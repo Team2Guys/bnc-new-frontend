@@ -441,12 +441,18 @@ const Footer: React.FC = () => {
 
       <div className="bg-primary">
         <Container className='pb-4 md:pb-0'>
-          <div className="border-t border-primary-300 py-3 text-center flex sm:flex-row flex-col sm:justify-between justify-center items-center sm:gap-y-0 gap-y-2">
-            <p className="text-14 xs:text-16 text-primary-foreground font-medium font-roboto">{footerInfo}</p>
+          <div className="border-t border-primary-300 py-3 text-center flex md:flex-row flex-col sm:justify-between justify-center items-center max-md:space-y-1 sm:gap-y-0 gap-y-2">
+            <div className='flex items-center max-sm:justify-between gap-4 lg:gap-6 max-sm:w-full'>
+              <Link href="/about-us/" className="text-14 lg:text-16 text-primary-foreground font-medium font-roboto">About Us</Link>
+              <Link href="/blog/" className="text-14 lg:text-16 text-primary-foreground font-medium font-roboto">Blog</Link>
+              <Link href="/faqs/" className="text-14 lg:text-16 text-primary-foreground font-medium font-roboto">Faqs</Link>
+              <Link href="/estimator/" className="text-14 lg:text-16 text-primary-foreground font-medium font-roboto">Estimator</Link>
+            </div>
+            <p className="text-14 lg:text-16 text-primary-foreground font-medium font-roboto">{footerInfo}</p>
             <div className='flex gap-2 items-center'>
-              <h4 className='text-base sm:font-bold font-semibold text-white font-roboto'>Follow Us</h4>
+              <h4 className='text-14 lg:text-16 sm:font-bold font-semibold text-white font-roboto'>Follow Us</h4>
               <div className="flex items-center space-x-5 ">
-            <SocialLink/>
+                <SocialLink/>
               </div>
             </div>
           </div>

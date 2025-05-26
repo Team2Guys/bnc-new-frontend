@@ -14,6 +14,6 @@
       "Motorised curtains",
       "Blackout Triple Pinch Pleat curtains",
       "Sheer Triple Pinch Pleat curtains",
-      "Sheer Ripple Fold curtains",
+      "Sheer Ripple Fold Curtains",
     ];
   
