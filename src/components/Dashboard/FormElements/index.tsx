@@ -1,13 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, SetStateAction, useRef } from 'react';
-import {
-  Formik,
-  FieldArray,
-  FormikErrors,
-  Form,
-  FormikTouched,
-} from 'formik';
+import { Formik, FieldArray, FormikErrors, Form, FormikTouched } from 'formik';
 
 import Imageupload from 'components/ImageUpload/Imageupload';
 import { RxCross2 } from 'react-icons/rx';
@@ -36,30 +30,64 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
   setEditProduct,
 }) => {
   const [imagesUrl, setImagesUrl] = useState<any[]>([]);
-  const [videos, setvideos] = useState<any[]>(EditInitialValues && EditInitialValues.videos && EditInitialValues.videos || []);
-  const [posterimageUrl, setposterimageUrl] = useState<any[]  | undefined>(EditInitialValues && EditInitialValues.posterImage && [EditInitialValues.posterImage]);
-  const [bannerImageUrl, setBannerImageUrl] = useState<any[]  | undefined>(EditInitialValues && EditInitialValues.bannerImage && [EditInitialValues.bannerImage]);
-  const [privarcyImagemageUrl, setprivarcyImage] = useState<any[]  | undefined>(EditInitialValues && EditInitialValues.privarcyImage && [EditInitialValues.privarcyImage]);
+  const [videos, setvideos] = useState<any[]>(
+    (EditInitialValues &&
+      EditInitialValues.videos &&
+      EditInitialValues.videos) ||
+      [],
+  );
+  const [posterimageUrl, setposterimageUrl] = useState<any[] | undefined>(
+    EditInitialValues &&
+      EditInitialValues.posterImage && [EditInitialValues.posterImage],
+  );
+  const [bannerImageUrl, setBannerImageUrl] = useState<any[] | undefined>(
+    EditInitialValues &&
+      EditInitialValues.bannerImage && [EditInitialValues.bannerImage],
+  );
+  const [privarcyImagemageUrl, setprivarcyImage] = useState<any[] | undefined>(
+    EditInitialValues &&
+      EditInitialValues.privarcyImage && [EditInitialValues.privarcyImage],
+  );
 
-
-  const [subCategoryImage, setsubCategoryImage] = useState<any[]  | undefined>(EditInitialValues && EditInitialValues.subCategoryImage && [EditInitialValues.subCategoryImage]);
-  const [topImages, settopImages] = useState<any[]>(EditInitialValues && EditInitialValues.topImages && EditInitialValues.topImages);
+  const [subCategoryImage, setsubCategoryImage] = useState<any[] | undefined>(
+    EditInitialValues &&
+      EditInitialValues.subCategoryImage && [
+        EditInitialValues.subCategoryImage,
+      ],
+  );
+  const [topImages, settopImages] = useState<any[]>(
+    EditInitialValues &&
+      EditInitialValues.topImages &&
+      EditInitialValues.topImages,
+  );
+  const [colorsImages, setcolorsImages] = useState<any[]>(
+    EditInitialValues &&
+      EditInitialValues.colorsImages &&
+      EditInitialValues.colorsImages,
+  );
   const [productUpdateFlat, setProductUpdateFlat] = useState(false);
   const [loading, setloading] = useState<boolean>(false);
-  const [productInitialValue, setProductInitialValue] = useState<any | null | undefined>(EditInitialValues);
+  const [productInitialValue, setProductInitialValue] = useState<
+    any | null | undefined
+  >(EditInitialValues);
 
   const [imgError, setError] = useState<string | null | undefined>();
 
   const [selectedCategoryIds, setSelectedCategoryIds] = useState<number[]>([]);
-  const [selectedSubcategoryIds, setSelectedSubcategoryIds] = useState<number[]>([]);
+  const [selectedSubcategoryIds, setSelectedSubcategoryIds] = useState<
+    number[]
+  >([]);
 
-  const [previousSelectedCategories, setpreviousSelectedCategories] = useState<number[]>([]);
+  const [previousSelectedCategories, setpreviousSelectedCategories] = useState<
+    number[]
+  >([]);
   const dragImage = useRef<number | null>(null);
   const draggedOverImage = useRef<number | null>(null);
   const token = Cookies.get('2guysAdminToken');
   const superAdminToken = Cookies.get('superAdminToken');
   let finalToken = token ? token : superAdminToken;
 
+  console.log(imagesUrl, 'imagesUrl');
   useEffect(() => {
     const CategoryHandler = async () => {
       try {
@@ -92,7 +120,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
           subCategory,
           EditInitialProductValues,
         );
-        console.log(EditInitialValues, "formikValues");
+        console.log(EditInitialValues, 'formikValues');
         if (category) {
           const catArr = [];
           catArr.push(category);
@@ -108,14 +136,34 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
           ...EditInitialProductValues,
           name: EditInitialProductValues.title,
         });
-        setBannerImageUrl(EditInitialValues && EditInitialValues.bannerImage && [EditInitialValues.bannerImage]);
-        setprivarcyImage(EditInitialValues && EditInitialValues.privarcyImage && [EditInitialValues.privarcyImage]);
-        setposterimageUrl(EditInitialValues && EditInitialValues.posterImage && [EditInitialValues.posterImage]);
-        setsubCategoryImage(EditInitialValues && EditInitialValues.subCategoryImage && [EditInitialValues.subCategoryImage]);
-        setsubCategoryImage(EditInitialValues && EditInitialValues.topImages && [EditInitialValues.topImages]);
-
-
-
+        setBannerImageUrl(
+          EditInitialValues &&
+            EditInitialValues.bannerImage && [EditInitialValues.bannerImage],
+        );
+        setprivarcyImage(
+          EditInitialValues &&
+            EditInitialValues.privarcyImage && [
+              EditInitialValues.privarcyImage,
+            ],
+        );
+        setposterimageUrl(
+          EditInitialValues &&
+            EditInitialValues.posterImage && [EditInitialValues.posterImage],
+        );
+        setsubCategoryImage(
+          EditInitialValues &&
+            EditInitialValues.subCategoryImage && [
+              EditInitialValues.subCategoryImage,
+            ],
+        );
+        setsubCategoryImage(
+          EditInitialValues &&
+            EditInitialValues.topImages && [EditInitialValues.topImages],
+        );
+        setsubCategoryImage(
+          EditInitialValues &&
+            EditInitialValues.colorsImages && [EditInitialValues.colorsImages],
+        );
       } catch (err) {
         console.log(err, 'err');
       }
@@ -124,7 +172,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     CategoryHandler();
   }, [EditInitialValues]);
 
-    function handleSort() {
+  function handleSort() {
     if (dragImage.current === null || draggedOverImage.current === null) return;
 
     const imagesClone = imagesUrl && imagesUrl.length > 0 ? [...imagesUrl] : [];
@@ -135,7 +183,6 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
 
     setImagesUrl(imagesClone);
   }
-
 
   const onSubmit = async (values: any, { resetForm }: any) => {
     try {
@@ -148,16 +195,25 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
         return showToast('warn', 'Please select relevant Images');
       }
 
-
-
       let newValues = {
         ...values,
         title: values.name,
         posterImage: posterImageUrl,
         bannerImage: bannerImage !== undefined ? bannerImage : null,
         privarcyImage: privarcyImage !== undefined ? privarcyImage : null,
-        subCategoryImage: newsubCategoryImage !== undefined ? newsubCategoryImage : null,
-        videos:videos,
+        subCategoryImage:
+          newsubCategoryImage !== undefined ? newsubCategoryImage : null,
+        videos: videos,
+        // colorsImages: colorsImages,
+        colorsImages: [
+          {
+            altText: 'Blackout Roller Blinds',
+            imageUrl:
+              'https://res.cloudinary.com/de6owjeap/image/upload/v1748239911/uzmhppjgucxkv3npa1cq.webp',
+            colorCode: 'BF6933',
+            public_id: 'uzmhppjgucxkv3npa1cq',
+          },
+        ],
         topImages: topImages,
         imageUrls: imagesUrl,
         price: values.salePrice,
@@ -210,7 +266,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
         name,
         finalValues,
 
-        "modelDetails"
+        'modelDetails',
       );
 
       let updatedvalue = {
@@ -218,19 +274,16 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
         category: { connect: { id: selectedCategoryIds[0] } },
       };
 
-
-
-
       if (selectedSubcategoryIds.length > 0) {
         updatedvalue = {
           ...updatedvalue,
           subCategory: updateFlag
             ? {
-              set: selectedSubcategoryIds.map((id) => ({ id })),
-            }
+                set: selectedSubcategoryIds.map((id) => ({ id })),
+              }
             : {
-              connect: selectedSubcategoryIds.map((id) => ({ id })),
-            },
+                connect: selectedSubcategoryIds.map((id) => ({ id })),
+              },
         };
       } else if (updateFlag) {
         updatedvalue = {
@@ -265,7 +318,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
       setprivarcyImage(undefined);
       setposterimageUrl(undefined);
       setImagesUrl([]);
-      setvideos([])
+      setvideos([]);
       setSelectedCategoryIds([]);
       setSelectedSubcategoryIds([]);
 
@@ -284,9 +337,9 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     } finally {
       setloading(false);
     }
-  }
+  };
 
-  console.log(EditInitialValues.privarcyImage, "privarcyImagemageUrl")
+  console.log(EditInitialValues.privarcyImage, 'privarcyImagemageUrl');
 
   const handleImageIndex = (index: number, newImageIndex: number) => {
     const updatedImagesUrl = imagesUrl.map((item, i) =>
@@ -300,7 +353,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     );
     setImagesUrl(updatedImagesUrl);
   };
-   const handlecolorCode = (index: number, colorCode: string) => {
+  const handlecolorCode = (index: number, colorCode: string) => {
     const updatedImagesUrl = imagesUrl.map((item, i) =>
       i === index ? { ...item, colorCode: colorCode } : item,
     );
@@ -315,7 +368,11 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     setposterimageUrl(updatedImagesUrl);
   };
 
-  const handlealtTextbannerImageUrl = (index: number, newaltText: string, setImageUrl: React.Dispatch<SetStateAction<any>>) => {
+  const handlealtTextbannerImageUrl = (
+    index: number,
+    newaltText: string,
+    setImageUrl: React.Dispatch<SetStateAction<any>>,
+  ) => {
     //@ts-expect-error
     const updatedImagesUrl = bannerImageUrl.map((item, i) =>
       i === index ? { ...item, altText: newaltText } : item,
@@ -323,7 +380,12 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     setImageUrl(updatedImagesUrl);
   };
 
-  const handleNameImageUrl = (index: number, name: string, setImageUrl: React.Dispatch<SetStateAction<any>>, variable: string) => {
+  const handleNameImageUrl = (
+    index: number,
+    name: string,
+    setImageUrl: React.Dispatch<SetStateAction<any>>,
+    variable: string,
+  ) => {
     const updatedImagesUrl = topImages.map((item, i) =>
       i === index ? { ...item, [variable]: name } : item,
     );
@@ -342,9 +404,9 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     queryFn: fetchSubCategories,
   });
 
-  const [filteredSubcategories, setFilteredSubcategories] = useState<ICategory[]>([]);
-
-
+  const [filteredSubcategories, setFilteredSubcategories] = useState<
+    ICategory[]
+  >([]);
 
   useEffect(() => {
     const filteredSubcategories = subCategoriesList.filter((subcategory) =>
@@ -353,12 +415,8 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     setFilteredSubcategories(filteredSubcategories);
   }, [selectedCategoryIds, categoriesList]);
 
-
-
-
   return (
     <>
-    
       <Formik
         enableReinitialize
         initialValues={
@@ -370,22 +428,18 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
         {(formik) => {
           return (
             <Form onSubmit={formik.handleSubmit}>
-              <div className='flex border items-center justify-between'>
+              <div className="flex border items-center justify-between">
                 <p
-        className="dashboard_primary_button "
-        onClick={() => {
-          setselecteMenu('Add All Products');
-        }}
-      >
-        <IoMdArrowRoundBack /> Back
-      </p>
-              <button
-                type="submit"
-                className="dashboard_primary_button"
-              >
-                {loading ? <Loader color="#fff" /> : 'Submit'}
-              </button>
-
+                  className="dashboard_primary_button "
+                  onClick={() => {
+                    setselecteMenu('Add All Products');
+                  }}
+                >
+                  <IoMdArrowRoundBack /> Back
+                </p>
+                <button type="submit" className="dashboard_primary_button">
+                  {loading ? <Loader color="#fff" /> : 'Submit'}
+                </button>
               </div>
 
               <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
@@ -399,7 +453,6 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                       </div>
                       {posterimageUrl && posterimageUrl?.length > 0 ? (
                         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
-
                           {posterimageUrl.map((item: any, index) => {
                             return (
                               <>
@@ -445,7 +498,6 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                               </>
                             );
                           })}
-
                         </div>
                       ) : (
                         <Imageupload setposterimageUrl={setposterimageUrl} />
@@ -454,9 +506,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
 
                     <div className="flex flex-col gap-5 py-4">
                       <div>
-                        <label className="primary-label ">
-                          Product Name
-                        </label>
+                        <label className="primary-label ">Product Name</label>
                         <input
                           type="text"
                           name="name"
@@ -464,10 +514,11 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                           onBlur={formik.handleBlur}
                           value={formik.values.name}
                           placeholder="Product name"
-                          className={`primary-input ${formik.touched.name && formik.errors.name
-                            ? 'border-red-500'
-                            : ''
-                            }`}
+                          className={`primary-input ${
+                            formik.touched.name && formik.errors.name
+                              ? 'border-red-500'
+                              : ''
+                          }`}
                         />
                         {formik.touched.name && formik.errors.name ? (
                           <div className="errorColor text-sm">
@@ -476,28 +527,23 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                         ) : null}
                       </div>
 
-
-
-
-
-                      <div className='flex  gap-2 flex-nowrap mad:flex-wrap'>
-                        <div className='w-1/2'>
-                          <label className="primary-label">
-                            Description{' '}
-                          </label>
+                      <div className="flex  gap-2 flex-nowrap mad:flex-wrap">
+                        <div className="w-1/2">
+                          <label className="primary-label">Description </label>
                           <textarea
                             name="description"
                             onChange={formik.handleChange}
                             value={formik.values.description}
                             placeholder="description"
-                            className={`primary-input ${formik.touched.description &&
+                            className={`primary-input ${
+                              formik.touched.description &&
                               formik.errors.description
-                              ? 'border-red-500'
-                              : ''
-                              }`}
+                                ? 'border-red-500'
+                                : ''
+                            }`}
                           />
                           {formik.touched.description &&
-                            formik.errors.description ? (
+                          formik.errors.description ? (
                             <div className="errorColor text-sm">
                               {
                                 formik.errors.description as FormikErrors<
@@ -508,7 +554,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                           ) : null}
                         </div>
 
-                        <div className='w-1/2'>
+                        <div className="w-1/2">
                           <label className="primary-label">
                             Short Description{' '}
                           </label>
@@ -517,14 +563,15 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                             onChange={formik.handleChange}
                             value={formik.values.short_description}
                             placeholder="Short Description"
-                            className={`primary-input ${formik.touched.short_description &&
+                            className={`primary-input ${
+                              formik.touched.short_description &&
                               formik.errors.short_description
-                              ? 'border-red-500'
-                              : ''
-                              }`}
+                                ? 'border-red-500'
+                                : ''
+                            }`}
                           />
                           {formik.touched.short_description &&
-                            formik.errors.short_description ? (
+                          formik.errors.short_description ? (
                             <div className="errorColor text-sm">
                               {
                                 formik.errors.short_description as FormikErrors<
@@ -534,24 +581,20 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                             </div>
                           ) : null}
                         </div>
-
                       </div>
 
-
-
                       <div>
-                        <label className="primary-label">
-                          Heading{' '}
-                        </label>
+                        <label className="primary-label">Heading </label>
                         <textarea
                           name="heading"
                           onChange={formik.handleChange}
                           value={formik.values.heading}
                           placeholder="Heading Text"
-                          className={`primary-input ${formik.touched.heading && formik.errors.heading
-                            ? 'border-red-500'
-                            : ''
-                            }`}
+                          className={`primary-input ${
+                            formik.touched.heading && formik.errors.heading
+                              ? 'border-red-500'
+                              : ''
+                          }`}
                         />
                         {formik.touched.heading && formik.errors.heading ? (
                           <div className="errorColor text-sm">
@@ -564,12 +607,9 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                         ) : null}
                       </div>
 
-
                       <div className="flex full gap-4">
                         <div className="w-[50%]">
-                          <label className="primary-label">
-                            customUrl
-                          </label>
+                          <label className="primary-label">customUrl</label>
                           <input
                             type="text"
                             name="customUrl"
@@ -577,19 +617,17 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                             onBlur={formik.handleBlur}
                             value={formik.values.customUrl}
                             placeholder="customUrl"
-                            className={`primary-input ${formik.touched.customUrl &&
+                            className={`primary-input ${
+                              formik.touched.customUrl &&
                               formik.errors.customUrl
-                              ? 'border-red-500'
-                              : ''
-                              }`}
+                                ? 'border-red-500'
+                                : ''
+                            }`}
                           />
-
                         </div>
 
                         <div className="w-[50%]">
-                          <label className="primary-label">
-                            breadcurum
-                          </label>
+                          <label className="primary-label">breadcurum</label>
                           <input
                             type="breadcurum"
                             name="breadcurum"
@@ -597,24 +635,19 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                             onBlur={formik.handleBlur}
                             value={formik.values.breadcurum}
                             placeholder="Discount Price"
-                            className={`primary-input ${formik.touched.breadcurum &&
+                            className={`primary-input ${
+                              formik.touched.breadcurum &&
                               formik.errors.breadcurum
-                              ? 'border-red-500'
-                              : ''
-                              }`}
+                                ? 'border-red-500'
+                                : ''
+                            }`}
                           />
-
                         </div>
                       </div>
 
-
-
-
                       <div className="flex full gap-4">
                         <div className="w-[50%]">
-                          <label className="primary-label">
-                            topHeading
-                          </label>
+                          <label className="primary-label">topHeading</label>
                           <input
                             type="text"
                             name="topHeading"
@@ -622,19 +655,17 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                             onBlur={formik.handleBlur}
                             value={formik.values.topHeading}
                             placeholder="topHeading"
-                            className={`primary-input ${formik.touched.topHeading &&
+                            className={`primary-input ${
+                              formik.touched.topHeading &&
                               formik.errors.topHeading
-                              ? 'border-red-500'
-                              : ''
-                              }`}
+                                ? 'border-red-500'
+                                : ''
+                            }`}
                           />
-
                         </div>
 
                         <div className="w-[50%]">
-                          <label className="primary-label">
-                            mainHeading
-                          </label>
+                          <label className="primary-label">mainHeading</label>
                           <input
                             type="mainHeading"
                             name="mainHeading"
@@ -642,24 +673,19 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                             onBlur={formik.handleBlur}
                             value={formik.values.mainHeading}
                             placeholder="Discount Price"
-                            className={`primary-input ${formik.touched.mainHeading &&
+                            className={`primary-input ${
+                              formik.touched.mainHeading &&
                               formik.errors.mainHeading
-                              ? 'border-red-500'
-                              : ''
-                              }`}
+                                ? 'border-red-500'
+                                : ''
+                            }`}
                           />
-
                         </div>
                       </div>
 
-
-
-
                       <div className="flex full gap-4">
                         <div className="w-[50%]">
-                          <label className="primary-label">
-                            Sale Price
-                          </label>
+                          <label className="primary-label">Sale Price</label>
                           <input
                             type="number"
                             name="salePrice"
@@ -667,14 +693,15 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                             onBlur={formik.handleBlur}
                             value={formik.values.salePrice}
                             placeholder="Sale Price"
-                            className={`primary-input ${formik.touched.salePrice &&
+                            className={`primary-input ${
+                              formik.touched.salePrice &&
                               formik.errors.salePrice
-                              ? 'border-red-500'
-                              : ''
-                              }`}
+                                ? 'border-red-500'
+                                : ''
+                            }`}
                           />
                           {formik.touched.salePrice &&
-                            formik.errors.salePrice ? (
+                          formik.errors.salePrice ? (
                             <div className="errorColor text-sm">
                               {
                                 formik.errors.salePrice as FormikErrors<
@@ -696,23 +723,21 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                             onBlur={formik.handleBlur}
                             value={formik.values.discountPrice}
                             placeholder="Discount Price"
-                            className={`primary-input ${formik.touched.discountPrice &&
+                            className={`primary-input ${
+                              formik.touched.discountPrice &&
                               formik.errors.discountPrice
-                              ? 'border-red-500'
-                              : ''
-                              }`}
+                                ? 'border-red-500'
+                                : ''
+                            }`}
                           />
                           {formik.touched.discountPrice &&
-                            formik.errors.discountPrice ? (
+                          formik.errors.discountPrice ? (
                             <div className="errorColor text-sm">
                               {formik.errors.discountPrice as String}
                             </div>
                           ) : null}
                         </div>
                       </div>
-
-
-
 
                       <div className="w-full">
                         <label className="mb-3 block py-4 px-2 text-sm font-medium text-black dark:text-white">
@@ -799,9 +824,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
 
                       <div className="flex gap-4">
                         <div className="w-2/4">
-                          <label className="primary-label">
-                            Meta Title
-                          </label>
+                          <label className="primary-label">Meta Title</label>
                           <input
                             type="text"
                             name="Meta_Title"
@@ -809,17 +832,15 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                             onBlur={formik.handleBlur}
                             value={formik.values.Meta_Title}
                             placeholder="Meta Title"
-                            className={`primary-input ${formik.touched.name && formik.errors.name
-                              ? 'border-red-500'
-                              : ''
-                              }`}
+                            className={`primary-input ${
+                              formik.touched.name && formik.errors.name
+                                ? 'border-red-500'
+                                : ''
+                            }`}
                           />
-
                         </div>
                         <div className="w-2/4">
-                          <label className="primary-label">
-                            Canonical Tag
-                          </label>
+                          <label className="primary-label">Canonical Tag</label>
                           <input
                             onBlur={formik.handleBlur}
                             type="text"
@@ -827,10 +848,11 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                             onChange={formik.handleChange}
                             value={formik.values.Canonical_Tag}
                             placeholder="Canonical Tag"
-                            className={`primary-input ${formik.touched.name && formik.errors.name
-                              ? 'border-red-500'
-                              : ''
-                              }`}
+                            className={`primary-input ${
+                              formik.touched.name && formik.errors.name
+                                ? 'border-red-500'
+                                : ''
+                            }`}
                           />
                         </div>
                       </div>
@@ -843,13 +865,13 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                           onChange={formik.handleChange}
                           value={formik.values.Meta_Description}
                           placeholder="Meta Description"
-                          className={`primary-input ${formik.touched.description &&
+                          className={`primary-input ${
+                            formik.touched.description &&
                             formik.errors.description
-                            ? 'border-red-500'
-                            : ''
-                            }`}
+                              ? 'border-red-500'
+                              : ''
+                          }`}
                         />
-
                       </div>
 
                       <div className="flex gap-4">
@@ -864,12 +886,12 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                             onBlur={formik.handleBlur}
                             value={formik.values.Images_Alt_Text}
                             placeholder="Images Alt Text"
-                            className={`primary-input ${formik.touched.name && formik.errors.name
-                              ? 'border-red-500'
-                              : ''
-                              }`}
+                            className={`primary-input ${
+                              formik.touched.name && formik.errors.name
+                                ? 'border-red-500'
+                                : ''
+                            }`}
                           />
-
                         </div>
                       </div>
                     </div>
@@ -877,8 +899,6 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                 </div>
 
                 <div className="flex flex-col gap-5">
-
-
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                     <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
                       <h3 className="font-medium text-black dark:text-white">
@@ -902,8 +922,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                       onChange={formik.handleChange}
                                       onBlur={formik.handleBlur}
                                       value={
-                                        formik.values.faqs[index]
-                                          .specsHeading
+                                        formik.values.faqs[index].specsHeading
                                       }
                                       placeholder="FAQS Heading"
                                       className={`primary-input 
@@ -917,8 +936,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                       onChange={formik.handleChange}
                                       onBlur={formik.handleBlur}
                                       value={
-                                        formik.values.faqs[index]
-                                          .specsDetails
+                                        formik.values.faqs[index].specsDetails
                                       }
                                       placeholder="FAQS Details"
                                       className={`primary-input 
@@ -951,10 +969,6 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                       </FieldArray>
                     </div>
                   </div>
-
-
-
-
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                     <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
@@ -1029,25 +1043,23 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                     </div>
                   </div>
 
-
                   <div className="flex  gap-4">
-                    <div className='w-1/2'>
-                      <label className="primary-label">
-                        Sub Heading
-                      </label>
+                    <div className="w-1/2">
+                      <label className="primary-label">Sub Heading</label>
                       <textarea
                         name="Sub_Heading"
                         onChange={formik.handleChange}
                         value={formik.values.Sub_Heading}
                         placeholder="Sub Heading"
-                        className={`primary-input ${formik.touched.Sub_Heading &&
+                        className={`primary-input ${
+                          formik.touched.Sub_Heading &&
                           formik.errors.Sub_Heading
-                          ? 'border-red-500'
-                          : ''
-                          }`}
+                            ? 'border-red-500'
+                            : ''
+                        }`}
                       />
                       {formik.touched.Sub_Heading &&
-                        formik.errors.Sub_Heading ? (
+                      formik.errors.Sub_Heading ? (
                         <div className="errorColor text-sm">
                           {
                             formik.errors.heading as FormikErrors<
@@ -1058,9 +1070,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                       ) : null}
                     </div>
 
-
-
-                    <div className='w-1/2'>
+                    <div className="w-1/2">
                       <label className="primary-label">
                         Sub Heading Description
                       </label>
@@ -1069,14 +1079,15 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                         onChange={formik.handleChange}
                         value={formik.values.Sub_Heading_description}
                         placeholder="Sub Heading Description"
-                        className={`primary-input ${formik.touched.Sub_Heading_description &&
+                        className={`primary-input ${
+                          formik.touched.Sub_Heading_description &&
                           formik.errors.Sub_Heading_description
-                          ? 'border-red-500'
-                          : ''
-                          }`}
+                            ? 'border-red-500'
+                            : ''
+                        }`}
                       />
                       {formik.touched.Sub_Heading_description &&
-                        formik.errors.Sub_Heading_description ? (
+                      formik.errors.Sub_Heading_description ? (
                         <div className="errorColor text-sm">
                           {
                             formik.errors.heading as FormikErrors<
@@ -1098,89 +1109,83 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                       <FieldArray name="modelDetails">
                         {({ push, remove }) => (
                           <div className="flex flex-col gap-2">
-                            {
-                              formik.values?.modelDetails?.map(
-                                (model: any, index: any) => (
-                                  <>
-                                    <div
-                                      key={index}
-                                      className="flex flex-col gap-3"
-                                    >
-                                      <input
-                                        type="text"
-                                        name={`modelDetails[${index}].name`}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        value={
-                                          formik.values.modelDetails[index].name
-                                        }
-                                        placeholder="Sub Category Name"
-                                        className={`primary-input 
-                                      ${formik.touched.modelDetails &&
-                                            (
-                                              formik.touched
-                                                .modelDetails as FormikTouched<
-                                                  FormValues['modelDetails']
-                                                >
-                                            )?.[index]?.name &&
-                                            (
-                                              formik.errors
-                                                .modelDetails as FormikErrors<
-                                                  FormValues['modelDetails']
-                                                >
-                                            )?.[index]?.name
+                            {formik.values?.modelDetails?.map(
+                              (model: any, index: any) => (
+                                <>
+                                  <div
+                                    key={index}
+                                    className="flex flex-col gap-3"
+                                  >
+                                    <input
+                                      type="text"
+                                      name={`modelDetails[${index}].name`}
+                                      onChange={formik.handleChange}
+                                      onBlur={formik.handleBlur}
+                                      value={
+                                        formik.values.modelDetails[index].name
+                                      }
+                                      placeholder="Sub Category Name"
+                                      className={`primary-input 
+                                      ${
+                                        formik.touched.modelDetails &&
+                                        (
+                                          formik.touched
+                                            .modelDetails as FormikTouched<
+                                            FormValues['modelDetails']
+                                          >
+                                        )?.[index]?.name &&
+                                        (
+                                          formik.errors
+                                            .modelDetails as FormikErrors<
+                                            FormValues['modelDetails']
+                                          >
+                                        )?.[index]?.name
+                                          ? 'border-red-500'
+                                          : ''
+                                      }`}
+                                    />
+                                    <textarea
+                                      name={`modelDetails[${index}].detail`}
+                                      onChange={formik.handleChange}
+                                      onBlur={formik.handleBlur}
+                                      value={
+                                        formik.values.modelDetails[index].detail
+                                      }
+                                      placeholder="Description on Sub Category"
+                                      className={`primary-input 
+                                        ${
+                                          formik.touched.modelDetails &&
+                                          (
+                                            formik.touched
+                                              .modelDetails as FormikTouched<
+                                              FormValues['modelDetails']
+                                            >
+                                          )?.[index]?.detail &&
+                                          (
+                                            formik.errors
+                                              .modelDetails as FormikErrors<
+                                              FormValues['modelDetails']
+                                            >
+                                          )?.[index]?.detail
                                             ? 'border-red-500'
                                             : ''
-                                          }`}
-                                      />
-                                      <textarea
-                                        name={`modelDetails[${index}].detail`}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        value={
-                                          formik.values.modelDetails[index].detail
-                                        }
-                                        placeholder="Description on Sub Category"
-                                        className={`primary-input 
-                                        ${formik.touched.modelDetails &&
-                                            (
-                                              formik.touched.modelDetails as FormikTouched<FormValues['modelDetails']>
-                                            )?.[index]?.detail &&
-                                            (
-                                              formik.errors
-                                                .modelDetails as FormikErrors<
-                                                  FormValues['modelDetails']
-                                                >
-                                            )?.[index]?.detail
-                                            ? 'border-red-500'
-                                            : ''
-                                          }`}
-                                      />
+                                        }`}
+                                    />
+                                  </div>
 
-                                    </div>
-
-
-
-
-                                    <button
-                                      type="button"
-                                      onClick={() => remove(index)}
-                                      className="ml-2 errorColor border-blue-500 px-4 py-2 "
-                                    >
-                                      <RxCross2
-                                        className="errorColor"
-                                        size={25}
-                                      />
-                                    </button>
-
-
-
-                                  </>
-
-
-                                ),
-                              )}
-
+                                  <button
+                                    type="button"
+                                    onClick={() => remove(index)}
+                                    className="ml-2 errorColor border-blue-500 px-4 py-2 "
+                                  >
+                                    <RxCross2
+                                      className="errorColor"
+                                      size={25}
+                                    />
+                                  </button>
+                                </>
+                              ),
+                            )}
 
                             <button
                               type="button"
@@ -1195,56 +1200,59 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                     </div>
                   </div>
 
-                  <div className='rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark'>
+                  <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                     <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
-                      <h3 className="font-medium">
-                        colors
-                      </h3>
+                      <h3 className="font-medium">colors</h3>
                     </div>
                     <div className="flex flex-col py-4 px-4">
                       <FieldArray name="colors">
                         {({ push, remove }) => (
                           <div className="flex flex-col gap-2">
                             {formik.values.colors &&
-                              formik.values.colors.map((model: any, index: number) => (
-                                <div
-                                  key={index}
-                                  className="flex items-center gap-2"
-                                >
-                                  <input
-                                    type="text"
-                                    name={`colors[${index}].name`}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    value={formik?.values?.colors?.[index].name}
-                                    placeholder="Heading name"
-                                    className="primary-input"
-                                  />
-                                  <input
-                                    type="text"
-                                    name={`colors[${index}].detail`}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    value={formik.values.colors?.[index].detail}
-                                    placeholder="details text"
-                                    className="primary-input"
-                                  />
-                                  <button
-                                    type="button"
-                                    onClick={() => remove(index)}
-                                    className=" errorColor "
+                              formik.values.colors.map(
+                                (model: any, index: number) => (
+                                  <div
+                                    key={index}
+                                    className="flex items-center gap-2"
                                   >
-                                    <RxCross2
-                                      className="errorColor"
-                                      size={25}
+                                    <input
+                                      type="text"
+                                      name={`colors[${index}].name`}
+                                      onChange={formik.handleChange}
+                                      onBlur={formik.handleBlur}
+                                      value={
+                                        formik?.values?.colors?.[index].name
+                                      }
+                                      placeholder="Heading name"
+                                      className="primary-input"
                                     />
-                                  </button>
-                                </div>
-                              )
+                                    <input
+                                      type="text"
+                                      name={`colors[${index}].detail`}
+                                      onChange={formik.handleChange}
+                                      onBlur={formik.handleBlur}
+                                      value={
+                                        formik.values.colors?.[index].detail
+                                      }
+                                      placeholder="details text"
+                                      className="primary-input"
+                                    />
+                                    <button
+                                      type="button"
+                                      onClick={() => remove(index)}
+                                      className=" errorColor "
+                                    >
+                                      <RxCross2
+                                        className="errorColor"
+                                        size={25}
+                                      />
+                                    </button>
+                                  </div>
+                                ),
                               )}
                             <button
                               type="button"
-                              onClick={() => push({ name: "", detail: "" })}
+                              onClick={() => push({ name: '', detail: '' })}
                               className="dashboard_primary_button"
                             >
                               colors
@@ -1255,12 +1263,9 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                     </div>
                   </div>
 
-
                   <div className="rounded-sm border border-stroke dark:border-strokedark ">
                     <div className="border-b bg-primary border-stroke py-4 px-2  ">
-                      <h3 className="font-medium text-white">
-                        Add Vidoes
-                      </h3>
+                      <h3 className="font-medium text-white">Add Vidoes</h3>
                     </div>
                     {videos?.[0] && videos?.length > 0 ? (
                       <div className=" p-4 bg-primary">
@@ -1280,7 +1285,6 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                     ImageRemoveHandler(
                                       item.public_id,
                                       setvideos,
-
                                     );
                                   }}
                                 />
@@ -1288,25 +1292,81 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
 
                               <video
                                 key={index}
-                                src={item?.imageUrl || ""}
-                                height={200} width={200}
+                                src={item?.imageUrl || ''}
+                                height={200}
+                                width={200}
                                 className="w-full h-full max-h-[300] max-w-full dark:bg-black dark:shadow-lg"
                                 autoPlay
                                 muted
                                 controls
-
-                              >
-
-
-                              </video>
-
-
+                              ></video>
                             </div>
                           );
                         })}
                       </div>
                     ) : (
                       <Imageupload setImagesUrl={setvideos} video s3Flag />
+                    )}
+                  </div>
+                  <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
+                    <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                      <h3 className="font-medium text-black dark:text-white">
+                        Colors Images
+                      </h3>
+                    </div>
+                    <Imageupload setImagesUrl={setcolorsImages} />
+                    {colorsImages && colorsImages?.length > 0 && (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
+                        <div>
+                          {colorsImages.map((item: any, index) => {
+                            return (
+                              <>
+                                <div
+                                  className="relative group rounded-lg overflow-hidden shadow-md bg-white transform transition-transform duration-300 hover:scale-105"
+                                  key={index}
+                                >
+                                  <div className="absolute top-1 right-1 invisible group-hover:visible errorColor bg-white rounded-full">
+                                    <RxCross2
+                                      className="cursor-pointer errorColor hover:errorColor-700"
+                                      size={17}
+                                      onClick={() => {
+                                        ImageRemoveHandler(
+                                          item.public_id,
+                                          setcolorsImages,
+                                        );
+                                      }}
+                                    />
+                                  </div>
+                                  <Image
+                                    key={index}
+                                    className="object-cover w-full h-full"
+                                    width={300}
+                                    height={400}
+                                    src={item?.imageUrl}
+                                    alt={`productImage-${index}`}
+                                  />
+                                </div>
+
+                                <input
+                                  className="primary-input"
+                                  placeholder="altText"
+                                  type="text"
+                                  name="altText"
+                                  value={item.altText}
+                                  onChange={(e) =>
+                                    handleNameImageUrl(
+                                      index,
+                                      String(e.target.value),
+                                      setcolorsImages,
+                                      'altText',
+                                    )
+                                  }
+                                />
+                              </>
+                            );
+                          })}
+                        </div>
+                      </div>
                     )}
                   </div>
 
@@ -1360,7 +1420,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                       index,
                                       String(e.target.value),
                                       settopImages,
-                                      'altText'
+                                      'altText',
                                     )
                                   }
                                 />
@@ -1375,7 +1435,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                       index,
                                       String(e.target.value),
                                       settopImages,
-                                      'name'
+                                      'name',
                                     )
                                   }
                                 />
@@ -1384,10 +1444,8 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                           })}
                         </div>
                       </div>
-                    )
-                    }
+                    )}
                   </div>
-
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                     <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
@@ -1437,8 +1495,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                     handlealtTextbannerImageUrl(
                                       index,
                                       String(e.target.value),
-                                      setsubCategoryImage
-
+                                      setsubCategoryImage,
                                     )
                                   }
                                 />
@@ -1451,7 +1508,6 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                       <Imageupload setposterimageUrl={setsubCategoryImage} />
                     )}
                   </div>
-
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                     <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
@@ -1501,7 +1557,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                     handlealtTextbannerImageUrl(
                                       index,
                                       String(e.target.value),
-                                      setBannerImageUrl
+                                      setBannerImageUrl,
                                     )
                                   }
                                 />
@@ -1521,7 +1577,8 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                         privarcy Image
                       </h3>
                     </div>
-                    {privarcyImagemageUrl && privarcyImagemageUrl?.length > 0 ? (
+                    {privarcyImagemageUrl &&
+                    privarcyImagemageUrl?.length > 0 ? (
                       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
                         <div>
                           {privarcyImagemageUrl.map((item: any, index) => {
@@ -1563,7 +1620,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                     handlealtTextbannerImageUrl(
                                       index,
                                       String(e.target.value),
-                                      setprivarcyImage
+                                      setprivarcyImage,
                                     )
                                   }
                                 />
@@ -1588,8 +1645,9 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
                         {imagesUrl.map((item: any, index) => {
                           return (
-                            <div key={index}
-                             draggable
+                            <div
+                              key={index}
+                              draggable
                               onDragStart={() => (dragImage.current = index)}
                               onDragEnter={() =>
                                 (draggedOverImage.current = index)
@@ -1598,7 +1656,10 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                               onDragOver={(e) => e.preventDefault()}
                             >
                               <div className="relative group rounded-lg overflow-hidden shadow-md bg-white transform transition-transform duration-300 hover:scale-105">
-                                <div className="absolute top-1 right-1 invisible group-hover:visible errorColor bg-white rounded-full z-10" draggable>
+                                <div
+                                  className="absolute top-1 right-1 invisible group-hover:visible errorColor bg-white rounded-full z-10"
+                                  draggable
+                                >
                                   <RxCross2
                                     className="cursor-pointer btext-red-500 hover:errorColor-700"
                                     size={17}
@@ -1645,14 +1706,14 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                   handlealtText(index, String(e.target.value))
                                 }
                               />
-                               <input
+                              <input
                                 className="border mt-2 w-full rounded-md border-stroke px-2 text-14 py-2 bg-white dark:border-strokedark dark:bg-lightdark focus:border-primary active:border-primary outline-none"
                                 placeholder="altText"
                                 type="text"
                                 name="colorCode"
                                 value={item.colorCode}
                                 onChange={(e) =>
-                                handlecolorCode(index, String(e.target.value))
+                                  handlecolorCode(index, String(e.target.value))
                                 }
                               />
                             </div>
@@ -1670,10 +1731,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                 </div>
               ) : null}
 
-              <button
-                type="submit"
-                className="dashboard_primary_button"
-              >
+              <button type="submit" className="dashboard_primary_button">
                 {loading ? <Loader color="#fff" /> : 'Submit'}
               </button>
             </Form>
