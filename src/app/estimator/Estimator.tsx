@@ -235,7 +235,7 @@ const EstimatorPage = ({ sortedProducts }: { sortedProducts: EstimatorProductTyp
               <Button
                 variant={'default'}
                 onClick={() => route.push('/request-appointment/')}
-                className="w-full mt-4 h-12 bg-secondary hover:bg-primary text-primary font-semibold font-roboto text-base md:text-sm lg:text-base hover:opacity-65"
+                className="w-full mt-4 h-12 bg-secondary text-primary font-semibold font-roboto text-base md:text-sm lg:text-base hover:opacity-65"
               >
                 Book A Free Visit
               </Button>
