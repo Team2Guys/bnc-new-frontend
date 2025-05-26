@@ -445,7 +445,7 @@ const Footer: React.FC = () => {
             <div className='flex items-center max-sm:justify-between gap-4 lg:gap-6 max-sm:w-full'>
               <Link href="/about-us/" className="text-14 lg:text-16 text-primary-foreground font-medium font-roboto">About Us</Link>
               <Link href="/blog/" className="text-14 lg:text-16 text-primary-foreground font-medium font-roboto">Blog</Link>
-              <Link href="/faqs/" className="text-14 lg:text-16 text-primary-foreground font-medium font-roboto">Faqs</Link>
+              <Link href="/faqs/" className="text-14 lg:text-16 text-primary-foreground font-medium font-roboto">FAQs</Link>
               <Link href="/estimator/" className="text-14 lg:text-16 text-primary-foreground font-medium font-roboto">Estimator</Link>
             </div>
             <p className="text-14 lg:text-16 text-primary-foreground font-medium font-roboto">{footerInfo}</p>
