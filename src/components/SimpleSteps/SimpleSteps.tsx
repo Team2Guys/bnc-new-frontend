@@ -23,7 +23,7 @@ export default function SimpleSteps() {
         </div>
 
         <div className="flex sm:flex-row flex-col justify-center gap-8 items-center sm:bg-secondary-foreground">
-          <div className="relative w-full h-[350px] md:h-[500px] sm:w-3/5">
+          <div className="relative w-full h-[350px] md:h-[600px] sm:w-3/5">
             <video
               src={workingProcessData.videoUrl}
               className="w-full h-full object-cover "
