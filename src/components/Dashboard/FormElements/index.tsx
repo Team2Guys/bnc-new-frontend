@@ -204,16 +204,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
         subCategoryImage:
           newsubCategoryImage !== undefined ? newsubCategoryImage : null,
         videos: videos,
-        // colorsImages: colorsImages,
-        colorsImages: [
-          {
-            altText: 'Blackout Roller Blinds',
-            imageUrl:
-              'https://res.cloudinary.com/de6owjeap/image/upload/v1748239911/uzmhppjgucxkv3npa1cq.webp',
-            colorCode: 'BF6933',
-            public_id: 'uzmhppjgucxkv3npa1cq',
-          },
-        ],
+        colorsImages: colorsImages,
         topImages: topImages,
         imageUrls: imagesUrl,
         price: values.salePrice,
@@ -379,7 +370,16 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     );
     setImageUrl(updatedImagesUrl);
   };
-
+const handlecolorChange = (
+    index: number,
+    newaltText: string,
+    setImageUrl: React.Dispatch<SetStateAction<any>>,
+  ) => {
+    const updatedImagesUrl = colorsImages.map((item, i) =>
+      i === index ? { ...item, altText: newaltText } : item,
+    );
+    setImageUrl(updatedImagesUrl);
+  };
   const handleNameImageUrl = (
     index: number,
     name: string,
@@ -1317,10 +1317,10 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                     <Imageupload setImagesUrl={setcolorsImages} />
                     {colorsImages && colorsImages?.length > 0 && (
                       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
-                        <div>
                           {colorsImages.map((item: any, index) => {
                             return (
-                              <>
+                             <>
+                              <div>
                                 <div
                                   className="relative group rounded-lg overflow-hidden shadow-md bg-white transform transition-transform duration-300 hover:scale-105"
                                   key={index}
@@ -1346,7 +1346,6 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                     alt={`productImage-${index}`}
                                   />
                                 </div>
-
                                 <input
                                   className="primary-input"
                                   placeholder="altText"
@@ -1354,18 +1353,18 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                   name="altText"
                                   value={item.altText}
                                   onChange={(e) =>
-                                    handleNameImageUrl(
+                                    handlecolorChange(
                                       index,
                                       String(e.target.value),
                                       setcolorsImages,
-                                      'altText',
                                     )
                                   }
                                 />
+
+                              </div>
                               </>
                             );
                           })}
-                        </div>
                       </div>
                     )}
                   </div>
