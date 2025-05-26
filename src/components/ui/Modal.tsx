@@ -8,7 +8,8 @@ interface CustomModalProps {
   children: React.ReactNode;
   title?: React.ReactNode;
   showCloseButton?: boolean;
-  width?: number | string; // NEW width prop
+  width?: number | string;
+  isheader?: boolean;
 }
 
 const CustomModal: React.FC<CustomModalProps> = ({
@@ -17,7 +18,8 @@ const CustomModal: React.FC<CustomModalProps> = ({
   children,
   title,
   showCloseButton = true,
-  width = 'max-w-4xl', // default tailwind class
+  width = 'max-w-4xl',
+  isheader
 }) => {
   if (!open) return null;
 
@@ -42,7 +44,19 @@ const CustomModal: React.FC<CustomModalProps> = ({
         className={`bg-secondary-foreground shadow-xl w-full relative z-50 rounded-lg m-2 ${getWidthClass()}`}
         onClick={(e) => e.stopPropagation()}
       >
-          <div className="px-6 py-6 border-b border-gray-200 relative shadow-md">
+        {
+          isheader ? 
+
+           showCloseButton && (
+              <button
+                onClick={onClose}
+                className="bg-secondary rounded-full text-white absolute -top-2 md:-top-3 -right-1 md:-right-3"
+              >
+                <X className="w-7 h-7" />
+              </button>
+            )
+          :
+           <div className="px-6 py-6 border-b border-gray-200 relative shadow-md">
             <div className="text-xl font-semibold">{title ?? " "}</div>
             {showCloseButton && (
               <button
@@ -53,6 +67,8 @@ const CustomModal: React.FC<CustomModalProps> = ({
               </button>
             )}
           </div>
+        }
+         
         <div>{children}</div>
       </div>
     </div>
