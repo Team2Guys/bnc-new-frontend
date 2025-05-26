@@ -12,7 +12,6 @@ import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
 const SellerSlider = ({products}: {products: IProduct[]}) => {
 
-  console.log(products,"productsproducts")
     const NextArrow = ({ onClick }: { onClick?: () => void }) => (
   <div
     className="absolute top-1/2 right-2 transform -translate-y-1/2 z-10 cursor-pointer"

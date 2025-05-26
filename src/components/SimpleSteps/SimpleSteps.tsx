@@ -62,7 +62,7 @@ export default function SimpleSteps() {
                 </div>
               ))}
             </div>
-            <Link href="/" className="bg-secondary text-primary py-3 px-8 sm:px-16 block rounded-md w-fit font-semibold mt-10 mb-2 max-sm:mx-auto">Book A Free Visit</Link>
+            <Link href="/request-appointment/" className="bg-secondary text-primary py-3 px-8 sm:px-16 block rounded-md w-fit font-semibold mt-10 mb-2 max-sm:mx-auto">Book A Free Visit</Link>
           </div>
         </div>
       </div>
