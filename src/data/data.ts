@@ -2011,6 +2011,7 @@ export const shuttersSubcategories = [
   "Bi-pass Shutters",
   "Solid Panel Shutters",
   "Tier On Tier Shutters",
+  "Bi-pass Shutters",
 ];
 
 export const curtainsSubcategories = [
@@ -2020,6 +2021,6 @@ export const curtainsSubcategories = [
   "Eyelet Curtains",
   "Double Pinch Pleat Curtains",
   "Blackout Curtains",
-  "Motorised Curtains",
+  "Motorised / Electric Curtains ",
   "Wave Sheer & Blackout Curtains",
 ];
