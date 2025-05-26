@@ -32,7 +32,6 @@ const Thumbnail = ({
 
   const isMotorisedCategory =
     title?.toLowerCase().includes('motorised blinds') || title?.toLowerCase().includes('motorised curtains');
-// Filter out the first image if it's a motorised category with videos
   const displayImages = isMotorisedCategory && videos.length > 0 ? images.slice(1) : images;
   
   useEffect(() => {
