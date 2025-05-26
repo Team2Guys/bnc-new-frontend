@@ -65,11 +65,14 @@ export const EmailInfo: Email = {
 };
 
 export const OurClientImage = [
-  { src: '/assets/images/ourclient/mercedes.png', alt: 'mercedes-logo' },
-  { src: '/assets/images/ourclient/warner.png', alt: 'warner-logo' },
-  { src: '/assets/images/ourclient/HUQQBAZ.png', alt: 'HUQQBAZ-Logo' },
-  { src: '/assets/images/ourclient/address.png', alt: 'address-Logo' },
-  { src: '/assets/images/ourclient/Khansaheb.png', alt: 'Khansaheb-Logo' },
+  { src: '/assets/images/ourclient/new/1.webp', alt: 'mercedes-logo' },
+  { src: '/assets/images/ourclient/new/2.webp', alt: 'warner-logo' },
+  { src: '/assets/images/ourclient/new/address.webp', alt: 'address-Logo' },
+  { src: '/assets/images/ourclient/new/Khansaheb.webp', alt: 'HUQQBAZ-Logo' },
+  { src: '/assets/images/ourclient/new/6.webp', alt: 'Khansaheb-Logo' },
+  { src: '/assets/images/ourclient/new/7.webp', alt: 'Khansaheb-Logo' },
+  { src: '/assets/images/ourclient/new/8.webp', alt: 'Khansaheb-Logo' },
+  { src: '/assets/images/ourclient/new/9.webp', alt: 'Khansaheb-Logo' },
 ];
 
 

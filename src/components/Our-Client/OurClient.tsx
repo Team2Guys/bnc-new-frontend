@@ -34,7 +34,7 @@ everyone who sees them says, &quot;I want that too.&quot;
             <ClientLogoGridSlider OurClientImage={OurClientImage} />
           </div>
           : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-3 xs:gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-8 gap-3 xs:gap-5">
               {OurClientImage.map((image: any, index: any) => (
                 <div className="bg-primary h-24 p-5 flex justify-center items-center" key={index}>
                   <Image
