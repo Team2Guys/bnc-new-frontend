@@ -98,7 +98,7 @@ const Detail = ({ data, setColorImage, selectedColor }: DetailProps) => {
         </div>
       ))}
     </div>
-    <CustomModal open={openModal} onClose={() => setOpenModal(false)} title={selectedImage.title ?? selectedImage.alt} width={"max-w-md"}>
+    <CustomModal open={openModal} onClose={() => setOpenModal(false)} title={" "} width={"max-w-md"}>
       <div className="p-4 flex justify-center">
         <Image
           src={selectedImage.src}
