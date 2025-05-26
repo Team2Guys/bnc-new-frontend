@@ -42,7 +42,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
         className={`bg-secondary-foreground shadow-xl w-full relative z-50 rounded-lg m-2 ${getWidthClass()}`}
         onClick={(e) => e.stopPropagation()}
       >
-          <div className="px-6 py-4 border-b border-gray-200 relative shadow-md">
+          <div className="px-6 py-6 border-b border-gray-200 relative shadow-md">
             <div className="text-xl font-semibold">{title ?? " "}</div>
             {showCloseButton && (
               <button
