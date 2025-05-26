@@ -21,7 +21,7 @@ const Accordion = ({ items }:AccordionProps) => {
             <span className="text-xl">{openIndex === index ? <MdOutlineKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown /> }</span>
           </button>
           {openIndex === index && (
-            <div className=" text-primary font-medium text-sm md:text-base">{item.specsDetails}</div>
+            <div className=" text-primary font-medium text-sm md:text-base" dangerouslySetInnerHTML={{ __html: item.specsDetails ?? '' }} />
           )}
         </div>
       ))}
