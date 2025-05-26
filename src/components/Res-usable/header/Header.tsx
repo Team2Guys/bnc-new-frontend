@@ -13,17 +13,13 @@ const Header = () => {
   const trustIndexRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (open && trustIndexRef.current) {
-      // Clear previous content
       trustIndexRef.current.innerHTML = '';
-
-      // Inject the Trustindex script
       const script = document.createElement('script');
-      script.src = 'https://cdn.trustindex.io/loader.js?050056e461bc440ede568cd2d0b';
+      script.src = 'https://cdn.trustindex.io/loader.js?6754fb44611899190046bf90da7';
       script.async = true;
       trustIndexRef.current.appendChild(script);
     }
   }, [open]);
-
   return (
     <>
     <Navbar />
