@@ -14,7 +14,7 @@ import { orderedTitles } from "data/new-data";
 const SellerSlider = ({ products }: { products: IProduct[] }) => {
  
   const filteredAndSortedProducts = orderedTitles
-    .map((title) => products.find((item) => item.title === title))
+    .map((title) => products.find((item) => item.title.toLowerCase() === title.toLowerCase()))
     .filter(Boolean) as IProduct[];
 
   const NextArrow = ({ onClick }: { onClick?: () => void }) => (

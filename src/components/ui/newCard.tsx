@@ -9,12 +9,12 @@ const Card = ({ card }: { card: IProduct }) => {
     <div className="px-2">
       <div className=" pb-4 bg-secondary-foreground rounded-xl flex flex-col justify-between h-full">
         <div className='space-y-2'>
-          <Link href={getPath(card)} className="relative block w-full h-[300px] lg:h-[365px]">
+          <Link href={getPath(card)} className="relative block w-full h-[300px]">
             <Image
               src={card?.posterImage?.imageUrl}
               alt={card.title}
               fill
-              className="object-cover rounded-xl"
+              className="rounded-xl"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
             />
           </Link>
