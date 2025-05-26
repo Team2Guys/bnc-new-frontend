@@ -14,20 +14,20 @@ interface SocialDataType {
 const SocialData: SocialDataType[] = [
   {
     href: 'https://www.facebook.com/blindsandcurtainsdubai',
-    icon: <RiFacebookFill size={28} className='pt-[2px]' />,
+    icon: <RiFacebookFill className='size-6' />,
     alt: 'Facebook',
     plateform: 'Facebook',
 
   },
   {
     href: 'https://www.pinterest.com/blindsandcurtainsdubai/',
-    icon: <FaPinterest size={20} />,
+    icon: <FaPinterest className='size-6' />,
     alt: 'Pinterest',
     plateform: 'Pinterest',
   },
   {
     href: 'https://www.instagram.com/blindsandcurtainsdubai/',
-    icon: <FaInstagram size={20} className='bg-primary' />,
+    icon: <FaInstagram className='rounded-full size-6 ps-[2px]' />,
     alt: 'Instagram',
     plateform: 'Instagram',
   },
@@ -40,7 +40,7 @@ const SocialLink: React.FC = () => {
       {SocialData.map((social, index) => (
         <Link key={index} href={social.href} target="_blank" aria-label={`Visit our ${social.plateform} page`}>
 
-          <div className="flex justify-center items-center rounded-full h-[16px] w-[16px] md:h-[28px] md:w-[28px] text-secondary border border-secondary">{social.icon}</div>
+          <div className="flex justify-center items-center rounded-full h-[16px] w-[16px] md:size-8 text-secondary border border-secondary">{social.icon}</div>
 
         </Link>
       ))}

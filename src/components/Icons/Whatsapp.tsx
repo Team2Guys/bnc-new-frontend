@@ -11,7 +11,7 @@ const WhatsIcon = () => {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
-      className="fixed bottom-[95px] md:bottom-20 right-1 z-50">
+      className="fixed bottom-[95px] md:bottom-2 right-1 z-50">
       <Image width={100} height={100} className='w-14 h-14' src={whatsapp} alt='whatsapp'/>
     </Link>
   );
