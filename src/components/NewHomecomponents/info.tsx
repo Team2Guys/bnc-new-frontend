@@ -129,7 +129,7 @@ export default function InfoTabs({ tabData,isHome }: InfoTabsProps) {
   </div>
       <div className="flex justify-center items-center">
           <Link
-            href="/book-free-visit"
+            href="/request-appointment"
             className="sm:hidden my-3 inline-block bg-secondary text-primary font-medium  text-lg sm:text-[14px] px-5 py-2 rounded-md shadow hover:bg-primary-dark transition"
           >
             Book A Free Visit
