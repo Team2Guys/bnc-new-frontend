@@ -5,6 +5,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Image from 'next/image';
 import { VideoItem } from 'types/product';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
 interface ThumbnailProps {
   images?: { imageUrl: string; altText?: string; colorCode?: string }[];
@@ -63,10 +64,31 @@ const Thumbnail = ({
     },
   };
 
+    const NextArrow = ({ onClick }: { onClick?: () => void }) => (
+        <button
+           onClick={onClick}
+           className="absolute right-0 md:-right-3 top-1/2 -translate-y-1/2 z-10 bg-secondary rounded-full shadow-md flex justify-center items-center size-6"
+         >
+           <MdKeyboardArrowRight className='text-white text-2xl' />
+         </button>
+    );
+  
+    const PrevArrow = ({ onClick }: { onClick?: () => void }) => (
+       <button
+          onClick={onClick}
+          className="absolute left-0 md:-left-3 top-1/2 -translate-y-1/2 z-10 bg-secondary rounded-full shadow-md flex justify-center items-center size-6"
+        >
+          <MdKeyboardArrowLeft className='text-white text-2xl' />
+        </button>
+        
+    );
+
   const thumbSettings = {
     slidesToShow: 4,
     asNavFor: nav1,
-    arrows: false,
+    arrows: true,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
     swipeToSlide: true,
     focusOnSelect: true,
   };

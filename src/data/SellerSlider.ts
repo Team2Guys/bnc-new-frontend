@@ -66,8 +66,8 @@ export const motorizeBlindData: MotorizeBlindData = {
   heading: "Motorised Blinds and Curtains for a Smart Home!",
   videoUrl: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", 
   buttons: [
-    { label: "View Motorised Blinds", link: "/motorised-blinds" },
-    { label: "View Motorised Curtains", link: "/motorised-curtains" },
+    { label: "View Motorised Blinds", link: "/blinds/motorised-blinds/" },
+    { label: "View Motorised Curtains", link: "/curtains/motorised-curtains/" },
   ],
   features: [
     {
