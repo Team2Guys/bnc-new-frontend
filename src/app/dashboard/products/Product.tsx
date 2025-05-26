@@ -60,7 +60,7 @@ const Products = ({ products }: PRODUCTS_PROPS) => {
     mainHeading: editProduct && editProduct.mainHeading,
     breadcurum: editProduct && editProduct.breadcurum,
     customUrl: editProduct && editProduct.customUrl,
-
+    colorsImages : editProduct && editProduct.colorsImages,
 
         faqs: editProduct && editProduct.faqs,
         videos: editProduct && editProduct.videos,

@@ -32,7 +32,8 @@ const Thumbnail = ({
 
   const isMotorisedCategory =
     title?.toLowerCase().includes('motorised blinds') || title?.toLowerCase().includes('motorised curtains');
-
+  const displayImages = isMotorisedCategory && videos.length > 0 ? images.slice(1) : images;
+  
   useEffect(() => {
     setNav1(slider1.current ?? undefined);
     setNav2(slider2.current ?? undefined);
@@ -82,19 +83,18 @@ const Thumbnail = ({
         </button>
         
     );
-
+  
   const thumbSettings = {
     slidesToShow: 4,
     asNavFor: nav1,
-    arrows: true,
+    arrows: displayImages.length > 4,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     swipeToSlide: true,
     focusOnSelect: true,
   };
 
-  // Filter out the first image if it's a motorised category with videos
-  const displayImages = isMotorisedCategory && videos.length > 0 ? images.slice(1) : images;
+
 
   return (
     <div>
