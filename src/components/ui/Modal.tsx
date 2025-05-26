@@ -8,6 +8,7 @@ interface CustomModalProps {
   children: React.ReactNode;
   title?: React.ReactNode;
   showCloseButton?: boolean;
+  width?: number | string; // NEW width prop
 }
 
 const CustomModal: React.FC<CustomModalProps> = ({
@@ -16,6 +17,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
   children,
   title,
   showCloseButton = true,
+  width = 'max-w-4xl', // default tailwind class
 }) => {
   if (!open) return null;
 
@@ -24,18 +26,24 @@ const CustomModal: React.FC<CustomModalProps> = ({
       onClose();
     }
   };
+
+  const getWidthClass = () => {
+    if (typeof width === 'string') return width;
+    if (typeof width === 'number') return `max-w-[${width}px]`;
+    return 'max-w-4xl';
+  };
+
   return (
     <div
-      className="fixed inset-0 bg-black/50 z-[60] flex items-center justify-center p-4"
+      className="fixed -inset-4 bg-black/50 z-[60] flex items-center justify-center p-4"
       onClick={handleBackdropClick}
     >
       <div
-        className="bg-secondary-foreground shadow-xl w-full max-w-4xl relative z-50  rounded-lg"
-        onClick={(e) => e.stopPropagation()} 
+        className={`bg-secondary-foreground shadow-xl w-full relative z-50 rounded-lg m-2 ${getWidthClass()}`}
+        onClick={(e) => e.stopPropagation()}
       >
-        {title && (
           <div className="px-6 py-4 border-b border-gray-200 relative shadow-md">
-            <div className="text-xl font-semibold">{title}</div>
+            <div className="text-xl font-semibold">{title ?? " "}</div>
             {showCloseButton && (
               <button
                 onClick={onClose}
@@ -45,7 +53,6 @@ const CustomModal: React.FC<CustomModalProps> = ({
               </button>
             )}
           </div>
-        )}
         <div>{children}</div>
       </div>
     </div>

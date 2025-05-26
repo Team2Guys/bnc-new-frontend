@@ -75,6 +75,7 @@ export interface IProduct {
   price: number;
   posterImage: ProductImages;
   imageUrls: Image[];
+  colorsImages?: Image[];
   CategoryId: number;
   SubCategoryId: number | null;
   createdAt: string;
