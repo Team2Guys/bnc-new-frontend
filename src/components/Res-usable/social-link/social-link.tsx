@@ -27,7 +27,7 @@ const SocialData: SocialDataType[] = [
   },
   {
     href: 'https://www.instagram.com/blindsandcurtainsdubai/',
-    icon: <FaInstagram className='rounded-full size-6 ps-[2px]' />,
+    icon: <FaInstagram className='size-6 ps-[1px]' />,
     alt: 'Instagram',
     plateform: 'Instagram',
   },
