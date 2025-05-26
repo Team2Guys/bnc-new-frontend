@@ -103,7 +103,7 @@ export default function VideoReelsSlider() {
           <div
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
-            className="relative flex items-center justify-center sm:h-[570px] h-[300px] overflow-hidden"
+            className="relative flex items-center justify-center sm:h-[750px] h-[300px] overflow-hidden"
           >
             {reelsData.map((item, index) => (
               <div
@@ -113,7 +113,7 @@ export default function VideoReelsSlider() {
                   index
                 )}`}
               >
-                <div className="relative sm:w-[500px] sm:h-[500px] w-[150px] h-[280px] rounded-2xl overflow-hidden shadow-lg">
+                <div className="relative sm:w-[500px] sm:h-[670px] w-[150px] h-[280px] rounded-2xl overflow-hidden shadow-lg">
                   <video
                     ref={(el) => {
                       if (el) videoRefs.current[index] = el
