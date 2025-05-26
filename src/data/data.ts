@@ -65,14 +65,14 @@ export const EmailInfo: Email = {
 };
 
 export const OurClientImage = [
-  { src: '/assets/images/ourclient/new/1.webp', alt: 'mercedes-logo' },
-  { src: '/assets/images/ourclient/new/2.webp', alt: 'warner-logo' },
+  { src: '/assets/images/ourclient/new/holiday.webp', alt: 'mercedes-logo' },
+  { src: '/assets/images/ourclient/new/huqqabaz.webp', alt: 'warner-logo' },
   { src: '/assets/images/ourclient/new/address.webp', alt: 'address-Logo' },
   { src: '/assets/images/ourclient/new/Khansaheb.webp', alt: 'HUQQBAZ-Logo' },
-  { src: '/assets/images/ourclient/new/6.webp', alt: 'Khansaheb-Logo' },
-  { src: '/assets/images/ourclient/new/7.webp', alt: 'Khansaheb-Logo' },
-  { src: '/assets/images/ourclient/new/8.webp', alt: 'Khansaheb-Logo' },
-  { src: '/assets/images/ourclient/new/9.webp', alt: 'Khansaheb-Logo' },
+  { src: '/assets/images/ourclient/new/maison.webp', alt: 'Khansaheb-Logo' },
+  { src: '/assets/images/ourclient/new/mercedes.webp', alt: 'Khansaheb-Logo' },
+  { src: '/assets/images/ourclient/new/roundedlogo.webp', alt: 'Khansaheb-Logo' },
+  { src: '/assets/images/ourclient/new/waner.webp', alt: 'Khansaheb-Logo' },
 ];
 
 
