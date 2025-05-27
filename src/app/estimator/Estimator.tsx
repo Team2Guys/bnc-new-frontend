@@ -174,9 +174,9 @@ const EstimatorPage = ({ sortedProducts }: { sortedProducts: EstimatorProductTyp
               Get Estimate
             </h1>
             <ul className="list-disc pl-5 font-roboto text-black opacity-70 pb-5 text-sm sm:text-base">
-              <li>The displayed price is for indication purposes only.</li>
-              <li>Final price may vary according to your actual requirements.</li>
-              <li>All blinds & shutters are charged at a minimum of 1.5m².</li>
+              <li>Price is an estimate — final cost depends on exact size and fabric.</li>
+              <li>Final quote confirmed during your free visit — no hidden charges.</li>
+              <li>Estimator prices for blinds, curtains, and shutters start at 1.5m².</li>
             </ul>
             <div className="space-y-2 sm:space-y-0 border-t pt-8 max-w-[500px]">
               <UnitSelector
