@@ -2002,6 +2002,7 @@ export const blindsSubcategories = [
   "Vertical Blinds",
   "Sheer Roman Blinds",
   "Motorised Blinds",
+  "Roman blinds"
 ];
 
 export const shuttersSubcategories = [
@@ -2011,7 +2012,6 @@ export const shuttersSubcategories = [
   "Bi-pass Shutters",
   "Solid Panel Shutters",
   "Tier On Tier Shutters",
-  "Bi-pass Shutters",
 ];
 
 export const curtainsSubcategories = [
