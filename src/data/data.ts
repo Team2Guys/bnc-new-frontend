@@ -2002,6 +2002,7 @@ export const blindsSubcategories = [
   "Vertical Blinds",
   "Sheer Roman Blinds",
   "Motorised Blinds",
+  "Roman blinds"
 ];
 
 export const shuttersSubcategories = [
@@ -2020,6 +2021,6 @@ export const curtainsSubcategories = [
   "Eyelet Curtains",
   "Double Pinch Pleat Curtains",
   "Blackout Curtains",
-  "Motorised Curtains",
+  "Motorised / Electric Curtains ",
   "Wave Sheer & Blackout Curtains",
 ];
