@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { MdOutlineStarPurple500 } from 'react-icons/md';
 import { IREVIEWS } from 'types/general';
 import { motion } from 'framer-motion';
+import ReviewImages from './ReviewImages';
 
 const TestimonialCard = ({
    testimonial,
@@ -22,11 +23,11 @@ const TestimonialCard = ({
    }, [testimonial.ReviewsDescription]);
 
    return (
-      <div className='grid grid-cols-1 bg-white p-4 2xl:p-6 lg:mb-5 h-fit'>
+      <div className='grid grid-cols-1 bg-transparent p-4 2xl:p-6 lg:mb-5 h-fit'>
          <div className="flex justify-between items-center gap-2">
             <div className='flex items-center gap-2'>
                <Image
-                  src={testimonial?.posterImageUrl}
+                  src={testimonial?.posterImageUrl || '/assets/images/dummy-avatar.jpg'}
                   alt="testimonial-image"
                   width={64}
                   height={64}
@@ -75,6 +76,7 @@ const TestimonialCard = ({
                   </button>
                )}
             </div>
+            <ReviewImages testimonial={testimonial} />
          </div>
       </div>
    );
