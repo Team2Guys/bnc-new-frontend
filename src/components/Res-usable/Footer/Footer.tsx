@@ -271,10 +271,10 @@ const Footer: React.FC = () => {
 
                                     const matchingProduct = products?.find(
                                       (product) =>
-                                        product.title === item &&
+                                        product.title.toLowerCase() === item.toLowerCase() &&
                                         product.CategoryId ===
                                         categories.find(
-                                          (cat) => cat.title === category.title,
+                                          (cat) => cat.title.toLowerCase() === category.title.toLowerCase(),
                                         )?.id,
                                     );
 
@@ -283,7 +283,7 @@ const Footer: React.FC = () => {
                                         {matchingSubcategory && (
                                           <li>
                                             <Link
-                                              className="text-14 2xl:text-16 text-primary font-normal"
+                                              className="text-14 2xl:text-16 text-primary font-normal capitalize"
                                               href={`/${category.title
                                                 .toLowerCase()
                                                 .replace('shutters', 'shutters-range')}/${ChangedProductUrl(
@@ -298,7 +298,7 @@ const Footer: React.FC = () => {
                                         {matchingProduct && (
                                           <li>
                                             <Link
-                                              className=" text-14 2xl:text-16 text-primary font-normal"
+                                              className=" text-14 2xl:text-16 text-primary font-normal capitalize"
                                               href={generatePath(
                                                 matchingProduct,
                                                 generateSlug(category.title),
@@ -325,7 +325,7 @@ const Footer: React.FC = () => {
                           <h3 className="font-semibold text-20 mb-2 text-primary w-fit font-robotoSerif">
                             {category.title}
                           </h3>
-                          <ul className="space-y-2 mt-4 text-primary font-roboto">
+                          <ul className="space-y-2 mt-4 text-primary font-roboto capitalize">
 
                             {
                               //@ts-ignore
@@ -343,14 +343,14 @@ const Footer: React.FC = () => {
 
                                 const matchingProduct = products?.find(
                                   (product) =>
-                                    product.title === item &&
+                                    product.title.toLowerCase() === item.toLowerCase() &&
                                     product.CategoryId ===
                                     categories.find(
-                                      (cat) => cat.title === category.title,
+                                      (cat) => cat.title.toLowerCase() === category.title.toLowerCase(),
                                     )?.id,
                                 );
 
-
+                              
                                 return (
 
 
