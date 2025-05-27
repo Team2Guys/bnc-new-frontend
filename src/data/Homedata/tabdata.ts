@@ -113,34 +113,34 @@ export const othersData = [
 export const featuresinfo = [
   {
     icon: '/assets/detailpage/fast1.png',
-    text: 'Delivery & Installation 1 to 2 Days',
+    text: 'Fast 1-2 day installation. Zero Hassle.',
   },
   {
     icon: '/assets/detailpage/fast2.png',
-    text: 'Free Home Visit Expert Guidance at Your Doorstep',
+    text: 'Free Home Consultation',
   },
   {
     icon: '/assets/detailpage/fast3.png',
-    text: '24/7 customer support',
+    text: '24/7 Custom Support',
   },
 ]
 
 export const Qualityfeatures = [
   {
     icon: '/assets/detailpage/fast4.png',
-    text: 'We are Top Manufacturer in Dubai with 20 Years of Designer Brand Expertise',
+    text: 'We are Dubai’s top blind manufacturers with 20+ years of experience, expert in-house designers, and zero outsourcing.',
   },
   {
     icon: '/assets/detailpage/fast5.png',
-    text: 'We are provide 5 to 10 year Warranty and Hassle-Free Replacement for Any Issues',
+    text: 'We provide a solid 5-year warranty — and if you move within 2 years, we’ll take care of uninstalling and reinstalling, completely free.',
   },
   {
     icon: '/assets/detailpage/fast7.png',
-    text: 'We serve 18000+ homes in Dubai — Rating <strong>4.9</strong> | <strong>760</strong> reviews — Window treatment store',
+    text: 'Trusted by 18,000+ families, with a <strong>4.9</strong> rating and <strong>760+</strong> five-star reviews',
   },
   {
     icon: '/assets/detailpage/fast6.png',
-    text: 'Measure your space? Don’t worry, it’s easy! We’ve got step-by-step tips and friendly advice to help you get it right',
+    text: 'We offer made-to-measure blinds and curtains, guided at home with 20+ fabric books, installed in just 1–2 days.',
   },
 ]
 

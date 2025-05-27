@@ -6,6 +6,7 @@ import { MdOutlineStarPurple500 } from 'react-icons/md';
 import { IREVIEWS } from 'types/general';
 import { motion } from 'framer-motion';
 import ReviewImages from './ReviewImages';
+import { getRandomColor } from 'utils/helperFunctions';
 
 const TestimonialCard = ({
    testimonial,
@@ -21,18 +22,37 @@ const TestimonialCard = ({
          setHasOverflow(contentRef.current.scrollHeight > 95);
       }
    }, [testimonial.ReviewsDescription]);
+   
+ 
+  console.log(testimonial)
 
    return (
       <div className='grid grid-cols-1 bg-transparent p-4 2xl:p-6 lg:mb-5 h-fit'>
          <div className="flex justify-between items-center gap-2">
             <div className='flex items-center gap-2'>
-               <Image
-                  src={testimonial?.posterImageUrl || '/assets/images/dummy-avatar.jpg'}
-                  alt="testimonial-image"
-                  width={64}
-                  height={64}
-                  className="size-12 xs:size-16 rounded-full object-cover"
-               />
+
+               {testimonial?.posterImageUrl?.imageUrl ? 
+               
+               <div  className='w-[34px] h-[34px] relative  sm:p-5 lg:p-10 '>
+                  <Image
+                     src={testimonial?.posterImageUrl.imageUrl}
+                     alt="testimonial-image"
+                     fill
+                      className='rounded-full'
+                    
+                  />
+
+               </div>
+               
+               : <p className="border sm:p-5 lg:p-10 rounded-full flex items-center justify-center text-white lg:text-[28px]"
+                  style={{
+                     backgroundColor: getRandomColor(), color: "white",
+                     width: "34px",   // You can adjust the size
+                     height: "34px",
+                  }}
+               >{testimonial?.name?.charAt(0)?.toUpperCase()}
+               </p>}
+
                <div className='flex flex-col gap-1'>
                   <h3 className="text-12 xs:text-14 2xl:text-lg font-bold">
                      {testimonial.name}

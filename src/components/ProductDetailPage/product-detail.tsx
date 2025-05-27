@@ -19,7 +19,6 @@ interface IProductDetail {
 }
 const ProductDetail = ({ title, filterProduct  }: IProductDetail) => {
    const [colorImage, setColorImage] = useState<string>('')
-   console.log(filterProduct,"filterProduct")
    const isMotorisedCategory =
     title?.toLowerCase().includes('motorised blinds') || title?.toLowerCase().includes('motorised curtains');
   return (
