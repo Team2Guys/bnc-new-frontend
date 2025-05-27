@@ -1,24 +1,21 @@
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from './Navbar'
 import { MdOutlineStarPurple500 } from 'react-icons/md';
 import CustomModal from 'components/ui/Modal';
 import { ratings } from 'data/new-data';
 import StarRatingBar from 'components/Hero/StarRatingBar';
 import Link from 'next/link';
+import { IREVIEWS } from 'types/general';
+import { fetchReviews } from 'config/fetch';
+import TestimonialCard from '../Cards/TestimonialCard';
 
 const Header = () => {
    const [open, setOpen] = useState(false);
+   const [reviews, setReviews] = useState<IREVIEWS[]>([])
    
-  const trustIndexRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    if (open && trustIndexRef.current) {
-      trustIndexRef.current.innerHTML = '';
-      const script = document.createElement('script');
-      script.src = 'https://cdn.trustindex.io/loader.js?6754fb44611899190046bf90da7';
-      script.async = true;
-      trustIndexRef.current.appendChild(script);
-    }
+    fetchReviews().then((data) => setReviews(data))
   }, [open]);
   return (
     <>
@@ -28,7 +25,7 @@ const Header = () => {
         onClick={() => setOpen(true)}
       >
         <div className="flex flex-col justify-center items-center">
-          {[1, 2, 3, 4, 5].map((star) => (
+          {Array(5).fill(null).map((star) => (
             <MdOutlineStarPurple500
               key={star}
               className="text-[#FFD800] text-lg md:text-27"
@@ -60,7 +57,11 @@ const Header = () => {
 
            <hr/>
            </div>
-        <div ref={trustIndexRef} className="w-full h-[350px] lg:h-[500px] overflow-y-scroll p-6" />
+        <div className="w-full h-[350px] lg:h-[500px] overflow-y-scroll p-4 xsm:p-6 grid grid-cols-1 xs:grid-cols-2 gap-4" >
+          {reviews.map((item, index) => (
+            <TestimonialCard key={index} testimonial={item} />
+          ))}
+        </div>
       </CustomModal>
     </>
   )
