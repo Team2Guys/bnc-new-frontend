@@ -34,7 +34,6 @@ const Testimonial = () => {
     fetchReviews().then((data) => setReviews(data))
   }, [])
 
-  console.log(reviews, 'reviews')
 
   return (
     <div className="mt-10 space-y-5">
