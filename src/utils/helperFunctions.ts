@@ -167,3 +167,10 @@ export const getSubcategoriesByCategory = (categoryName: string): string[] => {
     hour12: true
   }).format(parsedDate).toUpperCase();
 };
+
+
+
+ export const getRandomColor = () => {
+    return `hsl(${Math.floor(Math.random() * 360)}, 70%, 60%)`;
+
+  }

@@ -6,6 +6,7 @@ import { MdOutlineStarPurple500 } from 'react-icons/md';
 import { IREVIEWS } from 'types/general';
 import { motion } from 'framer-motion';
 import ReviewImages from './ReviewImages';
+import { getRandomColor } from 'utils/helperFunctions';
 
 const TestimonialCard = ({
    testimonial,
@@ -22,11 +23,7 @@ const TestimonialCard = ({
       }
    }, [testimonial.ReviewsDescription]);
    
-  const getRandomColor = () => {
-    return `hsl(${Math.floor(Math.random() * 360)}, 70%, 60%)`;
-
-  }
-
+ 
   console.log(testimonial)
 
    return (
@@ -55,6 +52,7 @@ const TestimonialCard = ({
                   }}
                >{testimonial?.name?.charAt(0)?.toUpperCase()}
                </p>}
+
                <div className='flex flex-col gap-1'>
                   <h3 className="text-12 xs:text-14 2xl:text-lg font-bold">
                      {testimonial.name}
