@@ -206,11 +206,11 @@ const Footer: React.FC = () => {
             {isLoading || isError ? (
               <>
                 {Array.from({ length: 3 }).map((_, index) => (
-                  <div className='flex flex-col sm:gap-4' key={index}>
+                  <div className='flex flex-col gap-2 sm:gap-4 w-full xs:items-center' key={index}>
                     {Array.from({ length: 6 }).map((_, index) => (
                       <Skeleton
                         key={index}
-                        className="w-1/2 h-6 bg-black/25"
+                        className="w-2/3 h-6 bg-black/25"
                       />
                     ))}
                   </div>

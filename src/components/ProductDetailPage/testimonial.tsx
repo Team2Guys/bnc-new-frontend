@@ -12,7 +12,7 @@ import { IREVIEWS } from 'types/general'
 const settings = {
   dots: true,
   infinite: true,
-  autoplay:true,
+  autoplay: true,
   speed: 500,
   slidesToShow: 2,
   slidesToScroll: 1,
@@ -33,6 +33,8 @@ const Testimonial = () => {
   useEffect(() => {
     fetchReviews().then((data) => setReviews(data))
   }, [])
+
+  console.log(reviews, 'reviews')
 
   return (
     <div className="mt-10 space-y-5">
@@ -67,11 +69,19 @@ const Testimonial = () => {
           <div className="col-span-12 md:col-span-8">
             <div className="custom-test">
               <Slider {...settings}>
-                {reviews?.map((item:IREVIEWS, index:number) => (
+                {reviews?.map((item: IREVIEWS, index: number) => (
                   <div key={index} className="px-4 sm:mb-2 ">
                     <div className=" space-y-3 h-full">
                       <p className="font-robotoSerif font-bold text-xl text-center sm:text-start">{item.name}</p>
-                      <p className="font-roboto text-gray-700 text-sm md:text-base text-center sm:text-start">{item.ReviewsDescription}</p>
+                      <div className='flex '>
+                        {[...Array(item.starRating)].map((_, i) => (
+                          <MdOutlineStarPurple500
+                            key={i}
+                            className="text-[#FFD800] text-xl"
+                          />
+                        ))}
+                      </div>
+                      <p className="font-roboto text-gray-700 text-sm md:text-base text-center sm:text-start">&quot;{item.ReviewsDescription}&quot;</p>
                     </div>
                   </div>
                 ))}
