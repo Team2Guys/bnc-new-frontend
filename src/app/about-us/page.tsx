@@ -40,14 +40,15 @@ const AboutUsPage = () => {
       </section>
       <div className=' text-center capitalize mt-10 sm:mb-0 mb-6'>
         <p className='sm:text-4xl text-2xl font-robotoSerif font-bold text-primary'>Our Journey</p>
-        <p className='sm:text-3xl text-14 font-medium font-roboto pt-2 text-[#3E3F42]'>The Story of Two Guys Home Furnishings</p>
+        <p className='sm:text-3xl text-14 font-medium font-roboto pt-2 text-[#3E3F42]'>Started as Blinds & Curtains — now proudly Two Guys Home Furnishings.
+        </p>
       </div>
 
       <Container>
         <AboutUsCompo blocks={aboutUsData} />
         <MilestoneSteps />
         <WhyChooseUss />
-        
+
       </Container>
 
     </Fragment>

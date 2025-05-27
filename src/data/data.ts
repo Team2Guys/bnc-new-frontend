@@ -318,31 +318,31 @@ export const PGuarantees: TProductGuarantees[] = [
 
 export const aboutUsData: AboutUsBlock[] = [
   {
-    shortHeading: 'From UK Roots to Dubai Dreams',
+    shortHeading: 'A New Country – A New Chapter',
     shortHeadingSize: 'sm:text-[20px] text-20 font-Roboto font-medium text-[#3E3F42]',
-    mainHeading: 'The Spark: A Passion Forged in the UK,  Ignited in Dubai',
+    mainHeading: 'How It All Began — From the UK to Dubai',
     mainHeadingSize: 'sm:text-2xl text-24 text-[#3E3F42]',
-    content: `Our story begins with Shiraz, our Managing Partner, who brought two decades of acclaimed UK retail expertise (including a 'Scottish Retailer of The Year' award in 1999!) to the vibrant landscape of Dubai in 2014. Driven by a vision for sunnier climes and new opportunities, the foundation for what would become Two Guys was laid.`,
+    content: `It all started with Shiraz, our Managing Partner, who worked in the UK for 20 years in the home retail business. He even won a big award back in 1999 called “Scottish Retailer of the Year”. In 2014, Shiraz moved to Dubai with his family, ready for a new start and bigger dreams. That move led to something special — the beginning of Two Guys. A brand built on years of experience and strong family values.`,
     contentSize: 'text-base text-start',   
     imageUrl: '/assets/images/about-us/about-3.webp',
   },
   {
-    shortHeading: 'Meet Our Team',
+    shortHeading: 'Meet the People Behind the Promise',
     shortHeadingSize: 'sm:text-2xl text-20 text-[#3E3F42] font-roboto font-semibold',
-    mainHeading: 'We Only Source from the BEST',
+    mainHeading: 'Real Experts. Real Advice. No Pushy Sales.',
     mainHeadingSize: 'sm:text-5xl text-2xl text[#3E3F42]',
-    content: `With over 60 dedicated professionals, our ethos is simple: deliver the level of service the owners themselves would expect (Shiraz’s self-professed OCD for detail is legendary!). This means impartial advice, never pushy sales or unnecessary up-sells, and a commitment that extends far beyond the final payment. We're here to build lasting relationships, one beautiful space at a time.`,
+    content: `At Two Guys, we don’t just hire staff — we build a team of over 60 people who care about your home like it’s their own. Our team is friendly, honest, and never pushy. Shiraz, our founder, notices every little detail — even a crooked curtain! That’s how much we care. When you choose us, you’re part of the Two Guys family`,
     contentSize: 'text-base text-start',
      imageUrl: '/assets/images/about-us/about-1.webp',
   },
   {
-    shortHeading: 'Dubai Beginnings',
+    shortHeading: 'Our First Big Step in Dubai',
       shortHeadingSize: 'sm:text-2xl text-20 text-[#3E3F42] font-roboto font-semibold',
-    mainHeading: 'Perseverance and Our First Showroom',
+    mainHeading: 'From a Tiny Office to the First Two Guys Showroom',
     mainHeadingSize: 'sm:text-5xl text-2xl text[#3E3F42]',
-    content: `The early days in Dubai, from a 'compact but cozy' Port Saeed office, were a testament to drive and ambition. 
-By 2017, this dedication blossomed into our first showroom in Oud Mehta, where 'Blindsandcurtains.ae
-quickly became a trusted name, fueled by word-of-mouth and returning customers.`,
+    content: `We started in a small, cosy office in Port Saeed — no fancy setup, just hard work and learning the Dubai market.
+In 2017, we opened our first showroom in Oud Metha as Blinds and Curtains and quickly became a trusted name.
+With loyal customers and growing demand, we evolved into Two Guys Home Furnishings — built on service, trust, and homes that feel just right.`,
     contentSize: 'text-base text-start',
    
      imageUrl: '/assets/images/about-us/about-2.webp',
@@ -1943,28 +1943,28 @@ export const blindimages = [
 
 
 export const milestoneStepsData: MilestoneStepsData = {
-  heading: "Our <br/> Milestones",
-  subheading: "A Journey in Time",
+  heading: "What Got <br/> Us Here",
+  subheading: "A timeline of dreams",
   image: "/assets/images/about-us/milestone.webp",
   steps: [
     {
       step: "1999",
-      description: "Our UK fashion roots win Scottish Retailer of The Year.",
+      description: "Scottish Retailer of the Year — our journey began with quality.",
       iconimage: "/assets/images/Line-380.svg",
     },
     {
       step: "2014",
-      description: "Blindsandcurtains.ae brings our expertise online in Dubai.",
+      description: "Launched blindsandcurtains.ae to serve Dubai homes better.",
       iconimage: "/assets/images/Line-380.svg",
     },
     {
       step: "2016",
-      description: "We begin manufacturing, ensuring quality from start to finish.",
+      description: "Started in-house Production to ensure better quality and control",
       iconimage: "/assets/images/Line-380.svg",
     },
     {
       step: "2023",
-      description: "Rebranded to Two Guys & expanded to our Al Quoz hub.",
+      description: "From Blinds & Curtains to Two Guys — Al Quoz is our new home.",
     },
   ],
 };
@@ -1973,23 +1973,23 @@ export const milestoneStepsData: MilestoneStepsData = {
 export const whyChooseData: WhyChooseItem[] = [
   {
     icon: "/assets/images/about-us/why1.svg",
-    title: "Decades of Combined <br /> Experience",
-    description: "From award-winning UK retail to Dubai market leadership.",
+    title: "Built on 20+ Years <br /> of Expertise",
+    description: " We bring decades of hands-on experience to every home we furnish.",
   },
   {
      icon: "/assets/images/about-us/why2.svg",
-    title: "Direct Manufacturing <br /> Control",
-    description: "Since 2016, ensuring superior quality and design flexibility.",
+    title: "In-house Production, <br /> No Outsourcing",
+    description: " Everything’s made by us —since 2016, so you get full quality, no compromises.",
   },
   {
      icon: "/assets/images/about-us/why3.svg",
-    title: "Honest, Customer-<br />First Approach",
-    description: "No pressure, just genuine advice and lifelong support.",
+    title: "No Pushy Sales.<br />  Just Happy Customers",
+    description: "We guide, not pressure — because your comfort always comes first.",
   },
   {
      icon: "/assets/images/about-us/why4.svg",
-    title: "Family Values, <br /> Professional Execution",
-    description: 'The dedication of "Two Guys" backed by a skilled team of 60+.',
+    title: "Crafted with Care. <br />  Installed with Confidence.",
+    description: 'From stitching to setup, we handle every detail with precision and pride.',
   },
 ];
 
@@ -2021,6 +2021,6 @@ export const curtainsSubcategories = [
   "Eyelet Curtains",
   "Double Pinch Pleat Curtains",
   "Blackout Curtains",
-  "Motorised / Electric Curtains ",
+  "Motorised Curtains ",
   "Wave Sheer & Blackout Curtains",
 ];
