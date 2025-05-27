@@ -454,3 +454,14 @@ ol {
 .ant-collapse-header{
   border: none !important;
 }
+
+.testimonial-slider .swiper-button-prev, .testimonial-slider .swiper-button-next {
+  color: black;
+  background-color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.testimonial-slider .swiper-button-next:after ,.testimonial-slider .swiper-button-prev:after {
+  font-size: 20px;
+}
