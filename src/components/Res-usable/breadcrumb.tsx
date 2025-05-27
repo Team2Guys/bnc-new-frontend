@@ -41,7 +41,7 @@ const Breadcrumb = ({
         {slug && (
           <>
             {arrow}
-          <Link  href={slug === "blinds"? "/made-to-measure-blinds/": slug === "curtains"? "/made-to-measure-curtains/": slug === "shutters"? "/shutters-range/": `/${slug}`}
+          <Link  href={slug === "Blinds"? "/made-to-measure-blinds/": slug === "curtains"? "/made-to-measure-curtains/": slug === "shutters"? "/shutters-range/": `/${slug}`}
               className="capitalize text-primary font-roboto text-16 sm:text-base"
             >
               {slug.replace(/-/g, " ")}
