@@ -4,20 +4,40 @@ import { MotorizeBlindData, Reel, WorkingProcessContent } from "types/types";
 
 export const reelsData: Reel[] = [
   {
-    videoUrl:  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    videoUrl:  "/videos/test(1).mp4",
   },
   {
-    videoUrl:  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    videoUrl:  "/videos/test(2).mp4",
   },
   {
-    videoUrl:  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    videoUrl:  "/videos/test(3).mp4",
   },
   {
-    videoUrl:  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    videoUrl:  "/videos/test(4).mp4",
   },
   {
-    videoUrl:  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    videoUrl:  "/videos/test(5).mp4",
   },
+  {
+    videoUrl:  "/videos/test(6).mp4",
+  },
+  {
+    videoUrl:  "/videos/test(7).mp4",
+  },
+  {
+    videoUrl:  "/videos/test(8).mp4",
+  },
+  {
+    videoUrl:  "/videos/test(9).mp4",
+  },
+  {
+    videoUrl:  "/videos/test(10).mp4",
+  },
+  {
+    videoUrl:  "/videos/test(11).mp4",
+  },
+
+
 ];
 
 
