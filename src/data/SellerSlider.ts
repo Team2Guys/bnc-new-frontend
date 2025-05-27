@@ -84,7 +84,7 @@ export const motorizeBlindData: MotorizeBlindData = {
     },
     {
     icon: "/assets/images/feature/remotecontrol.png",
-      label: "Remote Or Wall Switch",
+      label: "Remote Control",
     },
     {
       icon: "/assets/images/feature/automated.png",

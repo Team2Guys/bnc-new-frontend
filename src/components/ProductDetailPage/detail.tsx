@@ -1,13 +1,21 @@
 "use client"
+import CustomModal from 'components/ui/Modal'
 import { featuresinfo } from 'data/Homedata/tabdata'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { DetailProps } from 'types/product'
 
 
 const Detail = ({ data, setColorImage, selectedColor }: DetailProps) => {
-  
+   console.log(data,"datadata")
+  console.log(setColorImage,selectedColor)
+    const [openModal, setOpenModal] = useState(false);
+    const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string; title?: string }>({
+      src: '',
+      alt: '',
+      title: '',
+    });
   return (
     <div className=' space-y-2 sm:space-y-4 max-w-[650px]'>
       <h1 className='font-robotoSerif font-bold text-2xl xl:text-5xl text-primary px-2'>{data.title}</h1>
@@ -34,26 +42,45 @@ const Detail = ({ data, setColorImage, selectedColor }: DetailProps) => {
         dangerouslySetInnerHTML={{ __html:data.description}}/>
       </p>
         {
-          data.colors && data.colors.length > 0 && (
+          data.colorsImages && data.colorsImages.length > 0 && (
             <>
             <p className='font-roboto px-2'>Most Demanded Color</p>
             <div className=' flex items-center gap-2 md:pb-10 px-2'>
             <div className='flex items-center gap-2'>
-          {data.colors?.map((item: { name?: string; detail?: string }, index: number) => {
-                if (!item.detail) return null;
-                const colorCode = `#${item.detail}`;
-                const isSelected = selectedColor === colorCode;
-                return (
-                  <div
-                    key={index}
-                    onClick={() => setColorImage(colorCode)}
-                    style={{ backgroundColor: colorCode }}
-                    className={`h-9 md:w-12 w-9 md:h-12 rounded-sm cursor-pointer shadow border-2 ${
-                      isSelected ? 'border-secondary' : ''
-                    }`}
+          {/* {data.colors?.map((item: { name?: string; detail?: string }, index: number) => { */}
+                {data.colorsImages?.map((item, index) => {
+            // if (!item.detail) return null;
+            // const colorCode = `#${item.detail}`;
+            // const isSelected = selectedColor === colorCode;
+            return (
+              <div
+                  key={index}
+                  onClick={() => {
+                    setSelectedImage({
+                      src: item.imageUrl || '',
+                      alt: item.altText || 'color',
+                    });
+                    setOpenModal(true);
+                  }}
+                >
+                  <Image
+                    src={item.imageUrl || ''}
+                    alt={item.altText || 'color'}
+                    width={50}
+                    height={50}
+                    className="h-9 md:w-12 w-9 md:h-12 rounded-sm cursor-pointer shadow border-2"
                   />
-                );
-              })}
+                </div>
+              // <div
+              //   key={index}
+              //   onClick={() => setColorImage(colorCode)}
+              //   style={{ backgroundColor: colorCode }}
+              //   className={`h-9 md:w-12 w-9 md:h-12 rounded-sm cursor-pointer shadow border-2 ${
+              //     isSelected ? 'border-secondary' : ''
+              //   }`}
+              // />
+            );
+          })}
             </div>
               <p className='border rounded-lg font-roboto h-12 flex items-center px-2 text-xs md:text-base max-sm:max-w-32'>We still 3000 plus color availble </p>
               </div>
@@ -71,6 +98,17 @@ const Detail = ({ data, setColorImage, selectedColor }: DetailProps) => {
         </div>
       ))}
     </div>
+    <CustomModal open={openModal} onClose={() => setOpenModal(false)} title={" "} width={"max-w-md"} isheader>
+      <div className="p-4 flex justify-center">
+        <Image
+          src={selectedImage.src}
+          alt={selectedImage.alt}
+          width={700}
+          height={700}
+          className="rounded-md object-cover h-[300px] sm:h-[400px] "
+        />
+      </div>
+    </CustomModal>
     </div>
   )
 }
