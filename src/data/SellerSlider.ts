@@ -51,7 +51,7 @@ export const workingProcessData: WorkingProcessContent = {
     "/assets/images/Blinds/landing/Automatedblinds.webp",
     "/assets/images/Blinds/landing/Automatedblinds.webp",
   ],
-  videoUrl: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+  videoUrl: "/videos/FinalBncStepByStepProcess5SquareSize.mp4",
   steps: [
     {
       step: "Step 1",
