@@ -9,6 +9,7 @@ export interface IREVIEWS {
   starRating?: number
   createdAt: string;
   posterImageUrl: ProductImage
+  ReviewsImages: ProductImage[]
   updatedAt?: string
   reviewDate?: string
 }

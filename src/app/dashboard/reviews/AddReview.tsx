@@ -1,5 +1,5 @@
 "use client"
-import React, { SetStateAction, useEffect, useState } from 'react'
+import React, { SetStateAction, useEffect, useRef, useState } from 'react'
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 
@@ -29,6 +29,10 @@ function AddReview({ editReview, setEditsetReview, setselecteMenu }: I_Add_Revie
   const [loading, setloading] = useState(false)
 
   const [posterimageUrl, setposterimageUrl] = useState<ProductImages[] | undefined>((editReview && editReview.posterImageUrl) ? [editReview.posterImageUrl] : undefined);
+  const [imagesUrl, setImagesUrl] = useState<ProductImages[] >((editReview && editReview.posterImageUrl) ? editReview.ReviewsImages : []);
+    const dragImage = useRef<number | null>(null);
+    const draggedOverImage = useRef<number | null>(null);
+ 
   const [formDate, setformDate] = useState<initiValuesProps>({
     name: editReview?.name,
     starRating: editReview?.starRating,
@@ -99,13 +103,31 @@ catch (error:any) {
   console.log(values, 'values')
   const payload = {
     ...values,
-    posterImageUrl: posterImageUrl
+    posterImageUrl: posterImageUrl,
+    ReviewsImages:imagesUrl
   };
   await apiHandler(payload)
   resetForm()
-  
 
+  };
 
+      function handleSort() {
+    if (dragImage.current === null || draggedOverImage.current === null) return;
+
+    const imagesClone = imagesUrl && imagesUrl.length > 0 ? [...imagesUrl] : [];
+
+    const temp = imagesClone[dragImage.current];
+    imagesClone[dragImage.current] = imagesClone[draggedOverImage.current];
+    imagesClone[draggedOverImage.current] = temp;
+
+    setImagesUrl(imagesClone);
+  }
+
+  const handlealtText = (index: number, newaltText: string) => {
+    const updatedImagesUrl = imagesUrl.map((item, i) =>
+      i === index ? { ...item, altText: newaltText } : item,
+    );
+    setImagesUrl(updatedImagesUrl);
   };
 
   return (
@@ -210,6 +232,68 @@ catch (error:any) {
               <ErrorMessage name="reviewDate" component="div" className="text-red-500 text-sm" />
             </div>
 
+   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
+                    <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                      <h3 className="font-medium text-black dark:text-white">
+                      Add Reviews Images
+                      </h3>
+                    </div>
+                    <Imageupload setImagesUrl={setImagesUrl}  multiple/>
+                    {imagesUrl && imagesUrl.length > 0 ? (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+                        {imagesUrl.map((item: any, index) => {
+                          return (
+                            <div key={index}
+                             draggable
+                              onDragStart={() => (dragImage.current = index)}
+                              onDragEnter={() =>
+                                (draggedOverImage.current = index)
+                              }
+                              onDragEnd={handleSort}
+                              onDragOver={(e) => e.preventDefault()}
+                            >
+                              <div className="relative group rounded-lg overflow-hidden shadow-md bg-white transform transition-transform duration-300 hover:scale-105">
+                                <div className="absolute top-1 right-1 invisible group-hover:visible errorColor bg-white rounded-full z-10" draggable>
+                                  <RxCross2
+                                    className="cursor-pointer btext-red-500 hover:errorColor-700"
+                                    size={17}
+                                    onClick={() => {
+                                      ImageRemoveHandler(
+                                        item.public_id,
+                                        setImagesUrl,
+                                      );
+                                    }}
+                                  />
+                                </div>
+                                <div key={index} className=" relative ">
+                                  <div className="h-[100px] w-full overflow-hidden">
+                                    <Image
+                                      className="object-cover w-full h-full"
+                                      width={300}
+                                      height={200}
+                                      src={item.imageUrl}
+                                      alt={`productImage-${index}`}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                              <input
+                                className="border mt-2 w-full rounded-md border-stroke px-2 text-14 py-2 bg-white dark:border-strokedark dark:bg-lightdark focus:border-primary active:border-primary outline-none"
+                                placeholder="altText"
+                                type="text"
+                                name="altText"
+                                value={item.altText}
+                                onChange={(e) =>
+                                  handlealtText(index, String(e.target.value))
+                                }
+                              />
+                       
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ) : null}
+                  </div>
 
             <button type="submit" className="dashboard_primary_button">
               {loading  ? "Submitting" : "Submit"}
