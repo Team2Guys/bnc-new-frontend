@@ -13,7 +13,7 @@ const QualitySection = () => {
         <div className="space-y-2">
           <p className="uppercase text-sm sm:text-base font-medium text-primary text-center sm:text-start">We Only Focus On</p>
           <h2 className="text-2xl md:text-[40px] font-black text-primary font-robotoSerif text-center sm:text-start">
-            High Quality Curtains
+            Customer Satisfaction
           </h2>
         </div>
 
