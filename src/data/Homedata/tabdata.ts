@@ -198,7 +198,7 @@ export const staticvideos = [
     },
     {
       title: "Energy Efficiency",
-      icon: "/assets/detailpage/detail4.png",
+      icon: "/assets/detailpage/energyicon.png",
       image: "/assets/detailpage/Energy.webp", 
       heading: "Energy Efficiency.",
       description:
