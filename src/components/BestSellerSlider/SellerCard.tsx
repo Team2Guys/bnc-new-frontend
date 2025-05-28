@@ -105,12 +105,13 @@ const SellerSlider = ({ products }: { products: IProduct[] }) => {
                     />
                   </div>
                   <div className="pt-4 text-center md:text-start">
-                    <h3 className="text-lg font-semibold mb-1 text-primary text-24 md:text-20 font-robotoSerif">
+                    <h3 className="text-lg font-semibold mb-1 text-primary text-24 md:text-20 font-robotoSerif min-h-14">
                       {item.title}
                     </h3>
                     <p className="text-secondary font-normal md:text-16 text-20 font-roboto">
                       <span className="text-primary">Starting from</span>{" "}
-                      {item.price}AED
+                      {item.price*(2*3)}AED {" "}
+                    <span className="text-primary  text-16">(2m x 3m)</span>
                     </p>
                   </div>
                 </div>

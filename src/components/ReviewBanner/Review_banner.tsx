@@ -17,8 +17,8 @@ export default function ReviewBanner() {
         <div className="space-y-3 text-center">
         <Image src={"/assets/images/googleReview/google.png"} width={235} height={34} alt="logo"/>
         <div className="flex  justify-center items-center">
-          {Array(5).fill(null).map((star) => (
-            <MdOutlineStarPurple500 key={star} className="text-[#FFD800] text-36" />
+          {Array(5).fill(null).map((star, index) => (
+            <MdOutlineStarPurple500 key={index} className="text-[#FFD800] text-36" />
           ))}
         </div>
         <p className="font-roboto text-lg  md:text-xl">Rating <span className="font-medium">4.9 | 760</span> reviews <br/> Window treatment store</p>
