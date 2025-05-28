@@ -2021,6 +2021,6 @@ export const curtainsSubcategories = [
   "Eyelet Curtains",
   "Double Pinch Pleat Curtains",
   "Blackout Curtains",
-  "Motorised Curtains ",
+  "Motorised Curtains",
   "Wave Sheer & Blackout Curtains",
 ];
