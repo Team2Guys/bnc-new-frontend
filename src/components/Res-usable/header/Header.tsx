@@ -25,9 +25,9 @@ const Header = () => {
         onClick={() => setOpen(true)}
       >
         <div className="flex flex-col justify-center items-center">
-          {Array(5).fill(null).map((star) => (
+          {Array(5).fill(null).map((star, index) => (
             <MdOutlineStarPurple500
-              key={star}
+              key={index}
               className="text-[#FFD800] text-lg md:text-27"
             />
           ))}
@@ -40,8 +40,8 @@ const Header = () => {
          <div className="flex justify-between items-center flex-col space-y-2">
           <p className="font-bold font-robotoSerif text-xl">Let customers speak for us</p>
           <div className="flex  justify-center items-center">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <MdOutlineStarPurple500 key={star} className="text-[#FFD800] text-30" />
+            {[1, 2, 3, 4, 5].map((star, index) => (
+              <MdOutlineStarPurple500 key={index} className="text-[#FFD800] text-30" />
             ))}
           </div>
           <p className="font-roboto text-primary">Based on 800 reviews</p>
