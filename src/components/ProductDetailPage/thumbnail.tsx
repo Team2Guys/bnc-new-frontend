@@ -106,7 +106,6 @@ const Thumbnail = ({
 
   return (
     <div>
-      {/* Main Slider */}
       <Slider {...mainSettings} ref={slider1} className="overflow-hidden outline-0">
         {isMotorisedCategory && videos.length > 0 && (
           <div className="relative w-full h-[340px] md:h-[450px] xl:h-[563px] bg-black flex items-center justify-center">
@@ -130,7 +129,6 @@ const Thumbnail = ({
         ))}
       </Slider>
 
-      {/* Thumbnail Slider or Static Thumbnails */}
       {displayImages.length > 0 && displayImages.length > 4 ? (
         <Slider {...thumbSettings} ref={slider2}>
           {isMotorisedCategory && videos.length > 0 && (

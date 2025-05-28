@@ -2001,7 +2001,7 @@ export const blindsSubcategories = [
   "Blackout Roman Blinds",
   "Vertical Blinds",
   "Motorised Blinds",
-  "Roman blinds"
+  "Sheer Roman blinds"
 ];
 
 export const shuttersSubcategories = [
