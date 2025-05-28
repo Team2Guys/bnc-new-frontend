@@ -1997,10 +1997,9 @@ export const blindsSubcategories = [
   "Blackout Roller Blinds",
   "Sunscreen Roller Blinds",
   "Day/night Blinds",
-  "Wooden Venetian Blinds",
+  "Wood Venetian Blinds",
   "Blackout Roman Blinds",
   "Vertical Blinds",
-  "Wood Venetian blinds",
   "Motorised Blinds",
   "Roman blinds"
 ];
