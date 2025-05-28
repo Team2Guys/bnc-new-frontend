@@ -159,40 +159,50 @@ export const staticvideos = [
     {
   title: "Control at Your Fingertips",
   icon: "/assets/detailpage/detail1.png",
-  image: "/assets/detailpage/mobile2.png",
-  heading: "Discover the Tahoma® by Somfy",
+  image: "/assets/detailpage/control.webp",
+  heading: "Control at Your Fingertips",
   description:
-    "<p>Schedules that Move with You Your shades ready on your schedule.</p> <ul class='list-disc pl-5'><li>Pre-set schedules get you started with options like 'Thermal Comfort' to maintain comfortable temperatures</li> <li>Adapt shades to your routine and the time of day with advanced scheduling features</li></ul>",
+    "<p>Your blinds, your schedule.</p> <p >Set your blinds to move on your schedule. Use features like Thermal Comfort to keep the room temperature just right. You can even set them to open in the morning or close at sunset — all automatically.</p>",
   buttonText: "Book A Free Visit",
   href: "/request-appointment"
 },
     {
-      title: "voice assistant",
+      title: "Voice Assistant",
       icon: "/assets/detailpage/detail2.png",
-       image: "/assets/detailpage/mobile2.png", 
-      heading: "Expert Guidance at Your Doorstep1",
+       image: "/assets/detailpage/voice.webp", 
+      heading: "voice assistant",
       description:
-        "Discover what makes us the preferred choice for window solutions. Discover what makes us the preferred choice for window solutions. Discover what makes us the preferred choice for window solutions.Discover what makes us the preferred choice for window solutions.",
+        "Use your voice to control your blinds. Pair your smart blinds with Alexa or Google Assistant to open, close, or adjust them using just your voice. Seamless integration with your smart home system makes comfort effortless.",
       buttonText: "Book A Free Visit",
         href:"/request-appointment"
     },
     {
       title: "Smart Home Integration",
       icon: "/assets/detailpage/detail3.png",
-      image: "/assets/detailpage/mobile2.png", 
-      heading: "Expert Guidance at Your Doorstep2",
+      image: "/assets/detailpage/Smarthome.webp", 
+      heading: "Smart Home Integration",
       description:
-        "Discover what makes us the preferred choice for window solutions. Discover what makes us the preferred choice for window solutions. Discover what makes us the preferred choice for window solutions.Discover what makes us the preferred choice for window solutions.",
+        "Make your blinds part of your routine. Use Somfy’s smart scenes like Sunrise or Sunset to automate daily light control — or customise your own presets based on how you live. Every window works exactly the way you want it to.",
       buttonText: "Book A Free Visit",
        href:"/request-appointment"
     },
     {
-      title: "Smart Control",
+      title: "10+ Year Motor perfomance",
       icon: "/assets/detailpage/detail4.png",
-      image: "/assets/detailpage/mobile2.png", 
-      heading: "Expert Guidance at Your Doorstep3",
+      image: "/assets/detailpage/perfomance.webp", 
+      heading: "10-Year Motor Performance",
       description:
-        "Discover what makes us the preferred choice for window solutions. Discover what makes us the preferred choice for window solutions. Discover what makes us the preferred choice for window solutions.Discover what makes us the preferred choice for window solutions.",
+        "Reliable performance, year after year. Somfy motors are designed for durability and trusted by 270 million users worldwide. With a full 10-year warranty, you get long-term reliability with whisper-quiet motion every day.",
+      buttonText: "Book A Free Visit",
+       href:"/request-appointment"
+    },
+    {
+      title: "Energy Efficiency",
+      icon: "/assets/detailpage/energyicon.png",
+      image: "/assets/detailpage/Energy.webp", 
+      heading: "Energy Efficiency.",
+      description:
+        " Save on cooling — automatically. Motorised blinds adjust automatically to sunlight — reducing indoor heat, easing the load on your AC, and cutting down energy use. Real-time app notifications help you stay battery-ready and efficient all year round.",
       buttonText: "Book A Free Visit",
        href:"/request-appointment"
     },
