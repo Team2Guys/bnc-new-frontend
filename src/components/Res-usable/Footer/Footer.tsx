@@ -102,7 +102,7 @@ const Footer: React.FC = () => {
               <Link href='/' className="w-[79px] h-[50px] relative md:w-[120px] md:h-[70px]">
               <Image
                 fill
-                loading='lazy'
+                priority
                 src='/assets/images/logomain.webp'
                 alt="Logo"
               />
