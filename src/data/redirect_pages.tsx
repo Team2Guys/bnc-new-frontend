@@ -21,7 +21,7 @@ export const newblogPostUrl = [
       redirectUrl: '/blog/vertical-blinds-for-windows',
     },
     { url: '/our-installation', redirectUrl: '/gallery' },
-    { url: '/call-me-back', redirectUrl: '/request-appointment' },
+    { url: '/call-me-back', redirectUrl: '/request-appointment/' },
     { url: '/blinds-projects', redirectUrl: '/projects' },
     { url: '/curtains-projects', redirectUrl: '/projects' },
     { url: '/shutters-project', redirectUrl: '/projects' },
@@ -33,7 +33,7 @@ export const newblogPostUrl = [
     { url: '/roller-shades/solar-screen-shades', redirectUrl: '/' },
     { url: '/blinds/office-window-blinds', redirectUrl: '/commercial' }, 
     { url: '/contact-form', redirectUrl: '/contact-us' },
-    { url: '/talk-to-specialist', redirectUrl: '/request-appointment' },
+    { url: '/talk-to-specialist', redirectUrl: '/request-appointment/' },
     {
       url: '/blinds/digitally-printed-photo-logo-blinds',
       redirectUrl: '/commercial/printed-blinds',

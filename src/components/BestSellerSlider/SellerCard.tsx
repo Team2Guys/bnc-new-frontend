@@ -121,7 +121,7 @@ const SellerSlider = ({ products }: { products: IProduct[] }) => {
         </Slider>
 
         <Link
-          href="/request-appointment"
+          href="/request-appointment/"
           className="bg-secondary font-roboto text-primary font-medium text-lg sm:text-[14px] px-5 py-2 rounded-lg block w-fit text-center mx-auto mt-5 hover:opacity-65"
         >
           Book a Free Visit
