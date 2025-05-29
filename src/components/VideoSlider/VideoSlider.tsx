@@ -4,6 +4,9 @@ import React, { useState, useRef, useEffect } from "react"
 import { reelsData } from "data/SellerSlider"
 import Container from "components/Res-usable/Container/Container"
 import NeedHelp from "components/NeedHelp/NeedHelp"
+import VideoIcon from "../../../public/assets/images/videoicon.webp"
+
+import Image from "next/image"
 
 export default function VideoReelsSlider() {
   const [activeIndex, setActiveIndex] = useState(2)
@@ -114,13 +117,13 @@ export default function VideoReelsSlider() {
                 )}`}
               >
                 <div className="relative sm:w-[500px] sm:h-[670px] w-[150px] h-[280px] rounded-2xl overflow-hidden shadow-lg">
-                  {/* <div className="absolute top-2 right-2 z-40">
+                  <div className="absolute top-2 right-2 z-40">
                     <Image
-                      src="/assets/images/videoicon.webp"
+                      src={VideoIcon}
                       alt="icon"
-                      className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
+                      className="w-6 h-6 sm:w-12 sm:h-12 object-contain"
                     />
-                  </div> */}
+                  </div>
                   <video
                     ref={(el) => {
                       if (el) videoRefs.current[index] = el
