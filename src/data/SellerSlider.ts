@@ -51,7 +51,7 @@ export const workingProcessData: WorkingProcessContent = {
     "/assets/images/Blinds/landing/Automatedblinds.webp",
     "/assets/images/Blinds/landing/Automatedblinds.webp",
   ],
-  videoUrl: "/videos/FinalBncStepByStepProcess5SquareSize.mp4",
+  videoUrl: "https://bncmain.s3.eu-north-1.amazonaws.com/New+Latest+Bnc+Step+By+Step+Process+With+Text(1).mp4",
   steps: [
     {
       step: "Step 1",
