@@ -389,4 +389,8 @@ export interface WhyChooseItem {
   icon: string;
   title: string;
   description: string;
+}export interface ReviewData {
+  name: string;
+  review: string;
+  reviewLink: string;
 }
