@@ -32,7 +32,7 @@ const ClientLogoGridSlider = ({ OurClientImage }: { OurClientImage: any }) => {
                         src={image.src}
                         alt={image.alt}
                         fill
-                        loading="lazy"
+                       priority
                      />
                   </div>
                </SwiperSlide>
