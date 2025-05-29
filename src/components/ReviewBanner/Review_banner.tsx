@@ -26,7 +26,9 @@ export default function ReviewBanner() {
         </div>
         <div className="space-y-3 text-center md:text-start mt-5 md:mt-0">
           <p className="font-bold font-robotoSerif text-lg md:text-2xl text-primary">Imran Ahmad</p>
-          <p className=" sm:font-medium font-roboto text-lg md:text-xl text-primary px-6 sm:px-0 leading-7 ">“ Amazing experience from start to finish Ryan and Ben did a great job with installation leaving drive and garage clean ”</p>
+          <p className=" sm:font-medium font-roboto font-normal text-lg md:text-xl text-primary px-6 sm:px-0 leading-7 ">
+            “ Amazing experience from start to finish Ryan and Ben did a great job with installation leaving drive and garage clean ”
+          </p>
           <Link target="_blank" href={"https://www.google.com/maps/place/Blinds+And+Curtains+Dubai/@25.1177148,55.2356858,984m/data=!3m1!1e3!4m8!3m7!1s0x3e5f698d0b075de1:0x223e3563a8be56be!8m2!3d25.1177148!4d55.2356858!9m1!1b1!16s%2Fg%2F11bbt9c0yz?entry=ttu&g_ep=EgoyMDI1MDUxMy4xIKXMDSoASAFQAw%3D%3D"} className="border border-primary py-2 px-4 rounded-md font-roboto font-bold text-22 hidden md:block w-fit">Go to Google Reviews</Link>
         </div>
       </Container>

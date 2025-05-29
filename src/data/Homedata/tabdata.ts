@@ -170,7 +170,7 @@ export const staticvideos = [
       title: "Voice Assistant",
       icon: "/assets/detailpage/detail2.png",
        image: "/assets/detailpage/voice.webp", 
-      heading: "voice assistant",
+      heading: "Voice Assistant",
       description:
         "Use your voice to control your blinds. Pair your smart blinds with Alexa or Google Assistant to open, close, or adjust them using just your voice. Seamless integration with your smart home system makes comfort effortless.",
       buttonText: "Book A Free Visit",
@@ -200,7 +200,7 @@ export const staticvideos = [
       title: "Energy Efficiency",
       icon: "/assets/detailpage/energyicon.png",
       image: "/assets/detailpage/Energy.webp", 
-      heading: "Energy Efficiency.",
+      heading: "Energy Efficiency",
       description:
         " Save on cooling — automatically. Motorised blinds adjust automatically to sunlight — reducing indoor heat, easing the load on your AC, and cutting down energy use. Real-time app notifications help you stay battery-ready and efficient all year round.",
       buttonText: "Book A Free Visit",
