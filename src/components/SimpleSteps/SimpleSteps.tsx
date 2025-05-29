@@ -56,13 +56,13 @@ export default function SimpleSteps() {
 
                   </div>
                   <div className="flex flex-col justify-center pt-3">
-                    <p className="text-base font-bold text-primary font-robotoSerif">{step.title}</p>
+                    <h4 className="text-base font-bold text-primary font-robotoSerif">{step.title}</h4>
                     <p className="text-base text-primary font-roboto">{step.description}</p>
                   </div>
                 </div>
               ))}
             </div>
-            <Link href="/request-appointment" className="bg-secondary text-primary py-3 px-8 sm:px-16 block rounded-md w-fit font-semibold mt-10 mb-2 max-sm:mx-auto">Book A Free Visit</Link>
+            <Link href="/request-appointment/" className="bg-secondary text-primary py-3 px-8 sm:px-16 block rounded-md w-fit font-semibold mt-10 mb-2 max-sm:mx-auto">Book A Free Visit</Link>
           </div>
         </div>
       </div>

@@ -1943,7 +1943,7 @@ export const blindimages = [
 
 
 export const milestoneStepsData: MilestoneStepsData = {
-  heading: "What Got <br/> Us Here",
+  heading: "What Got Us Here",
   subheading: "A timeline of dreams",
   image: "/assets/images/about-us/milestone.webp",
   steps: [

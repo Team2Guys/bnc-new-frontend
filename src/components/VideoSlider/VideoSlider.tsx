@@ -114,6 +114,13 @@ export default function VideoReelsSlider() {
                 )}`}
               >
                 <div className="relative sm:w-[500px] sm:h-[670px] w-[150px] h-[280px] rounded-2xl overflow-hidden shadow-lg">
+                  {/* <div className="absolute top-2 right-2 z-40">
+                    <Image
+                      src="/assets/images/videoicon.webp"
+                      alt="icon"
+                      className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
+                    />
+                  </div> */}
                   <video
                     ref={(el) => {
                       if (el) videoRefs.current[index] = el

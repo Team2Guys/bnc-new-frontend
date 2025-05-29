@@ -37,9 +37,9 @@ const Testimonial = () => {
 
   return (
     <div className="mt-10 space-y-5">
-      <p className="font-bold font-robotoSerif text-[40px] hidden md:block text-center">
+      <h2 className="font-bold font-robotoSerif text-[40px] hidden md:block text-center">
         Testimonials
-      </p>
+      </h2>
       <div className="bg-secondary-foreground py-10 w-full">
         <Container className="grid grid-cols-12 gap-6">
           {/* Left Section */}
