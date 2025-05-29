@@ -101,6 +101,13 @@
   --hover: #141414;
   --input-color: white;
 }
+.font-roboto {
+  font-family: var(--font-roboto), sans-serif;
+}
+
+.font-roboto-serif {
+  font-family: var(--font-roboto-serif), serif;
+}
 
 input {
   outline: none;
