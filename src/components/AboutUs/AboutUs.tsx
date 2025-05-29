@@ -15,9 +15,9 @@ const AboutUsCompo: FC<Props> = ({ blocks }) => {
 
         const TextContent = (
           <div className="space-y-4">
-            <h3 className={`${block.shortHeadingSize} font-medium`}>
+            <p className={`${block.shortHeadingSize} font-medium`}>
               {block.shortHeading}
-            </h3>
+            </p>
             <h2 className={`${block.mainHeadingSize} font-bold font-robotoSerif`}>
               {block.mainHeading}
             </h2>

@@ -25,7 +25,7 @@
       title: "Stress-Free Smooth Experience",
       icon: "/assets/images/Home/tab/stress-free.svg",
       image: "/assets/images/Home/tab/trusted.webp", 
-      heading: "EFast Installation. Zero Hassle.",
+      heading: "Fast Installation. Zero Hassle.",
       description:
         "From the first visit to the final fitting, we make custom blinds and curtains with 2 days of easy installation or according to your schedule.<br/> Need a reinstall? It's free for 2 years.<br/> Need adjustments We fix — not upsell.<br/> Because your time and trust matter.",
       buttonText: "Book A Free Visit",

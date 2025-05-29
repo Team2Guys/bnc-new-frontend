@@ -37,7 +37,6 @@ export const reelsData: Reel[] = [
     videoUrl:  "/videos/test(11).mp4",
   },
 
-
 ];
 
 
