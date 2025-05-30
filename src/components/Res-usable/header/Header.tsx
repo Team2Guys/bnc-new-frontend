@@ -2,13 +2,16 @@
 import { useEffect, useState } from 'react';
 import Navbar from './Navbar'
 import { MdOutlineStarPurple500 } from 'react-icons/md';
-import CustomModal from 'components/ui/Modal';
+const CustomModal = dynamic(()=>import("components/ui/Modal"),{
+   loading: () => <p>Loading...</p>,
+})
 import { ratings } from 'data/new-data';
 import StarRatingBar from 'components/Hero/StarRatingBar';
 import Link from 'next/link';
 import { IREVIEWS } from 'types/general';
 import { fetchReviews } from 'config/fetch';
 import TestimonialCard from '../Cards/TestimonialCard';
+import dynamic from 'next/dynamic';
 
 const Header = () => {
    const [open, setOpen] = useState(false);
