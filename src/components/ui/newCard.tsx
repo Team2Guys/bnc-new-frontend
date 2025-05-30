@@ -18,16 +18,20 @@ const Card = ({ card }: { card: IProduct }) => {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
             />
           </Link>
-          <div className="text-center space-y-1 px-4 pb-4">
-            <h3 className="font-semibold md:font-black font-robotoSerif text-xl lg:text-2xl text-primary capitalize">
-              {card.title.replace(/\//g, ' ')}
-            </h3>
-            <div className="text-primary text-base lg:text-lg font-roboto transition-all">
-              <p>
-                {card?.short_description}{' '}
+          <div className="flex flex-col h-full px-4 pb-4 text-center space-y-1">
+            <div className="min-h-[60px]">
+              <h3 className="font-semibold md:font-black font-robotoSerif text-xl lg:text-2xl text-primary capitalize">
+                {card.title.replace(/\//g, ' ')}
+              </h3>
+            </div>
+
+            <div className="min-h-[80px]">
+              <p className="text-primary text-base lg:text-lg font-roboto transition-all">
+                {card?.short_description}
               </p>
             </div>
           </div>
+
         </div>
         <Link
           href={getPath(card)}
