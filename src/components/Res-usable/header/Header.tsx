@@ -58,7 +58,7 @@ const Header = () => {
            <hr/>
            </div>
         <div className="w-full h-[350px] lg:h-[500px] overflow-y-scroll p-4 xsm:p-6 grid grid-cols-1 xs:grid-cols-2 gap-4" >
-          {reviews.map((item, index) => (
+          { (reviews && reviews.length > 0) && reviews.map((item, index) => (
             <TestimonialCard key={index} testimonial={item} />
           ))}
         </div>
