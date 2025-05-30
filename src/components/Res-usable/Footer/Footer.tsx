@@ -153,7 +153,7 @@ const Footer: React.FC = () => {
                   <span>
                     <SlCalender size={19} className="text-secondary me-1 ms-[2px]" />
                   </span>
-                  <p className='text-base sm:text-sm '>8.30am - 6.00pm 7 days a week</p>
+                  <p className='text-base sm:text-sm '>8.30am - 11.00pm 7 days a week</p>
 
                 </li>
 

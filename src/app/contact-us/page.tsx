@@ -95,7 +95,7 @@ const ProductUs: React.FC = () => {
                 </div>
                 <div className="text-14 md:text-15 2xl:text-18 flex gap-3 items-start">
                   <SlCalender size={20} className="text-white w-1/12 " />
-                    <p className='w-11/12'>8.30am - 6.00pm 7 days a week</p>
+                    <p className='w-11/12'>8.30am - 11.00pm 7 days a week</p>
                     </div>
                 <div className=" text-14 flex gap-3 items-start md:text-18">
                   <MdEmail size={25} className="text-white w-1/12 " />
