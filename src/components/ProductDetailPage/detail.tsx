@@ -24,7 +24,7 @@ const Detail = ({ data, setColorImage, selectedColor }: DetailProps) => {
         {Array.isArray(data?.topImages) && data.topImages.map((feature, index) => (
           <div key={index} className='rounded-full py-2 px-4 flex items-center gap-1 bg-[#F2F2F2]'>
             <Image src={feature.imageUrl} height={20} width={20} alt='feature' />
-            <p className='font-roboto text-sm'>{feature.name}</p>
+            <p className='font-roboto text-sm '>{feature.name}</p>
           </div>
         ))}
       </div>

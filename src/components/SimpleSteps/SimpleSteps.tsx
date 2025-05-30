@@ -11,10 +11,10 @@ export default function SimpleSteps() {
     <Container className="mt-5 md:mt-10">
       <div className="mx-auto px-1 md:px-4">
         <div className="sm:py-7 pt-7 pb-0">
-          <h2 className="sm:text-5xl text-2xl font-robotoSerif font-bold text-primary text-center">
+          <h2 className="categoryHeading text-center">
             {workingProcessData.heading}
           </h2>
-          <p className="sm:text-xl text-lg mt-3 sm:mt-6 mb-2 text-center font-roboto text-primary max-w-5xl mx-auto sm:block hidden">
+          <p className="font-normal text-[20px] mb-2 text-center font-roboto text-primary max-w-5xl mx-auto sm:block hidden">
             {workingProcessData.subheading}
           </p>
           <h3 className="sm:text-2xl text-xl sm:font-bold font-semibold text-primary mb-6 text-center font-robotoSerif block sm:hidden">
@@ -35,7 +35,7 @@ export default function SimpleSteps() {
           </div>
 
           <div className="w-full sm:sm:w-2/5">
-            <h3 className="text-2xl font-bold text-primary mb-6 text-center font-robotoSerif sm:block hidden">
+            <h3 className="text-[24px] font-bold text-primary mb-6 font-robotoSerif sm:block hidden">
               Just <span className="text-[#F1B42F]">4</span> Simple Steps
             </h3>
             <div>
@@ -56,8 +56,8 @@ export default function SimpleSteps() {
 
                   </div>
                   <div className="flex flex-col justify-center pt-3">
-                    <h4 className="text-base font-bold text-primary font-robotoSerif">{step.title}</h4>
-                    <p className="text-base text-primary font-roboto">{step.description}</p>
+                    <h4 className="text-[20px] font-bold text-primary font-robotoSerif">{step.title}</h4>
+                    <p className="text-[14px] text-primary font-roboto">{step.description}</p>
                   </div>
                 </div>
               ))}

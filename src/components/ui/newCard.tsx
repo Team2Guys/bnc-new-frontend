@@ -20,13 +20,13 @@ const Card = ({ card }: { card: IProduct }) => {
           </Link>
           <div className="flex flex-col h-full px-4 pb-4 text-center space-y-1">
             <div className="min-h-[60px]">
-              <h3 className="font-semibold md:font-black font-robotoSerif text-xl lg:text-2xl text-primary capitalize">
+              <h3 className="font-bold  font-robotoSerif text-24 text-primary capitalize">
                 {card.title.replace(/\//g, ' ')}
               </h3>
             </div>
 
-            <div className="min-h-[80px]">
-              <p className="text-primary text-base lg:text-lg font-roboto transition-all">
+            <div className="min-h-[60px]">
+              <p className="text-primary font-normal text-16 font-roboto transition-al">
                 {card?.short_description}
               </p>
             </div>

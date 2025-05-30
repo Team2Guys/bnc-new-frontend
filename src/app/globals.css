@@ -60,6 +60,14 @@
 }
 
 
+
+@layer components {
+  .categoryHeading {
+    @apply font-robotoSerif font-bold text-[40px] hidden md:block border border-red-500 text-primary;
+  }
+}
+
+
 @layer components {
 .dashboard_primary_button {
     @apply bg-primary hover:bg-secondary text-white px-4 py-2 rounded w-fit flex items-center gap-2 cursor-pointer ;
