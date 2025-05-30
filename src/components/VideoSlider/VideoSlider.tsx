@@ -197,7 +197,7 @@ export default function VideoReelsSlider() {
           >
             <button
               onClick={() => setPopupVideoIndex(null)}
-              className="absolute top-3 right-3 z-50 text-white bg-gray-800 hover:bg-gray-700 rounded-full p-2 focus:outline-none"
+              className="absolute top-3 right-3 z-50 text-white bg-gray-800 hover:bg-gray-700 rounded-full px-2.5 py-1 focus:outline-none"
               aria-label="Close video"
             >
               ✕
