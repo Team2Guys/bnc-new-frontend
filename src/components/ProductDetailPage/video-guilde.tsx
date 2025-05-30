@@ -61,7 +61,7 @@ const VideoGuide = ({ videos,isMotorisedCategory }: { videos?: VideoItem[],isMot
                   muted
                   loop
                   playsInline
-                  controls={false}
+                  controls={!pausedStates[idx]}
                 >
                   <source src={video.src} type="video/mp4" />
                   Your browser does not support the video tag.
