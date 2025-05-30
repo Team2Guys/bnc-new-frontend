@@ -182,7 +182,7 @@ const EstimatorPage = ({ sortedProducts }: { sortedProducts: EstimatorProductTyp
           </div>
 
           <div className="flex flex-col space-y-3 col-span-12 md:col-span-6 px-2 md:px-0">
-            <div className='border hidden sm:block' >
+            <div className='hidden sm:block' >
               <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-robotoSerif font-bold capitalize text-primary">
                 Get Estimate
               </h1>
