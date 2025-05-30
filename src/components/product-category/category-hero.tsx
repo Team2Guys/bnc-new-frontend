@@ -28,7 +28,7 @@ const CategoryHero = ({ Data }: CategoryProps) => {
             </div>
            </div>
            <div className='col-span-12 md:col-span-4 order-1 md:order-2'>
-            <h1 className='font-robotoSerif font-bold text-2xl text-center md:hidden block mb-3'>{Data.title}</h1>
+            <p className='font-robotoSerif font-bold text-2xl text-center md:hidden block mb-3'>{Data.title}</p>
             <Image src={Data.posterImage?.imageUrl || ""} className='w-full h-[230px] md:h-[320px] rounded-xl' width={600} height={600} alt={"Hero"}/>
            </div>
         </Container>

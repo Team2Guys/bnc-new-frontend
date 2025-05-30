@@ -1,13 +1,19 @@
-"use client"
 
+'use client'
 import React, { useState, useRef, useEffect } from "react"
 import { reelsData } from "data/SellerSlider"
 import Container from "components/Res-usable/Container/Container"
 import NeedHelp from "components/NeedHelp/NeedHelp"
+import VideoIcon from "../../../public/assets/images/videoicon.webp"
+
+import Image from "next/image"
 
 export default function VideoReelsSlider() {
   const [activeIndex, setActiveIndex] = useState(2)
   const [isMobile, setIsMobile] = useState(false)
+  const [popupVideoIndex, setPopupVideoIndex] = useState<number | null>(null)
+  const [videoSize, setVideoSize] = useState<{ width: number; height: number } | null>(null)
+
   const totalVideos = reelsData.length
 
   const videoRefs = useRef<HTMLVideoElement[]>([])
@@ -43,13 +49,20 @@ export default function VideoReelsSlider() {
     })
   }, [activeIndex])
 
+  useEffect(() => {
+    if (popupVideoIndex !== null) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+      setVideoSize(null) 
+    }
+  }, [popupVideoIndex])
+
   const goToPrevious = () =>
     setActiveIndex((prev) => (prev === 0 ? totalVideos - 1 : prev - 1))
 
   const goToNext = () =>
     setActiveIndex((prev) => (prev === totalVideos - 1 ? 0 : prev + 1))
-
-  const goToSlide = (index: number) => setActiveIndex(index)
 
   const onTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     touchStartX.current = e.changedTouches[0].clientX
@@ -92,12 +105,39 @@ export default function VideoReelsSlider() {
     }
   }
 
+  const handleLoadedMetadata = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    const video = e.currentTarget
+    const naturalWidth = video.videoWidth
+    const naturalHeight = video.videoHeight
+
+    const maxWidth = window.innerWidth * 0.9
+    const maxHeight = window.innerHeight * 0.9
+
+    let width = naturalWidth
+    let height = naturalHeight
+
+    if (width > maxWidth) {
+      const ratio = maxWidth / width
+      width = maxWidth
+      height = height * ratio
+    }
+    if (height > maxHeight) {
+      const ratio = maxHeight / height
+      height = maxHeight
+      width = width * ratio
+    }
+
+    setVideoSize({ width, height })
+  }
+
   return (
     <>
       {isMobile && <NeedHelp />}
       <div className="relative mt-4">
         <div className="sm:py-6 py-4 text-center font-bold sm:w-full w-52 mx-auto">
-          <p className="font-robotoSerif sm:text-4xl text-xl text-primary font-bold" >Press Play on Style Quick Reels!</p>
+          <p className="font-robotoSerif sm:text-4xl text-xl text-primary font-bold">
+            Press Play on Style Quick Reels!
+          </p>
         </div>
         <Container>
           <div
@@ -108,12 +148,19 @@ export default function VideoReelsSlider() {
             {reelsData.map((item, index) => (
               <div
                 key={index}
-                onClick={() => goToSlide(index)}
+                onClick={() => setPopupVideoIndex(index)}
                 className={`absolute transition-all duration-500 ease-in-out cursor-pointer ${getPositionClass(
                   index
                 )}`}
               >
                 <div className="relative sm:w-[500px] sm:h-[670px] w-[150px] h-[280px] rounded-2xl overflow-hidden shadow-lg">
+                  <div className="absolute top-2 right-2 z-40">
+                    <Image
+                      src={VideoIcon}
+                      alt="icon"
+                      className="w-6 h-6 sm:w-12 sm:h-12 object-contain"
+                    />
+                  </div>
                   <video
                     ref={(el) => {
                       if (el) videoRefs.current[index] = el
@@ -132,6 +179,40 @@ export default function VideoReelsSlider() {
           </div>
         </Container>
       </div>
+
+      {popupVideoIndex !== null && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80"
+          onClick={() => setPopupVideoIndex(null)}
+        >
+          <div
+            className="relative bg-black rounded-lg shadow-lg"
+            style={{
+              width: videoSize?.width ?? "auto",
+              height: videoSize?.height ?? "auto",
+              maxWidth: "90vw",
+              maxHeight: "90vh",
+            }}
+            onClick={(e) => e.stopPropagation()} 
+          >
+            <button
+              onClick={() => setPopupVideoIndex(null)}
+              className="absolute top-3 right-3 z-50 text-white bg-gray-800 hover:bg-gray-700 rounded-full px-2.5 py-1 focus:outline-none"
+              aria-label="Close video"
+            >
+              ✕
+            </button>
+            <video
+              key={reelsData[popupVideoIndex].videoUrl}
+              src={reelsData[popupVideoIndex].videoUrl}
+              className="rounded-lg object-contain"
+              controls
+              autoPlay
+              onLoadedMetadata={handleLoadedMetadata}
+            />
+          </div>
+        </div>
+      )}
     </>
   )
 }

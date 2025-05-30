@@ -44,9 +44,9 @@ const VideoGuide = ({ videos,isMotorisedCategory }: { videos?: VideoItem[],isMot
   return (
     <div className="bg-secondary-foreground py-6 sm:py-12 mt-10">
       <Container className="space-y-5 md:space-y-10">
-        <p className="font-robotoSerif font-extrabold text-3xl lg:text-5xl text-center">
+        <h2 className="font-robotoSerif font-extrabold text-3xl lg:text-5xl text-center">
           A Complete Guide To
-        </p>
+        </h2>
 
         <div className={`grid  gap-2 md:gap-6 justify-items-center  mx-auto ${isMotorisedCategory? "grid-cols-2 max-w-3xl": "grid-cols-3 max-w-5xl"}`}>
           {allVideos.map((video, idx) => (
@@ -61,7 +61,7 @@ const VideoGuide = ({ videos,isMotorisedCategory }: { videos?: VideoItem[],isMot
                   muted
                   loop
                   playsInline
-                  controls={false}
+                  controls={!pausedStates[idx]}
                 >
                   <source src={video.src} type="video/mp4" />
                   Your browser does not support the video tag.
@@ -73,9 +73,9 @@ const VideoGuide = ({ videos,isMotorisedCategory }: { videos?: VideoItem[],isMot
                   </div>
                 )}
               </div>
-              <p className="text-lg sm:text-[22px] sm:font-semibold font-roboto px-2 sm:px-4 text-center sm:leading-6">
+              <h3 className="text-lg sm:text-[22px] sm:font-semibold font-roboto px-2 sm:px-4 text-center sm:leading-6">
                 {video.title}
-              </p>
+              </h3>
             </div>
           ))}
         </div>

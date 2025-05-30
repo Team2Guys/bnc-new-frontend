@@ -71,11 +71,11 @@ export default function ComparisonTable() {
       </div>     
 
      {/* button */}
-        <Link href="/request-appointment" className="bg-secondary font-semibold py-3 px-4 md:px-12 lg:px-16 xl:px-[116px] rounded-md text-primary font-roboto text-16 mx-auto w-fit relative hidden md:block md:bottom-16 hover:opacity-65">
+        <Link href="/request-appointment/" className="bg-secondary font-semibold py-3 px-4 md:px-12 lg:px-16 xl:px-[116px] rounded-md text-primary font-roboto text-16 mx-auto w-fit relative hidden md:block md:bottom-16 hover:opacity-65">
           Book A Free Visit                        
         </Link>
       </section> 
-      <Link href="/request-appointment" className="bg-secondary text-center font-semibold py-2  w-fit max-sm:px-6 xs:w-1/2 rounded-md text-primary font-roboto text-lg mx-auto relative block md:hidden my-4 hover:opacity-65">
+      <Link href="/request-appointment/" className="bg-secondary text-center font-semibold py-2  w-fit max-sm:px-6 xs:w-1/2 rounded-md text-primary font-roboto text-lg mx-auto relative block md:hidden my-4 hover:opacity-65">
           Book A Free Visit                        
         </Link>
       </Container>

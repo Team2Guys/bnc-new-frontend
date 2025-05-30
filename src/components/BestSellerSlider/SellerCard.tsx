@@ -84,13 +84,13 @@ const SellerSlider = ({ products }: { products: IProduct[] }) => {
           afterChange={() => setIsDragging(false)}
         >
           {filteredAndSortedProducts.map((item: IProduct, index) => (
-            <div key={index} className="px-2 xl:px-4">
+            <div key={index} className="pl-5 xl:px-4">
               <div
                 onMouseDown={() => setIsDragging(false)}
                 onMouseMove={() => setIsDragging(true)}
                 onMouseUp={() => {
                   if (!isDragging) {
-                    window.location.href = getPath(item); // manual redirect
+                    window.location.href = getPath(item);
                   }
                 }}
               >
@@ -104,11 +104,11 @@ const SellerSlider = ({ products }: { products: IProduct[] }) => {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                     />
                   </div>
-                  <div className="pt-4 text-center md:text-start">
-                    <h3 className="text-lg font-semibold mb-1 text-primary text-24 md:text-20 font-robotoSerif min-h-14">
+                  <div className="pt-4 text-center md:text-start sm:px-0 px-2">
+                    <h3 className="font-semibold mb-1 text-primary text-16 md:text-20 font-robotoSerif min-h-14">
                       {item.title}
                     </h3>
-                    <p className="text-secondary font-normal md:text-16 text-20 font-roboto">
+                    <p className="text-secondary font-normal md:text-16 text-16 font-roboto sm:px-0 px-4">
                       <span className="text-primary">Starting from</span>{" "}
                       {item.price*(2*3)}AED {" "}
                     <span className="text-primary  text-16">(2m x 3m)</span>
@@ -121,7 +121,7 @@ const SellerSlider = ({ products }: { products: IProduct[] }) => {
         </Slider>
 
         <Link
-          href="/request-appointment"
+          href="/request-appointment/"
           className="bg-secondary font-roboto text-primary font-medium text-lg sm:text-[14px] px-5 py-2 rounded-lg block w-fit text-center mx-auto mt-5 hover:opacity-65"
         >
           Book a Free Visit

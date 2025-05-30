@@ -9,7 +9,7 @@
       description:
         "No need to guess or visit. Our expert brings 20–30 fabric books of blinds and curtains to your home and provides an instant quote on the spot. You pick that fit — we handle the rest. From measuring to installation, your window coverings are our full-time job. <br/> Comfort, ease, and style — at your doorstep.",
       buttonText: "Book A Free Visit",
-      href:"/request-appointment"
+      href:"/request-appointment/"
     },
     {
       title: "24/7 customer support",
@@ -19,17 +19,17 @@
       description:
         "We don’t believe in “office hours”. Whether it’s a question or quick help, we’re just a message away — even on weekends.<br/> Our customer care team resolves most issues within 1 day.<br/> Fast answers. Real people. No delays.",
       buttonText: "Book A Free Visit",
-        href:"/request-appointment"
+        href:"/request-appointment/"
     },
     {
       title: "Stress-Free Smooth Experience",
       icon: "/assets/images/Home/tab/stress-free.svg",
       image: "/assets/images/Home/tab/trusted.webp", 
-      heading: "EFast Installation. Zero Hassle.",
+      heading: "Fast Installation. Zero Hassle.",
       description:
         "From the first visit to the final fitting, we make custom blinds and curtains with 2 days of easy installation or according to your schedule.<br/> Need a reinstall? It's free for 2 years.<br/> Need adjustments We fix — not upsell.<br/> Because your time and trust matter.",
       buttonText: "Book A Free Visit",
-       href:"/request-appointment"
+       href:"/request-appointment/"
     },
     {
       title: "High-Quality In-House Production",
@@ -39,7 +39,7 @@
       description:
         "We don’t outsource — every stitch is done in-house by our team. From fabric to frames, we run a 13-step quality check.<br/> And we back it with a 5-year warranty on parts, labour, and fabric. You get full control, zero compromise.",
       buttonText: "Book A Free Visit",
-       href:"/request-appointment"
+       href:"/request-appointment/"
     }, 
   ];
   //
@@ -164,7 +164,7 @@ export const staticvideos = [
   description:
     "<p>Your blinds, your schedule.</p> <p >Set your blinds to move on your schedule. Use features like Thermal Comfort to keep the room temperature just right. You can even set them to open in the morning or close at sunset — all automatically.</p>",
   buttonText: "Book A Free Visit",
-  href: "/request-appointment"
+  href: "/request-appointment/"
 },
     {
       title: "Voice Assistant",
@@ -174,7 +174,7 @@ export const staticvideos = [
       description:
         "Use your voice to control your blinds. Pair your smart blinds with Alexa or Google Assistant to open, close, or adjust them using just your voice. Seamless integration with your smart home system makes comfort effortless.",
       buttonText: "Book A Free Visit",
-        href:"/request-appointment"
+        href:"/request-appointment/"
     },
     {
       title: "Smart Home Integration",
@@ -184,7 +184,7 @@ export const staticvideos = [
       description:
         "Make your blinds part of your routine. Use Somfy’s smart scenes like Sunrise or Sunset to automate daily light control — or customise your own presets based on how you live. Every window works exactly the way you want it to.",
       buttonText: "Book A Free Visit",
-       href:"/request-appointment"
+       href:"/request-appointment/"
     },
     {
       title: "10+ Year Motor perfomance",
@@ -194,7 +194,7 @@ export const staticvideos = [
       description:
         "Reliable performance, year after year. Somfy motors are designed for durability and trusted by 270 million users worldwide. With a full 10-year warranty, you get long-term reliability with whisper-quiet motion every day.",
       buttonText: "Book A Free Visit",
-       href:"/request-appointment"
+       href:"/request-appointment/"
     },
     {
       title: "Energy Efficiency",
@@ -204,7 +204,7 @@ export const staticvideos = [
       description:
         " Save on cooling — automatically. Motorised blinds adjust automatically to sunlight — reducing indoor heat, easing the load on your AC, and cutting down energy use. Real-time app notifications help you stay battery-ready and efficient all year round.",
       buttonText: "Book A Free Visit",
-       href:"/request-appointment"
+       href:"/request-appointment/"
     },
   ];
 
