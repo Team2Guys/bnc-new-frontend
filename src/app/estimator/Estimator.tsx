@@ -154,6 +154,18 @@ const EstimatorPage = ({ sortedProducts }: { sortedProducts: EstimatorProductTyp
       <Container className="md:pt-10 lg:pb-20">
         <div className="grid grid-cols-12 md:gap-10 xl:gap-14 2xl:md:h-[677px] space-y-4 md:space-y-0 md:px-2 xl:px-0">
           <div className="col-span-12 md:col-span-6 mt-2 sm:mt-0">
+
+            <div className='block sm:hidden' >
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-robotoSerif font-bold capitalize text-primary">
+                Get Estimate
+              </h1>
+              <ul className="list-disc pl-5 font-roboto text-black opacity-70 pb-5 text-sm sm:text-base">
+                <li>Price is an estimate — final cost depends on exact size and fabric.</li>
+                <li>Final quote confirmed during your free visit — no hidden charges.</li>
+                <li>Estimator prices for blinds, curtains, and shutters start at 1.5m².</li>
+              </ul>
+
+            </div>
             <div className='w-full h-[250px] md:h-[450px] xl:h-[560px]'>
               <Image
                 src={selectedProduct?.posterImage?.imageUrl || sortedProducts[0].posterImage.imageUrl}
@@ -170,14 +182,17 @@ const EstimatorPage = ({ sortedProducts }: { sortedProducts: EstimatorProductTyp
           </div>
 
           <div className="flex flex-col space-y-3 col-span-12 md:col-span-6 px-2 md:px-0">
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-robotoSerif font-bold capitalize text-primary">
-              Get Estimate
-            </h1>
-            <ul className="list-disc pl-5 font-roboto text-black opacity-70 pb-5 text-sm sm:text-base">
-              <li>Price is an estimate — final cost depends on exact size and fabric.</li>
-              <li>Final quote confirmed during your free visit — no hidden charges.</li>
-              <li>Estimator prices for blinds, curtains, and shutters start at 1.5m².</li>
-            </ul>
+            <div className='border hidden sm:block' >
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-robotoSerif font-bold capitalize text-primary">
+                Get Estimate
+              </h1>
+              <ul className="list-disc pl-5 font-roboto text-black opacity-70 pb-5 text-sm sm:text-base">
+                <li>Price is an estimate — final cost depends on exact size and fabric.</li>
+                <li>Final quote confirmed during your free visit — no hidden charges.</li>
+                <li>Estimator prices for blinds, curtains, and shutters start at 1.5m².</li>
+              </ul>
+
+            </div>
             <div className="space-y-2 sm:space-y-0 border-t pt-8 max-w-[500px]">
               <UnitSelector
                 selectedUnit={selectedUnit}
