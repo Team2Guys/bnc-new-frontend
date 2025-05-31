@@ -110,8 +110,8 @@ const SellerSlider = ({ products }: { products: IProduct[] }) => {
                     </h3>
                     <p className="text-secondary font-normal md:text-16 text-16 font-roboto sm:px-0 px-4">
                       <span className="text-primary">Starting from</span>{" "}
-                      {item.price*(2*3)}AED {" "}
-                    <span className="text-primary  text-16">(2m x 3m)</span>
+                      {item.posterImage.pricing } AED {" "}
+                    <span className="text-primary  text-16"> {item.posterImage.dimentions }</span>
                     </p>
                   </div>
                 </div>

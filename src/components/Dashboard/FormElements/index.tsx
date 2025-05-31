@@ -6,7 +6,7 @@ import { Formik, FieldArray, FormikErrors, Form, FormikTouched } from 'formik';
 import Imageupload from 'components/ImageUpload/Imageupload';
 import { RxCross2 } from 'react-icons/rx';
 import Image from 'next/image';
-import { ImageRemoveHandler } from 'utils/helperFunctions';
+import { handleImageAltText, ImageRemoveHandler } from 'utils/helperFunctions';
 import { FormValues, ADDPRODUCTFORMPROPS } from 'types/interfaces';
 import axios from 'axios';
 import { IoMdArrowRoundBack } from 'react-icons/io';
@@ -67,27 +67,20 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
   );
   const [productUpdateFlat, setProductUpdateFlat] = useState(false);
   const [loading, setloading] = useState<boolean>(false);
-  const [productInitialValue, setProductInitialValue] = useState<
-    any | null | undefined
-  >(EditInitialValues);
+  const [productInitialValue, setProductInitialValue] = useState<any | null | undefined >(EditInitialValues);
 
   const [imgError, setError] = useState<string | null | undefined>();
 
   const [selectedCategoryIds, setSelectedCategoryIds] = useState<number[]>([]);
-  const [selectedSubcategoryIds, setSelectedSubcategoryIds] = useState<
-    number[]
-  >([]);
+  const [selectedSubcategoryIds, setSelectedSubcategoryIds] = useState<number[] >([]);
 
-  const [previousSelectedCategories, setpreviousSelectedCategories] = useState<
-    number[]
-  >([]);
+  const [previousSelectedCategories, setpreviousSelectedCategories] = useState<number[]>([]);
   const dragImage = useRef<number | null>(null);
   const draggedOverImage = useRef<number | null>(null);
   const token = Cookies.get('2guysAdminToken');
   const superAdminToken = Cookies.get('superAdminToken');
   let finalToken = token ? token : superAdminToken;
 
-  console.log(imagesUrl, 'imagesUrl');
   useEffect(() => {
     const CategoryHandler = async () => {
       try {
@@ -191,7 +184,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
       let bannerImage = bannerImageUrl && bannerImageUrl[0];
       let newsubCategoryImage = subCategoryImage && subCategoryImage[0];
       let privarcyImage = privarcyImagemageUrl && privarcyImagemageUrl[0];
-      if (!posterImageUrl || !(imagesUrl?.length > 0)) {
+      if (!posterImageUrl || !(imagesUrl) ||  !(imagesUrl?.length > 0)) {
         return showToast('warn', 'Please select relevant Images');
       }
 
@@ -332,44 +325,15 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
 
   console.log(EditInitialValues.privarcyImage, 'privarcyImagemageUrl');
 
-  const handleImageIndex = (index: number, newImageIndex: number) => {
-    const updatedImagesUrl = imagesUrl.map((item, i) =>
-      i === index ? { ...item, imageIndex: newImageIndex } : item,
-    );
-    setImagesUrl(updatedImagesUrl);
-  };
-  const handlealtText = (index: number, newaltText: string) => {
-    const updatedImagesUrl = imagesUrl.map((item, i) =>
-      i === index ? { ...item, altText: newaltText } : item,
-    );
-    setImagesUrl(updatedImagesUrl);
-  };
-  const handlecolorCode = (index: number, colorCode: string) => {
-    const updatedImagesUrl = imagesUrl.map((item, i) =>
-      i === index ? { ...item, colorCode: colorCode } : item,
-    );
-    setImagesUrl(updatedImagesUrl);
-  };
 
-  const handlealtTextposterimageUrl = (index: number, newaltText: string) => {
-    //@ts-expect-error
-    const updatedImagesUrl = posterimageUrl.map((item, i) =>
-      i === index ? { ...item, altText: newaltText } : item,
-    );
-    setposterimageUrl(updatedImagesUrl);
-  };
+  // const handlecolorCode = (index: number, colorCode: string) => {
+  //   const updatedImagesUrl = imagesUrl.map((item, i) =>
+  //     i === index ? { ...item, colorCode: colorCode } : item,
+  //   );
+  //   setImagesUrl(updatedImagesUrl);
+  // };
 
-  const handlealtTextbannerImageUrl = (
-    index: number,
-    newaltText: string,
-    setImageUrl: React.Dispatch<SetStateAction<any>>,
-  ) => {
-    //@ts-expect-error
-    const updatedImagesUrl = bannerImageUrl.map((item, i) =>
-      i === index ? { ...item, altText: newaltText } : item,
-    );
-    setImageUrl(updatedImagesUrl);
-  };
+
 const handlecolorChange = (
     index: number,
     newaltText: string,
@@ -380,17 +344,7 @@ const handlecolorChange = (
     );
     setImageUrl(updatedImagesUrl);
   };
-  const handleNameImageUrl = (
-    index: number,
-    name: string,
-    setImageUrl: React.Dispatch<SetStateAction<any>>,
-    variable: string,
-  ) => {
-    const updatedImagesUrl = topImages.map((item, i) =>
-      i === index ? { ...item, [variable]: name } : item,
-    );
-    setImageUrl(updatedImagesUrl);
-  };
+
 
   const { data: categoriesList = [], isLoading } = useQuery<ICategory[], Error>(
     {
@@ -404,9 +358,7 @@ const handlecolorChange = (
     queryFn: fetchSubCategories,
   });
 
-  const [filteredSubcategories, setFilteredSubcategories] = useState<
-    ICategory[]
-  >([]);
+  const [filteredSubcategories, setFilteredSubcategories] = useState<ICategory[]>([]);
 
   useEffect(() => {
     const filteredSubcategories = subCategoriesList.filter((subcategory) =>
@@ -489,12 +441,38 @@ const handlecolorChange = (
                                   name="altText"
                                   value={item.altText}
                                   onChange={(e) =>
-                                    handlealtTextposterimageUrl(
-                                      index,
-                                      String(e.target.value),
-                                    )
+                                    handleImageAltText(index,e.target.value,setposterimageUrl,"altText",  )
+                                   
                                   }
                                 />
+
+                                
+                                <input
+                                  className="primary-input"
+                                  placeholder="pricing"
+                                  type="text"
+                                  name="pricing"
+                                  value={item.pricing}
+                                  onChange={(e) =>
+                                    handleImageAltText(index,e.target.value,setposterimageUrl,"pricing",  )
+                                   
+                                  }
+                                />
+
+                                <input
+                                  className="primary-input"
+                                  placeholder="dimentions"
+                                  type="text"
+                                  name="dimentions"
+                                  value={item.dimentions}
+                                  onChange={(e) =>
+                                    handleImageAltText(index,e.target.value,setposterimageUrl,"dimentions",  )
+                                   
+                                  }
+                                />
+
+
+
                               </>
                             );
                           })}
@@ -1415,7 +1393,7 @@ const handlecolorChange = (
                                   name="altText"
                                   value={item.altText}
                                   onChange={(e) =>
-                                    handleNameImageUrl(
+                                    handleImageAltText(
                                       index,
                                       String(e.target.value),
                                       settopImages,
@@ -1430,7 +1408,7 @@ const handlecolorChange = (
                                   name="name"
                                   value={item.name}
                                   onChange={(e) =>
-                                    handleNameImageUrl(
+                                    handleImageAltText(
                                       index,
                                       String(e.target.value),
                                       settopImages,
@@ -1491,11 +1469,13 @@ const handlecolorChange = (
                                   name="altText"
                                   value={item.altText}
                                   onChange={(e) =>
-                                    handlealtTextbannerImageUrl(
+                                     handleImageAltText(
                                       index,
                                       String(e.target.value),
                                       setsubCategoryImage,
+                                      'altText',
                                     )
+                               
                                   }
                                 />
                               </>
@@ -1553,11 +1533,13 @@ const handlecolorChange = (
                                   name="altText"
                                   value={item.altText}
                                   onChange={(e) =>
-                                    handlealtTextbannerImageUrl(
+                                      handleImageAltText(
                                       index,
                                       String(e.target.value),
                                       setBannerImageUrl,
+                                      'altText',
                                     )
+                                 
                                   }
                                 />
                               </>
@@ -1616,11 +1598,13 @@ const handlecolorChange = (
                                   name="altText"
                                   value={item.altText}
                                   onChange={(e) =>
-                                    handlealtTextbannerImageUrl(
+                                      handleImageAltText(
                                       index,
                                       String(e.target.value),
                                       setprivarcyImage,
+                                      'altText',
                                     )
+                              
                                   }
                                 />
                               </>
@@ -1681,18 +1665,7 @@ const handlecolorChange = (
                                     />
                                   </div>
 
-                                  <input
-                                    type="number"
-                                    placeholder="Add Image Index"
-                                    className=" rounded-b-md p-2 text-sm focus:outline-none w-full border bg-white dark:border-strokedark dark:bg-lightdark"
-                                    value={item.imageIndex}
-                                    onChange={(e) =>
-                                      handleImageIndex(
-                                        index,
-                                        Number(e.target.value),
-                                      )
-                                    }
-                                  />
+                           
                                 </div>
                               </div>
                               <input
@@ -1702,7 +1675,12 @@ const handlecolorChange = (
                                 name="altText"
                                 value={item.altText}
                                 onChange={(e) =>
-                                  handlealtText(index, String(e.target.value))
+                                     handleImageAltText(
+                                      index,
+                                      String(e.target.value),
+                                      setImagesUrl,
+                                      'altText',
+                                    )                                  
                                 }
                               />
                               <input
@@ -1712,7 +1690,14 @@ const handlecolorChange = (
                                 name="colorCode"
                                 value={item.colorCode}
                                 onChange={(e) =>
-                                  handlecolorCode(index, String(e.target.value))
+                                  
+                                     handleImageAltText(
+                                      index,
+                                      String(e.target.value),
+                                      setImagesUrl,
+                                      'colorCode',
+                                    )
+                            
                                 }
                               />
                             </div>
