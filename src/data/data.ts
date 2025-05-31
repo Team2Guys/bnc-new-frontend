@@ -322,7 +322,9 @@ export const aboutUsData: AboutUsBlock[] = [
     shortHeadingSize: 'sm:text-[20px] text-20 font-Roboto font-medium text-[#3E3F42]',
     mainHeading: 'How It All Began — From the UK to Dubai',
     mainHeadingSize: 'sm:text-2xl text-24 text-[#3E3F42]',
-    content: `It all started with Shiraz, our Managing Partner, who worked in the UK for 20 years in the home retail business. He even won a big award back in 1999 called “Scottish Retailer of the Year”. In 2014, Shiraz moved to Dubai with his family, ready for a new start and bigger dreams. That move led to something special — the beginning of Two Guys. A brand built on years of experience and strong family values.`,
+    content: `It all started with Shiraz, our managing partner, who has spent over 20 years working within the retail business in the UK. Multiple achievements were collected over the years, including Scottish retailer of the year (twice), Top Customer Service Accolades on 5 occasions and even a place in the top 100 most influential fashion icons. In 2014, Shiraz moved to Dubai with his family, ready for a new start and bigger dreams. That move led to something special — the beginning of Blinds & Curtains Furnitures Trading. A brand built on years of experience and strong family values. Over the years, it was felt that customer’s would join the Blinds & Curtains family at the end of their renovation journeys. 1000’s fell in love with the company and brand ethics, but by the time they were ready to cover their windows, they had already purchased their furnitures and flooring options. This led to real deep thinking process that lasted for several months before it was decided to re-brand. And that was the birth of Two Guys Home Furnishings. 
+
+`,
     contentSize: 'text-base text-start',   
     imageUrl: '/assets/images/about-us/about-3.webp',
   },
@@ -331,7 +333,7 @@ export const aboutUsData: AboutUsBlock[] = [
     shortHeadingSize: 'sm:text-2xl text-20 text-[#3E3F42] font-roboto font-semibold',
     mainHeading: 'Real Experts. Real Advice. No Pushy Sales.',
     mainHeadingSize: 'sm:text-5xl text-2xl text[#3E3F42]',
-    content: `At Two Guys, we don’t just hire staff — we build a team of over 60 people who care about your home like it’s their own. Our team is friendly, honest, and never pushy. Shiraz, our founder, notices every little detail — even a crooked curtain! That’s how much we care. When you choose us, you’re part of the Two Guys family`,
+    content: `At Two Guys, we don’t just hire staff — we have built a team of over 60 people who care about your home like it’s their own. Our team is friendly, honest, and never pushy. Shiraz, our founder, notices every little detail — even a crooked curtain! That’s how much we care. When you choose us, you’re part of the Two Guys family.`,
     contentSize: 'text-base text-start',
      imageUrl: '/assets/images/about-us/about-1.webp',
   },
