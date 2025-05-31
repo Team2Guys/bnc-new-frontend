@@ -155,24 +155,24 @@ export const staticvideos = [
   },
 ]
 
- export const tabDataDetail = [
+  export const tabDataDetail = [
     {
   title: "Control at Your Fingertips",
   icon: "/assets/detailpage/detail1.png",
   image: "/assets/detailpage/control.webp",
-  heading: "Control at Your Fingertips",
+  heading: "The Options",
   description:
-    "<p>Your blinds, your schedule.</p> <p >Set your blinds to move on your schedule. Use features like Thermal Comfort to keep the room temperature just right. You can even set them to open in the morning or close at sunset — all automatically.</p>",
+    "<p>You can control your motorised blinds by a handheld remote control or wall mounted switch. Depending on the system you select, you can also download an app and connect via bluetooth.</p>",
   buttonText: "Book A Free Visit",
   href: "/request-appointment/"
 },
     {
-      title: "Voice Assistant",
+      title: "Voice Assistant Compatible",
       icon: "/assets/detailpage/detail2.png",
        image: "/assets/detailpage/voice.webp", 
-      heading: "Voice Assistant",
+      heading: "Voice Assistant Compatible",
       description:
-        "Use your voice to control your blinds. Pair your smart blinds with Alexa or Google Assistant to open, close, or adjust them using just your voice. Seamless integration with your smart home system makes comfort effortless.",
+        "If you add a WiFi bridge device, you can connect your motorised system to your Apple Home, Google Home or Alexa smart home app. You can also set timers and scenes to make the entire system so easy to use.",
       buttonText: "Book A Free Visit",
         href:"/request-appointment/"
     },
@@ -180,19 +180,19 @@ export const staticvideos = [
       title: "Smart Home Integration",
       icon: "/assets/detailpage/detail3.png",
       image: "/assets/detailpage/Smarthome.webp", 
-      heading: "Smart Home Integration",
+      heading: "Make your blinds part of your routine.",
       description:
-        "Make your blinds part of your routine. Use Somfy’s smart scenes like Sunrise or Sunset to automate daily light control — or customise your own presets based on how you live. Every window works exactly the way you want it to.",
+        "If you already have your own smart home system controlling your lights and ACs and want to add your blinds and curtains to the same system, then talk to our specialists who will make sure we can provide you with compatible motors to ensure a seamless connection.",
       buttonText: "Book A Free Visit",
        href:"/request-appointment/"
     },
     {
-      title: "10+ Year Motor perfomance",
+      title: "5-Year Motor Performance",
       icon: "/assets/detailpage/detail4.png",
       image: "/assets/detailpage/perfomance.webp", 
-      heading: "10-Year Motor Performance",
+      heading: "Reliable performance, year after year.",
       description:
-        "Reliable performance, year after year. Somfy motors are designed for durability and trusted by 270 million users worldwide. With a full 10-year warranty, you get long-term reliability with whisper-quiet motion every day.",
+        "Our motors are designed for durability and trusted by 100’s of millions of users worldwide. With a full 5-year warranty, you get long-term reliability with whisper-quiet motion every day.",
       buttonText: "Book A Free Visit",
        href:"/request-appointment/"
     },
@@ -200,9 +200,9 @@ export const staticvideos = [
       title: "Energy Efficiency",
       icon: "/assets/detailpage/energyicon.png",
       image: "/assets/detailpage/Energy.webp", 
-      heading: "Energy Efficiency",
+      heading: "Save on cooling — automatically.",
       description:
-        " Save on cooling — automatically. Motorised blinds adjust automatically to sunlight — reducing indoor heat, easing the load on your AC, and cutting down energy use. Real-time app notifications help you stay battery-ready and efficient all year round.",
+        "Motorised blinds can be set to adjust automatically to sunlight — reducing indoor heat, easing the load on your AC, and cutting down energy use. Real-time app notifications help you stay ready and efficient all year round.",
       buttonText: "Book A Free Visit",
        href:"/request-appointment/"
     },
