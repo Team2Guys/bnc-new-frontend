@@ -133,9 +133,7 @@ export const getSubcategoriesByCategory = (categoryName: string): string[] => {
   export const handleImageAltText = (
     index: number,
     newImageIndex: string,
-    setImagesUrlhandler: React.Dispatch<
-      React.SetStateAction<any[] | undefined>
-    >,
+    setImagesUrlhandler: React.Dispatch<React.SetStateAction<any[] | any>>,
     variantType: string
   ) => {
     setImagesUrlhandler((prev: any[] | undefined) => {
