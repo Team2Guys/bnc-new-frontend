@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 import Select from 'react-select';
-import 'react-datepicker/dist/react-datepicker.css';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import axios from 'axios';

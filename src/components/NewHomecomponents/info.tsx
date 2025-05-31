@@ -7,7 +7,7 @@ import Link from "next/link";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { InfoTabsProps } from "types/product";
 
-export default function InfoTabs({ tabData,isHome }: InfoTabsProps) {
+export default function InfoTabs({ tabData,isHome , isCurtainsCategory }: InfoTabsProps) {
   const [activeTab, setActiveTab] = useState(0);
   const [activeMobileTab, setActiveMobileTab] = useState<number | null>(null);
 
@@ -21,7 +21,7 @@ export default function InfoTabs({ tabData,isHome }: InfoTabsProps) {
       </div>
         :
         <div className="text-center text-primary font-bold font-robotoSerif text-24 lg:text-[40px] py-5 sm:py-7">
-            <span>Standout Features of Smart Blinds</span>
+            <span>Standout Features of Smart {isCurtainsCategory ? 'Curtains' : 'Blinds'}</span>
           </div>
       }
 

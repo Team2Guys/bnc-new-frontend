@@ -21,6 +21,23 @@ const ProductDetail = ({ title, filterProduct  }: IProductDetail) => {
    const [colorImage, setColorImage] = useState<string>('')
    const isMotorisedCategory =
     title?.toLowerCase().includes('motorised blinds') || title?.toLowerCase().includes('motorised curtains');
+
+  const isCurtainsCategory = title?.toLowerCase().includes("motorised curtains");
+
+  const replaceBlindsWithCurtains = (text: string) =>
+    text.replace(/blinds/gi, "curtains");
+
+  const processedTabDataDetail = isCurtainsCategory
+    ? tabDataDetail.map(({ title, heading, description, ...rest }) => ({
+    title: replaceBlindsWithCurtains(title),
+    heading: replaceBlindsWithCurtains(heading),
+    description:
+      typeof description === "string"
+        ? replaceBlindsWithCurtains(description)
+        : description,
+    ...rest,
+    }))
+    : tabDataDetail;
   return (
     <div>
     <Breadcrumb slug={filterProduct.category.breakcrum} title={title}/>
@@ -34,7 +51,7 @@ const ProductDetail = ({ title, filterProduct  }: IProductDetail) => {
           <Detail data={filterProduct} setColorImage={setColorImage} selectedColor={colorImage}/>
       </div>
     </Container>
-      {isMotorisedCategory &&<InfoTabs tabData={tabDataDetail} />}
+      {isMotorisedCategory &&<InfoTabs tabData={processedTabDataDetail} isCurtainsCategory={isCurtainsCategory} />}
 
         <div className='grid grid-cols-12 w-full'>
         <div className={` col-span-12 ${isMotorisedCategory ? "order-2" : "order-1"}`}>
