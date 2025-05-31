@@ -17,3 +17,31 @@
       "Sheer Ripple Fold Curtains",
     ];
   
+    export  const desiredOrder = [
+
+
+    "Blackout Roller Blinds",
+    "Blackout Roman Blinds",
+    "Day/Night Blinds",
+    "Motorised blinds",
+    "Vertical Blinds",
+    "Sunscreen Roller Blinds",
+    "Sheer Roman Blinds",
+    "Wood Venetian Blinds",
+
+    "Blackout Triple Pinch Pleat Curtains",
+    "Sheer Triple Pinch Pleat curtains",
+    "Blackout Curtains",
+    "Motorised Curtains",
+    "Sheer Ripple Fold Curtains",
+    "Eyelet Curtains",
+    "Double Pinch Pleat Curtains",
+    "Wave Sheer & Blackout Curtains",
+    
+
+    "Regular height shutters",
+    "Bi-Fold Shutters",
+    "Special Shape Shutters",
+    "Solid Panel Shutters",
+    "Tier On Tier Shutters"
+  ]
