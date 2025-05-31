@@ -82,8 +82,16 @@ const VideoGuide = ({ videos, isMotorisedCategory }: { videos?: VideoItem[], isM
         </div>
 
         {showModal && activeVideo && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 px-4">
-            <div className="relative bg-black rounded-lg w-full max-w-4xl max-h-[80vh] overflow-hidden">
+        <div
+         className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 px-4"
+          onClick={(e) => {
+          if (e.target === e.currentTarget) {
+        setShowModal(false)
+        setActiveVideo(null)
+          }
+          }}
+        >
+          <div className="relative bg-black rounded-lg w-full max-w-4xl max-h-[80vh] overflow-hidden">
               <button
                 onClick={() => {
                   setShowModal(false)
