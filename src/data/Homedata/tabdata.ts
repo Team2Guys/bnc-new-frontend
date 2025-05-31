@@ -160,9 +160,9 @@ export const staticvideos = [
   title: "Control at Your Fingertips",
   icon: "/assets/detailpage/detail1.png",
   image: "/assets/detailpage/control.webp",
-  heading: "The Options",
+  heading: "Control at Your Fingertips Your blinds, your schedule",
   description:
-    "<p>You can control your motorised blinds by a handheld remote control or wall mounted switch. Depending on the system you select, you can also download an app and connect via bluetooth.</p>",
+    " Set your blinds to move on your schedule. Use features like Thermal Comfort to keep the room temperature just right. You can even set them to open in the morning or close at sunset — all automatically.",
   buttonText: "Book A Free Visit",
   href: "/request-appointment/"
 },
@@ -182,7 +182,7 @@ export const staticvideos = [
       image: "/assets/detailpage/Smarthome.webp", 
       heading: "Make your blinds part of your routine.",
       description:
-        "If you already have your own smart home system controlling your lights and ACs and want to add your blinds and curtains to the same system, then talk to our specialists who will make sure we can provide you with compatible motors to ensure a seamless connection.",
+        "Use Smart blinds for smart scenes like Sunrise or Sunset to automate daily light control — or customise your own presets based on how you live. Every window works exactly the way you want it to.",
       buttonText: "Book A Free Visit",
        href:"/request-appointment/"
     },
