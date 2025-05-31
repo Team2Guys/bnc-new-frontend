@@ -22,7 +22,6 @@ import {
 import { ChangedProductUrl_handler, predefinedPaths, urls } from 'data/urls';
 import { Skeleton } from 'components/ui/skeleton';
 import { Collapse } from 'antd';
-import downIcon from '../../../../public/assets/images/icon/Vector@2x.png';
 import { TCategorySection } from 'types/footer';
 import Container from '../Container/Container';
 import { TfiEmail } from 'react-icons/tfi';
@@ -31,6 +30,7 @@ import { FaWhatsapp } from 'react-icons/fa';
 import { SlCalender } from 'react-icons/sl';
 import { usePathname } from 'next/navigation';
 import SocialLink from '../social-link/social-link';
+import { IoIosArrowDown } from 'react-icons/io';
 
 
 
@@ -95,18 +95,18 @@ const Footer: React.FC = () => {
 
   return (
     <footer>
-      <div className={`bg-[#F5F5F5] sm:pt-10 sm:pb-5 py-7 ${(pathname.replaceAll('/','') !== 'request-appointment') && (pathname.replaceAll('/','') !== 'estimator') ? 'mt-10' :''}`}>
+      <div className={`bg-[#F5F5F5] sm:pt-10 sm:pb-5 py-7 ${(pathname.replaceAll('/', '') !== 'request-appointment') && (pathname.replaceAll('/', '') !== 'estimator') ? 'mt-10' : ''}`}>
         <Container>
           <div className="grid grid-cols-1 xs:grid-cols-2  md:grid-cols-4 lg:grid-cols-5 gap-2 md:justify-items-center">
             <div className="mb-4 flex flex-col items-start">
               <Link href='/' className="w-[79px] h-[50px] relative md:w-[120px] md:h-[70px]">
-              <Image
-                fill
-                priority
-                src='/assets/images/logomain.webp'
-                alt="Logo"
-              />
-            </Link>
+                <Image
+                  fill
+                  priority
+                  src='/assets/images/logomain.webp'
+                  alt="Logo"
+                />
+              </Link>
               <p className="text-base sm:text-sm text-start max-w-80 text-primary font-roboto mt-2 opacity-60">
                 Most trusted window treatment company in Dubai with a decade of experience.
               </p>
@@ -174,34 +174,7 @@ const Footer: React.FC = () => {
                   </Link>
                 </li>
               </ul>
-              {/* <h4 className='text-base mt-4 font-bold text-primary font-roboto'>Follow Us</h4>
-              <div className="flex items-center space-x-4 mt-4">
-                <Link
-                  target="_blank"
-                  href={'https://www.facebook.com/blindsandcurtainsdubai'}
-                  aria-label="facebook"
 
-                >
-                  <CiFacebook className="w-9 h-9 text-secondary" />
-                </Link>
-                <Link
-                  target="_blank"
-                  href={'https://www.pinterest.com/blindsandcurtainsdubai/'}
-                  aria-label="pinterest"
-
-                ><span className='w-8 h-8 rounded-full border-2 border-secondary flex justify-center items-center'>
-                    <IoLogoPinterest className="w-6 h-6 rounded-full text-secondary" />
-                  </span>
-                </Link>
-                <Link
-                  target="_blank"
-                  href={'https://www.instagram.com/blindsandcurtainsdubai/'}
-                  aria-label="instagram"
-
-                >
-                  <AiOutlineInstagram className="w-9 h-9 text-secondary" />
-                </Link>
-              </div> */}
             </div>
             {isLoading || isError ? (
               <>
@@ -223,25 +196,17 @@ const Footer: React.FC = () => {
                 <div className="2xl:pl-2" key={category.key}>
                   {
                     isMobile ? (
-                      <Collapse 
+                      <Collapse
                         bordered={false}
                         expandIcon={({ isActive }) =>
                           isActive ? (
-                            <Image
-                              src={downIcon}
-                              alt="up icon"
-                              width={14}
-                              height={14}
-                              className="pt-1 transform rotate-180 opacity-60"
-                            />
+
+                            <IoIosArrowDown size={24} className="pt-1 transform rotate-180 opacity-60 text-primary" />
+
+
                           ) : (
-                            <Image
-                              src={downIcon}
-                              alt="down icon"
-                              width={14}
-                              height={14}
-                              className="pt-1 opacity-60"
-                            />
+                            <IoIosArrowDown size={24} className="pt-1 opacity-60 text-primary" />
+
                           )
                         }
                         className="custom-collapse bg-transparent border-0 flex flex-col gap-1"
@@ -350,7 +315,7 @@ const Footer: React.FC = () => {
                                     )?.id,
                                 );
 
-                              
+
                                 return (
 
 
@@ -397,21 +362,12 @@ const Footer: React.FC = () => {
                     >
                       <span>Location We are In</span>
                       {isOpen ? (
-                        <Image
-                          src={downIcon}
-                          alt="up icon"
-                          width={14}
-                          height={14}
-                          className="pt-1 transform rotate-180 transition-transform duration-300 opacity-60"
-                        />
+
+                        <IoIosArrowDown size={24} className="pt-1 transform rotate-180 transition-transform duration-300 opacity-60" />
+
                       ) : (
-                        <Image
-                          src={downIcon}
-                          alt="down icon"
-                          width={14}
-                          height={14}
-                          className="pt-1 transition-transform duration-300 opacity-60"
-                        />
+                        <IoIosArrowDown size={24} className="pt-1 transition-transform duration-300 opacity-60" />
+
                       )}
                     </button>
                   ) : (
@@ -452,7 +408,7 @@ const Footer: React.FC = () => {
             <div className='flex gap-2 items-center'>
               <h4 className='text-14 lg:text-16 sm:font-bold font-semibold text-white font-roboto'>Follow Us</h4>
               <div className="flex items-center space-x-5 ">
-                <SocialLink/>
+                <SocialLink />
               </div>
             </div>
           </div>
