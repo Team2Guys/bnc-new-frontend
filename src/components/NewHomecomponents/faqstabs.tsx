@@ -13,69 +13,81 @@ const FaqTabs = () => {
     setOpenIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
+  // Combine all FAQs when activeTab is "All"
+  const faqsToDisplay =
+    activeTab === "All"
+      ? Object.values(FAQ_DATA).flat()
+      : FAQ_DATA[activeTab] || [];
+
   return (
-      <div className="">
-   <div className="relative mb-3 overflow-x-auto scrollbar-hide font-roboto w-full">
-  <div className="flex flex-nowrap justify-between w-max 2xl:w-full relative border-b-4 border-primary">
-    {TABS.map((tab) => (
-      <button
-        key={tab}
-        onClick={() => {
-          setActiveTab(tab);
-          setOpenIndex(0);
-        }}
-        className={`relative group flex sm:block items-center gap-3 md:py-2 
-          whitespace-nowrap px-4 sm:justify-center text-center focus:outline-none 
-          transition duration-300 text-primary`}
-      >
-        <span
-          className={`transition-all duration-200 text-16 md:text-20 font-roboto text-primary ${
-            activeTab === tab ? "font-bold" : "font-normal"
-          }`}
-          dangerouslySetInnerHTML={{ __html: tab }}
-        />
-        <span
-          className={`absolute bottom-[-4px] left-0 w-full h-[4px] z-10 transition-all duration-300 ${
-            activeTab === tab
-              ? "bg-secondary"
-              : "bg-transparent group-hover:bg-secondary"
-          }`}
-        />
-      </button>
-    ))}
-  </div>
-</div>
+    <div className="">
+      <div className="relative mb-3 overflow-x-auto scrollbar-hide font-roboto w-full">
+        <div className="flex flex-nowrap justify-between w-max 2xl:w-full relative border-b-4 border-primary">
+          {TABS.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => {
+                setActiveTab(tab);
+                setOpenIndex(0);
+              }}
+              className={`relative group flex sm:block items-center gap-3 md:py-2 
+              whitespace-nowrap px-4 sm:justify-center text-center focus:outline-none 
+              transition duration-300 text-primary`}
+            >
+              <span
+                className={`transition-all duration-200 text-16 md:text-20 font-roboto text-primary capitalize ${
+                  activeTab === tab ? "font-bold" : "font-normal"
+                }`}
+                dangerouslySetInnerHTML={{ __html: tab }}
+              />
+              <span
+                className={`absolute bottom-[-4px] left-0 w-full h-[4px] z-10 transition-all duration-300 ${
+                  activeTab === tab
+                    ? "bg-secondary"
+                    : "bg-transparent group-hover:bg-secondary"
+                }`}
+              />
+            </button>
+          ))}
+        </div>
+      </div>
 
       <h2
-        className="text-2xl font-bold lg:text-[38px] text-center my-5 sm:my-10 text-primary lg:leading-10 2xl:leading-normal font-robotoSerif"
+        className="text-2xl font-bold lg:text-[38px] text-center my-5 sm:my-10 text-primary lg:leading-10 2xl:leading-normal font-robotoSerif "
         dangerouslySetInnerHTML={{ __html: activeTab }}
       />
+
       <div className="space-y-4">
-        {FAQ_DATA[activeTab]?.map((faq, index) => (
-    <div key={index} className="overflow-hidden border border-primary rounded-xl"> 
-    <button
-      onClick={() => toggleFaq(index)}
-      className={`w-full flex justify-between items-center px-4 py-3 text-left rounded-b-md transition-all duration-200 text-14 sm:text-20 font-roboto font-bold ${
-        openIndex === index
-          ? "text-white bg-primary hover:bg-primary/90"
-          : "text-primary bg-secondary-foreground hover:bg-gray-50"
-      }`}
-    >
-      <p className="w-[90%] sm:w-full">{faq.question}</p>
-      {openIndex === index ? <HiMinusSmall /> : <FiPlus className="h-4 w-4" />}
-    </button>
-    {openIndex === index && (
-      <div className="px-4 py-4 text-primary bg-white text-14 font-normal font-roboto sm:text-20">
-        <p>{faq.answer}</p>
-      </div>
-    )}
-  </div>
-))}
+        {faqsToDisplay.map((faq, index) => (
+          <div
+            key={index}
+            className="overflow-hidden border border-primary rounded-xl"
+          >
+            <button
+              onClick={() => toggleFaq(index)}
+              className={`w-full flex justify-between items-center px-4 py-3 text-left rounded-b-md transition-all duration-200 text-14 sm:text-20 font-roboto font-bold ${
+                openIndex === index
+                  ? "text-white bg-primary hover:bg-primary/90"
+                  : "text-primary bg-secondary-foreground hover:bg-gray-50"
+              }`}
+            >
+              <p className="w-[90%] sm:w-full">{faq.question}</p>
+              {openIndex === index ? (
+                <HiMinusSmall />
+              ) : (
+                <FiPlus className="h-4 w-4" />
+              )}
+            </button>
+            {openIndex === index && (
+              <div className="px-4 py-4 text-primary bg-white text-14 font-normal font-roboto sm:text-20">
+                <p dangerouslySetInnerHTML={{ __html: faq.answer }} />
+              </div>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );
 };
 
-
 export default FaqTabs;
-
