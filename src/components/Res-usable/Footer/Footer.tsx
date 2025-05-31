@@ -99,7 +99,7 @@ const Footer: React.FC = () => {
         <Container>
           <div className="grid grid-cols-1 xs:grid-cols-2  md:grid-cols-4 lg:grid-cols-5 gap-2 md:justify-items-center">
             <div className="mb-4 flex flex-col items-start">
-              <Link href='/' className="w-[79px] h-[50px] relative md:w-[120px] md:h-[70px]">
+              <Link href='/' className="w-[79px] h-[50px] relative md:w-[120px] md:h-[50px]">
                 <Image
                   fill
                   priority

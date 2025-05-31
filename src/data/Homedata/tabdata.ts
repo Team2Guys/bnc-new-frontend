@@ -151,8 +151,8 @@ export const staticvideos = [
     title: 'How Does Our Process Work?',
   },
   {
-    src: 'https://bncvidoes.s3.eu-north-1.amazonaws.com/mainblinds.mp4',
-    title: 'Why Go Motorized?',
+    src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Latest+Shutters+For+Product+Page.mp4',
+    title: ' Things to Know Before You Book',
   },
 ]
 
@@ -160,7 +160,7 @@ export const staticvideos = [
     {
   title: "Control at Your Fingertips",
   icon: "/assets/detailpage/detail1.png",
-  image: "/assets/detailpage/control.webp",
+  image: "/assets/detailpage/control1.webp",
   heading: "The Options",
   description:
     "<p>You can control your motorised blinds by a handheld remote control or wall mounted switch. Depending on the system you select, you can also download an app and connect via bluetooth.</p>",
@@ -170,7 +170,7 @@ export const staticvideos = [
     {
       title: "Voice Assistant Compatible",
       icon: "/assets/detailpage/detail2.png",
-       image: "/assets/detailpage/voice.webp", 
+       image: "/assets/detailpage/voice1.webp", 
       heading: "Voice Assistant Compatible",
       description:
         "If you add a WiFi bridge device, you can connect your motorised system to your Apple Home, Google Home or Alexa smart home app. You can also set timers and scenes to make the entire system so easy to use.",
@@ -180,7 +180,7 @@ export const staticvideos = [
     {
       title: "Smart Home Integration",
       icon: "/assets/detailpage/detail3.png",
-      image: "/assets/detailpage/Smarthome.webp", 
+      image: "/assets/detailpage/Smarthome1.webp", 
       heading: "Make your blinds part of your routine.",
       description:
         "If you already have your own smart home system controlling your lights and ACs and want to add your blinds and curtains to the same system, then talk to our specialists who will make sure we can provide you with compatible motors to ensure a seamless connection.",
@@ -190,7 +190,7 @@ export const staticvideos = [
     {
       title: "5-Year Motor Performance",
       icon: "/assets/detailpage/detail4.png",
-      image: "/assets/detailpage/perfomance.webp", 
+      image: "/assets/detailpage/perfomance1.webp", 
       heading: "Reliable performance, year after year.",
       description:
         "Our motors are designed for durability and trusted by 100’s of millions of users worldwide. With a full 5-year warranty, you get long-term reliability with whisper-quiet motion every day.",
@@ -200,7 +200,7 @@ export const staticvideos = [
     {
       title: "Energy Efficiency",
       icon: "/assets/detailpage/energyicon.png",
-      image: "/assets/detailpage/Energy.webp", 
+      image: "/assets/detailpage/Energy1.webp", 
       heading: "Save on cooling — automatically.",
       description:
         "Motorised blinds can be set to adjust automatically to sunlight — reducing indoor heat, easing the load on your AC, and cutting down energy use. Real-time app notifications help you stay ready and efficient all year round.",
