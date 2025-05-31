@@ -151,8 +151,8 @@ export const staticvideos = [
     title: 'How Does Our Process Work?',
   },
   {
-    src: 'https://bncvidoes.s3.eu-north-1.amazonaws.com/mainblinds.mp4',
-    title: 'Why Go Motorized?',
+    src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Latest+Shutters+For+Product+Page.mp4',
+    title: ' Things to Know Before You Book',
   },
 ]
 

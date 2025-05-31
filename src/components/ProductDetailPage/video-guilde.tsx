@@ -15,7 +15,7 @@ const VideoGuide = ({ videos, isMotorisedCategory }: { videos?: VideoItem[], isM
     ...staticvideos,
     ...(videos?.length ? [{
       src: videos[0].imageUrl ?? '',
-      title: 'Things to Know Before You Book'
+      title: 'Why Go Motorized?'
     }] : [])
   ]
 
