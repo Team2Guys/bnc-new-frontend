@@ -4,6 +4,7 @@ import { fetchProducts } from 'config/fetch';
 import dynamic from 'next/dynamic'
 const Product = dynamic(() => import('./Product'), {
   loading: () => <p>Loading...</p>,
+  ssr:false
 })
 
 
