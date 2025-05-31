@@ -1,6 +1,5 @@
 "use client";
 
-import Testimonial from "components/ProductDetailPage/testimonial";
 import { whyChooseData } from "data/data";
 import Image from "next/image";
 import { WhyChooseItem } from "types/types";
@@ -40,7 +39,7 @@ const WhyChoose = () => {
                 ))}
             </div>
         </section>
-        <Testimonial />
+        
         </>
     );
 };
