@@ -1,7 +1,8 @@
 import React from 'react'
-import MainPage from './MainPage'
 
 import { fetchRedirectUrls} from 'config/fetch';
+import dynamic from 'next/dynamic';
+const MainPage = dynamic(()=>import('./MainPage'),{ssr:false})
 
 async function  Page() {
   const  Redirecturls=await fetchRedirectUrls()

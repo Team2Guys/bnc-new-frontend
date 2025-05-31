@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
-const Custom_Roller = dynamic(() => import('./Custom_Roller'));
+const Custom_Roller = dynamic(() => import('./Custom_Roller'),{ssr:false});
 
 
 export const metadata:Metadata  = {

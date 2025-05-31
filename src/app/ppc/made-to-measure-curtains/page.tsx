@@ -10,24 +10,24 @@ import { explorecurtainData } from 'data/explorecurtaindata';
 import { consultationblindData } from 'data/consultationdata';
 
 //Dynamic imports
-const CustomSection = dynamic(() => import('components/ppc-moterised/customization'));
-const FeaturesCarousel = dynamic(() => import('components/ppc-moterised/features'));
-const VideoSection = dynamic(() => import('components/LandingPage/video-section'));
-const Header = dynamic(() => import('components/LandingPage/Header'));
-const Videoblind = dynamic(() => import('components/ppc-moterised/videosection'));
-const Blindtype = dynamic(() => import('components/ppc-moterised/blindtype'));
-const BlindsTabs = dynamic(() => import('components/ppc-moterised/Tabcomponnet'));
-const WhyChooseUs = dynamic(() => import('components/ppc-moterised/whychoose'));
-const ExploreBlinds = dynamic(() => import('components/ppc-moterised/blindsrange'));
-const WorkingProcess = dynamic(() => import('components/ppc-moterised/working'));
-const Carousel  = dynamic(() => import('components/ppc-moterised/blindcrousal'));
-const ServiceLocations = dynamic(() => import('components/ppc-moterised/servicelocation'));
-const RollerReviews = dynamic(() => import('components/Rollerblind/Roller_Reviews/Review'));
-const Banner = dynamic(() => import('components/HomeBanner/Home_Banner'));
-const BookingForm = dynamic(() => import('components/ppc-moterised/Bookingform'));
-const HeroBanner = dynamic(() => import('components/ppc-moterised/hero'));
-const ImageGallery = dynamic(() => import('components/ppc-moterised/Grid'));
-const Shop = dynamic(() => import('components/ppc-moterised/shop'));
+const CustomSection = dynamic(() => import('components/ppc-moterised/customization'),{ssr:false});
+const FeaturesCarousel = dynamic(() => import('components/ppc-moterised/features'),{ssr:false});
+const VideoSection = dynamic(() => import('components/LandingPage/video-section'),{ssr:false});
+const Header = dynamic(() => import('components/LandingPage/Header'),{ssr:false});
+const Videoblind = dynamic(() => import('components/ppc-moterised/videosection'),{ssr:false});
+const Blindtype = dynamic(() => import('components/ppc-moterised/blindtype'),{ssr:false});
+const BlindsTabs = dynamic(() => import('components/ppc-moterised/Tabcomponnet'),{ssr:false});
+const WhyChooseUs = dynamic(() => import('components/ppc-moterised/whychoose'),{ssr:false});
+const ExploreBlinds = dynamic(() => import('components/ppc-moterised/blindsrange'),{ssr:false});
+const WorkingProcess = dynamic(() => import('components/ppc-moterised/working'),{ssr:false});
+const Carousel  = dynamic(() => import('components/ppc-moterised/blindcrousal'),{ssr:false});
+const ServiceLocations = dynamic(() => import('components/ppc-moterised/servicelocation'),{ssr:false});
+const RollerReviews = dynamic(() => import('components/Rollerblind/Roller_Reviews/Review'),{ssr:false});
+const Banner = dynamic(() => import('components/HomeBanner/Home_Banner'),{ssr:false});
+const BookingForm = dynamic(() => import('components/ppc-moterised/Bookingform'),{ssr:false});
+const HeroBanner = dynamic(() => import('components/ppc-moterised/hero'),{ssr:false});
+const ImageGallery = dynamic(() => import('components/ppc-moterised/Grid'),{ssr:false});
+const Shop = dynamic(() => import('components/ppc-moterised/shop'),{ssr:false});
 
 export const metadata: Metadata = {
   robots: {

@@ -7,17 +7,17 @@ import { Metadata } from 'next';
 import { IProduct } from 'types/types';
 
 // Dynamic imports
-const VideoSection = dynamic(() => import('components/LandingPage/video-section'));
-const InstaVideoSection = dynamic(() => import('components/LandingPage/InstaVideoSection'));
-const Button = dynamic(() => import('components/LandingPage/ButtonSection'));
-const MoterizedService = dynamic(() => import('components/LandingPage/MoterizedService'));
-const Header = dynamic(() => import('components/LandingPage/Header'));
-const SellingFeatures = dynamic(() => import('components/LandingPage/SellingFeatures'));
-const RelatedProducts = dynamic(() => import('components/Related-products/RelatedProducts'));
-const Container = dynamic(() => import('components/Res-usable/Container/Container'));
-const CustomSection = dynamic(() => import('components/LandingPage/Custommade'));
-const MoterizedBlinds = dynamic(() => import('components/LandingPage/Moterized Blinds'));
-const KeyFeature = dynamic(() => import('components/LandingPage/KeyFeature'));
+const VideoSection = dynamic(() => import('components/LandingPage/video-section'),{ssr:false});
+const InstaVideoSection = dynamic(() => import('components/LandingPage/InstaVideoSection'),{ssr:false});
+const Button = dynamic(() => import('components/LandingPage/ButtonSection'),{ssr:false});
+const MoterizedService = dynamic(() => import('components/LandingPage/MoterizedService'),{ssr:false});
+const Header = dynamic(() => import('components/LandingPage/Header'),{ssr:false});
+const SellingFeatures = dynamic(() => import('components/LandingPage/SellingFeatures'),{ssr:false});
+const RelatedProducts = dynamic(() => import('components/Related-products/RelatedProducts'),{ssr:false});
+const Container = dynamic(() => import('components/Res-usable/Container/Container'),{ssr:false});
+const CustomSection = dynamic(() => import('components/LandingPage/Custommade'),{ssr:false});
+const MoterizedBlinds = dynamic(() => import('components/LandingPage/Moterized Blinds'),{ssr:false});
+const KeyFeature = dynamic(() => import('components/LandingPage/KeyFeature'),{ssr:false});
 
 export const metadata:Metadata  = {
   robots: {
