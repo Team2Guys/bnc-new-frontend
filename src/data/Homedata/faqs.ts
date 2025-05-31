@@ -22,7 +22,7 @@ export const FAQ_DATA: Record<string, { question: string; answer: string }[]> = 
     }
 
   ],
-  "Booking An Appointment": [
+  "Booking An <br/> Appointment": [
     {
       question: "Is the time I requested confirmed?",
       answer:
@@ -50,7 +50,7 @@ export const FAQ_DATA: Record<string, { question: string; answer: string }[]> = 
     }
   ],
 
-  "My Appointment Expectations": [
+  "My Appointment <br/> Expectations": [
     {
       question: "What can I expect during the appointment?",
       answer: `Our team will arrive at the allotted time. They will bring samples with them and go through the options with you to have an understanding of your requirements. They will then proceed to take precise measurements. They will key your selection along with the measurements into their iPads and give you an instant quotation. This will allow you time to change things around to suit your budget.`
@@ -120,7 +120,7 @@ export const FAQ_DATA: Record<string, { question: string; answer: string }[]> = 
 
   ],
 
-  "Installation And Pre-installation": [
+  "Installation And <br/> Pre-installation": [
     {
       question: "How long will it take for installation?",
       answer: "It depends on your order, size and ease of installation. Generally around 20-30 mins a blind and around 45 mins for a curtain. If steaming is needed, some more time will be required."
@@ -148,7 +148,7 @@ export const FAQ_DATA: Record<string, { question: string; answer: string }[]> = 
 
   ],
 
-  "Pricing And Payment": [
+  "Pricing And <br/> Payment": [
     {
       question: "What are your prices like?",
       answer: "Being very honest, we’re not the cheapest out there nor are we the most expensive. What we do offer is excellent products, unbeatable after sales care and a fantastic warranty. Every company will have the same claims as above, but when almost 50% percent of our business is from returning customers, we know we must be good at it."
@@ -175,7 +175,7 @@ export const FAQ_DATA: Record<string, { question: string; answer: string }[]> = 
     }
   ],
 
-  "Cancellation And Refunds": [
+  "Cancellation <br/>And Refunds": [
     {
       question: "Can I cancel an order once it’s been placed?",
       answer: "Made to measure products are custom made to your exact requirements. This includes curtains, blinds and accessories. Once manufactured our products are suitable only to you and therefore cannot be cancelled or returned."
