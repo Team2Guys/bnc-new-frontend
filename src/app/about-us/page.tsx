@@ -7,6 +7,7 @@ import AboutUsCompo from 'components/AboutUs/AboutUs';
 import { aboutUsData } from 'data/data';
 import MilestoneSteps from 'components/AboutUs/OurMilestones';
 import WhyChooseUss from 'components/AboutUs/WhyChoosUs';
+import Testimonial from 'components/ProductDetailPage/testimonial';
 
 export const metadata: Metadata = {
   title: 'Blinds and Curtains Dubai | Made to Measure Blinds | About Us',
@@ -48,9 +49,8 @@ const AboutUsPage = () => {
         <AboutUsCompo blocks={aboutUsData} />
         <MilestoneSteps />
         <WhyChooseUss />
-
       </Container>
-
+      <Testimonial />
     </Fragment>
   );
 };
