@@ -72,7 +72,8 @@ function AddReview({ editReview, setEditsetReview, setselecteMenu }: I_Add_Revie
 
       const payload = {
         ...values,
-        posterImageUrl,
+    posterImageUrl: posterImageUrl !== undefined ? posterImageUrl : null ,
+    ReviewsImages:imagesUrl
       };
 
       if (editReview?.name) {
@@ -99,14 +100,8 @@ catch (error:any) {
 
   const handleSubmit = async (values: initiValuesProps, { resetForm }: FormikHelpers<initiValuesProps>) => {
 
-  const posterImageUrl = posterimageUrl && posterimageUrl[0];
-  console.log(values, 'values')
-  const payload = {
-    ...values,
-    posterImageUrl: posterImageUrl,
-    ReviewsImages:imagesUrl
-  };
-  await apiHandler(payload)
+
+  await apiHandler(values)
   resetForm()
 
   };
