@@ -2008,7 +2008,7 @@ export const shuttersSubcategories = [
   "Regular Height Shutters",
   "Bi-fold Shutters",
   "Special Shape Shutters",
-  "Bi-pass Shutters",
+  // "Bi-pass Shutters",
   "Solid Panel Shutters",
   "Tier On Tier Shutters",
 ];

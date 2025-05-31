@@ -74,11 +74,6 @@ export const urls = [
     errorUrl: '/blinds/honeycomb-blinds',
   },
   {
-    productName: 'Sunscreen/Transparent Blinds',
-    Url: 'sunscreen-roller-blinds',
-    errorUrl: '/blinds/roller-blinds/sunscreentransparent-blinds',
-  },
-  {
     productName: 'Dimout Blinds',
     Url: 'dimout-roller-blinds',
     errorUrl: '/blinds/roller-blinds/dimout-blinds',

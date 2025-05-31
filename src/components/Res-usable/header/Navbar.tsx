@@ -104,7 +104,7 @@ const Navbar = () => {
           </div>
       }
 
-      
+
 
       <nav className="sticky -top-1 z-50 py-2 sm:py-0 bg-white">
 
@@ -129,7 +129,7 @@ const Navbar = () => {
                   <button
                     onClick={() => handleLanguageSwitch('en')}
                     disabled={!translatorReady || language === 'en'}
-                    className='flex items-center justify-end gap-1 w-20 py-1 rounded-md font-medium text-12 xl:text-lg transition-colors duration-200 text-primary notranslate'
+                    className={`flex items-center justify-end gap-1 w-20 py-1 rounded-md font-medium text-12 xl:text-lg transition-colors duration-200 notranslate ${language === 'en' ? 'text-secondary' : 'text-primary'}`}
                   >
                     <Image
                       src="/assets/uaeFlag.webp"
@@ -142,11 +142,11 @@ const Navbar = () => {
                   </button>
                   <div className='bg-primary w-[1px] h-6'></div>
                   <button
-                    className='w-fit py-1 mb-2 text-start rounded-md font-medium text-12 xl:text-lg transition-colors duration-200 text-primary'
+                    className={`w-fit py-1 text-start rounded-md font-medium text-12 xl:text-lg transition-colors duration-200 notranslate ${language === 'ar' ? 'text-secondary' : 'text-primary'}`}
                     onClick={() => handleLanguageSwitch('ar')}
                     disabled={!translatorReady || language === 'ar'}
                   >
-                    عربی
+                    العربية
                   </button>
                 </div>
               }
@@ -161,7 +161,7 @@ const Navbar = () => {
                 return (
                   <Link
                     key={index}
-                    href={link.href+"/" || ''}
+                    href={link.href + "/" || ''}
                     className="px-1 lg:text-10 text-12 xl:text-18 h-full flex items-center justify-center transition-all duration-200"
 
                   >

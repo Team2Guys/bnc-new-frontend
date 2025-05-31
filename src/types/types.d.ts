@@ -63,6 +63,7 @@ export interface Image {
   public_id: string;
   altText?:string;
   name?:string;
+  pricing?:string
 }
 
 
@@ -104,6 +105,8 @@ export interface ProductImages {
   altText?: string,
   imageUrl: string,
   public_id?: string,
+  pricing?:string
+  dimentions?:string
 }
 
 export interface IRECORDS {
