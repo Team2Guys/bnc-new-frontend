@@ -88,9 +88,9 @@ export default function InfoTabs({ tabData,isHome }: InfoTabsProps) {
     <Image
       src={tabData[activeMobileTab ?? 0].image}
       alt={tabData[activeMobileTab ?? 0].heading}
-      width={600}
-      height={400}
-      className={`w-full  ${isHome? "h-[235px] object-cover" : "h-[400px] object-contain"}`}
+      width={800}
+      height={800}
+      className={`w-full  ${isHome? "h-[235px] object-cover" : "h-[450px] object-contain"}`}
     />
     {
       isHome &&
