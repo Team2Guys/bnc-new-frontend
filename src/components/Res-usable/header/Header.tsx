@@ -43,7 +43,7 @@ const Header = () => {
          <div className="flex justify-between items-center flex-col space-y-2">
           <p className="font-bold font-robotoSerif text-xl">Let customers speak for us</p>
           <div className="flex  justify-center items-center">
-            {[1, 2, 3, 4, 5].map((star, index) => (
+            {Array(5).fill(null).map((star, index) => (
               <MdOutlineStarPurple500 key={index} className="text-[#FFD800] text-30" />
             ))}
           </div>
@@ -60,7 +60,7 @@ const Header = () => {
 
            <hr/>
            </div>
-        <div className="w-full h-[350px] lg:h-[500px] overflow-y-scroll p-4 xsm:p-6 grid grid-cols-1 xs:grid-cols-2 gap-4" >
+        <div className="w-full h-[300px] xs:h-[350px] lg:h-[500px] overflow-y-scroll p-4 xsm:p-6 grid grid-cols-1 xs:grid-cols-2 gap-0 xs:gap-4" >
           { (reviews && reviews.length > 0) && reviews.map((item, index) => (
             <TestimonialCard key={index} testimonial={item} />
           ))}
