@@ -112,7 +112,7 @@ const Navbar = () => {
 
         <Container className="flex w-full justify-between h-12 sm:h-24 max-lg:px-2 items-center gap-1 md:gap-3 lg:gap-0 overflow-hidden ">
           <div className='flex gap-4 items-center'>
-            <Link href='/' className="w-[79px] h-[50px] relative md:w-[122px] md:h-[72px]">
+            <Link href='/' className="w-[79px] h-[50px] relative md:w-[122px] md:h-[50px]">
               <Image
                 fill
                 loading='lazy'
