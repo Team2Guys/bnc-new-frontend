@@ -29,7 +29,7 @@ const AboutUsCompo: FC<Props> = ({ blocks }) => {
 
         const ImageContent = (
           <div
-            className="w-full h-[300px] md:h-[300px] bg-cover bg-no-repeat bg-center"
+            className="w-full h-[300px] md:h-[350px] bg-cover bg-no-repeat bg-center"
             style={{ backgroundImage: `url(${block.imageUrl})` }}
           />
         );
