@@ -45,8 +45,8 @@ export default function ReviewBanner() {
       </Container>
       <div className="block sm:hidden">
       <div className=" mt-5 md:mt-10 relative flex justify-between items-center">
-        <ReviewBackground className="block sm:hidden" />
-        <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-robotoSerif text-center xss:text-[16px] text-[20px] font-bold xl:font-bold text-primary-foreground max-sm:px-6 w-full ">
+        <ReviewBackground/>
+        <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-robotoSerif text-center xxs:text-[16px] text-[20px] font-bold xl:font-bold text-primary-foreground max-sm:px-6 w-full ">
           Dubai Homeowners Have Crowned Us With Their Trust!
         </p>
       </div>
@@ -54,7 +54,7 @@ export default function ReviewBanner() {
       
        <div className="hidden sm:block">
       <div className=" mt-5 md:mt-10 relative">
-        <ReviewBackgrounddashktop className="hidden sm:block" />
+        <ReviewBackgrounddashktop />
         <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-robotoSerif text-center sm:text-[19px] md:text-24 xl:text-32 font-bold xl:font-bold text-primary-foreground max-sm:px-6 w-full ">
           Dubai Homeowners Have Crowned Us With Their Trust!
         </p>
