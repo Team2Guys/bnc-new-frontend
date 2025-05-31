@@ -47,7 +47,7 @@ const QualitySection = () => {
               ))}
             </div>
             <div className='relative top-5'>
-              <Link href="/" className="bg-secondary text-primary font-semibold px-6 sm:px-20 py-3 sm:py-4 rounded-md mx-auto block w-fit hover:opacity-65 ">
+              <Link href="/request-appointment/" className="bg-secondary text-primary font-semibold px-6 sm:px-20 py-3 sm:py-4 rounded-md mx-auto block w-fit hover:opacity-65 " aria-label='Book a free visit'>
                 Book A Free Visit
               </Link>
             </div>
