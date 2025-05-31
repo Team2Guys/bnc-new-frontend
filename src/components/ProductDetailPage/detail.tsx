@@ -38,7 +38,7 @@ const Detail = ({ data, setColorImage, selectedColor }: DetailProps) => {
     </div>
     
       <p className='px-2'>
-      <span className='font-roboto'
+      <span className='font-roboto blog-content'
         dangerouslySetInnerHTML={{ __html:data.description}}/>
       </p>
         {
