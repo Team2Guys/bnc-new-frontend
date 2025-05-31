@@ -67,9 +67,9 @@ export default function InfoTabs({ tabData,isHome }: InfoTabsProps) {
             <Image
               src={tabData[activeTab].image}
               alt={tabData[activeTab].heading}
-              width={600}
-              height={400}
-              className={`w-full  px-4 ${isHome ? "h-[235px] lg:h-[454px] object-cover":"h-[400px] lg:h-[547px] object-contain"}`}
+              width={1400}
+              height={1400}
+              className={`w-full  px-4 ${isHome ? "h-[235px] lg:h-[454px] object-cover":"h-[500px] lg:h-[547px] object-contain"}`}
             />
             {
               isHome &&
@@ -84,13 +84,13 @@ export default function InfoTabs({ tabData,isHome }: InfoTabsProps) {
 
     {/* Mobile View */}
     <div className="sm:hidden">
-    <div className="relative mb-4">
+    <div className="relative mb-4 w-full">
     <Image
       src={tabData[activeMobileTab ?? 0].image}
       alt={tabData[activeMobileTab ?? 0].heading}
       width={600}
       height={400}
-      className={`w-full  ${isHome? "h-[235px] object-cover" : "h-[300px] object-contain"}`}
+      className={`w-full  ${isHome? "h-[235px] object-cover" : "h-[400px] object-contain"}`}
     />
     {
       isHome &&

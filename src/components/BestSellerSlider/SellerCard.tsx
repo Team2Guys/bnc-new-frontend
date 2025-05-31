@@ -67,7 +67,7 @@ const SellerSlider = ({ products }: { products: IProduct[] }) => {
     <div className="bg-secondary-foreground py-5">
       <Container className="overflow-hidden best_seller_slider bg-secondary-foreground space-y-4">
         <div className="text-center sm:pb-5 lg:pt-8 space-y-2">
-          <h3 className="sm:text-[40px] text-2xl font-robotoSerif font-bold text-primary hidden md:block">
+          <h3 className="lg:text-[40px] text-2xl font-robotoSerif font-bold text-primary hidden md:block">
             SEE OUR BEST-SELLING PRODUCTS
           </h3>
           <h3 className="sm:text-[40px] text-4xl font-robotoSerif font-bold text-primary block md:hidden">
