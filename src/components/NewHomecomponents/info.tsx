@@ -63,13 +63,12 @@ export default function InfoTabs({ tabData,isHome , isCurtainsCategory }: InfoTa
               {tabData[activeTab].buttonText}
             </Link>
           </div>
-          <div className="relative">
+          <div className={`relative w-full ${isHome ? "px-4  h-[235px] lg:h-[454px] object-cover":"h-[500px] lg:h-[547px] object-contain"}`}> 
             <Image
               src={tabData[activeTab].image}
               alt={tabData[activeTab].heading}
-              width={600}
-              height={400}
-              className={`w-full  px-4 ${isHome ? "h-[235px] lg:h-[454px] object-cover":"h-[400px] lg:h-[547px] object-contain"}`}
+              fill
+              className="object-contain "
             />
             {
               isHome &&
@@ -84,13 +83,12 @@ export default function InfoTabs({ tabData,isHome , isCurtainsCategory }: InfoTa
 
     {/* Mobile View */}
     <div className="sm:hidden">
-    <div className="relative mb-4">
+    <div className={`relative mb-4 w-full ${isHome? "h-[235px] object-cover" : "h-[450px] object-contain"}`}>
     <Image
       src={tabData[activeMobileTab ?? 0].image}
       alt={tabData[activeMobileTab ?? 0].heading}
-      width={800}
-      height={800}
-      className={`w-full  ${isHome? "h-[235px] object-cover" : "h-[450px] object-contain"}`}
+      fill
+      className="w-full object-contain"
     />
     {
       isHome &&
@@ -131,6 +129,7 @@ export default function InfoTabs({ tabData,isHome , isCurtainsCategory }: InfoTa
           <Link
             href="/request-appointment/"
             className="sm:hidden my-3 inline-block bg-secondary text-primary font-medium  text-lg sm:text-[14px] px-5 py-2 rounded-md shadow hover:bg-primary-dark transition"
+            aria-label="Book a free visit"
           >
             Book A Free Visit
           </Link>

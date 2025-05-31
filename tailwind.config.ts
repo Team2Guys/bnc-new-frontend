@@ -22,6 +22,7 @@ const config = {
         'xxl': '1921px',
         'xxll': '2560px',
         'xsm': '400px',
+        'xxs' : '320px',
       },
       fontFamily: {
         roboto: ['var(--font-roboto)', 'sans-serif'],
