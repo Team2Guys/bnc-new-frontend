@@ -39,10 +39,10 @@
     "Wave Sheer & Blackout Curtains",
     
 
-    "Regular height shutters",
+    "Regular Full Height Shutters",
     "Bi-Fold Shutters",
     "Special Shape Shutters",
     "Solid Panel Shutters",
     "Tier On Tier Shutters",
-    "Bi-Pass Shutters"
+    "Bypass Shutters"
   ]
