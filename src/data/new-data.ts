@@ -43,5 +43,6 @@
     "Bi-Fold Shutters",
     "Special Shape Shutters",
     "Solid Panel Shutters",
-    "Tier On Tier Shutters"
+    "Tier On Tier Shutters",
+    "Bypass Shutters"
   ]
