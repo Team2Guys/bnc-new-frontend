@@ -25,6 +25,11 @@ const VideoGuide = ({ isMotorisedCategory }: { videos?: VideoItem[], isMotorised
     selectedVideos = curtainsVideos
   }
 
+
+  
+
+  console.log(selectedVideos, "selectedVideos", blindsVideos)
+
   const allVideos: VideoItem[] =
     selectedVideos.length > 0
       ? [staticvideos[0], selectedVideos[0], staticvideos[1]]

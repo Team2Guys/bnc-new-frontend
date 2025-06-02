@@ -165,20 +165,20 @@ export const staticvideos: VideoItem[] = [
 export const shuttersVideos:VideoItem[] = [
    {
     src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Final+Bnc+Step+By+Step+Process+With+Voice+Over+(2).mp4',
-    title: 'shutters text',
+    title: 'Style Your Space with the Right Shutters',
   },
 ]
 export const blindsVideos:VideoItem[] = [
    {
-    src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Curtains+For+Product+Page+(1).mp4',
-    title: 'blinds text',
+    src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Latest+Blinds+For+Product+Page+(2).mp4',
+    title: 'Style Your Space with the Right Blinds',
   },
 ]
 
 export const curtainsVideos:VideoItem[] = [
    {
     src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Curtains+For+Product+Page.mp4',
-    title: 'Which Curtains Suit Your Space? ',
+    title: 'Style Your Space with the Right Curtains',
   },
 ]
 
