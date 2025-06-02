@@ -22,11 +22,11 @@ export default function ReviewBanner() {
                 <MdOutlineStarPurple500 key={index} className="text-[#FFD800] text-36" />
               ))}
             </div>
-            <p className="font-roboto text-lg  md:text-xl">Rating <span className="font-medium">4.9 | 760</span> reviews <br /> Window treatment store</p>
+            <p className="font-roboto text-lg  md:text-xl">Rating <span className="font-medium">4.9 | 773</span> reviews <br /> Window treatment store</p>
           </div>
         </div>
-        <div className="space-y-3 text-center md:text-start mt-5 md:mt-0">
-          <p className="font-bold font-robotoSerif text-lg md:text-2xl text-primary">
+        <div className="space-y-3 text-center md:text-start">
+          <p className="font-bold font-robotoSerif text-lg md:text-2xl text-primary pt-5 md:pt-1 xl:pt-0">
             {customerReview.name}
           </p>
           <div className="font-roboto-serif font-medium text-lg md:text-xl text-primary px-6 sm:px-0 leading-7">
@@ -37,18 +37,29 @@ export default function ReviewBanner() {
           <Link
             target="_blank"
             href={customerReview.reviewLink}
+            aria-label="Reviews"
             className="border border-primary py-2 px-4 rounded-md font-roboto font-bold text-22 hidden md:block w-fit"
           >
             Go to Google Reviews
           </Link>
         </div>
       </Container>
-      <div className=" mt-5 md:mt-10 relative ">
-        <ReviewBackground className="block md:hidden" />
-        <ReviewBackgrounddashktop className="hidden md:block" />
-        <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-robotoSerif text-center text-sm md:text-24 xl:text-32 font-bold xl:font-bold text-primary-foreground max-sm:px-6 w-full ">
+      <div className="block sm:hidden">
+      <div className=" mt-5 md:mt-10 relative flex justify-between items-center">
+        <ReviewBackground/>
+        <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-robotoSerif text-center xxs:text-[16px] text-[20px] font-bold xl:font-bold text-primary-foreground max-sm:px-6 w-full ">
           Dubai Homeowners Have Crowned Us With Their Trust!
         </p>
+      </div>
+      </div>
+      
+       <div className="hidden sm:block">
+      <div className=" mt-5 md:mt-10 relative">
+        <ReviewBackgrounddashktop />
+        <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-robotoSerif text-center sm:text-[19px] md:text-24 xl:text-32 font-bold xl:font-bold text-primary-foreground max-sm:px-6 w-full ">
+          Dubai Homeowners Have Crowned Us With Their Trust!
+        </p>
+      </div>
       </div>
     </div>
   );

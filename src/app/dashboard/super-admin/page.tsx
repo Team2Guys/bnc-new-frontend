@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import { getAllAdmins } from 'config/fetch';
 import { cookies } from 'next/headers'
 
-const Admins = dynamic(() => import('./Admins'), {})
+const Admins = dynamic(() => import('./Admins'))
 
 const SuperAdmin_handler = async () => {
   const Cookies = await cookies()

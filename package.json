@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next lint && next build",
+    "dev": "next dev --turbopack",
+    "build": "next lint && next build --turbopack",
     "start": "next start -p 5001",
     "lint": "next lint",
     "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,md}\""
@@ -29,7 +29,6 @@
     "lucide-react": "^0.414.0",
     "next": "^15.1.5",
     "react": "19.0.0",
-    "react-datepicker": "^7.3.0",
     "react-dom": "19.0.0",
     "react-icons": "^5.2.1",
     "react-phone-number-input": "^3.4.9",

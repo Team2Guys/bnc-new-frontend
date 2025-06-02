@@ -20,10 +20,7 @@ export async function generateMetadata({
 }: meta_props): Promise<Metadata> {
   const product = (await params).product;
 
-  const [products, categories] = await Promise.all([
-    fetchProducts(),
-    fetchSubCategories(),
-  ]);
+  const [products, categories] = await Promise.all([fetchProducts(),    fetchSubCategories()]);
 
   const filteredProduct = filterProd(products, product, Cateories);
   const filteredSubCategory = filtereCategory(categories, product, Cateories);
@@ -38,10 +35,7 @@ export async function generateMetadata({
 
   let Product = filteredProduct as IProduct;
 
-  let ImageUrl =
-    Product?.posterImage?.imageUrl ||
-    filteredSubCategory?.posterImage?.imageUrl ||
-    'blindsandcurtains';
+  let ImageUrl =Product?.posterImage?.imageUrl ||filteredSubCategory?.posterImage?.imageUrl ||'blindsandcurtains';
   let alt =
     Product?.posterImage.altText ||
     filteredSubCategory?.posterImage?.altText ||

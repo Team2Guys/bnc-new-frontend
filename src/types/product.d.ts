@@ -40,9 +40,11 @@ type TabDataItem = {
   href: string;
   buttonText: string;
   image: string;
+  mobileImage?: string 
 };
 
 export interface InfoTabsProps {
   tabData: TabDataItem[];
   isHome?: boolean;
+  isCurtainsCategory?: boolean
 }

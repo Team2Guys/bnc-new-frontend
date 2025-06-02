@@ -216,10 +216,6 @@ li button:before {
   border-color: black !important;
 }
 
-.custom-datepicker .react-datepicker-wrapper {
-  width: 100%;
-}
-
 .ant-select-selector {
   border-color: #000000 !important;
 }

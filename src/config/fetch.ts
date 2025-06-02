@@ -197,6 +197,7 @@ export const filterProd = (
 ): IProduct | undefined => {
   return prod?.find((sub) => {
     const title = ChangedProductUrl(product as string);
+    
     const title_flag = title === generateSlug(sub.title);
     return (
       title_flag && Cateories.some((item: number) => item === sub.CategoryId)

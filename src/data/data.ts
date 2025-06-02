@@ -94,148 +94,7 @@ export const supportItems: SupportItem[] = [
   },
 ];
 
-//Review Hardcode Section
-export const testimonials = [
-  {
-    id: 1,
-    author_name: 'Fatima Seedat',
-    time: '3 months ago',
-    profile_photo_url: '/assets/images/static/testimonial/1.png',
-    text: `
-      The Meditation and Holistic Counseling course provided valuable insights and information. Nevine, our facilitator, was truly inspiring. I gained a wealth of knowledge and am eager to apply the skills I've acquired. This experience has not only broadened my understanding but also motivated me to integrate these new techniques into my practice. Overall, it was a rewarding learning journey that I am excited on my journey ahead.`,
-    rating: 5,
-  },
-  {
-    id: 2,
-    author_name: 'Marlyn Hoffman',
-    time: '2 years ago',
-    profile_photo_url: '/assets/images/static/testimonial/2.png',
-    text: `Excellent service from the team! Both Adeel and Robert were very helpful starting from the measurements, providing us options and  discussing what's best for our home. We also had great communication with Shiraz who gave us assurance that we will receive great service, good quality of work and reasonable price. And sure they delivered as promised! Very happy with Blinds & Curtains and will surely avail their services for our future needs! Thank you.`,
-    rating: 5,
-  },
-  {
-    id: 3,
-    author_name: 'Katherine G. Tan Casis',
-    time: '5 months ago',
-    profile_photo_url: '/assets/images/static/testimonial/3.png',
-    text: `Very happy with their customer service as they were very responsive when I was inquiring and scheduling the ocular. They have a wide variety of fabric selections and Jayson provided us so much assistance in the measurements and discussing the fabric options. He provided inputs that helped us decide which one to get.The curtains were ordered on Saturday and were delivered and installed by Thursday.Jayson and Robert did the installation and they did a wonderful job. We are very happy with the curtains they have delivered and installed. Highly recommended 👍🏻`,
-    rating: 5,
-  },
-  {
-    id: 4,
-    author_name: 'Menna Hisham Essa',
-    time: 'a year ago',
-    profile_photo_url: '/assets/images/static/testimonial/4.png',
-    text: `One of the best companies, the quality of the curtains are very good and 100% black out comparing to the price they gave and very big variety of colors and materials to choose.Arshad and Shafiq came on time and they were very professional and very fast, they finished installing 4 curtains in only 40mins.I would highly recommend this company and for sure will deal with them again in future.`,
-    rating: 5,
-  },
-  {
-    id: 5,
-    author_name: 'Sunny Collins',
-    time: '2 years ago',
-    profile_photo_url: '/assets/images/static/testimonial/5.png',
-    text: `I used this company for my black-out roller blinds with sheers. I had such an AMAZING experience with this company from start to end! I cannot praise this team enough.The sales team- especially Mir- was very patient and attentive, answered all my many of questions and offered great suggestions of fabrics and products based on my needs. There were doubts about the initial measurements so they sent the team again to triple check everything. Abdul was so helpful when it came to giving technical information and what to expect for my space if I chose a specific design or material- for example, how much black out I'd have with 1 roller blind vs 2 roller blinds, and the ideal curtain length for my windows. He shared lots of photos of examples so I could visualize what he was talking about and the potential problems I could face if I went with my initial design ideas. I'm so grateful for his suggestions and don't regret changing the design based on his suggestions a single bit.Next was the installation- the guys were SUPER. Everything was installed perfectly, and the guys were VERY clean- washing their hands before touching the curtains to avoid dirtying the fabrics, and they left my apartment spotless. They are so very good at keeping the space dust-free while doing their work.The finished product is gorgeous and great quality too! I've definitely found my go-to place for curtains, and will highly recommed them to anyone else.`,
-    rating: 5,
-  },
-  {
-    id: 6,
-    author_name: 'Maya Smadi',
-    time: 'a year ago',
-    profile_photo_url: '/assets/images/static/testimonial/6.png',
-    text: `Highly recommend using Blinds & Curtains. I came across them by coincidence through a google search. I was very hesitant in the beginning, but when the team came for a site visit, I was completely confident in their service.Yahweh and the team came on time, provided us with many samples, shared with us different pictures, explained the different mechanisms and got us the price on the spot through their iPads. They were truly very informed and really gave us peace of mind. And Once we paid the advance, installation was within a couple of days and they were so fast and efficient. Really excellent service, professional team and reasonable prices. `,
-    rating: 5,
-  },
-  {
-    id: 8,
-    author_name: 'renren evans',
-    time: '3 years ago',
-    profile_photo_url: '/assets/images/static/testimonial/8.png',
-    text: `I have a very good experience with Blinds and Curtains from day one (measurement/site visit) up to the installation. Kudos to Mr. Yahweh and his Assistant Robert who has done an excellent job to our new office. They have provided us with a very good service and these guys are really professional. Highly recommended!!! Attached are our sample photos. Thank you Blinds and curtains.`,
-    rating: 5,
-  },
-  {
-    id: 9,
-    author_name: 'Phyllis Murray',
-    time: 'a year ago',
-    profile_photo_url: '/assets/images/static/testimonial/9.png',
-    text: `Great experience dealing with these guys. Very easy and straightforward process from initial enquiry to the installation of the curtains.Wahab and Tashiyana were very efficient in installing the curtains and very friendly as well. They cleaned up after themselves, too, and left no mess behind.Very happy customer here. Won't hesitate to use them again at all. Highly recommend!`,
-    rating: 5,
-  },
-  {
-    id: 10,
-    author_name: 'Damian Seneviratne',
-    time: 'a year ago',
-    profile_photo_url: '/assets/images/static/testimonial/10.png',
-    text: `Had awesome work done by Yahweh and Arvin on 03/20/2023. Exceeding expectations and very professional all the way. Very courteous and really good at what they were doing. Neat and tidy. Thank you guys for making my new place much more beautiful than it was and able to make it home.. Cheers...`,
-    rating: 5,
-  },
-  {
-    id: 11,
-    author_name: 'Alisha Alwany',
-    time: '2 years ago',
-    profile_photo_url: '/assets/images/static/testimonial/11.png',
-    text: `Amazing Service. From the initial appointment to measure and choose materials to the installation. Perfect finish and so happy with the quality of the material too. Tanveer and Ray were very polite and cleaned up after the installation. Highly recommend!
-    2 years on, I used blinds and curtains again to fit some shutters in our bedroom. Yahweh and Jayson were fantastic at installation but a special shout out to Yahweh who dealt with the whole process from measuring to installation. He put up with my messages to find out when the shutters will arrive in the UAE and was very patient. Both Yahweh and Jayson are a credit to your company! Would definitely recommend this company and have done to our friends and family.`,
-    rating: 5,
-  },
-  {
-    id: 12,
-    author_name: 'Leisha Clark',
-    time: '2 years ago',
-    profile_photo_url: '/assets/images/static/testimonial/12.png',
-    text: `A huge thank you to Yahweh & Arvin for doing a fantastic job putting up our curtains & blinds. They went above and beyond to make sure every curtain and blind was to my liking and perfect. I am very pleased with the quality of the curtains. I highly recommend them and would definitely use them again. ⭐️⭐️⭐️⭐️⭐️`,
-    rating: 5,
-  },
-  {
-    id: 13,
-    author_name: 'James Spearman',
-    time: 'a year ago',
-    profile_photo_url: '/assets/images/static/testimonial/13.png',
-    text: `Lots of choice, easy to deal with and very professional.  The team came to measure and provide a quote, once I was ready we selected the final material and paid the deposit.. 2 days later blinds were ready Humayoun and Arvin quickly, efficiently and very cleanly installed the blinds.  Everything was super easy, even getting the security passes to my tower was handled without me getting involved.  Great service and love the end result.`,
-    rating: 5,
-  },
-  {
-    id: 14,
-    author_name: 'Karolina Vaseva',
-    time: '2 years ago',
-    profile_photo_url: '/assets/images/static/testimonial/14.png',
-    text: `Outstanding service from Abdul and Roy! From measuring, helping to pick the fabrics to setting everything up, the process was very smooth and fast. We love our blackout curtains in all rooms and we are very happy with Blinds and Curtains service, you got us as your loyal clients from now on.`,
-    rating: 5,
-  },
-  {
-    id: 15,
-    author_name: 'Bintang A',
-    time: '3 years ago',
-    profile_photo_url: '/assets/images/static/testimonial/17.png',
-    text: `Amazing guys working very hard, from the start of choosing the curtains and installation. Yahweh is very patient helping me with colour curtains as I can't decided 😊. Great choices for curtains with any budget. Yahweh and his installation team Jayson and Reagan very polite and professional.
-    Definitely recommend them!`,
-    rating: 5,
-  },
-  {
-    id: 16,
-    author_name: 'Eliska Mundell',
-    time: '4 years ago',
-    profile_photo_url: '/assets/images/static/testimonial/18.png',
-    text: `I had two sets of curtains and a kitchen blind made, very impressed with the speed to deliver and the quality of the items. Tanveer was very easy to talk to and understood the requirements. The prices are reasonable, I would rather pay for quality. The installation job was done very quickly and the team is very professional. A small problem with the blind was rectified immediately. I certainly would use them again!`,
-    rating: 5,
-  },
-  {
-    id: 17,
-    author_name: 'Eisa Alhabib',
-    time: 'a year ago',
-    profile_photo_url: '/assets/images/static/testimonial/15.png',
-    text: `Great place to get your curtains set up! They came to my apartment , took measurements then a few days later they set up my curtains and they look amazing! Very good quality and service. So happy with the final result`,
-    rating: 5,
-  },
-  {
-    id: 18,
-    author_name: 'Carey Boucher Erasmus',
-    time: 'a year ago',
-    profile_photo_url: '/assets/images/static/testimonial/16.png',
-    text: `Excellent service, so professional. Yahweh was brilliant and precise with our blind requirements. Fair, affordable prices too.`,
-    rating: 5,
-  },
-];
+
 
 export const productData: Tproductdata = {
   title: 'PRODUCT GUARANTEES',
@@ -2005,10 +1864,10 @@ export const blindsSubcategories = [
 ];
 
 export const shuttersSubcategories = [
-  "Regular Height Shutters",
+  "Regular Full Height Shutters",
   "Bi-fold Shutters",
   "Special Shape Shutters",
-  // "Bi-pass Shutters",
+  "Bypass Shutters",
   "Solid Panel Shutters",
   "Tier On Tier Shutters",
 ];
@@ -2025,9 +1884,9 @@ export const curtainsSubcategories = [
 ];
 
 export const customerReview: ReviewData = {
-  name: 'Imran Ahmad',
+  name: 'Eisa Alhabib',
   review:
-    '“ Amazing experience from start to finish Ryan and Ben did a great job with installation leaving drive and garage clean ”',
+    '“ Great place to get your curtains set up! They came to my apartment , took measurements then a few days later they set up my curtains and they look amazing! Very good quality and service. So happy with the final result ”',
   reviewLink:
     'https://www.google.com/maps/place/Blinds+And+Curtains+Dubai/@25.1177148,55.2356858,984m/data=!3m1!1e3!4m8!3m7!1s0x3e5f698d0b075de1:0x223e3563a8be56be!8m2!3d25.1177148!4d55.2356858!9m1!1b1!16s%2Fg%2F11bbt9c0yz?entry=ttu&g_ep=EgoyMDI1MDUxMy4xIKXMDSoASAFQAw%3D%3D',
 };
