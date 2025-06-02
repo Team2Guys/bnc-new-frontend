@@ -30,7 +30,7 @@ const UploadFile = ({ setImagesUrl, setposterimageUrl, sethoverImage, video, mul
     if (files.length === 0) throw new Error('No files found');
 
     const Response_data: ImagesProps[] = [];
-let urlsEndpoint = s3Flag ? "file-upload/upload-s3" : "file-upload"
+    let urlsEndpoint = s3Flag ? "file-upload/upload-s3" : "file-upload"
 
       for (const file of files) {
         const isImage = file.type.startsWith('image/');
