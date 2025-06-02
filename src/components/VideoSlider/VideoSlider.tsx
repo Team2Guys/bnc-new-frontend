@@ -1,4 +1,3 @@
-
 'use client'
 import React, { useState, useRef, useEffect } from "react"
 import { reelsData } from "data/SellerSlider"
@@ -148,7 +147,12 @@ export default function VideoReelsSlider() {
             {reelsData.map((item, index) => (
               <div
                 key={index}
-                onClick={() => setPopupVideoIndex(index)}
+                onClick={() => {
+                  setActiveIndex(index)
+                  setTimeout(() => {
+                    setPopupVideoIndex(index)
+                  }, 100)
+                }}
                 className={`absolute transition-all duration-500 ease-in-out cursor-pointer ${getPositionClass(
                   index
                 )}`}
@@ -193,7 +197,7 @@ export default function VideoReelsSlider() {
               maxWidth: "90vw",
               maxHeight: "90vh",
             }}
-            onClick={(e) => e.stopPropagation()} 
+            onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setPopupVideoIndex(null)}

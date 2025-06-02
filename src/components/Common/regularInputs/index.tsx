@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Ref, useState } from 'react';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
 
 interface InputProps {
@@ -11,6 +11,7 @@ interface InputProps {
   value?: any;
   checked?: any;
   className?: string;
+  ref?: Ref<HTMLInputElement>
 }
 
 const Input: React.FC<InputProps> = ({
@@ -23,6 +24,7 @@ const Input: React.FC<InputProps> = ({
   id,
   checked,
   className,
+  ref
 })=> {
   const [inputType, setInputType] = useState(type);
 
@@ -41,6 +43,7 @@ const Input: React.FC<InputProps> = ({
         onChange={onChange}
         value={value}
         checked={checked}
+        ref={ref}
       />
       {type === 'password' && (
         <span

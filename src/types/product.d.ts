@@ -45,4 +45,5 @@ type TabDataItem = {
 export interface InfoTabsProps {
   tabData: TabDataItem[];
   isHome?: boolean;
+  isCurtainsCategory?: boolean
 }
