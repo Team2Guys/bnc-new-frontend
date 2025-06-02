@@ -8,8 +8,7 @@ const MainHero = () => {
  
   return (
     <div className="relative w-full h-[295px] md:h-[75vh] overflow-hidden">
-      <Image src="/assets/hero-banner.webp" className="absolute top-0 left-0 w-full h-full object-cover object-center" fill
-      loading="eager" alt="Hero Banner"/>
+      <Image src="/assets/hero-banner.webp" className="absolute top-0 left-0 w-full h-full object-cover object-center" fill priority fetchPriority="high" alt="Hero Banner"/>
       <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-25" />
       {/* Content */}
       <Container className="relative h-full flex flex-col justify-between text-primary-foreground">
