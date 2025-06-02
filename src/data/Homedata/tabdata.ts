@@ -1,3 +1,4 @@
+import { VideoItem } from "types/product";
 
 //   Tabdata
 export const tabData = [
@@ -149,28 +150,35 @@ export const Qualityfeatures = [
   },
 ]
 
-export const staticvideos = [
+export const staticvideos: VideoItem[] = [
   {
-    src: 'https://bncvidoes.s3.eu-north-1.amazonaws.com/mainblinds.mp4',
+    //  src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Latest+Shutters+For+Product+Page.mp4',
+     src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Final+Bnc+Step+By+Step+Process+With+Voice+Over+(2).mp4',
     title: 'How Does Our Process Work?',
   },
   {
-    src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Latest+Shutters+For+Product+Page.mp4',
-    title: ' Things to Know Before You Book',
+     src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Motion+Blinds+%26+Curtains+No+Voiceover.mp4',
+    title: 'Why Go Motorized?',
   },
 ]
 
-export const shuttersVideos = [
+export const shuttersVideos:VideoItem[] = [
    {
-    src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Latest+Shutters+For+Product+Page.mp4',
-    title: 'How Does Our Process Work?',
+    src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Final+Bnc+Step+By+Step+Process+With+Voice+Over+(2).mp4',
+    title: 'shutters text',
+  },
+]
+export const blindsVideos:VideoItem[] = [
+   {
+    src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Curtains+For+Product+Page+(1).mp4',
+    title: 'blinds text',
   },
 ]
 
-export const curtainsVideos = [
+export const curtainsVideos:VideoItem[] = [
    {
     src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Curtains+For+Product+Page.mp4',
-    title: 'How Does Our Process Work?',
+    title: 'Which Curtains Suit Your Space? ',
   },
 ]
 

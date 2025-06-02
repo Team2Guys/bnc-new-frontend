@@ -77,6 +77,7 @@ export async function generateMetadata({
 const CommercialPage = async ({ params }: meta_props) => {
   const product = (await params).product;
   const [products] = await Promise.all([fetchProducts()]);
+  
   const filteredProduct = filterProd(products, product, Cateories);
   const matchingUrl = urls.find((url) => `${url.errorUrl}/` === `/curtains/${product}/`);
   if (matchingUrl) {
