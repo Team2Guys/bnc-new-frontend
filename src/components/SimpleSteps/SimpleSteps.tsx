@@ -37,37 +37,37 @@ export default function SimpleSteps() {
 
   return (
     <div className="bg-secondary-foreground sm:bg-transparent pb-5 sm:pb-0">
-    <Container className="mt-5 md:mt-10">
-      <div className="mx-auto px-1 md:px-4">
-        <div className="sm:py-7 pt-5 pb-0">
-          <h2 className="categoryHeading text-primary text-center block font-bold text-24 lg:text-[48px] font-robotoSerif">
-            {workingProcessData.heading}
-          </h2>
-          <p className="font-normal text-[20px] mb-2 text-center font-roboto text-primary max-w-5xl mx-auto sm:block hidden">
-            {workingProcessData.subheading}
-          </p>
-          <h3 className="sm:text-2xl text-xl sm:font-bold font-semibold text-primary mb-6 text-center font-robotoSerif block sm:hidden">
-            Just <span className="text-[#F1B42F]">4</span> Simple Steps
-          </h3>
-        </div>
-
-        <div className="flex md:flex-row flex-col justify-center gap-8 md:gap-3 lg:gap-8 items-center sm:bg-secondary-foreground">
-          <div className="relative w-full h-full md:h-[600px] sm:w-3/5 sm:pt-5 lg:pt-0 xl:pb-10">
-            <video
-              src={workingProcessData.videoUrl}
-              className="w-full h-full object-fill"
-              autoPlay
-              loop
-              muted
-              playsInline
-            />
-          </div>
-
-          <div className="w-full md:sm:w-2/5 flex flex-col justify-center items-center sm:pb-5">
-            <h3 className="text-[24px] font-bold text-primary mb-6 md:mb-3 xl:mt-6 font-robotoSerif sm:block hidden">
+      <Container className="mt-5 md:mt-10">
+        <div className="mx-auto px-1 md:px-4">
+          <div className="sm:py-7 pt-5 pb-0">
+            <h2 className="categoryHeading text-primary text-center block font-bold text-24 lg:text-[48px] font-robotoSerif">
+              {workingProcessData.heading}
+            </h2>
+            <p className="font-normal text-[20px] mb-2 text-center font-roboto text-primary max-w-5xl mx-auto sm:block hidden">
+              {workingProcessData.subheading}
+            </p>
+            <h3 className="sm:text-2xl text-xl sm:font-bold font-semibold text-primary mb-6 text-center font-robotoSerif block sm:hidden">
               Just <span className="text-[#F1B42F]">4</span> Simple Steps
             </h3>
-             <div>
+          </div>
+
+          <div className="flex md:flex-row flex-col justify-center gap-8 md:gap-3 lg:gap-8 items-center sm:bg-secondary-foreground">
+            <div className="relative w-full h-full md:h-[600px] sm:w-3/5 sm:pt-5 lg:pt-0 xl:pb-10">
+              <video
+                src={workingProcessData.videoUrl}
+                className="w-full h-full object-fill"
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
+            </div>
+
+            <div className="w-full md:sm:w-2/5 flex flex-col justify-center items-center sm:pb-5">
+              <h3 className="text-[24px] font-bold text-primary mb-6 md:mb-3 xl:mt-6 font-robotoSerif sm:block hidden">
+                Just <span className="text-[#F1B42F]">4</span> Simple Steps
+              </h3>
+              <div>
                 {workingProcessData.steps.map((step, idx) => (
                   <div key={idx} className="flex items-start gap-4 mt-1">
                     <div className="flex flex-col items-center space-y-1">
