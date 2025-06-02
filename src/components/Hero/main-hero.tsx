@@ -7,7 +7,7 @@ import Image from "next/image";
 const MainHero = () => {
  
   return (
-    <div className="relative w-full h-[295px] md:h-[75vh] overflow-hidden">
+    <div className="relative w-full h-[295px] md:h-[70vh] overflow-hidden">
       {/* Video Background */}
       {/* <video
         autoPlay
