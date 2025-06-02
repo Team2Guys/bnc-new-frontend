@@ -15,6 +15,7 @@ const Card = ({ card }: { card: IProduct }) => {
               alt={card.title}
               fill
               className="rounded-xl"
+            
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
             />
           </Link>
