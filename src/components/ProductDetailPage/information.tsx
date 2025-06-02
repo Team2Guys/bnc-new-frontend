@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import Container from 'components/Res-usable/Container/Container'
 import Image from 'next/image'
 
@@ -17,9 +17,24 @@ interface InformationProps {
 
 const Information = ({ privarcyImage, privacySectoin }: InformationProps) => {
   const [visibleCount, setVisibleCount] = useState(1)
+  const [isDesktop, setIsDesktop] = useState(false)
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsDesktop(window.innerWidth >= 768)
+    }
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  useEffect(() => {
+    if (isDesktop) {
+      setVisibleCount(privacySectoin.length - 1)
+    }
+  }, [isDesktop, privacySectoin.length])
 
   const handleReadMore = () => setVisibleCount(prev => prev + 2)
-  const handleReadLess = () => setVisibleCount(1)
 
   const { visibleSections, hasMore } = useMemo(() => {
     const extraSections = privacySectoin.slice(1)
@@ -53,40 +68,34 @@ const Information = ({ privarcyImage, privacySectoin }: InformationProps) => {
                 </div>
               ))}
 
-              {/* Controls */}
-              <div className="pt-5 md:pt-10 space-x-4">
-                {hasMore && (
-                  <button
-                    onClick={handleReadMore}
-                    className="p-2  md:text-[22px] xl:p-4 font-medium text-secondary border rounded-md border-primary hover:border-secondary hover:bg-secondary hover:text-primary max-sm:px-10"
-                  >
-                    Read More
-                  </button>
-                )}
-                {visibleCount > 1 && (
-                  <button
-                    onClick={handleReadLess}
-                    className="p-2  md:text-[22px] xl:p-4 font-medium text-secondary border rounded-md border-primary hover:border-secondary hover:bg-secondary hover:text-primary max-sm:px-10"
-                  >
-                    Read Less
-                  </button>
-                )}
-              </div>
+              {/* Controls (only shown on mobile) */}
+              {!isDesktop && (
+                <div className="pt-5 md:pt-10 space-x-4">
+                  {hasMore && (
+                    <button
+                      onClick={handleReadMore}
+                      className="p-2 md:text-[22px] xl:p-4 font-medium text-secondary border rounded-md border-primary hover:border-secondary hover:bg-secondary hover:text-primary max-sm:px-10"
+                    >
+                      Read More
+                    </button>
+                  )}
+                 
+                </div>
+              )}
             </div>
 
             {/* Image Section */}
-            {
-              privarcyImage?.imageUrl &&
-            <div className="col-span-12 md:col-span-6 order-1 md:order-2">
-              <Image
-                className="h-56 sm:h-96 md:h-[600px] w-full object-cover"
-                src={privarcyImage.imageUrl}
-                width={600}
-                height={600}
-                alt="information"
-              />
-            </div>
-            }
+            {privarcyImage?.imageUrl && (
+              <div className="col-span-12 md:col-span-6 order-1 md:order-2">
+                <Image
+                  className="h-56 sm:h-96 md:h-[600px] w-full object-cover"
+                  src={privarcyImage.imageUrl}
+                  width={600}
+                  height={600}
+                  alt="information"
+                />
+              </div>
+            )}
           </Container>
         </div>
       )}
