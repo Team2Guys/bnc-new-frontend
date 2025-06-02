@@ -55,7 +55,7 @@ export default function InfoTabs({ tabData,isHome , isCurtainsCategory }: InfoTa
       <hr className=" relative bottom-[5px] bg-primary border-b-4 border-black hidden sm:block" />
       {/* Desktop Content */}
       <div className="hidden sm:block">
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-16 items-center md:py-8 p-2">
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-16 2xl:gap-24 items-center md:py-8 p-2">
           <div className="flex flex-col justify-center items-start space-y-5 lg:space-y-12">
             <h3 className="font-robotoSerif font-semibold text-20 lg:text-[40px] text-primary sm:pr-10">{tabData[activeTab].heading}</h3>
             <p className="text-[16px] font-normal font-roboto lg:text-[20px] text-primary text-justify" dangerouslySetInnerHTML={{__html:tabData[activeTab].description}}/>
@@ -63,16 +63,15 @@ export default function InfoTabs({ tabData,isHome , isCurtainsCategory }: InfoTa
               {tabData[activeTab].buttonText}
             </Link>
           </div>
-          <div className={`relative w-full ${isHome ? "px-4  h-[235px] lg:h-[454px] object-cover":"h-[500px] lg:h-[547px] object-contain"}`}> 
+          <div className={`relative w-full ${isHome ? "px-4  h-[235px] lg:h-[454px]":"h-[500px] lg:h-[547px] object-contain"}`}> 
             <Image
               src={tabData[activeTab].image}
               alt={tabData[activeTab].heading}
               fill
-              className="object-contain "
             />
             {
               isHome &&
-            <div className="absolute bottom-10 -left-10 lg:bottom-20 xl:bottom-[73px] lg:-left-[80px] w-[116px] h-[56px] md:h-[70px] md:w-[140px] lg:h-[100px] lg:w-[200px] bg-primary flex flex-col items-center justify-center -rotate-90">
+            <div className="absolute bottom-10 -left-10 lg:bottom-20 xl:bottom-[73px] lg:-left-[80px] 2xl:-left-24 w-[116px] h-[56px] md:h-[70px] md:w-[140px] lg:h-[100px] lg:w-[200px] bg-primary flex flex-col items-center justify-center -rotate-90">
               <span className="text-white font-semibold text-14 md:text-22 lg:text-[24px] font-robotoSerif">20 Years</span>
               <span className="text-white text-[8px] md:text-10 lg:text-[14px] font-medium md:mt-2 font-roboto">Making Blinds & Curtains</span>
             </div>
