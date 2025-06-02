@@ -5,6 +5,7 @@ export const tabData = [
     title: "Expert Guidance at Your Doorstep",
     icon: "/assets/images/Home/tab/Black.svg",
     image: "/assets/images/Home/tab/trusted.webp",
+    mobileImage:"/assets/images/Home/tab/mobileTrusted.webp",
     heading: "Free In-Home Consultation",
     description:
       "No need to guess or visit. Our expert brings 20–30 fabric books of blinds and curtains to your home and provides an instant quote on the spot. You pick that fit — we handle the rest. From measuring to installation, your window coverings are our full-time job. <br/> Comfort, ease, and style — at your doorstep.",
@@ -15,6 +16,7 @@ export const tabData = [
     title: "24/7 customer support",
     icon: "/assets/images/Home/tab/customer-support.svg",
     image: "/assets/images/Home/tab/trusted.webp",
+    mobileImage:"/assets/images/Home/tab/mobileTrusted.webp",
     heading: "Real Time Support – No Bots, Only Humans ",
     description:
       "We don’t believe in “office hours”. Whether it’s a question or quick help, we’re just a message away — even on weekends.<br/> Our customer care team resolves most issues within 1 day.<br/> Fast answers. Real people. No delays.",
@@ -25,6 +27,7 @@ export const tabData = [
     title: "Stress-Free Smooth Experience",
     icon: "/assets/images/Home/tab/stress-free.svg",
     image: "/assets/images/Home/tab/trusted.webp",
+    mobileImage:"/assets/images/Home/tab/mobileTrusted.webp",
     heading: "Fast Installation. Zero Hassle.",
     description:
       "From the first visit to the final fitting, we make custom blinds and curtains with 2 days of easy installation or according to your schedule.<br/> Need a reinstall? It's free for 2 years.<br/> Need adjustments We fix — not upsell.<br/> Because your time and trust matter.",
@@ -35,6 +38,7 @@ export const tabData = [
     title: "High-Quality In-House Production",
     icon: "/assets/images/Home/tab/high-quality.svg",
     image: "/assets/images/Home/tab/trusted.webp",
+    mobileImage:"/assets/images/Home/tab/mobileTrusted.webp",
     heading: "No Outsource,  Full Warranty",
     description:
       "We don’t outsource — every stitch is done in-house by our team. From fabric to frames, we run a 13-step quality check.<br/> And we back it with a 5-year warranty on parts, labour, and fabric. You get full control, zero compromise.",
@@ -153,6 +157,20 @@ export const staticvideos = [
   {
     src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Latest+Shutters+For+Product+Page.mp4',
     title: ' Things to Know Before You Book',
+  },
+]
+
+export const shuttersVideos = [
+   {
+    src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Latest+Shutters+For+Product+Page.mp4',
+    title: 'How Does Our Process Work?',
+  },
+]
+
+export const curtainsVideos = [
+   {
+    src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Curtains+For+Product+Page.mp4',
+    title: 'How Does Our Process Work?',
   },
 ]
 
