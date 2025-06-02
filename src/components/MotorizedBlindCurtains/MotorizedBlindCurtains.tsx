@@ -50,7 +50,7 @@ export default function MotorizeBlindCurtain() {
         <video
           ref={videoRef}
           src={motorizeBlindData.videoUrl}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-fill"
           muted
           loop
           playsInline

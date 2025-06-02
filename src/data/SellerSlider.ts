@@ -83,7 +83,7 @@ export const workingProcessData: WorkingProcessContent = {
 
 export const motorizeBlindData: MotorizeBlindData = {
   heading: "Motorised Blinds and Curtains for a Smart Home!",
-  videoUrl: "/videos/sunset.mp4", 
+  videoUrl: "https://bncmain.s3.eu-north-1.amazonaws.com/Motion+Blinds+%26+Curtains+No+Voiceover.mp4", 
   buttons: [
     { label: "View Motorised Blinds", link: "/blinds/motorised-blinds/" },
     { label: "View Motorised Curtains", link: "/curtains/motorised-curtains/" },

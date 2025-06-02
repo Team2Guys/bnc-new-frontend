@@ -63,7 +63,7 @@ const allVideos = [
 
         <div className={`grid gap-2 md:gap-6 justify-items-center mx-auto ${isMotorisedCategory ? "grid-cols-2 max-w-3xl" : "grid-cols-3 max-w-5xl"}`}>
           {allVideos.map((video, idx) => (
-            <div key={idx} className="flex flex-col space-y-3 relative w-full">
+            <div key={idx} className="flex flex-col space-y-3 relative w-full bg">
               <div
                 className="p-1 sm:p-2 rounded-md border border-secondary relative cursor-pointer "
                 onClick={() => handlePlayPause(idx)}
