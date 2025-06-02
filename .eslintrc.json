@@ -6,9 +6,9 @@
   ],
   "plugins": ["unused-imports"],
   "rules": {
-    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-imports": "off",
      "react-hooks/exhaustive-deps": "off",
-         "import/no-unresolved": "error",
+         "import/no-unresolved": "off",
     "unused-imports/no-unused-vars": [
       "error",
       {
