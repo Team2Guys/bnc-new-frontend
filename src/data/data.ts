@@ -1864,7 +1864,7 @@ export const blindsSubcategories = [
 ];
 
 export const shuttersSubcategories = [
-  "Full Height Shutters	",
+  "Regular Full Height Shutters",
   "Bi-fold Shutters",
   "Special Shape Shutters",
   "Bi-pass Shutters",

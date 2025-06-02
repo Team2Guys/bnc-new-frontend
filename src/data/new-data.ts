@@ -39,7 +39,7 @@
     "Wave Sheer & Blackout Curtains",
     
 
-    "Full Height Shutters	",
+    "Regular Full Height Shutters",
     "Bi-Fold Shutters",
     "Special Shape Shutters",
     "Solid Panel Shutters",
