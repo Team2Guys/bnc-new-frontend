@@ -46,7 +46,7 @@ const Detail = ({ data, setColorImage, selectedColor }: DetailProps) => {
             <>
             <p className='font-roboto px-2'>Most demanded colours</p>
             <div className=' flex items-start gap-2 md:pb-10 px-2'>
-            <div className='flex flex-wrap items-center gap-2'>
+            <div className='flex flex-wrap items-center gap-1 xs:gap-2'>
           {/* {data.colors?.map((item: { name?: string; detail?: string }, index: number) => { */}
                 {data.colorsImages?.map((item, index) => {
             // if (!item.detail) return null;
@@ -82,7 +82,7 @@ const Detail = ({ data, setColorImage, selectedColor }: DetailProps) => {
             );
           })}
             </div>
-              <p className='border rounded-lg font-roboto h-9 md:h-12 flex items-center px-2 text-xs md:text-base'>You can still pick from 3000+ fabric colours</p>
+              <p className='border rounded-lg font-roboto h-9 md:h-12 flex items-center px-2 text-xs md:text-base max-w-[140px] xs:max-w-full'>You can still pick from 3000+ fabric colours</p>
               </div>
               </>
             )

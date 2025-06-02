@@ -1,23 +1,35 @@
 import Container from 'components/Res-usable/Container/Container'
-import { staticvideos } from 'data/Homedata/tabdata'
+import { curtainsVideos, shuttersVideos, staticvideos } from 'data/Homedata/tabdata'
 import React, { useRef, useState, useEffect } from 'react'
 import { BsPlayFill } from 'react-icons/bs'
 import { VideoItem } from 'types/product'
 import { IoClose } from 'react-icons/io5'
+import { usePathname } from 'next/navigation'
 
 const VideoGuide = ({ videos, isMotorisedCategory }: { videos?: VideoItem[], isMotorisedCategory?: boolean }) => {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
   const [pausedStates, setPausedStates] = useState<boolean[]>([])
   const [showModal, setShowModal] = useState(false)
   const [activeVideo, setActiveVideo] = useState<{ src: string; title: string } | null>(null)
+  const pathname = usePathname()
 
-  const allVideos = [
-    ...staticvideos,
-    ...(videos?.length ? [{
-      src: videos[0].imageUrl ?? '',
-      title: 'Why Go Motorized?'
-    }] : [])
-  ]
+const selectedVideos =
+  pathname.includes('shutters')
+    ? shuttersVideos
+    : pathname.includes('curtains')
+    ? curtainsVideos
+    : staticvideos;
+
+const allVideos = [
+  ...selectedVideos,
+  ...(videos?.length
+    ? [{
+        src: videos[0].imageUrl ?? '',
+        title: 'Why Go Motorized?'
+      }]
+    : [])
+];
+
 
   useEffect(() => {
     setPausedStates(Array(allVideos.length).fill(true))

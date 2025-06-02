@@ -85,10 +85,10 @@ export default function InfoTabs({ tabData,isHome , isCurtainsCategory }: InfoTa
     <div className="sm:hidden">
     <div className={`relative mb-4 w-full ${isHome? "h-[235px] object-cover" : "h-[450px] object-contain"}`}>
     <Image
-      src={tabData[activeMobileTab ?? 0].image}
+      src={tabData[activeMobileTab ?? 0].mobileImage || tabData[activeMobileTab ?? 0].image}
       alt={tabData[activeMobileTab ?? 0].heading}
       fill
-      className="w-full object-contain"
+      className="w-full"
     />
     {
       isHome &&
