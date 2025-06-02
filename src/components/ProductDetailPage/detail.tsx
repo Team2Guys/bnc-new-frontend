@@ -82,7 +82,7 @@ const Detail = ({ data, setColorImage, selectedColor }: DetailProps) => {
             );
           })}
             </div>
-              <p className='border rounded-lg font-roboto h-12 flex items-center px-2 text-xs md:text-base max-sm:max-w-32'>You can still pick from 3000+ fabric colours</p>
+              <p className='border rounded-lg font-roboto h-9 md:h-12 flex items-center px-2 text-xs md:text-base'>You can still pick from 3000+ fabric colours</p>
               </div>
               </>
             )
