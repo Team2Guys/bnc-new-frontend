@@ -22,7 +22,7 @@ export default function ReviewBanner() {
                 <MdOutlineStarPurple500 key={index} className="text-[#FFD800] text-36" />
               ))}
             </div>
-            <p className="font-roboto text-lg  md:text-xl">Rating <span className="font-medium">4.9 | 760</span> reviews <br /> Window treatment store</p>
+            <p className="font-roboto text-lg  md:text-xl">Rating <span className="font-medium">4.9 | 773</span> reviews <br /> Window treatment store</p>
           </div>
         </div>
         <div className="space-y-3 text-center md:text-start mt-5 md:mt-0">

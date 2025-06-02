@@ -59,7 +59,7 @@ const Testimonial = () => {
               ))}
             </div>
             <p className="font-roboto text-xl">
-              Rating <span className="font-medium">4.9 | 760</span> reviews <br />
+              Rating <span className="font-medium">4.9 | 773</span> reviews <br />
               Window treatment store
             </p>
           </div>
