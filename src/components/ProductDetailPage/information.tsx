@@ -19,7 +19,6 @@ const Information = ({ privarcyImage, privacySectoin }: InformationProps) => {
   const [visibleCount, setVisibleCount] = useState(1)
   const [isDesktop, setIsDesktop] = useState(false)
 
-  // Detect screen size
   useEffect(() => {
     const checkScreenSize = () => {
       setIsDesktop(window.innerWidth >= 768)
