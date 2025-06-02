@@ -1,12 +1,17 @@
-import Container from 'components/Res-usable/Container/Container'
-import { Qualityfeatures } from 'data/Homedata/tabdata'
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
-
-
+"use client"
+import Container from 'components/Res-usable/Container/Container';
+import { Qualityfeatures } from 'data/Homedata/tabdata';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import React from 'react';
 
 const QualitySection = () => {
+  const path = usePathname()
+let category = path.includes('blinds') ? "blinds"  : path.includes('curtains') ? "curtains"  : "shutter"
+console.log(category,"category")
+  const imageSrc = getImageSrc(category);
+
   return (
     <section className="sm:bg-secondary-foreground py-6 sm:py-12 md:px-6 sm:mt-10">
       <Container className="space-y-4 sm:space-y-10">
@@ -21,8 +26,8 @@ const QualitySection = () => {
           <div className="col-span-12 md:col-span-5">
             <div className='w-full h-[250px] xsm:h-[300px] xs:h-[350px] sm:h-[430px] md:h-[300px] xl:h-[325px] 2xl:h-[400px]'>
               <Image
-                src="/assets/detailpage/quantity.webp"
-                alt="Curtain"
+                src={imageSrc}
+                alt={category}
                 fill
                 className="!relative rounded"
               />
@@ -56,7 +61,21 @@ const QualitySection = () => {
         </div>
       </Container>
     </section>
-  )
+  );
+};
+
+function getImageSrc(category: string) {
+  switch(category.toLowerCase()) {
+    case "blinds":
+      return "/assets/images/safisfaction/Blinds.webp";      
+
+    case "curtains":
+      return "/assets/images/safisfaction/Curtains.webp";
+
+    default:
+    return "/assets/images/safisfaction/Shutters.webp";
+   
+  }
 }
 
-export default QualitySection
+export default QualitySection;
