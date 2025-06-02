@@ -65,7 +65,7 @@ const allVideos = [
           {allVideos.map((video, idx) => (
             <div key={idx} className="flex flex-col space-y-3 relative w-full">
               <div
-                className="p-1 sm:p-2 rounded-md border border-secondary relative cursor-pointer"
+                className="p-1 sm:p-2 rounded-md border border-secondary relative cursor-pointer "
                 onClick={() => handlePlayPause(idx)}
               >
                 <video

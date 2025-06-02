@@ -4,37 +4,37 @@ import { MotorizeBlindData, Reel, WorkingProcessContent } from "types/types";
 
 export const reelsData: Reel[] = [
   {
-    videoUrl:  "/videos/test(1).mp4",
+    videoUrl:  "/videos/test1.mp4",
   },
   {
-    videoUrl:  "/videos/test(2).mp4",
+    videoUrl:  "/videos/test2.mp4",
   },
   {
-    videoUrl:  "/videos/test(3).mp4",
+    videoUrl:  "/videos/test3.mp4",
   },
   {
-    videoUrl:  "/videos/test(4).mp4",
+    videoUrl:  "/videos/test4.mp4",
   },
   {
-    videoUrl:  "/videos/test(5).mp4",
+    videoUrl:  "/videos/test5.mp4",
   },
   {
-    videoUrl:  "/videos/test(6).mp4",
+    videoUrl:  "/videos/test6.mp4",
   },
   {
-    videoUrl:  "/videos/test(7).mp4",
+    videoUrl:  "/videos/test7.mp4",
   },
   {
-    videoUrl:  "/videos/test(8).mp4",
+    videoUrl:  "/videos/test8.mp4",
   },
   {
-    videoUrl:  "/videos/test(9).mp4",
+    videoUrl:  "/videos/test9.mp4",
   },
   {
-    videoUrl:  "/videos/test(10).mp4",
+    videoUrl:  "/videos/test10.mp4",
   },
   {
-    videoUrl:  "/videos/test(11).mp4",
+    videoUrl:  "/videos/test11.mp4",
   },
 
 ];
@@ -83,7 +83,7 @@ export const workingProcessData: WorkingProcessContent = {
 
 export const motorizeBlindData: MotorizeBlindData = {
   heading: "Motorised Blinds and Curtains for a Smart Home!",
-  videoUrl: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", 
+  videoUrl: "/videos/sunset.mp4", 
   buttons: [
     { label: "View Motorised Blinds", link: "/blinds/motorised-blinds/" },
     { label: "View Motorised Curtains", link: "/curtains/motorised-curtains/" },

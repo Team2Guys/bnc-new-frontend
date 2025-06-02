@@ -25,8 +25,8 @@ export default function ReviewBanner() {
             <p className="font-roboto text-lg  md:text-xl">Rating <span className="font-medium">4.9 | 773</span> reviews <br /> Window treatment store</p>
           </div>
         </div>
-        <div className="space-y-3 text-center md:text-start mt-5 md:mt-0">
-          <p className="font-bold font-robotoSerif text-lg md:text-2xl text-primary">
+        <div className="space-y-3 text-center md:text-start">
+          <p className="font-bold font-robotoSerif text-lg md:text-2xl text-primary pt-5 md:pt-1 xl:pt-0">
             {customerReview.name}
           </p>
           <div className="font-roboto-serif font-medium text-lg md:text-xl text-primary px-6 sm:px-0 leading-7">
@@ -37,6 +37,7 @@ export default function ReviewBanner() {
           <Link
             target="_blank"
             href={customerReview.reviewLink}
+            aria-label="Reviews"
             className="border border-primary py-2 px-4 rounded-md font-roboto font-bold text-22 hidden md:block w-fit"
           >
             Go to Google Reviews
