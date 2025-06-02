@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Slider from "react-slick";
@@ -13,16 +13,19 @@ export default function MotorizeBlindCurtain() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const togglePlayPause = () => {
-    if (!videoRef.current) return;
-    if (videoRef.current.paused) {
-      videoRef.current.play();
+  const togglePlayPause = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (video.paused) {
+      video.play().catch(() => { });
       setIsPlaying(true);
     } else {
-      videoRef.current.pause();
+      video.pause();
       setIsPlaying(false);
     }
-  };
+  }, []);
+
 
   const sliderSettings = {
     dots: true,
@@ -39,7 +42,7 @@ export default function MotorizeBlindCurtain() {
       <h2 className="text-center font-robotoSerif text-xl sm:text-4xl font-bold sm:mb-10 mb-5 text-primary px-4 md:px-0 hidden md:block">
         {motorizeBlindData.heading}
       </h2>
-       <h2 className="text-center font-robotoSerif text-2xl sm:text-4xl font-bold sm:mb-10 mb-5 text-primary px-4 md:px-0 block md:hidden">
+      <h2 className="text-center font-robotoSerif text-2xl sm:text-4xl font-bold sm:mb-10 mb-5 text-primary px-4 md:px-0 block md:hidden">
         New! Motorised Blinds And curtains
       </h2>
       {/* Video Section */}
@@ -97,7 +100,7 @@ export default function MotorizeBlindCurtain() {
         {motorizeBlindData.features.map(({ icon, label }, i) => (
           <div key={i} className="flex flex-col items-center gap-2 relative">
             <div className="w-20 h-20 relative">
-              <Image src={icon} alt={label} fill className="object-contain" />
+              <Image src={icon} alt={label} fill className="object-contain" loading="lazy" />
             </div>
             <p className="text-lg text-primary font-medium font-roboto">
               {label}
@@ -120,6 +123,7 @@ export default function MotorizeBlindCurtain() {
                   alt={label}
                   fill
                   className="object-contain"
+                  loading="lazy"
                 />
               </div>
               <p className=" text-lg sm:text-10 text-gray-700 font-medium text-center mt-2">
