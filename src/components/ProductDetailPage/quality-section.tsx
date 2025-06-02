@@ -19,13 +19,14 @@ const QualitySection = () => {
 
         <div className="grid grid-cols-12 gap-4 lg:gap-4 items-center">
           <div className="col-span-12 md:col-span-5">
-            <Image
-              src="/assets/detailpage/quantity.webp"
-              alt="Curtain"
-              width={500}
-              height={500}
-              className="w-full h-[220px] sm:h-[315px] rounded"
-            />
+            <div className='w-full h-[220px] sm:h-[315px]'>
+              <Image
+                src="/assets/detailpage/quantity.webp"
+                alt="Curtain"
+                fill
+                className="!relative rounded"
+              />
+            </div>
           </div>
 
           <div className="col-span-12 md:col-span-7 lg:space-y-6">
