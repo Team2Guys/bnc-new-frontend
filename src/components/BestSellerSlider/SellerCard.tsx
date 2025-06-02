@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import Slider from "react-slick";
 import Image from "next/image";
 import { IProduct } from "types/types";
@@ -12,30 +12,38 @@ import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import { orderedTitles } from "data/new-data";
 
 const SellerSlider = ({ products }: { products: IProduct[] }) => {
- 
-  const filteredAndSortedProducts = orderedTitles
-    .map((title) => products.find((item) => item.title.toLowerCase() === title.toLowerCase()))
-    .filter(Boolean) as IProduct[];
+  const [isDragging, setIsDragging] = useState(false);
 
-  const NextArrow = ({ onClick }: { onClick?: () => void }) => (
+  // 💡 Memoize to prevent recalculating on each render
+  const filteredAndSortedProducts = useMemo(
+    () =>
+      orderedTitles
+        .map((title) =>
+          products.find((item) => item.title.toLowerCase() === title.toLowerCase())
+        )
+        .filter(Boolean) as IProduct[],
+    [products]
+  );
+
+  const NextArrow = useCallback(({ onClick }: { onClick?: () => void }) => (
     <div
       className="absolute top-1/2 right-2 transform -translate-y-1/2 z-10 cursor-pointer"
       onClick={onClick}
     >
       <GrFormNext className="text-3xl xl:text-4xl text-primary transition border-2 border-white rounded-full bg-white opacity-50 hover:border-primary" />
     </div>
-  );
+  ), []);
 
-  const PrevArrow = ({ onClick }: { onClick?: () => void }) => (
+  const PrevArrow = useCallback(({ onClick }: { onClick?: () => void }) => (
     <div
       className="absolute top-1/2 left-2 transform -translate-y-1/2 z-10 cursor-pointer"
       onClick={onClick}
     >
       <GrFormPrevious className="text-3xl xl:text-4xl text-primary transition border-2 border-white rounded-full bg-white opacity-50 hover:border-primary" />
     </div>
-  );
+  ), []);
 
-  const settings = {
+  const sliderSettings = useMemo(() => ({
     dots: false,
     infinite: true,
     speed: 600,
@@ -47,21 +55,21 @@ const SellerSlider = ({ products }: { products: IProduct[] }) => {
     responsive: [
       {
         breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-        },
+        settings: { slidesToShow: 2 },
       },
       {
         breakpoint: 640,
-        settings: {
-          slidesToShow: 1.1,
-          arrows: false,
-        },
+        settings: { slidesToShow: 1.1, arrows: false },
       },
     ],
-  };
+  }), [NextArrow, PrevArrow]);
 
-  const [isDragging, setIsDragging] = useState(false);
+  // 💡 Callback to minimize re-renders
+  const handleMouseUp = useCallback((item: IProduct) => {
+    if (!isDragging) {
+      window.location.href = getPath(item);
+    }
+  }, [isDragging]);
 
   return (
     <div className="bg-secondary-foreground py-5">
@@ -79,30 +87,27 @@ const SellerSlider = ({ products }: { products: IProduct[] }) => {
         </div>
 
         <Slider
-          {...settings}
+          {...sliderSettings}
           beforeChange={() => setIsDragging(true)}
           afterChange={() => setIsDragging(false)}
         >
-          {filteredAndSortedProducts.map((item: IProduct, index) => (
-            <div key={index} className="pl-5 xl:px-4">
+          {filteredAndSortedProducts.map((item, index) => (
+            <div key={item.id || index} className="pl-5 xl:px-4">
               <div
                 onMouseDown={() => setIsDragging(false)}
                 onMouseMove={() => setIsDragging(true)}
-                onMouseUp={() => {
-                  if (!isDragging) {
-                    window.location.href = getPath(item);
-                  }
-                }}
+                onMouseUp={() => handleMouseUp(item)}
               >
                 <div className="bg-white overflow-hidden rounded-xl md:p-3 cursor-pointer">
                   <div className="relative w-full h-[280px] md:h-[365px] rounded-xl">
                 <Image
-                src={item.posterImage.imageUrl.replace('/upload/', '/upload/f_auto,q_auto/')}
-                alt={item.title}
-                fill
-                className="object-cover rounded-xl"
-                sizes="(max-width: 768px) 221px, 296px"
-                />
+               src={item.posterImage.imageUrl.replace('/upload/', '/upload/w_296,f_auto,q_auto/')}
+              alt={item.title}
+              fill
+              className="object-cover rounded-xl"
+              sizes="(max-width: 768px) 221px, 296px"
+              />
+
                 </div>
                   <div className="pt-4 text-center md:text-start sm:px-0 px-2">
                     <h3 className="font-semibold mb-1 text-primary text-16 md:text-20 font-robotoSerif min-h-14">
@@ -110,8 +115,8 @@ const SellerSlider = ({ products }: { products: IProduct[] }) => {
                     </h3>
                     <p className="text-secondary font-normal md:text-16 text-16 font-roboto sm:px-0 px-4">
                       <span className="text-primary">Starting from</span>{" "}
-                      {item.posterImage.pricing } AED {" "}
-                    <span className="text-primary  text-16"> {item.posterImage.dimentions }</span>
+                      {item.posterImage.pricing} AED{" "}
+                      <span className="text-primary text-16">{item.posterImage.dimentions}</span>
                     </p>
                   </div>
                 </div>
