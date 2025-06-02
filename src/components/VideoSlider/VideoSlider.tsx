@@ -18,10 +18,21 @@ export default function VideoReelsSlider({ reelsData }: { reelsData: Reel[] }) {
 
   const totalVideos = reelsData.length
 
+
   const videoRefs = useRef<HTMLVideoElement[]>([])
   const touchStartX = useRef<number | null>(null)
   const touchEndX = useRef<number | null>(null)
   const minSwipeDistance = 50
+
+  const goToPrevious = useCallback(
+    () => setActiveIndex((prev) => (prev === 0 ? totalVideos - 1 : prev - 1)),
+    [totalVideos]
+  )
+
+  const goToNext = useCallback(
+    () => setActiveIndex((prev) => (prev === totalVideos - 1 ? 0 : prev + 1)),
+    [totalVideos]
+  )
 
   // Debounced resize to avoid layout thrashing
   useEffect(() => {
@@ -36,20 +47,22 @@ export default function VideoReelsSlider({ reelsData }: { reelsData: Reel[] }) {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // Auto-play next video every 5 seconds
   useEffect(() => {
+    if (popupVideoIndex !== null) return; // 🚫 Stop autoplay when popup is open
+
     const interval = setInterval(() => {
-      goToNext()
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [activeIndex])
+      goToNext();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [activeIndex, popupVideoIndex, goToNext]);
 
   // Efficiently play/pause only affected video refs
   useEffect(() => {
     videoRefs.current.forEach((video, index) => {
       if (video) {
         if (index === activeIndex) {
-          video.play().catch(() => {})
+          video.play().catch(() => { })
         } else {
           video.pause()
           video.currentTime = 0
@@ -65,16 +78,6 @@ export default function VideoReelsSlider({ reelsData }: { reelsData: Reel[] }) {
       setVideoSize(null)
     }
   }, [popupVideoIndex])
-
-  const goToPrevious = useCallback(
-    () => setActiveIndex((prev) => (prev === 0 ? totalVideos - 1 : prev - 1)),
-    [totalVideos]
-  )
-
-  const goToNext = useCallback(
-    () => setActiveIndex((prev) => (prev === totalVideos - 1 ? 0 : prev + 1)),
-    [totalVideos]
-  )
 
   const onTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     touchStartX.current = e.changedTouches[0].clientX
