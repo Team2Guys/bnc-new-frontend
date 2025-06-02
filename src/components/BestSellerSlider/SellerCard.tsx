@@ -104,9 +104,8 @@ const SellerSlider = ({ products }: { products: IProduct[] }) => {
                       src={item.posterImage.imageUrl}
                       alt={item.title}
                       fill
-                      className="rounded-xl object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                      priority={index === 0} // Load first image eagerly
+                      className="rounded-xl"
+                      loading="lazy"
                     />
                   </div>
                   <div className="pt-4 text-center md:text-start sm:px-0 px-2">

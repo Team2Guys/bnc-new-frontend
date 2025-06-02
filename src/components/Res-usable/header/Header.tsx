@@ -8,8 +8,6 @@ import StarRatingBar from "components/Hero/StarRatingBar";
 import Link from "next/link";
 import { IREVIEWS } from "types/general";
 import { fetchReviews } from "config/fetch";
-
-// Dynamic imports
 const CustomModal = dynamic(() => import("components/ui/Modal"), {
   loading: () => <p>Loading...</p>,
 });
@@ -18,12 +16,14 @@ const TestimonialCard = dynamic(() => import("../Cards/TestimonialCard"));
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [reviews, setReviews] = useState<IREVIEWS[]>([]);
+  const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
     if (open && reviews.length === 0) {
       fetchReviews().then(setReviews);
     }
   }, [open, reviews.length]);
+  const visibleReviews = showAll ? reviews : reviews.slice(0, 4);
 
   const handleModalOpen = useCallback(() => {
     setOpen(true);
@@ -41,12 +41,14 @@ const Header = () => {
         onClick={handleModalOpen}
       >
         <div className="flex flex-col justify-center items-center">
-          {Array.from({ length: 5 }, (_, index) => (
-            <MdOutlineStarPurple500
-              key={index}
-              className="text-[#FFD800] text-lg md:text-27"
-            />
-          ))}
+          {Array(5)
+            .fill(null)
+            .map((_, index) => (
+              <MdOutlineStarPurple500
+                key={index}
+                className="text-[#FFD800] text-lg md:text-27"
+              />
+            ))}
         </div>
         <span className="text-base md:text-[22px] font-bold text-primary-foreground">
           4.9
@@ -92,11 +94,21 @@ const Header = () => {
         </div>
 
         <div className="w-full max-h-[30vh] xsm:max-h-[40vh] xs:max-h-[350px] lg:max-h-[500px] overflow-y-scroll p-4 xsm:p-6 grid grid-cols-1 xs:grid-cols-2 gap-0 xs:gap-4">
-          {reviews.length > 0 &&
-            reviews.map((item, index) => (
-              <TestimonialCard key={item.id || index} testimonial={item} />
-            ))}
+          {visibleReviews.map((item, index) => (
+            <TestimonialCard key={index} testimonial={item} />
+          ))}
         </div>
+
+        {reviews.length > 4 && (
+          <div className="text-center py-4">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="text-primary font-semibold  bg-[#f1b42f] px-3 py-2 rounded "
+            >
+              {showAll ? 'Show Less' : 'View More'}
+            </button>
+          </div>
+        )}
       </CustomModal>
     </>
   );

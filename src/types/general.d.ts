@@ -1,4 +1,4 @@
-import { ProductImage } from "./prod";
+import { ProductImages } from "./types";
 
 
 
@@ -8,8 +8,8 @@ export interface IREVIEWS {
   ReviewsDescription: string
   starRating?: number
   createdAt: string;
-  posterImageUrl: ProductImage
-  ReviewsImages: ProductImage[]
+  posterImageUrl: ProductImages
+  ReviewsImages: ProductImages[]
   updatedAt?: string
   reviewDate?: string
 }
