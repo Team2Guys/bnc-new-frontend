@@ -57,7 +57,7 @@ export default function InfoTabs({ tabData,isHome , isCurtainsCategory }: InfoTa
       <div className="hidden sm:block">
         <div className="grid md:grid-cols-2 gap-6 lg:gap-16 2xl:gap-24 items-center md:py-8 p-2">
           <div className="flex flex-col justify-center items-start space-y-5 lg:space-y-12">
-            <h3 className="font-robotoSerif font-semibold text-20 lg:text-[40px] text-primary sm:pr-10">{tabData[activeTab].heading}</h3>
+            <h1 className="font-robotoSerif font-semibold text-20 lg:text-[40px] text-primary sm:pr-10">{tabData[activeTab].heading}</h1>
             <p className="text-[16px] font-normal font-roboto lg:text-[20px] text-primary text-justify" dangerouslySetInnerHTML={{__html:tabData[activeTab].description}}/>
             <Link href={tabData[activeTab].href} className=" border bg-secondary text-primary font-semibold text-16 font-roboto px-6 py-2 md:py-4 rounded-xl hover:bg-primary-dark transition hover:opacity-65">
               {tabData[activeTab].buttonText}
@@ -68,10 +68,12 @@ export default function InfoTabs({ tabData,isHome , isCurtainsCategory }: InfoTa
               src={tabData[activeTab].image}
               alt={tabData[activeTab].heading}
               fill
+              className="object-contain "
+              loading="lazy"
             />
             {
               isHome &&
-            <div className="absolute bottom-10 -left-10 lg:bottom-20 xl:bottom-[73px] lg:-left-[80px] 2xl:-left-24 w-[116px] h-[56px] md:h-[70px] md:w-[140px] lg:h-[100px] lg:w-[200px] bg-primary flex flex-col items-center justify-center -rotate-90">
+            <div className="absolute bottom-10 -left-10 lg:bottom-32 xl:bottom-[73px] lg:-left-[80px] 2xl:left-24 w-[116px] h-[56px] md:h-[70px] md:w-[140px] lg:h-[100px] lg:w-[200px] bg-primary flex flex-col items-center justify-center -rotate-90">
               <span className="text-white font-semibold text-14 md:text-22 lg:text-[24px] font-robotoSerif">20 Years</span>
               <span className="text-white text-[8px] md:text-10 lg:text-[14px] font-medium md:mt-2 font-roboto">Making Blinds & Curtains</span>
             </div>
@@ -108,7 +110,7 @@ export default function InfoTabs({ tabData,isHome , isCurtainsCategory }: InfoTa
         className="w-full flex justify-between items-center py-3 text-left"
       >
         <div className="flex justify-start items-center gap-2">
-          <Image src={tab.icon} alt={tab.title} width={30} height={30} className="w-9 h-9" />
+          <Image src={tab.icon} alt="image" width={30} height={30} className="w-9 h-9" />
           <span className="text-primary font-roboto font-medium  md:font-normal text-[16px] leading-[130%]">{tab.title}</span>
         </div>
         <div>
