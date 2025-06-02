@@ -1,6 +1,5 @@
 'use client'
 import Container from 'components/Res-usable/Container/Container'
-import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { MdOutlineStarPurple500 } from 'react-icons/md'
 import Slider from 'react-slick'
@@ -44,12 +43,12 @@ const Testimonial = () => {
         <Container className="grid grid-cols-12 gap-6">
           {/* Left Section */}
           <div className="col-span-12 md:col-span-4 flex flex-col items-center md:items-start space-y-4 text-center md:text-left">
-            <Image
+            {/* <Image
               src="/assets/images/googleReview/google.png"
               width={235}
               height={34}
               alt="Google"
-            />
+            /> */}
             <div className="flex justify-center md:justify-start">
               {[...Array(5)].map((_, i) => (
                 <MdOutlineStarPurple500

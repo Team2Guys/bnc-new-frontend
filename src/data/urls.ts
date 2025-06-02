@@ -160,6 +160,11 @@ export const urls = [
     Url: 'dining-room-curtains-dubai',
     errorUrl: '/curtains/dining-room-curtains',
   },
+  {
+    productName: 'Regular Full Height Shutters',
+    Url: 'full-height-shutters',
+    errorUrl: '/shutters-range/regular-full-height-shutters',
+  },
 ];
 
 export const predefinedPaths = {

@@ -107,8 +107,7 @@ export const getPath = (product: IProduct) => {
     const slug = ChangedProductUrl_handler(product.title);
     const basePath =product.href && parent? `${window.origin}/${product.href}`: `/${slug}`;
 
-    const path = predefinedPaths[slug as keyof typeof predefinedPaths] ||
-      (slug === 'hotels-restaurants-blinds-curtains'? basePath : `/${parent?.toLowerCase() === 'shutters' ? `${parent.toLowerCase()}-range`
+    const path = predefinedPaths[slug as keyof typeof predefinedPaths] || (slug === 'hotels-restaurants-blinds-curtains'? basePath : `/${parent?.toLowerCase() === 'shutters' ? `${parent.toLowerCase()}-range`
           : parent?.toLowerCase()
         }${['dimout-roller-blinds', 'sunscreen-roller-blinds', 'blackout-roller-blinds'].includes(slug)
           ? '/roller-blinds'

@@ -60,6 +60,7 @@ export default function SimpleSteps() {
                 loop
                 muted
                 playsInline
+                aria-describedby="video-caption"
               />
             </div>
 

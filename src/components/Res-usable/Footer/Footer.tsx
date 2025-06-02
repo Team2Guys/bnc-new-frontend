@@ -314,11 +314,7 @@ const Footer: React.FC = () => {
                                       (cat) => cat.title.toLowerCase() === category.title.toLowerCase(),
                                     )?.id,
                                 );
-
-
                                 return (
-
-
                                   <React.Fragment key={index}>
                                     {matchingSubcategory && (
                                       <li>
@@ -406,7 +402,7 @@ const Footer: React.FC = () => {
             </div>
             <p className="text-14 lg:text-16 text-primary-foreground font-medium font-roboto">{footerInfo}</p>
             <div className='flex gap-2 items-center'>
-              <h4 className='text-14 lg:text-16 sm:font-bold font-semibold text-white font-roboto'>Follow Us</h4>
+              <p className='text-14 lg:text-16 sm:font-bold font-semibold text-white font-roboto'>Follow Us</p>
               <div className="flex items-center space-x-5 ">
                 <SocialLink />
               </div>
