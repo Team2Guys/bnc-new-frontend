@@ -1,8 +1,8 @@
 'use client';
 
 import Breadcrumb from 'components/Dashboard/Breadcrumbs/Breadcrumb';
-const FormElements = dynamic(()=>import("components/Dashboard/FormElements"),{ssr:false})
-const ViewProduct = dynamic(()=>import("components/Dashboard/Tables/ViewProduct"),{ssr:false})
+const FormElements = dynamic(()=>import("components/Dashboard/FormElements"))
+const ViewProduct = dynamic(()=>import("components/Dashboard/Tables/ViewProduct"))
 import ProtectedRoute from 'hooks/AuthHookAdmin';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';

@@ -5,8 +5,8 @@ import Breadcrumb from 'components/Dashboard/Breadcrumbs/Breadcrumb';
 import DefaultLayout from 'components/Dashboard/Layouts/DefaultLayout';
 import ProtectedRoute from 'hooks/AuthHookAdmin';
 import { useState } from 'react';
-const Addcategory = dynamic(()=>import("components/AddCategory/Addcategory"),{ssr:false})
-const TableTwo = dynamic(()=>import("components/Dashboard/Tables/TableTwo"),{ssr:false})
+const Addcategory = dynamic(()=>import("components/AddCategory/Addcategory"))
+const TableTwo = dynamic(()=>import("components/Dashboard/Tables/TableTwo"))
 import { CategoriesType } from 'types/interfaces';
 import { ICategory } from 'types/types';
 import dynamic from 'next/dynamic';

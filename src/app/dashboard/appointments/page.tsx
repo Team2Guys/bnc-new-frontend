@@ -1,6 +1,6 @@
 import { fetchAppointments } from 'config/fetch';
 import React from 'react';
-const AppointmentsClient = dynamic(()=>import("./AppointmentsClient"),{ssr:false})
+const AppointmentsClient = dynamic(()=>import("./AppointmentsClient"))
 import { cookies } from 'next/headers';
 import dynamic from 'next/dynamic';
 

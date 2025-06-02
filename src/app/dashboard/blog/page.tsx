@@ -2,7 +2,7 @@
 import { fetchBlogs } from 'config/fetch';
 import { BlogInfo } from 'types/interfaces';
 import dynamic from 'next/dynamic';
-const Blog = dynamic(()=>import('./Blogs'),{ssr:false})
+const Blog = dynamic(()=>import('./Blogs'))
 
 const Blogging = async () => {
   let blog = await fetchBlogs()
