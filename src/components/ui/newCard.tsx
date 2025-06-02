@@ -10,15 +10,15 @@ const Card = ({ card }: { card: IProduct }) => {
       <div className=" pb-4 bg-secondary-foreground rounded-xl flex flex-col justify-between h-full">
         <div className='space-y-2'>
           <Link href={getPath(card)} className="relative block w-full h-[300px]">
-            <Image
-              src={card?.posterImage?.imageUrl}
-              alt={card.title}
-              fill
-              className="rounded-xl"
-            
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-            />
-          </Link>
+          <Image
+          src={card?.posterImage?.imageUrl.replace('/upload/', '/upload/f_auto,q_auto,w_307/')}
+          alt={card.title}
+          fill
+          className="rounded-xl object-fill"
+          sizes="(max-width: 768px) 296px, 307px"
+           />
+        </Link>
+
           <div className="flex flex-col h-full px-4 pb-4 text-center space-y-1">
             <div className="min-h-[60px]">
               <h3 className="font-bold  font-robotoSerif text-24 text-primary capitalize">

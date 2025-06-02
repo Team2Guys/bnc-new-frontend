@@ -27,6 +27,8 @@ export interface RedirectUrls {
 }
 
 
+
+
 export interface initialRedirectUrls extends Omit<RedirectUrls, "id" > {
   redirectedUrl: string
   url: string,

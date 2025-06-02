@@ -8,8 +8,7 @@ import WhatsIcon from 'components/Icons/Whatsapp';
 import { GoogleTagManager } from '@next/third-parties/google';
 import Script from 'next/script';
 import Head from 'next/head';
-import { Roboto } from 'next/font/google';
-import { Roboto_Serif } from 'next/font/google';
+import { Roboto ,Roboto_Serif} from 'next/font/google';
 
 
 export const roboto = Roboto({
@@ -27,9 +26,21 @@ export const robotoSerif = Roboto_Serif({
 });
 
 export const metadata: Metadata = {
-  title: 'Blinds and Curtains',
-  description: 'Welcome To Blinds and Curtains !',
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
+
 
 export default function RootLayout({
   children,
