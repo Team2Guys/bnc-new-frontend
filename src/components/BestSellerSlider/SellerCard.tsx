@@ -97,12 +97,12 @@ const SellerSlider = ({ products }: { products: IProduct[] }) => {
                 <div className="bg-white overflow-hidden rounded-xl md:p-3 cursor-pointer">
                   <div className="relative w-full h-[280px] md:h-[365px] rounded-xl">
                 <Image
-  src={item.posterImage.imageUrl.replace('/upload/', '/upload/w_296,f_auto,q_auto/')}
-  alt={item.title}
-  fill
-  className="object-cover rounded-xl"
-  sizes="(max-width: 768px) 221px, 296px"
-/>
+               src={item.posterImage.imageUrl.replace('/upload/', '/upload/w_296,f_auto,q_auto/')}
+              alt={item.title}
+              fill
+              className="object-cover rounded-xl"
+              sizes="(max-width: 768px) 221px, 296px"
+              />
 
                 </div>
                   <div className="pt-4 text-center md:text-start sm:px-0 px-2">
