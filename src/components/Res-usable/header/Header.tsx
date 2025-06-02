@@ -73,7 +73,7 @@ const Header = () => {
       }>
         <div className="space-y-3 mt-5">
           <div className="mt-2 max-w-64 md:max-w-md mx-auto">
-            {ratings.map((r) => (
+            {ratings && ratings.map((r) => (
               <StarRatingBar
                 key={r.rating}
                 rating={r.rating}
@@ -94,7 +94,7 @@ const Header = () => {
         </div>
 
         <div className="w-full max-h-[30vh] xsm:max-h-[40vh] xs:max-h-[350px] lg:max-h-[500px] overflow-y-scroll p-4 xsm:p-6 grid grid-cols-1 xs:grid-cols-2 gap-0 xs:gap-4">
-          {visibleReviews.map((item, index) => (
+          {visibleReviews && visibleReviews.map((item, index) => (
             <TestimonialCard key={index} testimonial={item} />
           ))}
         </div>
