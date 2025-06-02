@@ -8,8 +8,11 @@ import { IProduct } from 'types/types'
 const AllProduct = ({ Products, title }: CategoryProps) => {
 
   const sortedProducts = [...Products ?? []].sort(
+  
     (a, b) => desiredOrder.indexOf(a.title) - desiredOrder.indexOf(b.title)
   )
+
+  console.log('filter products' , sortedProducts)
   return (
     <Container className='mt-10 space-y-5 md:space-y-10'>
       <h2 className='categoryHeading text-center sm:text-start'>
