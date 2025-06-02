@@ -1,13 +1,16 @@
 'use client'
-import React, { useState, useRef, useEffect } from "react"
-import { reelsData } from "data/SellerSlider"
-import Container from "components/Res-usable/Container/Container"
-import NeedHelp from "components/NeedHelp/NeedHelp"
-import VideoIcon from "../../../public/assets/images/videoicon.webp"
 
-import Image from "next/image"
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
+import dynamic from 'next/dynamic'
+import Container from 'components/Res-usable/Container/Container'
+import VideoIcon from '../../../public/assets/images/videoicon.webp'
+import Image from 'next/image'
+import { Reel } from 'types/types'
 
-export default function VideoReelsSlider() {
+// Dynamically import NeedHelp to reduce TBT during initial render
+const NeedHelp = dynamic(() => import('components/NeedHelp/NeedHelp'), { ssr: false })
+
+export default function VideoReelsSlider({ reelsData }: { reelsData: Reel[] }) {
   const [activeIndex, setActiveIndex] = useState(2)
   const [isMobile, setIsMobile] = useState(false)
   const [popupVideoIndex, setPopupVideoIndex] = useState<number | null>(null)
@@ -20,26 +23,33 @@ export default function VideoReelsSlider() {
   const touchEndX = useRef<number | null>(null)
   const minSwipeDistance = 50
 
+  // Debounced resize to avoid layout thrashing
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 640)
     checkMobile()
-    window.addEventListener("resize", checkMobile)
-    return () => window.removeEventListener("resize", checkMobile)
+
+    const handleResize = () => {
+      window.requestAnimationFrame(checkMobile)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+  // Auto-play next video every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       goToNext()
     }, 5000)
-
     return () => clearInterval(interval)
   }, [activeIndex])
 
+  // Efficiently play/pause only affected video refs
   useEffect(() => {
     videoRefs.current.forEach((video, index) => {
       if (video) {
         if (index === activeIndex) {
-          video.play()
+          video.play().catch(() => {})
         } else {
           video.pause()
           video.currentTime = 0
@@ -48,20 +58,23 @@ export default function VideoReelsSlider() {
     })
   }, [activeIndex])
 
+  // Manage body scroll when popup is shown
   useEffect(() => {
-    if (popupVideoIndex !== null) {
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = ""
-      setVideoSize(null) 
+    document.body.style.overflow = popupVideoIndex !== null ? 'hidden' : ''
+    if (popupVideoIndex === null) {
+      setVideoSize(null)
     }
   }, [popupVideoIndex])
 
-  const goToPrevious = () =>
-    setActiveIndex((prev) => (prev === 0 ? totalVideos - 1 : prev - 1))
+  const goToPrevious = useCallback(
+    () => setActiveIndex((prev) => (prev === 0 ? totalVideos - 1 : prev - 1)),
+    [totalVideos]
+  )
 
-  const goToNext = () =>
-    setActiveIndex((prev) => (prev === totalVideos - 1 ? 0 : prev + 1))
+  const goToNext = useCallback(
+    () => setActiveIndex((prev) => (prev === totalVideos - 1 ? 0 : prev + 1)),
+    [totalVideos]
+  )
 
   const onTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     touchStartX.current = e.changedTouches[0].clientX
@@ -83,103 +96,112 @@ export default function VideoReelsSlider() {
     touchEndX.current = null
   }
 
-  const getPositionClass = (index: number) => {
-    const left2 = (activeIndex - 2 + totalVideos) % totalVideos
-    const left1 = (activeIndex - 1 + totalVideos) % totalVideos
-    const right1 = (activeIndex + 1) % totalVideos
-    const right2 = (activeIndex + 2) % totalVideos
+  const getPositionClass = useCallback(
+    (index: number) => {
+      const left2 = (activeIndex - 2 + totalVideos) % totalVideos
+      const left1 = (activeIndex - 1 + totalVideos) % totalVideos
+      const right1 = (activeIndex + 1) % totalVideos
+      const right2 = (activeIndex + 2) % totalVideos
 
-    if (index === activeIndex) {
-      return "z-30 scale-100 opacity-100"
-    } else if (index === left1) {
-      return "z-20 scale-[0.85] opacity-1 -translate-x-[60%]"
-    } else if (index === left2) {
-      return "z-10 scale-[0.75] opacity-1 -translate-x-[110%]"
-    } else if (index === right1) {
-      return "z-20 scale-[0.85] opacity-1 translate-x-[60%]"
-    } else if (index === right2) {
-      return "z-10 scale-[0.75] opacity-1 translate-x-[110%]"
-    } else {
-      return "hidden"
-    }
-  }
+      if (index === activeIndex) return 'z-30 scale-100 opacity-100'
+      if (index === left1) return 'z-20 scale-[0.85] opacity-1 -translate-x-[60%]'
+      if (index === left2) return 'z-10 scale-[0.75] opacity-1 -translate-x-[110%]'
+      if (index === right1) return 'z-20 scale-[0.85] opacity-1 translate-x-[60%]'
+      if (index === right2) return 'z-10 scale-[0.75] opacity-1 translate-x-[110%]'
+      return 'hidden'
+    },
+    [activeIndex, totalVideos]
+  )
 
-  const handleLoadedMetadata = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
-    const video = e.currentTarget
-    const naturalWidth = video.videoWidth
-    const naturalHeight = video.videoHeight
+  const handleLoadedMetadata = useCallback(
+    (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+      const video = e.currentTarget
+      const naturalWidth = video.videoWidth
+      const naturalHeight = video.videoHeight
 
-    const maxWidth = window.innerWidth * 0.9
-    const maxHeight = window.innerHeight * 0.9
+      const maxWidth = window.innerWidth * 0.9
+      const maxHeight = window.innerHeight * 0.9
 
-    let width = naturalWidth
-    let height = naturalHeight
+      let width = naturalWidth
+      let height = naturalHeight
 
-    if (width > maxWidth) {
-      const ratio = maxWidth / width
-      width = maxWidth
-      height = height * ratio
-    }
-    if (height > maxHeight) {
-      const ratio = maxHeight / height
-      height = maxHeight
-      width = width * ratio
-    }
+      if (width > maxWidth) {
+        const ratio = maxWidth / width
+        width = maxWidth
+        height = height * ratio
+      }
+      if (height > maxHeight) {
+        const ratio = maxHeight / height
+        height = maxHeight
+        width = width * ratio
+      }
 
-    setVideoSize({ width, height })
-  }
+      setVideoSize({ width, height })
+    },
+    []
+  )
+
+  // Memoized rendering to reduce re-renders
+  const videoElements = useMemo(
+    () =>
+      reelsData.map((item, index) => (
+        <div
+          key={index}
+          onClick={() => {
+            setActiveIndex(index)
+            setTimeout(() => {
+              setPopupVideoIndex(index)
+            }, 100)
+          }}
+          className={`absolute transition-all duration-500 ease-in-out cursor-pointer ${getPositionClass(
+            index
+          )}`}
+        >
+          <div className="relative sm:w-[500px] sm:h-[670px] w-[150px] h-[280px] rounded-2xl overflow-hidden shadow-lg">
+            <div className="absolute top-2 right-2 z-40">
+              <Image
+                src={VideoIcon}
+                alt="icon"
+                className="w-6 h-6 sm:w-12 sm:h-12 object-contain"
+                loading="lazy"
+              />
+            </div>
+            <video
+              ref={(el) => {
+                if (el) videoRefs.current[index] = el
+              }}
+              key={item.videoUrl}
+              src={item.videoUrl}
+              className="w-full h-full object-cover"
+              loop
+              muted
+              playsInline
+              preload="auto"
+            />
+          </div>
+        </div>
+      )),
+    [reelsData, getPositionClass]
+  )
 
   return (
     <>
       {isMobile && <NeedHelp />}
+
       <div className="relative mt-4">
         <div className="sm:py-6 py-4 text-center font-bold sm:w-full w-52 mx-auto">
           <p className="font-robotoSerif sm:text-4xl text-xl text-primary font-bold">
             Press Play on Style Quick Reels!
           </p>
         </div>
+
         <Container>
           <div
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
             className="relative flex items-center justify-center sm:h-[750px] h-[300px] overflow-hidden"
           >
-            {reelsData.map((item, index) => (
-              <div
-                key={index}
-                onClick={() => {
-                  setActiveIndex(index)
-                  setTimeout(() => {
-                    setPopupVideoIndex(index)
-                  }, 100)
-                }}
-                className={`absolute transition-all duration-500 ease-in-out cursor-pointer ${getPositionClass(
-                  index
-                )}`}
-              >
-                <div className="relative sm:w-[500px] sm:h-[670px] w-[150px] h-[280px] rounded-2xl overflow-hidden shadow-lg">
-                  <div className="absolute top-2 right-2 z-40">
-                    <Image
-                      src={VideoIcon}
-                      alt="icon"
-                      className="w-6 h-6 sm:w-12 sm:h-12 object-contain"
-                    />
-                  </div>
-                  <video
-                    ref={(el) => {
-                      if (el) videoRefs.current[index] = el
-                    }}
-                    key={item.videoUrl}
-                    src={item.videoUrl}
-                    className="w-full h-full object-cover"
-                    loop
-                    muted
-                    playsInline
-                    preload="metadata"
-                  />
-                </div>
-              </div>
-            ))}
+            {videoElements}
           </div>
         </Container>
       </div>
@@ -192,10 +214,10 @@ export default function VideoReelsSlider() {
           <div
             className="relative bg-black rounded-lg shadow-lg"
             style={{
-              width: videoSize?.width ?? "auto",
-              height: videoSize?.height ?? "auto",
-              maxWidth: "90vw",
-              maxHeight: "90vh",
+              width: videoSize?.width ?? 'auto',
+              height: videoSize?.height ?? 'auto',
+              maxWidth: '90vw',
+              maxHeight: '90vh',
             }}
             onClick={(e) => e.stopPropagation()}
           >

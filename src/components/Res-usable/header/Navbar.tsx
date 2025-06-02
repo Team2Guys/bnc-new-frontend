@@ -1,5 +1,5 @@
 'use client';
-import React, { Fragment, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Container from 'components/Res-usable/Container/Container';
@@ -23,6 +23,7 @@ const Navbar = () => {
   const [translatorReady, setTranslatorReady] = useState(false);
   const lastLangRef = useRef<string>('en');
   const skipNextUpdateRef = useRef<boolean>(false);
+  const path = usePathname();
 
   useEffect(() => {
     // Wait for Google Translate widget to be available
@@ -68,7 +69,6 @@ const Navbar = () => {
 
 
 
-  const path = usePathname();
   const handleLinkClick = () => {
     setDrawerOpen(false);
     setSelectedLabel(undefined);
@@ -137,6 +137,7 @@ const Navbar = () => {
                       width={20}
                       height={20}
                       className="rounded-full size-6"
+                      loading='lazy'
                     />
                     <span className='max-w-10 xl:max-w-14 notranslate'>Eng</span>
                   </button>

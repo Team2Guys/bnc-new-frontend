@@ -1,20 +1,22 @@
 
 import React, { Suspense } from 'react'
-import Review_banner from 'components/ReviewBanner/Review_banner';
+import dynamic from 'next/dynamic';
 import type { Metadata } from 'next'
 import Script from 'next/script';
 import { schema } from 'data/schema';
-import MainHero from 'components/Hero/main-hero';
 import logo from '../../public/assets/images/blind-curtains-dubai/blinds-curtains-dubai1.png';
-import SellerSlider from 'components/BestSellerSlider/SellerCard';
-import SimpleSteps from 'components/SimpleSteps/SimpleSteps';
-import MotorizeBlindCurtain from 'components/MotorizedBlindCurtains/MotorizedBlindCurtains';
-import VideoReelsSlider from 'components/VideoSlider/VideoSlider';
-import InfoTabs from 'components/NewHomecomponents/info';
-import ComparisonTable from 'components/NewHomecomponents/comparisontabble';
-import OurClient from 'components/Our-Client/OurClient';
+const MainHero = dynamic(() => import('components/Hero/main-hero'));
+const SellerSlider = dynamic(() => import('components/BestSellerSlider/SellerCard'));
+const SimpleSteps = dynamic(() => import('components/SimpleSteps/SimpleSteps'));
+const MotorizeBlindCurtain = dynamic(() => import('components/MotorizedBlindCurtains/MotorizedBlindCurtains'));
+const VideoReelsSlider = dynamic(() => import('components/VideoSlider/VideoSlider'));
+const InfoTabs = dynamic(() => import('components/NewHomecomponents/info'));
+const ComparisonTable = dynamic(() => import('components/NewHomecomponents/comparisontabble'));
+const OurClient = dynamic(() => import('components/Our-Client/OurClient'));
+const Review_banner = dynamic(() => import('components/ReviewBanner/Review_banner'));
 import { fetchProducts } from 'config/fetch';
 import { tabData } from 'data/Homedata/tabdata';
+import { reelsData } from 'data/SellerSlider';
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://blindsandcurtains.ae/"),
@@ -64,7 +66,7 @@ export default async function Home() {
       </div>
       <SimpleSteps />
       <MotorizeBlindCurtain />
-      <VideoReelsSlider />
+      <VideoReelsSlider reelsData={reelsData} />
       <OurClient />
     </>
   );
