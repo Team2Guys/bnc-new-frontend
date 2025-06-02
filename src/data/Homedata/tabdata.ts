@@ -152,7 +152,6 @@ export const Qualityfeatures = [
 
 export const staticvideos: VideoItem[] = [
   {
-    //  src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Latest+Shutters+For+Product+Page.mp4',
      src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Final+Bnc+Step+By+Step+Process+With+Voice+Over+(2).mp4',
     title: 'How Does Our Process Work?',
   },
@@ -164,7 +163,7 @@ export const staticvideos: VideoItem[] = [
 
 export const shuttersVideos:VideoItem[] = [
    {
-    src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Final+Bnc+Step+By+Step+Process+With+Voice+Over+(2).mp4',
+    src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Latest+Shutters+For+Product+Page.mp4',
     title: 'Style Your Space with the Right Shutters',
   },
 ]
