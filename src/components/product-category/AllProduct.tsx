@@ -8,6 +8,7 @@ import { IProduct } from 'types/types'
 const AllProduct = ({ Products, title }: CategoryProps) => {
 
   const sortedProducts = [...Products ?? []].sort(
+  
     (a, b) => desiredOrder.indexOf(a.title) - desiredOrder.indexOf(b.title)
   )
   return (
