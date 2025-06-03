@@ -19,8 +19,6 @@ const VideoGuide = ({ isMotorisedCategory }: { videos?: VideoItem[], isMotorised
 
   if (pathname.includes('shutters')) {
     selectedVideos = shuttersVideos
-  } else if (pathname.includes('motorised')) {
-    selectedVideos = []
   } else if (pathname.includes('blinds')) {
     selectedVideos = blindsVideos
   } else if (pathname.includes('curtains')) {
