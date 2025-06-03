@@ -65,12 +65,12 @@ const VideoGuide = ({ isMotorisedCategory }: { videos?: VideoItem[], isMotorised
           A Complete Guide To
         </h2>
 
-        <div className={`grid gap-2 md:gap-6 justify-items-center mx-auto ${isMotorisedCategory ? "grid-cols-2 max-w-3xl" : "grid-cols-3 max-w-5xl"}`}>
+        <div className={`grid gap-2 md:gap-6 justify-items-center mx-auto ${isMotorisedCategory ? "grid-cols-3 max-w-5xl" : "grid-cols-3 max-w-5xl"}`}>
           {allVideos.map((video, idx) => (
             <div key={idx} className="flex flex-col space-y-3 relative w-full">
               <div
                 className={`p-1 sm:p-2 rounded-md border border-secondary relative cursor-pointer ${
-                  idx === 1 ? 'ring-2 ring-primary' : ''
+                  idx === 1 ? 'border border-secondary' : ''
                 }`}
                 onClick={() => handlePlayPause(idx)}
               >
