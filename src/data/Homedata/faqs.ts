@@ -6,7 +6,7 @@ export const FAQ_DATA: Record<string, { question: string; answer: string }[]> = 
     },
     {
       question: "What are your opening hours?",
-      answer: "We are open 7 days a week, from 8.30am to 6.00pm"
+      answer: "We are open 7 days a week, from 8.30am to 11.00pm"
     },
     {
       question: "How long have you been in business?",
