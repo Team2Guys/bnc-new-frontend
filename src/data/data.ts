@@ -204,7 +204,7 @@ In 2017, we opened our first showroom in Oud Metha as Blinds and Curtains and qu
 With loyal customers and growing demand, we evolved into Two Guys Home Furnishings — built on service, trust, and homes that feel just right.`,
     contentSize: 'text-base text-start',
    
-     imageUrl: '/assets/images/about-us/about-2.webp',
+     imageUrl: '/assets/images/about-us/IMG_7006.webp',
   },
 ];
 
