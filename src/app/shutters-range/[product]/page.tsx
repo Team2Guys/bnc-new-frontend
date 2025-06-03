@@ -9,6 +9,7 @@ import { Metadata } from 'next';
 import { meta_props } from 'types/interfaces';
 import { urls } from 'data/urls';
 import NotFound from 'app/not-found';
+import { Suspense } from 'react';
 
 export async function generateMetadata({
   params,
@@ -86,7 +87,9 @@ const CommercialPage = async ({ params }: meta_props) => {
   }
 
   return (
-    <Shutters filteredProduct={filteredProduct}/>
+    <Suspense>
+      <Shutters filteredProduct={filteredProduct}/>
+    </Suspense>
   );
 };
 

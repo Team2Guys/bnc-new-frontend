@@ -1,10 +1,11 @@
-import TopHero from 'components/ui/top-hero';
 import bgBreadcrum from '../../../public/assets/images/Blog/blogbackground.png';
 import PageSkelton from 'components/Skeleton/PageSkelton';
 import { BlogInfo } from 'types/interfaces';
-import BlogMain from 'components/Blogs/blog-main';
+import dynamic from 'next/dynamic';
+const PopularBlog = dynamic(() => import('components/Blogs/popular-blog'));
+const BlogMain = dynamic(() => import('components/Blogs/blog-main'));
+const TopHero = dynamic(() => import('components/ui/top-hero'));
 import { Suspense } from 'react';
-import PopularBlog from 'components/Blogs/popular-blog';
 import { Metadata } from 'next';
 import { fetchBlogs } from 'config/fetch';
 

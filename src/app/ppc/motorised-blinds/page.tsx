@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import { InstablindData, KeyData, MotorisedSellingDataBlinds, benefits, TabData } from 'data/data';
 import { fetchProducts } from 'config/fetch';
@@ -53,7 +53,7 @@ const Custommade_MoterisedBlinds = async () => {
   
   const blindsProducts = getBlindsProducts(products || [])
   return (
-    <>
+    <Suspense fallback='loading...'>
       <Header/>
       <VideoSection 
        videoSrc="/assets/video/Automated_Blinds.mp4"
@@ -86,7 +86,7 @@ const Custommade_MoterisedBlinds = async () => {
       <RelatedProducts className='font-serif font-black' products={blindsProducts || []} limit={4} bgcolor={true} isPPc ={true}/>
       </Container>
 
-    </>
+    </Suspense>
   );
 };
 
