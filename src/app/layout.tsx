@@ -165,8 +165,6 @@ export default function RootLayout({
 
           <PathnameWrapper>
 
-            {/* <VisitModal /> */}
-
             {children}
             <WhatsIcon />
             <ToastContainer autoClose={3000} />
