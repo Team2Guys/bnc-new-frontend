@@ -63,12 +63,13 @@ export default function InfoTabs({ tabData,isHome , isCurtainsCategory }: InfoTa
               {tabData[activeTab].buttonText}
             </Link>
           </div>
-          <div className={`relative w-full ${isHome ? "px-4  h-[235px] lg:h-[454px]":"h-[500px] lg:h-[547px] object-contain"}`}> 
+          <div className={`relative w-full object-contain ${isHome ? "px-4  h-[235px] lg:h-[454px]":"h-[500px] lg:h-[547px] "}`}> 
             <Image
               src={tabData[activeTab].image}
               alt={tabData[activeTab].heading}
               fill
               loading="lazy"
+              className="object-contain"
             />
             {
               isHome &&
