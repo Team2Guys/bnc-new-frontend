@@ -156,8 +156,8 @@ export const staticvideos: VideoItem[] = [
     title: 'How Does Our Process Work?',
   },
   {
-     src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Motion+Blinds+%26+Curtains+No+Voiceover.mp4',
-    title: 'Why Go Motorized?',
+     src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Motion+Blinds+%26+Curtains+With+Voiceover+(2).mp4',
+    title: 'Why Go Motorised?',
   },
 ]
 
