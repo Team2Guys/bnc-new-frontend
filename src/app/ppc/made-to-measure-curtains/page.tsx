@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { Suspense } from 'react'
 import {banners, Chooseuscurtain, chooseuscurtain, Curtainbannerfeatures, curtaincrousal, Curtainfeatures, curtainImages, curtainsData, CurtainvideoData, serviceLocationsData, Tab2categories, workingProcesscurtainData} from 'data/data';
 import Bullets from '../made-to-measure-blinds/bullets';
 import LButton from '../made-to-measure-blinds/button';
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
 const Made_to_Measure_Curtains = async () => {
   const locationData = serviceLocationsData[1];
   return (
-    <>
+    <Suspense fallback='loading...'>
     <Header/>
     <div id="Main">
     <VideoSection 
@@ -89,7 +89,7 @@ const Made_to_Measure_Curtains = async () => {
     <div id="booking-form">
     <BookingForm />
     </div>
-    </>   
+    </Suspense>   
   )
 }
 

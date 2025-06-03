@@ -8,7 +8,7 @@ import WhatsIcon from 'components/Icons/Whatsapp';
 import { GoogleTagManager } from '@next/third-parties/google';
 import Script from 'next/script';
 import Head from 'next/head';
-import { Roboto ,Roboto_Serif} from 'next/font/google';
+import { Roboto, Roboto_Serif } from 'next/font/google';
 
 
 export const roboto = Roboto({
@@ -52,14 +52,27 @@ export default function RootLayout({
       <html lang="en">
 
         <Head>
+
           {/* Google Site Verification */}
           <meta name="google-site-verification" content="kY94RrP8_rfkJPW-jgK6GaWAfX9BUykeQ5Q7WFxmGyY" />
 
           {/* Pinterest Domain Verification */}
           <meta name="p:domain_verify" content="58b7c4e018c53c00c2cd12f5f838b47a" />
         </Head>
+        {/* Google Tag Manager  */}
+        <Script
+          id="google-tag-manager"
+          strategy="afterInteractive"
+        >
+          {`(function(w,d,s,l,i){w[l] = w[l] || [];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-MNXTN5B');`}
+        </Script>
+        {/* End Google Tag Manager */}
         <Script id="google-translate-init" strategy="afterInteractive">
-    {`
+          {`
       function googleTranslateElementInit() {
         new google.translate.TranslateElement({
           pageLanguage: 'en',
@@ -68,12 +81,12 @@ export default function RootLayout({
         }, 'google_translate_element');
       }
     `}
-  </Script>
+        </Script>
 
-          <Script
-    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-    strategy="afterInteractive"
-  />
+        <Script
+          src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          strategy="afterInteractive"
+        />
 
         {/* Microsoft Clarity */}
         <Script
@@ -133,6 +146,14 @@ export default function RootLayout({
 
 
         <body className={`${roboto.variable} ${robotoSerif.variable}`}>
+          <noscript>
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-MNXTN5B"
+              height="0"
+              width="0"
+              style={{ display: 'none', visibility: 'hidden' }}
+            />
+          </noscript>
           <div id="google_translate_element" className="translate-widget hidden"></div>
 
           <GoogleTagManager gtmId="GTM-MNXTN5B" />

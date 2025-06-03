@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import { ICategory } from "types/types";
-import Blog from "./Blog";
+import dynamic from "next/dynamic";
+const Blog = dynamic(() => import('./Blog'));
 import { headers } from "next/headers";
 import { fetchBlogs, fetchCategories } from "config/fetch";
 import { blogLinks } from "data/header_links";
@@ -56,7 +58,7 @@ export async function generateMetadata({ params }: { params: Promise<{ name: str
       description: description,
       url: url,
       images: NewImage,
-      type:'article'
+      type: 'article'
     },
     alternates: {
       canonical:
@@ -98,7 +100,9 @@ const BlogDetail = async ({ params }: { params: Promise<{ name: string }> }) => 
   const filterRelatedPosts = blogs?.filter((blogItem: BlogInfo) => (blogItem.category === blog?.category) &&
     generateSlug(blogItem.title) !== generateSlug(blog.title) && blogItem.isPublished)
   return (
-    <Blog category={category} filterCategoryBlogPosts={filterCategoryBlogPosts} blog={blog} filterRelatedPosts={filterRelatedPosts} />
+    <Suspense>
+      <Blog category={category} filterCategoryBlogPosts={filterCategoryBlogPosts} blog={blog} filterRelatedPosts={filterRelatedPosts} />
+    </Suspense>
   );
 };
 

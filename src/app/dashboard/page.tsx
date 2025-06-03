@@ -5,8 +5,10 @@ import ProtectedRoute from 'hooks/AuthHookAdmin';
 const ECommerce = dynamic(() => import('components/Dashboard/E-commerce'), {
   ssr: false,
 });
+const DefaultLayout = dynamic(() => import('components/Dashboard/Layouts/DefaultLayout'), {
+  ssr: false,
+});
 
-import DefaultLayout from 'components/Dashboard/Layouts/DefaultLayout';
 
 function Home() {
   return (

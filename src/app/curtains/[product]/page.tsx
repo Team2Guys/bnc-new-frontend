@@ -1,5 +1,6 @@
 import { IProduct } from 'types/types';
-import Curtain from './Curtain';
+import dynamic from 'next/dynamic';
+const Curtain = dynamic(() => import('./Curtain'));
 import {
   fetchProducts,
   fetchSubCategories,

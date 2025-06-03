@@ -1,9 +1,10 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
+import { Suspense } from "react";
 const Custom_Roller = dynamic(() => import('./Custom_Roller'));
 
 
-export const metadata:Metadata  = {
+export const metadata: Metadata = {
   robots: {
     index: false,
     follow: false,
@@ -19,9 +20,11 @@ export const metadata:Metadata  = {
   },
 };
 
-const RollerMain= () => {
+const RollerMain = () => {
   return (
- <Custom_Roller/>
+    <Suspense fallback='loading...'>
+      <Custom_Roller />
+    </Suspense>
   );
 };
 
