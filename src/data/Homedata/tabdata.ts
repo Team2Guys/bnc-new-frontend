@@ -169,7 +169,7 @@ export const shuttersVideos:VideoItem[] = [
 ]
 export const blindsVideos:VideoItem[] = [
    {
-    src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Latest+Blinds+For+Product+Page+(2).mp4',
+    src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Blinds+For+Product+Page+In+Landscape.mp4',
     title: 'Style Your Space with the Right Blinds',
   },
 ]
