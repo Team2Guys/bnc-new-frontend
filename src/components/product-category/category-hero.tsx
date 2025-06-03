@@ -10,7 +10,6 @@ const CategoryHero = ({ Data }: CategoryProps) => {
     return null;
   }
 
-  console.log(Data.headingchecks, "headingchecks")
   return (
     <div className='bg-secondary-foreground py-4 md:py-0'>
         <Container className='grid grid-cols-12 md:gap-4 items-center px-4' >
