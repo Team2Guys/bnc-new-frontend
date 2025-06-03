@@ -98,7 +98,7 @@ export default function SimpleSteps() {
               <Link
                 href="/request-appointment/"
                 aria-label="Book A Free Visit"
-                className="bg-secondary text-primary py-3 px-8 sm:px-16 block rounded-md w-fit font-semibold mt-10 mb-2 max-sm:mx-auto"
+                className=" mt-10 bg-secondary text-center font-semibold py-2 w-fit max-sm:px-6 xs:w-1/2 rounded-md text-primary font-roboto text-lg mx-auto relative block  my-4 hover:opacity-65"
               >
                 Book A Free Visit
               </Link>
