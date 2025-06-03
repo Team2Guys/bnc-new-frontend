@@ -73,7 +73,7 @@ export default function InfoTabs({ tabData,isHome , isCurtainsCategory }: InfoTa
             />
             {
               isHome &&
-            <div className="absolute bottom-10 -left-10 lg:bottom-32 xl:bottom-[73px] lg:-left-[80px] 2xl:-left-24 w-[116px] h-[56px] md:h-[70px] md:w-[140px] lg:h-[100px] lg:w-[200px] bg-primary flex flex-col items-center justify-center -rotate-90">
+            <div className="absolute bottom-10 -left-10 lg:bottom-32 xl:bottom-[73px] lg:-left-[80px] 2xl:-left-10 w-[116px] h-[56px] md:h-[70px] md:w-[140px] lg:h-[100px] lg:w-[200px] bg-primary flex flex-col items-center justify-center -rotate-90">
               <span className="text-white font-semibold text-14 md:text-22 lg:text-[24px] font-robotoSerif">20 Years</span>
               <span className="text-white text-[8px] md:text-10 lg:text-[14px] font-medium md:mt-2 font-roboto">Making Blinds & Curtains</span>
             </div>
