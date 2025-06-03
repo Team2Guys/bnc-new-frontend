@@ -7,7 +7,7 @@ import Link from "next/link";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { InfoTabsProps } from "types/product";
 
-export default function InfoTabs({ tabData,isHome , isCurtainsCategory }: InfoTabsProps) {
+export default function InfoTabs({ tabData,isHome , isCurtainsCategory, isMotorisedCategory }: InfoTabsProps) {
   const [activeTab, setActiveTab] = useState(0);
   const [activeMobileTab, setActiveMobileTab] = useState<number | null>(null);
 
@@ -69,7 +69,7 @@ export default function InfoTabs({ tabData,isHome , isCurtainsCategory }: InfoTa
               alt={tabData[activeTab].heading}
               fill
               loading="lazy"
-              className="object-contain"
+              className={`${isMotorisedCategory && 'object-contain'}`}
             />
             {
               isHome &&
