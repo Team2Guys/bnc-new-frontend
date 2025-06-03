@@ -63,7 +63,7 @@
 
 @layer components {
   .categoryHeading {
-    @apply font-robotoSerif font-bold text-[40px] hidden md:block text-primary;
+    @apply font-robotoSerif font-bold text-2xl lg:text-[40px] text-primary;
   }
 }
 
