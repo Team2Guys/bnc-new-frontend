@@ -1,11 +1,12 @@
-import React from 'react';
-import bgBreadcrum from '../../../public/assets/images/Breadcrum/endering.png';
-import BookAppointment from 'components/Book-appointment/BookAppointment';
-import Container from 'components/Res-usable/Container/Container';
+import dynamic from 'next/dynamic';
 import { Metadata } from 'next';
-import Breadcrumb from 'components/Res-usable/breadcrumb';
-import Testimonial from 'components/ProductDetailPage/testimonial';
-import AppointmentMapWrapper from 'components/AppointmentMap/AppointmentMapWrapper';
+const BookAppointment = dynamic(() => import('components/Book-appointment/BookAppointment'));
+const Container = dynamic(() => import('components/Res-usable/Container/Container'));
+const Breadcrumb = dynamic(() => import('components/Res-usable/breadcrumb'));
+const Testimonial = dynamic(() => import('components/ProductDetailPage/testimonial'));
+const AppointmentMapWrapper = dynamic(() => import('components/AppointmentMap/AppointmentMapWrapper'));
+import bgBreadcrum from '../../../public/assets/images/Breadcrum/endering.png';
+
 
 export const metadata: Metadata = {
   title: 'Blind And Curtains Dubai | Book Appointment',

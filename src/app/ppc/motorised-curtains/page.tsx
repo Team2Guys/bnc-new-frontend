@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import { InstacurtainData, KeyData, MotorisedSellingDataCurtain, benefits, TabData } from 'data/data';
 import { fetchProducts } from 'config/fetch';
@@ -52,7 +52,7 @@ const curtainsTitles = [
 
   const curtainProducts = getcurtainProducts(products || []);
   return (
-    <>
+    <Suspense fallback='loading...'>
       <Header/>
       <VideoSection 
        videoSrc="/assets/video/automated_curtains.mp4"
@@ -83,7 +83,7 @@ const curtainsTitles = [
       <RelatedProducts className='font-serif font-black' products={curtainProducts || []} limit={4} bgcolor={true} isPPc={true} description='Explore our collection, each piece a showcase of exceptional window curtains design.' />
       </Container>
       
-    </>
+    </Suspense>
   );
 };
 
