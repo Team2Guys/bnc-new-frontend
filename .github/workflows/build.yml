@@ -45,8 +45,8 @@ jobs:
           
           npm install --legacy-peer-deps
           rm -rf .next
+          npm run build
           # pm2 restart ppcclient
           exit
           EOF
 
-          
