@@ -2,7 +2,6 @@
 import Container from "components/Res-usable/Container/Container";
 import { useState } from "react";
 import Image from "next/image";
-
 import Link from "next/link";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { InfoTabsProps } from "types/product";
