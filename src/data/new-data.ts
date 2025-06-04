@@ -9,9 +9,9 @@
  export  const orderedTitles = [
       "Motorised blinds",
       "Blackout Roller Blinds",
-      "Motorised curtains",
-      "Blackout Roman Blinds	",
+      "Blackout Roman Blinds",
       "Vertical Blinds",
+      "Motorised curtains",
       "Blackout Triple Pinch Pleat curtains",
       "Sheer Triple Pinch Pleat curtains",
       "Sheer Ripple Fold Curtains",
