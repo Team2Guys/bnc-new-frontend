@@ -15,8 +15,7 @@ const SellerSlider = ({ products }: { products: IProduct[] }) => {
   const [isDragging, setIsDragging] = useState(false);
 
   // 💡 Memoize to prevent recalculating on each render
-  const filteredAndSortedProducts = useMemo(
-    () =>
+  const filteredAndSortedProducts = useMemo(() =>
       orderedTitles
         .map((title) =>
           products.find((item) => item.title.toLowerCase() === title.toLowerCase())
