@@ -112,6 +112,7 @@ const Thumbnail = ({
             <video
               className="w-full h-full object-cover"
               controls
+              autoPlay
               src={videos[0]?.imageUrl}
             />
           </div>
