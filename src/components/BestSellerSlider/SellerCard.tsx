@@ -46,7 +46,7 @@ const SellerSlider = ({ products }: { products: IProduct[] }) => {
     dots: false,
     infinite: true,
     speed: 600,
-    slidesToShow: 5,
+    slidesToShow: 4,
     slidesToScroll: 1,
     arrows: true,
     nextArrow: <NextArrow />,
