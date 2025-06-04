@@ -44,7 +44,6 @@ jobs:
           git pull origin production  --no-rebase
           
           npm install --legacy-peer-deps
-          rm -rf .next
           npm run build
           # pm2 restart ppcclient
           exit
