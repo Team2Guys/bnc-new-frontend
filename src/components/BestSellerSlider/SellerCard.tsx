@@ -53,10 +53,6 @@ const SellerSlider = ({ products }: { products: IProduct[] }) => {
     prevArrow: <PrevArrow />,
     responsive: [
       {
-        breakpoint: 1500,
-        settings: { slidesToShow: 4 },
-      },
-      {
         breakpoint: 1024,
         settings: { slidesToShow: 3 },
       },
