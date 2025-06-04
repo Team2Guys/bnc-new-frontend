@@ -16,7 +16,7 @@ const Customisation = () => {
             Customisation
           </p>
           <p className="text-base lg:text-2xl text-white font-roboto drop-shadow-2xl">
-            In Motorised blinds, we offer customisation with a range of fabrics, hardware colours, and charging options.
+            In Motorised curtains, we offer customisation with a range of fabrics, hardware colours, and charging options.
           </p>
         </div>
        <div className='space-y-3'>
