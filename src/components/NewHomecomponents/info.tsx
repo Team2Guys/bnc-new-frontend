@@ -68,7 +68,6 @@ export default function InfoTabs({ tabData,isHome , isCurtainsCategory }: InfoTa
               src={tabData[activeTab].image}
               alt={tabData[activeTab].heading}
               fill
-              className="object-contain "
               loading="lazy"
             />
             {

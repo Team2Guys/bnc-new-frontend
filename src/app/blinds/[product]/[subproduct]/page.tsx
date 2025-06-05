@@ -106,6 +106,7 @@ const Page = async ({ params }: SlugPageProps) => {
   }
   const productTitle = filteredProduct?.title || '';
   const matchedSchema = BlindSchemaMap[productTitle];
+  console.log(filteredProduct,'filteredProduct')
   return (
     <>
       {matchedSchema && (

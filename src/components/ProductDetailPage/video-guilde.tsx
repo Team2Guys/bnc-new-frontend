@@ -1,39 +1,43 @@
+'use client'
+
 import Container from 'components/Res-usable/Container/Container'
-import { curtainsVideos, shuttersVideos, staticvideos } from 'data/Homedata/tabdata'
+import { blindsVideos, curtainsVideos, shuttersVideos, staticvideos } from 'data/Homedata/tabdata'
 import React, { useRef, useState, useEffect } from 'react'
 import { BsPlayFill } from 'react-icons/bs'
 import { VideoItem } from 'types/product'
 import { IoClose } from 'react-icons/io5'
 import { usePathname } from 'next/navigation'
 
-const VideoGuide = ({ videos, isMotorisedCategory }: { videos?: VideoItem[], isMotorisedCategory?: boolean }) => {
+const VideoGuide = ({ isMotorisedCategory }: { videos?: VideoItem[], isMotorisedCategory?: boolean }) => {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
   const [pausedStates, setPausedStates] = useState<boolean[]>([])
   const [showModal, setShowModal] = useState(false)
   const [activeVideo, setActiveVideo] = useState<{ src: string; title: string } | null>(null)
   const pathname = usePathname()
 
-const selectedVideos =
-  pathname.includes('shutters')
-    ? shuttersVideos
-    : pathname.includes('curtains')
-    ? curtainsVideos
-    : staticvideos;
+  let selectedVideos: VideoItem[] = []
 
-const allVideos = [
-  ...selectedVideos,
-  ...(videos?.length
-    ? [{
-        src: videos[0].imageUrl ?? '',
-        title: 'Why Go Motorized?'
-      }]
-    : [])
-];
+  if (pathname.includes('shutters')) {
+    selectedVideos = shuttersVideos
+  } else if (pathname.includes('blinds')) {
+    selectedVideos = blindsVideos
+  } else if (pathname.includes('curtains')) {
+    selectedVideos = curtainsVideos
+  }
 
+
+  
+
+  console.log(selectedVideos, "selectedVideos", blindsVideos)
+
+  const allVideos: VideoItem[] =
+    selectedVideos.length > 0
+      ? [staticvideos[0], selectedVideos[0], staticvideos[1]]
+      : [...staticvideos]
 
   useEffect(() => {
     setPausedStates(Array(allVideos.length).fill(true))
-  }, [])
+  }, [allVideos.length])
 
   const handlePlayPause = (index: number) => {
     const video = videoRefs.current[index]
@@ -65,7 +69,9 @@ const allVideos = [
           {allVideos.map((video, idx) => (
             <div key={idx} className="flex flex-col space-y-3 relative w-full">
               <div
-                className="p-1 sm:p-2 rounded-md border border-secondary relative cursor-pointer "
+                className={`p-1 sm:p-2 rounded-md border border-secondary relative cursor-pointer ${
+                  idx === 1 ? 'ring-2 ring-primary' : ''
+                }`}
                 onClick={() => handlePlayPause(idx)}
               >
                 <video
@@ -94,16 +100,16 @@ const allVideos = [
         </div>
 
         {showModal && activeVideo && (
-        <div
-         className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 px-4"
-          onClick={(e) => {
-          if (e.target === e.currentTarget) {
-        setShowModal(false)
-        setActiveVideo(null)
-          }
-          }}
-        >
-          <div className="relative bg-black rounded-lg w-full max-w-4xl max-h-[80vh] overflow-hidden">
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 px-4"
+            onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                setShowModal(false)
+                setActiveVideo(null)
+              }
+            }}
+          >
+            <div className="relative bg-black rounded-lg w-full max-w-4xl max-h-[80vh] overflow-hidden">
               <button
                 onClick={() => {
                   setShowModal(false)

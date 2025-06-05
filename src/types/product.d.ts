@@ -24,6 +24,8 @@ export interface AccordionProps {
 export interface VideoItem {
   imageUrl?: string
   public_id?: string
+   src: string
+  title: string
 }
 
 export interface DetailProps {
