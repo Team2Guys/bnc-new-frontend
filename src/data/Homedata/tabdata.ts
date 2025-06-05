@@ -153,10 +153,13 @@ export const Qualityfeatures = [
 export const staticvideos: VideoItem[] = [
   {
      src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Final+Bnc+Step+By+Step+Process+With+Voice+Over+(2).mp4',
+     poster:"https://res.cloudinary.com/de6owjeap/image/upload/v1749103559/Screenshot_2025-06-05_110535_sw4klp.png",
+
     title: 'How Does Our Process Work?',
   },
   {
      src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Motion+Blinds+%26+Curtains+With+Voiceover+(2).mp4',
+     poster:"https://res.cloudinary.com/de6owjeap/image/upload/v1749103713/image_qilvq7.jpg",
     title: 'Why Go Motorised?',
   },
 ]
@@ -165,18 +168,22 @@ export const shuttersVideos:VideoItem[] = [
    {
     src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Latest+Shutters+For+Product+Page.mp4',
     title: 'Style Your Space with the Right Shutters',
+    poster:"https://res.cloudinary.com/de6owjeap/image/upload/v1749103955/image_3_clmn1y.jpg"
   },
 ]
 export const blindsVideos:VideoItem[] = [
    {
     src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Blinds+For+Product+Page+In+Landscape.mp4',
     title: 'Style Your Space with the Right Blinds',
+    poster:"https://res.cloudinary.com/de6owjeap/image/upload/v1749103787/image_1_lopvz9.jpg"
+
   },
 ]
 
 export const curtainsVideos:VideoItem[] = [
    {
     src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Curtains+For+Product+Page.mp4',
+    poster:"https://res.cloudinary.com/de6owjeap/image/upload/v1749103875/image_2_qzoaa0.jpg",
     title: 'Style Your Space with the Right Curtains',
   },
 ]
