@@ -440,6 +440,7 @@ const BookAppointment: React.FC<AppointmentProps> = ({
         <div className="text-center sm:text-start mt-8">
           <button
             type="submit"
+            id='appointment'
             className="w-fit bg-secondary py-3 px-5 sm:px-8 rounded-lg font-semibold"
             disabled={loading}
           >

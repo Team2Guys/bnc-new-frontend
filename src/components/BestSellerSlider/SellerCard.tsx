@@ -15,8 +15,7 @@ const SellerSlider = ({ products }: { products: IProduct[] }) => {
   const [isDragging, setIsDragging] = useState(false);
 
   // 💡 Memoize to prevent recalculating on each render
-  const filteredAndSortedProducts = useMemo(
-    () =>
+  const filteredAndSortedProducts = useMemo(() =>
       orderedTitles
         .map((title) =>
           products.find((item) => item.title.toLowerCase() === title.toLowerCase())
@@ -55,6 +54,10 @@ const SellerSlider = ({ products }: { products: IProduct[] }) => {
     responsive: [
       {
         breakpoint: 1024,
+        settings: { slidesToShow: 3 },
+      },
+      {
+        breakpoint: 800,
         settings: { slidesToShow: 2 },
       },
       {
@@ -92,20 +95,19 @@ const SellerSlider = ({ products }: { products: IProduct[] }) => {
           afterChange={() => setIsDragging(false)}
         >
           {filteredAndSortedProducts.map((item, index) => (
-            <div key={item.id || index} className="pl-5 xl:px-4">
+            <div key={item.id || index} className="pl-5 xl:px-2 ">
               <div
                 onMouseDown={() => setIsDragging(false)}
                 onMouseMove={() => setIsDragging(true)}
                 onMouseUp={() => handleMouseUp(item)}
               >
                 <div className="bg-white overflow-hidden rounded-xl md:p-3 cursor-pointer">
-                  <div className="relative w-full h-[280px] md:h-[365px] rounded-xl">
+                  <div className="relative w-full h-[280px] md:h-[345px] rounded-xl">
                 <Image
                src={item.posterImage.imageUrl.replace('/upload/', '/upload/w_296,f_auto,q_auto/')}
               alt={item.title}
               fill
-              className="object-cover rounded-xl"
-              sizes="(max-width: 768px) 221px, 296px"
+              className="rounded-xl"
               />
 
                 </div>

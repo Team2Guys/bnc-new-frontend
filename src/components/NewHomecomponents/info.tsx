@@ -2,12 +2,11 @@
 import Container from "components/Res-usable/Container/Container";
 import { useState } from "react";
 import Image from "next/image";
-
 import Link from "next/link";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { InfoTabsProps } from "types/product";
 
-export default function InfoTabs({ tabData,isHome , isCurtainsCategory }: InfoTabsProps) {
+export default function InfoTabs({ tabData,isHome , isCurtainsCategory, isMotorisedCategory }: InfoTabsProps) {
   const [activeTab, setActiveTab] = useState(0);
   const [activeMobileTab, setActiveMobileTab] = useState<number | null>(null);
 
@@ -54,7 +53,7 @@ export default function InfoTabs({ tabData,isHome , isCurtainsCategory }: InfoTa
       </div>
       <hr className=" relative bottom-[5px] bg-primary border-b-4 border-black hidden sm:block" />
       {/* Desktop Content */}
-      <div className="hidden sm:block">
+      <div className="hidden md:block">
         <div className="grid md:grid-cols-2 gap-6 lg:gap-16 2xl:gap-24 items-center md:py-8 p-2">
           <div className="flex flex-col justify-center items-start space-y-5 lg:space-y-12">
             <h1 className="font-robotoSerif font-semibold text-20 lg:text-[40px] text-primary sm:pr-10">{tabData[activeTab].heading}</h1>
@@ -63,16 +62,17 @@ export default function InfoTabs({ tabData,isHome , isCurtainsCategory }: InfoTa
               {tabData[activeTab].buttonText}
             </Link>
           </div>
-          <div className={`relative w-full ${isHome ? "px-4  h-[235px] lg:h-[454px]":"h-[500px] lg:h-[547px] object-contain"}`}> 
+          <div className={`relative w-full object-contain ${isHome ? "px-4  h-[235px] lg:h-[454px]":"h-[500px] lg:h-[547px] "}`}> 
             <Image
               src={tabData[activeTab].image}
               alt={tabData[activeTab].heading}
               fill
               loading="lazy"
+              className={`${isMotorisedCategory && 'object-contain'}`}
             />
             {
               isHome &&
-            <div className="absolute bottom-10 -left-10 lg:bottom-32 xl:bottom-[73px] lg:-left-[80px] 2xl:-left-[40px] w-[116px] h-[56px] md:h-[70px] md:w-[140px] lg:h-[100px] lg:w-[200px] bg-primary flex flex-col items-center justify-center -rotate-90">
+            <div className="absolute bottom-10 -left-12 lg:bottom-32 xl:bottom-[73px] lg:-left-[80px] 2xl:-left-24 w-[116px] h-[56px] md:h-[70px] md:w-[140px] lg:h-[100px] lg:w-[200px] bg-primary flex flex-col items-center justify-center -rotate-90">
               <span className="text-white font-semibold text-14 md:text-22 lg:text-[24px] font-robotoSerif">20 Years</span>
               <span className="text-white text-[8px] md:text-10 lg:text-[14px] font-medium md:mt-2 font-roboto">Making Blinds & Curtains</span>
             </div>
@@ -82,13 +82,13 @@ export default function InfoTabs({ tabData,isHome , isCurtainsCategory }: InfoTa
       </div>
 
     {/* Mobile View */}
-    <div className="sm:hidden">
-    <div className={`relative mb-4 w-full ${isHome? "h-[235px] object-cover" : "h-[450px] object-contain"}`}>
+    <div className="md:hidden">
+    <div className={`relative mb-4 w-full ${isHome? "h-[235px]" : "h-[450px]"}`}>
     <Image
-      src={tabData[activeMobileTab ?? 0].mobileImage || tabData[activeMobileTab ?? 0].image}
-      alt={tabData[activeMobileTab ?? 0].heading}
+      src={tabData[activeTab].image}
+      alt={tabData[activeTab].heading}
       fill
-      className="w-full"
+      className={`${isMotorisedCategory && 'object-contain'}`}
     />
     {
       isHome &&

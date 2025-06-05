@@ -25,11 +25,6 @@ const VideoGuide = ({ isMotorisedCategory }: { videos?: VideoItem[], isMotorised
     selectedVideos = curtainsVideos
   }
 
-
-  
-
-  console.log(selectedVideos, "selectedVideos", blindsVideos)
-
   const allVideos: VideoItem[] =
     selectedVideos.length > 0
       ? [staticvideos[0], selectedVideos[0], staticvideos[1]]
@@ -65,13 +60,11 @@ const VideoGuide = ({ isMotorisedCategory }: { videos?: VideoItem[], isMotorised
           A Complete Guide To
         </h2>
 
-        <div className={`grid gap-2 md:gap-6 justify-items-center mx-auto ${isMotorisedCategory ? "grid-cols-2 max-w-3xl" : "grid-cols-3 max-w-5xl"}`}>
+        <div className={`grid gap-2 md:gap-6 justify-items-center mx-auto ${isMotorisedCategory ? "grid-cols-3 max-w-5xl" : "grid-cols-3 max-w-5xl"}`}>
           {allVideos.map((video, idx) => (
             <div key={idx} className="flex flex-col space-y-3 relative w-full">
               <div
-                className={`p-1 sm:p-2 rounded-md border border-secondary relative cursor-pointer ${
-                  idx === 1 ? 'ring-2 ring-primary' : ''
-                }`}
+                className={`p-1 sm:p-2 rounded-md border border-secondary relative cursor-pointer ${idx === 1 ? 'border border-secondary' : ''}`}
                 onClick={() => handlePlayPause(idx)}
               >
                 <video
@@ -81,6 +74,8 @@ const VideoGuide = ({ isMotorisedCategory }: { videos?: VideoItem[], isMotorised
                   loop
                   playsInline
                   controls={!pausedStates[idx]}
+                  preload="metadata"
+
                 >
                   <source src={video.src} type="video/mp4" />
                   Your browser does not support the video tag.
@@ -101,7 +96,7 @@ const VideoGuide = ({ isMotorisedCategory }: { videos?: VideoItem[], isMotorised
 
         {showModal && activeVideo && (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 px-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4"
             onClick={(e) => {
               if (e.target === e.currentTarget) {
                 setShowModal(false)
@@ -109,25 +104,27 @@ const VideoGuide = ({ isMotorisedCategory }: { videos?: VideoItem[], isMotorised
               }
             }}
           >
-            <div className="relative bg-black rounded-lg w-full max-w-4xl max-h-[80vh] overflow-hidden">
-              <button
-                onClick={() => {
-                  setShowModal(false)
-                  setActiveVideo(null)
-                }}
-                className="absolute top-3 right-3 z-50 text-white text-2xl"
-              >
-                <IoClose />
-              </button>
-              <video
-                className="w-full h-full object-contain"
-                controls
-                autoPlay
-              >
-                <source src={activeVideo.src} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-              <p className="text-white text-center py-2 font-medium">{activeVideo.title}</p>
+            <div className="relative w-full max-w-2xl max-h-[90vh] flex flex-col items-center justify-center">
+              <div className="relative w-full flex justify-center">
+                <button
+                  onClick={() => {
+                    setShowModal(false)
+                    setActiveVideo(null)
+                  }}
+                  className="absolute top-2 right-2 z-50 bg-white rounded-full p-1 hover:bg-gray-300"
+                >
+                  <IoClose className="text-black text-2xl" />
+                </button>
+                <video
+                  className="w-full max-h-[75vh] rounded-lg"
+                  controls
+                  autoPlay
+                >
+                  <source src={activeVideo.src} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <p className="text-white text-center py-3 font-medium">{activeVideo.title}</p>
             </div>
           </div>
         )}

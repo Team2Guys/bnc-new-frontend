@@ -16,9 +16,10 @@ interface InformationProps {
 }
 
 const Information = ({ privarcyImage, privacySectoin }: InformationProps) => {
-  const [visibleCount, setVisibleCount] = useState(1)
+  const [visibleCount, setVisibleCount] = useState(0)
   const [isDesktop, setIsDesktop] = useState(false)
 
+  // Detect screen size
   useEffect(() => {
     const checkScreenSize = () => {
       setIsDesktop(window.innerWidth >= 768)
@@ -28,19 +29,32 @@ const Information = ({ privarcyImage, privacySectoin }: InformationProps) => {
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
 
+  // Show all on desktop
   useEffect(() => {
     if (isDesktop) {
       setVisibleCount(privacySectoin.length - 1)
+    } else {
+      setVisibleCount(0)
     }
   }, [isDesktop, privacySectoin.length])
 
-  const handleReadMore = () => setVisibleCount(prev => prev + 2)
+  const handleReadMore = () => {
+    const total = privacySectoin.length - 1
+    setVisibleCount(prev => Math.min(prev + 2, total))
+  }
 
-  const { visibleSections, hasMore } = useMemo(() => {
+  const handleReadLess = () => setVisibleCount(0)
+
+  const { visibleSections, hasMore, hasVisible } = useMemo(() => {
     const extraSections = privacySectoin.slice(1)
     const visible = extraSections.slice(0, visibleCount)
-    const more = visibleCount < extraSections.length
-    return { visibleSections: visible, hasMore: more }
+    const total = extraSections.length
+    return {
+      visibleSections: visible,
+      hasMore: visibleCount < total,
+      hasVisible: visibleCount > 0,
+      isFullyVisible: visibleCount >= total
+    }
   }, [privacySectoin, visibleCount])
 
   return (
@@ -50,7 +64,7 @@ const Information = ({ privarcyImage, privacySectoin }: InformationProps) => {
           <Container className="grid grid-cols-12 gap-6">
             {/* Text Section */}
             <div className="col-span-12 md:col-span-6 space-y-2 order-2 md:order-1">
-              {/* First section (always visible) */}
+              {/* First always-visible section */}
               <div>
                 <h2 className="font-robotoSerif font-bold text-2xl md:text-[30px] xl:text-[40px] leading-[120%]">
                   {privacySectoin[0].specsHeading}
@@ -58,7 +72,7 @@ const Information = ({ privarcyImage, privacySectoin }: InformationProps) => {
                 <p>{privacySectoin[0].specsDetails}</p>
               </div>
 
-              {/* Dynamically shown extra sections */}
+              {/* Extra sections */}
               {visibleSections.map((item, index) => (
                 <div key={index}>
                   <h3 className="font-robotoSerif font-medium md:font-bold text-xl md:text-2xl leading-[120%]">
@@ -68,9 +82,10 @@ const Information = ({ privarcyImage, privacySectoin }: InformationProps) => {
                 </div>
               ))}
 
-              {/* Controls (only shown on mobile) */}
+              {/* Buttons (mobile only) */}
               {!isDesktop && (
                 <div className="pt-5 md:pt-10 space-x-4">
+                  {/* Show only one button at a time */}
                   {hasMore && (
                     <button
                       onClick={handleReadMore}
@@ -79,7 +94,14 @@ const Information = ({ privarcyImage, privacySectoin }: InformationProps) => {
                       Read More
                     </button>
                   )}
-                 
+                  {!hasMore && hasVisible && (
+                    <button
+                      onClick={handleReadLess}
+                      className="p-2 md:text-[22px] xl:p-4 font-medium text-secondary border rounded-md border-primary hover:border-secondary hover:bg-secondary hover:text-primary max-sm:px-10"
+                    >
+                      Read Less
+                    </button>
+                  )}
                 </div>
               )}
             </div>

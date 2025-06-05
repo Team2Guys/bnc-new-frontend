@@ -153,7 +153,7 @@ const EstimatorPage = ({ sortedProducts }: { sortedProducts: EstimatorProductTyp
       <Container className="md:pt-10 pb-10 lg:pb-20">
         <div className="grid grid-cols-12 gap-4 lg:gap-10 xl:gap-14 md:px-2 xl:px-0">
           <div className="col-span-12 md:col-span-6 mt-2 sm:mt-0">
-            <div className='w-full h-[250px] md:h-[450px] xl:h-[560px]'>
+            <div className='w-full h-[350px] xs:h-[600px] md:h-[450px] xl:h-[610px]'>
               <Image
                 src={selectedProduct?.posterImage?.imageUrl || sortedProducts[0].posterImage.imageUrl}
                 fill

@@ -2,11 +2,11 @@ export const FAQ_DATA: Record<string, { question: string; answer: string }[]> = 
   "General": [
     {
       question: "Do you have a physical showroom we can visit?",
-      answer: `Yes, we have a lovely showroom in <a style="color:#F1B42F" href="https://www.google.com/maps/uv?pb=!1s0x3e5f6959ee921415%3A0x49a4b39a2751f62c!3m1!7e115!4s%2Fmaps%2Fplace%2FTwo%2BGuys%2BShowroom%2BAl%2BQuoz%2BInd%2B4%2F%4025.1176875%2C55.2354378%2C3a%2C75y%2C132.44h%2C90t%2Fdata%3D*213m4*211e1*213m2*211s4_lOvRuZzQKJbPBfF3v1Wg*212e0*214m2*213m1*211s0x3e5f6959ee921415%3A0x49a4b39a2751f62c%3Fsa%3DX%26ved%3D2ahUKEwjNztWN98yNAxWt-AIHHRuoGgwQpx96BAgUEAA!5sTwo%20Guys%20Showroom%20Al%20Quoz%20Ind%204%20-%20Google%20Search!15sCgIgAQ&imagekey=!1e2!2s4_lOvRuZzQKJbPBfF3v1Wg&cr=le_a7&hl=en&ved=1t%3A206134&ictx=111" target="_blank" rel="noopener noreferrer">Al Quoz Ind 4</a>`
+      answer: `Yes, we have a lovely showroom in <a style="color:#F1B42F" href="https://www.google.com/maps/place/Blinds+And+Curtains+Dubai/@25.1177148,55.2356858,692m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3e5f698d0b075de1:0x223e3563a8be56be!8m2!3d25.1177148!4d55.2356858!16s%2Fg%2F11bbt9c0yz?entry=ttu&g_ep=EgoyMDI1MDYwMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">Al Quoz Ind 4</a>`
     },
     {
       question: "What are your opening hours?",
-      answer: "We are open 7 days a week, from 8.30am to 6.00pm"
+      answer: "We are open 7 days a week, from 8.30am to 11.00pm"
     },
     {
       question: "How long have you been in business?",

@@ -26,6 +26,7 @@ export interface VideoItem {
   public_id?: string
    src: string
   title: string
+  poster?:string
 }
 
 export interface DetailProps {
@@ -49,4 +50,5 @@ export interface InfoTabsProps {
   tabData: TabDataItem[];
   isHome?: boolean;
   isCurtainsCategory?: boolean
+  isMotorisedCategory?: boolean
 }

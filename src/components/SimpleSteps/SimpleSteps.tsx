@@ -39,7 +39,7 @@ export default function SimpleSteps() {
     <div className="bg-secondary-foreground sm:bg-transparent pb-5 sm:pb-0">
       <Container className="mt-5 md:mt-10">
         <div className="mx-auto px-1 md:px-4">
-          <div className="sm:py-7 pt-5 pb-0">
+          <div className="sm:py-7 pt-5 pb-0 space-y-5">
             <h2 className="categoryHeading text-primary text-center block font-bold text-24 lg:text-[48px] font-robotoSerif">
               {workingProcessData.heading}
             </h2>
@@ -98,7 +98,7 @@ export default function SimpleSteps() {
               <Link
                 href="/request-appointment/"
                 aria-label="Book A Free Visit"
-                className="bg-secondary text-primary py-3 px-8 sm:px-16 block rounded-md w-fit font-semibold mt-10 mb-2 max-sm:mx-auto"
+                className=" mt-10 bg-secondary text-center font-semibold py-2 w-fit max-sm:px-6 xs:w-1/2 rounded-md text-primary font-roboto text-lg mx-auto relative block  my-4 hover:opacity-65"
               >
                 Book A Free Visit
               </Link>

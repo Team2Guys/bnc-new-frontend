@@ -1,11 +1,11 @@
-import React from 'react';
-import TopHero from 'components/ui/top-hero';
+import dynamic from 'next/dynamic';
+const TopHero = dynamic(() => import('components/ui/top-hero'));
+const BookAppointment = dynamic(() => import('components/Book-appointment/BookAppointment'));
 import second from '../../../public/assets/images/contact-us/contactUs.webp';
 import Container from 'components/Res-usable/Container/Container';
 import { MdEmail } from 'react-icons/md';
 import { IoCall, IoLocationSharp } from 'react-icons/io5';
 import Link from 'next/link';
-import BookAppointment from 'components/Book-appointment/BookAppointment';
 import { SlCalender } from "react-icons/sl";
 import { Metadata } from 'next';
 import GoogleMap from 'components/googlemap';
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 
 
 
-const ProductUs: React.FC = () => {
+const ProductUs = () => {
   return (
     <>
       <TopHero title="CONTACT US" image={second.src} />

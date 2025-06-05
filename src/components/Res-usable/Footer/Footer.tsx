@@ -202,7 +202,7 @@ const Footer: React.FC = () => {
                           isActive ? (
 
                             
-                            <IoIosArrowDown size={24} className="pt-1 transform rotate-180 opacity-60 text-primary border border-red-500" />
+                            <IoIosArrowDown size={24} className="pt-1 transform rotate-180 opacity-60 text-primary" />
                             
                           ) : (
                             <IoIosArrowDown size={24} className="pt-1 opacity-60 text-primary" /> 

@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { Suspense } from 'react'
 import Bullets from './bullets'
 import LButton from './button';
 import {banners, Blindbannerfeatures, blindcrousal, blindimages, blindsData, Blindsfeatures, BlindvideoData, Chooseusblind, chooseusblind, serviceLocationsData, Tab1categories, workingProcessblindData} from 'data/data';
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
 const Made_to_Measure_Blinds = async () => {
   const locationData = serviceLocationsData[0];
   return (
-    <>
+    <Suspense fallback='loading...'>
     <Header/>
     <div id="Main">
     <VideoSection 
@@ -89,7 +89,7 @@ const Made_to_Measure_Blinds = async () => {
     <div id="booking-form">
     <BookingForm />
     </div>
-    </>  
+    </Suspense>  
   )
 }
 

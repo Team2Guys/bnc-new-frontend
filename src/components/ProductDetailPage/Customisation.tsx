@@ -1,10 +1,14 @@
+"use client"
+
 import Container from 'components/Res-usable/Container/Container';
 import { logos } from 'data/Homedata/tabdata';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React from 'react';
 
 const Customisation = () => {
+const path = usePathname()
   return (
     <div className="relative bg-detailbanner bg-cover sm:bg-current 2xl:bg-cover w-full bg-no-repeat bg-right">
       {/* Black blur overlay */}
@@ -16,13 +20,12 @@ const Customisation = () => {
             Customisation
           </p>
           <p className="text-base lg:text-2xl text-white font-roboto drop-shadow-2xl">
-            In Motorised blinds we offer customization with a range fabrics,
-            hardware colours, and charging options.
+            In Motorised {path.includes("curtains") ? "curtains": "blinds"}, we offer customisation with a range of fabrics, hardware colours, and charging options.
           </p>
         </div>
        <div className='space-y-3'>
-         <p className="max-w-[650px] font-robotoSerif font-extrabold text-19 sm:text-3xl lg:text-[40px] text-white drop-shadow-2xl">
-          Dubai leading manufacturer{' '}
+         <p className="max-w-[660px] font-robotoSerif font-extrabold text-19 sm:text-3xl lg:text-[40px] text-white drop-shadow-2xl">
+          Dubai&apos;s leading manufacturer{' '}
           <span className="block sm:hidden">of automated blinds</span>
         </p>
         <p className="font-robotoSerif font-extrabold text-19 sm:text-3xl lg:text-[40px] text-white hidden sm:block">

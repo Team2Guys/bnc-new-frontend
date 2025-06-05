@@ -18,12 +18,6 @@ const config = {
       },
     },
     extend: {
-      screens: {
-        'xxl': '1921px',
-        'xxll': '2560px',
-        'xsm': '400px',
-        'xxs' : '320px',
-      },
       fontFamily: {
         roboto: ['var(--font-roboto)', 'sans-serif'],
         robotoSerif: ['var(--font-roboto-serif)', 'serif'],
@@ -154,7 +148,8 @@ const config = {
       },
     },
     screens: {
-      'xsm': '320px',
+      'xxs': '320px',
+      'xsm': '400px',
       'xs': '480px',
       'sm': '640px',
       // 'md': '895px',
@@ -162,6 +157,8 @@ const config = {
       'lg': '1024px',
       'xl': '1280px',
       '2xl': '1536px',
+      'xxl': '1921px',
+      'xxll': '2560px',
     }
   },
   plugins: [require("tailwindcss-animate"),
