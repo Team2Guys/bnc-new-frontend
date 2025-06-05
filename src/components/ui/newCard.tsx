@@ -11,7 +11,7 @@ const Card = ({ card }: { card: IProduct }) => {
         <div className='space-y-2'>
           <Link href={getPath(card)} className="relative block w-full h-[300px]">
           <Image
-          src={card?.posterImage?.imageUrl.replace('/upload/', '/upload/f_auto,q_auto,w_307/')}
+          src={card?.posterImage?.imageUrl}
           alt={card.title}
           fill
           className="rounded-xl object-fill"

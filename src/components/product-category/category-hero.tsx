@@ -14,7 +14,7 @@ const CategoryHero = ({ Data }: CategoryProps) => {
     <div className='bg-secondary-foreground py-4 md:py-0'>
         <Container className='grid grid-cols-12 md:gap-4 items-center px-4' >
            <div className=' col-span-12 md:col-span-8 space-y-3 order-2 md:order-1 text-primary'>
-            <h1 className='categoryHeading'>{Data.title}</h1>
+            <h1 className='categoryHeading hidden lg:block'>{Data.title}</h1>
             <p className='font-normal font-roboto text-16 pb-[24px] '>{Data?.description}</p>
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4'>
                {Data.headingchecks && Data.headingchecks.map((item, index) => (
