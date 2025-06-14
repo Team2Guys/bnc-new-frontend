@@ -111,11 +111,11 @@ const Thumbnail = ({
           <div className="relative w-full h-[340px] md:h-[450px] xl:h-[563px] bg-black flex items-center justify-center">
             <video
               className="w-full h-full object-cover"
-              controls
               autoPlay
+              controls
+              loop
               muted
               playsInline
-              loop
               src={videos[0]?.imageUrl}
             />
           </div>
@@ -173,10 +173,9 @@ const Thumbnail = ({
                 className={`cursor-pointer border-2 
                   aspect-square
                   w-20 sm:w-28 lg:w-32 xl:w-40
-                  ${
-                    adjustedIndex === activeIndex
-                      ? 'border-secondary'
-                      : 'border-transparent'
+                  ${adjustedIndex === activeIndex
+                    ? 'border-secondary'
+                    : 'border-transparent'
                   }`}
               >
                 <Image
@@ -230,10 +229,9 @@ const Thumbnail = ({
                 className={`cursor-pointer border-2 
                   aspect-square
                   w-20 sm:w-28 lg:w-32 xl:w-40
-                  ${
-                    adjustedIndex === activeIndex
-                      ? 'border-secondary'
-                      : 'border-transparent'
+                  ${adjustedIndex === activeIndex
+                    ? 'border-secondary'
+                    : 'border-transparent'
                   }`}
               >
                 <Image

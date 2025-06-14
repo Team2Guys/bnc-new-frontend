@@ -8,8 +8,6 @@ const nextConfig = {
         "bncvidoes.s3.eu-north-1.amazonaws.com",
         "bncmain.s3.eu-north-1.amazonaws.com"
     ],
-    unoptimized: true,
-
   }, 
   compiler: {
       removeConsole: process.env.NODE_ENV === 'production' ? true : false,

@@ -1,11 +1,14 @@
+"use client"
+
 import Container from 'components/Res-usable/Container/Container';
 import { logos } from 'data/Homedata/tabdata';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React from 'react';
 
-const Customisation = ({title}:{title:string}) => {
-  console.log(title,"titletitle")
+const Customisation = () => {
+const path = usePathname()
   return (
     <div className="relative bg-detailbanner bg-cover sm:bg-current 2xl:bg-cover w-full bg-no-repeat bg-right">
       {/* Black blur overlay */}
@@ -17,7 +20,7 @@ const Customisation = ({title}:{title:string}) => {
             Customisation
           </p>
           <p className="text-base lg:text-2xl text-white font-roboto drop-shadow-2xl">
-            In Motorised {title==="Motorised blinds" ? "blinds":"curtains"}, we offer customisation with a range of fabrics, hardware colours, and charging options.
+            In Motorised {path.includes("curtains") ? "curtains": "blinds"}, we offer customisation with a range of fabrics, hardware colours, and charging options.
           </p>
         </div>
        <div className='space-y-3'>

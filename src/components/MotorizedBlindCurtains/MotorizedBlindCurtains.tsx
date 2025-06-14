@@ -11,7 +11,8 @@ import { FaPlay } from "react-icons/fa";
 
 export default function MotorizeBlindCurtain() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [hideBtn, setHideBtn] = useState(false);
 
   const togglePlayPause = useCallback(() => {
     const video = videoRef.current;
@@ -20,9 +21,11 @@ export default function MotorizeBlindCurtain() {
     if (video.paused) {
       video.play().catch(() => { });
       setIsPlaying(true);
+      setHideBtn(true)
     } else {
       video.pause();
       setIsPlaying(false);
+      setHideBtn(false)
     }
   }, []);
 
@@ -58,6 +61,7 @@ export default function MotorizeBlindCurtain() {
           loop
           playsInline
           controls={false}
+          autoPlay
         />
 
         {/* Full Gradient Overlay */}
@@ -79,7 +83,7 @@ export default function MotorizeBlindCurtain() {
 
         {/* Buttons Over Video */}
         <div
-          className={`absolute inset-0 flex flex-col sm:flex-row justify-end sm:justify-center items-center sm:items-end sm:pb-6 pb-3 gap-3 sm:gap-4 sm:pr-6 transition-opacity duration-300 z-20 ${isPlaying ? "opacity-0" : "opacity-100"
+          className={`absolute inset-0 flex flex-col sm:flex-row justify-end sm:justify-center items-center sm:items-end sm:pb-6 pb-3 gap-3 sm:gap-4 sm:pr-6 transition-opacity duration-300 z-20 ${hideBtn ? "opacity-0" : "opacity-100"
             }`}
         >
           {motorizeBlindData.buttons.map(({ label, link }, i) => (

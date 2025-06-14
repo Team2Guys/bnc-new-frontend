@@ -26,6 +26,7 @@ export interface VideoItem {
   public_id?: string
    src: string
   title: string
+  poster?:string
 }
 
 export interface DetailProps {
