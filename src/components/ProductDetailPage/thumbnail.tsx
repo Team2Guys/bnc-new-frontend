@@ -113,6 +113,9 @@ const Thumbnail = ({
               className="w-full h-full object-cover"
               controls
               autoPlay
+              muted
+              playsInline
+              loop
               src={videos[0]?.imageUrl}
             />
           </div>

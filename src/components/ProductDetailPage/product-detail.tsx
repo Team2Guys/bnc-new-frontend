@@ -55,11 +55,11 @@ const ProductDetail = ({ title, filterProduct  }: IProductDetail) => {
 
         <div className='grid grid-cols-12 w-full'>
         <div className={` col-span-12 ${isMotorisedCategory ? "order-2" : "order-1"}`}>
-<QualitySection />
+        <QualitySection />
         </div>
         <div className={`col-span-12 ${isMotorisedCategory ? "order-1" : "order-2"}`}>
         <VideoGuide videos={isMotorisedCategory ? "" :filterProduct.videos } isMotorisedCategory={isMotorisedCategory}/>
-        {isMotorisedCategory && <Customisation/>   }
+        {isMotorisedCategory && <Customisation title={title}/>   }
         </div>
         </div>
         <Testimonial/>

@@ -83,7 +83,7 @@ export default function InfoTabs({ tabData,isHome , isCurtainsCategory, isMotori
 
     {/* Mobile View */}
     <div className="md:hidden">
-    <div className={`relative mb-4 w-full ${isHome? "h-[235px] object-cover" : "h-[450px] w-[280px] md:w-full mx-auto object-contain"}`}>
+    <div className={`relative mb-4 ${isHome? "h-[235px] object-cover" : "h-[450px] w-[280px] md:w-full mx-auto object-contain"}`}>
     <Image
       src={tabData[activeTab].image}
       alt={tabData[activeTab].heading}
