@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 
-const Customisation = () => {
+const Customisation = ({title}:{title:string}) => {
 const path = usePathname()
   return (
     <div className="relative bg-detailbanner bg-cover sm:bg-current 2xl:bg-cover w-full bg-no-repeat bg-right">
