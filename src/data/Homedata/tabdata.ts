@@ -52,7 +52,7 @@ export const tabData = [
 
 export const popupData: Record<string, string> = {
   installation: "We have our own in-house production and installation teams — no middlemen, no delays. That means faster lead times.",
-  fabrics: "Enjoy our 5-year warranty covering everything from fabric, parts, and components to even labour. No fine print. Just 5 years of complete peace of mind.",
+  fabrics: "Enjoy our 5-year warranty against manufacturing defects, covering everything from fabric, parts, and components to even labour. No fine print. Just 5 years of complete peace of mind.",
   production: "Visit our spacious showroom in Al Quoz 4. Explore over 30,000 fabric options and see real setups before you decide. Free parking, great coffee — and no pressure.",
   warranty: "Our team arrives with an iPad in hand and gives you a custom quote on the spot. You can adjust options instantly to match your budget. No waiting. No back and forth.",
   quality: "From fabric arrival to final stitching, every product goes through a strict 13-point quality check. Ensuring perfect results at the first time of asking.",

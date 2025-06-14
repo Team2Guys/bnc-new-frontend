@@ -26,10 +26,10 @@ const path = usePathname()
        <div className='space-y-3'>
          <p className="max-w-[660px] font-robotoSerif font-extrabold text-19 sm:text-3xl lg:text-[40px] text-white drop-shadow-2xl">
           Dubai&apos;s leading manufacturer{' '}
-          <span className="block sm:hidden">of automated blinds</span>
+          <span className="block sm:hidden">of automated {title==="Motorised blinds" ? "blinds":"curtains"}</span>
         </p>
         <p className="font-robotoSerif font-extrabold text-19 sm:text-3xl lg:text-[40px] text-white hidden sm:block">
-          of automated blinds
+          of automated {title==="Motorised blinds" ? "blinds":"curtains"}
         </p>
        </div>
 
