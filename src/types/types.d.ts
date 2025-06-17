@@ -397,3 +397,11 @@ export interface WhyChooseItem {
   review: string;
   reviewLink: string;
 }
+
+export interface ThankYouCardProps {
+  title: string;
+  description: string;
+  buttonLabel: string;
+  iconKey: 'calendar' | 'map' | 'message';
+  buttonLink: string;
+}

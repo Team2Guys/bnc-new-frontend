@@ -10,7 +10,7 @@ import {
 } from 'types/interfaces';
 import * as Yup from 'yup';
 import { Category, FormValues } from 'types/interfaces';
-import { AboutUsBlock, ISUBCATEGORY, MilestoneStepsData, ReviewData, WhyChooseItem } from 'types/types';
+import { AboutUsBlock, ISUBCATEGORY, MilestoneStepsData, ReviewData, ThankYouCardProps, WhyChooseItem } from 'types/types';
 /* eslint-disable no-useless-escape */
 export const generateSlug = (text: string) => {
   if (!text) return '';
@@ -1890,3 +1890,33 @@ export const customerReview: ReviewData = {
   reviewLink:
     'https://www.google.com/maps/place/Blinds+And+Curtains+Dubai/@25.1177148,55.2356858,984m/data=!3m1!1e3!4m8!3m7!1s0x3e5f698d0b075de1:0x223e3563a8be56be!8m2!3d25.1177148!4d55.2356858!9m1!1b1!16s%2Fg%2F11bbt9c0yz?entry=ttu&g_ep=EgoyMDI1MDUxMy4xIKXMDSoASAFQAw%3D%3D',
 };
+
+
+
+export const thankYouCards: ThankYouCardProps[] = [
+  {
+    title: 'FREE HOME DESIGN VISIT',
+    description:
+      'Our experts will visit at a time to suit you; go through colors, styles and see your dream room come to life.',
+    buttonLabel: 'Book A Free Design',
+    iconKey: 'calendar',
+    buttonLink: '/request-appointment/',
+  },
+  {
+    title: 'VISIT OUR SHOWROOM',
+    description:
+      'The best way to experience our items is to see it for yourself in our showroom, which you are welcome to visit.',
+    buttonLabel: 'Find Our Location Map',
+    iconKey: 'map',
+    buttonLink:
+      'https://www.google.com/maps/place/Two+Guys+-+Blinds+%26+Curtains+Dubai/@25.1177196,55.2331055,17z/data=!3m1!4b1!4m6!3m5!1s0x3e5f698d0b075de1:0x223e3563a8be56be!8m2!3d25.1177148!4d55.2356858!16s%2Fg%2F11bbt9c0yz?entry=tts&g_ep=EgoyMDI0MDkxOC4xKgBIAVAD',
+  },
+  {
+    title: 'TALK TO OUR SPECIALIST',
+    description:
+      'Do you want to talk with Shutters.ae Team? We would be glad to contact you back ASAP.',
+    buttonLabel: 'Send Us A Message',
+    iconKey: 'message',
+    buttonLink: 'https://wa.me/+971544945339',
+  },
+];
