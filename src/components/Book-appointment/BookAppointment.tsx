@@ -94,7 +94,7 @@ const BookAppointment: React.FC<AppointmentProps> = ({
     user_query: '',
     productoption: selectedOptions,
     other: '',
-    prefered_time: '08:30 - 12:00 PM',
+    prefered_time: '09:00 - 12:00 PM',
   };
 
   const [formData, setFormData] = useState(formInitialValues);

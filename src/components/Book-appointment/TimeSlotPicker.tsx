@@ -6,8 +6,9 @@ type TimeSlot = {
 };
 
 const preferTimeOptions: TimeSlot[] = [
-  { label: '08:30 - 12:00 PM', value: '08:30 - 12:00 PM' },
-  { label: '12:00 - 06:00 PM', value: '12:00 - 06:00 PM' },
+  { label: '09:00 - 12:00 PM', value: '09:00 - 12:00 PM' },
+  { label: '12:00 - 03:00 PM', value: '12:00 - 03:00 PM' },
+  { label: '03:00 - 06:00 PM', value: '03:00 - 06:00 PM' },
 ];
 
 type TimePickerProps = {
