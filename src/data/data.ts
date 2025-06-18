@@ -1895,14 +1895,6 @@ export const customerReview: ReviewData = {
 
 export const thankYouCards: ThankYouCardProps[] = [
   {
-    title: 'FREE HOME DESIGN VISIT',
-    description:
-      'Our experts will visit at a time to suit you; go through colors, styles and see your dream room come to life.',
-    buttonLabel: 'Book A Free Design',
-    iconKey: 'calendar',
-    buttonLink: '/request-appointment/',
-  },
-  {
     title: 'VISIT OUR SHOWROOM',
     description:
       'The best way to experience our items is to see it for yourself in our showroom, which you are welcome to visit.',
