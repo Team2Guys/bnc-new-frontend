@@ -14,6 +14,7 @@ import TimeSlotPicker from './TimeSlotPicker';
 import { IoMdCheckmark } from 'react-icons/io';
 import Image from 'next/image';
 import Loader from 'components/Loader/Loader';
+import { useRouter } from 'next/navigation'; 
 interface IAppointments {
   name: string;
   phone_number: string;
@@ -34,6 +35,7 @@ const BookAppointment: React.FC<AppointmentProps> = ({
   singlePage,
   className,
 }) => {
+  const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [sameAsPhone, setSameAsPhone] = useState(true);
   const [selectedCity, setSelectedCity] = useState('Dubai');
@@ -79,7 +81,7 @@ const BookAppointment: React.FC<AppointmentProps> = ({
     whatsapp: false,
   };
   const [contactMethods, setContactMethods] = useState<ContactMethods>(initialContactMethods);
-  const [successMessage, setSuccessMessage] = useState<string>('');
+  // const [successMessage, setSuccessMessage] = useState<string>('');
 
   const formInitialValues = {
     name: '',
@@ -94,7 +96,7 @@ const BookAppointment: React.FC<AppointmentProps> = ({
     user_query: '',
     productoption: selectedOptions,
     other: '',
-    prefered_time: '08:30 - 12:00 PM',
+    prefered_time: '09:00 - 12:00 PM',
   };
 
   const [formData, setFormData] = useState(formInitialValues);
@@ -200,23 +202,25 @@ const BookAppointment: React.FC<AppointmentProps> = ({
           })
           .filter((item) => item !== undefined);
 
-        const response = await PostAppointments({
+         await PostAppointments({
           ...withoutproductoption,
           prefered_time,
           prefered_contact_method: prefered_contact_method_list,
           product_type: productTypeArray,
           area: formData.area + ' ' + selectedCity
         });
-        console.log('response:', response);
+         router.replace('/thank-you');
         setFormData({
           ...formInitialValues,
           how_user_find_us: '',
 
         });
+       
         setTimeout(() => setFormData(formInitialValues), 0);
         setSelectedOptions(getInitialSelectedOptions());
         setContactMethods(initialContactMethods)
-        setSuccessMessage('Form Submitted Successfully🎉');
+        // setSuccessMessage('Form Submitted Successfully🎉');
+       
       } catch (error) {
         toast.error('Failed to submit the appointment. Please try again.');
       } finally {
@@ -446,12 +450,12 @@ const BookAppointment: React.FC<AppointmentProps> = ({
           >
             {loading ? <Loader color="#fff" /> : 'Submit Request'}
           </button>
-          {successMessage && (
+          {/* {successMessage && (
             <p className=" text-lg mt-2">{successMessage}
 
 
             </p>
-          )}
+          )} */}
 
         </div>
 
