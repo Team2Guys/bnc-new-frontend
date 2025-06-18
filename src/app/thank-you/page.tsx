@@ -16,7 +16,7 @@ const ThankYou = () => {
                 <h1 className="sm:text-5xl text-3xl font-extrabold mb-4">THANK YOU</h1>
                 <p className="sm:text-3xl text-2xl text-gray-700 mb-2">
                     Thank you for contacting us. One of our sales team will contact you shortly. If you’re in a hurry, feel free to call us on
-                    <Link href="tel:043933242" className=" font-bold  underline ml-1">(04) 252 2025</Link>.
+                    <Link href="tel:043933242" className=" font-bold  underline ml-1 text-secondary">(04) 252 2025</Link>.
                 </p>
                 <h2 className="text-2xl font-bold mt-10 mb-6">NEXT STEPS TO CREATING YOUR DREAM HOUSE</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 sm:gap-6 bg-white border shadow-xl">
@@ -28,7 +28,7 @@ const ThankYou = () => {
                                 <Link
                                     href={card.buttonLink}
                                     target="_blank"
-                                    className="bg-primary text-white hover:bg-secondary p-3 flex items-center justify-center"
+                                    className=" flex tems-center justify-center py-2 px-2 xl:py-3 xl:px-6 font-roboto font-semibold rounded-md text-[16px] text-secondary border-2 border-secondary hover:bg-secondary hover:text-primary"
                                 >
                                     {iconMap[card.iconKey]} {card.buttonLabel}
                                 </Link>
