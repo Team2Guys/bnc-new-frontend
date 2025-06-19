@@ -15,8 +15,8 @@ const ThankYou = () => {
             <div className="px-4 py-10 max-w-7xl mx-auto text-center ">
                 <h1 className="sm:text-5xl text-3xl font-extrabold mb-4">THANK YOU</h1>
                 <p className="sm:text-3xl text-2xl text-gray-700 mb-2">
-                    Thank you for contacting us. One of our sales team will contact you shortly. If you’re in a hurry, feel free to call us on
-                    <Link href="tel:043933242" className=" font-bold  underline ml-1 text-secondary">(04) 252 2025</Link>.
+                    One of our sales team will be in touch shortly to confirm the details. If you’re in a hurry, drop us a message on{' '}
+                    <Link href="https://wa.me/0544945339" className=" font-bold  underline ml-1 text-secondary">054 494 5339</Link> or call <Link href="tel:042522025" className=" font-bold  underline ml-1 text-secondary">04 252 2025</Link>.
                 </p>
                 <h2 className="text-2xl font-bold mt-10 mb-6">NEXT STEPS TO CREATING YOUR DREAM HOUSE</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 sm:gap-6 bg-white border shadow-xl">
