@@ -18,11 +18,11 @@ const ThankYou = () => {
                     One of our sales team will be in touch shortly to confirm the details. If you’re in a hurry, drop us a message on{' '}
                     <Link href="https://wa.me/0544945339" className=" font-bold  underline ml-1 text-secondary">054 494 5339</Link> or call <Link href="tel:042522025" className=" font-bold  underline ml-1 text-secondary">04 252 2025</Link>.
                 </p>
-                <h2 className="text-2xl font-bold mt-10 mb-6">NEXT STEPS TO CREATING YOUR DREAM HOUSE</h2>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 sm:gap-6 bg-white border shadow-xl">
                     {thankYouCards.map((card, index) => (
                         <div key={index} className="text-center sm:p-12 p-6 ">
-                            <h3 className="font-bold text-lg mb-2">{card.title}</h3>
+                            <h2 className="font-bold text-lg mb-2">{card.title}</h2>
                             <p className="text-base text-gray-600 mt-4 sm:h-24 sm:pb-0 pb-4">{card.description}</p>
                             <div className='flex items-center justify-center'>
                                 <Link

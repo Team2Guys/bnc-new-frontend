@@ -1906,7 +1906,7 @@ export const thankYouCards: ThankYouCardProps[] = [
   {
     title: 'TALK TO OUR SPECIALIST',
     description:
-      'Do you want to talk with Shutters.ae Team? We would be glad to contact you back ASAP.',
+      'Do you want to talk with blindsandcurtains.ae team? We would be glad to contact you back ASAP.',
     buttonLabel: 'Send Us A Message',
     iconKey: 'message',
     buttonLink: 'https://wa.me/+971544945339',
