@@ -68,7 +68,7 @@ const Header = () => {
               />
             ))}
           </div>
-          <p className="font-roboto text-primary">Based on 800 reviews</p>
+          <p className="font-roboto text-primary">Based on 773 reviews</p>
         </div>
       }>
         <div className="space-y-3 mt-5">
