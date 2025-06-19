@@ -1,12 +1,20 @@
 'use client'
+
 import Container from 'components/Res-usable/Container/Container'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { MdOutlineStarPurple500 } from 'react-icons/md'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { fetchReviews } from 'config/fetch'
 import { IREVIEWS } from 'types/general'
+
+const getTruncatedText = (text: string, wordLimit: number) => {
+  const words = text.split(' ')
+  return words.length > wordLimit
+    ? words.slice(0, wordLimit).join(' ') + '...'
+    : text
+}
 
 const settings = {
   dots: true,
@@ -28,11 +36,40 @@ const settings = {
 
 const Testimonial = () => {
   const [reviews, setReviews] = useState<IREVIEWS[]>([])
+  const [expandedStates, setExpandedStates] = useState<{ [key: number]: boolean }>({})
+  const [isOverflowing, setIsOverflowing] = useState<{ [key: number]: boolean }>({})
+  const textRefs = useRef<(HTMLParagraphElement | null)[]>([])
+  const [wordLimit, setWordLimit] = useState(28)
 
   useEffect(() => {
-    fetchReviews().then((data) => setReviews(data))
+    if (typeof window !== 'undefined') {
+      const width = window.innerWidth
+      setWordLimit(width < 500 ? 26 : 28)
+    }
   }, [])
 
+  useEffect(() => {
+    const result: { [key: number]: boolean } = {}
+    textRefs.current.forEach((ref, index) => {
+      if (ref) {
+        const lineHeight = parseFloat(getComputedStyle(ref).lineHeight)
+        const maxHeight = lineHeight * 3
+        result[index] = ref.scrollHeight > maxHeight
+      }
+    })
+    setIsOverflowing(result)
+  }, [reviews])
+
+  const toggleExpand = (index: number) => {
+    setExpandedStates(prev => ({
+      ...prev,
+      [index]: !prev[index],
+    }))
+  }
+
+  useEffect(() => {
+    fetchReviews().then(data => setReviews(data))
+  }, [])
 
   return (
     <div className="mt-10 space-y-5">
@@ -43,18 +80,9 @@ const Testimonial = () => {
         <Container className="grid grid-cols-12 gap-6">
           {/* Left Section */}
           <div className="col-span-12 md:col-span-4 flex flex-col items-center md:items-start space-y-4 text-center md:text-left">
-            {/* <Image
-              src="/assets/images/googleReview/google.png"
-              width={235}
-              height={34}
-              alt="Google"
-            /> */}
             <div className="flex justify-center md:justify-start">
               {[...Array(5)].map((_, i) => (
-                <MdOutlineStarPurple500
-                  key={i}
-                  className="text-[#FFD800] text-[30px]"
-                />
+                <MdOutlineStarPurple500 key={i} className="text-[#FFD800] text-[30px]" />
               ))}
             </div>
             <p className="font-roboto text-xl">
@@ -63,26 +91,52 @@ const Testimonial = () => {
             </p>
           </div>
 
-          {/* Right Section */}
+          {/* Right Section - Slider */}
           <div className="col-span-12 md:col-span-8">
             <div className="custom-test">
               <Slider {...settings}>
-                {reviews?.map((item: IREVIEWS, index: number) => (
-                  <div key={index} className="px-4 sm:mb-2 ">
-                    <div className=" space-y-3 h-full">
-                      <p className="font-robotoSerif font-bold text-xl text-center sm:text-start">{item.name}</p>
-                      <div className='flex '>
-                        {[...Array(item.starRating)].map((_, i) => (
-                          <MdOutlineStarPurple500
-                            key={i}
-                            className="text-[#FFD800] text-xl"
-                          />
-                        ))}
+                {reviews.map((item, index) => {
+                  const isExpanded = expandedStates[index]
+                  const showTruncation = isOverflowing[index] && !isExpanded
+                  const content = showTruncation
+                    ? getTruncatedText(item.ReviewsDescription, wordLimit)
+                    : item.ReviewsDescription
+
+                  return (
+                    <div key={index} className="px-4 sm:mb-2">
+                      <div className="space-y-3 h-full">
+                        <p className="font-robotoSerif font-bold text-xl text-center sm:text-start">
+                          {item.name}
+                        </p>
+                        <div className="flex justify-center xs:justify-start">
+                          {[...Array(item.starRating)].map((_, i) => (
+                            <MdOutlineStarPurple500
+                              key={i}
+                              className="text-[#FFD800] text-xl"
+                            />
+                          ))}
+                        </div>
+                        <div className="relative">
+                          <p
+                            ref={el => {
+                              textRefs.current[index] = el
+                            }}
+                            className="font-roboto text-gray-700 text-sm md:text-base text-center sm:text-start transition-all duration-300"
+                          >
+                            &quot;{content}{isOverflowing[index] && (
+                              <button
+                                onClick={() => toggleExpand(index)}
+                                className="text-gray-700 text-sm underline"
+                              >
+                                {' '}{isExpanded ? 'Read less' : 'Read more'}
+                              </button>
+                            )}&quot;
+                          </p>
+                        </div>
                       </div>
-                      <p className="font-roboto text-gray-700 text-sm md:text-base text-center sm:text-start">&quot;{item.ReviewsDescription}&quot;</p>
                     </div>
-                  </div>
-                ))}
+                  )
+                })}
               </Slider>
             </div>
           </div>
