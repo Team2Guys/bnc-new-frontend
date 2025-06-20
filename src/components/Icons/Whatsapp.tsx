@@ -7,6 +7,7 @@ import whatsapp from "../../../public/assets/images/whatsapp.webp"
 const WhatsIcon = () => {
   return (
     <Link
+    id='QAT-DIGITAL_WA'
       href={`https://wa.me/${WhatsAppInfo.number.replaceAll(' ', '')}`}
       target="_blank"
       rel="noopener noreferrer"
