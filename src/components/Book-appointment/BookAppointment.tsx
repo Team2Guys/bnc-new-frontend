@@ -209,15 +209,18 @@ const BookAppointment: React.FC<AppointmentProps> = ({
           product_type: productTypeArray,
           area: formData.area + ' ' + selectedCity
         });
-        if (window !== undefined) {
+
+        if (typeof window !== 'undefined') {
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
             event: 'pageview',
-            page: '/thank-you'
+            page: '/thank-you/',
+            page_location: window.location.origin + '/thank-you/',
           });
-
         }
+
         router.push('/thank-you');
+
         setFormData({
           ...formInitialValues,
           how_user_find_us: '',
@@ -252,6 +255,7 @@ const BookAppointment: React.FC<AppointmentProps> = ({
 
   return (
     <div
+
       className={`bg-white  text-left text-black ${className} ${singlePage ? 'w-full rounded-lg sm:px-3 sm:py-4' : 'xl:w-6/12 2xl:w-5/12 py-4 bg-white drop-shadow-md rounded-xl  mt-5'}`}
     >
       {!singlePage && (
