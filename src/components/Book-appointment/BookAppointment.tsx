@@ -14,7 +14,7 @@ import TimeSlotPicker from './TimeSlotPicker';
 import { IoMdCheckmark } from 'react-icons/io';
 import Image from 'next/image';
 import Loader from 'components/Loader/Loader';
-import { useRouter } from 'next/navigation'; 
+import { useRouter } from 'next/navigation';
 interface IAppointments {
   name: string;
   phone_number: string;
@@ -202,24 +202,32 @@ const BookAppointment: React.FC<AppointmentProps> = ({
           })
           .filter((item) => item !== undefined);
 
-         await PostAppointments({
+        await PostAppointments({
           ...withoutproductoption,
           prefered_time,
           prefered_contact_method: prefered_contact_method_list,
           product_type: productTypeArray,
           area: formData.area + ' ' + selectedCity
         });
-         router.push('/thank-you');
+        if (window !== undefined) {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'pageview',
+            page: '/thank-you'
+          });
+
+        }
+        router.push('/thank-you');
         setFormData({
           ...formInitialValues,
           how_user_find_us: '',
 
         });
-       
+
         setTimeout(() => setFormData(formInitialValues), 0);
         setSelectedOptions(getInitialSelectedOptions());
         setContactMethods(initialContactMethods)
-       
+
       } catch (error) {
         toast.error('Failed to submit the appointment. Please try again.');
       } finally {
@@ -268,8 +276,8 @@ const BookAppointment: React.FC<AppointmentProps> = ({
               </Radio>
             ))}
           </Radio.Group>
-       {  selectedCity !== "Dubai" &&  
-       <p className='text-red-500 font-medium font-roboto text-sm sm:text-xl py-4 sm:px-8'>Services available with a minimum order of 8 windows.</p>}
+          {selectedCity !== "Dubai" &&
+            <p className='text-red-500 font-medium font-roboto text-sm sm:text-xl py-4 sm:px-8'>Services available with a minimum order of 8 windows.</p>}
         </div>
         <div className='pt-4 sm:pt-8'>
           <HorizontalDatePicker

@@ -1,3 +1,5 @@
+"use client"
+
 import Breadcrumb from 'components/Res-usable/breadcrumb'
 import { thankYouCards } from 'data/data'
 import Link from 'next/link'
