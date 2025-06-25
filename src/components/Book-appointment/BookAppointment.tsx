@@ -209,7 +209,7 @@ const BookAppointment: React.FC<AppointmentProps> = ({
           product_type: productTypeArray,
           area: formData.area + ' ' + selectedCity
         });
-         router.replace('/thank-you');
+         router.push('/thank-you');
         setFormData({
           ...formInitialValues,
           how_user_find_us: '',
@@ -219,7 +219,6 @@ const BookAppointment: React.FC<AppointmentProps> = ({
         setTimeout(() => setFormData(formInitialValues), 0);
         setSelectedOptions(getInitialSelectedOptions());
         setContactMethods(initialContactMethods)
-        // setSuccessMessage('Form Submitted Successfully🎉');
        
       } catch (error) {
         toast.error('Failed to submit the appointment. Please try again.');
