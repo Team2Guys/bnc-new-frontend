@@ -113,9 +113,10 @@ export const othersData = [
   "IoIosCloseCircle",
   "6 Days a Week",
 ];
+// data/Homedata/tabdata.ts
 
-
-export const featuresinfo = [
+export const FeaturesData = {
+  blinds: [
   {
     icon: '/assets/detailpage/fast1.png',
     text: 'Fast 1-2 day installation. Zero Hassle.',
@@ -129,9 +130,41 @@ export const featuresinfo = [
     icon: '/assets/detailpage/fast3.png',
     text: 'Dedicated After Sales Care, 7 days a week',
   },
-]
+  ],
+  curtains: [
+ {
+    icon: '/assets/detailpage/fast1.png',
+    text: 'Fast 1-2 day installation. Zero Hassle.',
 
-export const Qualityfeatures = [
+  },
+  {
+    icon: '/assets/detailpage/fast2.png',
+    text: 'Free Home Consultation',
+  },
+  {
+    icon: '/assets/detailpage/fast3.png',
+    text: 'Dedicated After Sales Care, 7 days a week',
+  },
+  ],
+  shutters: [
+   {
+    icon: '/assets/detailpage/fast1.png',
+    text: 'Hassle-Free Installation',
+
+  },
+  {
+    icon: '/assets/detailpage/fast2.png',
+    text: 'Free Home Consultation',
+  },
+  {
+    icon: '/assets/detailpage/fast3.png',
+    text: 'Dedicated After Sales Care, 7 days a week',
+  },
+  ],
+};
+
+export const QualityData = {
+  blinds: [
   {
     icon: '/assets/detailpage/fast4.png',
     text: 'We are one of Dubai’s top blinds manufacturer with over 20 years of experience, expert in-house designers, and zero outsourcing.',
@@ -148,7 +181,45 @@ export const Qualityfeatures = [
     icon: '/assets/detailpage/fast6.png',
     text: 'Trusted by 18,000 + customers, a sterling 4.9 rating and over 700 + five-star reviews',
   },
-]
+  ],
+  curtains: [
+    {
+    icon: '/assets/detailpage/fast4.png',
+    text: 'We are one of Dubai’s top curtains manufacturer with over 20 years of experience, expert in-house designers, and zero outsourcing.',
+  },
+  {
+    icon: '/assets/detailpage/fast5.png',
+    text: 'We provide a solid 5-year warranty — and if you move within 2 years, we’ll take care of uninstalling and reinstalling, completely free.',
+  },
+  {
+    icon: '/assets/detailpage/fast7.png',
+    text: 'We offer made-to-measure blinds and curtains and can manufacture your order in as little as 1-2 days.',
+  },
+  {
+    icon: '/assets/detailpage/fast6.png',
+    text: 'Trusted by 18,000 + customers, a sterling 4.9 rating and over 700 + five-star reviews',
+  },
+  ],
+  shutters: [
+    {
+       icon: '/assets/detailpage/fast4.png',
+      text: 'We are one of Dubai’s top shutter manufacturers with over 10+ years of experience, expert in-house designers, and zero outsourcing.',
+    },
+    {
+       icon: '/assets/detailpage/fast5.png',
+      text: 'We offer made-to-measure shutters with expert consultation. Once your order is confirmed, delivery typically takes around 6-8 weeks.',
+    },
+    {
+      icon: '/assets/detailpage/fast7.png',
+      text: 'Custom-built shutters installed within a few days by our experts.',
+    },
+    {
+       icon: '/assets/detailpage/fast6.png',
+      text: 'Custom-built shutters installed within a few days by our experts.',
+    },
+  ],
+};
+
 
 export const staticvideos: VideoItem[] = [
   {
