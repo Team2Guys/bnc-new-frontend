@@ -167,7 +167,7 @@ export const QualityData = {
   blinds: [
   {
     icon: '/assets/detailpage/fast4.png',
-    text: 'We are one of Dubai’s top blinds manufacturer with over 20 years of experience, expert in-house designers, and zero outsourcing.',
+    text: 'We are one of Dubai’s top blinds manufacturer with over 10+ years of experience, expert in-house designers, and zero outsourcing.',
   },
   {
     icon: '/assets/detailpage/fast5.png',
@@ -185,7 +185,7 @@ export const QualityData = {
   curtains: [
     {
     icon: '/assets/detailpage/fast4.png',
-    text: 'We are one of Dubai’s top curtains manufacturer with over 20 years of experience, expert in-house designers, and zero outsourcing.',
+    text: 'We are one of Dubai’s top curtains manufacturer with over 10+ years of experience, expert in-house designers, and zero outsourcing.',
   },
   {
     icon: '/assets/detailpage/fast5.png',
