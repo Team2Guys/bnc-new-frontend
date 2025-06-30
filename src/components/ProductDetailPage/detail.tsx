@@ -1,8 +1,9 @@
 "use client"
 import CustomModal from 'components/ui/Modal'
-import { featuresinfo } from 'data/Homedata/tabdata'
+import { FeaturesData, } from 'data/Homedata/tabdata'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import React, { useState } from 'react'
 import { DetailProps } from 'types/product'
 
@@ -16,6 +17,14 @@ const Detail = ({ data, setColorImage, selectedColor }: DetailProps) => {
       alt: '',
       title: '',
     });
+    const path = usePathname();
+const category = path.includes('blinds')
+  ? 'blinds'
+  : path.includes('curtains')
+  ? 'curtains'
+  : 'shutters';
+
+const featuresinfo = FeaturesData[category];
   return (
     <div className=' space-y-2 sm:space-y-4 max-w-[650px]'>
       <h1 className='font-robotoSerif font-bold text-2xl xl:text-5xl text-primary px-2'>{data.title}</h1>
@@ -90,14 +99,14 @@ const Detail = ({ data, setColorImage, selectedColor }: DetailProps) => {
       
         <Link href="/request-appointment/" className='bg-secondary hover:opacity-65 text-primary py-3 px-6 font-semibold hidden md:block rounded-md w-full sm:w-fit font-roboto text-center '>Book A Free Visit</Link>
 
-      <div className='flex max-sm:flex-col sm:items-stretch sm:gap-2 sm:pt-5 px-2'>
-      {featuresinfo.map((feature, index) => (
-        <div key={index} className='sm:border sm:rounded-sm flex sm:flex-col gap-1 justify-center items-center sm:space-y-2 py-2 sm:px-4 sm:min-h-[140px] w-fit'>
-          <Image src={feature.icon} height={200} width={200} className=' h-10 sm:h-12 w-10 sm:w-12' alt='feature' />
-          <p className='font-roboto sm:max-w-32 sm:text-center text-base sm:text-sm'>{feature.text}</p>
-        </div>
-      ))}
+    <div className='flex max-sm:flex-col sm:items-stretch sm:gap-2 sm:pt-5 px-2'>
+  {featuresinfo.map((feature, index) => (
+    <div key={index} className='sm:border sm:rounded-sm flex sm:flex-col gap-1 justify-center items-center sm:space-y-2 py-2 sm:px-4 sm:min-h-[140px] w-fit'>
+      <Image src={feature.icon} height={200} width={200} className='h-10 sm:h-12 w-10 sm:w-12' alt='feature' />
+      <p className='font-roboto sm:max-w-32 sm:text-center text-base sm:text-sm'>{feature.text}</p>
     </div>
+  ))}
+</div>
     <CustomModal open={openModal} onClose={() => setOpenModal(false)} title={" "} width={"max-w-md"} isheader>
       <div className="p-4 flex justify-center">
         <Image
