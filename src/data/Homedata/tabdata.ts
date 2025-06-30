@@ -221,41 +221,6 @@ export const QualityData = {
 };
 
 
-export const featuresinfo = [
-  {
-    icon: '/assets/detailpage/fast1.png',
-    text: 'Fast 1-2 day installation. Zero Hassle.',
-
-  },
-  {
-    icon: '/assets/detailpage/fast2.png',
-    text: 'Free Home Consultation',
-  },
-  {
-    icon: '/assets/detailpage/fast3.png',
-    text: 'Dedicated After Sales Care, 7 days a week',
-  },
-]
-
-export const Qualityfeatures = [
-  {
-    icon: '/assets/detailpage/fast4.png',
-    text: 'We are one of Dubai’s top blinds manufacturer with over 20 years of experience, expert in-house designers, and zero outsourcing.',
-  },
-  {
-    icon: '/assets/detailpage/fast5.png',
-    text: 'We provide a solid 5-year warranty — and if you move within 2 years, we’ll take care of uninstalling and reinstalling, completely free.',
-  },
-  {
-    icon: '/assets/detailpage/fast7.png',
-    text: 'We offer made-to-measure blinds and curtains and can manufacture your order in as little as 1-2 days.',
-  },
-  {
-    icon: '/assets/detailpage/fast6.png',
-    text: 'Trusted by 18,000 + customers, a sterling 4.9 rating and over 700 + five-star reviews',
-  },
-]
-
 export const staticvideos: VideoItem[] = [
   {
      src: 'https://bncmain.s3.eu-north-1.amazonaws.com/Final+Bnc+Step+By+Step+Process+With+Voice+Over+(2).mp4',
