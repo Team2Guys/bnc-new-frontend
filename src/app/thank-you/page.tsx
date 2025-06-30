@@ -21,7 +21,7 @@ const ThankYou = () => {
                     <Link href="https://wa.me/0544945339" className=" font-bold  underline ml-1 text-secondary">054 494 5339</Link> or call <Link href="tel:042522025" className=" font-bold  underline ml-1 text-secondary">04 252 2025</Link>.
                 </p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 sm:gap-6 bg-white border shadow-xl">
+                <div className="grid grid-cols-1 md:grid-cols-2 sm:gap-6 bg-white border shadow-xl mt-10">
                     {thankYouCards.map((card, index) => (
                         <div key={index} className="text-center sm:p-12 p-6 ">
                             <h2 className="font-bold text-lg mb-2">{card.title}</h2>
