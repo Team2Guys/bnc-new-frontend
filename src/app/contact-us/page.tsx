@@ -49,7 +49,7 @@ const ProductUs = () => {
             <Link
              aria-label="Call Phone Number"
               target="_blank"
-              href={'tel:+04042522025'}
+              href={'tel:042522025'}
               className="underline"
             >
               04 252 2025

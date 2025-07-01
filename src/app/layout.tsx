@@ -9,6 +9,7 @@ import { GoogleTagManager } from '@next/third-parties/google';
 import Script from 'next/script';
 import Head from 'next/head';
 import { Roboto, Roboto_Serif } from 'next/font/google';
+import Callbutton from 'components/callbutton/callbutton';
 
 
 export const roboto = Roboto({
@@ -167,6 +168,7 @@ export default function RootLayout({
 
             {children}
             <WhatsIcon />
+            <Callbutton />
             <ToastContainer autoClose={3000} />
 
           </PathnameWrapper>
