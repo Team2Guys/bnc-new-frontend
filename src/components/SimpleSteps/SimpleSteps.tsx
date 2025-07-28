@@ -85,7 +85,7 @@ export default function SimpleSteps() {
                       />
                     </div>
                     <div className="flex flex-col justify-center pt-3">
-                      <h4 className="text-[18px] sm:text-[20px] md:text-[16px] lg:text-[18px] xl:text-[20px] font-bold text-primary font-robotoSerif">
+                      <h4 className="text-[18px] sm:text-[20px] md:text-[16px] lg:text-[18px] xl:text-[20px] font-bold text-primary font-robotoSerif capitalize">
                         {step.title}
                       </h4>
                       <p className="text-[16px] md:text-[14px] lg:text-[16px] xl:text-[20px] text-primary font-roboto">
