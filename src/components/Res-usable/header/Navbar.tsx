@@ -123,10 +123,10 @@ const Navbar = () => {
               />
             </Link>
             <div className='w-[140px] overflow-hidden hidden lg:block'>
-              {!translatorReady ?
+              {/* {!translatorReady ?
                 <div
                   className={`bg-gray-300 h-8 w-full rounded-lg animate-pulse`} />
-                :
+                : */}
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => handleLanguageSwitch('en')}
@@ -152,7 +152,7 @@ const Navbar = () => {
                     العربية
                   </button>
                 </div>
-              }
+              {/* } */}
 
             </div>
           </div>
