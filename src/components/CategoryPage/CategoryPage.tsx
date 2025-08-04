@@ -21,10 +21,10 @@ interface ICategoryPage {
   subCategories: ICategory[]
 }
 
-const CategoryPage = ({ title, relatedProducts, products, categories , subCategories }: ICategoryPage) => {
+const CategoryPage = ({ title, relatedProducts, products, categories, subCategories }: ICategoryPage) => {
   const pathname = usePathname();
 
-  const [filteredProducts, setFilteredProducts] =useState<IProduct[]>(relatedProducts);
+  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>(relatedProducts);
   let filterSubCat = subCategories?.find((subCat) => subCat.title === title);
   const filterProducts = () => {
     const filtered = products?.filter((product) => product.CategoryId === filterSubCat?.CategoryId,
@@ -67,29 +67,28 @@ const CategoryPage = ({ title, relatedProducts, products, categories , subCatego
       <Container className="sm:pt-10 pb-10 sm:pb-14 flex flex-col gap-3 sm:gap-10 items-center">
         {filteredProducts?.map((product, index) => {
           let product_Images = prod_finder_handler(product);
-
           return (
             <div
               key={index}
               className={`flex flex-col gap-5 items-center justify-between mt-5 sm:mt-10 md:flex-row ${index % 2 === 0 ? 'md:flex-row-reverse' : ''} justify-between`}
             >
-              <div className="w-full md:w-1/2">
+              <div className={`w-full md:w-1/2 flex ${index % 2 === 0 ? 'md:justify-start' : 'md:justify-end' }`}>
                 <div className="font-bold text-xl xs:text-2xl tracking-wider space-y-3 block sm:hidden pb-2">
                   <h2 className="tracking-[.6rem] mb-2">
                     Roller Blinds in Dubai, UAE{' '}
                   </h2>
                 </div>
-                {product_Images && (
+                <div className='relative w-full max-w-[550px] h-[280px] sm:h-[300px] md:h-[450px]'>
                   <Image
-                    className="w-full h-[280px] sm:h-[300px] md:h-[450px] rounded-xl"
-                    src={product_Images.Imagesurl}
-                    height={500}
-                    width={500}
+                    className="rounded-xl"
+                    src={product_Images ? product_Images.Imagesurl : product.imageUrls.at(-1)?.imageUrl || ''}
+                    fill
                     alt={product.title}
-                    priority 
-                    loading='eager'
+                    priority
+                    fetchPriority='high'
+                    sizes='40vw'
                   />
-                )}
+                </div>
               </div>
               <div className="w-full md:w-1/2 flex flex-col gap-4">
                 <div>
@@ -111,7 +110,7 @@ const CategoryPage = ({ title, relatedProducts, products, categories , subCatego
 
                 <div className="mt-5 sm:mt-10 mx-auto">
                   <Link
-                    href={`/blinds/roller-blinds/${generateSlug(product.title === 'Sunscreen/Transparent Blinds'? 'sunscreen-roller-blinds/': product.title)+"/"
+                    href={`/blinds/roller-blinds/${generateSlug(product.title === 'Sunscreen/Transparent Blinds' ? 'sunscreen-roller-blinds/' : product.title) + "/"
                       }`}
                     className="px-6 sm:px-8 py-4 bg-secondary rounded-md text-white hover:bg-primary max-xs:text-14"
                   >

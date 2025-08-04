@@ -112,19 +112,21 @@ const Navbar = () => {
 
         <Container className="flex w-full justify-between h-12 sm:h-24 max-lg:px-2 items-center gap-1 md:gap-3 lg:gap-0 overflow-hidden ">
           <div className='flex gap-4 items-center'>
-            <Link href='/' className="w-[79px] h-[50px] relative md:w-[122px] md:h-[50px]">
+            <Link href='/' className="w-[79px] h-[35px] relative md:w-[120px] md:h-[48px]">
               <Image
                 fill
-                loading='lazy'
+                fetchPriority='high'
+                priority
                 src='/assets/images/logomain.webp'
                 alt="Logo"
+                sizes='(max-width: 680px) 40px, 120px'
               />
             </Link>
             <div className='w-[140px] overflow-hidden hidden lg:block'>
-              {!translatorReady ?
+              {/* {!translatorReady ?
                 <div
-                  className={`bg-gray-300 h-8 w-full rounded-lg`} />
-                :
+                  className={`bg-gray-300 h-8 w-full rounded-lg animate-pulse`} />
+                : */}
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => handleLanguageSwitch('en')}
@@ -150,7 +152,7 @@ const Navbar = () => {
                     العربية
                   </button>
                 </div>
-              }
+              {/* } */}
 
             </div>
           </div>
@@ -243,15 +245,15 @@ const Navbar = () => {
                         height={20}
                         className="rounded-full size-6"
                       />
-                      <span>English</span>
+                      <span className='notranslate'>English</span>
                     </button>
                     <div className='bg-primary w-[1px] h-6'></div>
                     <button
-                      className='w-fit py-1 mb-1 text-start rounded-md font-medium font-robotoSerif transition-colors duration-200 text-primary'
+                      className='w-fit py-1 mb-1 text-start rounded-md font-medium font-robotoSerif transition-colors duration-200 text-primary notranslate'
                       onClick={() => handleLanguageSwitch('ar')}
                       disabled={!translatorReady || language === 'ar'}
                     >
-                      عربی
+                      العربية
                     </button>
                   </div>
                 }

@@ -108,7 +108,7 @@ const Thumbnail = ({
     <div>
       <Slider {...mainSettings} ref={slider1} className="overflow-hidden outline-0">
         {isMotorisedCategory && videos.length > 0 && (
-          <div className="relative w-full h-[340px] md:h-[450px] xl:h-[563px] bg-black flex items-center justify-center">
+          <div className="relative w-full h-[340px] xsm:h-[400px] lg:h-[450px] xl:h-[563px] bg-black flex items-center justify-center">
             <video
               className="w-full h-full object-cover"
               autoPlay
@@ -121,13 +121,14 @@ const Thumbnail = ({
           </div>
         )}
         {displayImages.map((img, index) => (
-          <div key={index}>
+          <div key={index} className='relative w-full h-[340px] xsm:h-[400px] lg:h-[450px] xl:h-[563px]'>
             <Image
               src={img.imageUrl}
-              alt={img.altText || ''}
-              width={800}
-              height={600}
-              className="w-full h-[340px] md:h-[450px] xl:h-[563px] object-cover"
+              alt={img.altText || `Thumbnail${index}`}
+              fill
+              priority
+              fetchPriority='high'
+              sizes='(max-width: 680px) 100vw, 40vw'
             />
           </div>
         ))}
@@ -141,7 +142,7 @@ const Thumbnail = ({
                 setActiveIndex(0);
                 slider1.current?.slickGoTo(0);
               }}
-              className={`cursor-pointer border-2 
+              className={`cursor-pointer border-2 relative
                 aspect-square
                 w-20 sm:w-28 lg:w-32 xl:w-40
                 ${activeIndex === 0 ? 'border-secondary' : 'border-transparent'}`}
@@ -150,9 +151,7 @@ const Thumbnail = ({
                 <Image
                   src={videoThumbnail}
                   alt="Video thumbnail"
-                  width={160}
-                  height={160}
-                  className="w-full h-full object-cover"
+                  fill
                 />
               ) : (
                 <div className="w-full h-full bg-black flex items-center justify-center text-white">
@@ -170,9 +169,8 @@ const Thumbnail = ({
                   setActiveIndex(adjustedIndex);
                   slider1.current?.slickGoTo(adjustedIndex);
                 }}
-                className={`cursor-pointer border-2 
-                  aspect-square
-                  w-20 sm:w-28 lg:w-32 xl:w-40
+                className={`cursor-pointer border-2 relative
+                  aspect-square w-20 sm:w-28 lg:w-32 xl:w-40
                   ${adjustedIndex === activeIndex
                     ? 'border-secondary'
                     : 'border-transparent'
@@ -181,9 +179,8 @@ const Thumbnail = ({
                 <Image
                   src={img.imageUrl}
                   alt={img.altText || ''}
-                  width={160}
-                  height={160}
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes='10vw'
                 />
               </div>
             );
@@ -197,7 +194,7 @@ const Thumbnail = ({
                 setActiveIndex(0);
                 slider1.current?.slickGoTo(0);
               }}
-              className={`cursor-pointer border-2 
+              className={`cursor-pointer border-2 relative
                 aspect-square
                 w-20 sm:w-28 lg:w-32 xl:w-40
                 ${activeIndex === 0 ? 'border-secondary' : 'border-transparent'}`}
@@ -206,9 +203,7 @@ const Thumbnail = ({
                 <Image
                   src={videoThumbnail}
                   alt="Video thumbnail"
-                  width={160}
-                  height={160}
-                  className="w-full h-full object-cover"
+                  fill
                 />
               ) : (
                 <div className="w-full h-full bg-black flex items-center justify-center text-white">
@@ -226,7 +221,7 @@ const Thumbnail = ({
                   setActiveIndex(adjustedIndex);
                   slider1.current?.slickGoTo(adjustedIndex);
                 }}
-                className={`cursor-pointer border-2 
+                className={`cursor-pointer border-2 relative
                   aspect-square
                   w-20 sm:w-28 lg:w-32 xl:w-40
                   ${adjustedIndex === activeIndex
@@ -237,9 +232,7 @@ const Thumbnail = ({
                 <Image
                   src={img.imageUrl}
                   alt={img.altText || ''}
-                  width={160}
-                  height={160}
-                  className="w-full h-full object-cover"
+                  fill
                 />
               </div>
             );

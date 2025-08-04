@@ -1,10 +1,9 @@
 import { fetchSingleCategory, fetchSingleCategorymain, } from "config/fetch";
 import Product from "../../../components/Product";
-import { ICategory, IProduct } from "types/types";
+import { IProduct } from "types/types";
 import { headers } from "next/headers";
 import { Metadata } from "next";
 import { links } from "data/header_links";
-import NotFound from "app/not-found";
 import Script from "next/script";
 import { notFound } from "next/navigation";
 import { getSubcategoriesByCategory } from "utils/helperFunctions";
@@ -16,9 +15,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const productName = (await params).productName + "/";
 
 
-  let filterCategory = await fetchSingleCategory(productName)
+  let Category = await fetchSingleCategory(productName)
 
-  if (!filterCategory) {
+  if (!Category) {
     notFound();
   }
   const headersList = await headers();
@@ -27,8 +26,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const pathname = headersList.get('x-invoke-path') || '/';
 
   const fullUrl = `${protocol}://${domain}${pathname}`;
-
-  let Category = filterCategory as ICategory;
 
   let ImageUrl = Category?.posterImage?.imageUrl || 'blindsandcurtains';
   let alt = Category?.posterImage?.altText || 'blindsandcurtains';
@@ -66,13 +63,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const Products = async ({ params }: Props) => {
   const slug = (await params).productName;
 
-  let category = await fetchSingleCategorymain(slug)  
-  const matchingLink: any = links.find((link) => slug.includes(link.href.replace(/^\//, '')),);
-
-
+  const category = await fetchSingleCategorymain(slug)
   if (!category) {
-    return <NotFound />;
+    return notFound();
   }
+  const matchingLink: any = links.find((link) => slug.includes(link.href.replace(/^\//, '')),);
 
   const subcategoryList = getSubcategoriesByCategory(category.title);
   const lowerSubcategorySet = new Set(subcategoryList.map((sub) => sub.toLowerCase().trim()));

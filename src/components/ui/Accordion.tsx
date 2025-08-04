@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+'use client'
+import { useState } from 'react';
 import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from 'react-icons/md';
 import { AccordionProps } from 'types/product';
 
