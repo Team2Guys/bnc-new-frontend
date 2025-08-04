@@ -1,5 +1,3 @@
-'use client';
-import React from 'react';
 import { ICategory, IProduct } from 'types/types';
 import Breadcrumb from './Res-usable/breadcrumb';
 import CategoryHero from './product-category/category-hero';
@@ -21,7 +19,7 @@ const Product = ({
       <Breadcrumb title={categories.breakcrum || categories.title}/>
       <CategoryHero Data={categories}/>
       <AllProduct title={categories.productpageHeading} Products={filteredItems || []} />
-      <SimpleSteps/>
+      <SimpleSteps />
       <Faqs Data={categories}/>
     </>
   );

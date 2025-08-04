@@ -26,7 +26,7 @@ export const fetchProducts = async () => {
 
 
 
-  
+
 
 };
 
@@ -62,6 +62,10 @@ export async function fetchSingleCategorymain(customUrl: string) {
       next: { tags: ['categories'] },
     });
     const data = await res.json();
+    if (!res.ok) {
+      console.error('API error:', data.message);
+      return null;
+    }
     return data;
   } catch (error: any) {
     console.error('fetchSingleCategory error:', error.message);
@@ -197,7 +201,7 @@ export const filterProd = (
 ): IProduct | undefined => {
   return prod?.find((sub) => {
     const title = ChangedProductUrl(product as string);
-    
+
     const title_flag = title === generateSlug(sub.title);
     return (
       title_flag && Cateories.some((item: number) => item === sub.CategoryId)
@@ -267,34 +271,34 @@ export async function createReview(payload: any) {
 export async function updateReview(payload: any) {
   try {
     console.log(payload, "payload")
-     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/updated_reviews`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-  });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/updated_reviews`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
 
-  if (!res.ok) {
-    throw new Error('Failed to update review');
-  }
+    if (!res.ok) {
+      throw new Error('Failed to update review');
+    }
 
-  return await res.json();
+    return await res.json();
   } catch (error) {
-   console.log(error, "error") 
+    console.log(error, "error")
   }
- 
+
 }
 
 
 export async function deleteReview(id: string | number) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/${id}`
     , {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
   if (!res.ok) {
     throw new Error('Failed to update review');

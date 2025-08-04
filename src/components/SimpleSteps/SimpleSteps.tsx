@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Container from "components/Res-usable/Container/Container";
 import { workingProcessData } from "data/SellerSlider";
 import Image from "next/image";
