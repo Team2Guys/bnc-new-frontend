@@ -32,7 +32,7 @@ const QualitySection = () => {
         <div className="grid grid-cols-12 gap-4 lg:gap-4 items-center">
           <div className="col-span-12 md:col-span-5">
             <div className="w-full h-[250px] xsm:h-[300px] xs:h-[350px] sm:h-[430px] md:h-[300px] xl:h-[325px] 2xl:h-[400px]">
-              <Image src={imageSrc} alt={category} fill className="!relative rounded" />
+              <Image src={imageSrc} alt={category} fill className="!relative rounded" sizes='40vw' />
             </div>
           </div>
 

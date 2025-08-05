@@ -31,11 +31,11 @@ export interface VideoItem {
 
 export interface DetailProps {
   data: IProduct;
-  selectedColor: string;
-  setColorImage: React.Dispatch<React.SetStateAction<string>>;
+  selectedColor?: string;
+  setColorImage?: React.Dispatch<React.SetStateAction<string>>;
 }
 
-type TabDataItem = {
+export type TabDataItem = {
   icon: string;
   title: string;
   heading: string;

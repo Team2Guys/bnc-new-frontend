@@ -8,7 +8,7 @@ const FAQPage = () => {
     <div>
       <SectionHeader
         title="Frequently Asked Questions"
-        backgroundImage="/assets/Homenew/faqsbanner.webp" 
+        backgroundImage="/assets/images/Home/faqsbanner.webp" 
       />
       <Container>
       <div className="flex justify-center items-center">

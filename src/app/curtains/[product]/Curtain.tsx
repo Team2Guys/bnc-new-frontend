@@ -1,4 +1,3 @@
-'use client';
 import ProductDetail from 'components/ProductDetailPage/product-detail';
 import Script from 'next/script';
 import { PRODUCS_PROPS } from 'types/interfaces';

@@ -1,5 +1,7 @@
 import React, { FormEventHandler, SetStateAction } from 'react';
 import { ICategory, IProduct } from './types';
+import { VideoItem } from './product';
+import Slider from 'react-slick';
 
 React.FormEvent<HTMLFormElement>;
 export interface USRPROPS {
@@ -478,4 +480,17 @@ export interface WhyChooseUsProps {
   paragraph: string;
   features: Feature[];
   backgroundImage: string;
+}
+
+export interface ThumbnailProps {
+  images?: { imageUrl: string; altText?: string; colorCode?: string }[];
+  selectedColor?: string;
+  setColorImage?: React.Dispatch<React.SetStateAction<string>>;
+  videos: VideoItem[];
+  videoThumbnail?: string;
+  isMotorisedCategory: boolean
+}
+
+export interface SliderWithGoTo extends Slider {
+  slickGoTo: (index: number, dontAnimate?: boolean) => void;
 }
