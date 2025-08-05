@@ -380,3 +380,49 @@ export const fetchRedirectUrlById = async (url: string) => {
     console.error(error);
   }
 };
+
+
+
+
+export const getMonthlyAppointments = async (
+  token?: string | undefined,
+) => {
+  try {
+    // if (!token) throw new Error('token not found');
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/admins/getMonthlyAppointments`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        next: { tags: ['ecomerece'] },
+      },
+    );
+
+    let data = await response.json()
+    return data;
+  } catch (error) {
+    console.error('Error fetching admin records:', error);
+    throw error;
+  }
+};
+export const getLast7DaysStats = async (
+  token?: string | undefined,
+) => {
+  try {
+    // if (!token) throw new Error('token not found');
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/admins/getLast7DaysStats`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        next: { tags: ['ecomerece'] },
+      },
+    );
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching admin records:', error);
+    throw error;
+  }
+};

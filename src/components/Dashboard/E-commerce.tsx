@@ -1,54 +1,22 @@
+'use client'
 import React from 'react';
 import CardDataStats from './CardDataStats';
-import Cookies from 'js-cookie';
 import { useAppSelector } from 'components/Others/HelperRedux';
 import { IoMdEye } from 'react-icons/io';
 import { IoBagOutline } from 'react-icons/io5';
-import { Skeleton } from 'antd';
-import { useQuery } from '@tanstack/react-query';
-import { adminRecords } from 'config/fetch';
-import { IRECORDS } from 'types/types';
 import { TbCalendarCheck, TbCategory } from 'react-icons/tb';
 import { FaBloggerB } from "react-icons/fa6";
+import { MONTHLYGRAPH, WEEKLYGRAPH } from 'types/general';
+import { IRECORDS } from 'types/types';
+import dynamic from 'next/dynamic';
+import ProtectedRoute from 'hooks/AuthHookAdmin';
+const ChartTwo = dynamic(()=>import('./Charts/ChartTwo'),{ssr:false})
+const ChartOne = dynamic(()=>import('./Charts/ChartOne'),{ssr:false} )
 
-
-const ECommerce: React.FC = () => {
-  const token = Cookies.get('2guysAdminToken');
-  const superAdmintoken = Cookies.get('superAdminToken');
-  let Finaltoken = superAdmintoken ? superAdmintoken : token;
-
-  const {
-    data: records,
-    error,
-    isLoading,
-  } = useQuery<IRECORDS>(
-    {
-      queryKey: ['records', Finaltoken],
-      queryFn: () => adminRecords(Finaltoken),
-      enabled: !!Finaltoken,
-    }
-  );
-
+const ECommerce= ({ records,chartData,weeklyChart }: { records: IRECORDS,chartData:MONTHLYGRAPH, weeklyChart :WEEKLYGRAPH  }) => {
   const { loggedInUser } = useAppSelector((state) => state.usersSlice);
 
-  if (isLoading)
-    return (
-      <div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 2xl:gap-7.5">
-          <>
-            <Skeleton avatar active />
-            <Skeleton avatar active />
-            <Skeleton avatar active />
-            <Skeleton avatar active />
-            <Skeleton avatar active />
-            <Skeleton avatar active />
-            <Skeleton avatar active />
-          </>
-        </div>
-      </div>
-    );
-  if (error instanceof Error) return <div>Error: {error.message}</div>;
-
+  console.log("records" ,weeklyChart)
   const canVeiwAdmins = loggedInUser && (loggedInUser.role == 'Admin' ? loggedInUser.canVeiwAdmins : true);
   const canCheckProfit =
     loggedInUser &&
@@ -141,9 +109,12 @@ const ECommerce: React.FC = () => {
 
       </div>
 
-
+     <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
+        <ChartOne chartData={chartData} />
+        <ChartTwo chartData={weeklyChart} />
+      </div>
     </>
   );
 };
 
-export default ECommerce;
+export default ProtectedRoute(ECommerce)
