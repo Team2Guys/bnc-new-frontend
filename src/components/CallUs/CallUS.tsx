@@ -64,7 +64,7 @@ const CallUS = () => {
                <Image src='/assets/images/callus/callus.webp' fill loading="lazy" className='!relative hidden sm:block' alt='call us image' />
                <div className='sm:absolute top-0 w-full h-full pt-8 sm:py-6 lg:py-8 sm:ps-8 sm:pe-14 2xl:pe-20 flex flex-col justify-center gap-4 items-center sm:items-start sm:justify-between'>
                   <h2 className='text-center sm:text-start text-primary-foreground text-24 sm:text-28 xl:text-[40px] font-semibold font-robotoSerif leading-tight lg:max-w-md'>Ready to Decide? Let&apos;s Set It Up Instantly!</h2>
-                  <Link href="tel:042522025"  className='flex gap-4 items-center'>
+                  <Link href="tel:042522025" target='_blank'  className='flex gap-4 items-center'>
                      <span>
                         <FiPhoneCall className='size-12 xl:size-16 text-primary-foreground' />
                      </span>

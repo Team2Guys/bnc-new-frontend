@@ -1,6 +1,5 @@
 import Container from 'components/Res-usable/Container/Container'
 import Accordion from 'components/ui/Accordion'
-import React from 'react'
 import { CategoryProps } from 'types/product'
 
 const Faqs = ({ Data }: CategoryProps) => {

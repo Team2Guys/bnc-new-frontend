@@ -11,8 +11,8 @@ import { headers } from 'next/headers';
 import { IProduct } from 'types/types';
 import { meta_props } from 'types/interfaces';
 import { urls } from 'data/urls';
-import NotFound from 'app/not-found';
 import { BlindSchemaMap } from 'data/blinds-schema';
+import { notFound } from 'next/navigation';
 const Cateories = [2];
 
 export async function generateMetadata({params}: meta_props): Promise<Metadata> {
@@ -25,7 +25,9 @@ export async function generateMetadata({params}: meta_props): Promise<Metadata> 
 
   const filteredProduct = filterProd(products, product, Cateories);
   const filteredSubCategory = filtereCategory(categories, product, Cateories);
-
+  if (!filteredSubCategory && !filteredProduct) {
+    return notFound();
+  }
   const headersList = await headers();
   const domain = headersList.get('x-forwarded-host') || headersList.get('host') || '';
   const protocol = headersList.get('x-forwarded-proto') || 'https';
@@ -81,16 +83,15 @@ const CommercialPage = async ({ params }: meta_props) => {
   const [ products, cateories, subCategories] = await Promise.all([fetchProducts(),fetchCategories(), fetchSubCategories()]);
 
   const filteredSubCategory = filtereCategory(subCategories, product, Cateories);
-
   const filteredProduct = filterProd(products, product, Cateories);
+  if (!filteredSubCategory && !filteredProduct) {
+    return notFound();
+  }
 
   const matchingUrl = urls.find((url) => `${url.errorUrl}/` === `/blinds/${product}/`);
 
   if (matchingUrl) {
-    return <NotFound />
-  }
-  if (!filteredSubCategory && !filteredProduct) {
-    return <NotFound />;
+    return notFound();
   }
 
   const productTitle = filteredProduct?.title || filteredSubCategory?.title || '';

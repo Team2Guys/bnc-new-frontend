@@ -1,11 +1,11 @@
 
-import React, { Suspense } from 'react'
+import { Suspense } from 'react'
 import dynamic from 'next/dynamic';
 import type { Metadata } from 'next'
 import Script from 'next/script';
 import { schema } from 'data/schema';
 import logo from '../../public/assets/images/blind-curtains-dubai/blinds-curtains-dubai1.png';
-const MainHero = dynamic(() => import('components/Hero/main-hero'));
+import MainHero from 'components/Hero/main-hero';
 const SellerSlider = dynamic(() => import('components/BestSellerSlider/SellerCard'));
 const SimpleSteps = dynamic(() => import('components/SimpleSteps/SimpleSteps'));
 const MotorizeBlindCurtain = dynamic(() => import('components/MotorizedBlindCurtains/MotorizedBlindCurtains'));

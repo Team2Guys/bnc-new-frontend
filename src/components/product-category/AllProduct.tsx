@@ -1,7 +1,6 @@
 import Container from 'components/Res-usable/Container/Container'
 import Card from 'components/ui/newCard'
 import { desiredOrder } from 'data/new-data'
-import React from 'react'
 import { CategoryProps } from 'types/product'
 import { IProduct } from 'types/types'
 

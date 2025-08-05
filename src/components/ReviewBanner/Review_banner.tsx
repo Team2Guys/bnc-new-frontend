@@ -4,7 +4,6 @@ import { ReviewBackground, ReviewBackgrounddashktop } from "components/svg/revie
 import { customerReview } from "data/data";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 
 export default function ReviewBanner() {
@@ -18,7 +17,7 @@ export default function ReviewBanner() {
           <div className="space-y-3 text-center">
             <Image src={"/assets/images/googleReview/google.png"} width={235} height={34} alt="logo" />
             <div className="flex  justify-center items-center">
-              {Array(5).fill(null).map((star, index) => (
+              {Array(5).fill(null).map((_, index) => (
                 <MdOutlineStarPurple500 key={index} className="text-[#FFD800] text-36" />
               ))}
             </div>

@@ -2,7 +2,6 @@ import Container from 'components/Res-usable/Container/Container'
 import Circletick from 'components/svg/circle-tick'
 import GreenCircle from 'components/svg/green-circle';
 import Image from 'next/image'
-import React from 'react'
 import { CategoryProps } from 'types/product';
 
 const CategoryHero = ({ Data }: CategoryProps) => {
@@ -29,7 +28,7 @@ const CategoryHero = ({ Data }: CategoryProps) => {
            <div className='col-span-12 md:col-span-4 order-1 md:order-2'>
             <p className='font-robotoSerif font-bold text-2xl text-center md:hidden block mb-3'>{Data.title}</p>
             <div className='relative w-full h-[230px] md:h-[320px] '>
-            <Image src={Data.posterImage?.imageUrl || ""} className='rounded-xl object-fill' loading='eager' fill alt={"Hero"}/>
+            <Image src={Data.posterImage?.imageUrl || ""} className='rounded-xl object-fill' fetchPriority='high' priority fill alt={Data.title} sizes='40vw' quality={100} />
             </div>
            </div>
         </Container>
