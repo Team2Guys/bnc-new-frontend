@@ -2,7 +2,7 @@
 
 import Container from 'components/Res-usable/Container/Container'
 import { blindsVideos, curtainsVideos, shuttersVideos, staticvideos } from 'data/Homedata/tabdata'
-import React, { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useMemo } from 'react'
 import { BsPlayFill } from 'react-icons/bs'
 import { VideoItem } from 'types/product'
 import { IoClose } from 'react-icons/io5'
@@ -25,10 +25,13 @@ const VideoGuide = ({ isMotorisedCategory }: { videos?: VideoItem[], isMotorised
     selectedVideos = curtainsVideos
   }
 
-  const allVideos: VideoItem[] =
-    selectedVideos.length > 0
-      ? [staticvideos[0], selectedVideos[0], staticvideos[1]]
-      : [...staticvideos]
+const allVideos = useMemo<VideoItem[]>(() => {
+  if (selectedVideos.length > 0 && staticvideos.length >= 2) {
+    return [staticvideos[0], selectedVideos[0], staticvideos[1]];
+  }
+  return [...staticvideos];
+}, [selectedVideos, staticvideos]);
+
 
   useEffect(() => {
     setPausedStates(Array(allVideos.length).fill(true))
@@ -96,7 +99,7 @@ const VideoGuide = ({ isMotorisedCategory }: { videos?: VideoItem[], isMotorised
 
         {showModal && activeVideo && (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4"
+            className="fixed top-0 inset-0 z-50 flex items-center justify-center bg-black/70 px-4 !m-0"
             onClick={(e) => {
               if (e.target === e.currentTarget) {
                 setShowModal(false)

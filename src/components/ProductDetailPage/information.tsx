@@ -108,13 +108,13 @@ const Information = ({ privarcyImage, privacySectoin }: InformationProps) => {
 
             {/* Image Section */}
             {privarcyImage?.imageUrl && (
-              <div className="col-span-12 md:col-span-6 order-1 md:order-2">
+              <div className="col-span-12 md:col-span-6 order-1 md:order-2 h-56 sm:h-96 md:h-[600px] w-full">
                 <Image
-                  className="h-56 sm:h-96 md:h-[600px] w-full object-cover"
+                  className="object-cover !relative"
                   src={privarcyImage.imageUrl}
-                  width={600}
-                  height={600}
+                  fill
                   alt="information"
+                  sizes='40vw'
                 />
               </div>
             )}

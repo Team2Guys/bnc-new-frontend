@@ -1,5 +1,6 @@
-import CategoryPage from 'components/CategoryPage/CategoryPage';
-import ProductDetail from 'components/ProductDetailPage/product-detail';
+import dynamic from 'next/dynamic';
+const CategoryPage = dynamic(() => import('components/CategoryPage/CategoryPage'));
+const ProductDetail = dynamic(() => import('components/ProductDetailPage/product-detail'));
 import Script from 'next/script';
 import { PRODUCS_PROPS } from 'types/interfaces';
 

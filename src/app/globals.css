@@ -365,17 +365,6 @@ ol {
 }
 
 
-.custom-lang-select .ant-select-item-option:hover {
-  background-color: var(--secondry) !important;
-  /* or any Tailwind color like #f0f0f0 */
-  color: black;
-}
-
-.custom-lang-select .ant-select-item-option-selected {
-  background-color: var(--color-secondary, #FFD700);
-  color: black;
-}
-
 .custom-radio .ant-radio-inner {
   border-color: black;
 }

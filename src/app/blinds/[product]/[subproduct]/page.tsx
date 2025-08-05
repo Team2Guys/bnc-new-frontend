@@ -98,15 +98,12 @@ const Page = async ({ params }: SlugPageProps) => {
   );
   const matchingUrl = urls.find((url) => `${url.errorUrl}/` === `/blinds/roller-blinds/${slug}/`);
 
-  if (matchingUrl) {
+  if (matchingUrl || !filteredProduct) {
     return <NotFound />
   }
-  if (!filteredProduct) {
-    return <NotFound />;
-  }
+
   const productTitle = filteredProduct?.title || '';
   const matchedSchema = BlindSchemaMap[productTitle];
-  console.log(filteredProduct,'filteredProduct')
   return (
     <>
       {matchedSchema && (

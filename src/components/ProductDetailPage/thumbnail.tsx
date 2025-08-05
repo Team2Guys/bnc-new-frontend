@@ -1,31 +1,20 @@
 'use client';
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useMemo } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Image from 'next/image';
-import { VideoItem } from 'types/product';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
+import { SliderWithGoTo, ThumbnailProps } from 'types/interfaces';
 
-interface ThumbnailProps {
-  images?: { imageUrl: string; altText?: string; colorCode?: string }[];
-  selectedColor?: string;
-  setColorImage?: React.Dispatch<React.SetStateAction<string>>;
-  videos: VideoItem[];
-  title: string;
-  videoThumbnail?: string;
-}
-interface SliderWithGoTo extends Slider {
-  slickGoTo: (index: number, dontAnimate?: boolean) => void;
-}
 
 const Thumbnail = ({
   images = [],
   selectedColor,
   setColorImage,
   videos,
-  title,
   videoThumbnail,
+  isMotorisedCategory
 }: ThumbnailProps) => {
   const [nav1, setNav1] = useState<SliderWithGoTo | undefined>(undefined);
   const [nav2, setNav2] = useState<SliderWithGoTo | undefined>(undefined);
@@ -34,12 +23,13 @@ const Thumbnail = ({
   const slider1 = useRef<SliderWithGoTo | null>(null);
   const slider2 = useRef<SliderWithGoTo | null>(null);
 
-  const isMotorisedCategory =
-    title?.toLowerCase().includes('motorised blinds') ||
-    title?.toLowerCase().includes('motorised curtains');
 
-  const displayImages =
-    isMotorisedCategory && videos.length > 0 ? images.slice(1) : images;
+  const displayImages = useMemo(() => {
+    return isMotorisedCategory && videos.length > 0
+      ? images.slice(1)
+      : images;
+  }, [isMotorisedCategory, videos, images]);
+
 
   useEffect(() => {
     setNav1(slider1.current ?? undefined);
@@ -128,7 +118,7 @@ const Thumbnail = ({
               fill
               priority
               fetchPriority='high'
-              sizes='(max-width: 680px) 100vw, 40vw'
+              sizes='40vw'
             />
           </div>
         ))}
