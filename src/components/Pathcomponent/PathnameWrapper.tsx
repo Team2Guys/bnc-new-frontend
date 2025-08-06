@@ -1,7 +1,8 @@
 'use client';
 import { usePathname } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import Header from 'components/Res-usable/header/Header';
-import Footer from 'components/Res-usable/Footer/Footer';
+const Footer = dynamic(() => import('components/Res-usable/Footer/Footer'), { ssr: false });
 import { RootState } from 'redux/store';
 import { useSelector } from 'react-redux';
 import { ReactNode } from 'react';
@@ -21,12 +22,7 @@ const PathnameWrapper = ({ children }: { children: ReactNode }) => {
       {withoutHeaderPages.includes(pathname) || splited_urls.includes('dashboard') ? null : (
         <>
         {splited_urls.includes('blog') || splited_urls.includes('product-guarantees') || pathname === '/faqs/' || pathname === '/about-us/' || isNotFoundPage  || splited_urls.includes('request-appointment') || splited_urls.includes('estimator') ? null : (
-
-            <>
-              {/* <Guarrenty /> */}
-              {/* {!hiddenTestimonialPages.includes(pathname) && <Testimonial />} */}
               <CallUS />
-            </>
           )}
           <Footer />
         </>

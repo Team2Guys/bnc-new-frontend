@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
+import { useState, useRef, useEffect, useCallback, useMemo, TouchEvent, SyntheticEvent } from 'react'
 import dynamic from 'next/dynamic'
 import Container from 'components/Res-usable/Container/Container'
 import VideoIcon from '../../../public/assets/images/videoicon.webp'
@@ -79,11 +79,11 @@ export default function VideoReelsSlider({ reelsData }: { reelsData: Reel[] }) {
     }
   }, [popupVideoIndex])
 
-  const onTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+  const onTouchStart = (e: TouchEvent<HTMLDivElement>) => {
     touchStartX.current = e.changedTouches[0].clientX
   }
 
-  const onTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
+  const onTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
     touchEndX.current = e.changedTouches[0].clientX
 
     if (touchStartX.current !== null && touchEndX.current !== null) {
@@ -117,7 +117,7 @@ export default function VideoReelsSlider({ reelsData }: { reelsData: Reel[] }) {
   )
 
   const handleLoadedMetadata = useCallback(
-    (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    (e: SyntheticEvent<HTMLVideoElement, Event>) => {
       const video = e.currentTarget
       const naturalWidth = video.videoWidth
       const naturalHeight = video.videoHeight

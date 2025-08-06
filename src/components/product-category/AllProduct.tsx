@@ -15,7 +15,7 @@ const AllProduct = ({ Products, title }: CategoryProps) => {
         {title}
       </h2>
 
-      <div className='grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 px-6 sm:px-4 md:px-0'>
+      <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 xs:gap-4 xs:px-6 sm:px-4 md:px-0'>
         {sortedProducts?.map((product: IProduct, index: number) => (
           <Card card={product} key={index} />
         ))}
