@@ -56,7 +56,7 @@ export default function InfoTabs({ tabData,isHome , isCurtainsCategory, isMotori
       <div className="hidden md:block">
         <div className="grid md:grid-cols-2 gap-6 lg:gap-16 2xl:gap-24 items-center md:py-8 p-2">
           <div className="flex flex-col justify-center items-start space-y-5 lg:space-y-12">
-            <h1 className="font-robotoSerif font-semibold text-20 lg:text-[40px] text-primary sm:pr-10">{tabData[activeTab].heading}</h1>
+            <h2 className="font-robotoSerif font-semibold text-20 lg:text-[40px] text-primary sm:pr-10">{tabData[activeTab].heading}</h2>
             <p className="text-[16px] font-normal font-roboto lg:text-[20px] text-primary text-justify" dangerouslySetInnerHTML={{__html:tabData[activeTab].description}}/>
             <Link href={tabData[activeTab].href} className=" border bg-secondary text-primary font-semibold text-16 font-roboto px-6 py-2 md:py-4 rounded-xl hover:bg-primary-dark transition hover:opacity-65">
               {tabData[activeTab].buttonText}
