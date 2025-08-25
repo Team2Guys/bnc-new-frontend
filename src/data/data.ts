@@ -156,7 +156,7 @@ export const aboutUsData: AboutUsBlock[] = [
     mainHeading: 'How It All Began — From the UK to Dubai',
     mainHeadingSize: 'sm:text-2xl text-24 text-[#3E3F42]',
     content: `It all started with Shiraz, our managing partner, who has spent over 20 years working within the retail business in the UK. Multiple achievements were collected over the years, including Scottish retailer of the year (twice), Top Customer Service Accolades on 5 occasions and even a place in the top 100 most influential fashion icons. In 2014, Shiraz moved to Dubai with his family, ready for a new start and bigger dreams. That move led to something special — the beginning of Blinds & Curtains Furnitures Trading. A brand built on years of experience and strong family values. Over the years, it was felt that customer’s would join the Blinds & Curtains family at the end of their renovation journeys. 1000’s fell in love with the company and brand ethics, but by the time they were ready to cover their windows, they had already purchased their furnitures and flooring options. This led to real deep thinking process that lasted for several months before it was decided to re-brand. And that was the birth of Two Guys Home Furnishings.`,
-    contentSize: 'text-base text-start',   
+    contentSize: 'text-base text-start',
     imageUrl: '/assets/images/about-us/aboutus.webp',
   },
   {
@@ -166,19 +166,19 @@ export const aboutUsData: AboutUsBlock[] = [
     mainHeadingSize: 'sm:text-5xl text-2xl text[#3E3F42]',
     content: `At Two Guys, we don’t just hire staff — we have built a team of over 60 people who care about your home like it’s their own. Our team is friendly, honest, and never pushy. Shiraz, our founder, notices every little detail — even a crooked curtain! That’s how much we care. When you choose us, you’re part of the Two Guys family.`,
     contentSize: 'text-base text-start',
-     imageUrl: '/assets/images/about-us/only-sources.webp',
+    imageUrl: '/assets/images/about-us/only-sources.webp',
   },
   {
     shortHeading: 'Our First Big Step in Dubai',
-      shortHeadingSize: 'sm:text-2xl text-20 text-[#3E3F42] font-roboto font-semibold',
+    shortHeadingSize: 'sm:text-2xl text-20 text-[#3E3F42] font-roboto font-semibold',
     mainHeading: 'From a Tiny Office to the First Two Guys Showroom',
     mainHeadingSize: 'sm:text-5xl text-2xl text[#3E3F42]',
     content: `We started in a small, cosy office in Port Saeed — no fancy setup, just hard work and learning the Dubai market.
 In 2017, we opened our first showroom in Oud Metha as Blinds and Curtains and quickly became a trusted name.
 With loyal customers and growing demand, we evolved into Two Guys Home Furnishings — built on service, trust, and homes that feel just right.`,
     contentSize: 'text-base text-start',
-   
-     imageUrl: '/assets/images/about-us/IMG_7006.webp',
+
+    imageUrl: '/assets/images/about-us/IMG_7006.webp',
   },
 ];
 
@@ -933,17 +933,17 @@ export const whyChooseData: WhyChooseItem[] = [
     description: " We bring decades of hands-on experience to every home we furnish.",
   },
   {
-     icon: "/assets/images/about-us/why2.svg",
+    icon: "/assets/images/about-us/why2.svg",
     title: "In-house Production, <br /> No Outsourcing",
     description: " Everything’s made by us —since 2016, so you get full quality, no compromises.",
   },
   {
-     icon: "/assets/images/about-us/why3.svg",
+    icon: "/assets/images/about-us/why3.svg",
     title: "No Pushy Sales.<br />  Just Happy Customers",
     description: "We guide, not pressure — because your comfort always comes first.",
   },
   {
-     icon: "/assets/images/about-us/why4.svg",
+    icon: "/assets/images/about-us/why4.svg",
     title: "Crafted with Care. <br />  Installed with Confidence.",
     description: 'From stitching to setup, we handle every detail with precision and pride.',
   },
@@ -957,7 +957,27 @@ export const blindsSubcategories = [
   "Blackout Roman Blinds",
   "Vertical Blinds",
   "Motorised Blinds",
-  "Sheer Roman blinds"
+  "Sheer Roman blinds",
+  "Roller Blinds",
+  "Roman Blinds",
+  "Skylight Blinds",
+  "Patricia Blinds",
+  "Honeycomb Blinds",
+  "Panel Blinds",
+  "Aluminium Blinds",
+  "Sheer Horizon Blinds",
+  "Translucent Blinds",
+  "Zebra Blinds",
+  "Printed Blinds",
+  "Living Room Blinds",
+  "Kitchen Blinds",
+  "Dining Room Blinds",
+  "Staircase Blinds",
+  "Bathroom Blinds",
+  "Kids Room Blinds",
+  "Bedroom Blinds",
+  "Balcony Blinds Dubai",
+  "Zipline Outdoor Blinds",
 ];
 
 export const shuttersSubcategories = [
@@ -967,6 +987,17 @@ export const shuttersSubcategories = [
   "Bypass Shutters",
   "Solid Panel Shutters",
   "Tier On Tier Shutters",
+  "Dark Wood Shutters",
+  "Bold Colours Shutters",
+  "Light Wood Shutters",
+  "Cafe Style Shutters",
+  "Outdoor Shutters",
+  "Living Room Shutters",
+  "Dining Room Shutters",
+  "Kitchen Room Shutters",
+  "Bedroom Shutters",
+  "Staircase Shutters",
+  "White Shutters"
 ];
 
 export const curtainsSubcategories = [
@@ -978,6 +1009,30 @@ export const curtainsSubcategories = [
   "Blackout Curtains",
   "Motorised Curtains",
   "Wave Sheer & Blackout Curtains",
+  "Office Curtains",
+  "Home Curtains",
+  "Plain Curtains",
+  "Patterned Curtains",
+  "Natural Fabric Curtains",
+  "Kids Prints Curtains",
+  "Textured Curtains",
+  "Geometric Curtains",
+  "Goblet Pleat Curtains",
+  "Velvet Curtains",
+  "Stripes Curtains",
+  "Tab Top Curtains",
+  "Pencil Pleat Curtains",
+  "Dining Room Curtains",
+  "Bedroom Curtains",
+  "Hotel Curtains",
+  "Kids Room Curtains",
+  "Living room Curtains",
+  "Pelmet Curtains",
+  "Linen Curtains",
+  "Chiffon Curtains",
+  "Pinch Pleat Curtains",
+  "Staircase Curains",
+  "Conservatory Curtains",
 ];
 
 export const customerReview: ReviewData = {
