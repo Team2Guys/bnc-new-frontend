@@ -12,6 +12,7 @@ import {
 import dynamic from 'next/dynamic'
 import Container from 'components/Res-usable/Container/Container'
 import VideoIcon from '../../../public/assets/images/videoicon.webp'
+import videoPoster from '../../../public/videos/video-poster.webp'
 import Image from 'next/image'
 import { reelsData } from 'data/SellerSlider'
 
@@ -26,13 +27,11 @@ export default function VideoReelsSlider() {
   const [isVisible, setIsVisible] = useState(false)
 
   const totalVideos = reelsData.length
-
   const videoRefs = useRef<HTMLVideoElement[]>([])
   const touchStartX = useRef<number | null>(null)
   const touchEndX = useRef<number | null>(null)
-  const minSwipeDistance = 50
-
   const sliderRef = useRef<HTMLDivElement>(null)
+  const minSwipeDistance = 50
 
   const goToPrevious = useCallback(
     () => setActiveIndex((prev) => (prev === 0 ? totalVideos - 1 : prev - 1)),
@@ -44,15 +43,13 @@ export default function VideoReelsSlider() {
     [totalVideos]
   )
 
-  // Intersection Observer to detect if slider is in viewport
+  // Intersection Observer for visibility
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting)
       },
-      {
-        threshold: 0.3,
-      }
+      { threshold: 0.3 }
     )
 
     if (sliderRef.current) {
@@ -60,37 +57,26 @@ export default function VideoReelsSlider() {
     }
 
     return () => {
-      if (sliderRef.current) {
-        observer.unobserve(sliderRef.current)
-      }
+      if (sliderRef.current) observer.unobserve(sliderRef.current)
     }
   }, [])
 
-  // Detect mobile resize
+  // Mobile detection
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 640)
     checkMobile()
-
-    const handleResize = () => {
-      window.requestAnimationFrame(checkMobile)
-    }
-
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  // Autoplay slider only when visible and no popup
+  // Auto-slide if visible and no popup
   useEffect(() => {
     if (!isVisible || popupVideoIndex !== null) return
-
-    const interval = setInterval(() => {
-      goToNext()
-    }, 5000)
-
+    const interval = setInterval(goToNext, 5000)
     return () => clearInterval(interval)
-  }, [activeIndex, popupVideoIndex, goToNext, isVisible])
+  }, [goToNext, popupVideoIndex, isVisible])
 
-  // Play/pause videos based on active index and visibility
+  // Play/pause active video
   useEffect(() => {
     videoRefs.current.forEach((video, index) => {
       if (video) {
@@ -104,12 +90,10 @@ export default function VideoReelsSlider() {
     })
   }, [activeIndex, isVisible])
 
-  // Manage body scroll when popup is shown
+  // Body scroll lock when popup opens
   useEffect(() => {
     document.body.style.overflow = popupVideoIndex !== null ? 'hidden' : ''
-    if (popupVideoIndex === null) {
-      setVideoSize(null)
-    }
+    if (popupVideoIndex === null) setVideoSize(null)
   }, [popupVideoIndex])
 
   const onTouchStart = (e: TouchEvent<HTMLDivElement>) => {
@@ -118,16 +102,11 @@ export default function VideoReelsSlider() {
 
   const onTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
     touchEndX.current = e.changedTouches[0].clientX
-
     if (touchStartX.current !== null && touchEndX.current !== null) {
       const distance = touchStartX.current - touchEndX.current
-      if (distance > minSwipeDistance) {
-        goToNext()
-      } else if (distance < -minSwipeDistance) {
-        goToPrevious()
-      }
+      if (distance > minSwipeDistance) goToNext()
+      else if (distance < -minSwipeDistance) goToPrevious()
     }
-
     touchStartX.current = null
     touchEndX.current = null
   }
@@ -149,75 +128,80 @@ export default function VideoReelsSlider() {
     [activeIndex, totalVideos]
   )
 
-  const handleLoadedMetadata = useCallback(
-    (e: SyntheticEvent<HTMLVideoElement, Event>) => {
-      const video = e.currentTarget
-      const naturalWidth = video.videoWidth
-      const naturalHeight = video.videoHeight
+  const handleLoadedMetadata = useCallback((e: SyntheticEvent<HTMLVideoElement>) => {
+    const video = e.currentTarget
+    const maxWidth = window.innerWidth * 0.9
+    const maxHeight = window.innerHeight * 0.9
 
-      const maxWidth = window.innerWidth * 0.9
-      const maxHeight = window.innerHeight * 0.9
+    let width = video.videoWidth
+    let height = video.videoHeight
 
-      let width = naturalWidth
-      let height = naturalHeight
+    if (width > maxWidth) {
+      const ratio = maxWidth / width
+      width = maxWidth
+      height *= ratio
+    }
+    if (height > maxHeight) {
+      const ratio = maxHeight / height
+      height = maxHeight
+      width *= ratio
+    }
 
-      if (width > maxWidth) {
-        const ratio = maxWidth / width
-        width = maxWidth
-        height = height * ratio
-      }
-      if (height > maxHeight) {
-        const ratio = maxHeight / height
-        height = maxHeight
-        width = width * ratio
-      }
+    setVideoSize({ width, height })
+  }, [])
 
-      setVideoSize({ width, height })
-    },
-    []
-  )
-
-  // Memoized rendering to reduce re-renders
+  // 🔥 Dynamic Lazy Load Videos
   const videoElements = useMemo(
     () =>
-      reelsData.map((item, index) => (
-        <div
-          key={index}
-          onClick={() => {
-            setActiveIndex(index)
-            setTimeout(() => {
-              setPopupVideoIndex(index)
-            }, 100)
-          }}
-          className={`absolute transition-all duration-500 ease-in-out cursor-pointer ${getPositionClass(
-            index
-          )}`}
-        >
-          <div className="relative sm:w-[500px] sm:h-[670px] w-[150px] h-[280px] rounded-2xl overflow-hidden shadow-lg">
-            <div className="absolute top-2 right-2 z-40">
-              <Image
-                src={VideoIcon}
-                alt="icon"
-                className="w-6 h-6 sm:w-12 sm:h-12 object-contain"
-                loading="lazy"
-              />
+      reelsData.map((item, index) => {
+        const shouldLoad =
+          index === activeIndex ||
+          index === (activeIndex + 1) % totalVideos ||
+          index === (activeIndex - 1 + totalVideos) % totalVideos
+
+        return (
+          <div
+            key={index}
+            onClick={() => {
+              setActiveIndex(index)
+              setTimeout(() => setPopupVideoIndex(index), 100)
+            }}
+            className={`absolute transition-all duration-500 ease-in-out cursor-pointer ${getPositionClass(
+              index
+            )}`}
+          >
+            <div className="relative sm:w-[500px] sm:h-[670px] w-[150px] h-[280px] rounded-2xl overflow-hidden shadow-lg">
+              <div className="absolute top-2 right-2 z-40">
+                <Image
+                  src={VideoIcon}
+                  alt="icon"
+                  className="w-6 h-6 sm:w-12 sm:h-12 object-contain"
+                  loading="lazy"
+                />
+              </div>
+
+              {shouldLoad ? (
+                <video
+                  ref={(el) => {
+                    if (el) videoRefs.current[index] = el
+                  }}
+                  key={item.videoUrl}
+                  src={item.videoUrl}
+                  className="w-full h-full object-cover"
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  poster={videoPoster.src}
+                />
+              ) : (
+                <div className="w-full h-full bg-black" />
+              )}
             </div>
-            <video
-              ref={(el) => {
-                if (el) videoRefs.current[index] = el
-              }}
-              key={item.videoUrl}
-              src={item.videoUrl}
-              className="w-full h-full object-cover"
-              loop
-              muted
-              playsInline
-              preload="auto"
-            />
           </div>
-        </div>
-      )),
-    [reelsData, getPositionClass]
+        )
+      }),
+    [reelsData, getPositionClass, activeIndex, totalVideos]
   )
 
   return (

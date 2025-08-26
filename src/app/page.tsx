@@ -6,7 +6,8 @@ import MainHero from 'components/Hero/main-hero';
 import { fetchProducts } from 'config/fetch';
 import InfoTabs from 'components/NewHomecomponents/info';
 import ComparisonTable from 'components/NewHomecomponents/comparisontabble';
-import SellerSlider from 'components/BestSellerSlider/SellerCard';
+import dynamic from 'next/dynamic';
+const SellerSlider = dynamic(() => import("components/BestSellerSlider/SellerCard"))
 import SimpleSteps from 'components/SimpleSteps/SimpleSteps';
 import MotorizeBlindCurtain from 'components/MotorizedBlindCurtains/MotorizedBlindCurtains';
 import VideoReelsSlider from 'components/VideoSlider/VideoSlider';
