@@ -214,9 +214,9 @@ useEffect(()=>{
 
   return (
     <div className="mt-10">
-      <div className="flex justify-between mb-4 items-center flex-wrap text-black dark:text-white">
+      <div className="flex justify-between mb-4 items-center text-black dark:text-white">
         <input
-          className="primary-input"
+          className="primary-input w-fit"
           type="search"
           placeholder="Search Product"
           value={searchTerm}

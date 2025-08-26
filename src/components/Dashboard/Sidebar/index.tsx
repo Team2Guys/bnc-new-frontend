@@ -9,13 +9,17 @@ import {
   MdKeyboardArrowLeft,
   MdOutlineDashboard,
   MdOutlineKeyboardArrowDown,
+  MdProductionQuantityLimits,
 } from 'react-icons/md';
-import { BiCategoryAlt } from 'react-icons/bi';
-import { GrCodeSandbox, GrUserAdmin } from 'react-icons/gr';
+import {  GrUserAdmin } from 'react-icons/gr';
 import { useAppSelector } from 'components/Others/HelperRedux';
 import { IoSettingsOutline } from 'react-icons/io5';
-import { TfiShoppingCartFull } from 'react-icons/tfi';
 import { TbGardenCartOff } from 'react-icons/tb';
+import { BsArrowReturnRight } from 'react-icons/bs';
+import { ImBlog } from "react-icons/im";
+import { CgListTree } from 'react-icons/cg';
+import { FaChalkboardUser } from 'react-icons/fa6';
+
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -26,8 +30,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const { loggedInUser }: any = useAppSelector((state) => state.usersSlice);
   let superAdmin = loggedInUser && loggedInUser.role !== 'Admin';
 
-  const path  = usePathname().split("/").filter((boolean)=>boolean).join("/");
-let pathname = "/"+path
+  const path = usePathname().split("/").filter((boolean) => boolean).join("/");
+  let pathname = "/" + path
 
   const trigger = useRef<any>(null);
   const sidebar = useRef<any>(null);
@@ -73,7 +77,7 @@ let pathname = "/"+path
   return (
     <aside
       ref={sidebar}
-      className={`absolute left-0 top-0 z-50 flex h-screen w-72 flex-col overflow-y-hidden bg-primary  dark:bg-dashboardDark duration-300 ease-linear lg:static lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+      className={`absolute left-0 top-0 z-50 flex h-screen w-72 flex-col overflow-y-hidden bg-secondary dark:border-r dark:bg-dashboardDark duration-300 ease-linear lg:static lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
     >
       <div className="flex items-center justify-between gap-2 px-6 py-5 lg:py-2">
@@ -101,40 +105,51 @@ let pathname = "/"+path
               MENU
             </h3>
 
-            <ul className="mb-6 flex flex-col gap-1">
+            <ul className="mb-6 flex flex-col gap-4">
+
+              {/* ================= Dashboard ================= */}
               <SidebarLinkGroup activeCondition={pathname === '/dashboard'}>
                 {(handleClick, open) => {
                   return (
                     <>
+                      {/* Main Link */}
                       <Link
                         href="/dashboard"
-                        className={`group dashboard_sidebar_links ${pathname === '/dashboard' &&
-                          'dashboard_sidebar_Active_links'
-                          }`}
+                       className={`relative flex items-center gap-2 group dashboard_sidebar_links 
+    ${pathname === '/dashboard' ? 'dashboard_sidebar_Active_links' : ''}`}
                         onClick={(e) => {
                           e.preventDefault();
-                          sidebarExpanded
-                            ? handleClick()
-                            : setSidebarExpanded(true);
+                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
                         }}
                       >
-                        <MdOutlineDashboard size={20} className="text-white" />
-                        Dashboard
+                        <MdOutlineDashboard size={20} className="text-white transition-transform duration-500 " />
+                        <span className="ml-2">Dashboard</span>
                         <MdOutlineKeyboardArrowDown
-                          size={30}
-                          className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current text-white ${open && 'rotate-180'
+                          size={24}
+                          className={`MdOutlineKeyboardArrowDown ${open ? 'rotate-180' : 'rotate-0'
                             }`}
                         />
                       </Link>
+
+                      {/* Dropdown */}
                       <div
-                        className={`translate transform overflow-hidden ${!open && 'hidden'
+                        className={`db_dropdown ${open ? 'max-h-60 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
                           }`}
                       >
-                        <ul className="mb-3 mt-3 flex flex-col gap-2 pl-6">
-                          <li>
+                        <ul className="db_ui_link">
+                          <li
+                            className={`db_ul_li_link ${open ? 'opacity-100' : 'opacity-0'
+                              }`}
+                          >
+                            <BsArrowReturnRight
+                              size={25}
+                              className="db_main_link"
+                            />
                             <Link
                               href="/dashboard"
-                              className={`group dashboard_sidebar_links   ${pathname === '/dashboard' && 'text-white '
+                              className={`sidebar_inner_link text-white ${pathname === '/dashboard'
+                                  ? ' db_inner_sub_cat_link'
+                                  : 'db_inner_sub_cat_link_hover '
                                 }`}
                             >
                               eCommerce
@@ -147,52 +162,61 @@ let pathname = "/"+path
                 }}
               </SidebarLinkGroup>
 
-              <SidebarLinkGroup
-                activeCondition={pathname === '/dashboard/category'}
-              >
+              {/* ================= Category ================= */}
+              <SidebarLinkGroup activeCondition={pathname === '/dashboard/category'}>
                 {(handleClick, open) => {
                   return (
                     <>
                       <Link
                         href="#"
-                        className={`group dashboard_sidebar_links ${pathname === '/dashboard/category' &&
-                          'dashboard_sidebar_Active_links'
+                        className={`relative flex items-center gap-2 group dashboard_sidebar_links ${pathname === '/dashboard/category' && 'dashboard_sidebar_Active_links'
                           }`}
                         onClick={(e) => {
                           e.preventDefault();
-                          sidebarExpanded
-                            ? handleClick()
-                            : setSidebarExpanded(true);
+                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
                         }}
                       >
-                        <BiCategoryAlt size={20} className="text-white" />
-                        Category
+                        <CgListTree size={20} className="text-white" />
+                        <span className="ml-2">Category</span>
                         <MdOutlineKeyboardArrowDown
-                          size={30}
-                          className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current text-white ${open && 'rotate-180'
+                          size={24}
+                          className={`MdOutlineKeyboardArrowDown ${open ? 'rotate-180' : 'rotate-0'
                             }`}
                         />
                       </Link>
+
+                      {/* Dropdown */}
                       <div
-                        className={`translate transform overflow-hidden ${!open && 'hidden'
+                        className={`db_dropdown ${open ? 'max-h-60 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
                           }`}
                       >
-                        <ul className="mb-3 mt-3 flex flex-col gap-2 pl-6">
-                          <li>
+                        <ul className="db_ui_link">
+                          <li
+                            className={`db_ul_li_link ${open ? 'opacity-100' : 'opacity-0'
+                              }`}
+                          >
+                            <BsArrowReturnRight size={25} className="db_main_link" />
                             <Link
                               href="/dashboard/category"
-                              className={`group dashboard_sidebar_links   mt-2 ${pathname === '/dashboard/category' &&
-                                'text-white'
+                              className={`sidebar_inner_link ${pathname === '/dashboard/category'
+                                  ? 'db_inner_sub_cat_link'
+                                  : 'db_inner_sub_cat_link_hover'
                                 }`}
                             >
                               View Categories
                             </Link>
                           </li>
-                          <li>
+
+                          <li
+                            className={`sub_cat_link ${open ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
+                              }`}
+                          >
+                            <BsArrowReturnRight size={25} className="db_main_link" />
                             <Link
                               href="/dashboard/subcategory"
-                              className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in- text-white mt-2.5 hover:scale-105 ${pathname === '/dashboard/category' &&
-                                'text-slate-200'
+                              className={`sidebar_inner_link ${pathname === '/dashboard/subcategory'
+                                  ? 'db_inner_sub_cat_link'
+                                  : 'db_inner_sub_cat_link_hover'
                                 }`}
                             >
                               View Sub Categories
@@ -205,43 +229,46 @@ let pathname = "/"+path
                 }}
               </SidebarLinkGroup>
 
-              <SidebarLinkGroup
-                activeCondition={pathname === '/dashboard/products'}
-              >
+              {/* ================= Products ================= */}
+              <SidebarLinkGroup activeCondition={pathname === '/dashboard/products'}>
                 {(handleClick, open) => {
                   return (
                     <>
                       <Link
-                        href="/dashboard/Products"
-                        className={`group dashboard_sidebar_links  ${pathname === '/dashboard/products' &&
-                          'dashboard_sidebar_Active_links'
+                        href="/dashboard/products"
+                        className={`relative flex items-center gap-2 group dashboard_sidebar_links ${pathname === '/dashboard/products' && 'dashboard_sidebar_Active_links'
                           }`}
                         onClick={(e) => {
                           e.preventDefault();
-                          sidebarExpanded
-                            ? handleClick()
-                            : setSidebarExpanded(true);
+                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
                         }}
                       >
-                        <GrCodeSandbox size={20} className="text-white" />
-                        Products
+                        <MdProductionQuantityLimits size={20} className="text-white" />
+                        <span className="ml-2">Products</span>
                         <MdOutlineKeyboardArrowDown
-                          size={30}
-                          className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current text-white ${open && 'rotate-180'
+                          size={24}
+                          className={`MdOutlineKeyboardArrowDown ${open ? 'rotate-180' : 'rotate-0'
                             }`}
                         />
                       </Link>
+
+                      {/* Dropdown */}
                       <div
-                        className={`translate transform overflow-hidden ${!open && 'hidden'
+                        className={`db_dropdown ${open ? 'max-h-60 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
                           }`}
                       >
-                        <ul className="mb-3 mt-3 flex flex-col gap-2 pl-6">
-                          <li>
+                        <ul className="db_ui_link">
+                          <li
+                            className={`db_ul_li_link ${open ? 'opacity-100' : 'opacity-0'
+                              }`}
+                          >
+                            <BsArrowReturnRight size={25} className="db_main_link" />
                             <Link
                               href="/dashboard/products"
-                              className={`group dashboard_sidebar_links   ${pathname === 'dashboard/products' &&
-                                'dashboard_sidebar_Active_links'
-                                } `}
+                              className={`sidebar_inner_link ${pathname === '/dashboard/products'
+                                  ? 'db_inner_sub_cat_link'
+                                  : 'db_inner_sub_cat_link_hover'
+                                }`}
                             >
                               View Products
                             </Link>
@@ -253,55 +280,62 @@ let pathname = "/"+path
                 }}
               </SidebarLinkGroup>
 
-
-
-              <SidebarLinkGroup
-                activeCondition={pathname === '/dashboard/blog'}
-              >
+              {/* ================= Blog ================= */}
+              <SidebarLinkGroup activeCondition={pathname === '/dashboard/blog'}>
                 {(handleClick, open) => {
                   return (
                     <>
                       <Link
                         href="/dashboard/blog"
-                        className={`group dashboard_sidebar_links  ${pathname === '/dashboard/blog' &&
-                          'dashboard_sidebar_Active_links'
+                        className={`relative flex items-center gap-2 group dashboard_sidebar_links ${pathname === '/dashboard/blog' && 'dashboard_sidebar_Active_links'
                           }`}
                         onClick={(e) => {
                           e.preventDefault();
-                          sidebarExpanded
-                            ? handleClick()
-                            : setSidebarExpanded(true);
+                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
                         }}
                       >
-                        <GrCodeSandbox size={20} className="text-white" />
-                        Blog
+                        <ImBlog size={20} className="text-white" />
+                        <span className="ml-2">Blog</span>
                         <MdOutlineKeyboardArrowDown
-                          size={30}
-                          className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current text-white ${open && 'rotate-180'
+                          size={24}
+                          className={`MdOutlineKeyboardArrowDown ${open ? 'rotate-180' : 'rotate-0'
                             }`}
                         />
                       </Link>
+
+                      {/* Dropdown */}
                       <div
-                        className={`translate transform overflow-hidden ${!open && 'hidden'
+                        className={`db_dropdown ${open ? 'max-h-60 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
                           }`}
                       >
-                        <ul className="mb-3 mt-3 flex flex-col gap-2 pl-6">
-                          <li>
+                        <ul className="db_ui_link">
+                          <li
+                            className={`db_ul_li_link ${open ? 'opacity-100' : 'opacity-0'
+                              }`}
+                          >
+                            <BsArrowReturnRight size={25} className="db_main_link" />
                             <Link
                               href="/dashboard/blog"
-                              className={`group dashboard_sidebar_links   ${pathname === 'dashboard/blog' &&
-                                'dashboard_sidebar_Active_links'
-                                } `}
+                              className={`sidebar_inner_link ${pathname === '/dashboard/blog'
+                                  ? 'db_inner_sub_cat_link'
+                                  : 'db_inner_sub_cat_link_hover'
+                                }`}
                             >
                               View Blog
                             </Link>
                           </li>
-                          <li>
+
+                          <li
+                            className={`sub_cat_link ${open ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
+                              }`}
+                          >
+                            <BsArrowReturnRight size={25} className="db_main_link" />
                             <Link
                               href="/dashboard/comment"
-                              className={`group dashboard_sidebar_links   ${pathname === 'dashboard/blog' &&
-                                'dashboard_sidebar_Active_links'
-                                } `}
+                              className={`sidebar_inner_link ${pathname === '/dashboard/comment'
+                                  ? 'db_inner_sub_cat_link'
+                                  : 'db_inner_sub_cat_link_hover'
+                                }`}
                             >
                               View Comment
                             </Link>
@@ -314,43 +348,48 @@ let pathname = "/"+path
               </SidebarLinkGroup>
 
 
-              <SidebarLinkGroup
-                activeCondition={pathname === '/dashboard/appointments'}
-              >
+
+              {/* ================= Appointments ================= */}
+              <SidebarLinkGroup activeCondition={pathname === '/dashboard/appointments'}>
                 {(handleClick, open) => {
                   return (
                     <>
+                      {/* Main Link */}
                       <Link
                         href="/dashboard/appointments"
-                        className={`group dashboard_sidebar_links ${pathname === '/dashboard/appointments' &&
-                          'dashboard_sidebar_Active_links'
+                        className={`relative flex items-center gap-2 group dashboard_sidebar_links ${pathname === '/dashboard/appointments' && 'dashboard_sidebar_Active_links'
                           }`}
                         onClick={(e) => {
                           e.preventDefault();
-                          sidebarExpanded
-                            ? handleClick()
-                            : setSidebarExpanded(true);
+                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
                         }}
                       >
-                        <TfiShoppingCartFull size={20} className="text-white" />
-                        Appointments
+                        <FaChalkboardUser size={20} className="text-white" />
+                        <span className="ml-2">Appointments</span>
                         <MdOutlineKeyboardArrowDown
-                          size={30}
-                          className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current text-white ${open && 'rotate-180'
+                          size={24}
+                          className={`MdOutlineKeyboardArrowDown ${open ? 'rotate-180' : 'rotate-0'
                             }`}
                         />
                       </Link>
+
+                      {/* Dropdown */}
                       <div
-                        className={`translate transform overflow-hidden ${!open && 'hidden'
+                        className={`db_dropdown ${open ? 'max-h-40 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
                           }`}
                       >
-                        <ul className="mb-3 mt-3 flex flex-col gap-2 pl-6">
-                          <li>
+                        <ul className="db_ui_link">
+                          <li
+                            className={`db_ul_li_link ${open ? 'opacity-100' : 'opacity-0'
+                              }`}
+                          >
+                            <BsArrowReturnRight size={22} className="text-white" />
                             <Link
                               href="/dashboard/appointments"
-                              className={`group dashboard_sidebar_links   ${pathname === 'dashboard/appointments' &&
-                                'text-white'
-                                } `}
+                              className={`sidebar_inner_link ${pathname === '/dashboard/appointments'
+                                  ? 'db_inner_sub_cat_link'
+                                  : 'db_inner_sub_cat_link_hover'
+                                }`}
                             >
                               View Appointments
                             </Link>
@@ -362,63 +401,67 @@ let pathname = "/"+path
                 }}
               </SidebarLinkGroup>
 
-
-              <SidebarLinkGroup
-                activeCondition={pathname === '/dashboard/general'}
-              >
+              {/* ================= Generals ================= */}
+              <SidebarLinkGroup activeCondition={pathname === '/dashboard/general'}>
                 {(handleClick, open) => {
                   return (
                     <>
+                      {/* Main Link */}
                       <Link
-                        href="/dashboard"
-                        className={` group dashboard_sidebar_links  ${pathname === '/dashboard/general' && 'dashboard_sidebar_Active_links'
+                        href="/dashboard/general"
+                        className={`relative flex items-center gap-2 group dashboard_sidebar_links ${pathname === '/dashboard/general' && 'dashboard_sidebar_Active_links'
                           }`}
                         onClick={(e) => {
-                          e.preventDefault(); // Prevent default link behavior
-                          if (sidebarExpanded) {
-                            handleClick();
-                          } else {
-                            setSidebarExpanded(true);
-                          }
+                          e.preventDefault();
+                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
                         }}
                       >
                         <TbGardenCartOff size={20} className="text-white" />
-                        Generals
+                        <span className="ml-2">Generals</span>
                         <MdOutlineKeyboardArrowDown
-                          size={30}
-                          className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current text-white ${open && 'rotate-180'
+                          size={24}
+                          className={`MdOutlineKeyboardArrowDown ${open ? 'rotate-180' : 'rotate-0'
                             }`}
                         />
                       </Link>
-                      {/* <!-- Dropdown Menu Start --> */}
+
+                      {/* Dropdown */}
                       <div
-                        className={`translate transform overflow-hidden ${!open && 'hidden'
+                        className={`db_dropdown ${open ? 'max-h-60 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
                           }`}
                       >
-                        <ul className="mb-3 mt-3 flex flex-col gap-2.5 pl-6">
-                          <li>
+                        <ul className="db_ui_link">
+                          <li
+                            className={`db_ul_li_link ${open ? 'opacity-100' : 'opacity-0'
+                              }`}
+                          >
+                            <BsArrowReturnRight size={22} className="text-white" />
                             <Link
                               href="/dashboard/reviews"
-                              className={`dashboard_sidebar_links group ${pathname === '/dashboard/reviews' &&
-                                'dashboard_sidebar_Active_links'
-                                } `}
+                              className={`sidebar_inner_link ${pathname === '/dashboard/reviews'
+                                  ? 'db_inner_sub_cat_link'
+                                  : 'db_inner_sub_cat_link_hover'
+                                }`}
                             >
                               View Reviews
                             </Link>
                           </li>
 
-                               <li>
+                          <li
+                            className={`db_ul_li_link ${open ? 'opacity-100' : 'opacity-0'
+                              }`}
+                          >
+                            <BsArrowReturnRight size={22} className="text-white" />
                             <Link
                               href="/dashboard/Redirecturls"
-                              className={`dashboard_sidebar_links group ${pathname === '/dashboard/Redirecturls' &&
-                                'dashboard_sidebar_Active_links'
-                                } `}
+                              className={`sidebar_inner_link ${pathname === '/dashboard/Redirecturls'
+                                  ? 'db_inner_sub_cat_link'
+                                  : 'db_inner_sub_cat_link_hover'
+                                }`}
                             >
                               View Redirecturls
                             </Link>
                           </li>
-
-          
                         </ul>
                       </div>
                     </>
