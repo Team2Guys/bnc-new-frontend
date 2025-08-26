@@ -56,6 +56,7 @@ export interface ICategory {
 
   faqs: any[]
   faqHeading?:string
+  status:Status
 }
 
 export interface Image {
@@ -99,6 +100,7 @@ export interface IProduct {
   modelDetails?:{name:string, detail:string}[]
   privarcyImage?:Image
   topImages?:Image
+  status:Status
 }
 
 export interface ProductImages {
@@ -405,3 +407,7 @@ export interface ThankYouCardProps {
   iconKey: 'calendar' | 'map' | 'message';
   buttonLink: string;
 }
+
+
+
+export type Status = "DRAFT" | "PUBLISHED" | "ARCHIVED"
