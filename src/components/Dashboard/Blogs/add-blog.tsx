@@ -2,7 +2,6 @@
 import { Form, Formik } from 'formik';
 import React, { useState, SetStateAction, Fragment, useRef } from 'react';
 import { IoMdArrowRoundBack } from 'react-icons/io';
-import { Select, Spin } from 'antd';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { ICategory } from 'types/types';
 import { fetchCategories } from 'config/fetch';
@@ -18,6 +17,7 @@ import Image from 'next/image';
 import MyEditor from './custom-editor';
 import Cookies from 'js-cookie';
 import revalidateTag from 'components/ServerActons/ServerAction';
+import Select from 'components/ui/Select';
 
 interface IAddBlogs {
   setMenuType: React.Dispatch<SetStateAction<string>>;
@@ -271,29 +271,28 @@ const AddBlogs = ({
                   Category
                 </label>
                 {categoryLoading ? (
-                  <Spin />
+                  <Loader color="#fff" />
                 ) : (
                   <Select
-                    className="w-full h-[48px] detail-option  border rounded-md "
-                    placeholder="Select Category"
-                    value={values.category}
+                    name="category"
+                    className="w-full mt-1 detail-option border rounded-md"
+                    defaultValue={values.category || ""}
                     onChange={(value) => {
-                      setFieldValue('category', value);
+                      setFieldValue("category", value);
                       handleDebouncedMutation({ ...values, category: value });
                     }}
-                    notFoundContent={
-                      categoryError
-                        ? 'Error loading categories'
-                        : 'No categories found'
-                    }
                     options={[
-                      { value: '', label: 'Select Category', disabled: true },
-                      ...(categories
-                        ?.filter((category) => category.title !== 'Commercial')
-                        .map((category) => ({
-                          value: category.title,
-                          label: category.title,
-                        })) || []),
+                      ...(categories?.length
+                        ? [
+                            { value: "", label: "Select Category",  disabled: true },
+                            ...categories
+                              .filter((category) => category.title !== "Commercial")
+                              .map((category) => ({
+                                value: category.title,
+                                label: category.title,
+                              })),
+                          ]
+                        : [{ value: "", label: categoryError ? "Error loading categories" : "No categories found" }]),
                     ]}
                   />
                 )}

@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineStarPurple500 } from 'react-icons/md';
 import { IREVIEWS } from 'types/general';
-import { motion } from 'framer-motion';
 import ReviewImages from './ReviewImages';
 import { getRandomColor } from 'utils/helperFunctions';
 
@@ -78,14 +77,13 @@ const TestimonialCard = ({
             </div>
 
             <div className="relative mt-2">
-               <motion.p
+               <p
                   ref={contentRef}
-                  layout
                   className={`text-black font-roboto font-normal text-sm xsm:text-base overflow-hidden transition-all duration-700 ease-in-out ${isExpanded ? 'max-h-[1000px]' : 'max-h-[95px]'
                      }`}
                >
                   {testimonial.ReviewsDescription}
-               </motion.p>
+               </p>
 
                {hasOverflow && (
                   <button

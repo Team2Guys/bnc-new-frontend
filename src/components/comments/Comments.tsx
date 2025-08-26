@@ -1,6 +1,4 @@
 "use client"
-
-import { Modal } from 'antd';
 import axios from 'axios';
 import Loader from 'components/Loader/Loader';
 import React, { useEffect, useState } from 'react';
@@ -15,6 +13,7 @@ import {
   WhatsappShareButton
 } from "react-share";
 import { toast } from 'react-toastify';
+import CustomModal from 'components/ui/Modal';
 type CommentType = 'parent' | 'nested';
 interface CommentsProps {
   data: any;
@@ -284,11 +283,10 @@ function Comments({ data }: CommentsProps) {
         }
 
       </div>
-      <Modal
+      <CustomModal
         title="Reply to Comment"
         open={isModalOpen}
-        onCancel={handleModalClose}
-        footer={null}
+        onClose={handleModalClose}
       >
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <input
@@ -332,7 +330,7 @@ function Comments({ data }: CommentsProps) {
             </button>
           </div>
         </form>
-      </Modal>
+      </CustomModal>
     </div>
   );
 }
