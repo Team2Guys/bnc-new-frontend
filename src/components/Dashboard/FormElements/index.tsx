@@ -9,7 +9,6 @@ import Image from 'next/image';
 import { handleImageAltText, ImageRemoveHandler } from 'utils/helperFunctions';
 import { FormValues, ADDPRODUCTFORMPROPS } from 'types/interfaces';
 import axios from 'axios';
-import { IoMdArrowRoundBack } from 'react-icons/io';
 import Loader from 'components/Loader/Loader';
 import Cookies from 'js-cookie';
 
@@ -23,6 +22,7 @@ import { fetchCategories, fetchSubCategories } from 'config/fetch';
 import showToast from 'components/Toaster/Toaster';
 import revalidateTag from 'components/ServerActons/ServerAction';
 import Checkbox from 'components/ui/Checkbox';
+import TopButton from '../Layouts/TopButton';
 
 const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
   EditInitialValues,
@@ -307,7 +307,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
       setSelectedSubcategoryIds([]);
 
       updateFlag ? setEditProduct && setEditProduct(undefined) : null;
-      setselecteMenu('Add All Products');
+      setselecteMenu('Categories');
     } catch (err: any) {
       if (err.response && err.response.data && err.response.data.message) {
         setError(err.response.data.message);
@@ -322,17 +322,6 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
       setloading(false);
     }
   };
-
-  console.log(EditInitialValues.privarcyImage, 'privarcyImagemageUrl');
-
-
-  // const handlecolorCode = (index: number, colorCode: string) => {
-  //   const updatedImagesUrl = imagesUrl.map((item, i) =>
-  //     i === index ? { ...item, colorCode: colorCode } : item,
-  //   );
-  //   setImagesUrl(updatedImagesUrl);
-  // };
-
 
 const handlecolorChange = (
     index: number,
@@ -380,21 +369,9 @@ const handlecolorChange = (
         {(formik) => {
           return (
             <Form onSubmit={formik.handleSubmit}>
-              <div className="flex border items-center justify-between">
-                <p
-                  className="dashboard_primary_button "
-                  onClick={() => {
-                    setselecteMenu('Add All Products');
-                  }}
-                >
-                  <IoMdArrowRoundBack /> Back
-                </p>
-                <button type="submit" className="dashboard_primary_button">
-                  {loading ? <Loader color="#fff" /> : 'Submit'}
-                </button>
-              </div>
+          <TopButton  setMenuType={setselecteMenu} loading={loading}/>
 
-              <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-9 sm:grid-cols-2 mt-1">
                 <div className="flex flex-col gap-9 dark:border-strokedark dark:bg-lightdark">
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark p-6">
                     <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">

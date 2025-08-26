@@ -48,7 +48,6 @@ const ViewProduct: React.FC<CategoryProps> = ({
   const [colorMode, toggleColorMode] = useColorMode();
   console.log(toggleColorMode, 'toggleColorMode');
   const [loading, setLoading] = useState<boolean>(false);
-  console.log(setLoading, 'setLoading');
 
   const token = admin_token || super_admin_token;
 
@@ -105,6 +104,7 @@ const ViewProduct: React.FC<CategoryProps> = ({
 
   const handleDelete = async (key: number) => {
     try {
+      setLoading(true)
       await axios.delete(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/delete_product/${key}`,
         {
@@ -116,6 +116,10 @@ const ViewProduct: React.FC<CategoryProps> = ({
       toast.success('Product Deleted: The product has been successfully deleted.');
     } catch (err) {
       toast.error('Deletion Failed: There was an error deleting the product.');
+    }
+    finally{
+      setLoading(false)
+
     }
   };
 

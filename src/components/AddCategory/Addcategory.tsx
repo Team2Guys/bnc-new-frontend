@@ -7,8 +7,7 @@ import { ImageRemoveHandler } from 'utils/helperFunctions';
 
 import Toaster from 'components/Toaster/Toaster';
 import axios from 'axios';
-import { Formik, Form, FieldArray } from 'formik';
-import { IoMdArrowRoundBack } from 'react-icons/io';
+import { Formik, Form, FieldArray} from 'formik';
 
 import { categoryInitialValues, categoryValidationSchema } from 'data/data';
 import ProtectedRoute from 'hooks/AuthHookAdmin';
@@ -16,6 +15,8 @@ import Loader from 'components/Loader/Loader';
 import { Category } from 'types/interfaces';
 import Cookies from 'js-cookie';
 import revalidateTag from 'components/ServerActons/ServerAction';
+import { Status } from 'types/types';
+import TopButton from 'components/Dashboard/Layouts/TopButton';
 interface editCategoryNameType {
   name: string;
   description: string;
@@ -37,6 +38,8 @@ interface editCategoryNameType {
 
   productCustomUrl?: string
   categoryCustomUrl?: string
+  status: Status;
+
 }
 
 interface editCategoryProps {
@@ -82,11 +85,13 @@ const FormLayout = ({
     Meta_Title: editCategory?.Meta_Title ?? '',
     Meta_description: editCategory?.Meta_description ?? '',
     productCustomUrl: editCategory?.productCustomUrl ?? "",
-    categoryCustomUrl: editCategory?.categoryCustomUrl ?? ""
+    categoryCustomUrl: editCategory?.categoryCustomUrl ?? "",
+    status: editCategory?.status || 'PUBLISHED',
 
   });
 
   const onSubmit = async (values: Category, { resetForm }: any) => {
+
     try {
       setloading(true);
       let posterImageUrl = posterimageUrl && posterimageUrl[0];
@@ -205,23 +210,8 @@ const FormLayout = ({
         {(formik) => {
           return (
             <Form onSubmit={formik.handleSubmit}>
-              <div className='flex border items-center justify-between'>
-                <p
-                  className="dashboard_primary_button"
-                  onClick={() => {
-                    setMenuType('Categories');
-                  }}
-                >
-                  <IoMdArrowRoundBack /> Back
-                </p>
-                <button
-                  type="submit"
-                  className="dashboard_primary_button"
-                >
-                  {loading ? <Loader color="#fff" /> : 'Submit'}
-                </button>
+                <TopButton  setMenuType={setMenuType} loading={loading}/>
 
-              </div>
               <div className="flex justify-center ">
                 <div className="flex flex-col gap-9 w-2/5 dark:border-strokedark dark:bg-lightdark rounded-md">
                   <div className="rounded-md  bg-white   dark:bg-lightdark p-4">
@@ -741,6 +731,8 @@ const FormLayout = ({
                   </div>
                 </div>
               </div>
+
+              
               <div className="flex justify-center">
                 <button
                   type="submit"
