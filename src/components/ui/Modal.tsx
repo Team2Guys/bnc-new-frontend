@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { X } from 'lucide-react';
+import { IoCloseSharp } from 'react-icons/io5';
 
 interface CustomModalProps {
   open: boolean;
@@ -52,7 +52,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
                 onClick={onClose}
                 className="bg-secondary rounded-full text-white absolute -top-2 md:-top-3 -right-1 md:-right-3"
               >
-                <X className="w-7 h-7" />
+                <IoCloseSharp  className="w-7 h-7" />
               </button>
             )
           :
@@ -63,7 +63,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
                 onClick={onClose}
                 className="bg-secondary rounded-full text-white absolute -top-2 md:top-2 -right-1 md:right-2"
               >
-                <X className="w-7 h-7" />
+                <IoCloseSharp className="w-7 h-7" />
               </button>
             )}
           </div>

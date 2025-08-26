@@ -1,7 +1,6 @@
 "use client"
-
-import { Table } from 'antd';
 import revalidateTag from 'components/ServerActons/ServerAction';
+import Table from 'components/ui/Table';
 import { deleteRedirectUrl } from 'config/fetch';
 import React, { SetStateAction, useState } from 'react'
 import { LiaEdit } from 'react-icons/lia';
@@ -73,25 +72,21 @@ export default function ViewRedirecturl({
 
         {
             title: 'Url',
-            dataIndex: 'url',
             key: 'url',
-            width: 200,
         },
 
         {
             title: 'Create At',
-            dataIndex: 'createdAt',
             key: 'createdAt',
-            render: (_: string, record: RedirectUrls) => {
+            render: (record: RedirectUrls) => {
                 const createdAt = new Date(record?.createdAt ?? "");
                 return <span>{DateFormatHandler(createdAt)}</span>;
             }
         },
         {
             title: 'Updated At',
-            dataIndex: 'createdAt',
             key: 'date',
-            render: (_: string, record: RedirectUrls) => {
+            render: (record: RedirectUrls) => {
                 const createdAt = new Date(record?.updatedAt ?? "");
                 return <span>{DateFormatHandler(createdAt)}</span>;
             }
@@ -99,8 +94,7 @@ export default function ViewRedirecturl({
         {
             title: 'Edit',
             key: 'Edit',
-            width: 150,
-            render: (text: string, record: RedirectUrls) => (
+            render: (record: RedirectUrls) => (
                 <LiaEdit
                     className={`${canEditproduct ? 'cursor-pointer' : ''} ${!canEditproduct ? 'cursor-not-allowed text-slate-200' : ''
                         }`}
@@ -117,8 +111,7 @@ export default function ViewRedirecturl({
         {
             title: 'Action',
             key: 'action',
-            width: 150,
-            render: (text: string, record: RedirectUrls) => (
+            render: (record: RedirectUrls) => (
                 loading && loading === record.id ? "Deleting..." :
                     <RiDeleteBin6Line
                         className={`${canDeleteProduct ? 'text-red-600 cursor-pointer' : ''} ${!canDeleteProduct ? 'cursor-not-allowed text-slate-200' : ''
@@ -162,15 +155,16 @@ export default function ViewRedirecturl({
                     </p>
                 </div>
             </div>
-            <Table
-                className="lg:overflow-hidden overflow-x-scroll !dark:border-strokedark !dark:bg-boxdark !bg-transparent"
-                dataSource={Redirecturls}
-                columns={columns}
-                rowKey="id"
-                pagination={false}
-            />
-
-
+              {Redirecturls && Redirecturls.length > 0 ? (
+                    <Table<RedirectUrls>
+                            data={Redirecturls}
+                            columns={columns}
+                            rowKey="id"
+                        />
+                ) : (
+                    <p className="dark:text-white">No Blogs found</p>
+                )}
+        
         </>
     )
 }

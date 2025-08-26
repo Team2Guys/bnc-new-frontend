@@ -15,9 +15,9 @@ import {
 import { ImageRemoveHandler } from 'utils/helperFunctions';
 import Loader from 'components/Loader/Loader';
 import ProtectedRoute from 'hooks/AuthHookAdmin';
-import { Checkbox } from 'antd';
 import Cookies from 'js-cookie';
 import revalidateTag from 'components/ServerActons/ServerAction';
+import Checkbox from 'components/ui/Checkbox';
 
 interface editCategoryNameType {
   title: string;
@@ -356,33 +356,20 @@ const FormLayout = ({
                           Select Parent Category (atleat one)
                         </label>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          {categoriesList?.map((category) => (
-                            <div
-                              key={category.id}
-                              className="flex items-center space-x-2"
-                            >
-                              <Checkbox
-                                className="accent-green-500"
-                                name="CategoryId"
-                                checked={
-                                  formik.values.CategoryId === category.id
-                                }
-                                onChange={() =>
-                                  formik.setFieldValue(
-                                    'CategoryId',
-                                    formik.values.CategoryId === category.id
-                                      ? null
-                                      : category.id,
-                                  )
-                                }
-                              />
-                              <label
-                                htmlFor={`category-${category.id}`}
-                                className="ml-2 text-black dark:text-white"
-                              >
-                                {category.title}
-                              </label>
-                            </div>
+                          {categoriesList?.map((category,index) => (
+                            <Checkbox
+                              key={index}
+                              id={`category-${category.id}`}
+                              name="CategoryId"
+                              checked={formik.values.CategoryId === category.id}
+                              label={category.title}
+                              onChange={() =>
+                                formik.setFieldValue(
+                                  "CategoryId",
+                                  formik.values.CategoryId === category.id ? null : category.id
+                                )
+                              }
+                            />
                           ))}
                         </div>
                       </div>

@@ -7,6 +7,7 @@ type TFooterSection = {
   type TFooterLinkSection = {
     key: string;
     title: string;
+    items?: string[];
     links: {
       text: string;
       href: string;
@@ -15,5 +16,3 @@ type TFooterSection = {
   
 
   export type TCategorySection = TFooterSection | TFooterLinkSection;
-
-  
