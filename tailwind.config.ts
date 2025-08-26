@@ -26,10 +26,6 @@ const config = {
         'custom-size': '100% 500px',
       },
       backgroundImage: {
-        hero: "url('/assets/images/bg-hero.png')",
-        men: "url('/assets/images/static/menimage.png')",
-        appointment: "url('/assets/images/MotorisedBlind/appoint.png')",
-        keyimage: "url('/assets/images/Moterised-ads-blinds/Rectangle28.png')",
         detailbanner: "url('/assets/detailpage/detail-banner.webp')",
       },
       fontSize: {

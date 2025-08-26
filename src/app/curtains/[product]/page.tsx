@@ -21,7 +21,7 @@ export async function generateMetadata({
 }: meta_props): Promise<Metadata> {
   const product = (await params).product;
 
-  const [products, categories] = await Promise.all([fetchProducts(),    fetchSubCategories()]);
+  const [products, categories] = await Promise.all([fetchProducts(), fetchSubCategories()]);
 
   const filteredProduct = filterProd(products, product, Cateories);
   const filteredSubCategory = filtereCategory(categories, product, Cateories);
@@ -77,15 +77,12 @@ export async function generateMetadata({
 
 const CommercialPage = async ({ params }: meta_props) => {
   const product = (await params).product;
-  const [products] = await Promise.all([fetchProducts()]);
+  const products = await fetchProducts();
   
   const filteredProduct = filterProd(products, product, Cateories);
   const matchingUrl = urls.find((url) => `${url.errorUrl}/` === `/curtains/${product}/`);
-  if (matchingUrl) {
+  if (matchingUrl || !filteredProduct) {
     return <NotFound />
-  }
-  if ( !filteredProduct) {
-    return <NotFound />;
   }
     const productTitle = filteredProduct?.title  || '';
     const matchedSchema = CurtainsSchemaMap[productTitle];

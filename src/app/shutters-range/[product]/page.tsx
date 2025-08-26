@@ -9,7 +9,6 @@ import { Metadata } from 'next';
 import { meta_props } from 'types/interfaces';
 import { urls } from 'data/urls';
 import NotFound from 'app/not-found';
-import { Suspense } from 'react';
 
 export async function generateMetadata({
   params,
@@ -17,7 +16,7 @@ export async function generateMetadata({
   const product = (await params).product;
   const Cateories = [9];
 
-  const [products] = await Promise.all([ fetchProducts()]);
+  const products = await fetchProducts();
 
   const filteredProduct = filterProd(products, product, Cateories);
 
@@ -74,22 +73,17 @@ const CommercialPage = async ({ params }: meta_props) => {
  
   const Cateories = [9];
 
-  const [products] = await Promise.all([fetchProducts()]);
+  const products = await fetchProducts();
 
   const filteredProduct = filterProd(products, product, Cateories);
 
   const matchingUrl = urls.find((url) => `${url.errorUrl}/` === `/shutters-range/${product}/`);
-  if (matchingUrl) {
+  if (matchingUrl || !filteredProduct) {
     return <NotFound />
-  }
-  if (!filteredProduct ) {
-    return <NotFound />;
   }
 
   return (
-    <Suspense>
       <Shutters filteredProduct={filteredProduct}/>
-    </Suspense>
   );
 };
 
