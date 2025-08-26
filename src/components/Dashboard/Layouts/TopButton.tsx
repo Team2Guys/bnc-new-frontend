@@ -24,7 +24,6 @@ function TopButton({ setMenuType, loading }: ITOPBUTTON) {
             </p>
 
             <div className='flex gap-2'>
-                {/* Dropdown with Formik */}
                 <Field
                     as="select"
                     name="status"

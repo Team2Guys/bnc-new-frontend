@@ -1,13 +1,13 @@
 'use client';
 
 import React, { useState, useEffect, SetStateAction, useRef } from 'react';
-import { Formik, FieldArray, FormikErrors, Form, FormikTouched } from 'formik';
+import { Formik, FieldArray, Form } from 'formik';
 
 import Imageupload from 'components/ImageUpload/Imageupload';
 import { RxCross2 } from 'react-icons/rx';
 import Image from 'next/image';
 import { handleImageAltText, ImageRemoveHandler } from 'utils/helperFunctions';
-import { FormValues, ADDPRODUCTFORMPROPS } from 'types/interfaces';
+import {  ADDPRODUCTFORMPROPS } from 'types/interfaces';
 import axios from 'axios';
 import Loader from 'components/Loader/Loader';
 import Cookies from 'js-cookie';
@@ -23,6 +23,7 @@ import showToast from 'components/Toaster/Toaster';
 import revalidateTag from 'components/ServerActons/ServerAction';
 import TopButton from '../Layouts/TopButton';
 import Checkbox from 'components/ui/Checkbox';
+import Input from 'components/ui/Input';
 
 const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
   EditInitialValues,
@@ -460,238 +461,64 @@ const handlecolorChange = (
                     </div>
 
                     <div className="flex flex-col gap-5 py-4">
-                      <div>
-                        <label className="primary-label ">Product Name</label>
-                        <input
-                          type="text"
-                          name="name"
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
-                          value={formik.values.name}
-                          placeholder="Product name"
-                          className={`primary-input ${
-                            formik.touched.name && formik.errors.name
-                              ? 'border-red-500'
-                              : ''
-                          }`}
-                        />
-                        {formik.touched.name && formik.errors.name ? (
-                          <div className="errorColor text-sm">
-                            {formik.errors.name as String}
-                          </div>
-                        ) : null}
-                      </div>
-
+                      <Input
+                            label="Product Name"
+                            name="name"
+                            placeholder="Product Name"
+                          /> 
+                   
                       <div className="flex  gap-2 flex-nowrap mad:flex-wrap">
-                        <div className="w-1/2">
-                          <label className="primary-label">Description </label>
-                          <textarea
+                        <Input
+                            label="Description"
                             name="description"
-                            onChange={formik.handleChange}
-                            value={formik.values.description}
-                            placeholder="description"
-                            className={`primary-input ${
-                              formik.touched.description &&
-                              formik.errors.description
-                                ? 'border-red-500'
-                                : ''
-                            }`}
+                            placeholder="Description"
+                            textarea
                           />
-                          {formik.touched.description &&
-                          formik.errors.description ? (
-                            <div className="errorColor text-sm">
-                              {
-                                formik.errors.description as FormikErrors<
-                                  FormValues['description']
-                                >
-                              }
-                            </div>
-                          ) : null}
-                        </div>
-
-                        <div className="w-1/2">
-                          <label className="primary-label">
-                            Short Description{' '}
-                          </label>
-                          <textarea
+                       <Input
+                            label="Short Description"
                             name="short_description"
-                            onChange={formik.handleChange}
-                            value={formik.values.short_description}
                             placeholder="Short Description"
-                            className={`primary-input ${
-                              formik.touched.short_description &&
-                              formik.errors.short_description
-                                ? 'border-red-500'
-                                : ''
-                            }`}
+                            textarea
                           />
-                          {formik.touched.short_description &&
-                          formik.errors.short_description ? (
-                            <div className="errorColor text-sm">
-                              {
-                                formik.errors.short_description as FormikErrors<
-                                  FormValues['short_description']
-                                >
-                              }
-                            </div>
-                          ) : null}
-                        </div>
+                
                       </div>
-
-                      <div>
-                        <label className="primary-label">Heading </label>
-                        <textarea
-                          name="heading"
-                          onChange={formik.handleChange}
-                          value={formik.values.heading}
-                          placeholder="Heading Text"
-                          className={`primary-input ${
-                            formik.touched.heading && formik.errors.heading
-                              ? 'border-red-500'
-                              : ''
-                          }`}
-                        />
-                        {formik.touched.heading && formik.errors.heading ? (
-                          <div className="errorColor text-sm">
-                            {
-                              formik.errors.heading as FormikErrors<
-                                FormValues['heading']
-                              >
-                            }
-                          </div>
-                        ) : null}
-                      </div>
-
-                      <div className="flex full gap-4">
-                        <div className="w-[50%]">
-                          <label className="primary-label">customUrl</label>
-                          <input
-                            type="text"
+                        <Input
+                            label="Heading"
+                            name="heading"
+                            placeholder="Heading"
+                          />
+                    
+                      <div className="grid grid-cols-2 gap-4">
+                      <Input
+                            label="customUrl"
                             name="customUrl"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.customUrl}
                             placeholder="customUrl"
-                            className={`primary-input ${
-                              formik.touched.customUrl &&
-                              formik.errors.customUrl
-                                ? 'border-red-500'
-                                : ''
-                            }`}
                           />
-                        </div>
-
-                        <div className="w-[50%]">
-                          <label className="primary-label">breadcurum</label>
-                          <input
-                            type="breadcurum"
+                        <Input
+                            label="breadcurum"
                             name="breadcurum"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.breadcurum}
-                            placeholder="Discount Price"
-                            className={`primary-input ${
-                              formik.touched.breadcurum &&
-                              formik.errors.breadcurum
-                                ? 'border-red-500'
-                                : ''
-                            }`}
+                            placeholder="breadcurum"
                           />
-                        </div>
-                      </div>
-
-                      <div className="flex full gap-4">
-                        <div className="w-[50%]">
-                          <label className="primary-label">topHeading</label>
-                          <input
-                            type="text"
+                          <Input
+                            label="topHeading"
                             name="topHeading"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.topHeading}
                             placeholder="topHeading"
-                            className={`primary-input ${
-                              formik.touched.topHeading &&
-                              formik.errors.topHeading
-                                ? 'border-red-500'
-                                : ''
-                            }`}
                           />
-                        </div>
-
-                        <div className="w-[50%]">
-                          <label className="primary-label">mainHeading</label>
-                          <input
-                            type="mainHeading"
+                         <Input
+                            label="mainHeading"
                             name="mainHeading"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.mainHeading}
-                            placeholder="Discount Price"
-                            className={`primary-input ${
-                              formik.touched.mainHeading &&
-                              formik.errors.mainHeading
-                                ? 'border-red-500'
-                                : ''
-                            }`}
+                            placeholder="mainHeading"
                           />
-                        </div>
-                      </div>
-
-                      <div className="flex full gap-4">
-                        <div className="w-[50%]">
-                          <label className="primary-label">Sale Price</label>
-                          <input
-                            type="number"
+                        <Input
+                            label="Sale Price"
                             name="salePrice"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.salePrice}
                             placeholder="Sale Price"
-                            className={`primary-input ${
-                              formik.touched.salePrice &&
-                              formik.errors.salePrice
-                                ? 'border-red-500'
-                                : ''
-                            }`}
                           />
-                          {formik.touched.salePrice &&
-                          formik.errors.salePrice ? (
-                            <div className="errorColor text-sm">
-                              {
-                                formik.errors.salePrice as FormikErrors<
-                                  FormValues['salePrice']
-                                >
-                              }
-                            </div>
-                          ) : null}
-                        </div>
-
-                        <div className="w-[50%]">
-                          <label className="primary-label">
-                            Discount Price
-                          </label>
-                          <input
-                            type="number"
+                          <Input
+                            label="Discount Price"
                             name="discountPrice"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.discountPrice}
                             placeholder="Discount Price"
-                            className={`primary-input ${
-                              formik.touched.discountPrice &&
-                              formik.errors.discountPrice
-                                ? 'border-red-500'
-                                : ''
-                            }`}
                           />
-                          {formik.touched.discountPrice &&
-                          formik.errors.discountPrice ? (
-                            <div className="errorColor text-sm">
-                              {formik.errors.discountPrice as String}
-                            </div>
-                          ) : null}
-                        </div>
                       </div>
 
                       <div className="w-full">
@@ -754,78 +581,31 @@ const handlecolorChange = (
                         </div>
                       </div>
 
-                      <div className="flex gap-4">
-                        <div className="w-2/4">
-                          <label className="primary-label">Meta Title</label>
-                          <input
-                            type="text"
+                      <div className="grid grid-cols-2 gap-4">
+                        <Input
+                            label="Meta Title"
                             name="Meta_Title"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.Meta_Title}
                             placeholder="Meta Title"
-                            className={`primary-input ${
-                              formik.touched.name && formik.errors.name
-                                ? 'border-red-500'
-                                : ''
-                            }`}
                           />
-                        </div>
-                        <div className="w-2/4">
-                          <label className="primary-label">Canonical Tag</label>
-                          <input
-                            onBlur={formik.handleBlur}
-                            type="text"
+                        <Input
+                            label="Canonical Tag"
                             name="Canonical_Tag"
-                            onChange={formik.handleChange}
-                            value={formik.values.Canonical_Tag}
                             placeholder="Canonical Tag"
-                            className={`primary-input ${
-                              formik.touched.name && formik.errors.name
-                                ? 'border-red-500'
-                                : ''
-                            }`}
                           />
-                        </div>
+                        
                       </div>
-                      <div>
-                        <label className="primary-label">
-                          Meta Description
-                        </label>
-                        <textarea
-                          name="Meta_Description"
-                          onChange={formik.handleChange}
-                          value={formik.values.Meta_Description}
-                          placeholder="Meta Description"
-                          className={`primary-input ${
-                            formik.touched.description &&
-                            formik.errors.description
-                              ? 'border-red-500'
-                              : ''
-                          }`}
-                        />
-                      </div>
-
-                      <div className="flex gap-4">
-                        <div className="w-full">
-                          <label className="primary-label">
-                            Images Alt Text
-                          </label>
-                          <input
-                            type="text"
+                      <Input
+                            label="Meta Description"
+                            name="Meta_Description"
+                            placeholder="Meta Description"
+                            textarea
+                          />
+                      <Input
+                            label="Images Alt Text"
                             name="Images_Alt_Text"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.Images_Alt_Text}
                             placeholder="Images Alt Text"
-                            className={`primary-input ${
-                              formik.touched.name && formik.errors.name
-                                ? 'border-red-500'
-                                : ''
-                            }`}
                           />
-                        </div>
-                      </div>
+                    
                     </div>
                   </div>
                 </div>
@@ -848,34 +628,9 @@ const handlecolorChange = (
                                     key={index}
                                     className="flex gap-2 items-center"
                                   >
-                                    <input
-                                      type="text"
-                                      name={`faqs[${index}].specsHeading`}
-                                      onChange={formik.handleChange}
-                                      onBlur={formik.handleBlur}
-                                      value={
-                                        formik.values.faqs[index].specsHeading
-                                      }
-                                      placeholder="FAQS Heading"
-                                      className={`primary-input 
-      
-                                              
-                                            `}
-                                    />
-                                    <input
-                                      type="text"
-                                      name={`faqs[${index}].specsDetails`}
-                                      onChange={formik.handleChange}
-                                      onBlur={formik.handleBlur}
-                                      value={
-                                        formik.values.faqs[index].specsDetails
-                                      }
-                                      placeholder="FAQS Details"
-                                      className={`primary-input 
-      
-                                              
-                                            `}
-                                    />
+                                    <Input name={`faqs[${index}].specsHeading`} placeholder="FAQS Heading" />
+                                    <Input name={`faqs[${index}].specsDetails`} placeholder="FAQS Details" />
+                                   
                                     <button
                                       type="button"
                                       onClick={() => remove(index)}
@@ -919,36 +674,9 @@ const handlecolorChange = (
                                     key={index}
                                     className="flex gap-2 items-center"
                                   >
-                                    <input
-                                      type="text"
-                                      name={`privacySectoin[${index}].specsHeading`}
-                                      onChange={formik.handleChange}
-                                      onBlur={formik.handleBlur}
-                                      value={
-                                        formik.values.privacySectoin[index]
-                                          .specsHeading
-                                      }
-                                      placeholder="privacySectoin Heading"
-                                      className={`primary-input 
-      
-                                              
-                                            `}
-                                    />
-                                    <input
-                                      type="text"
-                                      name={`privacySectoin[${index}].specsDetails`}
-                                      onChange={formik.handleChange}
-                                      onBlur={formik.handleBlur}
-                                      value={
-                                        formik.values.privacySectoin[index]
-                                          .specsDetails
-                                      }
-                                      placeholder="privacySectoin Details"
-                                      className={`primary-input 
-      
-                                              
-                                            `}
-                                    />
+                                    <Input name={`privacySectoin[${index}].specsHeading`} placeholder="privacySectoin Heading" />
+                                    <Input name={`privacySectoin[${index}].specsDetails`} placeholder="privacySectoin Details" />
+                                  
                                     <button
                                       type="button"
                                       onClick={() => remove(index)}
@@ -975,60 +703,10 @@ const handlecolorChange = (
                     </div>
                   </div>
 
-                  <div className="flex  gap-4">
-                    <div className="w-1/2">
-                      <label className="primary-label">Sub Heading</label>
-                      <textarea
-                        name="Sub_Heading"
-                        onChange={formik.handleChange}
-                        value={formik.values.Sub_Heading}
-                        placeholder="Sub Heading"
-                        className={`primary-input ${
-                          formik.touched.Sub_Heading &&
-                          formik.errors.Sub_Heading
-                            ? 'border-red-500'
-                            : ''
-                        }`}
-                      />
-                      {formik.touched.Sub_Heading &&
-                      formik.errors.Sub_Heading ? (
-                        <div className="errorColor text-sm">
-                          {
-                            formik.errors.heading as FormikErrors<
-                              FormValues['Sub_Heading']
-                            >
-                          }
-                        </div>
-                      ) : null}
-                    </div>
-
-                    <div className="w-1/2">
-                      <label className="primary-label">
-                        Sub Heading Description
-                      </label>
-                      <textarea
-                        name="Sub_Heading_description"
-                        onChange={formik.handleChange}
-                        value={formik.values.Sub_Heading_description}
-                        placeholder="Sub Heading Description"
-                        className={`primary-input ${
-                          formik.touched.Sub_Heading_description &&
-                          formik.errors.Sub_Heading_description
-                            ? 'border-red-500'
-                            : ''
-                        }`}
-                      />
-                      {formik.touched.Sub_Heading_description &&
-                      formik.errors.Sub_Heading_description ? (
-                        <div className="errorColor text-sm">
-                          {
-                            formik.errors.heading as FormikErrors<
-                              FormValues['Sub_Heading_description']
-                            >
-                          }
-                        </div>
-                      ) : null}
-                    </div>
+                  <div className="grid grid-cols-2  gap-4">
+                    <Input name="Sub_Heading" placeholder="Sub Heading" textarea />
+                    <Input name="Sub_Heading_description" placeholder="Sub Heading Description" textarea />
+                  
                   </div>
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
@@ -1048,61 +726,10 @@ const handlecolorChange = (
                                     key={index}
                                     className="flex flex-col gap-3"
                                   >
-                                    <input
-                                      type="text"
-                                      name={`modelDetails[${index}].name`}
-                                      onChange={formik.handleChange}
-                                      onBlur={formik.handleBlur}
-                                      value={
-                                        formik.values.modelDetails[index].name
-                                      }
-                                      placeholder="Sub Category Name"
-                                      className={`primary-input 
-                                      ${
-                                        formik.touched.modelDetails &&
-                                        (
-                                          formik.touched
-                                            .modelDetails as FormikTouched<
-                                            FormValues['modelDetails']
-                                          >
-                                        )?.[index]?.name &&
-                                        (
-                                          formik.errors
-                                            .modelDetails as FormikErrors<
-                                            FormValues['modelDetails']
-                                          >
-                                        )?.[index]?.name
-                                          ? 'border-red-500'
-                                          : ''
-                                      }`}
-                                    />
-                                    <textarea
-                                      name={`modelDetails[${index}].detail`}
-                                      onChange={formik.handleChange}
-                                      onBlur={formik.handleBlur}
-                                      value={
-                                        formik.values.modelDetails[index].detail
-                                      }
-                                      placeholder="Description on Sub Category"
-                                      className={`primary-input 
-                                        ${
-                                          formik.touched.modelDetails &&
-                                          (
-                                            formik.touched
-                                              .modelDetails as FormikTouched<
-                                              FormValues['modelDetails']
-                                            >
-                                          )?.[index]?.detail &&
-                                          (
-                                            formik.errors
-                                              .modelDetails as FormikErrors<
-                                              FormValues['modelDetails']
-                                            >
-                                          )?.[index]?.detail
-                                            ? 'border-red-500'
-                                            : ''
-                                        }`}
-                                    />
+                                    <Input name={`modelDetails[${index}].name`} placeholder="Sub Category Name"  />
+                                    <Input name={`modelDetails[${index}].detail`} placeholder="Description on Sub Category" textarea />
+                                    
+                                    
                                   </div>
 
                                   <button
@@ -1147,28 +774,9 @@ const handlecolorChange = (
                                     key={index}
                                     className="flex items-center gap-2"
                                   >
-                                    <input
-                                      type="text"
-                                      name={`colors[${index}].name`}
-                                      onChange={formik.handleChange}
-                                      onBlur={formik.handleBlur}
-                                      value={
-                                        formik?.values?.colors?.[index].name
-                                      }
-                                      placeholder="Heading name"
-                                      className="primary-input"
-                                    />
-                                    <input
-                                      type="text"
-                                      name={`colors[${index}].detail`}
-                                      onChange={formik.handleChange}
-                                      onBlur={formik.handleBlur}
-                                      value={
-                                        formik.values.colors?.[index].detail
-                                      }
-                                      placeholder="details text"
-                                      className="primary-input"
-                                    />
+                                    <Input name={`colors[${index}].name`} placeholder="Heading name" />
+                                    <Input name={`colors[${index}].detail`} placeholder="details text" />
+                                                                        
                                     <button
                                       type="button"
                                       onClick={() => remove(index)}
@@ -1309,8 +917,8 @@ const handlecolorChange = (
                     </div>
                     <Imageupload setImagesUrl={settopImages} />
                     {topImages && topImages?.length > 0 && (
-                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
-                        <div>
+                      <div className="grid grid-cols-2 sm:grid-cols-4  gap-4 p-4">
+                        
                           {topImages.map((item: any, index) => {
                             return (
                               <>
@@ -1332,13 +940,12 @@ const handlecolorChange = (
                                   </div>
                                   <Image
                                     key={index}
-                                    className="object-cover w-full h-full"
+                                    className="object-cover h-10 w-10"
                                     width={300}
                                     height={400}
                                     src={item?.imageUrl}
                                     alt={`productImage-${index}`}
                                   />
-                                </div>
 
                                 <input
                                   className="primary-input"
@@ -1370,10 +977,11 @@ const handlecolorChange = (
                                     )
                                   }
                                 />
+                                
+                                </div>
                               </>
                             );
                           })}
-                        </div>
                       </div>
                     )}
                   </div>
