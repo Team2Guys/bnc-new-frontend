@@ -1,22 +1,17 @@
-
-import { Suspense } from 'react'
-import dynamic from 'next/dynamic';
 import type { Metadata } from 'next'
 import Script from 'next/script';
 import { schema } from 'data/schema';
 import logo from '../../public/assets/images/blind-curtains-dubai/blinds-curtains-dubai1.png';
 import MainHero from 'components/Hero/main-hero';
-const SellerSlider = dynamic(() => import('components/BestSellerSlider/SellerCard'));
-const SimpleSteps = dynamic(() => import('components/SimpleSteps/SimpleSteps'));
-const MotorizeBlindCurtain = dynamic(() => import('components/MotorizedBlindCurtains/MotorizedBlindCurtains'));
-const VideoReelsSlider = dynamic(() => import('components/VideoSlider/VideoSlider'));
-const InfoTabs = dynamic(() => import('components/NewHomecomponents/info'));
-const ComparisonTable = dynamic(() => import('components/NewHomecomponents/comparisontabble'));
-const OurClient = dynamic(() => import('components/Our-Client/OurClient'));
-const Review_banner = dynamic(() => import('components/ReviewBanner/Review_banner'));
 import { fetchProducts } from 'config/fetch';
-import { tabData } from 'data/Homedata/tabdata';
-import { reelsData } from 'data/SellerSlider';
+import InfoTabs from 'components/NewHomecomponents/info';
+import ComparisonTable from 'components/NewHomecomponents/comparisontabble';
+import SellerSlider from 'components/BestSellerSlider/SellerCard';
+import SimpleSteps from 'components/SimpleSteps/SimpleSteps';
+import MotorizeBlindCurtain from 'components/MotorizedBlindCurtains/MotorizedBlindCurtains';
+import VideoReelsSlider from 'components/VideoSlider/VideoSlider';
+import OurClient from 'components/Our-Client/OurClient';
+import Review_banner from 'components/ReviewBanner/Review_banner';
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://blindsandcurtains.ae/"),
@@ -33,7 +28,7 @@ export const metadata: Metadata = {
         alt: 'blindsandcurtains',
       },
     ],
-         type:"website"
+    type: "website"
   },
   alternates: {
     canonical: 'https://blindsandcurtains.ae/',
@@ -53,20 +48,20 @@ export default async function Home() {
 
       <MainHero />
       <Review_banner />
-      <InfoTabs tabData={tabData} isHome />
+      <InfoTabs isHome />
       <div className='grid grid-cols-12'>
         <div className='col-span-12 order-2 md:order-1'>
           <ComparisonTable />
         </div>
-        <div className='col-span-12 order-1 md:order-2'>
-          <Suspense fallback='loading ...'>
+        {products && (
+          <div className='col-span-12 order-1 md:order-2'>
             <SellerSlider products={products} />
-          </Suspense>
-        </div>
+          </div>
+        )}
       </div>
       <SimpleSteps />
       <MotorizeBlindCurtain />
-      <VideoReelsSlider reelsData={reelsData} />
+      <VideoReelsSlider />
       <OurClient />
     </>
   );

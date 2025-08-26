@@ -1,28 +1,38 @@
 'use client'
 
-import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
+import {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useMemo,
+  TouchEvent,
+  SyntheticEvent,
+} from 'react'
 import dynamic from 'next/dynamic'
 import Container from 'components/Res-usable/Container/Container'
 import VideoIcon from '../../../public/assets/images/videoicon.webp'
 import Image from 'next/image'
-import { Reel } from 'types/types'
+import { reelsData } from 'data/SellerSlider'
 
 // Dynamically import NeedHelp to reduce TBT during initial render
 const NeedHelp = dynamic(() => import('components/NeedHelp/NeedHelp'), { ssr: false })
 
-export default function VideoReelsSlider({ reelsData }: { reelsData: Reel[] }) {
+export default function VideoReelsSlider() {
   const [activeIndex, setActiveIndex] = useState(2)
   const [isMobile, setIsMobile] = useState(false)
   const [popupVideoIndex, setPopupVideoIndex] = useState<number | null>(null)
   const [videoSize, setVideoSize] = useState<{ width: number; height: number } | null>(null)
+  const [isVisible, setIsVisible] = useState(false)
 
   const totalVideos = reelsData.length
-
 
   const videoRefs = useRef<HTMLVideoElement[]>([])
   const touchStartX = useRef<number | null>(null)
   const touchEndX = useRef<number | null>(null)
   const minSwipeDistance = 50
+
+  const sliderRef = useRef<HTMLDivElement>(null)
 
   const goToPrevious = useCallback(
     () => setActiveIndex((prev) => (prev === 0 ? totalVideos - 1 : prev - 1)),
@@ -34,7 +44,29 @@ export default function VideoReelsSlider({ reelsData }: { reelsData: Reel[] }) {
     [totalVideos]
   )
 
-  // Debounced resize to avoid layout thrashing
+  // Intersection Observer to detect if slider is in viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting)
+      },
+      {
+        threshold: 0.3,
+      }
+    )
+
+    if (sliderRef.current) {
+      observer.observe(sliderRef.current)
+    }
+
+    return () => {
+      if (sliderRef.current) {
+        observer.unobserve(sliderRef.current)
+      }
+    }
+  }, [])
+
+  // Detect mobile resize
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 640)
     checkMobile()
@@ -47,29 +79,30 @@ export default function VideoReelsSlider({ reelsData }: { reelsData: Reel[] }) {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+  // Autoplay slider only when visible and no popup
   useEffect(() => {
-    if (popupVideoIndex !== null) return; // 🚫 Stop autoplay when popup is open
+    if (!isVisible || popupVideoIndex !== null) return
 
     const interval = setInterval(() => {
-      goToNext();
-    }, 5000);
+      goToNext()
+    }, 5000)
 
-    return () => clearInterval(interval);
-  }, [activeIndex, popupVideoIndex, goToNext]);
+    return () => clearInterval(interval)
+  }, [activeIndex, popupVideoIndex, goToNext, isVisible])
 
-  // Efficiently play/pause only affected video refs
+  // Play/pause videos based on active index and visibility
   useEffect(() => {
     videoRefs.current.forEach((video, index) => {
       if (video) {
-        if (index === activeIndex) {
-          video.play().catch(() => { })
+        if (index === activeIndex && isVisible) {
+          video.play().catch(() => {})
         } else {
           video.pause()
           video.currentTime = 0
         }
       }
     })
-  }, [activeIndex])
+  }, [activeIndex, isVisible])
 
   // Manage body scroll when popup is shown
   useEffect(() => {
@@ -79,11 +112,11 @@ export default function VideoReelsSlider({ reelsData }: { reelsData: Reel[] }) {
     }
   }, [popupVideoIndex])
 
-  const onTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+  const onTouchStart = (e: TouchEvent<HTMLDivElement>) => {
     touchStartX.current = e.changedTouches[0].clientX
   }
 
-  const onTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
+  const onTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
     touchEndX.current = e.changedTouches[0].clientX
 
     if (touchStartX.current !== null && touchEndX.current !== null) {
@@ -117,7 +150,7 @@ export default function VideoReelsSlider({ reelsData }: { reelsData: Reel[] }) {
   )
 
   const handleLoadedMetadata = useCallback(
-    (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    (e: SyntheticEvent<HTMLVideoElement, Event>) => {
       const video = e.currentTarget
       const naturalWidth = video.videoWidth
       const naturalHeight = video.videoHeight
@@ -191,7 +224,7 @@ export default function VideoReelsSlider({ reelsData }: { reelsData: Reel[] }) {
     <>
       {isMobile && <NeedHelp />}
 
-      <div className="relative mt-4">
+      <div className="relative mt-4" ref={sliderRef}>
         <div className="sm:py-6 py-4 text-center font-bold sm:w-full w-52 mx-auto">
           <p className="font-robotoSerif sm:text-4xl text-xl text-primary font-bold">
             Press Play on Style Quick Reels!
