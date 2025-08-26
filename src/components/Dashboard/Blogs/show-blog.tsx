@@ -5,8 +5,6 @@ import { BlogInfo, UpdateBlog } from 'types/interfaces';
 import { formatDateMonth } from 'config';
 import { LiaEdit } from 'react-icons/lia';
 import { RiDeleteBin6Line } from 'react-icons/ri';
-import { ColumnsType } from 'antd/es/table';
-import { Table } from 'antd';
 import axios from 'axios';
 import showToast from 'components/Toaster/Toaster';
 import Image from 'next/image';
@@ -16,6 +14,7 @@ import { useAppSelector } from 'components/Others/HelperRedux';
 import Cookies from 'js-cookie';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 import revalidateTag from 'components/ServerActons/ServerAction';
+import Table from 'components/ui/Table';
 
 interface BlogProps {
   setMenuType: React.Dispatch<SetStateAction<string>>;
@@ -93,12 +92,11 @@ const ShowBlog: React.FC<BlogProps> = ({ setMenuType, setEditBlog, blogs,menuTyp
     }
   };
 
-  const columns: ColumnsType<BlogInfo> = [
+  const columns = [
     {
       title: 'Image',
-      dataIndex: 'posterImageUrl',
       key: 'posterImageUrl',
-      render: (text: any, record: BlogInfo) => {
+      render: (record: BlogInfo) => {
         return (
           record.posterImage?.imageUrl ? 
 
@@ -109,33 +107,27 @@ const ShowBlog: React.FC<BlogProps> = ({ setMenuType, setEditBlog, blogs,menuTyp
           width={50}
           height={50}
         />    : "Image not available"
-      
-        
-
         )
         }  ,
     },
     {
       title: 'Name',
-      dataIndex: 'title',
       key: 'title',
     },
     {
       title: 'Created At',
-      dataIndex: 'createdAt',
       key: 'createdAt',
-      render: (text: string, record: BlogInfo) =>
+      render: (record: BlogInfo) =>
         formatDateMonth(record.createdAt),
     },
     {
       title: 'Category',
-      dataIndex: 'category',
       key: 'category',
     },
     {
       title: 'Preview',
       key: 'Preview',
-      render: (text: any, record: BlogInfo) => (
+      render: (record: BlogInfo) => (
         <FaRegEye
           className="cursor-pointer"
           onClick={() => {
@@ -147,17 +139,15 @@ const ShowBlog: React.FC<BlogProps> = ({ setMenuType, setEditBlog, blogs,menuTyp
     },
     {
       title: 'Last Edited By',
-      dataIndex: 'last_editedBy',
       key: 'time',
-      render: (text: string, record: BlogInfo) => {
+      render: (record: BlogInfo) => {
         return <span>{record.last_editedBy}</span>;
       },
     },
     {
       title: 'Status',
-      dataIndex: 'isPublished',
       key: 'isPublished',
-      render: (text: string, record: BlogInfo) => {
+      render: (record: BlogInfo) => {
         return (
           <Fragment>
             {record?.isPublished ? (
@@ -176,7 +166,7 @@ const ShowBlog: React.FC<BlogProps> = ({ setMenuType, setEditBlog, blogs,menuTyp
     {
       title: 'Edit',
       key: 'edit',
-      render: (_, record: BlogInfo) => (
+      render: (record: BlogInfo) => (
         <LiaEdit
           className={`${canEditBlog ? 'cursor-pointer' : 'cursor-not-allowed text-slate-200'}`}
           size={20}
@@ -192,14 +182,13 @@ const ShowBlog: React.FC<BlogProps> = ({ setMenuType, setEditBlog, blogs,menuTyp
     {
       title: 'Action',
       key: 'action',
-      //@ts-expect-error
-      render: (_, record: UpdateBlog) => (
+      render: (record: BlogInfo) => (
         <RiDeleteBin6Line
           className={`${canDeleteBlog ? 'text-red cursor-pointer' : 'cursor-not-allowed text-slate-200'}`}
           size={20}
           onClick={() => {
-            if (canDeleteBlog) {
-              confirmDelete(record.id);
+            if (canDeleteBlog && record.id) {
+              confirmDelete(String(record.id));
             }
           }}
         />
@@ -235,11 +224,10 @@ useEffect(()=>{
       </div>
 
       {filteredBlog && filteredBlog.length > 0 ? (
-        <Table
-          dataSource={filteredBlog}
+        <Table<BlogInfo>
+          data={filteredBlog}
           columns={columns}
           rowKey="id"
-          pagination={false}
         />
       ) : (
         <p className="dark:text-white">No Blogs found</p>

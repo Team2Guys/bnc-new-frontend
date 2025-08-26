@@ -1,5 +1,5 @@
 import React, { FormEventHandler, SetStateAction } from 'react';
-import { ICategory, IProduct } from './types';
+import { ICategory, IProduct, Status } from './types';
 import { VideoItem } from './product';
 import Slider from 'react-slick';
 
@@ -183,6 +183,8 @@ export interface Allproduct {
   createdAt: string;
   updatedAt: string | null;
   name?: any;
+    status:Status
+  
 }
 
 export interface CardTypes {

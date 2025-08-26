@@ -8,13 +8,13 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import showToast from 'components/Toaster/Toaster';
 import { AppointmentProps, ContactMethods, ProductOptions } from 'types/types';
-import { Radio, RadioChangeEvent } from 'antd';
 import HorizontalDatePicker from './HorizontalDatePicker';
 import TimeSlotPicker from './TimeSlotPicker';
 import { IoMdCheckmark } from 'react-icons/io';
 import Image from 'next/image';
 import Loader from 'components/Loader/Loader';
 import { useRouter } from 'next/navigation';
+import Checkbox from 'components/ui/Checkbox';
 interface IAppointments {
   name: string;
   phone_number: string;
@@ -116,9 +116,9 @@ const BookAppointment: React.FC<AppointmentProps> = ({
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleRadioChange = (e: RadioChangeEvent) => {
-    setSelectedCity(e.target.value)
-  };
+ const handleRadioChange = (city: string) => {
+  setSelectedCity(city);
+};
 
   const handleSelectChange = (name: string, value: string) => {
     setFormData({ ...formData, [name]: value });
@@ -267,22 +267,31 @@ const BookAppointment: React.FC<AppointmentProps> = ({
         onSubmit={handleSubmit}
         className={` bg-white rounded-md ${singlePage ? 'w-full  px-0 py-4 sm:p-4 ' : ' px-4 py-2'}`}
       >
-        <div>
-          <label className="font-bold mb-2 block font-robotoSerif text-xl sm:text-2xl">City</label>
-          <Radio.Group
-            onChange={handleRadioChange}
-            value={selectedCity}
-            className="flex sm:gap-12 justify-between sm:justify-start custom-radio"
-          >
-            {cities.map((city) => (
-              <Radio key={city} value={city} className="text-xs xsm:text-sm sm:text-xl font-medium">
-                {city}
-              </Radio>
-            ))}
-          </Radio.Group>
-          {selectedCity !== "Dubai" &&
-            <p className='text-red-500 font-medium font-roboto text-sm sm:text-xl py-4 sm:px-8'>Services available with a minimum order of 8 windows.</p>}
-        </div>
+       <div>
+      <label className="font-bold mb-2 block font-robotoSerif text-xl sm:text-2xl">
+        City
+      </label>
+
+      <div className="flex sm:gap-12 justify-between sm:justify-start">
+        {cities.map((city) => (
+          <Checkbox
+            key={city}
+            id={city}
+            name="city"
+            label={city}
+            checked={selectedCity === city}
+            onChange={() => handleRadioChange(city)}
+            radio
+        />
+        ))}
+      </div>
+
+      {selectedCity !== "Dubai" && (
+        <p className="text-red-500 font-medium font-roboto text-sm sm:text-xl py-4 sm:px-8">
+          Services available with a minimum order of 8 windows.
+        </p>
+      )}
+    </div>
         <div className='pt-4 sm:pt-8'>
           <HorizontalDatePicker
             onChange={(date: Date) =>

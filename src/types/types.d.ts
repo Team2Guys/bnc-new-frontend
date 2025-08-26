@@ -100,7 +100,7 @@ export interface IProduct {
   modelDetails?:{name:string, detail:string}[]
   privarcyImage?:Image
   topImages?:Image
-  status:Status
+  status?:Status
 }
 
 export interface ProductImages {
@@ -408,6 +408,40 @@ export interface ThankYouCardProps {
   buttonLink: string;
 }
 
+interface Column<T> {
+  title: string;
+  key: string;
+  render?: (_record: T) => React.ReactNode;
+}
 
 
+
+export interface TableProps<T> {
+  data: T[];
+  columns: Column<T>[];
+  rowKey: keyof T;
+  emptyMessage?: string;
+}
+
+export interface CheckboxProps {
+  id: string;
+  name?: string;
+  checked: boolean;
+  label: string;
+  radio?: boolean;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  className?: string;
+}
+
+export interface SheetProps {
+  children?: React.ReactNode;
+  drawerName: React.ReactNode; 
+  title?: string;
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  selectedLabel?: string;
+  setSelectedLabel?: (label: string | undefined) => void;
+  mobileBgColor?: string;
+  className?: string;
+}
 export type Status = "DRAFT" | "PUBLISHED" | "ARCHIVED"

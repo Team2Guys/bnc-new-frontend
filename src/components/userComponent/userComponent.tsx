@@ -4,11 +4,11 @@ import Link from 'next/link';
 import Loader from 'components/Loader/Loader';
 import { IoArrowBackSharp } from 'react-icons/io5';
 import { usePathname, useRouter } from 'next/navigation';
-import { Select } from 'antd';
 import { USRPROPS } from 'types/interfaces';
 import Container from 'components/Res-usable/Container/Container';
 import { Button } from 'components/ui/button';
 import Input from 'components/Common/regularInputs';
+import Select from 'components/ui/Select';
 
 export default function UserComponent({
   handleSubmit,
@@ -72,12 +72,13 @@ export default function UserComponent({
                   <div className=" mb-4 flex gap-3 items-center">
                     <p className="w-full">Sign in As </p>
                     <Select
-                      className="w-full !ring-white outline-none"
+                      name="role"
+                      className="w-full"
                       defaultValue="Admin"
                       onChange={selecthandleChange}
                       options={[
-                        { value: 'Admin', label: 'Admin' },
-                        { value: 'Super-Admin', label: 'Super-Admin' },
+                        { value: "Admin", label: "Admin" },
+                        { value: "Super-Admin", label: "Super-Admin" },
                       ]}
                     />
                   </div>
