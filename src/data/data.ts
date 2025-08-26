@@ -997,7 +997,8 @@ export const shuttersSubcategories = [
   "Kitchen Room Shutters",
   "Bedroom Shutters",
   "Staircase Shutters",
-  "White Shutters"
+  "White Shutters",
+  "Off White Shutters"
 ];
 
 export const curtainsSubcategories = [
