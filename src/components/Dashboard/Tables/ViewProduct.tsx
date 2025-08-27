@@ -20,6 +20,7 @@ import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import Table from 'components/ui/Table';
 import ViewsTableHeader from '../TableHeader/ViewsTableHeader';
+import { DateFormatHandler } from 'utils/helperFunctions';
 
 interface Product extends IProduct {
   id: number;
@@ -29,6 +30,7 @@ interface Product extends IProduct {
   createdAt: string;
   CategoryId: number;
   last_editedBy?: string;
+  
 }
 
 interface CategoryProps {
@@ -171,22 +173,27 @@ const ViewProduct: React.FC<CategoryProps> = ({
       title: 'Status',
       key: 'status',
     },
+
     {
-      title: 'Date',
+       title: 'Date',
       key: 'date',
       render: (record: Product) => {
-        const createdAt = new Date(record.createdAt);
-        return <span>{createdAt.toLocaleDateString()}</span>;
+         const createdAt = DateFormatHandler(record?.createdAt)
+ 
+        return <span>{createdAt}</span>;
       },
     },
     {
-      title: 'Time',
-      key: 'time',
+       title: 'UpdateAt',
+      key: 'UpdateAt',
       render: (record: Product) => {
-        const createdAt = new Date(record.createdAt);
-        return <span>{createdAt.toLocaleTimeString()}</span>;
+         const createdAt = DateFormatHandler(record?.updatedAt)
+ 
+        return <span>{createdAt}</span>;
       },
     },
+
+
     {
       title: 'Last Edited By',
       key: 'time',

@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import Table from 'components/ui/Table';
 import ViewsTableHeader from '../TableHeader/ViewsTableHeader';
+import { DateFormatHandler } from 'utils/helperFunctions';
 
 const TableTwo = ({
   setMenuType,
@@ -115,18 +116,21 @@ const TableTwo = ({
       title: 'Date',
       key: 'date',
       render: (record: ICategory) => {
-        const createdAt = new Date(record.createdAt);
-        return <span>{createdAt.toLocaleDateString()}</span>;
+               const createdAt = DateFormatHandler(record?.createdAt)
+      
+        return <span>{createdAt}</span>;
       },
     },
     {
-      title: 'Time',
-      key: 'time',
+      title: 'UpdatedAT',
+      key: 'UpdatedAT',
       render: (record: ICategory) => {
-        const createdAt = new Date(record.createdAt);
-        return <span>{createdAt.toLocaleTimeString()}</span>;
+               const createdAt = DateFormatHandler(record?.updatedAt)
+      
+        return <span>{createdAt}</span>;
       },
     },
+
     {
       title: 'Last Edited By',
       key: 'time',

@@ -62,6 +62,7 @@ const Products = ({ products }: PRODUCTS_PROPS) => {
     customUrl: editProduct && editProduct.customUrl,
     colorsImages : editProduct && editProduct.colorsImages,
     status : editProduct && editProduct.status,
+    updatedAt : editProduct && editProduct?.updatedAt,
 
         faqs: editProduct && editProduct.faqs,
         videos: editProduct && editProduct.videos,
