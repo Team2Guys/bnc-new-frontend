@@ -146,7 +146,8 @@ export const getSubcategoriesByCategory = (categoryName: string): string[] => {
   };
 
 
-  export const DateFormatHandler = (input: Date | string) => {
+  export const DateFormatHandler = (input?: Date | string) => {
+    console.log(input, "input from update at")
   if (!input) return "Not available";
 
   const parsedDate = typeof input === "string" ? new Date(input) : input;

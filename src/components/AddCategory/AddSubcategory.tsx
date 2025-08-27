@@ -30,6 +30,7 @@ interface editCategoryNameType {
   Meta_description?: string;
   Canonical_Tag?: string;
   Images_Alt_Text?: string;
+  customUrl?:string
 }
 
 interface editCategoryProps {
@@ -62,6 +63,7 @@ const FormLayout = ({
         Meta_Title: editCategory?.Meta_Title,
         Meta_description: editCategory?.Meta_description,
         status: editCategory?.status,
+        customUrl: editCategory?.customUrl,
       }
       : null;
   let CategorImageUrl = editCategory && editCategory.posterImage;
@@ -279,12 +281,17 @@ const FormLayout = ({
                       <Input
                         label="Category Description"
                         name="description"
-                        placeholder="Top Heading"
+                        placeholder="Description"
+                      />
+                      <Input
+                        label="Custom Url"
+                        name="customUrl"
+                        placeholder="Custom Url"
                       />
                       <Input
                         label="Category Short Description"
                         name="short_description"
-                        placeholder="Category Short Description"
+                        placeholder="Short Description"
                         textarea
                       />
 

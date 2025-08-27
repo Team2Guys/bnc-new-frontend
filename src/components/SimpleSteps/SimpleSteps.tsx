@@ -36,7 +36,7 @@ export default function SimpleSteps() {
   }, []);
 
   return (
-    <div className="bg-secondary-foreground sm:bg-transparent pb-5 sm:pb-0">
+    // <div className="bg-secondary-foreground sm:bg-transparent pb-5 sm:pb-0">
       <Container className="mt-5 md:mt-10">
         <div className="mx-auto px-1 md:px-4">
           <div className="sm:py-7 pt-5 pb-0 space-y-5">
@@ -106,6 +106,6 @@ export default function SimpleSteps() {
           </div>
         </div>
       </Container>
-    </div>
+    // </div>
   );
 }
