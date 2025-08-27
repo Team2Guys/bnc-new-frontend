@@ -17,6 +17,7 @@ import Cookies from 'js-cookie';
 import revalidateTag from 'components/ServerActons/ServerAction';
 import { Status } from 'types/types';
 import TopButton from 'components/Dashboard/Layouts/TopButton';
+import Input from 'components/ui/Input';
 interface editCategoryNameType {
   name: string;
   description: string;
@@ -210,7 +211,7 @@ const FormLayout = ({
         {(formik) => {
           return (
             <Form onSubmit={formik.handleSubmit}>
-                <TopButton  setMenuType={setMenuType} loading={loading}/>
+               <TopButton  setMenuType={setMenuType} loading={loading}/>
 
               <div className="flex justify-center ">
                 <div className="flex flex-col gap-9 w-2/5 dark:border-strokedark dark:bg-lightdark rounded-md">
@@ -249,9 +250,6 @@ const FormLayout = ({
                                   />
                                 </div>
                                 <input
-                                  className="border mt-2 w-full rounded-md border-stroke px-2 text-14 py-2 focus:border-primary active:border-primary outline-none border-stroke bg-white dark:border-strokedark dark:bg-lightdark "
-                                  placeholder="altText"
-                                  type="text"
                                   name="altText"
                                   value={item.altText}
                                   onChange={(e) =>
@@ -260,7 +258,10 @@ const FormLayout = ({
                                       String(e.target.value),
                                     )
                                   }
+                                  className='border rounded p-2 focus:outline-none mt-1'
+                                  placeholder="altText"
                                 />
+                              
                               </div>
                             );
                           })}
@@ -303,10 +304,8 @@ const FormLayout = ({
                                   />
                                 </div>
                                 <input
-                                  className="border mt-2 w-full rounded-md border-stroke px-2 text-14 py-2 focus:border-primary active:border-primary outline-none border-stroke bg-white dark:border-strokedark dark:bg-lightdark "
-                                  placeholder="altText"
-                                  type="text"
                                   name="altText"
+                                  className='border rounded p-2 focus:outline-none mt-1'
                                   value={item.altText}
                                   onChange={(e) =>
                                     handlealtTextbannerImageUrl(
@@ -314,7 +313,9 @@ const FormLayout = ({
                                       String(e.target.value),
                                     )
                                   }
+                                  placeholder="altText"
                                 />
+                               
                               </div>
                             );
                           })}
@@ -328,153 +329,47 @@ const FormLayout = ({
 
 
                       <div className=' flex flex-wrap md:flex-nowrap gap-4'>
-
-                        <div className='w-full'>
-                          <label className="primary-label">
-                            Category Title
-                          </label>
-                          <input
-                            type="text"
+                      <Input
+                            label="Category Title"
                             name="name"
-                            onChange={formik.handleChange}
-                            value={formik.values.name}
                             placeholder="Title"
-                            className={`primary-input ${formik.touched.name && formik.errors.name
-                              ? 'border-red-500'
-                              : ''
-                              }`}
                           />
-                          {formik.touched.name && formik.errors.name ? (
-                            <div className="text-red-500 text-sm">
-                              {formik.errors.name}
-                            </div>
-                          ) : null}
-
-                        </div>
-
-
-                        <div className='w-full'>
-                          <label className="primary-label">
-                            Top Heading
-                          </label>
-                          <input
-                            type="text"
+                          <Input
+                            label="Top Heading"
                             name="topHeading"
-                            onChange={formik.handleChange}
-                            value={formik.values.topHeading}
-                            placeholder="Title"
-                            className={`primary-input ${formik.touched.name && formik.errors.name
-                              ? 'border-red-500'
-                              : ''
-                              }`}
+                            placeholder="Top Heading"
+                          />  
+                      </div>
+                      <Input
+                            label="Product Page Heading"
+                            name="productpageHeading"
+                            placeholder="Product Page Heading"
                           />
-
-                        </div>
-
-                      </div>
-
-
-                      <div>
-                        <label className="primary-label">
-                          Product Page Heading
-                        </label>
-                        <input
-                          type="text"
-                          name="productpageHeading"
-                          onChange={formik.handleChange}
-                          value={formik.values.productpageHeading}
-                          placeholder="Title"
-                          className={`primary-input ${formik.touched.productpageHeading && formik.errors.productpageHeading
-                            ? 'border-red-500'
-                            : ''
-                            }`}
-                        />
-
-                      </div>
-
-
-
+               
                       <div className='flex gap-4 mt-2 flex-wrap md:flex-nowrap'>
-                        <div>
-                          <label className="primary-label">
-                            breadCrumb
-                          </label>
-                          <input
-                            type="text"
+                        <Input
+                            label="breadCrumb"
                             name="breakcrum"
-                            onChange={formik.handleChange}
-                            value={formik.values.breakcrum}
-                            placeholder="Title"
-                            className={`primary-input ${formik.touched.name && formik.errors.name
-                              ? 'border-red-500'
-                              : ''
-                              }`}
+                            placeholder="breadCrumb"
                           />
-
-                        </div>
-
-                        <div>
-                          <label className="primary-label">
-                            productCustomUrl
-                          </label>
-                          <input
-                            type="text"
+                        <Input
+                            label="productCustomUrl"
+                            name="productCustomUrl"
+                            placeholder="productCustomUrl"
+                          />
+                          <Input
+                            label="categoryCustomUrl"
                             name="categoryCustomUrl"
-                            onChange={formik.handleChange}
-                            value={formik.values.productCustomUrl}
-                            placeholder="Title"
-                            className={`primary-input ${formik.touched.productCustomUrl && formik.errors.productCustomUrl
-                              ? 'border-red-500'
-                              : ''
-                              }`}
+                            placeholder="categoryCustomUrl"
+                          />
+                      </div>
+                          <Input
+                            label="Faq Heading"
+                            name="faqHeading"
+                            placeholder="Faq Heading"
                           />
 
-                        </div>
-
-                        <div>
-
-
-                          <label className="primary-label">
-                            categoryCustomUrl
-                          </label>
-                          <input
-                            type="text"
-                            name="categoryCustomUrl"
-                            onChange={formik.handleChange}
-                            value={formik.values.categoryCustomUrl}
-                            placeholder="Title"
-                            className={`primary-input ${formik.touched.categoryCustomUrl && formik.errors.categoryCustomUrl
-                              ? 'border-red-500'
-                              : ''
-                              }`}
-                          />
-
-
-                        </div>
-
-
-                      </div>
-
-
-                      <div>
-                        <label className="primary-label">
-                          Faq Heading
-                        </label>
-                        <input
-                          type="text"
-                          name="faqHeading"
-                          onChange={formik.handleChange}
-                          value={formik.values.faqHeading}
-                          placeholder="Title"
-                          className={`primary-input ${formik.touched.name && formik.errors.name
-                            ? 'border-red-500'
-                            : ''
-                            }`}
-                        />
-
-                      </div>
-
-
+                  
                       <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                         <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
                           <h3 className="font-medium text-black dark:text-white">
@@ -492,36 +387,14 @@ const FormLayout = ({
                                         key={index}
                                         className="flex gap-2 items-center"
                                       >
-                                        <input
-                                          type="text"
-                                          name={`faqs[${index}].specsHeading`}
-                                          onChange={formik.handleChange}
-                                          onBlur={formik.handleBlur}
-                                          value={
-                                            formik.values.faqs[index]
-                                              .specsHeading
-                                          }
-                                          placeholder="FAQS Heading"
-                                          className={`primary-input 
-      
-                                              
-                                            `}
-                                        />
-                                        <input
-                                          type="text"
-                                          name={`faqs[${index}].specsDetails`}
-                                          onChange={formik.handleChange}
-                                          onBlur={formik.handleBlur}
-                                          value={
-                                            formik.values.faqs[index]
-                                              .specsDetails
-                                          }
-                                          placeholder="FAQS Details"
-                                          className={`primary-input 
-      
-                                              
-                                            `}
-                                        />
+                                        <Input
+                                            name={`faqs[${index}].specsHeading`}
+                                            placeholder="FAQS Heading"
+                                          />
+                                       <Input
+                                            name={`faqs[${index}].specsDetails`}
+                                            placeholder="FAQS Details"
+                                          />
                                         <button
                                           type="button"
                                           onClick={() => remove(index)}
@@ -565,21 +438,10 @@ const FormLayout = ({
                                         key={index}
                                         className="flex items-center"
                                       >
-                                        <input
-                                          type="text"
-                                          name={`headingchecks[${index}].specsDetails`}
-                                          onChange={formik.handleChange}
-                                          onBlur={formik.handleBlur}
-                                          value={
-                                            formik.values.headingchecks[index]
-                                              .specsDetails
-                                          }
-                                          placeholder="heading checks Details"
-                                          className={`primary-input 
-      
-                                              
-                                            `}
-                                        />
+                                        <Input
+                                            name={`headingchecks[${index}].specsDetails`}
+                                            placeholder="heading checks Details"
+                                          />
                                         <button
                                           type="button"
                                           onClick={() => remove(index)}
@@ -606,127 +468,37 @@ const FormLayout = ({
                         </div>
                       </div>
 
-
-                      <div>
-                        <label className="primary-label">
-                          Category Description
-                        </label>
-                        <textarea
+                      <Input
+                          label="Category Description"
                           name="description"
-                          onChange={formik.handleChange}
-                          value={formik.values.description}
-                          placeholder="Description"
-                          className={`primary-input ${formik.touched.name && formik.errors.name
-                            ? 'border-red-500'
-                            : ''
-                            }`}
+                          placeholder="Write something..."
+                          textarea
                         />
-                        {formik.touched.name && formik.errors.name ? (
-                          <div className="text-red-500 text-sm">
-                            {formik.errors.name}
-                          </div>
-                        ) : null}
-                      </div>
+                     
                       <div className="flex gap-4 mt-4">
-                        <div className="w-2/4">
-                          <label className="primary-label">
-                            Meta Title
-                          </label>
-                          <input
-                            type="text"
+                        <Input
+                            label="Meta Title"
                             name="Meta_Title"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.Meta_Title}
                             placeholder="Meta Title"
-                            className={`primary-input ${formik.touched.Meta_Title &&
-                              formik.errors.Meta_Title
-                              ? 'border-red-500'
-                              : ''
-                              }`}
                           />
-                          {formik.touched.Meta_Title &&
-                            formik.errors.Meta_Title ? (
-                            <div className="errorColor text-sm">
-                              {formik.errors.Meta_Title as String}
-                            </div>
-                          ) : null}
-                        </div>
-                        <div className="w-2/4">
-                          <label className="primary-label">
-                            Canonical Tag
-                          </label>
-                          <input
-                            onBlur={formik.handleBlur}
-                            type="text"
+                        <Input
+                            label="Canonical Tag"
                             name="Canonical_Tag"
-                            onChange={formik.handleChange}
-                            value={formik.values.Canonical_Tag}
                             placeholder="Canonical Tag"
-                            className={`primary-input ${formik.touched.Canonical_Tag &&
-                              formik.errors.Canonical_Tag
-                              ? 'border-red-500'
-                              : ''
-                              }`}
                           />
-
-                          {formik.touched.Canonical_Tag &&
-                            formik.errors.Canonical_Tag ? (
-                            <div className="errorColor text-sm">
-                              {formik.errors.Canonical_Tag as String}
-                            </div>
-                          ) : null}
-                        </div>
                       </div>
-                      <div className="mt-4">
-                        <label className="primary-label">
-                          Meta Description
-                        </label>
-                        <textarea
+                      <Input
+                          label="Meta Description"
                           name="Meta_description"
-                          onChange={formik.handleChange}
-                          value={formik.values.Meta_description}
-                          placeholder="Meta Description"
-                          className={`primary-input ${formik.touched.description &&
-                            formik.errors.description
-                            ? 'border-red-500'
-                            : ''
-                            }`}
+                          placeholder="Write something..."
+                          textarea
                         />
-                        {formik.touched.Meta_description &&
-                          formik.errors.Meta_description ? (
-                          <div className="errorColor text-sm">
-                            {formik.errors.Meta_description as String}
-                          </div>
-                        ) : null}
-                      </div>
-
-                      <div className="flex gap-4 mt-2">
-                        <div className="w-full">
-                          <label className="primary-label">
-                            Images Alt Text
-                          </label>
-                          <input
-                            type="text"
+                    
+                        <Input
+                            label="Images Alt Text"
                             name="Images_Alt_Text"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.Images_Alt_Text}
                             placeholder="Images Alt Text"
-                            className={`primary-input ${formik.touched.Images_Alt_Text &&
-                              formik.errors.Images_Alt_Text
-                              ? 'border-red-500'
-                              : ''
-                              }`}
                           />
-                          {formik.touched.Images_Alt_Text &&
-                            formik.errors.Images_Alt_Text ? (
-                            <div className="errorColor text-sm">
-                              {formik.errors.Images_Alt_Text as String}
-                            </div>
-                          ) : null}
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
