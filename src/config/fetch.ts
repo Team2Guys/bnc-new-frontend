@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IAppointments, ICategory, IRECORDS } from 'types/types';
+import { IAppointments, ICategory, IProduct, IRECORDS } from 'types/types';
 import { Allproduct } from 'types/interfaces';
 import { generateSlug } from 'data/data';
 import { ChangedProductUrl } from 'data/urls';
@@ -113,8 +113,6 @@ export const fetchSubCategories = async () => {
       next: { tags: ['subCategories'] },
     }
     );
-
-
     let result = await response.json();
     return result;
   } catch (error) {
@@ -200,7 +198,7 @@ export const filterProd = (
   prod: Allproduct[],
   product: string,
   Cateories: number[],
-) => {
+): IProduct | undefined => {
   return prod?.find((sub) => {
     const title = ChangedProductUrl(product as string);
 
