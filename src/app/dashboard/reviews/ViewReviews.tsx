@@ -1,7 +1,7 @@
 "use client"
 
-import { Table } from 'antd';
 import revalidateTag from 'components/ServerActons/ServerAction';
+import Table from 'components/ui/Table';
 import { deleteReview } from 'config/fetch';
 import Image from 'next/image';
 import React, { SetStateAction, useState } from 'react'
@@ -73,39 +73,33 @@ throw err
     const columns = [
         {
             title: 'Image',
-            dataIndex: 'posterImageUrl',
-            width: 150,
             key: 'posterImageUrl',
-            render: (text: string, record: IREVIEWS) => (
+            render: (record: IREVIEWS) => (
                 <Image
                     src={record?.posterImageUrl?.imageUrl || "/assets/images/dummy-avatar.jpg"}
                     alt={`Image of ${record?.name}`}
-                    width={200}
+                    width={50}
                     loading='lazy'
-                    className="sm:w-[80px] sm:h-[80px] rounded-md object-contain"
-                    height={200}
+                    className="h-[50px] rounded-md object-contain"
+                    height={50}
                 />
             ),
         },
         {
             title: 'Name',
-            dataIndex: 'name',
             key: 'name',
-            width: 200,
         },
 
         {
             title: 'Create At',
-            dataIndex: 'createdAt',
             key: 'createdAt',
-            render: (text: string, record: IREVIEWS) =>
+            render: (record: IREVIEWS) =>
                 record?.createdAt ? new Date(record.createdAt).toLocaleString('en-US', { hour12: true }).replace(/:\d{2}\s/, ' ') : null,
         },
         {
             title: 'Updated At',
-            dataIndex: 'createdAt',
             key: 'date',
-            render: (_: string, record: IREVIEWS) => {
+            render: (record: IREVIEWS) => {
                 const createdAt = new Date(record?.updatedAt ?? "");
                 return <span>{DateFormatHandler(createdAt)}</span>;
             }
@@ -113,8 +107,7 @@ throw err
         {
             title: 'Edit',
             key: 'Edit',
-            width: 150,
-            render: (text: string, record: IREVIEWS) => (
+            render: (record: IREVIEWS) => (
                 <LiaEdit
                     className={`${canEditproduct ? 'cursor-pointer' : ''} ${!canEditproduct ? 'cursor-not-allowed text-slate-200' : ''
                         }`}
@@ -131,8 +124,7 @@ throw err
         {
             title: 'Action',
             key: 'action',
-            width: 150,
-            render: (text: string, record: IREVIEWS) => (
+            render: (record: IREVIEWS) => (
                 loading == record.id ? "Deleting" :
                     <RiDeleteBin6Line
                         className={`${canDeleteProduct ? 'text-red-600 cursor-pointer' : ''} ${!canDeleteProduct ? 'cursor-not-allowed text-slate-200' : ''
@@ -176,13 +168,11 @@ throw err
                     </p>
                 </div>
             </div>
-            <Table
+            <Table<IREVIEWS>
                 key={review?.map(r => r.id).join(',')}
-                className="lg:overflow-hidden overflow-x-scroll !dark:border-strokedark !dark:bg-boxdark !bg-transparent"
-                dataSource={review}
+                data={review}
                 columns={columns}
                 rowKey="id"
-                pagination={false}
             />
 
 

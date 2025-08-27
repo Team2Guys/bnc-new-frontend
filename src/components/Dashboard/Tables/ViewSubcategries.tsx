@@ -1,7 +1,5 @@
 'use client';
-
 import React, { useState } from 'react';
-import { Table, notification } from 'antd';
 import Image from 'next/image';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import axios from 'axios';
@@ -14,6 +12,8 @@ import { FaRegEye } from 'react-icons/fa';
 import { generateSlug } from 'data/data';
 import { CategoryProps, ICategory } from 'types/types';
 import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
+import Table from 'components/ui/Table';
 
 const ViewSubcategries = ({
   setMenuType,
@@ -82,17 +82,10 @@ const ViewSubcategries = ({
         },
       );
       setCategory((prev: any) => prev.filter((item: any) => item.id != key));
-      notification.success({
-        message: 'Category Deleted',
-        description: 'The category has been successfully deleted.',
-        placement: 'topRight',
-      });
+      toast.success('Category Deleted: The category has been successfully deleted.'
+      );
     } catch (err) {
-      notification.error({
-        message: 'Deletion Failed',
-        description: 'There was an error deleting the category.',
-        placement: 'topRight',
-      });
+      toast.error('Deletion Failed: There was an error deleting the category.');
     }
   };
 
@@ -106,13 +99,13 @@ const ViewSubcategries = ({
   const columns = [
     {
       title: 'Image',
-      dataIndex: 'posterImageUrl',
       key: 'posterImageUrl',
-      render: (text: any, record: any) =>
+      render: (record: any) =>
         record.posterImage.imageUrl ? (
           <Image
             src={record.posterImage.imageUrl || ''}
             alt={`Image of ${record.name}`}
+            className="rounded-md h-[50px]"
             width={50}
             height={50}
           />
@@ -122,39 +115,35 @@ const ViewSubcategries = ({
     },
     {
       title: 'Name',
-      dataIndex: 'title',
       key: 'title',
     },
     {
       title: 'Date',
-      dataIndex: 'createdAt',
       key: 'date',
-      render: (text: any, record: ICategory) => {
+      render: (record: ICategory) => {
         const createdAt = new Date(record.createdAt);
         return <span>{createdAt.toLocaleDateString()}</span>;
       },
     },
     {
       title: 'Time',
-      dataIndex: 'createdAt',
       key: 'time',
-      render: (text: string, record: ICategory) => {
+      render: (record: ICategory) => {
         const createdAt = new Date(record.createdAt);
         return <span>{createdAt.toLocaleTimeString()}</span>;
       },
     },
     {
       title: 'Last Edited By',
-      dataIndex: 'last_editedBy',
       key: 'time',
-      render: (text: string, record: any) => {
+      render: (record: any) => {
         return <span>{record.last_editedBy}</span>;
       },
     },
     {
       title: 'Preview',
       key: 'Preview',
-      render: (text: string, record: ICategory) => {
+      render: (record: ICategory) => {
         const category = categories?.find((i) => i.id === record.CategoryId);
         if (category === undefined) return null;
         const parent = generateSlug(category?.title);
@@ -174,7 +163,7 @@ const ViewSubcategries = ({
     {
       title: 'Edit',
       key: 'Edit',
-      render: (text: any, record: any) => (
+      render: (record: any) => (
         <LiaEdit
           className={`cursor-pointer ${canEditCategory && 'text-black dark:text-white'} ${!canEditCategory && 'cursor-not-allowed text-black dark:text-slate-300'}`}
           size={20}
@@ -185,7 +174,7 @@ const ViewSubcategries = ({
     {
       title: 'Action',
       key: 'action',
-      render: (text: any, record: any) => (
+      render: (record: any) => (
         <RiDeleteBin6Line
           className={`cursor-pointer ${canDeleteCategory && 'text-red'} ${!canDeleteCategory &&
             'cursor-not-allowed text-black dark:text-slate-300'
@@ -232,11 +221,9 @@ const ViewSubcategries = ({
         </div>
 
         {filteredProducts.length > 0 ? (
-          <Table
-            className="overflow-x-scroll lg:overflow-auto w-full"
-            dataSource={filteredProducts}
+          <Table<ICategory>
+            data={filteredProducts}
             columns={columns}
-            pagination={false}
             rowKey="id"
           />
         ) : (

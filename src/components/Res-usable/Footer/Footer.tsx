@@ -21,7 +21,6 @@ import {
 } from 'config/fetch';
 import { ChangedProductUrl_handler, predefinedPaths, urls } from 'data/urls';
 import { Skeleton } from 'components/ui/skeleton';
-import { Collapse } from 'antd';
 import { TCategorySection } from 'types/footer';
 import Container from '../Container/Container';
 import { TfiEmail } from 'react-icons/tfi';
@@ -31,6 +30,7 @@ import { SlCalender } from 'react-icons/sl';
 import { usePathname } from 'next/navigation';
 import SocialLink from '../social-link/social-link';
 import { IoIosArrowDown } from 'react-icons/io';
+import Collapse from 'components/ui/Collapse';
 
 
 
@@ -197,93 +197,65 @@ const Footer: React.FC = () => {
                   {
                     isMobile ? (
                       <Collapse
-                        bordered={false}
-                        expandIcon={({ isActive }) =>
-                          isActive ? (
+                      className="bg-transparent border-0"
+                      items={[
+                        {
+                          key: category.key || category.title,
+                          label: category.title,
+                          children: (
+                            <ul className="space-y-2 font-roboto">
+                              {category?.items?.map((item: string, index: number) => {
+                                const matchingSubcategory = subcategories?.find(
+                                  (subcategory: ICategory) =>
+                                    subcategory.title === item &&
+                                    subcategory.CategoryId ===
+                                      categories.find(
+                                        (cat) => generateSlug(cat.title) === generateSlug(category.title)
+                                      )?.id
+                                );
 
-                            
-                            <IoIosArrowDown size={24} className="pt-1 transform rotate-180 opacity-60 text-primary" />
-                            
-                          ) : (
-                            <IoIosArrowDown size={24} className="pt-1 opacity-60 text-primary" /> 
+                                const matchingProduct = products?.find(
+                                  (product) =>
+                                    product.title.toLowerCase() === item.toLowerCase() &&
+                                    product.CategoryId ===
+                                      categories.find(
+                                        (cat) =>
+                                          cat.title.toLowerCase() === category.title.toLowerCase()
+                                      )?.id
+                                );
 
-                          )
-                        }
-                        className="custom-collapse bg-transparent border-0 flex flex-col gap-1"
-                        items={[
-                          {
-                            key: category.key || category.title,
-                            label: (
-                              <span className="sm:font-semibold font-medium text-18 text-primary font-robotoSerif">
-                                {category.title}
-                              </span>
-                            ),
-                            children: (
-                              <ul className="space-y-2 my-4 font-roboto">
-                                {(
-                                  //@ts-ignore
-                                  category?.items?.map((item, index: number) => {
-                                    const matchingSubcategory = subcategories?.find(
-                                      (subcategory: ICategory) =>
-                                        subcategory.title === item &&
-                                        subcategory.CategoryId ===
-                                        categories.find(
-                                          (cat) =>
-                                            generateSlug(cat.title) ===
-                                            generateSlug(category.title),
-                                        )?.id,
-                                    );
+                                return (
+                                  <li key={index}>
+                                    {matchingSubcategory && (
+                                      <Link
+                                        className="text-14 2xl:text-16 text-primary font-normal capitalize"
+                                        href={`/${category.title
+                                          .toLowerCase()
+                                          .replace("shutters", "shutters-range")}/${ChangedProductUrl(
+                                          matchingSubcategory.title
+                                        )}/`}
+                                      >
+                                        {matchingSubcategory.title}
+                                      </Link>
+                                    )}
 
-                                    const matchingProduct = products?.find(
-                                      (product) =>
-                                        product.title.toLowerCase() === item.toLowerCase() &&
-                                        product.CategoryId ===
-                                        categories.find(
-                                          (cat) => cat.title.toLowerCase() === category.title.toLowerCase(),
-                                        )?.id,
-                                    );
+                                    {matchingProduct && (
+                                      <Link
+                                        className="text-14 2xl:text-16 text-primary font-normal capitalize"
+                                        href={generatePath(matchingProduct, generateSlug(category.title))}
+                                      >
+                                        {matchingProduct.title}
+                                      </Link>
+                                    )}
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          ),
+                        },
+                      ]}
+                    />
 
-                                    return (
-                                      <React.Fragment key={index}>
-                                        {matchingSubcategory && (
-                                          <li>
-                                            <Link
-                                              className="text-14 2xl:text-16 text-primary font-normal capitalize"
-                                              href={`/${category.title
-                                                .toLowerCase()
-                                                .replace('shutters', 'shutters-range')}/${ChangedProductUrl(
-                                                  matchingSubcategory.title,
-                                                )}/`}
-                                            >
-                                              {matchingSubcategory.title}
-                                            </Link>
-                                          </li>
-                                        )}
-
-                                        {matchingProduct && (
-                                          <li>
-                                            <Link
-                                              className=" text-14 2xl:text-16 text-primary font-normal capitalize"
-                                              href={generatePath(
-                                                matchingProduct,
-                                                generateSlug(category.title),
-                                              )}
-                                            >
-                                              {matchingProduct.title}
-                                            </Link>
-                                          </li>
-                                        )}
-                                      </React.Fragment>
-                                    );
-                                  })
-                                )}
-                              </ul>
-                            ),
-                            className: 'pt-[6px]',
-                          },
-                        ]}
-
-                      />
                     )
                       : (
                         <div>

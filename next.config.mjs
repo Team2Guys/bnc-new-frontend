@@ -13,7 +13,7 @@ const nextConfig = {
       removeConsole: process.env.NODE_ENV === 'production' ? true : false,
   },
   experimental: {
-      optimizePackageImports: ['react-icons/*', 'antd'],
+      optimizePackageImports: ['react-icons/*'],
   },
 };
 

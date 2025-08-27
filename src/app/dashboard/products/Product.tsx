@@ -22,7 +22,7 @@ interface PRODUCTS_PROPS {
 
 const Products = ({ products }: PRODUCTS_PROPS) => {
   const [editProduct, setEditProduct] = useState<any | undefined>();
-  const [selecteMenu, setselecteMenu] = useState<string>('Add All Products');
+  const [selecteMenu, setselecteMenu] = useState<string>('Categories');
 
   const EditInitialValues: any = {
     id: editProduct?.id,
@@ -61,6 +61,7 @@ const Products = ({ products }: PRODUCTS_PROPS) => {
     breadcurum: editProduct && editProduct.breadcurum,
     customUrl: editProduct && editProduct.customUrl,
     colorsImages : editProduct && editProduct.colorsImages,
+    status : editProduct && editProduct.status,
 
         faqs: editProduct && editProduct.faqs,
         videos: editProduct && editProduct.videos,
@@ -71,7 +72,7 @@ const Products = ({ products }: PRODUCTS_PROPS) => {
 
   };
 
-  let productFlag: boolean = selecteMenu === 'Add All Products' ? true : false;
+  let productFlag: boolean = selecteMenu === 'Categories' ? true : false;
   return (
     <>
       <Breadcrumb pageName={productFlag ? 'Products' : 'Add Products'} />

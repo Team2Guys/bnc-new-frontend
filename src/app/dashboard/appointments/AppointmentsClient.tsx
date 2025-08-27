@@ -3,53 +3,47 @@ import Breadcrumb from 'components/Dashboard/Breadcrumbs/Breadcrumb';
 import DefaultLayout from 'components/Dashboard/Layouts/DefaultLayout';
 import React, { useEffect, useState } from 'react';
 import ProtectedRoute from 'hooks/AuthHookAdmin';
-import { Modal, Table } from 'antd';
 import useColorMode from 'hooks/useColorMode';
 import { TbScanEye } from 'react-icons/tb';
 import { IAppointments } from 'types/types';
+import Table from 'components/ui/Table';
+import CustomModal from 'components/ui/Modal';
 
 const AppointmentsClient = ({ appointments }: { appointments: IAppointments[] }) => {
   const appointmentColumns = [
     {
       title: 'ID',
-      dataIndex: 'id',
-      width: 60,
+      key: 'id',
     },
     {
       title: 'Name',
-      dataIndex: 'name',
-      width: 100,
+      key: 'name',
     },
     {
       title: 'Area',
-      dataIndex: 'area',
-      width: 100,
+      key: 'area',
     },
     {
       title: 'Email',
-      dataIndex: 'email',
-      width: 150,
+      key: 'email',
     },
     {
       title: 'Phone #',
-      dataIndex: 'phone_number',
-      width: 150,
+      key: 'phone_number',
     },
     {
       title: 'WhatsApp #',
-      dataIndex: 'whatsapp_number',
-      width: 120,
+      key: 'whatsapp_number',
     },
     {
       title: 'CreatedAt',
-      dataIndex: 'createdAt',
-      width: 120,
-      render: (createdAt: string) => formatDate(createdAt),
+      key: 'createdAt',
+      render: (record: IAppointments) => formatDate(record.createdAt),
     },
     {
       title: 'More Details',
-      width: 100,
-      render: (_: IAppointments, record: IAppointments) => (
+      key: 'moreDetails',
+      render: (record: IAppointments) => (
         <TbScanEye
           onClick={() => handleShowDetails(record)}
           className="text-30  cursor-pointer "
@@ -143,20 +137,18 @@ const AppointmentsClient = ({ appointments }: { appointments: IAppointments[] })
           </div>
           {
             appointments && (
-              <Table
-                scroll={{ y: 110 * 5 }}
-                dataSource={filteredAppointments}
+              <Table<IAppointments>
+                data={filteredAppointments}
                 columns={appointmentColumns}
-                pagination={false}
-                className='group'
+                rowKey='id'
               />
             )
           }
           {isModalVisible && selectedAppointment && (
-            <Modal
+            <CustomModal
               title={
                 <div className="flex items-center space-x-3">
-                  <div className="bg-blue-500 text-white rounded-full w-10 h-10 flex items-center justify-center">
+                  <div className="bg-blue-500 text-white rounded-full w-7 h-7 flex items-center justify-center">
                     {selectedAppointment.name[0]}
                   </div>
                   <span className="text-lg font-bold">
@@ -165,11 +157,10 @@ const AppointmentsClient = ({ appointments }: { appointments: IAppointments[] })
                 </div>
               }
               open={isModalVisible}
-              onCancel={handleCloseModal}
-              onOk={handleCloseModal}
-              footer={null}
+              onClose={handleCloseModal}
+              
             >
-              <div className="space-y-4">
+              <div className="space-y-4 p-4">
                 <div className="flex items-start">
                   <span className="w-1/3 font-semibold">Preferred Contact Method:</span>
                   <span className="w-2/3">{selectedAppointment.prefered_contact_method}</span>
@@ -195,7 +186,7 @@ const AppointmentsClient = ({ appointments }: { appointments: IAppointments[] })
                   <span className="w-2/3">{selectedAppointment.prefered_Date}</span>
                 </div>
               </div>
-            </Modal>
+            </CustomModal>
           )}
         </>
 

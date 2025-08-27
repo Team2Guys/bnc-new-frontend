@@ -1,6 +1,5 @@
 'use client';
 import React, { useState, useEffect, SetStateAction } from 'react';
-import { Table, notification } from 'antd';
 import Image from 'next/image';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import axios from 'axios';
@@ -18,6 +17,8 @@ import Link from 'next/link';
 import useColorMode from 'hooks/useColorMode';
 import TableSkeleton from './TableSkelton';
 import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
+import Table from 'components/ui/Table';
 
 interface Product extends IProduct {
   id: number;
@@ -47,7 +48,6 @@ const ViewProduct: React.FC<CategoryProps> = ({
   const [colorMode, toggleColorMode] = useColorMode();
   console.log(toggleColorMode, 'toggleColorMode');
   const [loading, setLoading] = useState<boolean>(false);
-  console.log(setLoading, 'setLoading');
 
   const token = admin_token || super_admin_token;
 
@@ -104,6 +104,7 @@ const ViewProduct: React.FC<CategoryProps> = ({
 
   const handleDelete = async (key: number) => {
     try {
+      setLoading(true)
       await axios.delete(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/delete_product/${key}`,
         {
@@ -112,17 +113,13 @@ const ViewProduct: React.FC<CategoryProps> = ({
       );
       revalidateTag('products');
 
-      notification.success({
-        message: 'Product Deleted',
-        description: 'The product has been successfully deleted.',
-        placement: 'topRight',
-      });
+      toast.success('Product Deleted: The product has been successfully deleted.');
     } catch (err) {
-      notification.error({
-        message: 'Deletion Failed',
-        description: 'There was an error deleting the product.',
-        placement: 'topRight',
-      });
+      toast.error('Deletion Failed: There was an error deleting the product.');
+    }
+    finally{
+            setLoading(false)
+
     }
   };
 
@@ -154,12 +151,12 @@ const ViewProduct: React.FC<CategoryProps> = ({
   const columns = [
     {
       title: 'Image',
-      dataIndex: 'posterImageUrl',
       key: 'posterImageUrl',
-      render: (text: any, record: Product) => (
+      render: (record: Product) => (
         <Image
           src={record.posterImage?.imageUrl}
           alt={`Image of ${record.title}`}
+          className="rounded-md h-[50px]"
           width={50}
           height={50}
         />
@@ -167,39 +164,35 @@ const ViewProduct: React.FC<CategoryProps> = ({
     },
     {
       title: 'Name',
-      dataIndex: 'title',
       key: 'title',
     },
     {
       title: 'Date',
-      dataIndex: 'createdAt',
       key: 'date',
-      render: (text: any, record: Product) => {
+      render: (record: Product) => {
         const createdAt = new Date(record.createdAt);
         return <span>{createdAt.toLocaleDateString()}</span>;
       },
     },
     {
       title: 'Time',
-      dataIndex: 'createdAt',
       key: 'time',
-      render: (text: string, record: Product) => {
+      render: (record: Product) => {
         const createdAt = new Date(record.createdAt);
         return <span>{createdAt.toLocaleTimeString()}</span>;
       },
     },
     {
       title: 'Last Edited By',
-      dataIndex: 'last_editedBy',
       key: 'time',
-      render: (text: string, record: Product) => {
+      render: (record: Product) => {
         return <span>{record.last_editedBy}</span>;
       },
     },
     {
       title: 'Preview',
       key: 'Preview',
-      render: (text: string, record: Product) => {
+      render: (record: Product) => {
         const category = categories?.find((i) => i.id === record.CategoryId);
         if (category === undefined) return null;
         const parent = generateSlug(category?.title);
@@ -213,7 +206,7 @@ const ViewProduct: React.FC<CategoryProps> = ({
     {
       title: 'Edit',
       key: 'Edit',
-      render: (text: any, record: Product) => (
+      render: (record: Product) => (
         <LiaEdit
           className={`${canEditproduct ? 'cursor-pointer' : 'cursor-not-allowed text-slate-200'}`}
           size={20}
@@ -230,7 +223,7 @@ const ViewProduct: React.FC<CategoryProps> = ({
     {
       title: 'Action',
       key: 'action',
-      render: (text: any, record: Product) => (
+      render: (record: Product) => (
         <RiDeleteBin6Line
           className={`${canDeleteProduct ? 'text-red cursor-pointer' : 'cursor-not-allowed text-slate-200'}`}
           size={20}
@@ -273,12 +266,10 @@ const ViewProduct: React.FC<CategoryProps> = ({
             </div>
           </div>
           {filteredProducts && filteredProducts.length > 0 ? (
-            <Table
-              className="lg:overflow-hidden overflow-x-scroll !dark:border-strokedark !dark:bg-boxdark !bg-transparent"
-              dataSource={filteredProducts}
+            <Table<Product>
+              data={filteredProducts}
               columns={columns}
               rowKey="id"
-              pagination={false}
             />
           ) : (
             <p className="text-primary dark:text-white">No products found</p>

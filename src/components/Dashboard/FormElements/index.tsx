@@ -9,7 +9,6 @@ import Image from 'next/image';
 import { handleImageAltText, ImageRemoveHandler } from 'utils/helperFunctions';
 import { FormValues, ADDPRODUCTFORMPROPS } from 'types/interfaces';
 import axios from 'axios';
-import { IoMdArrowRoundBack } from 'react-icons/io';
 import Loader from 'components/Loader/Loader';
 import Cookies from 'js-cookie';
 
@@ -17,12 +16,13 @@ import {
   AddProductvalidationSchema,
   AddproductsinitialValues,
 } from 'data/data';
-import { Checkbox } from 'antd';
 import { useQuery } from '@tanstack/react-query';
 import { ICategory } from 'types/types';
 import { fetchCategories, fetchSubCategories } from 'config/fetch';
 import showToast from 'components/Toaster/Toaster';
 import revalidateTag from 'components/ServerActons/ServerAction';
+import TopButton from '../Layouts/TopButton';
+import Checkbox from 'components/ui/Checkbox';
 
 const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
   EditInitialValues,
@@ -307,7 +307,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
       setSelectedSubcategoryIds([]);
 
       updateFlag ? setEditProduct && setEditProduct(undefined) : null;
-      setselecteMenu('Add All Products');
+      setselecteMenu('Categories');
     } catch (err: any) {
       if (err.response && err.response.data && err.response.data.message) {
         setError(err.response.data.message);
@@ -322,17 +322,6 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
       setloading(false);
     }
   };
-
-  console.log(EditInitialValues.privarcyImage, 'privarcyImagemageUrl');
-
-
-  // const handlecolorCode = (index: number, colorCode: string) => {
-  //   const updatedImagesUrl = imagesUrl.map((item, i) =>
-  //     i === index ? { ...item, colorCode: colorCode } : item,
-  //   );
-  //   setImagesUrl(updatedImagesUrl);
-  // };
-
 
 const handlecolorChange = (
     index: number,
@@ -380,21 +369,9 @@ const handlecolorChange = (
         {(formik) => {
           return (
             <Form onSubmit={formik.handleSubmit}>
-              <div className="flex border items-center justify-between">
-                <p
-                  className="dashboard_primary_button "
-                  onClick={() => {
-                    setselecteMenu('Add All Products');
-                  }}
-                >
-                  <IoMdArrowRoundBack /> Back
-                </p>
-                <button type="submit" className="dashboard_primary_button">
-                  {loading ? <Loader color="#fff" /> : 'Submit'}
-                </button>
-              </div>
+          <TopButton  setMenuType={setselecteMenu} loading={loading}/>
 
-              <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-9 sm:grid-cols-2 mt-1">
                 <div className="flex flex-col gap-9 dark:border-strokedark dark:bg-lightdark">
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark p-6">
                     <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
@@ -728,35 +705,24 @@ const handlecolorChange = (
                         ) : (
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {categoriesList.map((category) => (
-                              <div
+                              <Checkbox
                                 key={category.id}
-                                className="flex items-center space-x-2"
-                              >
-                                <Checkbox
-                                  checked={selectedCategoryIds.includes(
-                                    category.id,
-                                  )}
-                                  onChange={(e) => {
-                                    const checked = e.target.checked;
-                                    setSelectedCategoryIds((prev) => {
-                                      console.log(prev);
-                                      if (checked) {
-                                        return [category.id];
-                                      } else {
-                                        setSelectedSubcategoryIds([]);
-                                        return [];
-                                      }
-                                    });
-                                  }}
-                                  id={`category-${category.id}`}
-                                />
-                                <label
-                                  htmlFor={`category-${category.id}`}
-                                  className="ml-2 text-black dark:text-white"
-                                >
-                                  {category.title}
-                                </label>
-                              </div>
+                                id={`category-${category.id}`}
+                                name="CategoryId"
+                                checked={selectedCategoryIds.includes(category.id)}
+                                label={category.title}
+                                onChange={(e) => {
+                                  const checked = e.target.checked;
+                                  setSelectedCategoryIds(() => {
+                                    if (checked) {
+                                      return [category.id]; // single selection
+                                    } else {
+                                      setSelectedSubcategoryIds([]); // clear subs when deselecting parent
+                                      return [];
+                                    }
+                                  });
+                                }}
+                              />
                             ))}
                           </div>
                         )}
@@ -767,35 +733,23 @@ const handlecolorChange = (
                         </h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
                           {filteredSubcategories.map((subcategory) => (
-                            <div
-                              key={subcategory.id}
-                              className="flex items-center space-x-2 p-2 border rounded"
-                            >
-                              <Checkbox
-                                checked={selectedSubcategoryIds.includes(
-                                  subcategory.id,
-                                )}
-                                onChange={(e) => {
-                                  const checked = e.target.checked;
-                                  setSelectedSubcategoryIds((prev) => {
-                                    if (checked) {
-                                      return [...prev, subcategory.id];
-                                    } else {
-                                      return prev.filter(
-                                        (id) => id !== subcategory.id,
-                                      );
-                                    }
-                                  });
-                                }}
-                                id={`subcategory-${subcategory.id}`}
-                              />
-                              <label
-                                htmlFor={`subcategory-${subcategory.id}`}
-                                className="ml-2 text-black dark:text-white"
-                              >
-                                {subcategory.title}
-                              </label>
-                            </div>
+                            <Checkbox
+                            key={subcategory.id}
+                              id={`subcategory-${subcategory.id}`}
+                              name="SubcategoryId"
+                              checked={selectedSubcategoryIds.includes(subcategory.id)}
+                              label={subcategory.title}
+                              onChange={(e) => {
+                                const checked = e.target.checked;
+                                setSelectedSubcategoryIds((prev) => {
+                                  if (checked) {
+                                    return [...prev, subcategory.id];
+                                  } else {
+                                    return prev.filter((id) => id !== subcategory.id);
+                                  }
+                                });
+                              }}
+                            />
                           ))}
                         </div>
                       </div>

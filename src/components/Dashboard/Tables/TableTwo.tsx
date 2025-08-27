@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Table, notification } from 'antd';
 import Image from 'next/image';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import axios from 'axios';
@@ -11,6 +10,8 @@ import useColorMode from 'hooks/useColorMode';
 import Cookies from 'js-cookie';
 import { CategoryProps, ICategory } from 'types/types';
 import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
+import Table from 'components/ui/Table';
 
 const TableTwo = ({
   setMenuType,
@@ -74,17 +75,10 @@ const TableTwo = ({
         },
       );
       setCategory((prev: any) => prev.filter((item: any) => item.id != key));
-      notification.success({
-        message: 'Category Deleted',
-        description: 'The category has been successfully deleted.',
-        placement: 'topRight',
-      });
+      toast.success(
+       'Category Deleted: The category has been successfully deleted.');
     } catch (err) {
-      notification.error({
-        message: 'Deletion Failed',
-        description: 'There was an error deleting the category.',
-        placement: 'topRight',
-      });
+      toast.error('Deletion Failed: There was an error deleting the category.');
     }
   };
 
@@ -98,9 +92,8 @@ const TableTwo = ({
   const columns = [
     {
       title: 'Image',
-      dataIndex: 'posterImageUrl',
       key: 'posterImageUrl',
-      render: (text: any, record: ICategory) => (
+      render: (record: ICategory) => (
         <Image
           src={record.posterImage?.imageUrl || ''}
           alt={`Image of ${record.title}`}
@@ -111,39 +104,35 @@ const TableTwo = ({
     },
     {
       title: 'Name',
-      dataIndex: 'title',
       key: 'title',
     },
     {
       title: 'Date',
-      dataIndex: 'createdAt',
       key: 'date',
-      render: (text: any, record: ICategory) => {
+      render: (record: ICategory) => {
         const createdAt = new Date(record.createdAt);
         return <span>{createdAt.toLocaleDateString()}</span>;
       },
     },
     {
       title: 'Time',
-      dataIndex: 'createdAt',
       key: 'time',
-      render: (text: string, record: ICategory) => {
+      render: (record: ICategory) => {
         const createdAt = new Date(record.createdAt);
         return <span>{createdAt.toLocaleTimeString()}</span>;
       },
     },
     {
       title: 'Last Edited By',
-      dataIndex: 'last_editedBy',
       key: 'time',
-      render: (text: string, record: ICategory) => {
+      render: (record: ICategory) => {
         return <span>{record.last_editedBy}</span>;
       },
     },
     {
       title: 'Edit',
       key: 'Edit',
-      render: (text: any, record: ICategory) => (
+      render: (record: ICategory) => (
         <LiaEdit
           className={`cursor-pointer ${canEditCategory && 'text-black dark:text-white'} ${!canEditCategory && 'cursor-not-allowed text-slate-300'}`}
           size={20}
@@ -154,7 +143,7 @@ const TableTwo = ({
     {
       title: 'Action',
       key: 'action',
-      render: (text: any, record: ICategory) => (
+      render: (record: ICategory) => (
         <RiDeleteBin6Line
           className={`cursor-pointer ${canDeleteCategory && 'errorColor'} ${!canDeleteCategory && 'cursor-not-allowed text-slate-300'
             }`}
@@ -198,13 +187,7 @@ const TableTwo = ({
           </div>
         </div>
         {filteredProducts.length > 0 ? (
-          <Table
-            className="overflow-x-scroll lg:overflow-auto w-full"
-            dataSource={filteredProducts}
-            columns={columns}
-            pagination={false}
-            rowKey="_id"
-          />
+          <Table<ICategory> data={filteredProducts} columns={columns} rowKey="id"/>
         ) : (
           <p className="text-xl text-black dark:text-white">
             No Categories found

@@ -4,7 +4,6 @@ import { RxCross2 } from 'react-icons/rx';
 import Image from 'next/image';
 import axios from 'axios';
 import { Formik, Form } from 'formik';
-import { IoMdArrowRoundBack } from 'react-icons/io';
 import { ICategory, ISUBCATEGORY } from 'types/types';
 import showToast from 'components/Toaster/Toaster';
 import Imageupload from 'components/ImageUpload/Imageupload';
@@ -15,9 +14,10 @@ import {
 import { ImageRemoveHandler } from 'utils/helperFunctions';
 import Loader from 'components/Loader/Loader';
 import ProtectedRoute from 'hooks/AuthHookAdmin';
-import { Checkbox } from 'antd';
 import Cookies from 'js-cookie';
 import revalidateTag from 'components/ServerActons/ServerAction';
+import TopButton from 'components/Dashboard/Layouts/TopButton';
+import Checkbox from 'components/ui/Checkbox';
 
 interface editCategoryNameType {
   title: string;
@@ -59,6 +59,7 @@ const FormLayout = ({
         Canonical_Tag: editCategory?.Canonical_Tag,
         Meta_Title: editCategory?.Meta_Title,
         Meta_description: editCategory?.Meta_description,
+        status: editCategory?.status,
       }
       : null;
   let CategorImageUrl = editCategory && editCategory.posterImage;
@@ -155,14 +156,6 @@ const FormLayout = ({
 
   return (
     <>
-      <p
-        className="text-lg font-black mb-4 flex items-center justify-center gap-2  w-fit p-2 cursor-pointer text-black dark:text-white "
-        onClick={() => {
-          setMenuType('Categories');
-        }}
-      >
-        <IoMdArrowRoundBack /> Back
-      </p>
       <Formik
         initialValues={
           editCategoryName ? editCategoryName : subcategoryInitialValues
@@ -173,6 +166,10 @@ const FormLayout = ({
         {(formik) => {
           return (
             <Form onSubmit={formik.handleSubmit}>
+
+
+                              <TopButton  setMenuType={setMenuType} loading={loading}/>
+
               <div className="flex justify-center  dark:text-white  ">
                 <div className="flex flex-col gap-9 w-2/5   dark:text-white  dark:border-white">
                   <div className="rounded-md e bg-white  dark:bg-lightdark dark:bg-black dark:text-white  te p-3">
@@ -356,33 +353,20 @@ const FormLayout = ({
                           Select Parent Category (atleat one)
                         </label>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          {categoriesList?.map((category) => (
-                            <div
-                              key={category.id}
-                              className="flex items-center space-x-2"
-                            >
-                              <Checkbox
-                                className="accent-green-500"
-                                name="CategoryId"
-                                checked={
-                                  formik.values.CategoryId === category.id
-                                }
-                                onChange={() =>
-                                  formik.setFieldValue(
-                                    'CategoryId',
-                                    formik.values.CategoryId === category.id
-                                      ? null
-                                      : category.id,
-                                  )
-                                }
-                              />
-                              <label
-                                htmlFor={`category-${category.id}`}
-                                className="ml-2 text-black dark:text-white"
-                              >
-                                {category.title}
-                              </label>
-                            </div>
+                          {categoriesList?.map((category,index) => (
+                            <Checkbox
+                              key={index}
+                              id={`category-${category.id}`}
+                              name="CategoryId"
+                              checked={formik.values.CategoryId === category.id}
+                              label={category.title}
+                              onChange={() =>
+                                formik.setFieldValue(
+                                  "CategoryId",
+                                  formik.values.CategoryId === category.id ? null : category.id
+                                )
+                              }
+                            />
                           ))}
                         </div>
                       </div>
