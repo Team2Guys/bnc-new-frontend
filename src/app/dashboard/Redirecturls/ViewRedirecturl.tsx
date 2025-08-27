@@ -1,4 +1,5 @@
 "use client"
+import Breadcrumb from 'components/Dashboard/Breadcrumbs/Breadcrumb';
 import revalidateTag from 'components/ServerActons/ServerAction';
 import Table from 'components/ui/Table';
 import { deleteRedirectUrl } from 'config/fetch';
@@ -137,6 +138,8 @@ export default function ViewRedirecturl({
 
     return (
         <>
+             <Breadcrumb pageName={"View Redirection"} />
+        
             <div className="flex justify-between gap-2 mb-4 items-center flex-nowrap">
                 <input
                     className="search_input"

@@ -79,8 +79,6 @@ function AddRedirecturl({ RedirectUrls, setRedirectUrls, setselecteMenu }: IVIEW
 
   return (
     <>
-    
-
       <Formik enableReinitialize initialValues={formDate}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}

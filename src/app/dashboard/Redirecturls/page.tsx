@@ -7,11 +7,11 @@ const MainPage = dynamic(()=>import('./MainPage'))
 async function  Page() {
   const  Redirecturls=await fetchRedirectUrls()
   return (
- 
-    
+ <>
+   
     <MainPage Redirecturls={Redirecturls} />
     
-
+</>
   )
 }
 
