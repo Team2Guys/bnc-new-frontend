@@ -19,6 +19,7 @@ import TableSkeleton from './TableSkelton';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import Table from 'components/ui/Table';
+import ViewsTableHeader from '../TableHeader/ViewsTableHeader';
 
 interface Product extends IProduct {
   id: number;
@@ -117,8 +118,8 @@ const ViewProduct: React.FC<CategoryProps> = ({
     } catch (err) {
       toast.error('Deletion Failed: There was an error deleting the product.');
     }
-    finally{
-            setLoading(false)
+    finally {
+      setLoading(false)
 
     }
   };
@@ -243,28 +244,14 @@ const ViewProduct: React.FC<CategoryProps> = ({
         <TableSkeleton rows={10} columns={1} />
       ) : (
         <>
-          <div className="flex justify-between mb-4 items-center flex-wrap text-black dark:text-white">
-            <input
-              className="search_input"
-              type="search"
-              placeholder="Search Product"
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-            <div>
-              <p
-                className={`${canAddProduct ? 'cursor-pointer rounded-md' : 'cursor-not-allowed !bg-secondary opacity-20 text-gray-900 shadow-sm rounded-md'} p-2 ${canAddProduct ? '  bg-secondary text-white rounded-md ' : ''}`}
-                onClick={() => {
-                  if (canAddProduct) {
-                    setEditProduct(undefined);
-                    setselecteMenu('Add Products');
-                  }
-                }}
-              >
-                Add Products
-              </p>
-            </div>
-          </div>
+          <ViewsTableHeader
+            searchTerm={searchTerm}
+            onSearchChange={handleSearchChange}
+            canAdd={canAddProduct}
+            setEdit={setEditProduct}
+            setMenuType={setselecteMenu}
+            menuTypeText='Add Products'
+          />
           {filteredProducts && filteredProducts.length > 0 ? (
             <Table<Product>
               data={filteredProducts}

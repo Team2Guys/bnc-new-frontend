@@ -14,7 +14,9 @@ import revalidateTag from 'components/ServerActons/ServerAction';
 import showToast from 'components/Toaster/Toaster';
 import { ProductImages } from 'types/types';
 import { createReview, updateReview } from 'config/fetch';
-import { initiValuesProps, IREVIEWS,  } from 'types/general';
+import { initiValuesProps, IREVIEWS, } from 'types/general';
+import ImageTextInput from 'components/Common/regularInputs/ImageTextInput';
+import Input from 'components/ui/Input';
 
 
 
@@ -29,10 +31,10 @@ function AddReview({ editReview, setEditsetReview, setselecteMenu }: I_Add_Revie
   const [loading, setloading] = useState(false)
 
   const [posterimageUrl, setposterimageUrl] = useState<ProductImages[] | undefined>((editReview && editReview.posterImageUrl) ? [editReview.posterImageUrl] : undefined);
-  const [imagesUrl, setImagesUrl] = useState<ProductImages[] >((editReview && editReview.posterImageUrl) ? editReview.ReviewsImages : []);
-    const dragImage = useRef<number | null>(null);
-    const draggedOverImage = useRef<number | null>(null);
- 
+  const [imagesUrl, setImagesUrl] = useState<ProductImages[]>((editReview && editReview.posterImageUrl) ? editReview.ReviewsImages : []);
+  const dragImage = useRef<number | null>(null);
+  const draggedOverImage = useRef<number | null>(null);
+
   const [formDate, setformDate] = useState<initiValuesProps>({
     name: editReview?.name,
     starRating: editReview?.starRating,
@@ -72,15 +74,15 @@ function AddReview({ editReview, setEditsetReview, setselecteMenu }: I_Add_Revie
 
       const payload = {
         ...values,
-    posterImageUrl: posterImageUrl !== undefined ? posterImageUrl : null ,
-    ReviewsImages:imagesUrl
+        posterImageUrl: posterImageUrl !== undefined ? posterImageUrl : null,
+        ReviewsImages: imagesUrl
       };
 
       if (editReview?.name) {
-        await updateReview({id:editReview.id, ...payload});
+        await updateReview({ id: editReview.id, ...payload });
 
       } else {
-       await createReview(payload);
+        await createReview(payload);
 
       }
 
@@ -88,10 +90,10 @@ function AddReview({ editReview, setEditsetReview, setselecteMenu }: I_Add_Revie
       setselecteMenu('All Reviews')
       revalidateTag("reviews")
     } //eslint-disable-next-line
-catch (error:any) {
-  const graphQLError = error?.graphQLErrors?.[0]?.message;
-  showToast('error', graphQLError || "Internal server error")
-    } finally{
+    catch (error: any) {
+      const graphQLError = error?.graphQLErrors?.[0]?.message;
+      showToast('error', graphQLError || "Internal server error")
+    } finally {
       setloading(false)
     }
   };
@@ -101,12 +103,12 @@ catch (error:any) {
   const handleSubmit = async (values: initiValuesProps, { resetForm }: FormikHelpers<initiValuesProps>) => {
 
 
-  await apiHandler(values)
-  resetForm()
+    await apiHandler(values)
+    resetForm()
 
   };
 
-      function handleSort() {
+  function handleSort() {
     if (dragImage.current === null || draggedOverImage.current === null) return;
 
     const imagesClone = imagesUrl && imagesUrl.length > 0 ? [...imagesUrl] : [];
@@ -145,7 +147,7 @@ catch (error:any) {
             <div className="rounded-sm border  bg-white dark:bg-primary border-stroke">
               <div className="border-b bg-white dark:bg-primary py-4 px-2 ">
                 <h3 className="font-medium  text-black dark:text-white">
-           Reviewer Image
+                  Reviewer Image
                 </h3>
               </div>
               {posterimageUrl && posterimageUrl.length > 0 ? (
@@ -181,19 +183,12 @@ catch (error:any) {
                           alt={`productImage-${index}`}
                         />
 
-                        <input
-                          className="border  mt-2 w-full rounded-md border-stroke px-2 text-14 py-2 focus:border-primary active:border-primary outline-none"
-                          placeholder="Alt Text"
-                          type="text"
+                        <ImageTextInput
                           name="altText"
-                          value={item?.altText || ""}
-                          onChange={(e) =>
-                            handleImageAltText(
-                              index,
-                              String(e.target.value),
-                              setposterimageUrl,
-                              "altText"
-                            )
+                          value={item.altText || ""}
+                          placeholder="altText"
+                          onChange={(val) =>
+                            handleImageAltText(index, val, setposterimageUrl, "altText")
                           }
                         />
                       </div>
@@ -205,93 +200,92 @@ catch (error:any) {
               )}
             </div>
             <div>
-               <label className='primary-label' htmlFor="name">Name</label>
-              <Field name="name" type="text" className="primary-input" />
-              <ErrorMessage name="name" component="div" className="text-red-500 text-sm" />
+              <Input
+                label="Name"
+                name="name"
+                placeholder="Name"
+              />
             </div>
 
             <div>
-               <label className='primary-label' htmlFor="starRating">Star Rating</label>
+              <label className='primary-label' htmlFor="starRating">Star Rating</label>
               <Field name="starRating" type="number" className="primary-input" />
               <ErrorMessage name="starRating" component="div" className="text-red-500 text-sm" />
             </div>
             <div>
-               <label className='primary-label' htmlFor="ReviewsDescription">Description</label>
+              <label className='primary-label' htmlFor="ReviewsDescription">Description</label>
               <Field name="ReviewsDescription" as="textarea" rows={4} className="primary-input" />
               <ErrorMessage name="ReviewsDescription" component="div" className="text-red-500 text-sm" />
             </div>
 
             <div className='flex flex-col gap-2'>
-               <label className='primary-label' htmlFor="reviewDate">Review Date</label>
+              <label className='primary-label' htmlFor="reviewDate">Review Date</label>
               <Field name="reviewDate" type="date" className="primary-input w-fit items-center" />
               <ErrorMessage name="reviewDate" component="div" className="text-red-500 text-sm" />
             </div>
 
-   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                    <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
-                      <h3 className="font-medium text-black dark:text-white">
-                      Add Reviews Images
-                      </h3>
-                    </div>
-                    <Imageupload setImagesUrl={setImagesUrl}  multiple/>
-                    {imagesUrl && imagesUrl.length > 0 ? (
-                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
-                        {imagesUrl.map((item: any, index) => {
-                          return (
-                            <div key={index}
-                             draggable
-                              onDragStart={() => (dragImage.current = index)}
-                              onDragEnter={() =>
-                                (draggedOverImage.current = index)
-                              }
-                              onDragEnd={handleSort}
-                              onDragOver={(e) => e.preventDefault()}
-                            >
-                              <div className="relative group rounded-lg overflow-hidden shadow-md bg-white transform transition-transform duration-300 hover:scale-105">
-                                <div className="absolute top-1 right-1 invisible group-hover:visible errorColor bg-white rounded-full z-10" draggable>
-                                  <RxCross2
-                                    className="cursor-pointer btext-red-500 hover:errorColor-700"
-                                    size={17}
-                                    onClick={() => {
-                                      ImageRemoveHandler(
-                                        item.public_id,
-                                        setImagesUrl,
-                                      );
-                                    }}
-                                  />
-                                </div>
-                                <div key={index} className=" relative ">
-                                  <div className="h-[100px] w-full overflow-hidden">
-                                    <Image
-                                      className="object-cover w-full h-full"
-                                      width={300}
-                                      height={200}
-                                      src={item.imageUrl}
-                                      alt={`productImage-${index}`}
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                              <input
-                                className="border mt-2 w-full rounded-md border-stroke px-2 text-14 py-2 bg-white dark:border-strokedark dark:bg-lightdark focus:border-primary active:border-primary outline-none"
-                                placeholder="altText"
-                                type="text"
-                                name="altText"
-                                value={item.altText}
-                                onChange={(e) =>
-                                  handlealtText(index, String(e.target.value))
-                                }
+            <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
+              <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                <h3 className="font-medium text-black dark:text-white">
+                  Add Reviews Images
+                </h3>
+              </div>
+              <Imageupload setImagesUrl={setImagesUrl} multiple />
+              {imagesUrl && imagesUrl.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+                  {imagesUrl.map((item: any, index) => {
+                    return (
+                      <div key={index}
+                        draggable
+                        onDragStart={() => (dragImage.current = index)}
+                        onDragEnter={() =>
+                          (draggedOverImage.current = index)
+                        }
+                        onDragEnd={handleSort}
+                        onDragOver={(e) => e.preventDefault()}
+                      >
+                        <div className="relative group rounded-lg overflow-hidden shadow-md bg-white transform transition-transform duration-300 hover:scale-105">
+                          <div className="absolute top-1 right-1 invisible group-hover:visible errorColor bg-white rounded-full z-10" draggable>
+                            <RxCross2
+                              className="cursor-pointer btext-red-500 hover:errorColor-700"
+                              size={17}
+                              onClick={() => {
+                                ImageRemoveHandler(
+                                  item.public_id,
+                                  setImagesUrl,
+                                );
+                              }}
+                            />
+                          </div>
+                          <div key={index} className=" relative ">
+                            <div className="h-[100px] w-full overflow-hidden">
+                              <Image
+                                className="object-cover w-full h-full"
+                                width={300}
+                                height={200}
+                                src={item.imageUrl}
+                                alt={`productImage-${index}`}
                               />
-                       
                             </div>
-                          );
-                        })}
+                          </div>
+                        </div>
+                        <ImageTextInput
+                          name="altText"
+                          value={item.altText || ""}
+                          placeholder="altText"
+                          onChange={(val) =>
+                            handlealtText(index, val)
+                          }
+                        />
                       </div>
-                    ) : null}
-                  </div>
+                    );
+                  })}
+                </div>
+              ) : null}
+            </div>
 
             <button type="submit" className="dashboard_primary_button">
-              {loading  ? "Submitting" : "Submit"}
+              {loading ? "Submitting" : "Submit"}
             </button>
           </Form>
         )}

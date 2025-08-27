@@ -1,5 +1,6 @@
 "use client"
 
+import ViewsTableHeader from 'components/Dashboard/TableHeader/ViewsTableHeader';
 import revalidateTag from 'components/ServerActons/ServerAction';
 import Table from 'components/ui/Table';
 import { deleteReview } from 'config/fetch';
@@ -27,9 +28,9 @@ export default function ViewReviews({
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [loading, setloading] = useState<number | undefined>()
 
-    const canDeleteProduct = true;
-    const canEditproduct = true;
-    const canAddProduct = true;
+    const canDeleteReiview = true;
+    const canEditReiview = true;
+    const canAddReiview = true;
 
 
 
@@ -63,9 +64,9 @@ export default function ViewReviews({
             revalidateTag('reviews');
 
         } catch (err) {
-console.log(err, )
-throw err
-        } finally{
+            console.log(err,)
+            throw err
+        } finally {
             setloading(key)
         }
     };
@@ -109,11 +110,11 @@ throw err
             key: 'Edit',
             render: (record: IREVIEWS) => (
                 <LiaEdit
-                    className={`${canEditproduct ? 'cursor-pointer' : ''} ${!canEditproduct ? 'cursor-not-allowed text-slate-200' : ''
+                    className={`${canEditReiview ? 'cursor-pointer' : ''} ${!canEditReiview ? 'cursor-not-allowed text-slate-200' : ''
                         }`}
                     size={20}
                     onClick={() => {
-                        if (canEditproduct) {
+                        if (canEditReiview) {
                             setEditsetReview(record);
                             setselecteMenu('Add Products');
                         }
@@ -127,12 +128,12 @@ throw err
             render: (record: IREVIEWS) => (
                 loading == record.id ? "Deleting" :
                     <RiDeleteBin6Line
-                        className={`${canDeleteProduct ? 'text-red-600 cursor-pointer' : ''} ${!canDeleteProduct ? 'cursor-not-allowed text-slate-200' : ''
+                        className={`${canDeleteReiview ? 'text-red-600 cursor-pointer' : ''} ${!canDeleteReiview ? 'cursor-not-allowed text-slate-200' : ''
                             }`}
                         size={20}
                         onClick={() => {
                             console.log(record, "id")
-                            // if (canDeleteProduct) {
+                            // if (canDeleteReiview) {
                             confirmDelete(record.id);
                             // }
                         }}
@@ -143,31 +144,14 @@ throw err
 
     return (
         <>
-            <div className="flex justify-between gap-2 mb-4 items-center flex-nowrap">
-                <input
-                    className="primary-input w-fit max-w-96"
-                    type="search"
-                    placeholder="Search Review"
-                    value={searchTerm}
-                    onChange={handleSearchChange}
-                />
-                <div>
-                    <p
-                        className={`py-2 px-4 rounded-md text-nowrap text-12 xs:text-base ${canAddProduct
-                                ? 'cursor-pointer text-white bg-secondary '
-                                : 'cursor-not-allowed bg-gray-500 text-white'
-                            }`}
-                        onClick={() => {
-                            if (canAddProduct) {
-                                setselecteMenu('Add Products');
-                                setEditsetReview(undefined);
-                            }
-                        }}
-                    >
-                        Add Review
-                    </p>
-                </div>
-            </div>
+            <ViewsTableHeader
+                searchTerm={searchTerm}
+                onSearchChange={handleSearchChange}
+                canAdd={canAddReiview}
+                setEdit={setEditsetReview}
+                setMenuType={setselecteMenu}
+                menuTypeText='Add Review'
+            />
             <Table<IREVIEWS>
                 key={review?.map(r => r.id).join(',')}
                 data={review}

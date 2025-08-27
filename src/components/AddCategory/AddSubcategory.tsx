@@ -19,6 +19,7 @@ import revalidateTag from 'components/ServerActons/ServerAction';
 import TopButton from 'components/Dashboard/Layouts/TopButton';
 import Checkbox from 'components/ui/Checkbox';
 import Input from 'components/ui/Input';
+import ImageTextInput from 'components/Common/regularInputs/ImageTextInput';
 
 interface editCategoryNameType {
   title: string;
@@ -167,7 +168,7 @@ const FormLayout = ({
         {(formik) => {
           return (
             <Form onSubmit={formik.handleSubmit}>
-            <TopButton  setMenuType={setMenuType} loading={loading}/>
+              <TopButton setMenuType={setMenuType} loading={loading} />
               <div className="flex justify-center  dark:text-white  ">
                 <div className="flex flex-col gap-9 w-2/5   dark:text-white  dark:border-white">
                   <div className="rounded-md e bg-white  dark:bg-lightdark dark:bg-black dark:text-white  te p-3">
@@ -204,19 +205,14 @@ const FormLayout = ({
                                     alt={`productImage-${index}`}
                                   />
                                 </div>
-                                <input
+                                <ImageTextInput
                                   name="altText"
-                                  className='border rounded p-2 focus:outline-none mt-1'
                                   value={item.altText}
-                                  onChange={(e) =>
-                                    handlealtTextposterimageUrl(
-                                      index,
-                                      String(e.target.value),
-                                    )
-                                  }
-                                  placeholder="altText"
+                                  placeholder="Alt text"
+                                  onChange={(val) => handlealtTextposterimageUrl(index, val)}
+                                  className='border rounded p-2 focus:outline-none mt-1'
                                 />
-                                
+
                               </div>
                             );
                           })}
@@ -258,17 +254,12 @@ const FormLayout = ({
                                     alt={`productImage-${index}`}
                                   />
                                 </div>
-                                <input
+                                <ImageTextInput
                                   name="altText"
                                   value={item.altText}
+                                  placeholder="Alt text"
+                                  onChange={(val) => handlealtTextbannerImageUrl(index, val)}
                                   className='border rounded p-2 focus:outline-none mt-1'
-                                  onChange={(e) =>
-                                    handlealtTextbannerImageUrl(
-                                      index,
-                                      String(e.target.value),
-                                    )
-                                  }
-                                  placeholder="altText"
                                 />
                               </div>
                             );
@@ -281,28 +272,28 @@ const FormLayout = ({
 
                     <div className="flex flex-col gap-5 mt-2">
                       <Input
-                            label="Sub Category Name"
-                            name="title"
-                            placeholder="Sub Category Name"
-                          /> 
-                     <Input
-                            label="Category Description"
-                            name="description"
-                            placeholder="Top Heading"
-                          /> 
-                          <Input
-                            label="Category Short Description"
-                            name="short_description"
-                            placeholder="Category Short Description"
-                            textarea
-                          /> 
-                 
+                        label="Sub Category Name"
+                        name="title"
+                        placeholder="Sub Category Name"
+                      />
+                      <Input
+                        label="Category Description"
+                        name="description"
+                        placeholder="Top Heading"
+                      />
+                      <Input
+                        label="Category Short Description"
+                        name="short_description"
+                        placeholder="Category Short Description"
+                        textarea
+                      />
+
                       <div>
                         <label className="mb-3 primary-label">
                           Select Parent Category (atleat one)
                         </label>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          {categoriesList?.map((category,index) => (
+                          {categoriesList?.map((category, index) => (
                             <Checkbox
                               key={index}
                               id={`category-${category.id}`}
@@ -322,30 +313,30 @@ const FormLayout = ({
 
                       <div className="flex gap-4 mt-4">
                         <Input
-                            label="Meta Title"
-                            name="Meta_Title"
-                            placeholder="Meta Title"
-                          /> 
+                          label="Meta Title"
+                          name="Meta_Title"
+                          placeholder="Meta Title"
+                        />
                         <Input
-                            label="Canonical Tag"
-                            name="Canonical_Tag"
-                            placeholder="Canonical Tag"
-                          /> 
-                       
+                          label="Canonical Tag"
+                          name="Canonical_Tag"
+                          placeholder="Canonical Tag"
+                        />
+
                       </div>
                       <Input
-                            label="Meta Description"
-                            name="Meta_description"
-                            placeholder="Meta Description"
-                            textarea
-                          /> 
-                      
-                        <Input
-                            label="Images Alt Text"
-                            name="Images_Alt_Text"
-                            placeholder="Images Alt Text"
-                          /> 
-                    
+                        label="Meta Description"
+                        name="Meta_description"
+                        placeholder="Meta Description"
+                        textarea
+                      />
+
+                      <Input
+                        label="Images Alt Text"
+                        name="Images_Alt_Text"
+                        placeholder="Images Alt Text"
+                      />
+
                     </div>
                   </div>
                 </div>

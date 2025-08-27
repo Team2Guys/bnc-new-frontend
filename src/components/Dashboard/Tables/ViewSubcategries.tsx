@@ -14,6 +14,7 @@ import { CategoryProps, ICategory } from 'types/types';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import Table from 'components/ui/Table';
+import ViewsTableHeader from '../TableHeader/ViewsTableHeader';
 
 const ViewSubcategries = ({
   setMenuType,
@@ -197,32 +198,14 @@ const ViewSubcategries = ({
   return (
     <div className={colorMode === 'dark' ? 'dark' : ''}>
       <>
-        <div className="flex justify-between mb-4 items-center text-dark dark:text-white">
-          <input
-            className="search_input"
-            type="search"
-            placeholder="Search Category"
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
-          <div>
-            <p
-              className={`${canAddCategory &&
-                'cursor-pointer w-full xsm:text-12 xsm:px-2 py-2 lg:text-16'
-                } lg:p-2 md:p-2 ${canAddCategory && ' bg-secondary text-white rounded-md w-full '
-                } flex justify-center ${!canAddCategory && 'cursor-not-allowed w-full'
-                }`}
-              onClick={() => {
-                seteditCategory && seteditCategory(null);
-                if (canAddCategory) {
-                  setMenuType('Add Category');
-                }
-              }}
-            >
-              Add Sub Category
-            </p>
-          </div>
-        </div>
+        <ViewsTableHeader
+          searchTerm={searchTerm}
+          onSearchChange={handleSearchChange}
+          canAdd={canAddCategory}
+          setEdit={seteditCategory}
+          setMenuType={setMenuType}
+          menuTypeText='Add Sub Category'
+        />
 
         {filteredProducts.length > 0 ? (
           <Table<ICategory>

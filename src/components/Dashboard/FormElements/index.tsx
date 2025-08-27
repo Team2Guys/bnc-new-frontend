@@ -7,7 +7,7 @@ import Imageupload from 'components/ImageUpload/Imageupload';
 import { RxCross2 } from 'react-icons/rx';
 import Image from 'next/image';
 import { handleImageAltText, ImageRemoveHandler } from 'utils/helperFunctions';
-import {  ADDPRODUCTFORMPROPS } from 'types/interfaces';
+import { ADDPRODUCTFORMPROPS } from 'types/interfaces';
 import axios from 'axios';
 import Loader from 'components/Loader/Loader';
 import Cookies from 'js-cookie';
@@ -24,6 +24,7 @@ import revalidateTag from 'components/ServerActons/ServerAction';
 import TopButton from '../Layouts/TopButton';
 import Checkbox from 'components/ui/Checkbox';
 import Input from 'components/ui/Input';
+import ImageTextInput from 'components/Common/regularInputs/ImageTextInput';
 
 const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
   EditInitialValues,
@@ -35,45 +36,45 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     (EditInitialValues &&
       EditInitialValues.videos &&
       EditInitialValues.videos) ||
-      [],
+    [],
   );
   const [posterimageUrl, setposterimageUrl] = useState<any[] | undefined>(
     EditInitialValues &&
-      EditInitialValues.posterImage && [EditInitialValues.posterImage],
+    EditInitialValues.posterImage && [EditInitialValues.posterImage],
   );
   const [bannerImageUrl, setBannerImageUrl] = useState<any[] | undefined>(
     EditInitialValues &&
-      EditInitialValues.bannerImage && [EditInitialValues.bannerImage],
+    EditInitialValues.bannerImage && [EditInitialValues.bannerImage],
   );
   const [privarcyImagemageUrl, setprivarcyImage] = useState<any[] | undefined>(
     EditInitialValues &&
-      EditInitialValues.privarcyImage && [EditInitialValues.privarcyImage],
+    EditInitialValues.privarcyImage && [EditInitialValues.privarcyImage],
   );
 
   const [subCategoryImage, setsubCategoryImage] = useState<any[] | undefined>(
     EditInitialValues &&
-      EditInitialValues.subCategoryImage && [
-        EditInitialValues.subCategoryImage,
-      ],
+    EditInitialValues.subCategoryImage && [
+      EditInitialValues.subCategoryImage,
+    ],
   );
   const [topImages, settopImages] = useState<any[]>(
     EditInitialValues &&
-      EditInitialValues.topImages &&
-      EditInitialValues.topImages,
+    EditInitialValues.topImages &&
+    EditInitialValues.topImages,
   );
   const [colorsImages, setcolorsImages] = useState<any[]>(
     EditInitialValues &&
-      EditInitialValues.colorsImages &&
-      EditInitialValues.colorsImages,
+    EditInitialValues.colorsImages &&
+    EditInitialValues.colorsImages,
   );
   const [productUpdateFlat, setProductUpdateFlat] = useState(false);
   const [loading, setloading] = useState<boolean>(false);
-  const [productInitialValue, setProductInitialValue] = useState<any | null | undefined >(EditInitialValues);
+  const [productInitialValue, setProductInitialValue] = useState<any | null | undefined>(EditInitialValues);
 
   const [imgError, setError] = useState<string | null | undefined>();
 
   const [selectedCategoryIds, setSelectedCategoryIds] = useState<number[]>([]);
-  const [selectedSubcategoryIds, setSelectedSubcategoryIds] = useState<number[] >([]);
+  const [selectedSubcategoryIds, setSelectedSubcategoryIds] = useState<number[]>([]);
 
   const [previousSelectedCategories, setpreviousSelectedCategories] = useState<number[]>([]);
   const dragImage = useRef<number | null>(null);
@@ -132,31 +133,31 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
         });
         setBannerImageUrl(
           EditInitialValues &&
-            EditInitialValues.bannerImage && [EditInitialValues.bannerImage],
+          EditInitialValues.bannerImage && [EditInitialValues.bannerImage],
         );
         setprivarcyImage(
           EditInitialValues &&
-            EditInitialValues.privarcyImage && [
-              EditInitialValues.privarcyImage,
-            ],
+          EditInitialValues.privarcyImage && [
+            EditInitialValues.privarcyImage,
+          ],
         );
         setposterimageUrl(
           EditInitialValues &&
-            EditInitialValues.posterImage && [EditInitialValues.posterImage],
+          EditInitialValues.posterImage && [EditInitialValues.posterImage],
         );
         setsubCategoryImage(
           EditInitialValues &&
-            EditInitialValues.subCategoryImage && [
-              EditInitialValues.subCategoryImage,
-            ],
+          EditInitialValues.subCategoryImage && [
+            EditInitialValues.subCategoryImage,
+          ],
         );
         setsubCategoryImage(
           EditInitialValues &&
-            EditInitialValues.topImages && [EditInitialValues.topImages],
+          EditInitialValues.topImages && [EditInitialValues.topImages],
         );
         setsubCategoryImage(
           EditInitialValues &&
-            EditInitialValues.colorsImages && [EditInitialValues.colorsImages],
+          EditInitialValues.colorsImages && [EditInitialValues.colorsImages],
         );
       } catch (err) {
         console.log(err, 'err');
@@ -185,7 +186,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
       let bannerImage = bannerImageUrl && bannerImageUrl[0];
       let newsubCategoryImage = subCategoryImage && subCategoryImage[0];
       let privarcyImage = privarcyImagemageUrl && privarcyImagemageUrl[0];
-      if (!posterImageUrl || !(imagesUrl) ||  !(imagesUrl?.length > 0)) {
+      if (!posterImageUrl || !(imagesUrl) || !(imagesUrl?.length > 0)) {
         return showToast('warn', 'Please select relevant Images');
       }
 
@@ -264,11 +265,11 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
           ...updatedvalue,
           subCategory: updateFlag
             ? {
-                set: selectedSubcategoryIds.map((id) => ({ id })),
-              }
+              set: selectedSubcategoryIds.map((id) => ({ id })),
+            }
             : {
-                connect: selectedSubcategoryIds.map((id) => ({ id })),
-              },
+              connect: selectedSubcategoryIds.map((id) => ({ id })),
+            },
         };
       } else if (updateFlag) {
         updatedvalue = {
@@ -324,7 +325,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     }
   };
 
-const handlecolorChange = (
+  const handlecolorChange = (
     index: number,
     newaltText: string,
     setImageUrl: React.Dispatch<SetStateAction<any>>,
@@ -370,7 +371,7 @@ const handlecolorChange = (
         {(formik) => {
           return (
             <Form onSubmit={formik.handleSubmit}>
-          <TopButton  setMenuType={setselecteMenu} loading={loading}/>
+              <TopButton setMenuType={setselecteMenu} loading={loading} />
 
               <div className="grid grid-cols-1 gap-9 sm:grid-cols-2 mt-1">
                 <div className="flex flex-col gap-9 dark:border-strokedark dark:bg-lightdark">
@@ -411,44 +412,32 @@ const handlecolorChange = (
                                     alt={`productImage-${index}`}
                                   />
                                 </div>
-
-                                <input
-                                  className="primary-input"
-                                  placeholder="altText"
-                                  type="text"
+                                <ImageTextInput
                                   name="altText"
                                   value={item.altText}
-                                  onChange={(e) =>
-                                    handleImageAltText(index,e.target.value,setposterimageUrl,"altText",  )
-                                   
+                                  placeholder="altText"
+                                  onChange={(val) =>
+                                    handleImageAltText(index, val, setposterimageUrl, "altText")
                                   }
                                 />
 
-                                
-                                <input
-                                  className="primary-input"
-                                  placeholder="pricing"
-                                  type="text"
+                                <ImageTextInput
                                   name="pricing"
                                   value={item.pricing}
-                                  onChange={(e) =>
-                                    handleImageAltText(index,e.target.value,setposterimageUrl,"pricing",  )
-                                   
+                                  placeholder="pricing"
+                                  onChange={(val) =>
+                                    handleImageAltText(index, val, setposterimageUrl, "pricing")
                                   }
                                 />
 
-                                <input
-                                  className="primary-input"
-                                  placeholder="dimentions"
-                                  type="text"
+                                <ImageTextInput
                                   name="dimentions"
                                   value={item.dimentions}
-                                  onChange={(e) =>
-                                    handleImageAltText(index,e.target.value,setposterimageUrl,"dimentions",  )
-                                   
+                                  placeholder="dimentions"
+                                  onChange={(val) =>
+                                    handleImageAltText(index, val, setposterimageUrl, "dimentions")
                                   }
                                 />
-
 
 
                               </>
@@ -462,63 +451,63 @@ const handlecolorChange = (
 
                     <div className="flex flex-col gap-5 py-4">
                       <Input
-                            label="Product Name"
-                            name="name"
-                            placeholder="Product Name"
-                          /> 
-                   
+                        label="Product Name"
+                        name="name"
+                        placeholder="Product Name"
+                      />
+
                       <div className="flex  gap-2 flex-nowrap mad:flex-wrap">
                         <Input
-                            label="Description"
-                            name="description"
-                            placeholder="Description"
-                            textarea
-                          />
-                       <Input
-                            label="Short Description"
-                            name="short_description"
-                            placeholder="Short Description"
-                            textarea
-                          />
-                
+                          label="Description"
+                          name="description"
+                          placeholder="Description"
+                          textarea
+                        />
+                        <Input
+                          label="Short Description"
+                          name="short_description"
+                          placeholder="Short Description"
+                          textarea
+                        />
+
                       </div>
-                        <Input
-                            label="Heading"
-                            name="heading"
-                            placeholder="Heading"
-                          />
-                    
-                      <div className="grid grid-cols-2 gap-4">
                       <Input
-                            label="customUrl"
-                            name="customUrl"
-                            placeholder="customUrl"
-                          />
+                        label="Heading"
+                        name="heading"
+                        placeholder="Heading"
+                      />
+
+                      <div className="grid grid-cols-2 gap-4">
                         <Input
-                            label="breadcurum"
-                            name="breadcurum"
-                            placeholder="breadcurum"
-                          />
-                          <Input
-                            label="topHeading"
-                            name="topHeading"
-                            placeholder="topHeading"
-                          />
-                         <Input
-                            label="mainHeading"
-                            name="mainHeading"
-                            placeholder="mainHeading"
-                          />
+                          label="customUrl"
+                          name="customUrl"
+                          placeholder="customUrl"
+                        />
                         <Input
-                            label="Sale Price"
-                            name="salePrice"
-                            placeholder="Sale Price"
-                          />
-                          <Input
-                            label="Discount Price"
-                            name="discountPrice"
-                            placeholder="Discount Price"
-                          />
+                          label="breadcurum"
+                          name="breadcurum"
+                          placeholder="breadcurum"
+                        />
+                        <Input
+                          label="topHeading"
+                          name="topHeading"
+                          placeholder="topHeading"
+                        />
+                        <Input
+                          label="mainHeading"
+                          name="mainHeading"
+                          placeholder="mainHeading"
+                        />
+                        <Input
+                          label="Sale Price"
+                          name="salePrice"
+                          placeholder="Sale Price"
+                        />
+                        <Input
+                          label="Discount Price"
+                          name="discountPrice"
+                          placeholder="Discount Price"
+                        />
                       </div>
 
                       <div className="w-full">
@@ -561,7 +550,7 @@ const handlecolorChange = (
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
                           {filteredSubcategories.map((subcategory) => (
                             <Checkbox
-                            key={subcategory.id}
+                              key={subcategory.id}
                               id={`subcategory-${subcategory.id}`}
                               name="SubcategoryId"
                               checked={selectedSubcategoryIds.includes(subcategory.id)}
@@ -583,29 +572,29 @@ const handlecolorChange = (
 
                       <div className="grid grid-cols-2 gap-4">
                         <Input
-                            label="Meta Title"
-                            name="Meta_Title"
-                            placeholder="Meta Title"
-                          />
+                          label="Meta Title"
+                          name="Meta_Title"
+                          placeholder="Meta Title"
+                        />
                         <Input
-                            label="Canonical Tag"
-                            name="Canonical_Tag"
-                            placeholder="Canonical Tag"
-                          />
-                        
+                          label="Canonical Tag"
+                          name="Canonical_Tag"
+                          placeholder="Canonical Tag"
+                        />
+
                       </div>
                       <Input
-                            label="Meta Description"
-                            name="Meta_Description"
-                            placeholder="Meta Description"
-                            textarea
-                          />
+                        label="Meta Description"
+                        name="Meta_Description"
+                        placeholder="Meta Description"
+                        textarea
+                      />
                       <Input
-                            label="Images Alt Text"
-                            name="Images_Alt_Text"
-                            placeholder="Images Alt Text"
-                          />
-                    
+                        label="Images Alt Text"
+                        name="Images_Alt_Text"
+                        placeholder="Images Alt Text"
+                      />
+
                     </div>
                   </div>
                 </div>
@@ -630,7 +619,7 @@ const handlecolorChange = (
                                   >
                                     <Input name={`faqs[${index}].specsHeading`} placeholder="FAQS Heading" />
                                     <Input name={`faqs[${index}].specsDetails`} placeholder="FAQS Details" />
-                                   
+
                                     <button
                                       type="button"
                                       onClick={() => remove(index)}
@@ -676,7 +665,7 @@ const handlecolorChange = (
                                   >
                                     <Input name={`privacySectoin[${index}].specsHeading`} placeholder="privacySectoin Heading" />
                                     <Input name={`privacySectoin[${index}].specsDetails`} placeholder="privacySectoin Details" />
-                                  
+
                                     <button
                                       type="button"
                                       onClick={() => remove(index)}
@@ -706,7 +695,7 @@ const handlecolorChange = (
                   <div className="grid grid-cols-2  gap-4">
                     <Input name="Sub_Heading" placeholder="Sub Heading" textarea />
                     <Input name="Sub_Heading_description" placeholder="Sub Heading Description" textarea />
-                  
+
                   </div>
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
@@ -726,10 +715,10 @@ const handlecolorChange = (
                                     key={index}
                                     className="flex flex-col gap-3"
                                   >
-                                    <Input name={`modelDetails[${index}].name`} placeholder="Sub Category Name"  />
+                                    <Input name={`modelDetails[${index}].name`} placeholder="Sub Category Name" />
                                     <Input name={`modelDetails[${index}].detail`} placeholder="Description on Sub Category" textarea />
-                                    
-                                    
+
+
                                   </div>
 
                                   <button
@@ -776,7 +765,7 @@ const handlecolorChange = (
                                   >
                                     <Input name={`colors[${index}].name`} placeholder="Heading name" />
                                     <Input name={`colors[${index}].detail`} placeholder="details text" />
-                                                                        
+
                                     <button
                                       type="button"
                                       onClick={() => remove(index)}
@@ -857,9 +846,9 @@ const handlecolorChange = (
                     <Imageupload setImagesUrl={setcolorsImages} multiple />
                     {colorsImages && colorsImages?.length > 0 && (
                       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
-                          {colorsImages.map((item: any, index) => {
-                            return (
-                             <>
+                        {colorsImages.map((item: any, index) => {
+                          return (
+                            <>
                               <div>
                                 <div
                                   className="relative group rounded-lg overflow-hidden shadow-md bg-white transform transition-transform duration-300 hover:scale-105"
@@ -902,9 +891,9 @@ const handlecolorChange = (
                                 />
 
                               </div>
-                              </>
-                            );
-                          })}
+                            </>
+                          );
+                        })}
                       </div>
                     )}
                   </div>
@@ -918,70 +907,55 @@ const handlecolorChange = (
                     <Imageupload setImagesUrl={settopImages} />
                     {topImages && topImages?.length > 0 && (
                       <div className="grid grid-cols-2 sm:grid-cols-4  gap-4 p-4">
-                        
-                          {topImages.map((item: any, index) => {
-                            return (
-                              <>
-                                <div
-                                  className="relative group rounded-lg overflow-hidden shadow-md bg-white transform transition-transform duration-300 hover:scale-105"
-                                  key={index}
-                                >
-                                  <div className="absolute top-1 right-1 invisible group-hover:visible errorColor bg-white rounded-full">
-                                    <RxCross2
-                                      className="cursor-pointer errorColor hover:errorColor-700"
-                                      size={17}
-                                      onClick={() => {
-                                        ImageRemoveHandler(
-                                          item.public_id,
-                                          settopImages,
-                                        );
-                                      }}
-                                    />
-                                  </div>
-                                  <Image
-                                    key={index}
-                                    className="object-cover h-10 w-10"
-                                    width={300}
-                                    height={400}
-                                    src={item?.imageUrl}
-                                    alt={`productImage-${index}`}
-                                  />
 
-                                <input
-                                  className="primary-input"
-                                  placeholder="altText"
-                                  type="text"
+                        {topImages.map((item: any, index) => {
+                          return (
+                            <>
+                              <div
+                                className="relative group rounded-lg overflow-hidden shadow-md bg-white transform transition-transform duration-300 hover:scale-105"
+                                key={index}
+                              >
+                                <div className="absolute top-1 right-1 invisible group-hover:visible errorColor bg-white rounded-full">
+                                  <RxCross2
+                                    className="cursor-pointer errorColor hover:errorColor-700"
+                                    size={17}
+                                    onClick={() => {
+                                      ImageRemoveHandler(
+                                        item.public_id,
+                                        settopImages,
+                                      );
+                                    }}
+                                  />
+                                </div>
+                                <Image
+                                  key={index}
+                                  className="object-cover h-10 w-10"
+                                  width={300}
+                                  height={400}
+                                  src={item?.imageUrl}
+                                  alt={`productImage-${index}`}
+                                />
+                                <ImageTextInput
                                   name="altText"
                                   value={item.altText}
-                                  onChange={(e) =>
-                                    handleImageAltText(
-                                      index,
-                                      String(e.target.value),
-                                      settopImages,
-                                      'altText',
-                                    )
+                                  placeholder="altText"
+                                  onChange={(val) =>
+                                    handleImageAltText(index, val, settopImages, "altText")
                                   }
                                 />
-                                <input
-                                  className="primary-input"
-                                  placeholder="Name"
-                                  type="text"
+                                <ImageTextInput
                                   name="name"
                                   value={item.name}
-                                  onChange={(e) =>
-                                    handleImageAltText(
-                                      index,
-                                      String(e.target.value),
-                                      settopImages,
-                                      'name',
-                                    )
+                                  placeholder="Icon Name"
+                                  onChange={(val) =>
+                                    handleImageAltText(index, val, settopImages, "name")
                                   }
                                 />
-                                
-                                </div>
-                              </>
-                            );
-                          })}
+
+                              </div>
+                            </>
+                          );
+                        })}
                       </div>
                     )}
                   </div>
@@ -1024,22 +998,15 @@ const handlecolorChange = (
                                   />
                                 </div>
 
-                                <input
-                                  className="primary-input"
-                                  placeholder="altText"
-                                  type="text"
+                                <ImageTextInput
                                   name="altText"
                                   value={item.altText}
-                                  onChange={(e) =>
-                                     handleImageAltText(
-                                      index,
-                                      String(e.target.value),
-                                      setsubCategoryImage,
-                                      'altText',
-                                    )
-                               
+                                  placeholder="altText"
+                                  onChange={(val) =>
+                                    handleImageAltText(index, val, setsubCategoryImage, "altText")
                                   }
                                 />
+
                               </>
                             );
                           })}
@@ -1087,21 +1054,12 @@ const handlecolorChange = (
                                     alt={`productImage-${index}`}
                                   />
                                 </div>
-
-                                <input
-                                  className="primary-input"
-                                  placeholder="altText"
-                                  type="text"
+                                <ImageTextInput
                                   name="altText"
                                   value={item.altText}
-                                  onChange={(e) =>
-                                      handleImageAltText(
-                                      index,
-                                      String(e.target.value),
-                                      setBannerImageUrl,
-                                      'altText',
-                                    )
-                                 
+                                  placeholder="altText"
+                                  onChange={(val) =>
+                                    handleImageAltText(index, val, setBannerImageUrl, "altText")
                                   }
                                 />
                               </>
@@ -1121,7 +1079,7 @@ const handlecolorChange = (
                       </h3>
                     </div>
                     {privarcyImagemageUrl &&
-                    privarcyImagemageUrl?.length > 0 ? (
+                      privarcyImagemageUrl?.length > 0 ? (
                       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
                         <div>
                           {privarcyImagemageUrl.map((item: any, index) => {
@@ -1153,20 +1111,12 @@ const handlecolorChange = (
                                   />
                                 </div>
 
-                                <input
-                                  className="primary-input"
-                                  placeholder="altText"
-                                  type="text"
+                                <ImageTextInput
                                   name="altText"
                                   value={item.altText}
-                                  onChange={(e) =>
-                                      handleImageAltText(
-                                      index,
-                                      String(e.target.value),
-                                      setprivarcyImage,
-                                      'altText',
-                                    )
-                              
+                                  placeholder="altText"
+                                  onChange={(val) =>
+                                    handleImageAltText(index, val, setprivarcyImage, "altText")
                                   }
                                 />
                               </>
@@ -1227,39 +1177,23 @@ const handlecolorChange = (
                                     />
                                   </div>
 
-                           
+
                                 </div>
                               </div>
-                              <input
-                                className="border mt-2 w-full rounded-md border-stroke px-2 text-14 py-2 bg-white dark:border-strokedark dark:bg-lightdark focus:border-primary active:border-primary outline-none"
-                                placeholder="altText"
-                                type="text"
+                              <ImageTextInput
                                 name="altText"
                                 value={item.altText}
-                                onChange={(e) =>
-                                     handleImageAltText(
-                                      index,
-                                      String(e.target.value),
-                                      setImagesUrl,
-                                      'altText',
-                                    )                                  
+                                placeholder="altText"
+                                onChange={(val) =>
+                                  handleImageAltText(index, val, setImagesUrl, "altText")
                                 }
                               />
-                              <input
-                                className="border mt-2 w-full rounded-md border-stroke px-2 text-14 py-2 bg-white dark:border-strokedark dark:bg-lightdark focus:border-primary active:border-primary outline-none"
-                                placeholder="altText"
-                                type="text"
+                              <ImageTextInput
                                 name="colorCode"
                                 value={item.colorCode}
-                                onChange={(e) =>
-                                  
-                                     handleImageAltText(
-                                      index,
-                                      String(e.target.value),
-                                      setImagesUrl,
-                                      'colorCode',
-                                    )
-                            
+                                placeholder="colorCode"
+                                onChange={(val) =>
+                                  handleImageAltText(index, val, setImagesUrl, "colorCode")
                                 }
                               />
                             </div>

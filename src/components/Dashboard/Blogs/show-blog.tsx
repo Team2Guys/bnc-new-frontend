@@ -15,15 +15,16 @@ import Cookies from 'js-cookie';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 import revalidateTag from 'components/ServerActons/ServerAction';
 import Table from 'components/ui/Table';
+import ViewsTableHeader from '../TableHeader/ViewsTableHeader';
 
 interface BlogProps {
   setMenuType: React.Dispatch<SetStateAction<string>>;
   setEditBlog: React.Dispatch<SetStateAction<UpdateBlog | null>>;
   blogs: BlogInfo[];
-  menuType:string
+  menuType: string
 }
 
-const ShowBlog: React.FC<BlogProps> = ({ setMenuType, setEditBlog, blogs,menuType }) => {
+const ShowBlog: React.FC<BlogProps> = ({ setMenuType, setEditBlog, blogs, menuType }) => {
   const queryClient = useQueryClient();
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [filteredBlog, setfilteredBlog] = useState<BlogInfo[]>(blogs);
@@ -63,7 +64,7 @@ const ShowBlog: React.FC<BlogProps> = ({ setMenuType, setEditBlog, blogs,menuTyp
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'No, keep it',
-    }).then((result:SweetAlertResult) => {
+    }).then((result: SweetAlertResult) => {
       if (result.isConfirmed) {
         handleDelete(id);
       }
@@ -81,7 +82,7 @@ const ShowBlog: React.FC<BlogProps> = ({ setMenuType, setEditBlog, blogs,menuTyp
           },
         },
       );
-      setfilteredBlog(((prev)=>prev.filter((blog:any)=>blog.id !==id)))
+      setfilteredBlog(((prev) => prev.filter((blog: any) => blog.id !== id)))
       showToast('success', 'The blog has been successfully deleted👍');
       //@ts-expect-error
       queryClient.invalidateQueries(['blogs']);
@@ -98,17 +99,17 @@ const ShowBlog: React.FC<BlogProps> = ({ setMenuType, setEditBlog, blogs,menuTyp
       key: 'posterImageUrl',
       render: (record: BlogInfo) => {
         return (
-          record.posterImage?.imageUrl ? 
+          record.posterImage?.imageUrl ?
 
-          <Image
-          src={record.posterImage?.imageUrl}
-          alt={`Image of ${record.title}`}
-          className="rounded-md h-[50px]"
-          width={50}
-          height={50}
-        />    : "Image not available"
+            <Image
+              src={record.posterImage?.imageUrl}
+              alt={`Image of ${record.title}`}
+              className="rounded-md h-[50px]"
+              width={50}
+              height={50}
+            /> : "Image not available"
         )
-        }  ,
+      },
     },
     {
       title: 'Name',
@@ -196,35 +197,22 @@ const ShowBlog: React.FC<BlogProps> = ({ setMenuType, setEditBlog, blogs,menuTyp
     },
   ];
 
-useEffect(()=>{
-  setfilteredBlog(blogs)
-},[blogs,menuType])
+  useEffect(() => {
+    setfilteredBlog(blogs)
+  }, [blogs, menuType])
 
 
   return (
     <div className="mt-10">
-        <div className="flex justify-between mb-4 items-center flex-wrap text-black dark:text-white">
-            <input
-              className="search_input"
-              type="search"
-              placeholder="Search Product"
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-            <div>
-              <button
-              className={`${canAddBlog ? 'cursor-pointer rounded-md' : 'cursor-not-allowed  text-primary rounded-md'} p-2 ${canAddBlog ? '  bg-secondary text-white rounded-md ' : ''}`}
-              onClick={() => {
-                if (canAddBlog) {
-                  setMenuType('Add Blog');
-                }
-              }}
-            >
-              Add Blog
-            </button>
-          </div>
-          </div>
-    
+      <ViewsTableHeader
+        searchTerm={searchTerm}
+        onSearchChange={handleSearchChange}
+        canAdd={canAddBlog}
+        setEdit={setEditBlog}
+        setMenuType={setMenuType}
+        menuTypeText='Add Blog'
+      />
+
 
       {filteredBlog && filteredBlog.length > 0 ? (
         <Table<BlogInfo>
