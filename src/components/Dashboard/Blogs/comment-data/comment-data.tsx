@@ -230,7 +230,7 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
         <input
               className="search_input"
               type="search"
-              placeholder="Search Product"
+              placeholder="Search Comments"
               value={searchTerm}
               onChange={handleSearchChange}
             />
