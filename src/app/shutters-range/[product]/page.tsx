@@ -8,7 +8,7 @@ import { headers } from 'next/headers';
 import { Metadata } from 'next';
 import { meta_props } from 'types/interfaces';
 import { urls } from 'data/urls';
-import NotFound from 'app/not-found';
+import { notFound } from 'next/navigation';
 
 export async function generateMetadata({
   params,
@@ -79,7 +79,10 @@ const CommercialPage = async ({ params }: meta_props) => {
 
   const matchingUrl = urls.find((url) => `${url.errorUrl}/` === `/shutters-range/${product}/`);
   if (matchingUrl || !filteredProduct) {
-    return <NotFound />
+    return notFound()
+  }
+  if (filteredProduct && filteredProduct.status !== "PUBLISHED") {
+    return notFound()
   }
 
   return (

@@ -22,9 +22,6 @@ const TestimonialCard = ({
       }
    }, [testimonial.ReviewsDescription]);
    
- 
-  console.log(testimonial)
-
    return (
       <div className='grid grid-cols-1 bg-transparent p-4 2xl:p-6 lg:mb-5 h-fit'>
          <div className="flex justify-between items-center gap-2">

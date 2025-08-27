@@ -13,6 +13,7 @@ import MotorizeBlindCurtain from 'components/MotorizedBlindCurtains/MotorizedBli
 import VideoReelsSlider from 'components/VideoSlider/VideoSlider';
 import OurClient from 'components/Our-Client/OurClient';
 import Review_banner from 'components/ReviewBanner/Review_banner';
+import { IProduct } from 'types/types';
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://blindsandcurtains.ae/"),
@@ -38,6 +39,7 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   const products = await fetchProducts();
+  const PublishedProduct = products.filter((product: IProduct) => product.status === "PUBLISHED");
   return (
     <>
       {schema.map((script: any, index: number) =>
@@ -54,9 +56,9 @@ export default async function Home() {
         <div className='col-span-12 order-2 md:order-1'>
           <ComparisonTable />
         </div>
-        {products && (
+        {PublishedProduct && (
           <div className='col-span-12 order-1 md:order-2'>
-            <SellerSlider products={products} />
+            <SellerSlider products={PublishedProduct} />
           </div>
         )}
       </div>
