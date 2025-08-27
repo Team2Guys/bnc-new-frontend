@@ -141,7 +141,7 @@ export default function ViewRedirecturl({
                 <div>
                     <p
                         className={`dashboard_primary_button ${canAddProduct
-                                ? 'cursor-pointer text-white bg-primary '
+                                ? 'cursor-pointer text-white bg-secondary '
                                 : 'cursor-not-allowed bg-gray-500 text-white'
                             }`}
                         onClick={() => {

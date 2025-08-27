@@ -128,9 +128,9 @@ const AppointmentsClient = ({ appointments }: { appointments: IAppointments[] })
           <Breadcrumb pageName={'View Appointments'} />
           <div className="flex justify-between mb-4 items-center flex-wrap text-black dark:text-white pt-4">
             <input
-              className="peer lg:p-3 p-2 block outline-none border rounded-md border-gray-200 dark:bg-white dark:bg-transparent dark:border-white text-sm dark:focus:border-primary focus:border-dark focus:ring-dark-500 disabled:opacity-50 disabled:pointer-events-none dark:text-black"
+              className="search_input"
               type="search"
-              placeholder="Search..."
+              placeholder="Search Product"
               value={searchTerm}
               onChange={handleSearchChange}
             />

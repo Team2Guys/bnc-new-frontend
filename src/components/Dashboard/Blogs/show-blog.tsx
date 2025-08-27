@@ -203,25 +203,28 @@ useEffect(()=>{
 
   return (
     <div className="mt-10">
-      <div className="flex justify-between mb-4 items-center text-black dark:text-white">
-        <input
-          className="primary-input w-fit"
-          type="search"
-          placeholder="Search Product"
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
-        <button
-          className={`${canAddBlog ? 'cursor-pointer rounded-md' : 'cursor-not-allowed  text-primary rounded-md'} p-2 ${canAddBlog ? '  bg-secondary text-white rounded-md ' : ''}`}
-          onClick={() => {
-            if (canAddBlog) {
-              setMenuType('Add Blog');
-            }
-          }}
-        >
-          Add Blog
-        </button>
-      </div>
+        <div className="flex justify-between mb-4 items-center flex-wrap text-black dark:text-white">
+            <input
+              className="search_input"
+              type="search"
+              placeholder="Search Product"
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
+            <div>
+              <button
+              className={`${canAddBlog ? 'cursor-pointer rounded-md' : 'cursor-not-allowed  text-primary rounded-md'} p-2 ${canAddBlog ? '  bg-secondary text-white rounded-md ' : ''}`}
+              onClick={() => {
+                if (canAddBlog) {
+                  setMenuType('Add Blog');
+                }
+              }}
+            >
+              Add Blog
+            </button>
+          </div>
+          </div>
+    
 
       {filteredBlog && filteredBlog.length > 0 ? (
         <Table<BlogInfo>

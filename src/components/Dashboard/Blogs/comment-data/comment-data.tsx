@@ -228,15 +228,12 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
     <div className="space-y-8">
       <div className="flex justify-center">
         <input
-          className="w-full sm:w-1/2 px-4 py-3 rounded-2xl border border-gray-300 dark:border-gray-700 
-                     bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 
-                     text-gray-800 dark:text-gray-200 placeholder-gray-400
-                     focus:outline-none focus:ring-1 focus:ring-secondary transition-all"
-          type="search"
-          placeholder="Search comments..."
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
+              className="search_input"
+              type="search"
+              placeholder="Search Comments"
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {sections.map((status) => (

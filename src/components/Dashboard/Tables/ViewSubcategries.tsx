@@ -118,6 +118,10 @@ const ViewSubcategries = ({
       key: 'title',
     },
     {
+      title: 'Status',
+      key: 'status',
+    },
+    {
       title: 'Date',
       key: 'date',
       render: (record: ICategory) => {
