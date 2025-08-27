@@ -3,9 +3,7 @@ import DefaultLayout from 'components/Dashboard/Layouts/DefaultLayout';
 import { fetchProducts } from 'config/fetch';
 import dynamic from 'next/dynamic'
 import { IProduct } from 'types/types';
-const Product = dynamic(() => import('./Product'), {
-  loading: () => <p>Loading...</p>,
-})
+const Product = dynamic(() => import('./Product'))
 
 
 const Produc_page = async () => {

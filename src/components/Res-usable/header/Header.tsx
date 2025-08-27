@@ -8,9 +8,7 @@ import StarRatingBar from "components/Hero/StarRatingBar";
 import Link from "next/link";
 import { IREVIEWS } from "types/general";
 import { fetchReviews } from "config/fetch";
-const CustomModal = dynamic(() => import("components/ui/Modal"), {
-  loading: () => <p>Loading...</p>,
-});
+const CustomModal = dynamic(() => import("components/ui/Modal"));
 const TestimonialCard = dynamic(() => import("../Cards/TestimonialCard"));
 
 const Header = () => {

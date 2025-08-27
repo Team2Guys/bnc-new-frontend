@@ -91,22 +91,18 @@ function AddRedirecturl({ RedirectUrls, setRedirectUrls, setselecteMenu }: IVIEW
           <Form className="space-y-4 max-w-2xl mx-auto">
             <div className='flex border items-center justify-between'>
 
-                <p
-        className="dashboard_primary_button"
-        onClick={() => {
-          setselecteMenu('All RedirectUrls');
-        }}
-      >
-        <IoMdArrowRoundBack /> Back
-      </p>
-
-             <button
-                      type="submit"
-                      className="dashboard_primary_button"
-                    >
-                      {loading ? "loading..." : 'Submit'}
-                    </button>
-            </div>
+              <p
+                className="dashboard_primary_button"
+                onClick={() => {
+                  setselecteMenu('All RedirectUrls');
+                }}
+              >
+                <IoMdArrowRoundBack /> Back
+              </p>
+              <button type="submit" className="dashboard_primary_button">
+                {loading ? "loading..." : 'Submit'}
+                </button>
+                    </div>
 
             <div>
               <label htmlFor="name">Url Endpoint </label>
@@ -119,9 +115,6 @@ function AddRedirecturl({ RedirectUrls, setRedirectUrls, setselecteMenu }: IVIEW
               <Field name="redirectedUrl" type="text" className="primary-input" />
               <ErrorMessage name="redirectedUrl" component="div" className="text-red-500 text-sm" />
             </div>
-
-
-
             <button type="submit" disabled={loading} className="dashboard_primary_button">
               {(loading) ? "Submitting" : "Submit"}
             </button>
