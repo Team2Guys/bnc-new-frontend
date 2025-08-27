@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { motorizeBlindData } from "data/SellerSlider";
 import { FaPlay } from "react-icons/fa";
+import videoPoster from '../../../public/videos/video-poster.webp'
 
 export default function MotorizeBlindCurtain() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -62,6 +63,7 @@ export default function MotorizeBlindCurtain() {
           playsInline
           controls={false}
           autoPlay
+          poster={videoPoster.src}
         />
 
         {/* Full Gradient Overlay */}
