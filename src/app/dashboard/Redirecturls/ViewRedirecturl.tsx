@@ -3,7 +3,7 @@ import Breadcrumb from 'components/Dashboard/Breadcrumbs/Breadcrumb';
 import revalidateTag from 'components/ServerActons/ServerAction';
 import Table from 'components/ui/Table';
 import { deleteRedirectUrl } from 'config/fetch';
-import React, { SetStateAction, useState } from 'react'
+import React, { SetStateAction, useMemo, useState } from 'react'
 import { LiaEdit } from 'react-icons/lia';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import Swal from 'sweetalert2';
@@ -129,6 +129,13 @@ export default function ViewRedirecturl({
         },
     ];
 
+    const filteredRedirectUrls = useMemo(() => {
+  if (!searchTerm) return Redirecturls;
+  return Redirecturls.filter((item) =>
+    item.url.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+}, [searchTerm, Redirecturls]);
+
     return (
         <>
              <Breadcrumb pageName={"View Redirection"} />
@@ -158,9 +165,9 @@ export default function ViewRedirecturl({
                     </p>
                 </div>
             </div>
-              {Redirecturls && Redirecturls.length > 0 ? (
+              {filteredRedirectUrls && filteredRedirectUrls.length > 0 ? (
                     <Table<RedirectUrls>
-                            data={Redirecturls}
+                            data={filteredRedirectUrls}
                             columns={columns}
                             rowKey="id"
                         />

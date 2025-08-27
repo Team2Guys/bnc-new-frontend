@@ -12,6 +12,8 @@ import { CategoryProps, ICategory } from 'types/types';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import Table from 'components/ui/Table';
+import ViewsTableHeader from '../TableHeader/ViewsTableHeader';
+import { DateFormatHandler } from 'utils/helperFunctions';
 
 const TableTwo = ({
   setMenuType,
@@ -76,7 +78,7 @@ const TableTwo = ({
       );
       setCategory((prev: any) => prev.filter((item: any) => item.id != key));
       toast.success(
-       'Category Deleted: The category has been successfully deleted.');
+        'Category Deleted: The category has been successfully deleted.');
     } catch (err) {
       toast.error('Deletion Failed: There was an error deleting the category.');
     }
@@ -114,18 +116,21 @@ const TableTwo = ({
       title: 'Date',
       key: 'date',
       render: (record: ICategory) => {
-        const createdAt = new Date(record.createdAt);
-        return <span>{createdAt.toLocaleDateString()}</span>;
+               const createdAt = DateFormatHandler(record?.createdAt)
+      
+        return <span>{createdAt}</span>;
       },
     },
     {
-      title: 'Time',
-      key: 'time',
+      title: 'UpdatedAT',
+      key: 'UpdatedAT',
       render: (record: ICategory) => {
-        const createdAt = new Date(record.createdAt);
-        return <span>{createdAt.toLocaleTimeString()}</span>;
+               const createdAt = DateFormatHandler(record?.updatedAt)
+      
+        return <span>{createdAt}</span>;
       },
     },
+
     {
       title: 'Last Edited By',
       key: 'time',
@@ -165,33 +170,16 @@ const TableTwo = ({
   return (
     <div className={colorMode === 'dark' ? 'dark' : ''}>
       <>
-        <div className="flex justify-between mb-4 items-center text-dark dark:text-white">
-          <input
-            className="search_input"
-            type="search"
-            placeholder="Search Category"
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
-          <div>
-            <p
-              className={`${canAddCategory && 'cursor-pointer'} lg:p-2 md:p-2 ${canAddCategory &&
-                ' bg-secondary text-white rounded-md hover:text-white '
-                } flex justify-center ${!canAddCategory && 'cursor-not-allowed '
-                }`}
-              onClick={() => {
-                seteditCategory && seteditCategory(null);
-                if (canAddCategory) {
-                  setMenuType('Add Category');
-                }
-              }}
-            >
-              Add Category
-            </p>
-          </div>
-        </div>
+        <ViewsTableHeader
+          searchTerm={searchTerm}
+          onSearchChange={handleSearchChange}
+          canAdd={canAddCategory}
+          setEdit={seteditCategory}
+          setMenuType={setMenuType}
+          menuTypeText='Add Category'
+        />
         {filteredProducts.length > 0 ? (
-          <Table<ICategory> data={filteredProducts} columns={columns} rowKey="id"/>
+          <Table<ICategory> data={filteredProducts} columns={columns} rowKey="id" />
         ) : (
           <p className="text-xl text-black dark:text-white">
             No Categories found

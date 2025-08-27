@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: description,
       url: url,
       images: NewImage,
-      type:"website",
+      type: "website",
     },
     alternates: {
       canonical:
@@ -67,17 +67,15 @@ const Products = async ({ params }: Props) => {
   if (!category) {
     return notFound();
   }
-  console.log(category,"categorycategory")
+  console.log(category, "categorycategory")
   const matchingLink: any = links.find((link) => slug.includes(link.href.replace(/^\//, '')),);
 
   const subcategoryList = getSubcategoriesByCategory(category.title);
   const lowerSubcategorySet = new Set(subcategoryList.map((sub) => sub.toLowerCase().trim()));
 
   const filteredProducts = category.products?.filter((product: IProduct) =>
-    lowerSubcategorySet.has(product.title.toLowerCase()?.trim())
+    product.status === "PUBLISHED" && lowerSubcategorySet.has(product.title.toLowerCase()?.trim())
   );
-
-
 
   return (
     <>

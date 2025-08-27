@@ -11,8 +11,8 @@ import { headers } from 'next/headers';
 import { Metadata } from 'next';
 import { meta_props } from 'types/interfaces';
 import { urls } from 'data/urls';
-import NotFound from 'app/not-found';
 import { CurtainsSchemaMap } from 'data/curtains-schema';
+import { notFound } from 'next/navigation';
 
 const Cateories = [5];
 
@@ -82,7 +82,10 @@ const CommercialPage = async ({ params }: meta_props) => {
   const filteredProduct = filterProd(products, product, Cateories);
   const matchingUrl = urls.find((url) => `${url.errorUrl}/` === `/curtains/${product}/`);
   if (matchingUrl || !filteredProduct) {
-    return <NotFound />
+    return notFound()
+  }
+  if (filteredProduct && filteredProduct.status !== "PUBLISHED") {
+    return notFound();
   }
     const productTitle = filteredProduct?.title  || '';
     const matchedSchema = CurtainsSchemaMap[productTitle];

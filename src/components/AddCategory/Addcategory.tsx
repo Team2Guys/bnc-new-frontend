@@ -7,7 +7,7 @@ import { ImageRemoveHandler } from 'utils/helperFunctions';
 
 import Toaster from 'components/Toaster/Toaster';
 import axios from 'axios';
-import { Formik, Form, FieldArray} from 'formik';
+import { Formik, Form, FieldArray } from 'formik';
 
 import { categoryInitialValues, categoryValidationSchema } from 'data/data';
 import ProtectedRoute from 'hooks/AuthHookAdmin';
@@ -18,6 +18,7 @@ import revalidateTag from 'components/ServerActons/ServerAction';
 import { Status } from 'types/types';
 import TopButton from 'components/Dashboard/Layouts/TopButton';
 import Input from 'components/ui/Input';
+import ImageTextInput from 'components/Common/regularInputs/ImageTextInput';
 interface editCategoryNameType {
   name: string;
   description: string;
@@ -211,7 +212,7 @@ const FormLayout = ({
         {(formik) => {
           return (
             <Form onSubmit={formik.handleSubmit}>
-               <TopButton  setMenuType={setMenuType} loading={loading}/>
+              <TopButton setMenuType={setMenuType} loading={loading} />
 
               <div className="flex justify-center ">
                 <div className="flex flex-col gap-9 w-2/5 dark:border-strokedark dark:bg-lightdark rounded-md">
@@ -249,19 +250,14 @@ const FormLayout = ({
                                     alt={`productImage-${index}`}
                                   />
                                 </div>
-                                <input
+                                <ImageTextInput
                                   name="altText"
                                   value={item.altText}
-                                  onChange={(e) =>
-                                    handlealtTextposterimageUrl(
-                                      index,
-                                      String(e.target.value),
-                                    )
-                                  }
-                                  className='border rounded p-2 focus:outline-none mt-1'
                                   placeholder="altText"
+                                  className="border rounded p-2 focus:outline-none mt-1"
+                                  onChange={(val) => handlealtTextposterimageUrl(index, val)}
                                 />
-                              
+
                               </div>
                             );
                           })}
@@ -303,19 +299,14 @@ const FormLayout = ({
                                     alt={`productImage-${index}`}
                                   />
                                 </div>
-                                <input
+                                <ImageTextInput
                                   name="altText"
-                                  className='border rounded p-2 focus:outline-none mt-1'
                                   value={item.altText}
-                                  onChange={(e) =>
-                                    handlealtTextbannerImageUrl(
-                                      index,
-                                      String(e.target.value),
-                                    )
-                                  }
-                                  placeholder="altText"
+                                  placeholder="Alt text"
+                                  onChange={(val) => handlealtTextbannerImageUrl(index, val)}
+                                  className='border rounded p-2 focus:outline-none mt-1'
                                 />
-                               
+
                               </div>
                             );
                           })}
@@ -329,47 +320,47 @@ const FormLayout = ({
 
 
                       <div className=' flex flex-wrap md:flex-nowrap gap-4'>
-                      <Input
-                            label="Category Title"
-                            name="name"
-                            placeholder="Title"
-                          />
-                          <Input
-                            label="Top Heading"
-                            name="topHeading"
-                            placeholder="Top Heading"
-                          />  
+                        <Input
+                          label="Category Title"
+                          name="name"
+                          placeholder="Title"
+                        />
+                        <Input
+                          label="Top Heading"
+                          name="topHeading"
+                          placeholder="Top Heading"
+                        />
                       </div>
                       <Input
-                            label="Product Page Heading"
-                            name="productpageHeading"
-                            placeholder="Product Page Heading"
-                          />
-               
+                        label="Product Page Heading"
+                        name="productpageHeading"
+                        placeholder="Product Page Heading"
+                      />
+
                       <div className='flex gap-4 mt-2 flex-wrap md:flex-nowrap'>
                         <Input
-                            label="breadCrumb"
-                            name="breakcrum"
-                            placeholder="breadCrumb"
-                          />
+                          label="breadCrumb"
+                          name="breakcrum"
+                          placeholder="breadCrumb"
+                        />
                         <Input
-                            label="productCustomUrl"
-                            name="productCustomUrl"
-                            placeholder="productCustomUrl"
-                          />
-                          <Input
-                            label="categoryCustomUrl"
-                            name="categoryCustomUrl"
-                            placeholder="categoryCustomUrl"
-                          />
+                          label="productCustomUrl"
+                          name="productCustomUrl"
+                          placeholder="productCustomUrl"
+                        />
+                        <Input
+                          label="categoryCustomUrl"
+                          name="categoryCustomUrl"
+                          placeholder="categoryCustomUrl"
+                        />
                       </div>
-                          <Input
-                            label="Faq Heading"
-                            name="faqHeading"
-                            placeholder="Faq Heading"
-                          />
+                      <Input
+                        label="Faq Heading"
+                        name="faqHeading"
+                        placeholder="Faq Heading"
+                      />
 
-                  
+
                       <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                         <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
                           <h3 className="font-medium text-black dark:text-white">
@@ -388,13 +379,13 @@ const FormLayout = ({
                                         className="flex gap-2 items-center"
                                       >
                                         <Input
-                                            name={`faqs[${index}].specsHeading`}
-                                            placeholder="FAQS Heading"
-                                          />
-                                       <Input
-                                            name={`faqs[${index}].specsDetails`}
-                                            placeholder="FAQS Details"
-                                          />
+                                          name={`faqs[${index}].specsHeading`}
+                                          placeholder="FAQS Heading"
+                                        />
+                                        <Input
+                                          name={`faqs[${index}].specsDetails`}
+                                          placeholder="FAQS Details"
+                                        />
                                         <button
                                           type="button"
                                           onClick={() => remove(index)}
@@ -439,9 +430,9 @@ const FormLayout = ({
                                         className="flex items-center"
                                       >
                                         <Input
-                                            name={`headingchecks[${index}].specsDetails`}
-                                            placeholder="heading checks Details"
-                                          />
+                                          name={`headingchecks[${index}].specsDetails`}
+                                          placeholder="heading checks Details"
+                                        />
                                         <button
                                           type="button"
                                           onClick={() => remove(index)}
@@ -469,42 +460,42 @@ const FormLayout = ({
                       </div>
 
                       <Input
-                          label="Category Description"
-                          name="description"
-                          placeholder="Write something..."
-                          textarea
-                        />
-                     
+                        label="Category Description"
+                        name="description"
+                        placeholder="Write something..."
+                        textarea
+                      />
+
                       <div className="flex gap-4 mt-4">
                         <Input
-                            label="Meta Title"
-                            name="Meta_Title"
-                            placeholder="Meta Title"
-                          />
+                          label="Meta Title"
+                          name="Meta_Title"
+                          placeholder="Meta Title"
+                        />
                         <Input
-                            label="Canonical Tag"
-                            name="Canonical_Tag"
-                            placeholder="Canonical Tag"
-                          />
+                          label="Canonical Tag"
+                          name="Canonical_Tag"
+                          placeholder="Canonical Tag"
+                        />
                       </div>
                       <Input
-                          label="Meta Description"
-                          name="Meta_description"
-                          placeholder="Write something..."
-                          textarea
-                        />
-                    
-                        <Input
-                            label="Images Alt Text"
-                            name="Images_Alt_Text"
-                            placeholder="Images Alt Text"
-                          />
+                        label="Meta Description"
+                        name="Meta_description"
+                        placeholder="Write something..."
+                        textarea
+                      />
+
+                      <Input
+                        label="Images Alt Text"
+                        name="Images_Alt_Text"
+                        placeholder="Images Alt Text"
+                      />
                     </div>
                   </div>
                 </div>
               </div>
 
-              
+
               <div className="flex justify-center">
                 <button
                   type="submit"

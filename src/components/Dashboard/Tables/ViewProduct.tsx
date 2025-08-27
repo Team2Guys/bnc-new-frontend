@@ -19,6 +19,8 @@ import TableSkeleton from './TableSkelton';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import Table from 'components/ui/Table';
+import ViewsTableHeader from '../TableHeader/ViewsTableHeader';
+import { DateFormatHandler } from 'utils/helperFunctions';
 
 interface Product extends IProduct {
   id: number;
@@ -28,6 +30,7 @@ interface Product extends IProduct {
   createdAt: string;
   CategoryId: number;
   last_editedBy?: string;
+  
 }
 
 interface CategoryProps {
@@ -117,8 +120,8 @@ const ViewProduct: React.FC<CategoryProps> = ({
     } catch (err) {
       toast.error('Deletion Failed: There was an error deleting the product.');
     }
-    finally{
-            setLoading(false)
+    finally {
+      setLoading(false)
 
     }
   };
@@ -167,21 +170,30 @@ const ViewProduct: React.FC<CategoryProps> = ({
       key: 'title',
     },
     {
-      title: 'Date',
+      title: 'Status',
+      key: 'status',
+    },
+
+    {
+       title: 'Date',
       key: 'date',
       render: (record: Product) => {
-        const createdAt = new Date(record.createdAt);
-        return <span>{createdAt.toLocaleDateString()}</span>;
+         const createdAt = DateFormatHandler(record?.createdAt)
+ 
+        return <span>{createdAt}</span>;
       },
     },
     {
-      title: 'Time',
-      key: 'time',
+       title: 'UpdateAt',
+      key: 'UpdateAt',
       render: (record: Product) => {
-        const createdAt = new Date(record.createdAt);
-        return <span>{createdAt.toLocaleTimeString()}</span>;
+         const createdAt = DateFormatHandler(record?.updatedAt)
+ 
+        return <span>{createdAt}</span>;
       },
     },
+
+
     {
       title: 'Last Edited By',
       key: 'time',
@@ -243,28 +255,14 @@ const ViewProduct: React.FC<CategoryProps> = ({
         <TableSkeleton rows={10} columns={1} />
       ) : (
         <>
-          <div className="flex justify-between mb-4 items-center flex-wrap text-black dark:text-white">
-            <input
-              className="search_input"
-              type="search"
-              placeholder="Search Product"
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-            <div>
-              <p
-                className={`${canAddProduct ? 'cursor-pointer rounded-md' : 'cursor-not-allowed !bg-secondary opacity-20 text-gray-900 shadow-sm rounded-md'} p-2 ${canAddProduct ? '  bg-secondary text-white rounded-md ' : ''}`}
-                onClick={() => {
-                  if (canAddProduct) {
-                    setEditProduct(undefined);
-                    setselecteMenu('Add Products');
-                  }
-                }}
-              >
-                Add Products
-              </p>
-            </div>
-          </div>
+          <ViewsTableHeader
+            searchTerm={searchTerm}
+            onSearchChange={handleSearchChange}
+            canAdd={canAddProduct}
+            setEdit={setEditProduct}
+            setMenuType={setselecteMenu}
+            menuTypeText='Add Products'
+          />
           {filteredProducts && filteredProducts.length > 0 ? (
             <Table<Product>
               data={filteredProducts}

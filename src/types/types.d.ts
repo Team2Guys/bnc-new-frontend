@@ -41,6 +41,7 @@ export interface ICategory {
   bannerImage?: PosterImage;
   products: [];
   createdAt: Date;
+  updatedAt?: Date;
   Meta_Title?: string;
   Canonical_Tag?: string;
   Meta_description?: string;
@@ -81,7 +82,7 @@ export interface IProduct {
   CategoryId: number;
   SubCategoryId: number | null;
   createdAt: string;
-  updatedAt: string | null;
+  updatedAt?: string ;
   length?: any;
   href?: string;
   category?: any;

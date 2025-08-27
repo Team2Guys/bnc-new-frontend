@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Image from 'next/image';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import axios from 'axios';
@@ -14,6 +14,9 @@ import { CategoryProps, ICategory } from 'types/types';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import Table from 'components/ui/Table';
+import ViewsTableHeader from '../TableHeader/ViewsTableHeader';
+import { DateFormatHandler } from 'utils/helperFunctions';
+import revalidateTag from 'components/ServerActons/ServerAction';
 
 const ViewSubcategries = ({
   setMenuType,
@@ -27,9 +30,7 @@ const ViewSubcategries = ({
 
   const token = admin_token ? admin_token : super_admin_token;
   console.log(editCategory, 'editCategory');
-  const [category, setCategory] = useState<ICategory[] | undefined>(
-    subCategories,
-  );
+
   const [colorMode, toggleColorMode] = useColorMode();
   console.log(toggleColorMode, 'toggleColorMode');
 
@@ -51,10 +52,15 @@ const ViewSubcategries = ({
     setSearchTerm(e.target.value);
   };
 
-  const filteredProducts: ICategory[] =
-    category?.filter((product: any) =>
+  const filteredProducts=
+   useMemo(() => {
+    if(!searchTerm) return subCategories
+    return  subCategories?.filter((product: any) =>
       product.title.toLowerCase().includes(searchTerm.toLowerCase()),
-    ) || [];
+    ) || []
+  }, [searchTerm, subCategories]);
+
+
 
   const confirmDelete = (key: any) => {
     Swal.fire({
@@ -81,9 +87,12 @@ const ViewSubcategries = ({
           },
         },
       );
-      setCategory((prev: any) => prev.filter((item: any) => item.id != key));
+
+      revalidateTag('subCategories')
       toast.success('Category Deleted: The category has been successfully deleted.'
       );
+
+      return ;
     } catch (err) {
       toast.error('Deletion Failed: There was an error deleting the category.');
     }
@@ -125,16 +134,18 @@ const ViewSubcategries = ({
       title: 'Date',
       key: 'date',
       render: (record: ICategory) => {
-        const createdAt = new Date(record.createdAt);
-        return <span>{createdAt.toLocaleDateString()}</span>;
+        const createdAt = DateFormatHandler(record.createdAt)
+
+        return <span>{createdAt}</span>;
       },
     },
     {
-      title: 'Time',
-      key: 'time',
+      title: 'Update At',
+      key: 'date',
       render: (record: ICategory) => {
-        const createdAt = new Date(record.createdAt);
-        return <span>{createdAt.toLocaleTimeString()}</span>;
+        const createdAt = DateFormatHandler(record?.updatedAt)
+
+        return <span>{createdAt}</span>;
       },
     },
     {
@@ -197,34 +208,16 @@ const ViewSubcategries = ({
   return (
     <div className={colorMode === 'dark' ? 'dark' : ''}>
       <>
-        <div className="flex justify-between mb-4 items-center text-dark dark:text-white">
-          <input
-            className="search_input"
-            type="search"
-            placeholder="Search Category"
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
-          <div>
-            <p
-              className={`${canAddCategory &&
-                'cursor-pointer w-full xsm:text-12 xsm:px-2 py-2 lg:text-16'
-                } lg:p-2 md:p-2 ${canAddCategory && ' bg-secondary text-white rounded-md w-full '
-                } flex justify-center ${!canAddCategory && 'cursor-not-allowed w-full'
-                }`}
-              onClick={() => {
-                seteditCategory && seteditCategory(null);
-                if (canAddCategory) {
-                  setMenuType('Add Category');
-                }
-              }}
-            >
-              Add Sub Category
-            </p>
-          </div>
-        </div>
+        <ViewsTableHeader
+          searchTerm={searchTerm}
+          onSearchChange={handleSearchChange}
+          canAdd={canAddCategory}
+          setEdit={seteditCategory}
+          setMenuType={setMenuType}
+          menuTypeText='Add Sub Category'
+        />
 
-        {filteredProducts.length > 0 ? (
+        {filteredProducts && filteredProducts.length > 0 ? (
           <Table<ICategory>
             data={filteredProducts}
             columns={columns}

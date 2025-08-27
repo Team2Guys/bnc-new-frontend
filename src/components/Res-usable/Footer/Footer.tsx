@@ -216,6 +216,7 @@ const Footer: React.FC = () => {
 
                                 const matchingProduct = products?.find(
                                   (product) =>
+                                    product.status === "PUBLISHED" &&
                                     product.title.toLowerCase() === item.toLowerCase() &&
                                     product.CategoryId ===
                                       categories.find(
@@ -280,6 +281,7 @@ const Footer: React.FC = () => {
 
                                 const matchingProduct = products?.find(
                                   (product) =>
+                                    product.status === "PUBLISHED" &&
                                     product.title.toLowerCase() === item.toLowerCase() &&
                                     product.CategoryId ===
                                     categories.find(

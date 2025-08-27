@@ -181,7 +181,7 @@ export interface Allproduct {
   CategoryId: number;
   SubCategoryId: number | null;
   createdAt: string;
-  updatedAt: string | null;
+  updatedAt: string ;
   name?: any;
     status:Status
   
