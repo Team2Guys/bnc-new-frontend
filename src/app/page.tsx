@@ -17,6 +17,7 @@ const Review_banner = dynamic(() => import('components/ReviewBanner/Review_banne
 import { fetchProducts } from 'config/fetch';
 import { tabData } from 'data/Homedata/tabdata';
 import { reelsData } from 'data/SellerSlider';
+import { IProduct } from 'types/types';
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://blindsandcurtains.ae/"),
@@ -42,6 +43,7 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   const products = await fetchProducts();
+  const PublishedProduct = products.filter((product: IProduct) => product.status === "PUBLISHED");
   return (
     <>
       {schema.map((script: any, index: number) =>
@@ -60,7 +62,7 @@ export default async function Home() {
         </div>
         <div className='col-span-12 order-1 md:order-2'>
           <Suspense fallback='loading ...'>
-            <SellerSlider products={products} />
+            <SellerSlider products={PublishedProduct} />
           </Suspense>
         </div>
       </div>

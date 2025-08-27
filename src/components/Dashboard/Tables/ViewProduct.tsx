@@ -167,6 +167,10 @@ const ViewProduct: React.FC<CategoryProps> = ({
       key: 'title',
     },
     {
+      title: 'Status',
+      key: 'status',
+    },
+    {
       title: 'Date',
       key: 'date',
       render: (record: Product) => {

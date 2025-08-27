@@ -73,11 +73,9 @@ const Products = async ({ params }: Props) => {
   const subcategoryList = getSubcategoriesByCategory(category.title);
   const lowerSubcategorySet = new Set(subcategoryList.map((sub) => sub.toLowerCase().trim()));
 
-  const filteredProducts = category.products?.filter((product: IProduct) =>
-    lowerSubcategorySet.has(product.title.toLowerCase()?.trim())
-  );
-
-
+   const filteredProducts = category.products?.filter((product: IProduct) =>
+    product.status === "PUBLISHED" && lowerSubcategorySet.has(product.title.toLowerCase()?.trim())
+    );
 
   return (
     <>

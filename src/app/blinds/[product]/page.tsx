@@ -87,6 +87,9 @@ const CommercialPage = async ({ params }: meta_props) => {
   if (!filteredSubCategory && !filteredProduct) {
     return notFound();
   }
+  if (filteredProduct && filteredProduct.status !== "PUBLISHED") {
+    return notFound();
+  }
 
   const matchingUrl = urls.find((url) => `${url.errorUrl}/` === `/blinds/${product}/`);
 
