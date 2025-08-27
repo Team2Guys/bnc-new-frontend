@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic';
 import { fetchAppointments } from 'config/fetch';
-import { Suspense } from 'react';
 const AppointmentsClient = dynamic(() => import("./AppointmentsClient"))
 import { cookies } from 'next/headers';
 
@@ -17,9 +16,7 @@ const AppointmentPage = async () => {
     (a: any, b: any) => new Date(b.prefered_Date).getTime() - new Date(a.prefered_Date).getTime()
   );
   return (
-    <Suspense fallback='loading...'>
       <AppointmentsClient appointments={sortedFilteredAppointments} />
-    </Suspense>
   );
 };
 
