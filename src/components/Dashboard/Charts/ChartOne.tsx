@@ -81,13 +81,9 @@ const ChartOne = ({chartData}:{chartData : MONTHLYGRAPH}) => {
     <div className="col-span-12 rounded-sm border border-stroke  px-5 pb-5 pt-7 shadow-default sm:px-7 xl:col-span-8 bg-primary">
     
      
-          <div className="flex min-w-48 pb-5">
+          <div className="flex min-w-48 pb-5 text-white">
             Monthly Statistics
           </div>
-
-
-
-
           {
           (
             chartData && (

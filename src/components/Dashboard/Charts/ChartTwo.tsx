@@ -69,15 +69,9 @@ const ChartTwo= ({chartData}:{chartData:WEEKLYGRAPH}) => {
   return (
     <div className="col-span-12 rounded-sm border border-stroke p-7 shadow-default xl:col-span-4 bg-primary">
 
-      <p className="inline-flex appearance-none py-1 pl-3 pr-8 text-sm font-medium bg-primary">
-
+      <p className="inline-flex appearance-none py-1 pl-3 pr-8 text-sm font-medium bg-primary text-white">
         Weekly Statistics
       </p>
-
-
-
-
-
       <div id="chartTwo" className="-mb-9 -ml-5">
         { 
           chartData && (

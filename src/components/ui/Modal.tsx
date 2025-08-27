@@ -37,11 +37,11 @@ const CustomModal: React.FC<CustomModalProps> = ({
 
   return (
     <div
-      className="fixed -inset-4 bg-black/50 z-[60] flex items-center justify-center p-4"
+      className="fixed -inset-4 bg-black/50 z-[60] flex items-center justify-center p-4 "
       onClick={handleBackdropClick}
     >
       <div
-        className={`bg-secondary-foreground shadow-xl w-full relative z-50 rounded-lg m-2 ${getWidthClass()}`}
+        className={`bg-secondary-foreground shadow-xl w-full relative z-50 rounded-lg m-2 dark:bg-primary ${getWidthClass()}`}
         onClick={(e) => e.stopPropagation()}
       >
         {

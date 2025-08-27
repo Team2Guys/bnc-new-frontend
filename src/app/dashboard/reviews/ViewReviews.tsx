@@ -1,5 +1,6 @@
 "use client"
 
+import Breadcrumb from 'components/Dashboard/Breadcrumbs/Breadcrumb';
 import revalidateTag from 'components/ServerActons/ServerAction';
 import Table from 'components/ui/Table';
 import { deleteReview } from 'config/fetch';
@@ -55,7 +56,6 @@ export default function ViewReviews({
         });
     };
 
-
     const handleDelete = async (key: number) => {
         try {
             setloading(key)
@@ -63,9 +63,9 @@ export default function ViewReviews({
             revalidateTag('reviews');
 
         } catch (err) {
-console.log(err, )
-throw err
-        } finally{
+            console.log(err,)
+            throw err
+        } finally {
             setloading(key)
         }
     };
@@ -143,6 +143,7 @@ throw err
 
     return (
         <>
+        <Breadcrumb pageName={"View Review"} />
             <div className="flex justify-between gap-2 mb-4 items-center flex-nowrap">
                 <input
                     className="primary-input w-fit max-w-96"
@@ -154,8 +155,8 @@ throw err
                 <div>
                     <p
                         className={`py-2 px-4 rounded-md text-nowrap text-12 xs:text-base ${canAddProduct
-                                ? 'cursor-pointer text-white bg-secondary '
-                                : 'cursor-not-allowed bg-gray-500 text-white'
+                            ? 'cursor-pointer text-white bg-secondary '
+                            : 'cursor-not-allowed bg-gray-500 text-white'
                             }`}
                         onClick={() => {
                             if (canAddProduct) {
@@ -174,7 +175,6 @@ throw err
                 columns={columns}
                 rowKey="id"
             />
-
 
         </>
     )

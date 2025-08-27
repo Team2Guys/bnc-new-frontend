@@ -6,7 +6,9 @@ const MainPage = dynamic(()=>import('./MainPage'))
 async function  Page() {
   const  reviews=await fetchReviews()
   return (
+    <>
     <MainPage reviews={reviews} />
+    </>
   )
 }
 
