@@ -67,6 +67,7 @@ const Products = async ({ params }: Props) => {
   if (!category) {
     return notFound();
   }
+  console.log(category,"categorycategory")
   const matchingLink: any = links.find((link) => slug.includes(link.href.replace(/^\//, '')),);
 
   const subcategoryList = getSubcategoriesByCategory(category.title);

@@ -125,12 +125,12 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
     <>
       <div className="flex justify-between mb-4 items-center flex-wrap text-black dark:text-white">
         <input
-          className="primary-input"
-          type="search"
-          placeholder="Search Product"
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
+              className="search_input"
+              type="search"
+              placeholder="Search Product"
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
       </div>
 
       <div className="w-full">
