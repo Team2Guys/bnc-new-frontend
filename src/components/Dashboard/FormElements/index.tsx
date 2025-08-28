@@ -59,12 +59,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
   );
   const [topImages, settopImages] = useState<any[]>(EditInitialValues && EditInitialValues.topImages && EditInitialValues.topImages || []);
 
-  console.log(topImages, "topImages")
-  const [colorsImages, setcolorsImages] = useState<any[]>(
-    EditInitialValues &&
-    EditInitialValues.colorsImages &&
-    EditInitialValues.colorsImages,
-  );
+  const [colorsImages, setcolorsImages] = useState<any[]>( EditInitialValues && EditInitialValues.colorsImages && EditInitialValues.colorsImages || []);
   const [productUpdateFlat, setProductUpdateFlat] = useState(false);
   const [loading, setloading] = useState<boolean>(false);
   const [productInitialValue, setProductInitialValue] = useState<any | null | undefined>(EditInitialValues);
