@@ -54,9 +54,6 @@ const Footer: React.FC = () => {
   const products: IProduct[] = data?.products || [];
   const categories: ICategory[] = data?.categories || [];
   const subcategories = data?.subcategories || [];
-  console.log(categories,"categoriescategories")
-  console.log(subcategories,"subcategoriessubcategories")
-
   const [isMobile, setIsMobile] = useState(false);
   const generatePath = (product: IProduct, parent: string) => {
     const slug = ChangedProductUrl_handler(product.title);
