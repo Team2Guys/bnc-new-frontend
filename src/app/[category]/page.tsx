@@ -1,5 +1,4 @@
 import { fetchSingleCategory, fetchSingleCategorymain, } from "config/fetch";
-import Product from "../../../components/Product";
 import { IProduct } from "types/types";
 import { headers } from "next/headers";
 import { Metadata } from "next";
@@ -7,15 +6,17 @@ import { links } from "data/header_links";
 import Script from "next/script";
 import { notFound } from "next/navigation";
 import { getSubcategoriesByCategory } from "utils/helperFunctions";
+import Product from "components/Product";
 type Props = {
-  params: Promise<{ productName: string }>
+  params: Promise<{ category: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const productName = (await params).productName + "/";
+  const productName = (await params).category + "/";
 
 
   let Category = await fetchSingleCategory(productName)
+  console.log(Category, "Category")
 
   if (!Category) {
     notFound();
@@ -61,13 +62,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const Products = async ({ params }: Props) => {
-  const slug = (await params).productName;
+  const slug = (await params).category;
 
   const category = await fetchSingleCategorymain(slug)
   if (!category) {
     return notFound();
   }
-  console.log(category, "categorycategory")
   const matchingLink: any = links.find((link) => slug.includes(link.href.replace(/^\//, '')),);
 
   const subcategoryList = getSubcategoriesByCategory(category.title);

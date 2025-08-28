@@ -25,7 +25,6 @@ import { DateFormatHandler } from 'utils/helperFunctions';
 interface Product extends IProduct {
   id: number;
   title: string;
-  category: string;
   posterImage: { imageUrl: string };
   createdAt: string;
   CategoryId: number;
