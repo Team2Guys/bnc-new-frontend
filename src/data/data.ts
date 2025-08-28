@@ -724,7 +724,17 @@ export const footerData = [
       // 'Black Shutters',
     ],
   },
-
+{
+    key: "4",
+    title: 'Commercial',
+    items: [
+      'Pergola Window Coverings',
+      'Outdoor Window Coverings',
+      'Fire Retardant',
+      'Washable',
+      'Antimicrobial',
+    ],
+  },
 
 ];
 
