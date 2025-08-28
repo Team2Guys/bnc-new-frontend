@@ -1,7 +1,6 @@
 import dynamic from "next/dynamic";
 import { getAllAdmins } from 'config/fetch';
 import { cookies } from 'next/headers'
-import { Suspense } from "react";
 
 const Admins = dynamic(() => import('./Admins'))
 
@@ -12,9 +11,7 @@ const SuperAdmin_handler = async () => {
 
   console.log(token)
   return (
-    <Suspense fallback='loading...'>
       <Admins adminsData={admins || []} />
-    </Suspense>
   );
 };
 

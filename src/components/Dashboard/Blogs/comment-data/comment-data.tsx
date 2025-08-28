@@ -222,11 +222,11 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
     </div>
   );
 
-  const sections = ["PENDING", "APPROVED", "REJECTED"];
+  const sections = [ "APPROVED", "REJECTED"];
 
   return (
     <div className="space-y-8">
-      <div className="flex justify-center">
+      <div className="flex justify-start">
         <input
               className="search_input"
               type="search"
@@ -235,7 +235,7 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
               onChange={handleSearchChange}
             />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {sections.map((status) => (
           <div
             key={status}

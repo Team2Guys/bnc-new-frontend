@@ -1,9 +1,7 @@
 import { fetchCategories } from "config/fetch";
 import dynamic from 'next/dynamic'
 import { ICategory } from "types/types";
-const Category = dynamic(() => import('./Category'), {
-  loading: () => <p>Loading...</p>,
-})
+const Category = dynamic(() => import('./Category'))
 
 
 const AddCategory = async () => {

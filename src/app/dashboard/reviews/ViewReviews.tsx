@@ -1,6 +1,7 @@
 "use client"
 
 import ViewsTableHeader from 'components/Dashboard/TableHeader/ViewsTableHeader';
+import Breadcrumb from 'components/Dashboard/Breadcrumbs/Breadcrumb';
 import revalidateTag from 'components/ServerActons/ServerAction';
 import Table from 'components/ui/Table';
 import { deleteReview } from 'config/fetch';
@@ -55,7 +56,6 @@ export default function ViewReviews({
             console.log(err)
         });
     };
-
 
     const handleDelete = async (key: number) => {
         try {
@@ -144,6 +144,7 @@ export default function ViewReviews({
 
     return (
         <>
+        <Breadcrumb pageName={"View Review"} />
             <ViewsTableHeader
                 searchTerm={searchTerm}
                 onSearchChange={handleSearchChange}
@@ -158,7 +159,6 @@ export default function ViewReviews({
                 columns={columns}
                 rowKey="id"
             />
-
 
         </>
     )

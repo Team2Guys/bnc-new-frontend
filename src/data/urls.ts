@@ -116,12 +116,12 @@ export const urls = [
   },
 
   {
-    productName: 'hotels-restaurants',
+    productName: 'hotels restaurants',
     Url: 'hotels-restaurants-blinds-curtains',
     errorUrl: '/hotels-restaurants',
   },
   {
-    productName: 'blackout-roller-blinds',
+    productName: 'blackout roller blinds',
     Url: '/roller-blinds/blackout-roller-blinds',
     errorUrl: '/blinds/blackout-roller-blinds',
   },
