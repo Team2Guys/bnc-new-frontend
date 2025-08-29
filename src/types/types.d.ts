@@ -58,6 +58,8 @@ export interface ICategory {
   faqs: any[]
   faqHeading?:string
   status:Status
+  productCustomUrl?:string
+  
 }
 
 export interface Image {
@@ -85,7 +87,7 @@ export interface IProduct {
   updatedAt?: string ;
   length?: any;
   href?: string;
-  category?: any;
+  category?: ICategory;
   product_type?: string;
   subCategory?: [];
   short_description?: string;
@@ -102,6 +104,7 @@ export interface IProduct {
   privarcyImage?:Image
   topImages?:Image
   status?:Status
+    customUrl  ?:       String?
 }
 
 export interface ProductImages {

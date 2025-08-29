@@ -11,7 +11,6 @@ import { IProduct } from 'types/types';
 interface Product extends IProduct {
   id: number;
   title: string;
-  category: string;
   posterImage: { imageUrl: string };
   createdAt: string;
   CategoryId: number;
@@ -28,9 +27,8 @@ const Products = ({ products }: PRODUCTS_PROPS) => {
     id: editProduct?.id,
     name: editProduct?.title,
     description: editProduct?.description,
-    salePrice: editProduct?.price ? editProduct?.price : editProduct?.salePrice,
+    price: editProduct?.price ? editProduct?.price : editProduct?.salePrice,
     discountPrice: editProduct?.discountPrice,
-    code: editProduct && editProduct.code,
     category: editProduct && editProduct?.CategoryId,
     subCategory: editProduct && editProduct?.subCategory,
     Meta_Title: editProduct && editProduct?.Meta_Title,
@@ -46,8 +44,6 @@ const Products = ({ products }: PRODUCTS_PROPS) => {
     posterImage: editProduct && editProduct.posterImage,
     hoverImage: editProduct && editProduct.hoverImage,
     imageUrls: editProduct && editProduct.imageUrls,
-    additionalInformation: editProduct && editProduct.additionalInformation,
-    product_type: editProduct && editProduct.product_type,
     short_description: editProduct && editProduct.short_description,
     heading: editProduct && editProduct.heading,
     Sub_Heading: editProduct && editProduct.Sub_Heading,
@@ -64,10 +60,10 @@ const Products = ({ products }: PRODUCTS_PROPS) => {
     status : editProduct && editProduct.status,
     updatedAt : editProduct && editProduct?.updatedAt,
 
-        faqs: editProduct && editProduct.faqs,
+        faqs: editProduct && editProduct.faqs || [],
         videos: editProduct && editProduct.videos,
-        privacySectoin: editProduct && editProduct.privacySectoin,
-        privarcyImage: editProduct && editProduct.privarcyImage,
+        privacySectoin: editProduct && editProduct.privacySectoin || [],
+        privarcyImage: editProduct && editProduct.privarcyImage || [],
  
 
 
@@ -86,9 +82,16 @@ const Products = ({ products }: PRODUCTS_PROPS) => {
       ) : (
         <FormElements
           setselecteMenu={setselecteMenu}
-          EditInitialValues={EditInitialValues}
+          // EditInitialValues={EditInitialValues && EditInitialValues.}
           setEditProduct={setEditProduct}
           EditProductValue={
+            EditInitialValues &&
+              (EditInitialValues.name !== undefined ||
+                EditInitialValues.category !== undefined)
+              ? EditInitialValues
+              : undefined
+          }
+          EditInitialValues={
             EditInitialValues &&
               (EditInitialValues.name !== undefined ||
                 EditInitialValues.category !== undefined)

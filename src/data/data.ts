@@ -12,10 +12,9 @@ import * as Yup from 'yup';
 import { Category, FormValues } from 'types/interfaces';
 import { AboutUsBlock, ISUBCATEGORY, MilestoneStepsData, ReviewData, ThankYouCardProps, WhyChooseItem } from 'types/types';
 /* eslint-disable no-useless-escape */
-export const generateSlug = (text: string) => {
-  if (!text) return '';
+export const generateSlug = (text?: string) => {
+  if (!text) return ' ';
   return text
-    .toString()
     .toLowerCase()
     .trim()
     .replace(/\s+/g, '-')
@@ -969,6 +968,18 @@ export const blindsSubcategories = [
   "Motorised Blinds",
   "Sheer Roman blinds"
 ];
+
+export const subCategoryUrls = [
+  { url: 'blackout-blinds', name: 'Blackout/Private Blinds' },
+];
+
+export const subCategoryName = [
+  {
+    name: 'Living Room Blinds',
+    alterName: 'Made To Measure Blinds For Living Room',
+  },
+];
+
 
 export const shuttersSubcategories = [
   "Regular Full Height Shutters",
