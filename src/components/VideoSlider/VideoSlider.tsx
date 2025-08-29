@@ -81,7 +81,7 @@ export default function VideoReelsSlider() {
     videoRefs.current.forEach((video, index) => {
       if (video) {
         if (index === activeIndex && isVisible) {
-          video.play().catch(() => {})
+          video.play().catch(() => { })
         } else {
           video.pause()
           video.currentTime = 0
@@ -153,54 +153,42 @@ export default function VideoReelsSlider() {
   // 🔥 Dynamic Lazy Load Videos
   const videoElements = useMemo(
     () =>
-      reelsData.map((item, index) => {
-        const shouldLoad =
-          index === activeIndex ||
-          index === (activeIndex + 1) % totalVideos ||
-          index === (activeIndex - 1 + totalVideos) % totalVideos
-
-        return (
-          <div
-            key={index}
-            onClick={() => {
-              setActiveIndex(index)
-              setTimeout(() => setPopupVideoIndex(index), 100)
-            }}
-            className={`absolute transition-all duration-500 ease-in-out cursor-pointer ${getPositionClass(
-              index
-            )}`}
-          >
-            <div className="relative sm:w-[500px] sm:h-[670px] w-[150px] h-[280px] rounded-2xl overflow-hidden shadow-lg">
-              <div className="absolute top-2 right-2 z-40">
-                <Image
-                  src={VideoIcon}
-                  alt="icon"
-                  className="w-6 h-6 sm:w-12 sm:h-12 object-contain"
-                  loading="lazy"
-                />
-              </div>
-
-              {shouldLoad ? (
-                <video
-                  ref={(el) => {
-                    if (el) videoRefs.current[index] = el
-                  }}
-                  key={item.videoUrl}
-                  src={item.videoUrl}
-                  className="w-full h-full object-cover"
-                  loop
-                  muted
-                  playsInline
-                  preload="metadata"
-                  poster={videoPoster.src}
-                />
-              ) : (
-                <div className="w-full h-full bg-black" />
-              )}
+      reelsData.map((item, index) => (
+        <div
+          key={index}
+          onClick={() => {
+            setActiveIndex(index)
+            setTimeout(() => setPopupVideoIndex(index), 100)
+          }}
+          className={`absolute transition-all duration-500 ease-in-out cursor-pointer ${getPositionClass(
+            index
+          )}`}
+        >
+          <div className="relative sm:w-[500px] sm:h-[670px] w-[150px] h-[280px] rounded-2xl overflow-hidden shadow-lg">
+            <div className="absolute top-2 right-2 z-40">
+              <Image
+                src={VideoIcon}
+                alt="icon"
+                className="w-6 h-6 sm:w-12 sm:h-12 object-contain"
+                loading="lazy"
+              />
             </div>
+            <video
+              ref={(el) => {
+                if (el) videoRefs.current[index] = el
+              }}
+              key={item.videoUrl}
+              src={item.videoUrl}
+              className="w-full h-full object-cover"
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              poster={videoPoster.src}
+            />
           </div>
-        )
-      }),
+        </div>
+      )),
     [reelsData, getPositionClass, activeIndex, totalVideos]
   )
 
