@@ -103,16 +103,17 @@ export const UpdateShutterTitle = (title: string): string => {
 
 
 export const getPath = (product: IProduct) => {
-  const parent = (product?.category?.productCustomUrl ?? generateSlug(product?.category?.title)) as string;
+  const parent = (product?.category?.productCustomUrl || generateSlug(product?.category?.title)) as string;
 
   const slug = (product.customUrl || generateSlug(product.title)) as string
   const basePath = product.href && parent ? `${window.origin}/${product.href}` : `/${slug}`;
 
-  console.log(slug, "slug")
   const path = predefinedPaths[slug as keyof typeof predefinedPaths] || (slug === 'hotels-restaurants-blinds-curtains' ? basePath :
     `/${parent}${['dimout-roller-blinds', 'sunscreen-roller-blinds', 'blackout-roller-blinds'].includes(slug) ? 'roller-blinds'
       : ''
     }/${slug}`);
+
+
   return path + "/";
 };
 
