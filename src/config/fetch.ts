@@ -45,7 +45,7 @@ export const getSignleProd = async (Productname: string, category: string) => {
       }
     );
     if (!response.ok) {
-      throw new Error(`Failed to fetch product: ${response.statusText}`);
+      return null
     }
 
     const product = await response.json();
