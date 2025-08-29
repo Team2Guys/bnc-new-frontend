@@ -18,7 +18,7 @@ export async function generateMetadata({params}: meta_props): Promise<Metadata> 
   const category = (await params).category;
   const response =  await  getSignleProd(product, category)
   const  filteredProduct = response.product
-  if (!filteredProduct || !response.product) {
+  if (!filteredProduct) {
     return notFound();
   }
   const headersList = await headers();

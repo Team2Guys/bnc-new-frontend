@@ -35,7 +35,7 @@ const ProductGuarantees = () => {
         title="PRODUCT GUARANTEES"
         image={second.src}
       />
-      <Container className="">
+      <Container>
         <div className="lg:py-6 p-3 lg:mt-10 mx-auto">
           <h2 className="lg:text-3xl text-18 sm:text-2xl pb-2 font-bold text-center mb-9 w-fit mx-auto border-b-[1px] border-[#BDC9BD]">
             {productData.heading}
