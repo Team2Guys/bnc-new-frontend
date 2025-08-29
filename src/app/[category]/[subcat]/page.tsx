@@ -16,20 +16,11 @@ import Mainpage from 'components/CategoryPage/Mainpage';
 export async function generateMetadata({params}: meta_props): Promise<Metadata> {
   const product = (await params).subcat;
   const category = (await params).category;
-
   const response =  await  getSignleProd(product, category)
-
-
   const  filteredProduct = response.product
-
-    console.log(filteredProduct, 'filteredProduct', category)
-
-
   if (!filteredProduct) {
     return notFound();
   }
-
-
   const headersList = await headers();
   const domain = headersList.get('x-forwarded-host') || headersList.get('host') || '';
   const protocol = headersList.get('x-forwarded-proto') || 'https';
@@ -71,12 +62,10 @@ export async function generateMetadata({params}: meta_props): Promise<Metadata> 
 }
 
 const Page = async ({ params }: meta_props) => {
-    const product = (await params).subcat;
+  const product = (await params).subcat;
   const category = (await params).category;
-
   const response =  await  getSignleProd(product, category)
-
-    const  filteredProduct = response.product
+  const  filteredProduct = response.product
 
   if (!filteredProduct) {
     return notFound();
@@ -85,20 +74,16 @@ const Page = async ({ params }: meta_props) => {
     return notFound();
   }
 
-
   const productTitle = filteredProduct?.title;
   const matchedSchema = BlindSchemaMap[productTitle];
-console.log(response.type, "filteredSubCategory from main page")
 
   return (
-    <>
       <Mainpage
         filteredProduct={filteredProduct}
         filteredSubCategory={response.type == "subcategory"  && filteredProduct}
         product={product}
         matchedSchema={matchedSchema}
       />
-    </>
   );
 };
 

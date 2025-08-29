@@ -12,17 +12,13 @@ const SubProduct = ({ products, filteredProduct, filteredSubCategory }:ISubProdu
   return (
     <>
       {filteredSubCategory ? (
-        <>
           <SubCategory
             title={`${filteredSubCategory.title}`}
             description={`${filteredSubCategory.description}` || ""}
             category={`${filteredSubCategory.category.title}`}
             relatedProducts={filteredSubCategory?.products || []}
             products={products}
-       
           />
-
-        </>
       ) : (
         <ProductDetail
           title={`${filteredProduct?.title}`}

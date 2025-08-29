@@ -3,7 +3,7 @@ import { productData, PGuarantees } from 'data/data';
 import React from 'react';
 import Container from 'components/Res-usable/Container/Container';
 import Image from 'next/image';
-import second from '../../../public//assets/images/product-guarantees/large.png';
+import second from '../../../public/assets/images/product-guarantees/large.png';
 import GuaranteeVisit from 'components/Gurranteevisit';
 import { Metadata } from 'next';
 

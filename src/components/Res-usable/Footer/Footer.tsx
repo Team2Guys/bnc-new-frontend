@@ -97,7 +97,7 @@ const Footer: React.FC = () => {
     <footer>
       <div className={`bg-[#F5F5F5] sm:pt-10 sm:pb-5 py-7 ${(pathname.replaceAll('/', '') !== 'request-appointment') && (pathname.replaceAll('/', '') !== 'estimator') ? 'mt-10' : ''}`}>
         <Container>
-          <div className="grid grid-cols-1 xs:grid-cols-2  md:grid-cols-4 lg:grid-cols-6 gap-2 md:justify-items-center">
+          <div className="grid grid-cols-1 xs:grid-cols-2  md:grid-cols-4 lg:grid-cols-5 gap-2 md:justify-items-center">
             <div className="mb-4 flex flex-col items-start">
               <Link href='/' className="w-[79px] h-[50px] relative md:w-[120px] md:h-[50px]">
                 <Image
