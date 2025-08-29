@@ -63,12 +63,14 @@ const Products = ({ products }: PRODUCTS_PROPS) => {
         faqs: editProduct && editProduct.faqs || [],
         videos: editProduct && editProduct.videos,
         privacySectoin: editProduct && editProduct.privacySectoin || [],
-        privarcyImage: editProduct && editProduct.privarcyImage || [],
+        privarcyImage: editProduct && editProduct.privarcyImage ,
  
 
 
   };
 
+
+  console.log(editProduct?.privarcyImage, "privarcyImagemageUrl")
   let productFlag: boolean = selecteMenu === 'Categories' ? true : false;
   return (
     <>

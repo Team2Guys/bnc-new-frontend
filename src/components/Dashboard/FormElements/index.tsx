@@ -48,15 +48,16 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
   );
   const [privarcyImagemageUrl, setprivarcyImage] = useState<any[] | undefined>(
     EditInitialValues &&
-    EditInitialValues.privarcyImage && [EditInitialValues.privarcyImage],
+    EditInitialValues?.privarcyImage && [EditInitialValues.privarcyImage] || [],
   );
 
-  const [subCategoryImage, setsubCategoryImage] = useState<any[] | undefined>(
-    EditInitialValues &&
-    EditInitialValues.subCategoryImage && [
-      EditInitialValues.subCategoryImage,
-    ],
+  const [subCategoryImage, setsubCategoryImage] = useState<any[] | undefined>((EditInitialValues && 
+    EditInitialValues.subCategoryImage) ? EditInitialValues.subCategoryImage : []
   );
+
+    console.log(subCategoryImage, 'subCategoryImage', EditInitialValues.subCategoryImage)
+
+
   const [topImages, settopImages] = useState<any[]>(EditInitialValues &&EditInitialValues.topImages && EditInitialValues.topImages || []);
   const [colorsImages, setcolorsImages] = useState<any[]>(
     EditInitialValues &&
@@ -143,18 +144,9 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
         );
         setsubCategoryImage(
           EditInitialValues &&
-          EditInitialValues.subCategoryImage && [
-            EditInitialValues.subCategoryImage,
-          ],
-        );
-        setsubCategoryImage(
-          EditInitialValues &&
-          EditInitialValues.topImages && [EditInitialValues.topImages],
-        );
-        setsubCategoryImage(
-          EditInitialValues &&
-          EditInitialValues.colorsImages && [EditInitialValues.colorsImages],
-        );
+          EditInitialValues.subCategoryImage && 
+            EditInitialValues.subCategoryImage);
+ 
       } catch (err) {
         console.log(err, 'err');
       }
@@ -180,7 +172,6 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
       setError(null);
       let posterImageUrl = posterimageUrl && posterimageUrl[0];
       let bannerImage = bannerImageUrl && bannerImageUrl[0];
-      let newsubCategoryImage = subCategoryImage && subCategoryImage[0];
       let privarcyImage = privarcyImagemageUrl && privarcyImagemageUrl[0];
       if (!posterImageUrl || !(imagesUrl) || !(imagesUrl?.length > 0)) {
         return showToast('warn', 'Please select relevant Images');
@@ -192,8 +183,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
         posterImage: posterImageUrl,
         bannerImage: bannerImage !== undefined ? bannerImage : null,
         privarcyImage: privarcyImage !== undefined ? privarcyImage : null,
-        subCategoryImage:
-          newsubCategoryImage !== undefined ? newsubCategoryImage : null,
+        subCategoryImage,
         videos: videos,
         colorsImages: colorsImages,
         topImages: topImages,
@@ -356,7 +346,6 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     setFilteredSubcategories(filteredSubcategories);
   }, [selectedCategoryIds, categoriesList]);
 
-  console.log(productInitialValue, 'values')
   return (
     <>
       <Formik
