@@ -7,7 +7,7 @@ interface InputProps {
   label?: string;
   name: string;
   placeholder?: string;
-  type?: "text" | "password"; // only for input
+  type?: "text" | "password" | "number"; // only for input
   textarea?: boolean; // if true → render textarea
 }
 
@@ -36,7 +36,7 @@ const Input: React.FC<InputProps> = ({
         ) : (
           <>
             <Field
-              type={type === "password" && !showPassword ? "password" : "text"}
+              type={type === "password" ? (showPassword ? "text" : "password") : type}
               name={name}
               placeholder={placeholder}
               className="primary-input"
