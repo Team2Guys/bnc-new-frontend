@@ -1,18 +1,16 @@
+import React from 'react';
 import dynamic from 'next/dynamic';
 const ProductDetail = dynamic(() => import('components/ProductDetailPage/product-detail'));
 import Script from 'next/script';
 import { PRODUCS_PROPS } from 'types/interfaces';
-import SubCategory from './SubCategory';
+const SubCategory = dynamic(() => import('./SubCategory'));
 
 const Mainpage = ({
   filteredProduct,
   filteredSubCategory,
   matchedSchema
 }: PRODUCS_PROPS) => {
-  console.log(filteredSubCategory, "filteredSubCategory")
   return (
-
-
     <>
       {matchedSchema && (
         <Script type="application/ld+json" id="blinds-json-ld">
@@ -28,11 +26,7 @@ const Mainpage = ({
             relatedProducts={filteredSubCategory?.products || []}
             filteredSubCategory={filteredSubCategory}
             products={filteredSubCategory.products}
-
-
           />
-
-
         </>
       ) : (
         <ProductDetail
