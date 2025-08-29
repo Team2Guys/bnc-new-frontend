@@ -6,14 +6,13 @@ import MainHero from 'components/Hero/main-hero';
 import { fetchProducts } from 'config/fetch';
 import InfoTabs from 'components/NewHomecomponents/info';
 import ComparisonTable from 'components/NewHomecomponents/comparisontabble';
-import dynamic from 'next/dynamic';
-const SellerSlider = dynamic(() => import("components/BestSellerSlider/SellerCard"))
 import SimpleSteps from 'components/SimpleSteps/SimpleSteps';
 import MotorizeBlindCurtain from 'components/MotorizedBlindCurtains/MotorizedBlindCurtains';
 import VideoReelsSlider from 'components/VideoSlider/VideoSlider';
 import OurClient from 'components/Our-Client/OurClient';
 import Review_banner from 'components/ReviewBanner/Review_banner';
 import { IProduct } from 'types/types';
+import SellerSlider from 'components/BestSellerSlider/SellerCard';
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://blindsandcurtains.ae/"),

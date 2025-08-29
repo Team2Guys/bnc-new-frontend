@@ -29,6 +29,34 @@ export const fetchProducts = async () => {
 
 
 };
+export const getSignleProd = async (Productname: string, category: string) => {
+  try {
+
+    console.log(Productname, category)
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/getSignleProd`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({Productname, category}),
+        next: { tags: ["products"] },
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`Failed to fetch product: ${response.statusText}`);
+    }
+
+    const product = await response.json();
+    return product;
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    throw error;
+  }
+};
+
+
 
 
 export async function fetchSingleCategory(customUrl: string) {

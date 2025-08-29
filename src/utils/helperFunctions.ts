@@ -1,7 +1,7 @@
 
-import axios, { AxiosResponse} from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { blindsSubcategories, curtainsSubcategories, generateSlug, shuttersSubcategories } from 'data/data';
-import { ChangedProductUrl_handler, predefinedPaths } from 'data/urls';
+import { predefinedPaths } from 'data/urls';
 
 import Cookies from 'js-cookie';
 import React from 'react';
@@ -11,11 +11,11 @@ const superAdmintoken = Cookies.get('superAdminToken');
 const finalToken = token ? token : superAdmintoken;
 
 
-export const uploadPhotosToBackend = async (files: File[], s3Flag?:boolean): Promise<any[]> => {
+export const uploadPhotosToBackend = async (files: File[], s3Flag?: boolean): Promise<any[]> => {
   const formData = new FormData();
 
   if (files.length === 0) throw new Error('No files found');
-let urlsEndpoint = s3Flag ? "file-upload/upload-s3" : "file-upload"
+  let urlsEndpoint = s3Flag ? "file-upload/upload-s3" : "file-upload"
   try {
     for (const file of files) {
       console.log('hello from files');
@@ -23,11 +23,11 @@ let urlsEndpoint = s3Flag ? "file-upload/upload-s3" : "file-upload"
     }
 
     const response: AxiosResponse<any> = await axios.post(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/${urlsEndpoint}`,formData,{
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/${urlsEndpoint}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
       },
+    },
     );
 
     return response.data;
@@ -41,7 +41,7 @@ export const ImageRemoveHandler = async (
   imagePublicId: string,
   setterFunction: any,
 ) => {
- 
+
   console.log(imagePublicId);
   try {
     let awsS3Flag = imagePublicId.includes("s3") ? "DelImages3" : "DelImage"
@@ -65,7 +65,7 @@ export const Api_handler = async (
 ) => {
   try {
     const config = {
-      headers: { Authorization: `Bearer ${finalToken}`},
+      headers: { Authorization: `Bearer ${finalToken}` },
     };
 
     let response;
@@ -103,18 +103,18 @@ export const UpdateShutterTitle = (title: string): string => {
 
 
 export const getPath = (product: IProduct) => {
-    const parent = generateSlug(product.category?.title);
-    const slug = ChangedProductUrl_handler(product.title);
-    const basePath =product.href && parent? `${window.origin}/${product.href}`: `/${slug}`;
+  const parent = (product?.category?.productCustomUrl ?? generateSlug(product?.category?.title)) as string;
 
-    const path = predefinedPaths[slug as keyof typeof predefinedPaths] || (slug === 'hotels-restaurants-blinds-curtains'? basePath : `/${parent?.toLowerCase() === 'shutters' ? `${parent.toLowerCase()}-range`
-          : parent?.toLowerCase()
-        }${['dimout-roller-blinds', 'sunscreen-roller-blinds', 'blackout-roller-blinds'].includes(slug)
-          ? '/roller-blinds'
-          : ''
-        }/${slug}`);
-    return path+"/";
-  };
+  const slug = (product.customUrl || generateSlug(product.title)) as string
+  const basePath = product.href && parent ? `${window.origin}/${product.href}` : `/${slug}`;
+
+  console.log(slug, "slug")
+  const path = predefinedPaths[slug as keyof typeof predefinedPaths] || (slug === 'hotels-restaurants-blinds-curtains' ? basePath :
+    `/${parent}${['dimout-roller-blinds', 'sunscreen-roller-blinds', 'blackout-roller-blinds'].includes(slug) ? 'roller-blinds'
+      : ''
+    }/${slug}`);
+  return path + "/";
+};
 
 
 const subcategoryMap: Record<string, string[]> = {
@@ -129,25 +129,25 @@ export const getSubcategoriesByCategory = (categoryName: string): string[] => {
 
 
 
-  export const handleImageAltText = (
-    index: number,
-    newImageIndex: string,
-    setImagesUrlhandler: React.Dispatch<React.SetStateAction<any[] | any>>,
-    variantType: string
-  ) => {
-    setImagesUrlhandler((prev: any[] | undefined) => {
-      if (!prev) return [];
+export const handleImageAltText = (
+  index: number,
+  newImageIndex: string,
+  setImagesUrlhandler: React.Dispatch<React.SetStateAction<any[] | any>>,
+  variantType: string
+) => {
+  setImagesUrlhandler((prev: any[] | undefined) => {
+    if (!prev) return [];
 
-      const updatedImagesUrl = prev?.map((item: any, i: number) =>
-        i === index ? { ...item, [variantType]: newImageIndex } : item
-      );
-      return updatedImagesUrl;
-    });
-  };
+    const updatedImagesUrl = prev?.map((item: any, i: number) =>
+      i === index ? { ...item, [variantType]: newImageIndex } : item
+    );
+    return updatedImagesUrl;
+  });
+};
 
 
-  export const DateFormatHandler = (input?: Date | string) => {
-    console.log(input, "input from update at")
+export const DateFormatHandler = (input?: Date | string) => {
+  console.log(input, "input from update at")
   if (!input) return "Not available";
 
   const parsedDate = typeof input === "string" ? new Date(input) : input;
@@ -168,7 +168,7 @@ export const getSubcategoriesByCategory = (categoryName: string): string[] => {
 
 
 
- export const getRandomColor = () => {
-    return `hsl(${Math.floor(Math.random() * 360)}, 70%, 60%)`;
+export const getRandomColor = () => {
+  return `hsl(${Math.floor(Math.random() * 360)}, 70%, 60%)`;
 
-  }
+}
