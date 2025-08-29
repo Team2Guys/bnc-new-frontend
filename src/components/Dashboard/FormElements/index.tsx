@@ -57,9 +57,12 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
       EditInitialValues.subCategoryImage,
     ],
   );
-  const [topImages, settopImages] = useState<any[]>(EditInitialValues && EditInitialValues.topImages && EditInitialValues.topImages || []);
-
-  const [colorsImages, setcolorsImages] = useState<any[]>( EditInitialValues && EditInitialValues.colorsImages && EditInitialValues.colorsImages || []);
+  const [topImages, settopImages] = useState<any[]>(EditInitialValues &&EditInitialValues.topImages && EditInitialValues.topImages || []);
+  const [colorsImages, setcolorsImages] = useState<any[]>(
+    EditInitialValues &&
+    EditInitialValues.colorsImages &&
+    EditInitialValues.colorsImages ||[]
+  );
   const [productUpdateFlat, setProductUpdateFlat] = useState(false);
   const [loading, setloading] = useState<boolean>(false);
   const [productInitialValue, setProductInitialValue] = useState<any | null | undefined>(EditInitialValues);
@@ -195,9 +198,11 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
         colorsImages: colorsImages,
         topImages: topImages,
         imageUrls: imagesUrl,
-        price: values.salePrice,
         Meta_description: values.Meta_Description,
+        price: 2
       };
+
+      console.log(values, "values")
 
       setloading(true);
       let updateFlag = productUpdateFlat;
@@ -351,6 +356,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     setFilteredSubcategories(filteredSubcategories);
   }, [selectedCategoryIds, categoriesList]);
 
+  console.log(productInitialValue, 'values')
   return (
     <>
       <Formik
@@ -495,6 +501,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                           label="Sale Price"
                           name="salePrice"
                           placeholder="Sale Price"
+                          type='number'
                         />
                         <Input
                           label="Discount Price"
