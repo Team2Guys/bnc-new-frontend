@@ -4,37 +4,37 @@ import { MotorizeBlindData, Reel, WorkingProcessContent } from "types/types";
 
 export const reelsData: Reel[] = [
   {
-    videoUrl:  "/videos/test1.mp4",
+    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test1.mp4",
   },
   {
-    videoUrl:  "/videos/test2.mp4",
+    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test2.mp4",
   },
   {
-    videoUrl:  "/videos/test3.mp4",
+    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test3.mp4",
   },
   {
-    videoUrl:  "/videos/test4.mp4",
+    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test4.mp4",
   },
   {
-    videoUrl:  "/videos/test5.mp4",
+    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test5.mp4",
   },
   {
-    videoUrl:  "/videos/test6.mp4",
+    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test6.mp4",
   },
   {
-    videoUrl:  "/videos/test7.mp4",
+    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test7.mp4",
   },
   {
-    videoUrl:  "/videos/test8.mp4",
+    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test8.mp4",
   },
   {
-    videoUrl:  "/videos/test9.mp4",
+    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test9.mp4",
   },
   {
-    videoUrl:  "/videos/test10.mp4",
+    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test10.mp4",
   },
   {
-    videoUrl:  "/videos/test11.mp4",
+    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test11.mp4",
   },
 
 ];

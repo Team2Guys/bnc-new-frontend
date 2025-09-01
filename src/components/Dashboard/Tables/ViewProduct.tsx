@@ -6,13 +6,8 @@ import axios from 'axios';
 import { FaRegEye } from 'react-icons/fa';
 import { LiaEdit } from 'react-icons/lia';
 import { useAppSelector } from 'components/Others/HelperRedux';
-import { generateSlug } from 'data/data';
 import Cookies from 'js-cookie';
-import { useQuery } from '@tanstack/react-query';
-import { ICategory, IProduct } from 'types/types';
-import { fetchCategories } from 'config/fetch';
 import revalidateTag from 'components/ServerActons/ServerAction';
-import { ChangedProductUrl_handler, predefinedPaths } from 'data/urls';
 import Link from 'next/link';
 import useColorMode from 'hooks/useColorMode';
 import TableSkeleton from './TableSkelton';
@@ -20,7 +15,8 @@ import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import Table from 'components/ui/Table';
 import ViewsTableHeader from '../TableHeader/ViewsTableHeader';
-import { DateFormatHandler } from 'utils/helperFunctions';
+import { DateFormatHandler, getPath } from 'utils/helperFunctions';
+import { IProduct } from 'types/types';
 
 interface Product extends IProduct {
   id: number;
@@ -56,11 +52,6 @@ const ViewProduct: React.FC<CategoryProps> = ({
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
-
-  const { data: categories } = useQuery<ICategory[]>({
-    queryKey: ['categories'],
-    queryFn: fetchCategories,
-  });
 
   const { loggedInUser }: any = useAppSelector((state) => state.usersSlice);
 
@@ -125,30 +116,7 @@ const ViewProduct: React.FC<CategoryProps> = ({
     }
   };
 
-  const getPath = (product: IProduct, parent: string | undefined) => {
-    const slug = ChangedProductUrl_handler(product.title);
 
-    const basePath =
-      product.href && parent ? `${window.origin}/${product.href}` : `/${slug}`;
-
-    const path =
-      predefinedPaths[slug as keyof typeof predefinedPaths] ||
-      (slug === 'hotels-restaurants-blinds-curtains'
-        ? basePath
-        : `/${parent?.toLowerCase() === 'shutters'
-          ? `${parent.toLowerCase()}-range`
-          : parent?.toLowerCase() || ''
-        }${[
-          'dimout-roller-blinds',
-          'sunscreen-roller-blinds',
-          'blackout-roller-blinds',
-        ].includes(slug)
-          ? '/roller-blinds'
-          : ''
-        }/${slug}`);
-
-    return path;
-  };
 
   const columns = [
     {
@@ -204,11 +172,9 @@ const ViewProduct: React.FC<CategoryProps> = ({
       title: 'Preview',
       key: 'Preview',
       render: (record: Product) => {
-        const category = categories?.find((i) => i.id === record.CategoryId);
-        if (category === undefined) return null;
-        const parent = generateSlug(category?.title);
         return (
-          <Link href={getPath(record, parent)} target="_blank">
+        
+          <Link href={getPath(record)} target="_blank" rel="noreferrer">
             <FaRegEye className="cursor-pointer" />
           </Link>
         );

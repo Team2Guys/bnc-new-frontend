@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { FaAngleRight, FaHome } from 'react-icons/fa';
-import { colorData, TopHeroLink } from 'data/data';
+import { TopHeroLink } from 'data/data';
 import { usePathname } from 'next/navigation';
 import { BreakCrum_conent_pages } from 'data/data';
 import { blogCategoryUrl } from 'data/urls';
@@ -103,9 +103,7 @@ const TopHero: React.FC<TopHeroProps> = ({
                     (itemTitle) =>
                       itemTitle.title.toLowerCase() === item.toLowerCase(),
                   );
-                  const matchingColorData = colorData.find(
-                    (item) => item.url === page,
-                  );
+                
                   let linkHref = '';
                   let linkText = item;
                   if (matchedLink) {
@@ -135,21 +133,7 @@ const TopHero: React.FC<TopHeroProps> = ({
                               ? 'blog'
                               : ''
                       }${item === 'commercial' ? '' : `/${item.replaceAll(' ', '-')}`}`;
-                  } else if (matchingColorData) {
-                    return (
-                      <>
-                        <FaAngleRight size={20} />
-                        <Link
-                          href="/shutters-range/"
-                          className="font-bold capitalize"
-                        >
-                          Shutters Range
-                        </Link>
-                        <FaAngleRight size={20} />
-                        <h2 className="font-bold capitalize">{item}</h2>
-                      </>
-                    );
-                  } else {
+                  }  else {
                     linkText =
                       item === 'request appointment'
                         ? 'Book Appointment'
