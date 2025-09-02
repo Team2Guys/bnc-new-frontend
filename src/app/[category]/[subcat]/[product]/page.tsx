@@ -17,19 +17,12 @@ import Mainpage from 'components/CategoryPage/Mainpage';
 export async function generateMetadata({params}: meta_props): Promise<Metadata> {
   const product = (await params).product;
   const category = (await params).category;
-
   const response =  await  getSignleProd(product, category)
-
-
   const  filteredProduct = response.product
-
-    console.log(filteredProduct, 'filteredProduct', category)
-
 
   if (!filteredProduct) {
     return notFound();
   }
-
 
   const headersList = await headers();
   const domain = headersList.get('x-forwarded-host') || headersList.get('host') || '';
@@ -86,11 +79,8 @@ const Page = async ({ params }: meta_props) => {
     return notFound();
   }
 
-
   const productTitle = filteredProduct?.title;
   const matchedSchema = BlindSchemaMap[productTitle];
-
-
 
   return (
     <>

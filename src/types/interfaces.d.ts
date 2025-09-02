@@ -65,6 +65,7 @@ export interface Category {
     
   productCustomUrl?: string
   categoryCustomUrl?: string
+  title?: string
 }
 
 export interface CategoriesType extends Category {
@@ -149,6 +150,8 @@ export interface ADDPRODUCTFORMPROPS {
   EditInitialValues?: any | undefined;
   EditProductValue?: Product | undefined;
   setEditProduct?: any;
+  categoriesList: ICategory[];
+  subCategoriesList: ICategory[];
 }
 
 export interface Categories_Types {

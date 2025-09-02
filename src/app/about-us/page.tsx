@@ -1,4 +1,4 @@
-import aboutUsImg from '../../../public/assets/images/blind-curtains-dubai/blinds-curtains-dubai.png';
+import aboutUsImg from '../../../public/assets/images/blind-curtains-dubai/blinds-curtains-dubai1.png';
 import { Metadata } from 'next';
 import { Fragment } from 'react';
 import Breadcrumb from 'components/Res-usable/breadcrumb';
