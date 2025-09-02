@@ -6,8 +6,8 @@ import { Formik, FieldArray, Form } from 'formik';
 import Imageupload from 'components/ImageUpload/Imageupload';
 import { RxCross2 } from 'react-icons/rx';
 import Image from 'next/image';
-import { handleImageAltText, ImageRemoveHandler } from 'utils/helperFunctions';
-import { ADDPRODUCTFORMPROPS } from 'types/interfaces';
+import { compareImageArray, compareImages, handleImageAltText, ImageRemoveHandler } from 'utils/helperFunctions';
+import { ADDPRODUCTFORMPROPS, Product } from 'types/interfaces';
 import axios from 'axios';
 import Loader from 'components/Loader/Loader';
 import Cookies from 'js-cookie';
@@ -23,6 +23,7 @@ import TopButton from '../Layouts/TopButton';
 import Checkbox from 'components/ui/Checkbox';
 import Input from 'components/ui/Input';
 import ImageTextInput from 'components/Common/regularInputs/ImageTextInput';
+import { useConfirmModal } from 'components/ui/useConfirmModal';
 
 const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
   EditInitialValues,
@@ -51,22 +52,22 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     EditInitialValues?.privarcyImage && [EditInitialValues.privarcyImage] || [],
   );
 
-  const [subCategoryImage, setsubCategoryImage] = useState<any[] | undefined>((EditInitialValues && 
+  const [subCategoryImage, setsubCategoryImage] = useState<any[] | undefined>((EditInitialValues &&
     EditInitialValues.subCategoryImage) ? EditInitialValues.subCategoryImage : []
   );
 
-    console.log(subCategoryImage, 'subCategoryImage', EditInitialValues.subCategoryImage)
+  console.log(subCategoryImage, 'subCategoryImage', EditInitialValues.subCategoryImage)
 
 
-  const [topImages, settopImages] = useState<any[]>(EditInitialValues &&EditInitialValues.topImages && EditInitialValues.topImages || []);
+  const [topImages, settopImages] = useState<any[]>(EditInitialValues && EditInitialValues.topImages && EditInitialValues.topImages || []);
   const [colorsImages, setcolorsImages] = useState<any[]>(
     EditInitialValues &&
     EditInitialValues.colorsImages &&
-    EditInitialValues.colorsImages ||[]
+    EditInitialValues.colorsImages || []
   );
   const [productUpdateFlat, setProductUpdateFlat] = useState(false);
   const [loading, setloading] = useState<boolean>(false);
-  const [productInitialValue, setProductInitialValue] = useState<any | null | undefined>(EditInitialValues);
+  const [productInitialValue, setProductInitialValue] = useState<any | null | undefined>(EditInitialValues ? EditInitialValues : AddproductsinitialValues);
 
   const [imgError, setError] = useState<string | null | undefined>();
 
@@ -79,6 +80,8 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
   const token = Cookies.get('2guysAdminToken');
   const superAdminToken = Cookies.get('superAdminToken');
   let finalToken = token ? token : superAdminToken;
+  const { confirm, modalNode } = useConfirmModal();
+  const formikValuesRef = useRef<Product>(EditInitialValues ? EditInitialValues : AddproductsinitialValues);
 
   useEffect(() => {
     const CategoryHandler = async () => {
@@ -144,9 +147,9 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
         );
         setsubCategoryImage(
           EditInitialValues &&
-          EditInitialValues.subCategoryImage && 
-            EditInitialValues.subCategoryImage);
- 
+          EditInitialValues.subCategoryImage &&
+          EditInitialValues.subCategoryImage);
+
       } catch (err) {
         console.log(err, 'err');
       }
@@ -333,8 +336,123 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     setFilteredSubcategories(filteredSubcategories);
   }, [selectedCategoryIds, categoriesList]);
 
+
+  const hasUnsavedChanges = (): boolean => {
+    if (!EditInitialValues) return false;
+
+    const oldPoster = EditInitialValues.posterImage;
+    const newPoster = posterimageUrl?.[0];
+    const isPosterChanged = compareImages(oldPoster, newPoster);
+
+    const oldBanner = EditInitialValues.bannerImage;
+    const newBanner = bannerImageUrl?.[0];
+    const isBannerChanged = compareImages(oldBanner, newBanner);
+
+    const oldPrivacy = EditInitialValues.privarcyImage;
+    const newPrivacy = privarcyImagemageUrl?.[0];
+    const isPrivacyChanged = compareImages(oldPrivacy, newPrivacy);
+
+    const isVideosChanged = compareImageArray(EditInitialValues.videos ?? [], videos);
+    const isTopImagesChanged = compareImageArray(EditInitialValues.topImages ?? [], topImages);
+    const isColorsImagesChanged = compareImageArray(EditInitialValues.colorsImages ?? [], colorsImages);
+    const isSubCategoryImagesChanged = compareImageArray(EditInitialValues.subCategoryImage ?? [], subCategoryImage);
+    const isImagesUrlChanged = compareImageArray(EditInitialValues.imageUrls ?? [], imagesUrl);
+    const isCategoryChanged = EditInitialValues.category !== selectedCategoryIds[0];
+    const isSubCategoryChanged = (() => {
+      const a = (EditInitialValues.subCategory?.map((sc: any) => sc.id) ?? []).sort();
+      const b = selectedSubcategoryIds.slice().sort();
+
+      if (a.length !== b.length) return true;
+
+      for (let i = 0; i < a.length; i++) {
+        if (a[i] !== b[i]) return true;
+      }
+
+      return false;
+    })();
+    // eslint-disable-next-line
+    const { videos: _v1, topImages: _t1, colorsImages: _c1, subCategoryImage: _s1, imageUrls: _i1, posterImage: _p1, privarcyImage: _pr1, bannerImage: _b1, subCategory: _sub1, ...newInitialValues } = productInitialValue;
+    // eslint-disable-next-line
+    const { videos: _v2, topImages: _t2, colorsImages: _c2, subCategoryImage: _s2, imageUrls: _i2, posterImage: _p2, privarcyImage: _pr2, bannerImage: _b2, subCategory: _sub2, category, ...current } = formikValuesRef.current as any;
+
+    const values = {
+      ...newInitialValues,
+      name: EditInitialValues.name,
+    };
+
+    const normalizedInitial = JSON.stringify(values);
+    const normalizedCurrent = JSON.stringify(current);
+
+    const isFormChanged = normalizedInitial !== normalizedCurrent;
+
+    return (
+      isPosterChanged ||
+      isBannerChanged ||
+      isPrivacyChanged ||
+      isVideosChanged ||
+      isTopImagesChanged ||
+      isColorsImagesChanged ||
+      isSubCategoryImagesChanged ||
+      isImagesUrlChanged ||
+      isCategoryChanged ||
+      isSubCategoryChanged ||
+      isFormChanged
+    );
+  };
+
+
+
+
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (hasUnsavedChanges()) {
+        e.preventDefault();
+        e.returnValue = '';
+        return '';
+      }
+    };
+
+    const handlePopState = () => {
+      if (hasUnsavedChanges()) {
+        window.history.pushState(null, '', window.location.href);
+        confirm({
+          title: "Unsaved Changes",
+          content: "You have unsaved changes. Do you want to discard them?",
+          okText: "Discard Changes",
+          cancelText: "Cancel",
+          onOk: () => setselecteMenu("Categories"),
+        });
+      } else { setselecteMenu("All Categories"); }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('popstate', handlePopState);
+    window.history.pushState(null, '', window.location.href);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [productInitialValue, posterimageUrl]);
+
+  const handleBack = () => {
+    if (hasUnsavedChanges()) {
+      confirm({
+        title: "Unsaved Changes",
+        content: "You have unsaved changes. Do you want to discard them?",
+        okText: "Discard Changes",
+        cancelText: "Cancel",
+        onOk: () => setselecteMenu("Categories"),
+      });
+      return;
+    }
+
+    setselecteMenu("Categories");
+  };
+
   return (
     <>
+      {modalNode}
       <Formik
         enableReinitialize
         initialValues={
@@ -346,13 +464,13 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
         {(formik) => {
           return (
             <Form onSubmit={formik.handleSubmit}>
-              <TopButton setMenuType={setselecteMenu} loading={loading} />
+              <TopButton handleBack={handleBack} loading={loading} />
 
-              <div className="grid grid-cols-1 gap-9 sm:grid-cols-2 mt-1">
-                <div className="flex flex-col gap-9 dark:border-strokedark dark:bg-lightdark">
-                  <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark p-6">
+              <div className="grid grid-cols-1 gap-9 sm:grid-cols-2 mt-3">
+                <div className="flex flex-col gap-9 dark:border-strokedark dark:bg-lightdark ">
+                  <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark p-2 ">
                     <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                      <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                      <div className="inputs_heading border-stroke dark:border-strokedark">
                         <h3 className="font-medium text-black dark:text-white">
                           Poster Image
                         </h3>
@@ -577,7 +695,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
 
                 <div className="flex flex-col gap-5">
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                    <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                    <div className="inputs_heading border-stroke dark:border-strokedark">
                       <h3 className="font-medium text-black dark:text-white">
                         FAQS
                       </h3>
@@ -599,7 +717,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                     <button
                                       type="button"
                                       onClick={() => remove(index)}
-                                      className="ml-2 errorColor"
+                                      className="crose_button"
                                     >
                                       <RxCross2
                                         className="errorColor"
@@ -623,7 +741,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                   </div>
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                    <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                    <div className="inputs_heading border-stroke dark:border-strokedark">
                       <h3 className="font-medium text-black dark:text-white">
                         Privacy Section
                       </h3>
@@ -645,7 +763,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                     <button
                                       type="button"
                                       onClick={() => remove(index)}
-                                      className="ml-2 errorColor"
+                                      className="crose_button"
                                     >
                                       <RxCross2
                                         className="errorColor"
@@ -680,36 +798,40 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                         Descripton(On Subcategory Page)
                       </h3>
                     </div>
-                    <div className="flex flex-col gap-5 p-4">
+                    <div className="flex flex-col gap-5 p-2">
                       <FieldArray name="modelDetails">
                         {({ push, remove }) => (
-                          <div className="flex flex-col gap-2">
-                            {formik.values?.modelDetails?.map(
-                              (model: any, index: any) => (
-                                <>
-                                  <div
-                                    key={index}
-                                    className="flex flex-col gap-3"
-                                  >
-                                    <Input name={`modelDetails[${index}].name`} placeholder="Sub Category Name" />
-                                    <Input name={`modelDetails[${index}].detail`} placeholder="Description on Sub Category" textarea />
+                          <div className="flex flex-col gap-2 ">
+                            <div className='shadow-md p-2 rounded relative'>
+                              {formik.values?.modelDetails?.map(
+                                (model: any, index: any) => (
+                                  <>
+                                    <div
+                                      key={index}
+                                      className="flex flex-col gap-3 pt-3 "
+                                    >
+                                      <Input name={`modelDetails[${index}].name`} placeholder="Sub Category Name" />
+                                      <Input name={`modelDetails[${index}].detail`} placeholder="Description on Sub Category" textarea />
 
 
-                                  </div>
+                                    </div>
 
-                                  <button
-                                    type="button"
-                                    onClick={() => remove(index)}
-                                    className="ml-2 errorColor border-blue-500 px-4 py-2 "
-                                  >
-                                    <RxCross2
-                                      className="errorColor"
-                                      size={25}
-                                    />
-                                  </button>
-                                </>
-                              ),
-                            )}
+                                    <div className='relative'>
+                                      <button
+                                        type="button"
+                                        onClick={() => remove(index)}
+                                        className="crose_button border-blue-500  absolute -top-48 -right-3 z-10"
+                                      >
+                                        <RxCross2
+                                          className="errorColor"
+                                          size={25}
+                                        />
+                                      </button>
+                                    </div>
+                                  </>
+                                ),
+                              )}
+                            </div>
 
                             <button
                               type="button"
@@ -725,7 +847,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                   </div>
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                    <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                    <div className="inputs_heading border-stroke dark:border-strokedark">
                       <h3 className="font-medium">colors</h3>
                     </div>
                     <div className="flex flex-col py-4 px-4">
@@ -745,7 +867,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                     <button
                                       type="button"
                                       onClick={() => remove(index)}
-                                      className=" errorColor "
+                                      className="crose_button"
                                     >
                                       <RxCross2
                                         className="errorColor"
@@ -814,7 +936,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                     )}
                   </div>
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                    <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                    <div className="inputs_heading border-stroke dark:border-strokedark">
                       <h3 className="font-medium text-black dark:text-white">
                         Colors Images
                       </h3>
@@ -875,7 +997,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                   </div>
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                    <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                    <div className="inputs_heading border-stroke dark:border-strokedark">
                       <h3 className="font-medium text-black dark:text-white">
                         Top Images
                       </h3>
@@ -937,7 +1059,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                   </div>
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                    <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                    <div className="inputs_heading border-stroke dark:border-strokedark">
                       <h3 className="font-medium text-black dark:text-white">
                         subCategoryImage
                       </h3>
@@ -994,7 +1116,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                   </div>
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                    <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                    <div className="inputs_heading border-stroke dark:border-strokedark">
                       <h3 className="font-medium text-black dark:text-white">
                         Banner Image
                       </h3>
@@ -1049,7 +1171,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                   </div>
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                    <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                    <div className="inputs_heading border-stroke dark:border-strokedark">
                       <h3 className="font-medium text-black dark:text-white">
                         privarcy Image
                       </h3>
@@ -1106,7 +1228,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                   </div>
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                    <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                    <div className="inputs_heading border-stroke dark:border-strokedark">
                       <h3 className="font-medium text-black dark:text-white">
                         Product Images
                       </h3>

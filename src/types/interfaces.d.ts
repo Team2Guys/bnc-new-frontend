@@ -499,3 +499,12 @@ export interface ThumbnailProps {
 export interface SliderWithGoTo extends Slider {
   slickGoTo: (index: number, dontAnimate?: boolean) => void;
 }
+
+export interface ConfirmModalProps {
+  title: string;
+  content: string;
+  okText?: string;
+  cancelText?: string;
+  onOk?: () => void | Promise<void>;
+  onCancel?: () => void;
+}

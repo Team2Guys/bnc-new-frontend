@@ -2,23 +2,20 @@
 
 import Loader from 'components/Loader/Loader';
 import { Field } from 'formik';
-import React, { SetStateAction } from 'react'
 import { IoMdArrowRoundBack } from 'react-icons/io';
 
 interface ITOPBUTTON {
-    setMenuType: React.Dispatch<SetStateAction<string>>;
-    loading?: Boolean
+    loading?: Boolean;
+    handleBack: any
 }
 
 
-function TopButton({ setMenuType, loading }: ITOPBUTTON) {
+function TopButton({ loading, handleBack }: ITOPBUTTON) {
     return (
         <div className='flex items-center justify-between'>
             <p
                 className="dashboard_primary_button"
-                onClick={() => {
-                    setMenuType('Categories');
-                }}
+                onClick={handleBack}
             >
                 <IoMdArrowRoundBack /> Back
             </p>
