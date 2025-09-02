@@ -386,20 +386,6 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     const isFormChanged = normalizedInitial !== normalizedCurrent;
     console.log(values, current , 'isFormChanged')
 
-    console.log({
-      isPosterChanged,
-      isBannerChanged,
-      isPrivacyChanged,
-      isVideosChanged,
-      isTopImagesChanged,
-      isColorsImagesChanged,
-      isSubCategoryImagesChanged,
-      isImagesUrlChanged,
-      isCategoryChanged,
-      isSubCategoryChanged,
-      isFormChanged
-    }, 'isFormChanged')
-
     return (
       isPosterChanged ||
       isBannerChanged ||
