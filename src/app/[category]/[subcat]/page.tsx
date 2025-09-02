@@ -17,7 +17,7 @@ export async function generateMetadata({params}: meta_props): Promise<Metadata> 
   const product = (await params).subcat;
   const category = (await params).category;
 
-  const response =  await  getSignleProd(product, category)
+  const response =  await  getSignleProd(product, category,{Meta_Title:true, Meta_description:true, customUrl:true, title:true, posterImage:true})
 
 
   const  filteredProduct = response.product
