@@ -229,10 +229,10 @@ const FormLayout = ({
               <TopButton handleBack={handleBack} loading={loading} />
 
               <div className="flex justify-center ">
-                <div className="flex flex-col gap-9 w-2/5 dark:border-strokedark dark:bg-lightdark rounded-md">
-                  <div className="rounded-md  bg-white   dark:bg-lightdark p-4">
+                <div className="flex flex-col gap-9 w-full dark:border-strokedark dark:bg-lightdark rounded-md">
+                  <div className="rounded-md gap-3 flex justify-evenly dark:bg-lightdark mb-3 mt-3">
                     <div className="rounded-sm border border-stroke bg-white  dark:border-strokedark dark:bg-lightdark">
-                      <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                      <div className="inputs_heading border-stroke dark:border-strokedark ">
                         <h3 className="font-medium text-black dark:text-white">
                           Add Category Images
                         </h3>
@@ -279,61 +279,57 @@ const FormLayout = ({
                       ) : (
                         <Imageupload setposterimageUrl={setposterimageUrl} />
                       )}
-                    </div>
-                    <div className="rounded-sm border border-stroke bg-white  dark:border-strokedark dark:bg-lightdark">
-                      <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
-                        <h3 className="font-medium text-black dark:text-white">
-                          Banner Images for Blogs
-                        </h3>
-                      </div>
-                      {bannerImageUrl && bannerImageUrl.length > 0 ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
-                          {bannerImageUrl.map((item: any, index) => {
-                            return (
-                              <div key={index}>
-                                <div className="relative group rounded-lg overflow-hidden shadow-md bg-white  transform transition-transform duration-300 hover:scale-105">
-                                  <div className="absolute top-1 right-1 invisible group-hover:visible errorColor bg-white rounded-full">
-                                    <RxCross2
-                                      className="cursor-pointer text-red-500 hover:text-red-700"
-                                      size={17}
-                                      onClick={() => {
-                                        ImageRemoveHandler(
-                                          item.public_id,
-                                          setBannerImageUrl,
-                                        );
-                                      }}
+                      <div className='border p-2'>
+                      <div className="rounded-sm border border-stroke dark:border-strokedark dark:bg-lightdark ">
+                        <div className="inputs_heading border-stroke dark:border-strokedark">
+                          <h3 className="font-medium text-black dark:text-white">
+                            Banner Images for Blogs
+                          </h3>
+                        </div>
+                        {bannerImageUrl && bannerImageUrl.length > 0 ? (
+                          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+                            {bannerImageUrl.map((item: any, index) => {
+                              return (
+                                <div key={index}>
+                                  <div className="relative group rounded-lg overflow-hidden shadow-md bg-white  transform transition-transform duration-300 hover:scale-105">
+                                    <div className="absolute top-1 right-1 invisible group-hover:visible errorColor bg-white rounded-full">
+                                      <RxCross2
+                                        className="cursor-pointer text-red-500 hover:text-red-700"
+                                        size={17}
+                                        onClick={() => {
+                                          ImageRemoveHandler(
+                                            item.public_id,
+                                            setBannerImageUrl,
+                                          );
+                                        }}
+                                      />
+                                    </div>
+                                    <Image
+                                      key={index}
+                                      className="object-cover w-full h-full"
+                                      width={300}
+                                      height={200}
+                                      src={item.imageUrl}
+                                      alt={`productImage-${index}`}
                                     />
                                   </div>
-                                  <Image
-                                    key={index}
-                                    className="object-cover w-full h-full"
-                                    width={300}
-                                    height={200}
-                                    src={item.imageUrl}
-                                    alt={`productImage-${index}`}
+                                  <ImageTextInput
+                                    name="altText"
+                                    value={item.altText}
+                                    placeholder="Alt text"
+                                    onChange={(val) => handlealtTextbannerImageUrl(index, val)}
+                                    className='border rounded p-2 focus:outline-none mt-1'
                                   />
+
                                 </div>
-                                <ImageTextInput
-                                  name="altText"
-                                  value={item.altText}
-                                  placeholder="Alt text"
-                                  onChange={(val) => handlealtTextbannerImageUrl(index, val)}
-                                  className='border rounded p-2 focus:outline-none mt-1'
-                                />
-
-                              </div>
-                            );
-                          })}
-                        </div>
-                      ) : (
-                        <Imageupload setposterimageUrl={setBannerImageUrl} />
-                      )}
-                    </div>
-
-                    <div className="flex flex-col space-y-3 mt-2">
-
-
-                      <div className=' flex flex-wrap md:flex-nowrap gap-4'>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <Imageupload setposterimageUrl={setBannerImageUrl} />
+                        )}
+                      </div>
+                      <div className=' flex flex-wrap md:flex-nowrap gap-4 mt-3'>
                         <Input
                           label="Category Title"
                           name="name"
@@ -345,11 +341,13 @@ const FormLayout = ({
                           placeholder="Top Heading"
                         />
                       </div>
-                      <Input
+                      <div className='mt-2'>
+                        <Input
                         label="Product Page Heading"
                         name="productpageHeading"
                         placeholder="Product Page Heading"
                       />
+                      </div>
 
                       <div className='flex gap-4 mt-2 flex-wrap md:flex-nowrap'>
                         <Input
@@ -373,10 +371,15 @@ const FormLayout = ({
                         name="faqHeading"
                         placeholder="Faq Heading"
                       />
+                    </div>
+                    </div>
+                    
 
+
+                    <div className="flex flex-col space-y-3 mt-2 p-2 w-1/2 border">
 
                       <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                        <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                        <div className="inputs_heading border-stroke dark:border-strokedark">
                           <h3 className="font-medium text-black dark:text-white">
                             FAQS
                           </h3>
@@ -427,7 +430,7 @@ const FormLayout = ({
                       </div>
 
                       <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                        <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                        <div className="inputs_heading border-stroke dark:border-strokedark">
                           <h3 className="font-medium text-black dark:text-white">
                             heading checks
                           </h3>
@@ -510,7 +513,7 @@ const FormLayout = ({
               </div>
 
 
-              <div className="flex justify-center">
+              <div className="flex justify-start">
                 <button
                   type="submit"
                   className="dashboard_primary_button "

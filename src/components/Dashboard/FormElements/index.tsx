@@ -466,11 +466,11 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
             <Form onSubmit={formik.handleSubmit}>
               <TopButton handleBack={handleBack} loading={loading} />
 
-              <div className="grid grid-cols-1 gap-9 sm:grid-cols-2 mt-1">
-                <div className="flex flex-col gap-9 dark:border-strokedark dark:bg-lightdark">
-                  <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark p-6">
+              <div className="grid grid-cols-1 gap-9 sm:grid-cols-2 mt-3">
+                <div className="flex flex-col gap-9 dark:border-strokedark dark:bg-lightdark ">
+                  <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark p-2 ">
                     <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                      <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                      <div className="inputs_heading border-stroke dark:border-strokedark">
                         <h3 className="font-medium text-black dark:text-white">
                           Poster Image
                         </h3>
@@ -695,7 +695,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
 
                 <div className="flex flex-col gap-5">
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                    <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                    <div className="inputs_heading border-stroke dark:border-strokedark">
                       <h3 className="font-medium text-black dark:text-white">
                         FAQS
                       </h3>
@@ -717,7 +717,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                     <button
                                       type="button"
                                       onClick={() => remove(index)}
-                                      className="ml-2 errorColor"
+                                      className="crose_button"
                                     >
                                       <RxCross2
                                         className="errorColor"
@@ -741,7 +741,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                   </div>
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                    <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                    <div className="inputs_heading border-stroke dark:border-strokedark">
                       <h3 className="font-medium text-black dark:text-white">
                         Privacy Section
                       </h3>
@@ -763,7 +763,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                     <button
                                       type="button"
                                       onClick={() => remove(index)}
-                                      className="ml-2 errorColor"
+                                      className="crose_button"
                                     >
                                       <RxCross2
                                         className="errorColor"
@@ -798,36 +798,40 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                         Descripton(On Subcategory Page)
                       </h3>
                     </div>
-                    <div className="flex flex-col gap-5 p-4">
+                    <div className="flex flex-col gap-5 p-2">
                       <FieldArray name="modelDetails">
                         {({ push, remove }) => (
-                          <div className="flex flex-col gap-2">
-                            {formik.values?.modelDetails?.map(
-                              (model: any, index: any) => (
-                                <>
-                                  <div
-                                    key={index}
-                                    className="flex flex-col gap-3"
-                                  >
-                                    <Input name={`modelDetails[${index}].name`} placeholder="Sub Category Name" />
-                                    <Input name={`modelDetails[${index}].detail`} placeholder="Description on Sub Category" textarea />
+                          <div className="flex flex-col gap-2 ">
+                            <div className='shadow-md p-2 rounded relative'>
+                              {formik.values?.modelDetails?.map(
+                                (model: any, index: any) => (
+                                  <>
+                                    <div
+                                      key={index}
+                                      className="flex flex-col gap-3 pt-3 "
+                                    >
+                                      <Input name={`modelDetails[${index}].name`} placeholder="Sub Category Name" />
+                                      <Input name={`modelDetails[${index}].detail`} placeholder="Description on Sub Category" textarea />
 
 
-                                  </div>
+                                    </div>
 
-                                  <button
-                                    type="button"
-                                    onClick={() => remove(index)}
-                                    className="ml-2 errorColor border-blue-500 px-4 py-2 "
-                                  >
-                                    <RxCross2
-                                      className="errorColor"
-                                      size={25}
-                                    />
-                                  </button>
-                                </>
-                              ),
-                            )}
+                                    <div className='relative'>
+                                      <button
+                                        type="button"
+                                        onClick={() => remove(index)}
+                                        className="crose_button border-blue-500  absolute -top-48 -right-3 z-10"
+                                      >
+                                        <RxCross2
+                                          className="errorColor"
+                                          size={25}
+                                        />
+                                      </button>
+                                    </div>
+                                  </>
+                                ),
+                              )}
+                            </div>
 
                             <button
                               type="button"
@@ -843,7 +847,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                   </div>
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                    <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                    <div className="inputs_heading border-stroke dark:border-strokedark">
                       <h3 className="font-medium">colors</h3>
                     </div>
                     <div className="flex flex-col py-4 px-4">
@@ -863,7 +867,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                     <button
                                       type="button"
                                       onClick={() => remove(index)}
-                                      className=" errorColor "
+                                      className="crose_button"
                                     >
                                       <RxCross2
                                         className="errorColor"
@@ -932,7 +936,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                     )}
                   </div>
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                    <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                    <div className="inputs_heading border-stroke dark:border-strokedark">
                       <h3 className="font-medium text-black dark:text-white">
                         Colors Images
                       </h3>
@@ -993,7 +997,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                   </div>
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                    <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                    <div className="inputs_heading border-stroke dark:border-strokedark">
                       <h3 className="font-medium text-black dark:text-white">
                         Top Images
                       </h3>
@@ -1055,7 +1059,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                   </div>
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                    <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                    <div className="inputs_heading border-stroke dark:border-strokedark">
                       <h3 className="font-medium text-black dark:text-white">
                         subCategoryImage
                       </h3>
@@ -1112,7 +1116,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                   </div>
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                    <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                    <div className="inputs_heading border-stroke dark:border-strokedark">
                       <h3 className="font-medium text-black dark:text-white">
                         Banner Image
                       </h3>
@@ -1167,7 +1171,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                   </div>
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                    <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                    <div className="inputs_heading border-stroke dark:border-strokedark">
                       <h3 className="font-medium text-black dark:text-white">
                         privarcy Image
                       </h3>
@@ -1224,7 +1228,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                   </div>
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                    <div className="border-b border-stroke py-4 px-4 dark:border-strokedark">
+                    <div className="inputs_heading border-stroke dark:border-strokedark">
                       <h3 className="font-medium text-black dark:text-white">
                         Product Images
                       </h3>
