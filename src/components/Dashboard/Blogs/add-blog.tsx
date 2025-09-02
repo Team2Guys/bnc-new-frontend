@@ -1,6 +1,6 @@
 'use client';
 import { Form, Formik } from 'formik';
-import React, { useState, SetStateAction, Fragment, useRef } from 'react';
+import React, { useState, SetStateAction, Fragment, useRef, useEffect } from 'react';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { ICategory } from 'types/types';
@@ -18,6 +18,7 @@ import MyEditor from './custom-editor';
 import Cookies from 'js-cookie';
 import revalidateTag from 'components/ServerActons/ServerAction';
 import Select from 'components/ui/Select';
+import { useConfirmModal } from 'components/ui/useConfirmModal';
 
 interface IAddBlogs {
   setMenuType: React.Dispatch<SetStateAction<string>>;
@@ -54,6 +55,8 @@ const AddBlogs = ({
     Meta_description: EditInitialValues?.Meta_description || '',
     redirectionUrl: EditInitialValues?.redirectionUrl || '',
   };
+  const { confirm, modalNode } = useConfirmModal();
+  const formikValuesRef = useRef(blogInitialValues);
 
   const {
     data: categories,
@@ -95,7 +98,7 @@ const AddBlogs = ({
       );
     },
 
-  
+
     onSuccess: () => {
       if (typingTimeout.current) {
         clearTimeout(typingTimeout.current);
@@ -133,18 +136,86 @@ const AddBlogs = ({
     }, 5000);
   };
 
+  const hasUnsavedChanges = (): boolean => {
+
+    let isPosterChanged: boolean;
+
+    if (EditInitialValues) {
+      const oldPoster = EditInitialValues?.posterImage;
+      const newPoster = posterimageUrl?.[0];
+
+      isPosterChanged =
+        !oldPoster || !newPoster
+          ? oldPoster !== newPoster
+          : oldPoster.public_id !== newPoster.public_id ||
+          (oldPoster.altText ?? '') !== (newPoster.altText ?? '');
+
+    } else {
+      // Adding mode (initially no images)
+      isPosterChanged = !!posterimageUrl && posterimageUrl.length > 0;
+    }
+
+    const isFormChanged = JSON.stringify(blogInitialValues) !== JSON.stringify(formikValuesRef.current);
+    return (isPosterChanged || isFormChanged)
+  };
+
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (hasUnsavedChanges()) {
+        e.preventDefault();
+        e.returnValue = '';
+        return '';
+      }
+    };
+
+    const handlePopState = () => {
+      if (hasUnsavedChanges()) {
+        window.history.pushState(null, '', window.location.href);
+        confirm({
+          title: "Unsaved Changes",
+          content: "You have unsaved changes. Do you want to discard them?",
+          okText: "Discard Changes",
+          cancelText: "Cancel",
+          onOk: () => { setMenuType("Blogs"), setEditBlog(null) },
+        });
+      } else { setMenuType("All Blogs"); setEditBlog(null) }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('popstate', handlePopState);
+    window.history.pushState(null, '', window.location.href);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [blogInitialValues, posterimageUrl]);
+
+  const handleBack = () => {
+    if (hasUnsavedChanges()) {
+      confirm({
+        title: "Unsaved Changes",
+        content: "You have unsaved changes. Do you want to discard them?",
+        okText: "Discard Changes",
+        cancelText: "Cancel",
+        onOk: () => { setMenuType("Blogs"), setEditBlog(null) },
+      });
+      return;
+    }
+    if (typingTimeout.current) {
+      clearTimeout(typingTimeout.current);
+    }
+
+    setMenuType('Blogs');
+    setEditBlog(null);
+  };
+
   return (
     <Fragment>
+      {modalNode}
       <p
         className="text-lg font-black mb-4 flex items-center justify-center gap-2  w-fit p-2 cursor-pointer text-black  dark:text-white"
-        onClick={() => {
-          if (typingTimeout.current) {
-            clearTimeout(typingTimeout.current);
-          }
-          setMenuType('Blogs');
-          setEditBlog(null);
-        }}
-      >
+        onClick={handleBack}>
         <IoMdArrowRoundBack /> Back{' '}
       </p>
 
@@ -184,107 +255,109 @@ const AddBlogs = ({
             revalidateTag('blogs');
           }}
         >
-          {({ setFieldValue, values }) => (
-            <Form className="mt-10  bg-white rounded-md p-2 space-y-5 dark:bg-lightdark md:p-4">
-              <div className="rounded-sm border border-stroke bg-white dark:bg-lightdark">
-                <div className="border-b border-stroke py-4 px-4 ">
-                  <h3 className="font-medium text-black dark:text-white">
-                    Add Thumbnail
-                  </h3>
-                </div>
+          {({ setFieldValue, values }) => {
+            formikValuesRef.current = values;
+            return (
+              <Form className="mt-10  bg-white rounded-md p-2 space-y-5 dark:bg-lightdark md:p-4">
+                <div className="rounded-sm border border-stroke bg-white dark:bg-lightdark">
+                  <div className="border-b border-stroke py-4 px-4 ">
+                    <h3 className="font-medium text-black dark:text-white">
+                      Add Thumbnail
+                    </h3>
+                  </div>
 
-                {posterimageUrl && posterimageUrl?.length > 0 ? (
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
-                    {posterimageUrl.map((item: any, index) => (
-                      <div
-                        className="relative group rounded-lg overflow-hidden shadow-md bg-white dark:bg-lightdark transform transition-transform duration-300 hover:scale-105 w-[100px]"
-                        key={index}
-                      >
-                        <div className="absolute top-1 right-1 invisible group-hover:visible text-red-600 bg-white dark:bg-lightdark rounded-full">
-                          <RxCross2
-                            className="cursor-pointer text-red-600-500 hover:text-red-600-700"
-                            size={17}
-                            onClick={() => {
-                              ImageRemoveHandler(
-                                item.public_id,
-                                setposterimageUrl,
-                              );
-                            }}
+                  {posterimageUrl && posterimageUrl?.length > 0 ? (
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
+                      {posterimageUrl.map((item: any, index) => (
+                        <div
+                          className="relative group rounded-lg overflow-hidden shadow-md bg-white dark:bg-lightdark transform transition-transform duration-300 hover:scale-105 w-[100px]"
+                          key={index}
+                        >
+                          <div className="absolute top-1 right-1 invisible group-hover:visible text-red-600 bg-white dark:bg-lightdark rounded-full">
+                            <RxCross2
+                              className="cursor-pointer text-red-600-500 hover:text-red-600-700"
+                              size={17}
+                              onClick={() => {
+                                ImageRemoveHandler(
+                                  item.public_id,
+                                  setposterimageUrl,
+                                );
+                              }}
+                            />
+                          </div>
+                          <Image
+                            className="object-cover w-[100px]"
+                            width={120}
+                            height={120}
+                            src={item?.imageUrl}
+                            alt={`productImage-${index}`}
                           />
                         </div>
-                        <Image
-                          className="object-cover w-[100px]"
-                          width={120}
-                          height={120}
-                          src={item?.imageUrl}
-                          alt={`productImage-${index}`}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <Imageupload setposterimageUrl={setposterimageUrl} />
-                )}
-              </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <Imageupload setposterimageUrl={setposterimageUrl} />
+                  )}
+                </div>
 
-              <div>
-                <label className=" block text-16 font-medium text-black dark:text-white">
-                  Title
-                </label>
-                <input
-                  type="text"
-                  name="title"
-                  placeholder="Title"
-                  value={values.title}
-                  className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent placeholder:text-lightgrey px-5 py-3 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                  onChange={(e) => {
-                    setFieldValue('title', e.target.value);
-                    handleDebouncedMutation({
-                      ...values,
-                      title: e.target.value,
-                    });
-                  }}
-                />
-              </div>
-              <div>
-                <label className=" block text-16 font-medium text-black dark:text-white">
-                  Blog Url
-                </label>
-                <input
-                  type="text"
-                  name="redirectionUrl"
-                  placeholder="Blog Url"
-                  value={values.redirectionUrl}
-                  className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent placeholder:text-lightgrey px-5 py-3 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                  onChange={(e) => {
-                    setFieldValue('redirectionUrl', e.target.value);
-                    handleDebouncedMutation({
-                      ...values,
-                      redirectionUrl: e.target.value,
-                    });
-                  }}
-                />
-              </div>
-
-              <div>
-                <label className=" block text-16 font-medium text-black dark:text-white">
-                  Category
-                </label>
-                {categoryLoading ? (
-                  <Loader color="#fff" />
-                ) : (
-                  <Select
-                    name="category"
-                    className="w-full mt-1 detail-option border rounded-md"
-                    defaultValue={values.category || ""}
-                    onChange={(value) => {
-                      setFieldValue("category", value);
-                      handleDebouncedMutation({ ...values, category: value });
+                <div>
+                  <label className=" block text-16 font-medium text-black dark:text-white">
+                    Title
+                  </label>
+                  <input
+                    type="text"
+                    name="title"
+                    placeholder="Title"
+                    value={values.title}
+                    className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent placeholder:text-lightgrey px-5 py-3 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    onChange={(e) => {
+                      setFieldValue('title', e.target.value);
+                      handleDebouncedMutation({
+                        ...values,
+                        title: e.target.value,
+                      });
                     }}
-                    options={[
-                      ...(categories?.length
-                        ? [
-                            { value: "", label: "Select Category",  disabled: true },
+                  />
+                </div>
+                <div>
+                  <label className=" block text-16 font-medium text-black dark:text-white">
+                    Blog Url
+                  </label>
+                  <input
+                    type="text"
+                    name="redirectionUrl"
+                    placeholder="Blog Url"
+                    value={values.redirectionUrl}
+                    className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent placeholder:text-lightgrey px-5 py-3 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    onChange={(e) => {
+                      setFieldValue('redirectionUrl', e.target.value);
+                      handleDebouncedMutation({
+                        ...values,
+                        redirectionUrl: e.target.value,
+                      });
+                    }}
+                  />
+                </div>
+
+                <div>
+                  <label className=" block text-16 font-medium text-black dark:text-white">
+                    Category
+                  </label>
+                  {categoryLoading ? (
+                    <Loader color="#fff" />
+                  ) : (
+                    <Select
+                      name="category"
+                      className="w-full mt-1 detail-option border rounded-md"
+                      defaultValue={values.category || ""}
+                      onChange={(value) => {
+                        setFieldValue("category", value);
+                        handleDebouncedMutation({ ...values, category: value });
+                      }}
+                      options={[
+                        ...(categories?.length
+                          ? [
+                            { value: "", label: "Select Category", disabled: true },
                             ...categories
                               .filter((category) => category.title !== "Commercial")
                               .map((category) => ({
@@ -292,123 +365,124 @@ const AddBlogs = ({
                                 label: category.title,
                               })),
                           ]
-                        : [{ value: "", label: categoryError ? "Error loading categories" : "No categories found" }]),
-                    ]}
-                  />
-                )}
-                {categoryError && (
-                  <div className="text-red-500">{categoryError.message}</div>
-                )}
-              </div>
-              <MyEditor
-                setFieldValue={setFieldValue}
-                values={values}
-                addBlogMutation={addBlogMutation}
-                handleDebouncedMutation={handleDebouncedMutation}
-              />
+                          : [{ value: "", label: categoryError ? "Error loading categories" : "No categories found" }]),
+                      ]}
+                    />
+                  )}
+                  {categoryError && (
+                    <div className="text-red-500">{categoryError.message}</div>
+                  )}
+                </div>
+                <MyEditor
+                  setFieldValue={setFieldValue}
+                  values={values}
+                  addBlogMutation={addBlogMutation}
+                  handleDebouncedMutation={handleDebouncedMutation}
+                />
 
-              <div>
-                <label className=" block text-16 font-medium text-black dark:text-white">
-                  Meta Title
-                </label>
-                <input
-                  type="text"
-                  name="Meta_Title"
-                  placeholder="Enter Meta Title"
-                  value={values.Meta_Title}
-                  className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent placeholder:text-lightgrey px-5 py-3 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                  onChange={(e) => {
-                    setFieldValue('Meta_Title', e.target.value);
-                    handleDebouncedMutation({
-                      ...values,
-                      Meta_Title: e.target.value,
-                    });
-                  }}
-                />
-              </div>
-              <div>
-                <label className=" block text-16 font-medium text-black dark:text-white">
-                  Canonical Tag
-                </label>
-                <input
-                  type="text"
-                  name="Canonical_Tag"
-                  placeholder="Enter Canonical Tag"
-                  value={values.Canonical_Tag}
-                  className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent placeholder:text-lightgrey px-5 py-3 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                  onChange={(e) => {
-                    setFieldValue('Canonical_Tag', e.target.value);
-                    handleDebouncedMutation({
-                      ...values,
-                      Canonical_Tag: e.target.value,
-                    });
-                  }}
-                />
-              </div>
-              <div>
-                <label className=" block text-16 font-medium text-black dark:text-white">
-                  Meta Description
-                </label>
-                <textarea
-                  name="Meta_description"
-                  placeholder="Enter Meta Description"
-                  value={values.Meta_description}
-                  className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent placeholder:text-lightgrey px-5 py-3 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                  onChange={(e) => {
-                    setFieldValue('Meta_description', e.target.value);
-                    handleDebouncedMutation({
-                      ...values,
-                      Meta_description: e.target.value,
-                    });
-                  }}
-                />
-              </div>
-              <div>
-                <label className=" block text-16 font-medium text-black dark:text-white">
-                  Image ALT text
-                </label>
-                <input
-                  type="text"
-                  name="Images_Alt_Text"
-                  placeholder="Enter Image ALT text"
-                  value={values.Images_Alt_Text}
-                  className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent placeholder:text-lightgrey px-5 py-3 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                  onChange={(e) => {
-                    setFieldValue('Images_Alt_Text', e.target.value);
-                    handleDebouncedMutation({
-                      ...values,
-                      Images_Alt_Text: e.target.value,
-                    });
-                  }}
-                />
-              </div>
-              <div className="flex justify-between">
-                <Button
-                  disabled={addBlogMutation.isPending ? true : false}
-                  type="submit"
-                  className="text-white bg-yellow-500  px-4 py-2 font-semibold rounded-md"
-                >
-                  {addBlogMutation.isPending && !isPublish ? (
-                    <Loader color="#fff" />
-                  ) : (
-                    'Draft'
-                  )}
-                </Button>
-                <Button
-                  disabled={addBlogMutation.isPending ? true : false}
-                  type="submit"
-                  className="text-white bg-green-600 px-4 py-2 font-semibold rounded-md"
-                  onClick={() => setIsPublish(true)}
-                >
-                  {addBlogMutation.isPending && isPublish ? (
-                    <Loader color="#fff" />
-                  ) : (
-                    'PUBLISH'
-                  )}
-                </Button>
-              </div>
-            </Form>
-          )}
+                <div>
+                  <label className=" block text-16 font-medium text-black dark:text-white">
+                    Meta Title
+                  </label>
+                  <input
+                    type="text"
+                    name="Meta_Title"
+                    placeholder="Enter Meta Title"
+                    value={values.Meta_Title}
+                    className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent placeholder:text-lightgrey px-5 py-3 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    onChange={(e) => {
+                      setFieldValue('Meta_Title', e.target.value);
+                      handleDebouncedMutation({
+                        ...values,
+                        Meta_Title: e.target.value,
+                      });
+                    }}
+                  />
+                </div>
+                <div>
+                  <label className=" block text-16 font-medium text-black dark:text-white">
+                    Canonical Tag
+                  </label>
+                  <input
+                    type="text"
+                    name="Canonical_Tag"
+                    placeholder="Enter Canonical Tag"
+                    value={values.Canonical_Tag}
+                    className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent placeholder:text-lightgrey px-5 py-3 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    onChange={(e) => {
+                      setFieldValue('Canonical_Tag', e.target.value);
+                      handleDebouncedMutation({
+                        ...values,
+                        Canonical_Tag: e.target.value,
+                      });
+                    }}
+                  />
+                </div>
+                <div>
+                  <label className=" block text-16 font-medium text-black dark:text-white">
+                    Meta Description
+                  </label>
+                  <textarea
+                    name="Meta_description"
+                    placeholder="Enter Meta Description"
+                    value={values.Meta_description}
+                    className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent placeholder:text-lightgrey px-5 py-3 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    onChange={(e) => {
+                      setFieldValue('Meta_description', e.target.value);
+                      handleDebouncedMutation({
+                        ...values,
+                        Meta_description: e.target.value,
+                      });
+                    }}
+                  />
+                </div>
+                <div>
+                  <label className=" block text-16 font-medium text-black dark:text-white">
+                    Image ALT text
+                  </label>
+                  <input
+                    type="text"
+                    name="Images_Alt_Text"
+                    placeholder="Enter Image ALT text"
+                    value={values.Images_Alt_Text}
+                    className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent placeholder:text-lightgrey px-5 py-3 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    onChange={(e) => {
+                      setFieldValue('Images_Alt_Text', e.target.value);
+                      handleDebouncedMutation({
+                        ...values,
+                        Images_Alt_Text: e.target.value,
+                      });
+                    }}
+                  />
+                </div>
+                <div className="flex justify-between">
+                  <Button
+                    disabled={addBlogMutation.isPending ? true : false}
+                    type="submit"
+                    className="text-white bg-yellow-500  px-4 py-2 font-semibold rounded-md"
+                  >
+                    {addBlogMutation.isPending && !isPublish ? (
+                      <Loader color="#fff" />
+                    ) : (
+                      'Draft'
+                    )}
+                  </Button>
+                  <Button
+                    disabled={addBlogMutation.isPending ? true : false}
+                    type="submit"
+                    className="text-white bg-green-600 px-4 py-2 font-semibold rounded-md"
+                    onClick={() => setIsPublish(true)}
+                  >
+                    {addBlogMutation.isPending && isPublish ? (
+                      <Loader color="#fff" />
+                    ) : (
+                      'PUBLISH'
+                    )}
+                  </Button>
+                </div>
+              </Form>
+            )
+          }}
         </Formik>
       )}
     </Fragment>

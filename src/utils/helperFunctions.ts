@@ -173,3 +173,28 @@ export const getRandomColor = () => {
   return `hsl(${Math.floor(Math.random() * 360)}, 70%, 60%)`;
 
 }
+
+
+export function compareImages(a?: any, b?: any): boolean {
+  if (!a && !b) return false;
+  if (!a || !b) return true;
+
+  return (
+    a.public_id !== b.public_id ||
+    (a.altText ?? "") !== (b.altText ?? "")
+  );
+}
+
+export function compareImageArray(a?: any[], b?: any[]): boolean {
+  if (!a && !b) return false;
+  if (!a || !b) return true;
+  if (a.length !== b.length) return true;
+
+  for (let i = 0; i < a.length; i++) {
+    if (compareImages(a[i], b[i])) {
+      return true;
+    }
+  }
+
+  return false;
+}

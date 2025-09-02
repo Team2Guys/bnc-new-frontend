@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import Image from 'next/image';
 import axios from 'axios';
@@ -21,6 +21,7 @@ import Checkbox from 'components/ui/Checkbox';
 import Input from 'components/ui/Input';
 import ImageTextInput from 'components/Common/regularInputs/ImageTextInput';
 import { editCategoryProps, editSubCategoryNameType } from 'types/category';
+import { useConfirmModal } from 'components/ui/useConfirmModal';
 
 
 const FormLayout = ({
@@ -54,8 +55,9 @@ const FormLayout = ({
   const [bannerImageUrl, setBannerImageUrl] = useState<any[] | undefined>(editCategory && editCategory.bannerImage && [editCategory.bannerImage],
   );
   const [loading, setloading] = useState<boolean>(false);
-  const [editCategoryName, setEditCategoryName] = useState<editSubCategoryNameType | null | undefined>(CategoryName);
-
+  const [editCategoryName, setEditCategoryName] = useState<editSubCategoryNameType | ISUBCATEGORY | undefined>(CategoryName ? CategoryName : subcategoryInitialValues);
+  const { confirm, modalNode } = useConfirmModal();
+  const formikValuesRef = useRef<editSubCategoryNameType | ISUBCATEGORY>(editCategoryName ? editCategoryName : subcategoryInitialValues);
   const onSubmit = async (values: ISUBCATEGORY, { resetForm }: any) => {
     console.log(values, 'values');
     if (values.CategoryId === undefined) {
@@ -95,7 +97,7 @@ const FormLayout = ({
         });
         setMenuType('Categories');
         seteditCategory(null);
-        setEditCategoryName(null);
+        setEditCategoryName(undefined);
       } else {
         response = await axios.post(url, newValue, {
           headers: {
@@ -141,8 +143,90 @@ const FormLayout = ({
     setBannerImageUrl(updatedImagesUrl);
   };
 
+  const hasUnsavedChanges = (): boolean => {
+
+    let isPosterChanged: boolean;
+    let isBannerChanged: boolean;
+
+    if (editCategory) {
+      const oldPoster = editCategory?.posterImage;
+      const newPoster = posterimageUrl?.[0];
+
+      isPosterChanged =
+        !oldPoster || !newPoster
+          ? oldPoster !== newPoster
+          : oldPoster.public_id !== newPoster.public_id ||
+          (oldPoster.altText ?? '') !== (newPoster.altText ?? '');
+
+      const oldBanner = editCategory?.bannerImage;
+      const newBanner = bannerImageUrl ? bannerImageUrl?.[0] : null;
+      console.log(newBanner)
+      isBannerChanged =
+        !oldBanner || !newBanner
+          ? oldBanner !== newBanner
+          : oldBanner.public_id !== newBanner.public_id ||
+          (oldBanner.altText ?? '') !== (newBanner.altText ?? '');
+    } else {
+      // Adding mode (initially no images)
+      isPosterChanged = !!posterimageUrl && posterimageUrl.length > 0;
+      isBannerChanged = !!bannerImageUrl && bannerImageUrl.length > 0;
+    }
+
+    const isFormChanged = JSON.stringify(editCategoryName) !== JSON.stringify(formikValuesRef.current);
+    console.log(editCategory.bannerImage, 'formikValuesRef.current', bannerImageUrl, isBannerChanged)
+    return (isPosterChanged || isBannerChanged || isFormChanged)
+  };
+
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (hasUnsavedChanges()) {
+        e.preventDefault();
+        e.returnValue = '';
+        return '';
+      }
+    };
+
+    const handlePopState = () => {
+      if (hasUnsavedChanges()) {
+        window.history.pushState(null, '', window.location.href);
+        confirm({
+          title: "Unsaved Changes",
+          content: "You have unsaved changes. Do you want to discard them?",
+          okText: "Discard Changes",
+          cancelText: "Cancel",
+          onOk: () => setMenuType("Categories"),
+        });
+      } else { setMenuType("All Categories"); }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('popstate', handlePopState);
+    window.history.pushState(null, '', window.location.href);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [editCategoryName, posterimageUrl]);
+
+  const handleBack = () => {
+    if (hasUnsavedChanges()) {
+      confirm({
+        title: "Unsaved Changes",
+        content: "You have unsaved changes. Do you want to discard them?",
+        okText: "Discard Changes",
+        cancelText: "Cancel",
+        onOk: () => setMenuType("Categories"),
+      });
+      return;
+    }
+
+    setMenuType("Categories");
+  };
+
   return (
     <>
+      {modalNode}
       <Formik
         initialValues={
           editCategoryName ? editCategoryName : subcategoryInitialValues
@@ -151,9 +235,10 @@ const FormLayout = ({
         onSubmit={onSubmit}
       >
         {(formik) => {
+          formikValuesRef.current = formik.values;
           return (
             <Form onSubmit={formik.handleSubmit}>
-              <TopButton setMenuType={setMenuType} loading={loading} />
+              <TopButton handleBack={handleBack} loading={loading} />
               <div className="flex justify-center  dark:text-white  ">
                 <div className="flex flex-col gap-9 w-2/5   dark:text-white  dark:border-white">
                   <div className="rounded-md e bg-white  dark:bg-lightdark dark:bg-black dark:text-white  te p-3">

@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Imageupload from 'components/ImageUpload/Imageupload';
 import { RxCross2 } from 'react-icons/rx';
 import Image from 'next/image';
@@ -19,6 +19,7 @@ import TopButton from 'components/Dashboard/Layouts/TopButton';
 import Input from 'components/ui/Input';
 import ImageTextInput from 'components/Common/regularInputs/ImageTextInput';
 import { editCategoryNameType, editCategoryProps } from 'types/category';
+import { useConfirmModal } from 'components/ui/useConfirmModal';
 
 const FormLayout = ({
   seteditCategory,
@@ -27,7 +28,7 @@ const FormLayout = ({
 }: editCategoryProps) => {
   const admin_token = Cookies.get('2guysAdminToken');
   const super_admin_token = Cookies.get('superAdminToken');
-
+  const { confirm, modalNode } = useConfirmModal();
   let token = admin_token ? admin_token : super_admin_token;
 
   let CategoryName = editCategory && editCategory.title ? { name: editCategory.title, description: editCategory.description } : null;
@@ -60,6 +61,7 @@ const FormLayout = ({
     status: editCategory?.status || 'PUBLISHED',
 
   });
+  const formikValuesRef = useRef<editCategoryNameType | Category>(editCategoryName ? editCategoryName : categoryInitialValues);
 
   const onSubmit = async (values: Category, { resetForm }: any) => {
 
@@ -130,10 +132,89 @@ const FormLayout = ({
     );
     setBannerImageUrl(updatedImagesUrl);
   };
+
+  const hasUnsavedChanges = (): boolean => {
+
+    let isPosterChanged: boolean;
+    let isBannerChanged: boolean;
+
+    if (editCategory) {
+      const oldPoster = editCategory?.posterImage;
+      const newPoster = posterimageUrl?.[0];
+
+      isPosterChanged =
+        !oldPoster || !newPoster
+          ? oldPoster !== newPoster
+          : oldPoster.public_id !== newPoster.public_id ||
+          (oldPoster.altText ?? '') !== (newPoster.altText ?? '');
+
+      const oldBanner = editCategory?.bannerImage;
+      const newBanner = bannerImageUrl?.[0];
+
+      isBannerChanged =
+        !oldBanner || !newBanner
+          ? oldBanner !== newBanner
+          : oldBanner.public_id !== newBanner.public_id ||
+          (oldBanner.altText ?? '') !== (newBanner.altText ?? '');
+    } else {
+      // Adding mode (initially no images)
+      isPosterChanged = !!posterimageUrl && posterimageUrl.length > 0;
+      isBannerChanged = !!bannerImageUrl && bannerImageUrl.length > 0;
+    }
+
+    const isFormChanged = JSON.stringify(editCategoryName) !== JSON.stringify(formikValuesRef.current);
+    return (isPosterChanged || isBannerChanged || isFormChanged)
+  };
+
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (hasUnsavedChanges()) {
+        e.preventDefault();
+        e.returnValue = '';
+        return '';
+      }
+    };
+
+    const handlePopState = () => {
+      if (hasUnsavedChanges()) {
+        window.history.pushState(null, '', window.location.href);
+        confirm({
+          title: "Unsaved Changes",
+          content: "You have unsaved changes. Do you want to discard them?",
+          okText: "Discard Changes",
+          cancelText: "Cancel",
+          onOk: () => setMenuType("Categories"),
+        });
+      } else { setMenuType("All Categories"); }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('popstate', handlePopState);
+    window.history.pushState(null, '', window.location.href);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [editCategoryName, posterimageUrl]);
+
+  const handleBack = () => {
+    if (hasUnsavedChanges()) {
+      confirm({
+        title: "Unsaved Changes",
+        content: "You have unsaved changes. Do you want to discard them?",
+        okText: "Discard Changes",
+        cancelText: "Cancel",
+        onOk: () => setMenuType("Categories"),
+      });
+      return;
+    }
+
+    setMenuType("Categories");
+  };
   return (
     <>
-
-
+      {modalNode}
       <Formik
         initialValues={
           editCategoryName ? editCategoryName : categoryInitialValues
@@ -142,9 +223,10 @@ const FormLayout = ({
         onSubmit={onSubmit}
       >
         {(formik) => {
+          formikValuesRef.current = formik.values;
           return (
             <Form onSubmit={formik.handleSubmit}>
-              <TopButton setMenuType={setMenuType} loading={loading} />
+              <TopButton handleBack={handleBack} loading={loading} />
 
               <div className="flex justify-center ">
                 <div className="flex flex-col gap-9 w-2/5 dark:border-strokedark dark:bg-lightdark rounded-md">
