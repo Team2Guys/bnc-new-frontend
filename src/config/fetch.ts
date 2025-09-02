@@ -29,7 +29,7 @@ export const fetchProducts = async () => {
 
 
 };
-export const getSignleProd = async (Productname: string, category: string) => {
+export const getSignleProd = async (Productname: string, category: string,   fields?: Record<string, boolean> ) => {
   try {
 
     console.log(Productname, category)
@@ -40,7 +40,7 @@ export const getSignleProd = async (Productname: string, category: string) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({Productname, category}),
+        body: JSON.stringify({Productname, category, fields}),
         next: { tags: ["products"] },
       }
     );

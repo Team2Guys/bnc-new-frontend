@@ -1,13 +1,13 @@
 
 import DefaultLayout from 'components/Dashboard/Layouts/DefaultLayout';
-import { fetchProducts } from 'config/fetch';
+import { fetchCategories, fetchProducts, fetchSubCategories } from 'config/fetch';
 import dynamic from 'next/dynamic'
 import { IProduct } from 'types/types';
 const Product = dynamic(() => import('./Product'))
 
 
 const Produc_page = async () => {
-  let products = await fetchProducts()
+  const [ products , categories ,subcategories ] = await Promise.all([fetchProducts(), fetchCategories(), fetchSubCategories()])
 
 
   const FilteredProd = products.sort((a:IProduct, b:IProduct) => {
@@ -19,7 +19,7 @@ const Produc_page = async () => {
 
   return (
     <DefaultLayout>
-      <Product products={FilteredProd} />
+      <Product products={FilteredProd} categories={categories} subcategories={subcategories} />
     </DefaultLayout>
   );
 };

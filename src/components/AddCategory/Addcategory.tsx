@@ -1,5 +1,5 @@
 'use client';
-import React, { SetStateAction, useLayoutEffect, useState } from 'react';
+import { useState } from 'react';
 import Imageupload from 'components/ImageUpload/Imageupload';
 import { RxCross2 } from 'react-icons/rx';
 import Image from 'next/image';
@@ -15,41 +15,10 @@ import Loader from 'components/Loader/Loader';
 import { Category } from 'types/interfaces';
 import Cookies from 'js-cookie';
 import revalidateTag from 'components/ServerActons/ServerAction';
-import { Status } from 'types/types';
 import TopButton from 'components/Dashboard/Layouts/TopButton';
 import Input from 'components/ui/Input';
 import ImageTextInput from 'components/Common/regularInputs/ImageTextInput';
-interface editCategoryNameType {
-  name: string;
-  description: string;
-  Meta_Title?: string;
-  Meta_description?: string;
-  Canonical_Tag?: string;
-  Images_Alt_Text?: string;
-
-  topHeading?: string;
-
-  headingchecks: any[]
-  breakcrum?: string;
-
-  productpageHeading?: string;
-  faqHeadingS?: string;
-
-  faqs: any[]
-  faqHeading?: string
-
-  productCustomUrl?: string
-  categoryCustomUrl?: string
-  status: Status;
-
-}
-
-interface editCategoryProps {
-  seteditCategory: any;
-  editCategory: any;
-  setMenuType: React.Dispatch<SetStateAction<string>>;
-
-}
+import { editCategoryNameType, editCategoryProps } from 'types/category';
 
 const FormLayout = ({
   seteditCategory,
@@ -146,43 +115,6 @@ const FormLayout = ({
   };
 
   console.log(setEditCategoryName, 'setEditCategoryName');
-
-  useLayoutEffect(() => {
-    const CategoryHandler = async () => {
-      try {
-        if (!editCategory) return;
-
-        const {
-          posterImage,
-          imageUrls,
-          _id,
-          createdAt,
-          updatedAt,
-          CategoryId,
-          SubCategoryId,
-          __v,
-          ...EditInitialProductValues
-        } = editCategory as any;
-
-        console.log(
-          editCategory,
-          posterImage,
-          imageUrls,
-          _id,
-          createdAt,
-          updatedAt,
-          CategoryId,
-          SubCategoryId,
-          __v,
-          ...EditInitialProductValues,
-        );
-      } catch (err) {
-        console.log(err, 'err');
-      }
-    };
-
-    CategoryHandler();
-  }, []);
 
   const handlealtTextposterimageUrl = (index: number, newaltText: string) => {
     //@ts-expect-error

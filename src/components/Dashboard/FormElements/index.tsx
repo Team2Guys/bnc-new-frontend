@@ -16,9 +16,7 @@ import {
   AddProductvalidationSchema,
   AddproductsinitialValues,
 } from 'data/data';
-import { useQuery } from '@tanstack/react-query';
 import { ICategory } from 'types/types';
-import { fetchCategories, fetchSubCategories } from 'config/fetch';
 import showToast from 'components/Toaster/Toaster';
 import revalidateTag from 'components/ServerActons/ServerAction';
 import TopButton from '../Layouts/TopButton';
@@ -30,6 +28,8 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
   EditInitialValues,
   setselecteMenu,
   setEditProduct,
+  categoriesList,
+  subCategoriesList
 }) => {
   const [imagesUrl, setImagesUrl] = useState<any[]>([]);
   const [videos, setvideos] = useState<any[]>(
@@ -324,19 +324,6 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     setImageUrl(updatedImagesUrl);
   };
 
-
-  const { data: categoriesList = [], isLoading } = useQuery<ICategory[], Error>(
-    {
-      queryKey: ['categories'],
-      queryFn: fetchCategories,
-    },
-  );
-
-  const { data: subCategoriesList = [] } = useQuery<ICategory[], Error>({
-    queryKey: ['subcategories'],
-    queryFn: fetchSubCategories,
-  });
-
   const [filteredSubcategories, setFilteredSubcategories] = useState<ICategory[]>([]);
 
   useEffect(() => {
@@ -503,7 +490,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                         <label className="mb-3 block py-4 px-2 text-sm font-medium text-black dark:text-white">
                           Select Parent Category (at least one)
                         </label>
-                        {isLoading ? (
+                        {categoriesList.length === 0 ? (
                           <div>
                             <Loader color="#fff" />
                           </div>

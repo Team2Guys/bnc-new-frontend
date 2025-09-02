@@ -1,10 +1,10 @@
 'use client';
-import React, { SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import Image from 'next/image';
 import axios from 'axios';
 import { Formik, Form } from 'formik';
-import { ICategory, ISUBCATEGORY } from 'types/types';
+import { ISUBCATEGORY } from 'types/types';
 import showToast from 'components/Toaster/Toaster';
 import Imageupload from 'components/ImageUpload/Imageupload';
 import {
@@ -20,25 +20,8 @@ import TopButton from 'components/Dashboard/Layouts/TopButton';
 import Checkbox from 'components/ui/Checkbox';
 import Input from 'components/ui/Input';
 import ImageTextInput from 'components/Common/regularInputs/ImageTextInput';
+import { editCategoryProps, editSubCategoryNameType } from 'types/category';
 
-interface editCategoryNameType {
-  title: string;
-  description: string;
-  short_description?: string;
-  CategoryId: undefined;
-  Meta_Title?: string;
-  Meta_description?: string;
-  Canonical_Tag?: string;
-  Images_Alt_Text?: string;
-  customUrl?:string
-}
-
-interface editCategoryProps {
-  seteditCategory: any;
-  editCategory: any;
-  setMenuType: React.Dispatch<SetStateAction<string>>;
-  categoriesList?: ICategory[] | undefined;
-}
 
 const FormLayout = ({
   seteditCategory,
@@ -71,7 +54,7 @@ const FormLayout = ({
   const [bannerImageUrl, setBannerImageUrl] = useState<any[] | undefined>(editCategory && editCategory.bannerImage && [editCategory.bannerImage],
   );
   const [loading, setloading] = useState<boolean>(false);
-  const [editCategoryName, setEditCategoryName] = useState<editCategoryNameType | null | undefined>(CategoryName);
+  const [editCategoryName, setEditCategoryName] = useState<editSubCategoryNameType | null | undefined>(CategoryName);
 
   const onSubmit = async (values: ISUBCATEGORY, { resetForm }: any) => {
     console.log(values, 'values');
