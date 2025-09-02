@@ -171,11 +171,11 @@ const FormLayout = ({
           return (
             <Form onSubmit={formik.handleSubmit}>
               <TopButton setMenuType={setMenuType} loading={loading} />
-              <div className="flex justify-center  dark:text-white  ">
-                <div className="flex flex-col gap-9 w-2/5   dark:text-white  dark:border-white">
-                  <div className="rounded-md e bg-white  dark:bg-lightdark dark:bg-black dark:text-white  te p-3">
-                    <div className="rounded-sm border border-stroke bg-white  dark:border-strokedark dark:bg-lightdark">
-                      <div className="border-b border-stroke py-4 px-2 dark:bg-lightdark dark:bg-black dark:text-white  dark:border-white">
+              <div className="flex justify-center  dark:text-white">
+                <div className="flex flex-col gap-9 w-full dark:text-white  dark:border-white">
+                  <div className="rounded-md flex gap-3 w-full bg-white  dark:bg-lightdark dark:bg-black dark:text-white mt-3">
+                    <div className="rounded-sm border border-stroke bg-white  dark:border-strokedark dark:bg-lightdark w-full">
+                      <div className="inputs_heading border-stroke dark:border-strokedark ">
                         <h3 className="font-medium text-black dark:text-white">
                           Add Sub Category Images
                         </h3>
@@ -184,7 +184,7 @@ const FormLayout = ({
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4  dark:bg-black dark:text-white dark:bg-lightdark dark:border-white">
                           {posterimageUrl.map((item: any, index) => {
                             return (
-                              <div key={index}>
+                              <div key={index} className='w-full'>
                                 <div className="relative group rounded-lg overflow-hidden shadow-md bg-white transform transition-transform duration-300 hover:scale-105">
                                   <div className="absolute top-1 right-1 invisible group-hover:visible text-red bg-white rounded-full ">
                                     <RxCross2
@@ -222,9 +222,9 @@ const FormLayout = ({
                       ) : (
                         <Imageupload setposterimageUrl={setposterimageUrl} />
                       )}
-                    </div>
-                    <div className="rounded-sm border border-stroke bg-white  dark:border-strokedark dark:bg-lightdark">
-                      <div className="border-b border-stroke py-4 px-2 dark:bg-lightdark dark:bg-black dark:text-white  dark:border-white">
+
+                       <div className="rounded-sm border border-stroke bg-white  dark:border-strokedark dark:bg-lightdark w-full">
+                      <div className="inputs_heading border-stroke dark:border-strokedark ">
                         <h3 className="font-medium text-black dark:text-white">
                           Banner Image
                         </h3>
@@ -270,10 +270,8 @@ const FormLayout = ({
                       ) : (
                         <Imageupload setposterimageUrl={setBannerImageUrl} />
                       )}
-                    </div>
-
-                    <div className="flex flex-col gap-5 mt-2">
-                      <Input
+                      <div className='p-2'>
+                           <Input
                         label="Sub Category Name"
                         name="title"
                         placeholder="Sub Category Name"
@@ -294,12 +292,20 @@ const FormLayout = ({
                         placeholder="Short Description"
                         textarea
                       />
+                      </div>
+                    </div>
+                    </div>
+                   
+
+                    <div className="flex flex-col gap-5 mt-2 border w-full p-2">                 
 
                       <div>
-                        <label className="mb-3 primary-label">
-                          Select Parent Category (atleat one)
-                        </label>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="inputs_heading border-stroke dark:border-strokedark">
+                         <h3 className="font-medium text-black dark:text-white">
+                            Select Parent Category (atleat one)
+                          </h3>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
                           {categoriesList?.map((category, index) => (
                             <Checkbox
                               key={index}
@@ -348,7 +354,7 @@ const FormLayout = ({
                   </div>
                 </div>
               </div>
-              <div className="flex justify-center">
+              <div className="flex justify-start">
                 <button
                   type="submit"
                   className="mt-4 px-8 py-2 bg-primary text-white rounded"

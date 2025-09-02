@@ -7,8 +7,7 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import revalidateTag from 'components/ServerActons/ServerAction';
 import showToast from 'components/Toaster/Toaster';
 import { createRedirectUrl, updateRedirectUrl } from 'config/fetch';
-
-
+import Breadcrumb from 'components/Dashboard/Breadcrumbs/Breadcrumb';
 
 interface IVIEWREDIRECTURLS {
   setRedirectUrls: React.Dispatch<SetStateAction<RedirectUrls | undefined>>
@@ -16,114 +15,126 @@ interface IVIEWREDIRECTURLS {
   RedirectUrls: RedirectUrls | undefined
 }
 
-
 function AddRedirecturl({ RedirectUrls, setRedirectUrls, setselecteMenu }: IVIEWREDIRECTURLS) {
   const [loading, setloading] = useState(false)
-
 
   const [formDate, setformDate] = useState<initialRedirectUrls>({
     redirectedUrl: RedirectUrls?.redirectedUrl || "",
     url: RedirectUrls?.url || "",
-
   })
 
   useEffect(() => {
-
     setformDate({
-    redirectedUrl: RedirectUrls?.redirectedUrl || "",
-    url: RedirectUrls?.url || "",
-
+      redirectedUrl: RedirectUrls?.redirectedUrl || "",
+      url: RedirectUrls?.url || "",
     })
   }, [RedirectUrls])
 
-
   const validationSchema = Yup.object({
     url: Yup.string().required('Url is required'),
-    redirectedUrl: Yup.string().required('redirectedUrl is required'),
+    redirectedUrl: Yup.string().required('Redirected URL is required'),
   });
 
   const apiHandler = async (values: initialRedirectUrls) => {
     try {
       setloading(true)
       if (RedirectUrls?.redirectedUrl) {
-        // UPDATE existing review
-        await updateRedirectUrl({id:RedirectUrls.id, ...values})
-
-          ;
+        await updateRedirectUrl({ id: RedirectUrls.id, ...values })
       } else {
-        // ADD new review
         await createRedirectUrl(values);
       }
 
       setRedirectUrls(undefined);
       setselecteMenu('All RedirectUrls')
       revalidateTag("RedirectUrls")
-      // eslint-disable-next-line
     } catch (error: any) {
       const graphQLError = error?.graphQLErrors?.[0]?.message;
       showToast('error', graphQLError || "Internal server error")
     } finally {
       setloading(false)
     }
-
-
   };
-
-
 
   const handleSubmit = async (values: initialRedirectUrls, { resetForm }: FormikHelpers<initialRedirectUrls>) => {
     await apiHandler(values)
     resetForm()
-
   };
 
   return (
-    <>
-      <Formik enableReinitialize initialValues={formDate}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {() => (
+    <div className="p-6">
+      {/* Breadcrumb */}
 
+      <Breadcrumb pageName={"Add Redirect URL"} />
 
-          <Form className="space-y-4 max-w-2xl mx-auto">
-            <div className='flex border items-center justify-between'>
-
-              <p
-                className="dashboard_primary_button"
-                onClick={() => {
-                  setselecteMenu('All RedirectUrls');
-                }}
-              >
-                <IoMdArrowRoundBack /> Back
-              </p>
-              <button type="submit" className="dashboard_primary_button">
-                {loading ? "loading..." : 'Submit'}
+      <div className="bg-white dark:bg-gray-900 shadow-xl rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+        <Formik
+          enableReinitialize
+          initialValues={formDate}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {() => (
+            <Form className="space-y-6">
+              {/* Top Header */}
+              <div className="flex items-center justify-between pb-4 border-b border-gray-200 dark:border-gray-700">
+                <button
+                  type="button"
+                  className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-200 transition"
+                  onClick={() => setselecteMenu('All RedirectUrls')}
+                >
+                  <IoMdArrowRoundBack /> Back
                 </button>
-                    </div>
+                <button
+                  type="submit"
+                  className="px-6 py-2 bg-primary text-white rounded-lg shadow hover:bg-primary/90 transition"
+                >
+                  {loading ? "Loading..." : "Submit"}
+                </button>
+              </div>
 
-            <div>
-              <label htmlFor="name">Url Endpoint </label>
-              <Field name="url" type="text" className="primary-input" />
-              <ErrorMessage name="url" component="div" className="text-red-500 text-sm" />
-            </div>
+              {/* URL Input */}
+              <div>
+                <label htmlFor="url" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                  Url Endpoint
+                </label>
+                <Field
+                  name="url"
+                  type="text"
+                  placeholder="/example-endpoint"
+                  className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 placeholder-gray-400 dark:placeholder-gray-500 px-4 py-3 text-gray-900 dark:text-white outline-none transition focus:border-secondary dark:focus:border-secondary focus:ring-2 focus:ring-secondary dark:focus:secondary" />
+                <ErrorMessage name="url" component="div" className="text-red-500 text-sm mt-1" />
+              </div>
 
-            <div>
-              <label htmlFor="redirectedUrl">Redirect Pages</label>
-              <Field name="redirectedUrl" type="text" className="primary-input" />
-              <ErrorMessage name="redirectedUrl" component="div" className="text-red-500 text-sm" />
-            </div>
-            <button type="submit" disabled={loading} className="dashboard_primary_button">
-              {(loading) ? "Submitting" : "Submit"}
-            </button>
-          </Form>
-        )}
-      </Formik>
-    </>
+              {/* Redirected URL Input */}
+              <div>
+                <label htmlFor="redirectedUrl" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                  Redirect Pages
+                </label>
+                <Field
+                  name="redirectedUrl"
+                  type="text"
+                  placeholder="https://example.com"
+                  className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 placeholder-gray-400 dark:placeholder-gray-500 px-4 py-3 text-gray-900 dark:text-white outline-none transition focus:border-secondary dark:focus:border-secondary focus:ring-2 focus:ring-secondary dark:focus:secondary"
+                />
+                <ErrorMessage name="redirectedUrl" component="div" className="text-red-500 text-sm mt-1" />
+              </div>
 
+              {/* Bottom Button */}
+              <div className="pt-4 flex justify-end">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="px-6 py-2 bg-primary text-white rounded-lg shadow hover:bg-primary/90 transition disabled:opacity-50"
+                >
+                  {loading ? "Submitting..." : "Submit"}
+                </button>
+              </div>
+            </Form>
+          )}
+        </Formik>
+      </div>
+    </div>
   )
 }
 
 export default AddRedirecturl
-
-
