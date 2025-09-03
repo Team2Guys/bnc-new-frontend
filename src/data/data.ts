@@ -301,23 +301,6 @@ export const BreakCrum_conent_pages = [
   },
 ];
 
-
-
-
-export const BooKNowbannerContent = [
-  {
-    url: '/blinds/roller-blinds',
-    content:
-      'Ready to get started? Call our sales team at <a href="tel:(04) 252 2025"" style="text-decoration:underline">(04) 252 2025</a> for a free quote or fill out the online form, and we&apos;ll be in touch',
-  },
-  {
-    url: '/blinds/panel-blinds',
-    content:
-      'Need expert advice? We can make <a href="/made-to-measure-blinds/""" style="text-decoration: underline">custom window blinds</a> for you. Feel free to give us a call at (04) 252 2025, or fill out our online contact form, and we&apos;ll walk you through everything.',
-  },
-];
-
-
 export const footerData = [
   {
     key: "1",
@@ -328,15 +311,6 @@ export const footerData = [
       'Sunscreen Roller Blinds',
       'Day/Night Blinds',
       'Blackout Roman blinds',
-      // 'Roller Blinds',
-      // 'Roman Blinds',
-      // 'Vertical Blinds',
-      // 'Wooden Blinds',
-      // 'Aluminium Blinds',
-      // 'Zebra Blinds',
-      // 'Zipline Outdoor Blinds',
-      // 'Panel Blinds',
-      // 'Blackout Blinds',
     ],
   },
   {
@@ -348,15 +322,6 @@ export const footerData = [
       'Sheer Triple Pinch Pleat curtains',
       'Sheer Ripple Fold Curtains',
       'Eyelet Curtains',
-      // 'Triple Pinch Pleat Curtains',
-      // 'Double Pinch Pleat Curtains',
-      // 'Pencil Pleat Curtains',
-      // 'Ripplefold/Wave Curtains',
-      // 'Eyelet Curtains',
-      // 'Tab Top Curtains',
-      // 'Blackout Curtains',
-      // 'Sheer Curtains',
-      // 'Textured Curtains',
     ],
   },
   {
@@ -365,28 +330,11 @@ export const footerData = [
     items: [
       'Full Height Shutters',
       'Tracked Shutters',
-      // 'Bi-Fold Shutters',
       'Special Shape Shutters',
       'Solid Panel Shutters',
       'Tier On Tier Shutters',
-      // 'Cafe Style Shutters',
-      // 'Bay Window Shutters',
-      // 'Outdoor Shutters',
-
-      // 'Black Shutters',
     ],
   },
-// {
-//     key: "4",
-//     title: 'Commercial',
-//     items: [
-//       'Pergola Window Coverings',
-//       'Outdoor Window Coverings',
-//       'Fire Retardant',
-//       'Washable',
-//       'Antimicrobial',
-//     ],
-//   },
 
 ];
 

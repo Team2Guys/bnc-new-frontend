@@ -36,7 +36,6 @@
         "swiper": "^11.2.1",
         "tailwind-merge": "^2.4.0",
         "tailwindcss-animate": "^1.0.7",
-        "tinymce": "^7.6.0",
         "typescript-eslint": "^8.18.0",
         "yup": "^1.6.1",
       },

@@ -180,14 +180,6 @@ export const predefinedPaths = {
   'balcony-blinds-and-curtains': '/balcony-blinds-and-curtains',
 };
 
-export const ChangedProductUrl = (title: string): string => {
-  let products = urls.find((url: { productName: string; Url: string }) => {
-    return url.Url === title;
-  });
-  let flag = products ? generateSlug(products.productName) : title;
-  return flag;
-};
-
 export const ChangedProductUrl_handler = (title: string): string => {
 
   let products = urls.find((url: { productName: string; Url: string }) => {
@@ -203,11 +195,4 @@ export const blogCategoryUrl = [
   { url: '/blog/shutters', name: 'Shutters' },
 ];
 
-
-export const desiredProductTitles = [
-  'Sunscreen/Transparent Blinds',
-  'Blackout Roller Blinds',
-  'Dimout Blinds',
-  'Translucent Blinds',
-];
 
