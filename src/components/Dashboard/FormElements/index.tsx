@@ -357,7 +357,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     const isColorsImagesChanged = compareImageArray(EditInitialValues.colorsImages ?? [], colorsImages);
     const isSubCategoryImagesChanged = compareImageArray(EditInitialValues.subCategoryImage ?? [], subCategoryImage);
     const isImagesUrlChanged = compareImageArray(EditInitialValues.imageUrls ?? [], imagesUrl);
-    const isCategoryChanged = EditInitialValues.category !== selectedCategoryIds[0];
+    const isCategoryChanged = (EditInitialValues.category ? EditInitialValues.category : undefined) !== selectedCategoryIds[0];
     const isSubCategoryChanged = (() => {
       const a = (EditInitialValues.subCategory?.map((sc: any) => sc.id) ?? []).sort();
       const b = selectedSubcategoryIds.slice().sort();
@@ -371,7 +371,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
       return false;
     })();
     // eslint-disable-next-line
-    const { videos: _v1, topImages: _t1, colorsImages: _c1, subCategoryImage: _s1, imageUrls: _i1, posterImage: _p1, privarcyImage: _pr1, bannerImage: _b1, subCategory: _sub1, ...newInitialValues } = productInitialValue;
+    const { videos: _v1, topImages: _t1, colorsImages: _c1, subCategoryImage: _s1, imageUrls: _i1, posterImage: _p1, privarcyImage: _pr1, bannerImage: _b1, subCategory: _sub1, category: _category , ...newInitialValues } = productInitialValue;
     // eslint-disable-next-line
     const { videos: _v2, topImages: _t2, colorsImages: _c2, subCategoryImage: _s2, imageUrls: _i2, posterImage: _p2, privarcyImage: _pr2, bannerImage: _b2, subCategory: _sub2, category, ...current } = formikValuesRef.current as any;
 
@@ -384,6 +384,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     const normalizedCurrent = JSON.stringify(current);
 
     const isFormChanged = normalizedInitial !== normalizedCurrent;
+    console.log(values, current , 'isFormChanged')
 
     return (
       isPosterChanged ||
@@ -462,6 +463,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
         onSubmit={onSubmit}
       >
         {(formik) => {
+          formikValuesRef.current = formik.values;
           return (
             <Form onSubmit={formik.handleSubmit}>
               <TopButton handleBack={handleBack} loading={loading} />
