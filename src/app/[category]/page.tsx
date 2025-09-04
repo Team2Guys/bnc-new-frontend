@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import { links } from "data/header_links";
 import Script from "next/script";
 import { notFound } from "next/navigation";
-import { getSubcategoriesByCategory } from "utils/helperFunctions";
+// import { getSubcategoriesByCategory } from "utils/helperFunctions";
 import Product from "components/Product";
 type Props = {
   params: Promise<{ category: string }>
@@ -70,11 +70,13 @@ const Products = async ({ params }: Props) => {
   }
   const matchingLink: any = links.find((link) => slug.includes(link.href.replace(/^\//, '')),);
 
-  const subcategoryList = getSubcategoriesByCategory(category.title);
-  const lowerSubcategorySet = new Set(subcategoryList.map((sub) => sub.toLowerCase().trim()));
+  // const subcategoryList = getSubcategoriesByCategory(category.title);
+  // const lowerSubcategorySet = new Set(subcategoryList.map((sub) => sub.toLowerCase().trim()));
 
   const filteredProducts = category.products?.filter((product: IProduct) =>
-    product.status === "PUBLISHED" && lowerSubcategorySet.has(product.title.toLowerCase()?.trim())
+    product.status === "PUBLISHED" 
+  
+  // && lowerSubcategorySet.has(product.title.toLowerCase()?.trim())
   );
 
   return (

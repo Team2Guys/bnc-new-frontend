@@ -172,7 +172,7 @@ export const predefinedPaths = {
   'offices-blinds': '/commercial',
   theatre: '/curtains/stage-and-theatre-curtains',
   hospitals: '/curtains/hospital-curtains',
-  'hotels-restaurants': '/hotels-restaurants-blinds-curtains',
+  // 'hotels-restaurants': '/hotels-restaurants-blinds-curtains',
   offices: '/commercial',
   gym: '/curtains/gym-curtains',
   skylight: '/blinds/skylight-blinds-dubai',

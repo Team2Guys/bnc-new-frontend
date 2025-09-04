@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo } from "react";
 import Slider from "react-slick";
 import Image from "next/image";
 import { IProduct } from "types/types";

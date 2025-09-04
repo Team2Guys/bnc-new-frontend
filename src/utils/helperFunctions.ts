@@ -108,10 +108,10 @@ export const getPath = (product: IProduct) => {
   const slug = (product.customUrl || generateSlug(product.title)) as string
   const basePath = product.href && parent ? `${window.origin}/${product.href}` : `/${slug}`;
 
-  const path = predefinedPaths[slug as keyof typeof predefinedPaths] || (slug === 'hotels-restaurants-blinds-curtains' ? basePath :
+  const path = predefinedPaths[slug as keyof typeof predefinedPaths] ? basePath :
     `/${parent}${['dimout-roller-blinds', 'sunscreen-roller-blinds', 'blackout-roller-blinds'].includes(slug) ? 'roller-blinds'
       : ''
-    }/${slug}`);
+    }/${slug}`;
 
 
   return path + "/";

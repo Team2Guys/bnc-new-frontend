@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import PathnameWrapper from 'components/Pathcomponent/PathnameWrapper';
 import 'app/globals.css';
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <Providers>

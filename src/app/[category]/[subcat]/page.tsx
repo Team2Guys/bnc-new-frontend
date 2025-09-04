@@ -21,6 +21,7 @@ export async function generateMetadata({params}: meta_props): Promise<Metadata> 
 
 
   const  filteredProduct = response.product
+
   if (!filteredProduct) {
     return notFound();
   }
@@ -69,6 +70,8 @@ const Page = async ({ params }: meta_props) => {
   const category = (await params).category;
   const response =  await  getSignleProd(product, category)
   const  filteredProduct = response.product
+
+    console.log(response, "filteredProduct")
 
   if (!filteredProduct) {
     return notFound();
