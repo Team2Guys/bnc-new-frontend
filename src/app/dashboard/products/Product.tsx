@@ -44,7 +44,7 @@ const Products = ({ products, categories , subcategories }: PRODUCTS_PROPS) => {
     starRating: editProduct && editProduct.starRating,
     reviews: editProduct && editProduct.starRating,
     posterImage: editProduct && editProduct.posterImage,
-    hoverImage: editProduct && editProduct.hoverImage,
+    // hoverImage: editProduct && editProduct.hoverImage,
     imageUrls: editProduct && editProduct.imageUrls,
     short_description: editProduct && editProduct.short_description,
     heading: editProduct && editProduct.heading,
@@ -60,7 +60,7 @@ const Products = ({ products, categories , subcategories }: PRODUCTS_PROPS) => {
     customUrl: editProduct && editProduct.customUrl,
     colorsImages : editProduct && editProduct.colorsImages,
     status : editProduct && editProduct.status,
-    updatedAt : editProduct && editProduct?.updatedAt,
+    // updatedAt : editProduct && editProduct?.updatedAt,
 
         faqs: editProduct && editProduct.faqs || [],
         videos: editProduct && editProduct.videos,
