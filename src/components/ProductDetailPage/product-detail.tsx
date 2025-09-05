@@ -69,7 +69,7 @@ const ProductDetail = ({ title, filterProduct }: IProductDetail) => {
       </div>
       <Testimonial />
       <Faqs Data={filterProduct} />
-      <Information privacySectoin={filterProduct.privacySectoin} privarcyImage={filterProduct?.privarcyImage} />
+      <Information privacySectoin={filterProduct.privacySectoin} privarcyImage={filterProduct?.privarcyImage || filterProduct.imageUrls[0]} />
     </div>
   )
 }
