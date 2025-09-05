@@ -7,6 +7,7 @@ import Script from "next/script";
 import { notFound } from "next/navigation";
 // import { getSubcategoriesByCategory } from "utils/helperFunctions";
 import Product from "components/Product";
+import { subcategoryMap } from "utils/helperFunctions";
 type Props = {
   params: Promise<{ category: string }>
 }
@@ -70,14 +71,21 @@ const Products = async ({ params }: Props) => {
   }
   const matchingLink: any = links.find((link) => slug.includes(link.href.replace(/^\//, '')),);
 
-  // const subcategoryList = getSubcategoriesByCategory(category.title);
-  // const lowerSubcategorySet = new Set(subcategoryList.map((sub) => sub.toLowerCase().trim()));
 
-  const filteredProducts = category.products?.filter((product: IProduct) =>
-    product.status === "PUBLISHED" 
-  
-  // && lowerSubcategorySet.has(product.title.toLowerCase()?.trim())
-  );
+
+  const filteredProducts = category.products?.filter((product: IProduct) => product.status === "PUBLISHED")?.sort((a: IProduct, b: IProduct) => {
+    // Pick the correct order list based on category
+    const orderArray = subcategoryMap[category.title?.toLowerCase()];
+
+    if (!orderArray) return 0;
+
+    const indexA = orderArray.findIndex(item => item.toLowerCase().trim() === a.title?.toLowerCase().trim());
+    const indexB = orderArray.findIndex(item => item.toLowerCase().trim() === b.title?.toLowerCase().trim());
+    return (indexA === -1 ? orderArray.length : indexA) - (indexB === -1 ? orderArray.length : indexB);
+  });
+
+
+console.log(filteredProducts, "filteredProducts")
 
   return (
     <>

@@ -559,36 +559,6 @@ export const whyChooseData: WhyChooseItem[] = [
   },
 ];
 
-export const blindsSubcategories = [
-  "Blackout Roller Blinds",
-  "Sunscreen Roller Blinds",
-  "Day/night Blinds",
-  "Wood Venetian Blinds",
-  "Blackout Roman Blinds",
-  "Vertical Blinds",
-  "Motorised Blinds",
-  "Sheer Roman blinds",
-  "Roller Blinds",
-  "Roman Blinds",
-  "Skylight Blinds",
-  "Patricia Blinds",
-  "Honeycomb Blinds",
-  "Panel Blinds",
-  "Aluminium Blinds",
-  "Sheer Horizon Blinds",
-  "Translucent Blinds",
-  "Zebra Blinds",
-  "Printed Blinds",
-  "Living Room Blinds",
-  "Kitchen Blinds",
-  "Dining Room Blinds",
-  "Staircase Blinds",
-  "Bathroom Blinds",
-  "Kids Room Blinds",
-  "Bedroom Blinds",
-  "Balcony Blinds Dubai",
-  "Zipline Outdoor Blinds",
-];
 
 export const subCategoryUrls = [
   { url: 'blackout-blinds', name: 'Blackout/Private Blinds' },
@@ -622,6 +592,39 @@ export const shuttersSubcategories = [
   "White Shutters",
   "Off White Shutters"
 ];
+
+
+export const blindsSubcategories = [
+  "Blackout Roller Blinds",
+  "Sunscreen Roller Blinds",
+  "Day/night Blinds",
+  "Wood Venetian Blinds",
+  "Blackout Roman Blinds",
+  "Vertical Blinds",
+  "Motorised Blinds",
+  "Sheer Roman blinds",
+  "Roller Blinds",
+  "Roman Blinds",
+  "Skylight Blinds",
+  "Patricia Blinds",
+  "Honeycomb Blinds",
+  "Panel Blinds",
+  "Aluminium Blinds",
+  "Sheer Horizon Blinds",
+  "Translucent Blinds",
+  "Zebra Blinds",
+  "Printed Blinds",
+  "Living Room Blinds",
+  "Kitchen Blinds",
+  "Dining Room Blinds",
+  "Staircase Blinds",
+  "Bathroom Blinds",
+  "Kids Room Blinds",
+  "Bedroom Blinds",
+  "Balcony Blinds Dubai",
+  "Zipline Outdoor Blinds",
+];
+
 
 export const curtainsSubcategories = [
   "Blackout Triple Pinch Pleat Curtains",

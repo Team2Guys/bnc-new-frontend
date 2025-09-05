@@ -109,7 +109,7 @@ export const getPath = (product: IProduct) => {
   const basePath = product.href && parent ? `${window.origin}/${product.href}` : `/${slug}`;
 
   const path = predefinedPaths[slug as keyof typeof predefinedPaths] ? basePath :
-    `/${parent}${['dimout-roller-blinds', 'sunscreen-roller-blinds', 'blackout-roller-blinds'].includes(slug) ? 'roller-blinds'
+    `/${parent}${['dimout-roller-blinds', 'sunscreen-roller-blinds', 'blackout-roller-blinds'].includes(slug) ? '/roller-blinds'
       : ''
     }/${slug}`;
 
@@ -118,7 +118,7 @@ export const getPath = (product: IProduct) => {
 };
 
 
-const subcategoryMap: Record<string, string[]> = {
+export const subcategoryMap: Record<string, string[]> = {
   blinds: blindsSubcategories,
   shutters: shuttersSubcategories,
   curtains: curtainsSubcategories,

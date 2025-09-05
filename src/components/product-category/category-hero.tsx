@@ -4,7 +4,7 @@ import GreenCircle from 'components/svg/green-circle';
 import Image from 'next/image'
 import { CategoryProps } from 'types/product';
 
-const CategoryHero = ({ Data }: CategoryProps) => {
+const CategoryHero = ({ Data }: Omit<CategoryProps, "Products"> ) => {
  if (!Data) {
     return null;
   }

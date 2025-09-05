@@ -20,11 +20,14 @@ export async function generateMetadata({params}: meta_props): Promise<Metadata> 
   const response =  await  getSignleProd(product, category,{Meta_Title:true, Meta_description:true, customUrl:true, title:true, posterImage:true})
 
 
-  const  filteredProduct = response.product
+  const  filteredProduct = response?.product
 
   if (!filteredProduct) {
     return notFound();
   }
+
+
+  
   const headersList = await headers();
   const domain = headersList.get('x-forwarded-host') || headersList.get('host') || '';
   const protocol = headersList.get('x-forwarded-proto') || 'https';
