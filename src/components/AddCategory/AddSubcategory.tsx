@@ -242,9 +242,9 @@ const FormLayout = ({
               <div className="flex justify-center  dark:text-white">
                 <div className="flex flex-col gap-9 w-full dark:text-white  dark:border-white">
                   <div className="rounded-md flex gap-3 w-full bg-white  dark:bg-lightdark dark:bg-black dark:text-white mt-3">
-                    <div className="rounded-sm border border-stroke bg-white  dark:border-strokedark dark:bg-lightdark w-full">
+                    <div className="upload_image dark:border-strokedark dark:bg-lightdark w-full">
                       <div className="inputs_heading border-stroke dark:border-strokedark ">
-                        <h3 className="font-medium text-black dark:text-white">
+                        <h3 className="label_main">
                           Add Sub Category Images
                         </h3>
                       </div>
@@ -291,9 +291,9 @@ const FormLayout = ({
                         <Imageupload setposterimageUrl={setposterimageUrl} />
                       )}
 
-                       <div className="rounded-sm border border-stroke bg-white  dark:border-strokedark dark:bg-lightdark w-full">
+                       <div className="upload_image dark:border-strokedark dark:bg-lightdark w-full">
                       <div className="inputs_heading border-stroke dark:border-strokedark ">
-                        <h3 className="font-medium text-black dark:text-white">
+                        <h3 className="label_main">
                           Banner Image
                         </h3>
                       </div>
@@ -369,7 +369,7 @@ const FormLayout = ({
 
                       <div>
                         <div className="inputs_heading border-stroke dark:border-strokedark">
-                         <h3 className="font-medium text-black dark:text-white">
+                         <h3 className="label_main">
                             Select Parent Category (atleat one)
                           </h3>
                         </div>

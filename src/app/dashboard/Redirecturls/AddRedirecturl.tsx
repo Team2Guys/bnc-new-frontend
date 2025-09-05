@@ -126,25 +126,13 @@ function AddRedirecturl({ RedirectUrls, setRedirectUrls, setselecteMenu }: IVIEW
         {/* Breadcrumb */}
 
         <Breadcrumb pageName={"Add Redirect URL"} />
-
-        <div className="bg-white dark:bg-gray-900 shadow-xl rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-          <Formik enableReinitialize initialValues={formDate}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-          >
-            {({ values }) => {
-              formikValuesRef.current = values;
-              return (
-                <Form className="space-y-6">
-                  {/* Top Header */}
-                  <div className="flex items-center justify-between pb-4 border-b border-gray-200 dark:border-gray-700">
-                    <button
-                      type="button"
-                      className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-200 transition"
-                      onClick={handleBack}
-                    >
-                      <IoMdArrowRoundBack /> Back
-                    </button>
+    <div className="back_main_button pb-4 border-b border-gray-200 dark:border-gray-700">
+                     <p
+                               className="dashboard_primary_button"
+                               onClick={handleBack}
+                             >
+                               <IoMdArrowRoundBack /> Back
+                             </p>
                     <button
                       type="submit"
                       className="px-6 py-2 bg-primary text-white rounded-lg shadow hover:bg-primary/90 transition"
@@ -152,6 +140,18 @@ function AddRedirecturl({ RedirectUrls, setRedirectUrls, setselecteMenu }: IVIEW
                       {loading ? "Loading..." : "Submit"}
                     </button>
                   </div>
+        <div className="bg-white dark:bg-gray-900 shadow-xl rounded-lg p-6 border border-gray-200 dark:border-gray-700 mt-4">
+          <Formik enableReinitialize initialValues={formDate}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ values }) => {
+              formikValuesRef.current = values;
+              return (
+                
+                <Form className="space-y-6">
+                  {/* Top Header */}
+              
 
                   {/* URL Input */}
                   <div>

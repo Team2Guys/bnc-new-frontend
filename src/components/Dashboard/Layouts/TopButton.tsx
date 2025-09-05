@@ -12,7 +12,7 @@ interface ITOPBUTTON {
 
 function TopButton({ loading, handleBack }: ITOPBUTTON) {
     return (
-        <div className='flex items-center justify-between'>
+        <div className='back_main_button'>
             <p
                 className="dashboard_primary_button"
                 onClick={handleBack}
