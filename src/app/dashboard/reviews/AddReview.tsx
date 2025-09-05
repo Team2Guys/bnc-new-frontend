@@ -181,9 +181,9 @@ function AddReview({ editReview, setEditsetReview, setselecteMenu }: I_Add_Revie
     <>
       {modalNode}
       <Breadcrumb pageName={"Add Reviews"} />
-      <div className="flex justify-between border-b">
+      <div className='back_main_button border-b'>
         <p
-          className="text-lg font-black mb-4 flex items-center justify-center gap-2 hover:bg-parimary bg-black rounded-sm w-fit p-2 cursor-pointer text-white"
+          className="dashboard_primary_button"
           onClick={handleBack}
         >
           <IoMdArrowRoundBack /> Back
@@ -200,124 +200,150 @@ function AddReview({ editReview, setEditsetReview, setselecteMenu }: I_Add_Revie
           {(formik) => {
             formikValuesRef.current = formik.values;
             return (
+              <Form className="space-y-6 max-w-5xl mx-auto shadow-lg rounded-xl p-8 bg-white dark:bg-gray-900">
 
-              <Form className="space-y-4 max-w-4xl mx-auto shadow-lg p-5">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                  {/* Left Column */}
+                  <div className="space-y-8">
 
-                <div className="rounded-sm border  bg-white dark:bg-primary border-stroke">
-                  <div className="inputs_heading border-stroke dark:border-strokedark">
-                    <h3 className="font-medium text-black dark:text-white">
-                      Reviewer Image
-                    </h3>
-                  </div>
-                  {posterimageUrl && posterimageUrl.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4  dark:border-white dark:bg-black">
-                      {posterimageUrl.map((item: ProductImages, index: number) => {
+                    {/* Reviewer Image */}
+                    <div className="rounded-xl border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
+                      <div className="px-5 py-3 border-b border-gray-200 dark:border-gray-700">
+                        <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Reviewer Image</h3>
+                      </div>
+                      {posterimageUrl && posterimageUrl.length > 0 ? (
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 p-5">
+                          {posterimageUrl.map((item: ProductImages, index: number) => (
+                            <div
+                              className="relative group rounded-lg overflow-hidden shadow-md bg-white dark:bg-gray-700 transform transition-transform duration-300 hover:scale-105"
+                              key={index}
+                            >
+                              <button
+                                type="button"
+                                className="absolute top-2 right-2 invisible group-hover:visible bg-white rounded-full p-1 shadow"
+                                onClick={() =>
+                                  ImageRemoveHandler(item.public_id || "", setposterimageUrl)
+                                }
+                              >
+                                <RxCross2 className="text-red-500 hover:text-red-700" size={18} />
+                              </button>
 
-                        return (
-                          <div
-                            className="relative group rounded-lg overflow-hidden shadow-md bg-white transform transition-transform duration-300 hover:scale-105"
-                            key={index}
-                          >
-                            <div className="absolute top-1 right-1 invisible group-hover:visible text-red bg-white rounded-full ">
-                              <RxCross2
-                                className="cursor-pointer text-red-500 dark:text-red-700"
-                                size={17}
-                                onClick={() => {
-                                  ImageRemoveHandler(
-                                    item.public_id || "",
-                                    setposterimageUrl,
+                              <Image
+                                className="object-cover w-full h-40"
+                                width={300}
+                                height={200}
+                                src={item.imageUrl}
+                                alt={`productImage-${index}`}
+                              />
 
-                                  );
-                                }}
+                              <ImageTextInput
+                                name="altText"
+                                value={item.altText || ""}
+                                placeholder="Alt text"
+                                onChange={(val) =>
+                                  handleImageAltText(index, val, setposterimageUrl, "altText")
+                                }
                               />
                             </div>
-
-                            <Image
-                              key={index}
-                              className="object-cover w-full h-full dark:bg-black dark:shadow-lg cursor-crosshair"
-                              width={300}
-                              height={200}
-                              src={item.imageUrl}
-                              loading='lazy'
-                              alt={`productImage-${index}`}
-                            />
-
-                            <ImageTextInput
-                              name="altText"
-                              value={item.altText || ""}
-                              placeholder="altText"
-                              onChange={(val) =>
-                                handleImageAltText(index, val, setposterimageUrl, "altText")
-                              }
-                            />
-                          </div>
-                        );
-                      })}
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="p-5">
+                          <Imageupload setposterimageUrl={setposterimageUrl} />
+                        </div>
+                      )}
                     </div>
-                  ) : (
-                    <Imageupload setposterimageUrl={setposterimageUrl} />
-                  )}
-                </div>
-                <div>
-                  <Input
-                    label="Name"
-                    name="name"
-                    placeholder="Name"
-                  />
-                </div>
 
-                <div>
-                  <label className='primary-label' htmlFor="starRating">Star Rating</label>
-                  <Field name="starRating" type="number" className="primary-input" />
-                  <ErrorMessage name="starRating" component="div" className="text-red-500 text-sm" />
-                </div>
-                <div>
-                  <label className='primary-label' htmlFor="ReviewsDescription">Description</label>
-                  <Field name="ReviewsDescription" as="textarea" rows={4} className="primary-input" />
-                  <ErrorMessage name="ReviewsDescription" component="div" className="text-red-500 text-sm" />
-                </div>
+                    {/* Name */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Reviewer Name
+                      </label>
+                      <Input name="name" placeholder="Enter reviewer name" />
+                    </div>
 
-                <div className='flex flex-col gap-2'>
-                  <label className='primary-label' htmlFor="reviewDate">Review Date</label>
-                  <Field name="reviewDate" type="date" className="primary-input w-fit items-center" />
-                  <ErrorMessage name="reviewDate" component="div" className="text-red-500 text-sm" />
-                </div>
-
-                <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                  <div className="inputs_heading border-stroke dark:border-strokedark">
-                    <h3 className="font-medium text-black dark:text-white">
-                      Add Reviews Images
-                    </h3>
+                    {/* Star Rating */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Star Rating
+                      </label>
+                      <Field name="starRating" type="number" className="primary-input" />
+                      <ErrorMessage
+                        name="starRating"
+                        component="div"
+                        className="text-red-500 text-xs mt-1"
+                      />
+                    </div>
                   </div>
-                  <Imageupload setImagesUrl={setImagesUrl} multiple />
-                  {imagesUrl && imagesUrl.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
-                      {imagesUrl.map((item: any, index) => {
-                        return (
-                          <div key={index}
-                            draggable
-                            onDragStart={() => (dragImage.current = index)}
-                            onDragEnter={() =>
-                              (draggedOverImage.current = index)
-                            }
-                            onDragEnd={handleSort}
-                            onDragOver={(e) => e.preventDefault()}
-                          >
-                            <div className="relative group rounded-lg overflow-hidden shadow-md bg-white transform transition-transform duration-300 hover:scale-105">
-                              <div className="absolute top-1 right-1 invisible group-hover:visible errorColor bg-white rounded-full z-10" draggable>
-                                <RxCross2
-                                  className="cursor-pointer btext-red-500 hover:errorColor-700"
-                                  size={17}
-                                  onClick={() => {
-                                    ImageRemoveHandler(
-                                      item.public_id,
-                                      setImagesUrl,
-                                    );
-                                  }}
-                                />
-                              </div>
-                              <div key={index} className=" relative ">
-                                <div className="h-[100px] w-full overflow-hidden">
+
+                  {/* Right Column */}
+                  <div className="space-y-8">
+                    {/* Description */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Review Description
+                      </label>
+                      <Field
+                        name="ReviewsDescription"
+                        as="textarea"
+                        rows={5}
+                        className="primary-input"
+                        placeholder="Write review details..."
+                      />
+                      <ErrorMessage
+                        name="ReviewsDescription"
+                        component="div"
+                        className="text-red-500 text-xs mt-1"
+                      />
+                    </div>
+
+                    {/* Review Date */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Review Date
+                      </label>
+                      <Field
+                        name="reviewDate"
+                        type="date"
+                        className="primary-input w-fit"
+                      />
+                      <ErrorMessage
+                        name="reviewDate"
+                        component="div"
+                        className="text-red-500 text-xs mt-1"
+                      />
+                    </div>
+
+                    {/* Review Images */}
+                    <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm">
+                      <div className="px-5 py-3 border-b border-gray-200 dark:border-gray-700">
+                        <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Add Review Images</h3>
+                      </div>
+                      <div className="p-5">
+                        <Imageupload setImagesUrl={setImagesUrl} multiple />
+                      </div>
+
+                      {imagesUrl && imagesUrl.length > 0 && (
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 p-5">
+                          {imagesUrl.map((item: any, index: number) => (
+                            <div
+                              key={index}
+                              draggable
+                              onDragStart={() => (dragImage.current = index)}
+                              onDragEnter={() => (draggedOverImage.current = index)}
+                              onDragEnd={handleSort}
+                              onDragOver={(e) => e.preventDefault()}
+                              className="space-y-2"
+                            >
+                              <div className="relative group rounded-lg overflow-hidden shadow-md bg-white dark:bg-gray-700 transform transition-transform duration-300 hover:scale-105">
+                                <button
+                                  type="button"
+                                  className="absolute top-2 right-2 invisible group-hover:visible bg-white rounded-full p-1 shadow z-10"
+                                  onClick={() => ImageRemoveHandler(item.public_id, setImagesUrl)}
+                                >
+                                  <RxCross2 className="text-red-500 hover:text-red-700" size={18} />
+                                </button>
+                                <div className="h-[120px] w-full overflow-hidden">
                                   <Image
                                     className="object-cover w-full h-full"
                                     width={300}
@@ -327,28 +353,28 @@ function AddReview({ editReview, setEditsetReview, setselecteMenu }: I_Add_Revie
                                   />
                                 </div>
                               </div>
+                              <ImageTextInput
+                                name="altText"
+                                value={item.altText || ""}
+                                placeholder="Alt text"
+                                onChange={(val) => handlealtText(index, val)}
+                              />
                             </div>
-                            <ImageTextInput
-                              name="altText"
-                              value={item.altText || ""}
-                              placeholder="altText"
-                              onChange={(val) =>
-                                handlealtText(index, val)
-                              }
-                            />
-                          </div>
-                        );
-                      })}
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  ) : null}
+                  </div>
                 </div>
 
-                <div className=" bg-white dark:bg-black shadow-md z-50 p-3 flex justify-start">
+                {/* Submit */}
+                <div className="bg-white dark:bg-gray-800 p-4 rounded-lg flex justify-start">
                   <button type="submit" className="dashboard_primary_button">
-                    {loading ? "Submitting" : "Submit"}
+                    {loading ? "Submitting..." : "Submit Review"}
                   </button>
                 </div>
               </Form>
+
             )
           }}
         </Formik>

@@ -80,7 +80,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       className={`absolute left-0 top-0 z-50 flex h-screen w-72 flex-col overflow-y-hidden bg-secondary dark:border-r dark:bg-dashboardDark duration-300 ease-linear lg:static lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
     >
-      <div className="flex items-center justify-between gap-2 px-6 py-5 lg:py-2">
+      <div className="back_main_button gap-2 px-6 py-5 lg:py-2">
         <Link href="/">
           <Image
             width={140}

@@ -231,9 +231,9 @@ const FormLayout = ({
               <div className="flex justify-center ">
                 <div className="flex flex-col gap-9 w-full dark:border-strokedark dark:bg-lightdark rounded-md">
                   <div className="rounded-md gap-3 flex justify-evenly dark:bg-lightdark mb-3 mt-3">
-                    <div className="rounded-sm border border-stroke bg-white  dark:border-strokedark dark:bg-lightdark">
+                    <div className="upload_image dark:border-strokedark dark:bg-lightdark">
                       <div className="inputs_heading border-stroke dark:border-strokedark ">
-                        <h3 className="font-medium text-black dark:text-white">
+                        <h3 className="label_main">
                           Add Category Images
                         </h3>
                       </div>
@@ -282,7 +282,7 @@ const FormLayout = ({
                       <div className='border p-2'>
                       <div className="rounded-sm border border-stroke dark:border-strokedark dark:bg-lightdark ">
                         <div className="inputs_heading border-stroke dark:border-strokedark">
-                          <h3 className="font-medium text-black dark:text-white">
+                          <h3 className="label_main">
                             Banner Images for Blogs
                           </h3>
                         </div>
@@ -380,7 +380,7 @@ const FormLayout = ({
 
                       <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                         <div className="inputs_heading border-stroke dark:border-strokedark">
-                          <h3 className="font-medium text-black dark:text-white">
+                          <h3 className="label_main">
                             FAQS
                           </h3>
                         </div>
@@ -431,7 +431,7 @@ const FormLayout = ({
 
                       <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                         <div className="inputs_heading border-stroke dark:border-strokedark">
-                          <h3 className="font-medium text-black dark:text-white">
+                          <h3 className="label_main">
                             heading checks
                           </h3>
                         </div>

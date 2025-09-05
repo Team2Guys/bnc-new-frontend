@@ -164,7 +164,7 @@ const Settings = () => {
                         />
                       </div>
                       <div>
-                        <p className="font-medium text-black dark:text-white">Edit your photo</p>
+                        <p className="label_main">Edit your photo</p>
                         <div className="flex gap-3 mt-1">
                           <button
                             className="text-sm text-red-500 hover:underline"
