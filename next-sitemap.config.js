@@ -40,7 +40,6 @@ module.exports = {
             fetchCategories(),
         ])
 
-        console.log(products, "products")
         const categoryPaths = categories.map((category) => ({
             loc: `/${category.categoryCustomUrl || generateSlug(category.title)}/`,
             lastmod: new Date().toISOString(),
