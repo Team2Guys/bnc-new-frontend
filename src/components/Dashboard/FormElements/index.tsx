@@ -473,12 +473,12 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark p-2 ">
                     <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                       <div className="inputs_heading border-stroke dark:border-strokedark">
-                        <h3 className="font-medium text-black dark:text-white">
+                        <h3 className="label_main">
                           Poster Image
                         </h3>
                       </div>
                       {posterimageUrl && posterimageUrl?.length > 0 ? (
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
+                        <div className="form_element_main">
                           {posterimageUrl.map((item: any, index) => {
                             return (
                               <>
@@ -607,7 +607,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                       </div>
 
                       <div className="w-full">
-                        <label className="mb-3 block py-4 px-2 text-sm font-medium text-black dark:text-white">
+                        <label className="mb-3 block py-4 px-2 text-sm label_main">
                           Select Parent Category (at least one)
                         </label>
                         {categoriesList.length === 0 ? (
@@ -698,7 +698,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                 <div className="flex flex-col gap-5">
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                     <div className="inputs_heading border-stroke dark:border-strokedark">
-                      <h3 className="font-medium text-black dark:text-white">
+                      <h3 className="label_main">
                         FAQS
                       </h3>
                     </div>
@@ -744,7 +744,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                     <div className="inputs_heading border-stroke dark:border-strokedark">
-                      <h3 className="font-medium text-black dark:text-white">
+                      <h3 className="label_main">
                         Privacy Section
                       </h3>
                     </div>
@@ -795,8 +795,8 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                   </div>
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                    <div className="border-b border-stroke p-4 dark:border-strokedark">
-                      <h3 className="font-medium text-black dark:text-white">
+                   <div className="inputs_heading border-stroke dark:border-strokedark">
+                      <h3 className="label_main">
                         Descripton(On Subcategory Page)
                       </h3>
                     </div>
@@ -893,8 +893,8 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                   </div>
 
                   <div className="rounded-sm border border-stroke dark:border-strokedark ">
-                    <div className="border-b bg-primary border-stroke py-4 px-2  ">
-                      <h3 className="font-medium text-white">Add Vidoes</h3>
+                  <div className="inputs_heading border-stroke dark:border-strokedark">
+                      <h3 className="font-medium">Add Vidoes</h3>
                     </div>
                     {videos?.[0] && videos?.length > 0 ? (
                       <div className=" p-4 bg-primary">
@@ -939,13 +939,13 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                   </div>
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                     <div className="inputs_heading border-stroke dark:border-strokedark">
-                      <h3 className="font-medium text-black dark:text-white">
+                      <h3 className="label_main">
                         Colors Images
                       </h3>
                     </div>
                     <Imageupload setImagesUrl={setcolorsImages} multiple />
                     {colorsImages && colorsImages?.length > 0 && (
-                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
+                      <div className="form_element_main">
                         {colorsImages.map((item: any, index) => {
                           return (
                             <>
@@ -1000,7 +1000,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                     <div className="inputs_heading border-stroke dark:border-strokedark">
-                      <h3 className="font-medium text-black dark:text-white">
+                      <h3 className="label_main">
                         Top Images
                       </h3>
                     </div>
@@ -1062,12 +1062,12 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                     <div className="inputs_heading border-stroke dark:border-strokedark">
-                      <h3 className="font-medium text-black dark:text-white">
+                      <h3 className="label_main">
                         subCategoryImage
                       </h3>
                     </div>
                     {subCategoryImage && subCategoryImage?.length > 0 ? (
-                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
+                      <div className="form_element_main">
                         <div>
                           {subCategoryImage.map((item: any, index) => {
                             return (
@@ -1119,12 +1119,12 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                     <div className="inputs_heading border-stroke dark:border-strokedark">
-                      <h3 className="font-medium text-black dark:text-white">
+                      <h3 className="label_main">
                         Banner Image
                       </h3>
                     </div>
                     {bannerImageUrl && bannerImageUrl?.length > 0 ? (
-                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
+                      <div className="form_element_main">
                         <div>
                           {bannerImageUrl.map((item: any, index) => {
                             return (
@@ -1174,13 +1174,13 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                     <div className="inputs_heading border-stroke dark:border-strokedark">
-                      <h3 className="font-medium text-black dark:text-white">
+                      <h3 className="label_main">
                         privarcy Image
                       </h3>
                     </div>
                     {privarcyImagemageUrl &&
                       privarcyImagemageUrl?.length > 0 ? (
-                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
+                      <div className="form_element_main">
                         <div>
                           {privarcyImagemageUrl.map((item: any, index) => {
                             return (
@@ -1231,7 +1231,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                     <div className="inputs_heading border-stroke dark:border-strokedark">
-                      <h3 className="font-medium text-black dark:text-white">
+                      <h3 className="label_main">
                         Product Images
                       </h3>
                     </div>
