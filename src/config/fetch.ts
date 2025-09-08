@@ -26,6 +26,8 @@ export const fetchProducts = async () => {
 
 
 };
+
+
 export const getSignleProd = async (Productname: string, category: string,   fields?: Record<string, boolean> ) => {
   try {
 

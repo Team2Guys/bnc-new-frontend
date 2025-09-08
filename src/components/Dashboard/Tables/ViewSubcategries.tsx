@@ -5,18 +5,17 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 import axios from 'axios';
 import { LiaEdit } from 'react-icons/lia';
 import useColorMode from 'hooks/useColorMode';
-import { ChangedProductUrl_handler } from 'data/urls';
 import { useAppSelector } from 'components/Others/HelperRedux';
 import Cookies from 'js-cookie';
 import { FaRegEye } from 'react-icons/fa';
-import { generateSlug } from 'data/data';
-import { CategoryProps, ICategory } from 'types/types';
+import { CategoryProps, ICategory, SUBCATEOGRY } from 'types/types';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import Table from 'components/ui/Table';
 import ViewsTableHeader from '../TableHeader/ViewsTableHeader';
-import { DateFormatHandler } from 'utils/helperFunctions';
+import { DateFormatHandler, getPath } from 'utils/helperFunctions';
 import revalidateTag from 'components/ServerActons/ServerAction';
+import Link from 'next/link';
 
 const ViewSubcategries = ({
   setMenuType,
@@ -133,7 +132,7 @@ const ViewSubcategries = ({
     {
       title: 'Date',
       key: 'date',
-      render: (record: ICategory) => {
+      render: (record: SUBCATEOGRY) => {
         const createdAt = DateFormatHandler(record.createdAt)
 
         return <span>{createdAt}</span>;
@@ -142,7 +141,7 @@ const ViewSubcategries = ({
     {
       title: 'Update At',
       key: 'date',
-      render: (record: ICategory) => {
+      render: (record: SUBCATEOGRY) => {
         const createdAt = DateFormatHandler(record?.updatedAt)
 
         return <span>{createdAt}</span>;
@@ -158,20 +157,13 @@ const ViewSubcategries = ({
     {
       title: 'Preview',
       key: 'Preview',
-      render: (record: ICategory) => {
+      render: (record: any) => {
         const category = categories?.find((i) => i.id === record.CategoryId);
         if (category === undefined) return null;
-        const parent = generateSlug(category?.title);
         return (
-          <FaRegEye
-            className="cursor-pointer"
-            onClick={() => {
-              const url = `/${parent === 'shutters' ? `${parent}-range` : parent}/${ChangedProductUrl_handler(record.title)
-                }
-                  `;
-              window.open(url, '_blank');
-            }}
-          />
+          <Link href={getPath(record)} target="_blank" rel="noreferrer">
+            <FaRegEye className="cursor-pointer" />
+          </Link>
         );
       },
     },

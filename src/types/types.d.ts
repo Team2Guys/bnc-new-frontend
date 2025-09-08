@@ -48,19 +48,21 @@ export interface ICategory {
   last_editedBy?: string;
   breakcrum: string;
   topHeading?: string;
-
   headingchecks: any[]
   breakcrum?: string;
-
   productpageHeading?: string;
   faqHeadingS?: string;
-
   faqs: any[]
   faqHeading?:string
   status:Status
   productCustomUrl?:string
   categoryCustomUrl?:string
-  
+}
+
+
+interface SUBCATEOGRY extends ICategory{
+    category?: ICategory;
+
 }
 
 export interface Image {
