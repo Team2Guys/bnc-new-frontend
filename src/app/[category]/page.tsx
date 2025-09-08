@@ -85,8 +85,6 @@ const Products = async ({ params }: Props) => {
   });
 
 
-console.log(filteredProducts, "filteredProducts")
-
   return (
     <>
       <Script type="application/ld+json" id="categories-json-ld">

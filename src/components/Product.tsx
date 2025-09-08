@@ -18,7 +18,7 @@ const Product = ({
 }: IProductProps) => {
   return (
     <>
-      <Breadcrumb title={categories.breakcrum || categories.title}/>
+      <Breadcrumb title={categories.breakcrum || categories.title} categorylink={categories.categoryCustomUrl}/>
       <CategoryHero Data={categories}/>
       <AllProduct title={categories.productpageHeading} Products={filteredItems || []} />
       <SimpleSteps />

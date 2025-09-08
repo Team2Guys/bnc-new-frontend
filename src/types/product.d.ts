@@ -6,6 +6,8 @@ export interface BreadcrumbProps  {
     image?: string;
     slug?: string;
     subcategory?: string;
+    categorylink?: string;
+    productLink?:string
   }
  export interface CategoryProps {
   Data?: ICategory;

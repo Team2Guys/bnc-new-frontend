@@ -43,9 +43,11 @@ const ProductDetail = ({ title, filterProduct }: IProductDetail) => {
     setProcessedTabDataDetail(processedData);
   }, [isCurtainsCategory]);
 
+
+  console.log(filterProduct.category, "categoryCustomUrl")
   return (
     <div>
-      <Breadcrumb slug={filterProduct.category.breakcrum} title={title} />
+      <Breadcrumb slug={filterProduct.category.breakcrum} title={title} categorylink={filterProduct.category.categoryCustomUrl} />
       <Container className='grid grid-cols-12 mt-10 gap-4 xl:gap-8 max-sm:px-0'>
         <div className='col-span-12 md:col-span-6 xl:col-span-5 px-2'>
           <Thumbnail images={filterProduct.imageUrls} selectedColor={colorImage} setColorImage={setColorImage} videos={filterProduct.videos}

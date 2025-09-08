@@ -59,6 +59,7 @@ export interface ICategory {
   faqHeading?:string
   status:Status
   productCustomUrl?:string
+  categoryCustomUrl?:string
   
 }
 
