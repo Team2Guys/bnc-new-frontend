@@ -6,7 +6,7 @@ const ViewProduct = dynamic(()=>import("components/Dashboard/Tables/ViewProduct"
 import ProtectedRoute from 'hooks/AuthHookAdmin';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
-import { IProduct } from 'types/types';
+import { ICategory, IProduct } from 'types/types';
 
 interface Product extends IProduct {
   id: number;
@@ -17,9 +17,11 @@ interface Product extends IProduct {
 }
 interface PRODUCTS_PROPS {
   products: Product[];
+  subcategories: ICategory[];
+  categories: ICategory[]
 }
 
-const Products = ({ products }: PRODUCTS_PROPS) => {
+const Products = ({ products, categories , subcategories }: PRODUCTS_PROPS) => {
   const [editProduct, setEditProduct] = useState<any | undefined>();
   const [selecteMenu, setselecteMenu] = useState<string>('Categories');
 
@@ -42,7 +44,7 @@ const Products = ({ products }: PRODUCTS_PROPS) => {
     starRating: editProduct && editProduct.starRating,
     reviews: editProduct && editProduct.starRating,
     posterImage: editProduct && editProduct.posterImage,
-    hoverImage: editProduct && editProduct.hoverImage,
+    // hoverImage: editProduct && editProduct.hoverImage,
     imageUrls: editProduct && editProduct.imageUrls,
     short_description: editProduct && editProduct.short_description,
     heading: editProduct && editProduct.heading,
@@ -58,7 +60,7 @@ const Products = ({ products }: PRODUCTS_PROPS) => {
     customUrl: editProduct && editProduct.customUrl,
     colorsImages : editProduct && editProduct.colorsImages,
     status : editProduct && editProduct.status,
-    updatedAt : editProduct && editProduct?.updatedAt,
+    // updatedAt : editProduct && editProduct?.updatedAt,
 
         faqs: editProduct && editProduct.faqs || [],
         videos: editProduct && editProduct.videos,
@@ -100,6 +102,8 @@ const Products = ({ products }: PRODUCTS_PROPS) => {
               ? EditInitialValues
               : undefined
           }
+          categoriesList={categories}
+          subCategoriesList={subcategories}
         />
       )}
     </>

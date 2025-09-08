@@ -103,13 +103,13 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
       prevComments.map((item) =>
         item.id === itemId
           ? {
-              ...item,
-              comments: item.comments.map((comment: IComment) =>
-                comment.id === commentId
-                  ? { ...comment, status: newStatus }
-                  : comment
-              ),
-            }
+            ...item,
+            comments: item.comments.map((comment: IComment) =>
+              comment.id === commentId
+                ? { ...comment, status: newStatus }
+                : comment
+            ),
+          }
           : item
       )
     );
@@ -170,44 +170,51 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
       </p>
 
       {/* Actions */}
-      <div className="flex gap-3 mt-5">
-        <button
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition 
-            ${
+      <div className="flex items-center gap-4 mt-6">
+        <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+          Status:
+        </h3>
+        <div className="flex gap-3">
+          {/* Approve Button */}
+          <button
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition 
+        ${disabledButtons[comment.id] ||
+                !canEditBlog ||
+                comment.status === "APPROVED"
+                ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+                : "bg-gradient-to-r from-green-500 to-green-700 text-white hover:scale-105 shadow-md"
+              }`}
+            onClick={() => handleApprove(comment.id, comment, item)}
+            disabled={
+              !canEditBlog ||
+              comment.status === "APPROVED" ||
               disabledButtons[comment.id]
-                ? "bg-gray-400 cursor-not-allowed"
-                : !canEditBlog || comment.status === "APPROVED"
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-gradient-to-r from-green-500 to-green-700 hover:scale-105 text-white shadow-md"
-            }`}
-          onClick={() => handleApprove(comment.id, comment, item)}
-          disabled={
-            !canEditBlog ||
-            comment.status === "APPROVED" ||
-            disabledButtons[comment.id]
-          }
-        >
-          ✅ Approve
-        </button>
-        <button
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition 
-            ${
+            }
+          >
+            ✅ <span>Approve</span>
+          </button>
+
+          {/* Reject Button */}
+          <button
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition 
+        ${disabledButtons[comment.id] ||
+                !canEditBlog ||
+                comment.status === "REJECTED"
+                ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+                : "bg-gradient-to-r from-red-500 to-red-700 text-white hover:scale-105 shadow-md"
+              }`}
+            onClick={() => handleReject(comment.id, comment, item)}
+            disabled={
+              !canEditBlog ||
+              comment.status === "REJECTED" ||
               disabledButtons[comment.id]
-                ? "bg-gray-400 cursor-not-allowed"
-                : !canEditBlog || comment.status === "REJECTED"
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-gradient-to-r from-red-500 to-red-700 hover:scale-105 text-white shadow-md"
-            }`}
-          onClick={() => handleReject(comment.id, comment, item)}
-          disabled={
-            !canEditBlog ||
-            comment.status === "REJECTED" ||
-            disabledButtons[comment.id]
-          }
-        >
-          ❌ Reject
-        </button>
+            }
+          >
+            ❌ <span>Reject</span>
+          </button>
+        </div>
       </div>
+
 
       {/* Status Badge */}
       <div className="mt-4">
@@ -222,18 +229,18 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
     </div>
   );
 
-  const sections = [ "APPROVED", "REJECTED"];
+  const sections = ["APPROVED", "REJECTED"];
 
   return (
     <div className="space-y-8">
       <div className="flex justify-start">
         <input
-              className="search_input"
-              type="search"
-              placeholder="Search Comments"
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
+          className="search_input"
+          type="search"
+          placeholder="Search Comments"
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {sections.map((status) => (

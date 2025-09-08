@@ -1,10 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
 import { IProduct } from 'types/types';
-import { ChangedProductUrl_handler, predefinedPaths } from 'data/urls';
 import Link from 'next/link';
 import { Categories_wise_Images } from 'data/Images';
 import { usePathname } from 'next/navigation';
+import { getPath } from 'utils/helperFunctions';
 
 interface BathroomCategoryProps {
   filteredProducts: IProduct[];
@@ -23,46 +23,15 @@ interface BathroomCategoryProps {
 const BathroomCategory = ({
   filteredProducts,
   isLoading,
-  categoryTitle,
   subCategory,
   categoryName,
   description,
-  updateSubCategoryName,
 }: BathroomCategoryProps) => {
   const pathname = usePathname();
 
 
 
-  const getPath = (arr: IProduct, parent: string) => {
-    categoryTitle === 'none' ? (categoryTitle = parent) : categoryTitle;
-  
-    const slug = ChangedProductUrl_handler(
-      arr.title === updateSubCategoryName?.name ? updateSubCategoryName.url : arr.title
-    );
-  
-    const basePath =
-      arr.href && typeof categoryTitle === 'string'? `${window.origin}/${arr.href}`: `/${slug}`;
-  
-      const isShutters =
-      (parent && parent.toLowerCase() === 'shutters') ||
-      (!parent && categoryTitle?.toLowerCase() === 'shutters');
-    
-    const baseCategory = isShutters
-      ? 'shutters-range'
-      : parent?.toLowerCase() || categoryTitle?.toLowerCase();
-    
-    const path =
-      predefinedPaths[slug as keyof typeof predefinedPaths] ||
-      (slug === 'hotels-restaurants-blinds-curtains'
-        ? basePath
-        : `/${baseCategory}${
-            ['dimout-roller-blinds', 'sunscreen-roller-blinds', 'blackout-roller-blinds'].includes(slug)
-              ? '/roller-blinds'
-              : ''
-          }/${slug}`);
-  
-    return path + '/';
-  };
+
   
 
   let prod_finder_handler = (arr: IProduct) => {
@@ -111,7 +80,6 @@ const BathroomCategory = ({
           ))
           : filteredProducts &&
           filteredProducts.map((arr: IProduct, index: number) => {
-            const parent = arr.category?.title || categoryTitle;
             let product_Images = prod_finder_handler(arr);
             let findModel = arr?.modelDetails?.find((value)=>value?.name?.trim()?.toLowerCase()===subCategory?.trim()?.toLowerCase())
   
@@ -142,7 +110,7 @@ const BathroomCategory = ({
                 </div>
                 <div>
                   <Link
-                  href={`${getPath(arr, (parent ||""))}`}
+                  href={`${getPath(arr)}`}
                     className="font-bold text-xs sm:text-base bg-secondary text-white hover:bg-primary w-fit px-2 py-2 rounded-md flex items-center justify-center text-center mx-auto"
                   >
                     View Our {arr.title} 

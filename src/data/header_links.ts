@@ -158,7 +158,7 @@ export const links = [
           }
         ]
       } },
-  // { href: '/commercial', label: 'Commercial' },
+  { href: '/commercial', label: 'Commercial' },
   { href: '/estimator', label: 'Estimator' },
   // { href: '/blog', label: 'Blog' },
   { href: '/faqs', label: 'FAQs' },

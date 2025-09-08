@@ -40,7 +40,7 @@ const BlogCard = ({ blog }: IBlogCard) => {
         />
         </div>
       <div className='grow max-sm:w-full w-2/12 px-4'>
-        <div className="hidden sm:flex items-center justify-between mb-2">
+        <div className="hidden sm:back_main_button mb-2">
           <span className="text-sm text-gray-500">{category}</span>
           <span className="text-sm text-gray-500">
             {formatDateMonth(createdAt)}

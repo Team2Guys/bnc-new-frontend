@@ -93,25 +93,12 @@ const Thumbnail = ({
     focusOnSelect: displayImages.length > 4,
     draggable: displayImages.length > 4,
   };
-
+console.log(displayImages.length , 'displayImages')
   return (
     <div>
-      <Slider {...mainSettings} ref={slider1} className="overflow-hidden outline-0">
-        {isMotorisedCategory && videos.length > 0 && (
-          <div className="relative w-full h-[340px] xsm:h-[400px] lg:h-[450px] xl:h-[563px] bg-black flex items-center justify-center">
-            <video
-              className="w-full h-full object-cover"
-              autoPlay
-              controls
-              loop
-              muted
-              playsInline
-              src={videos[0]?.imageUrl}
-            />
-          </div>
-        )}
-        {displayImages.map((img, index) => (
-          <div key={index} className='relative w-full h-[340px] xsm:h-[400px] lg:h-[450px] xl:h-[563px]'>
+      {displayImages.length < 2 ? (
+        displayImages.map((img, index) => (
+          <div key={index} className='relative w-full h-[340px] xsm:h-[400px] lg:h-[450px] xl:h-[563px] mb-2'>
             <Image
               src={img.imageUrl}
               alt={img.altText || `Thumbnail${index}`}
@@ -121,8 +108,39 @@ const Thumbnail = ({
               sizes='40vw'
             />
           </div>
-        ))}
-      </Slider>
+        ))
+      )
+        :
+        (
+          <Slider {...mainSettings} ref={slider1} className="overflow-hidden outline-0">
+            {isMotorisedCategory && videos.length > 0 && (
+              <div className="relative w-full h-[340px] xsm:h-[400px] lg:h-[450px] xl:h-[563px] bg-black flex items-center justify-center">
+                <video
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  controls
+                  loop
+                  muted
+                  playsInline
+                  src={videos[0]?.imageUrl}
+                />
+              </div>
+            )}
+            {displayImages.map((img, index) => (
+              <div key={index} className='relative w-full h-[340px] xsm:h-[400px] lg:h-[450px] xl:h-[563px]'>
+                <Image
+                  src={img.imageUrl}
+                  alt={img.altText || `Thumbnail${index}`}
+                  fill
+                  priority
+                  fetchPriority='high'
+                  sizes='40vw'
+                />
+              </div>
+            ))}
+          </Slider>
+        )
+      }
 
       {displayImages.length > 0 && displayImages.length > 4 ? (
         <Slider {...thumbSettings} ref={slider2}>

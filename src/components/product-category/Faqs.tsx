@@ -2,7 +2,7 @@ import Container from 'components/Res-usable/Container/Container'
 import Accordion from 'components/ui/Accordion'
 import { CategoryProps } from 'types/product'
 
-const Faqs = ({ Data }: CategoryProps) => {
+const Faqs = ({ Data }: Omit<CategoryProps, "Products">) => {
   return (
     <>
     {Data?.faqs && Data.faqs.length > 0 &&

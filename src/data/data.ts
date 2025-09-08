@@ -154,7 +154,7 @@ export const aboutUsData: AboutUsBlock[] = [
     mainHeading: 'How It All Began — From the UK to Dubai',
     mainHeadingSize: 'sm:text-2xl text-24 text-[#3E3F42]',
     content: `It all started with Shiraz, our managing partner, who has spent over 20 years working within the retail business in the UK. Multiple achievements were collected over the years, including Scottish retailer of the year (twice), Top Customer Service Accolades on 5 occasions and even a place in the top 100 most influential fashion icons. In 2014, Shiraz moved to Dubai with his family, ready for a new start and bigger dreams. That move led to something special — the beginning of Blinds & Curtains Furnitures Trading. A brand built on years of experience and strong family values. Over the years, it was felt that customer’s would join the Blinds & Curtains family at the end of their renovation journeys. 1000’s fell in love with the company and brand ethics, but by the time they were ready to cover their windows, they had already purchased their furnitures and flooring options. This led to real deep thinking process that lasted for several months before it was decided to re-brand. And that was the birth of Two Guys Home Furnishings.`,
-    contentSize: 'text-base text-start',   
+    contentSize: 'text-base text-start',
     imageUrl: '/assets/images/about-us/aboutus.webp',
   },
   {
@@ -164,19 +164,19 @@ export const aboutUsData: AboutUsBlock[] = [
     mainHeadingSize: 'sm:text-5xl text-2xl text[#3E3F42]',
     content: `At Two Guys, we don’t just hire staff — we have built a team of over 60 people who care about your home like it’s their own. Our team is friendly, honest, and never pushy. Shiraz, our founder, notices every little detail — even a crooked curtain! That’s how much we care. When you choose us, you’re part of the Two Guys family.`,
     contentSize: 'text-base text-start',
-     imageUrl: '/assets/images/about-us/only-sources.webp',
+    imageUrl: '/assets/images/about-us/only-sources.webp',
   },
   {
     shortHeading: 'Our First Big Step in Dubai',
-      shortHeadingSize: 'sm:text-2xl text-20 text-[#3E3F42] font-roboto font-semibold',
+    shortHeadingSize: 'sm:text-2xl text-20 text-[#3E3F42] font-roboto font-semibold',
     mainHeading: 'From a Tiny Office to the First Two Guys Showroom',
     mainHeadingSize: 'sm:text-5xl text-2xl text[#3E3F42]',
     content: `We started in a small, cosy office in Port Saeed — no fancy setup, just hard work and learning the Dubai market.
 In 2017, we opened our first showroom in Oud Metha as Blinds and Curtains and quickly became a trusted name.
 With loyal customers and growing demand, we evolved into Two Guys Home Furnishings — built on service, trust, and homes that feel just right.`,
     contentSize: 'text-base text-start',
-   
-     imageUrl: '/assets/images/about-us/IMG_7006.webp',
+
+    imageUrl: '/assets/images/about-us/IMG_7006.webp',
   },
 ];
 
@@ -301,23 +301,6 @@ export const BreakCrum_conent_pages = [
   },
 ];
 
-
-
-
-export const BooKNowbannerContent = [
-  {
-    url: '/blinds/roller-blinds',
-    content:
-      'Ready to get started? Call our sales team at <a href="tel:(04) 252 2025"" style="text-decoration:underline">(04) 252 2025</a> for a free quote or fill out the online form, and we&apos;ll be in touch',
-  },
-  {
-    url: '/blinds/panel-blinds',
-    content:
-      'Need expert advice? We can make <a href="/made-to-measure-blinds/""" style="text-decoration: underline">custom window blinds</a> for you. Feel free to give us a call at (04) 252 2025, or fill out our online contact form, and we&apos;ll walk you through everything.',
-  },
-];
-
-
 export const footerData = [
   {
     key: "1",
@@ -328,15 +311,6 @@ export const footerData = [
       'Sunscreen Roller Blinds',
       'Day/Night Blinds',
       'Blackout Roman blinds',
-      // 'Roller Blinds',
-      // 'Roman Blinds',
-      // 'Vertical Blinds',
-      // 'Wooden Blinds',
-      // 'Aluminium Blinds',
-      // 'Zebra Blinds',
-      // 'Zipline Outdoor Blinds',
-      // 'Panel Blinds',
-      // 'Blackout Blinds',
     ],
   },
   {
@@ -348,15 +322,6 @@ export const footerData = [
       'Sheer Triple Pinch Pleat curtains',
       'Sheer Ripple Fold Curtains',
       'Eyelet Curtains',
-      // 'Triple Pinch Pleat Curtains',
-      // 'Double Pinch Pleat Curtains',
-      // 'Pencil Pleat Curtains',
-      // 'Ripplefold/Wave Curtains',
-      // 'Eyelet Curtains',
-      // 'Tab Top Curtains',
-      // 'Blackout Curtains',
-      // 'Sheer Curtains',
-      // 'Textured Curtains',
     ],
   },
   {
@@ -365,28 +330,11 @@ export const footerData = [
     items: [
       'Full Height Shutters',
       'Tracked Shutters',
-      // 'Bi-Fold Shutters',
       'Special Shape Shutters',
       'Solid Panel Shutters',
       'Tier On Tier Shutters',
-      // 'Cafe Style Shutters',
-      // 'Bay Window Shutters',
-      // 'Outdoor Shutters',
-
-      // 'Black Shutters',
     ],
   },
-// {
-//     key: "4",
-//     title: 'Commercial',
-//     items: [
-//       'Pergola Window Coverings',
-//       'Outdoor Window Coverings',
-//       'Fire Retardant',
-//       'Washable',
-//       'Antimicrobial',
-//     ],
-//   },
 
 ];
 
@@ -595,32 +543,22 @@ export const whyChooseData: WhyChooseItem[] = [
     description: " We bring decades of hands-on experience to every home we furnish.",
   },
   {
-     icon: "/assets/images/about-us/why2.svg",
+    icon: "/assets/images/about-us/why2.svg",
     title: "In-house Production, <br /> No Outsourcing",
     description: " Everything’s made by us —since 2016, so you get full quality, no compromises.",
   },
   {
-     icon: "/assets/images/about-us/why3.svg",
+    icon: "/assets/images/about-us/why3.svg",
     title: "No Pushy Sales.<br />  Just Happy Customers",
     description: "We guide, not pressure — because your comfort always comes first.",
   },
   {
-     icon: "/assets/images/about-us/why4.svg",
+    icon: "/assets/images/about-us/why4.svg",
     title: "Crafted with Care. <br />  Installed with Confidence.",
     description: 'From stitching to setup, we handle every detail with precision and pride.',
   },
 ];
 
-export const blindsSubcategories = [
-  "Blackout Roller Blinds",
-  "Sunscreen Roller Blinds",
-  "Day/night Blinds",
-  "Wood Venetian Blinds",
-  "Blackout Roman Blinds",
-  "Vertical Blinds",
-  "Motorised Blinds",
-  "Sheer Roman blinds"
-];
 
 export const subCategoryUrls = [
   { url: 'blackout-blinds', name: 'Blackout/Private Blinds' },
@@ -641,7 +579,54 @@ export const shuttersSubcategories = [
   "Bypass Shutters",
   "Solid Panel Shutters",
   "Tier On Tier Shutters",
+  "Dark Wood Shutters",
+  "Bold Colours Shutters",
+  "Light Wood Shutters",
+  "Cafe Style Shutters",
+  "Outdoor Shutters",
+  "Living Room Shutters",
+  "Dining Room Shutters",
+  "Kitchen Room Shutters",
+  "Bedroom Shutters",
+  "Staircase Shutters",
+  "White Shutters",
+  "Off White Shutters"
 ];
+
+
+export const blindsSubcategories = [
+  "Blackout Roller Blinds",
+  "Sunscreen Roller Blinds",
+  "Day/night Blinds",
+  "Wood Venetian Blinds",
+  "Blackout Roman Blinds",
+  "Vertical Blinds",
+  "Motorised Blinds",
+  "Sheer Roman blinds",
+  "Roller Blinds",
+  "Roman Blinds",
+  "Zipline Outdoor Blinds",
+  "Skylight Blinds",
+  "Blackout Blinds",
+  "Zebra Blinds",
+  "Sheer Horizon Blinds",
+  "Honeycomb Blinds",
+  "Printed Blinds",
+  "Wooden Blinds",
+  "Staircase Blinds",
+  "Translucent Blinds",
+  "Patricia Blinds",
+  "Panel Blinds",
+  "Aluminium Blinds",
+  "Living Room Blinds",
+  "Kitchen Blinds",
+  "Dining Room Blinds",
+  "Bathroom Blinds",
+  "Kids Room Blinds",
+  "Bedroom Blinds",
+  "Balcony Blinds Dubai",
+];
+
 
 export const curtainsSubcategories = [
   "Blackout Triple Pinch Pleat Curtains",
@@ -652,6 +637,30 @@ export const curtainsSubcategories = [
   "Blackout Curtains",
   "Motorised Curtains",
   "Wave Sheer & Blackout Curtains",
+  "Office Curtains",
+  "Home Curtains",
+  "Plain Curtains",
+  "Patterned Curtains",
+  "Natural Fabric Curtains",
+  "Kids Prints Curtains",
+  "Textured Curtains",
+  "Geometric Curtains",
+  "Goblet Pleat Curtains",
+  "Velvet Curtains",
+  "Stripes Curtains",
+  "Tab Top Curtains",
+  "Pencil Pleat Curtains",
+  "Dining Room Curtains",
+  "Bedroom Curtains",
+  "Hotel Curtains",
+  "Kids Room Curtains",
+  "Living room Curtains",
+  "Pelmet Curtains",
+  "Linen Curtains",
+  "Chiffon Curtains",
+  "Pinch Pleat Curtains",
+  "Staircase Curains",
+  "Conservatory Curtains",
 ];
 
 export const customerReview: ReviewData = {

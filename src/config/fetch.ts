@@ -1,8 +1,5 @@
 import axios from 'axios';
-import { IAppointments, ICategory, IProduct, IRECORDS } from 'types/types';
-import { Allproduct } from 'types/interfaces';
-import { generateSlug } from 'data/data';
-import { ChangedProductUrl } from 'data/urls';
+import { IAppointments, IRECORDS } from 'types/types';
 import { token } from 'components/ServerActons/ServerAction';
 import { initialRedirectUrls, RedirectUrls } from 'types/general';
 
@@ -29,7 +26,7 @@ export const fetchProducts = async () => {
 
 
 };
-export const getSignleProd = async (Productname: string, category: string) => {
+export const getSignleProd = async (Productname: string, category: string,   fields?: Record<string, boolean> ) => {
   try {
 
     console.log(Productname, category)
@@ -40,7 +37,7 @@ export const getSignleProd = async (Productname: string, category: string) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({Productname, category}),
+        body: JSON.stringify({Productname, category, fields}),
         next: { tags: ["products"] },
       }
     );
@@ -208,34 +205,6 @@ export const getAllAdmins = async (token: any) => {
   }
 };
 
-export const filtereCategory = (
-  categories: ICategory[],
-  product: string,
-  Cateories: number[],
-): ICategory | undefined => {
-  return categories?.find((sub) => {
-    const title = ChangedProductUrl(product as string);
-    const title_flag = title === generateSlug(sub.title);
-    return (
-      title_flag && Cateories.some((item: number) => item === sub.CategoryId)
-    );
-  });
-};
-
-export const filterProd = (
-  prod: Allproduct[],
-  product: string,
-  Cateories: number[],
-): IProduct | undefined => {
-  return prod?.find((sub) => {
-    const title = ChangedProductUrl(product as string);
-
-    const title_flag = title === generateSlug(sub.title);
-    return (
-      title_flag && Cateories.some((item: number) => item === sub.CategoryId)
-    );
-  });
-};
 
 
 

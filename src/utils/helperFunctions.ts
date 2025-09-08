@@ -1,7 +1,6 @@
 
 import axios, { AxiosResponse } from 'axios';
 import { blindsSubcategories, curtainsSubcategories, generateSlug, shuttersSubcategories } from 'data/data';
-import { predefinedPaths } from 'data/urls';
 
 import Cookies from 'js-cookie';
 import React from 'react';
@@ -106,19 +105,18 @@ export const getPath = (product: IProduct) => {
   const parent = (product?.category?.productCustomUrl || generateSlug(product?.category?.title)) as string;
 
   const slug = (product.customUrl || generateSlug(product.title)) as string
-  const basePath = product.href && parent ? `${window.origin}/${product.href}` : `/${slug}`;
 
-  const path = predefinedPaths[slug as keyof typeof predefinedPaths] || (slug === 'hotels-restaurants-blinds-curtains' ? basePath :
-    `/${parent}${['dimout-roller-blinds', 'sunscreen-roller-blinds', 'blackout-roller-blinds'].includes(slug) ? 'roller-blinds'
+  const path = 
+    `/${parent}${['dimout-roller-blinds', 'sunscreen-roller-blinds', 'blackout-roller-blinds'].includes(slug) ? '/roller-blinds'
       : ''
-    }/${slug}`);
+    }/${slug}`;
 
 
   return path + "/";
 };
 
 
-const subcategoryMap: Record<string, string[]> = {
+export const subcategoryMap: Record<string, string[]> = {
   blinds: blindsSubcategories,
   shutters: shuttersSubcategories,
   curtains: curtainsSubcategories,
@@ -172,4 +170,29 @@ export const DateFormatHandler = (input?: Date | string) => {
 export const getRandomColor = () => {
   return `hsl(${Math.floor(Math.random() * 360)}, 70%, 60%)`;
 
+}
+
+
+export function compareImages(a?: any, b?: any): boolean {
+  if (!a && !b) return false;
+  if (!a || !b) return true;
+
+  return (
+    a.public_id !== b.public_id ||
+    (a.altText ?? "") !== (b.altText ?? "")
+  );
+}
+
+export function compareImageArray(a?: any[], b?: any[]): boolean {
+  if (!a && !b) return false;
+  if (!a || !b) return true;
+  if (a.length !== b.length) return true;
+
+  for (let i = 0; i < a.length; i++) {
+    if (compareImages(a[i], b[i])) {
+      return true;
+    }
+  }
+
+  return false;
 }

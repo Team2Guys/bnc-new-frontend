@@ -19,7 +19,7 @@ import {
   fetchProducts,
   fetchSubCategories,
 } from 'config/fetch';
-import { ChangedProductUrl_handler, predefinedPaths, urls } from 'data/urls';
+import { urls } from 'data/urls';
 import { Skeleton } from 'components/ui/skeleton';
 import { TCategorySection } from 'types/footer';
 import Container from '../Container/Container';
@@ -31,6 +31,7 @@ import { usePathname } from 'next/navigation';
 import SocialLink from '../social-link/social-link';
 import { IoIosArrowDown } from 'react-icons/io';
 import Collapse from 'components/ui/Collapse';
+import { getPath } from 'utils/helperFunctions';
 
 
 
@@ -55,26 +56,8 @@ const Footer: React.FC = () => {
   const categories: ICategory[] = data?.categories || [];
   const subcategories = data?.subcategories || [];
   const [isMobile, setIsMobile] = useState(false);
-  const generatePath = (product: IProduct, parent: string) => {
-    const slug = ChangedProductUrl_handler(product.title);
-    const basePath = product.href
-      ? `${window.origin}/${product.href}`
-      : `/${slug}`;
 
-    return (
-      predefinedPaths[slug as keyof typeof predefinedPaths] ||
-      (slug === 'hotels-restaurants-blinds-curtains'
-        ? basePath
-        : `/${parent === 'shutters' ? `${parent}-range` : parent}${[
-          'dimout-roller-blinds',
-          'sunscreen-roller-blinds',
-          'blackout-roller-blinds',
-        ].includes(slug)
-          ? '/roller-blinds'
-          : ''
-        }/${slug}`)
-    );
-  };
+
   const ChangedProductUrl = (title: string): string => {
     let products = urls.find((url: { productName: string; Url: string }) => {
       return url.productName === title;
@@ -243,7 +226,7 @@ const Footer: React.FC = () => {
                                     {matchingProduct && (
                                       <Link
                                         className="text-14 2xl:text-16 text-primary font-normal capitalize"
-                                        href={generatePath(matchingProduct, generateSlug(category.title))}
+                                        href={getPath(matchingProduct)}
                                       >
                                         {matchingProduct.title}
                                       </Link>
@@ -306,7 +289,7 @@ const Footer: React.FC = () => {
                                       <li>
                                         <Link
                                           className="text-12 sm:text-14 text-[#3E3F42] opacity-60"
-                                          href={generatePath(matchingProduct, generateSlug(category.title)) + "/"}
+                                          href={getPath(matchingProduct)}
                                         >
                                           {matchingProduct.title}
                                         </Link>

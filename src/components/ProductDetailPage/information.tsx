@@ -5,6 +5,7 @@ import Image from 'next/image'
 
 interface PrivacyImage {
   imageUrl: string
+  alt?:string
 }
 
 interface InformationProps {
@@ -113,7 +114,7 @@ const Information = ({ privarcyImage, privacySectoin }: InformationProps) => {
                   className="object-cover !relative"
                   src={privarcyImage.imageUrl}
                   fill
-                  alt="information"
+                  alt={privarcyImage.alt ||"Category Images"}
                   sizes='40vw'
                 />
               </div>

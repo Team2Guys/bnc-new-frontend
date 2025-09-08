@@ -9,7 +9,7 @@ export interface BreadcrumbProps  {
   }
  export interface CategoryProps {
   Data?: ICategory;
-  Products?: IProduct[];
+  Products: IProduct[];
   title?: string;
 }
 
