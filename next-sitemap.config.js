@@ -1,7 +1,7 @@
 /** @type {import('next-sitemap').IConfig} */
 
 //eslint-disable-next-line
-const { fetchCategories, fetchProducts, generateSlug, fetchSubCategories } = require('./src/utils/sitemap-data');
+const { fetchCategories, fetchProducts, generateSlug, fetchSubCategories ,fetchBlogs} = require('./src/utils/sitemap-data');
 
 const excludePages = [
     '/dashboard*',
@@ -34,10 +34,11 @@ module.exports = {
 
 
     additionalPaths: async () => {
-        const [products, subcategories, categories] = await Promise.all([
+        const [products, subcategories, categories, blogs] = await Promise.all([
             fetchProducts(),
             fetchSubCategories(),
             fetchCategories(),
+            fetchBlogs()
         ])
 
         const categoryPaths = categories.map((category) => ({
@@ -58,8 +59,13 @@ module.exports = {
             lastmod: new Date().toISOString(),
         }));
 
+        const blogsPaths = blogs.filter((blog) => blog.isPublished).map((blog) => ({
+            loc: `/blog/${ blog.redirectionUrl ? blog.redirectionUrl : generateSlug(blog.title)}/`,
+            lastmod: new Date().toISOString(),
+        }));
 
-        return [...categoryPaths, ...productPaths, ...subcategoriesPaths];
+
+        return [...categoryPaths, ...productPaths, ...subcategoriesPaths, ...blogsPaths];
 
     },
 

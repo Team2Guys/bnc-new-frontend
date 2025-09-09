@@ -65,4 +65,22 @@ const fetchSubCategories = async () => {
 
 
 
-module.exports = {fetchCategories,fetchProducts,fetchSubCategories, generateSlug};
+const fetchBlogs = async () => {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/blogs`,
+      {
+        next: { tags: ['blogs'] },
+      },
+    );
+
+    let blogs = response.json()
+
+    return blogs;
+  } catch (error) {
+    console.log(error)
+  }
+
+};
+
+
+module.exports = {fetchCategories,fetchProducts,fetchSubCategories,fetchBlogs, generateSlug};
