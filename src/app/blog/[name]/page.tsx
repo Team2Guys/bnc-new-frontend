@@ -99,6 +99,7 @@ const BlogDetail = async ({ params }: { params: Promise<{ name: string }> }) => 
   );
   const filterRelatedPosts = blogs?.filter((blogItem: BlogInfo) => (blogItem.category === blog?.category) &&
     generateSlug(blogItem.title) !== generateSlug(blog.title) && blogItem.isPublished)
+    
   return (
     <Suspense>
       <Blog category={category} filterCategoryBlogPosts={filterCategoryBlogPosts} blog={blog} filterRelatedPosts={filterRelatedPosts} />

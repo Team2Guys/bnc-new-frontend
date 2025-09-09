@@ -8,6 +8,8 @@
 /package-lock.json
 /yarn.lock
 /bun.lock
+/public/sitemap.xml
+/public/robots.txt
 
 # testing
 /coverage

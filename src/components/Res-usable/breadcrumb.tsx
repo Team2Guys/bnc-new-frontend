@@ -10,6 +10,7 @@ const Breadcrumb = ({
   slug = "",
   subcategory = "",
   className = "",
+  categorylink, 
 }: BreadcrumbProps & { className?: string }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -26,7 +27,7 @@ const Breadcrumb = ({
     <MdOutlineArrowForwardIos className="text-primary" />
 
   );
-
+  
   return (
     <div
       className={`z-40 w-full p-2 bg-white  ${
@@ -41,7 +42,7 @@ const Breadcrumb = ({
         {slug && (
           <>
             {arrow}
-          <Link  href={slug === "Blinds"? "/made-to-measure-blinds/": slug === "curtains"? "/made-to-measure-curtains/": slug === "shutters"? "/shutters-range/": `/${slug}`}
+          <Link  href={`/${categorylink || slug}`}
               className="capitalize text-primary font-roboto text-16 sm:text-base"
             >
               {slug.replace(/-/g, " ")}
@@ -55,13 +56,7 @@ const Breadcrumb = ({
             {title ? (
               <Link
                  href={
-                    slug === "blinds"
-                      ? "/made-to-measure-blinds/"
-                      : slug === "curtains"
-                      ? "/made-to-measure-curtains/"
-                      : slug === "shutters"
-                      ? "/shutters-range/"
-                      : `/${slug}/${subcategory}`
+            `/${categorylink || slug}/${subcategory}`
                   }
                 className="capitalize text-primary font-roboto text-xs sm:text-base"
               >

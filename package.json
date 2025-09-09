@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
+    "postbuild": "next-sitemap",
     "build": "next lint && next build",
     "start": "next start -p 5100",
     "lint": "next lint",
@@ -27,6 +28,7 @@
     "knip": "^5.57.1",
     "lottie-react": "^2.4.0",
     "next": "^15.1.5",
+    "next-sitemap": "^4.2.3",
     "react": "19.0.0",
     "react-apexcharts": "^1.7.0",
     "react-dom": "19.0.0",
