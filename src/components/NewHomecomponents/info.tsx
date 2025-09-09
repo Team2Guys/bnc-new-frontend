@@ -12,7 +12,6 @@ export default function InfoTabs({ tabData, isHome, isCurtainsCategory, isMotori
   const [activeTabData] = useState<TabDataItem[]>(tabData ? tabData : Data);
   const [activeMobileTab, setActiveMobileTab] = useState<number | null>(null);
 
-
   return (
     <div className={`bg-secondary-foreground ${isHome ? "" : "mt-10"}`}>
       <Container>
@@ -26,9 +25,6 @@ export default function InfoTabs({ tabData, isHome, isCurtainsCategory, isMotori
               <span>Standout Features of Smart {isCurtainsCategory ? 'Curtains' : 'Blinds'}</span>
             </div>
         }
-
-
-        {/* Desktop Tabs */}
         <div className="hidden sm:flex justify-between text-center">
           {activeTabData.map((tab, index) => (
             <button

@@ -1,24 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import gitImg from '../../public/assets/json/404.json';
 import { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
 import { useDispatch } from 'react-redux';
 import { setIsNotFoundPage } from '../redux/slices/pageStateSlice';
 
-
-const Lottie = dynamic(() => import('components/Lottie/error-gif'), {
-  ssr: false,
-});
-
 export default function NotFound() {
   const [isClient, setIsClient] = useState(false);
-
   const dispatch = useDispatch();
-
-
-
   useEffect(() => {
     dispatch(setIsNotFoundPage(true));
 
@@ -27,9 +16,7 @@ export default function NotFound() {
     };
   }, [dispatch]);
 
-
-
-      useEffect(() => {
+    useEffect(() => {
     setIsClient(true);
   }, []);
   if (!isClient) {
@@ -37,9 +24,19 @@ export default function NotFound() {
   }
 
   return (
-    <div className="flex items-center justify-center h-[90vh]">
+    <div className="flex items-center justify-center sm:h-[90vh]">
       <div className="flex flex-col items-center gap-4 relative">
-        <Lottie data={gitImg} />
+        <video
+          className="w-full h-full sm:w-96 sm:h-96 object-contain"
+          autoPlay
+          muted
+          loop
+          playsInline
+          >
+          <source src="/assets/404.mp4" type="video/mp4" />
+        
+          Your browser does not support the video tag.
+          </video>
         <h2 className="text-2xl xsm:text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-black -mt-10">
           There&apos;s <span className="uppercase">Nothing</span> here ...
         </h2>
@@ -48,13 +45,13 @@ export default function NotFound() {
         </p>
         <div className="flex items-center gap-4 justify-center">
           <Link
-            className="w-35 sm:w-40 h-10 sm:h-12 text-14 sm:text-base flex justify-center items-center rounded-full bg-primary text-white hover:bg-white border border-primary hover:text-primary transition"
+            className="w-35 sm:w-40 h-10 sm:h-12 text-14 max-md:px-4 sm:text-base flex justify-center items-center rounded-full bg-primary text-white hover:bg-white border border-primary hover:text-primary transition"
             href="/"
           >
             Back to Home
           </Link>
           <Link
-            className="w-35 sm:w-40 h-10 sm:h-12 text-14 flex justify-center items-center rounded-full bg-transparent text-primary hover:bg-primary border border-primary hover:border-primary hover:text-white transition"
+            className="w-35 sm:w-40 h-10 sm:h-12 text-14 max-md:px-4 flex justify-center items-center rounded-full bg-transparent text-primary hover:bg-primary border border-primary hover:border-primary hover:text-white transition"
             href="/contact-us"
           >
             Contact Us

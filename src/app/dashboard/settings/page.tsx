@@ -12,7 +12,6 @@ import { useAppDispatch } from 'components/Others/HelperRedux';
 import { loggedInAdminAction } from '../../../redux/slices/AdminsSlice';
 import { IMAGE_INTERFACE } from 'types/interfaces';
 import { CiMail } from 'react-icons/ci';
-import { Button } from 'components/ui/button';
 import Loader from 'components/Loader/Loader';
 
 const Settings = () => {
@@ -223,10 +222,10 @@ const Settings = () => {
                       />
                     </svg>
                   </span>
-                  <p className="mt-3 text-sm text-gray-600 dark:text-white">
+                  <p className="mt-3 text-sm text-gray-600">
                     <span className="font-medium text-primary">Click to upload</span> or drag and drop
                   </p>
-                  <p className="text-xs text-gray-500 dark:text-white">SVG, PNG, JPG or GIF (max 800x800)</p>
+                  <p className="text-xs text-gray-500 ">SVG, PNG, JPG or GIF (max 800x800)</p>
                 </div>
               </div>
             </div>
@@ -283,13 +282,13 @@ const Settings = () => {
 
                 {/* Save Button */}
                 <div className="flex justify-end">
-                  <Button
+                  <button
                     className="px-6 py-2 rounded-md bg-primary text-white hover:bg-primary/90 transition"
                     type="submit"
                     disabled={loading}
                   >
                     {loading ? <Loader color="#fff" /> : 'Save'}
-                  </Button>
+                  </button>
                 </div>
               </form>
             </div>

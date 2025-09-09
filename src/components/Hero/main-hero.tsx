@@ -10,7 +10,6 @@ const MainHero = () => {
       <Image src="https://res.cloudinary.com/de6owjeap/image/upload/v1748924786/hero-banner_njgokk.webp" className="absolute top-0 left-0 w-full h-full object-cover object-center"
       fetchPriority="high" priority fill alt="Hero Banner" sizes='(max-width: 680px) 45vw, 1500px' />
       <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-25" />
-      {/* Content */}
       <Container className="relative h-full flex flex-col justify-between text-primary-foreground">
         <div className="flex flex-col items-start h-full max-w-72 md:max-w-2xl space-y-2 md:space-y-5 justify-center">
           <h1 className="text-2xl md:text-5xl font-extrabold font-robotoSerif">

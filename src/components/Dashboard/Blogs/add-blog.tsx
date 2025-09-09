@@ -9,7 +9,6 @@ import Imageupload from 'components/ImageUpload/Imageupload';
 import axios from 'axios';
 import showToast from 'components/Toaster/Toaster';
 import Loader from 'components/Loader/Loader';
-import { Button } from 'components/ui/button';
 import { UpdateBlog as IUpdateBlog, UpdateBlog } from 'types/interfaces';
 import { RxCross2 } from 'react-icons/rx';
 import { ImageRemoveHandler } from 'utils/helperFunctions';
@@ -231,16 +230,16 @@ const AddBlogs = ({
           </p>
 
           <div className="flex items-center space-x-3">
-            <Button
+            <button
               disabled={addBlogMutation.isPending}
               type="button"
               className="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center"
               onClick={handleCancel}
             >
               Cancel
-            </Button>
+            </button>
 
-            <Button
+            <button
               disabled={addBlogMutation.isPending}
               type="submit"
               form="blog-form"
@@ -255,9 +254,9 @@ const AddBlogs = ({
                 </svg>
               )}
               Save Draft
-            </Button>
+            </button>
 
-            <Button
+            <button
               disabled={addBlogMutation.isPending}
               type="submit"
               form="blog-form"
@@ -272,7 +271,7 @@ const AddBlogs = ({
                 </svg>
               )}
               Publish
-            </Button>
+            </button>
           </div>
         </div>
       </div>
@@ -524,21 +523,21 @@ const AddBlogs = ({
 
                   {/* FIXED BUTTONS */}
                   <div className="sticky z-50 w-full bottom-0 mt-6 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 py-4 px-6 flex justify-start gap-4">
-                    <Button
+                    <button
                       disabled={addBlogMutation.isPending ? true : false}
                       type="submit"
                       className="text-white bg-yellow-500 px-6 py-2 font-semibold rounded-lg shadow-md hover:bg-yellow-600 transition"
                     >
                       {addBlogMutation.isPending && !isPublish ? <Loader color="#fff" /> : "Draft"}
-                    </Button>
-                    <Button
+                    </button>
+                    <button
                       disabled={addBlogMutation.isPending ? true : false}
                       type="submit"
-              className="bg-black hover:bg-secondary text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center"
+                      className="bg-black hover:bg-secondary text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center"
                       onClick={() => setIsPublish(true)}
                     >
                       {addBlogMutation.isPending && isPublish ? <Loader color="#fff" /> : "Publish"}
-                    </Button>
+                    </button>
                   </div>
                 </div>
 

@@ -5,7 +5,6 @@ import axios from 'axios';
 import Toaster from 'components/Toaster/Toaster';
 import Loader from 'components/Loader/Loader';
 import Cookies from 'js-cookie';
-import { Button } from 'components/ui/button';
 import { createAdmin, formDataTypes } from 'types/interfaces';
 import Input from 'components/Common/regularInputs';
 import { checkboxData, intitalValues } from 'data/data';
@@ -218,13 +217,13 @@ const CreateAdmin = ({ setselecteMenu, edit_admins, setedit_admins }: createAdmi
 
       {/* Submit button */}
       <div className="text-center mt-6">
-        <Button
+        <button
           disabled={loading}
           className="bg-primary text-white w-full"
           onClick={handleSubmit}
         >
           {loading ? <Loader color="#fff" /> : edit_admins ? 'Edit Admin' : 'Add Admin'}
-        </Button>
+        </button>
       </div>
     </div>
   );

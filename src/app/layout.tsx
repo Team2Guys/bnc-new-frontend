@@ -14,16 +14,18 @@ import Callbutton from 'components/callbutton/callbutton';
 
 export const roboto = Roboto({
   subsets: ['latin'],
-  weight: ['100', '300', '400', '500', '700', '900'],
+  weight: ["300", "400", "500", "700", "900"],
   variable: '--font-roboto',
   display: 'swap',
+  adjustFontFallback: false,
 });
 
 export const robotoSerif = Roboto_Serif({
   subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   variable: '--font-roboto-serif',
   display: 'swap',
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {

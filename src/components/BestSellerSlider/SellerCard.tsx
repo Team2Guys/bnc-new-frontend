@@ -13,8 +13,6 @@ import { orderedTitles } from "data/new-data";
 
 const SellerSlider = ({ products }: { products: IProduct[] }) => {
   const [isDragging, setIsDragging] = useState(false);
-
-  // 💡 Memoize to prevent recalculating on each render
   const filteredAndSortedProducts = useMemo(() =>
       orderedTitles
         .map((title) =>
@@ -45,9 +43,8 @@ const SellerSlider = ({ products }: { products: IProduct[] }) => {
   const sliderSettings = useMemo(() => ({
     dots: false,
     infinite: true,
-    speed: 600,
     slidesToShow: 4,
-    slidesToScroll: 1,
+    swipeToSlide: true,
     arrows: true,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
@@ -66,8 +63,6 @@ const SellerSlider = ({ products }: { products: IProduct[] }) => {
       },
     ],
   }), [NextArrow, PrevArrow]);
-
-  // 💡 Callback to minimize re-renders
   const handleMouseUp = useCallback((item: IProduct) => {
     if (!isDragging) {
       window.location.href = getPath(item);

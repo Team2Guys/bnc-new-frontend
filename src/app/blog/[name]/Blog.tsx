@@ -12,9 +12,9 @@ import bgBreadcrum from '../../../../public/assets/images/Blog/blogbackground.pn
 import { FaAngleRight } from 'react-icons/fa';
 import Link from 'next/link';
 import { ICategory } from 'types/types';
-import NotFound from 'app/not-found';
 import HTMLReactParser from "html-react-parser";
 import Script from 'next/script';
+import { notFound } from 'next/navigation';
 
 
 const Blog = ({
@@ -177,13 +177,11 @@ const Blog = ({
                 href={`/blog/${blog?.category.toLowerCase()}/`}>See All</Link>
             </div>
 
-            {filterRelatedPosts && filterRelatedPosts?.length >= 2 && <OurBlog Blogdata={filterRelatedPosts
-              .slice(0, 3)
-              || []} />}
+            {filterRelatedPosts && filterRelatedPosts?.length >= 2 && <OurBlog Blogdata={filterRelatedPosts.slice(0, 3)|| []} />}
           </div>
         </Container>
       ) : (
-        <NotFound />
+        notFound()
       )}
     </>
   );

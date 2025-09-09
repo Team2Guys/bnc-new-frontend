@@ -1,6 +1,5 @@
 'use client';
 import React, { useState } from 'react';
-import Select from 'react-select';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import axios from 'axios';
@@ -15,6 +14,7 @@ import Image from 'next/image';
 import Loader from 'components/Loader/Loader';
 import { useRouter } from 'next/navigation';
 import Checkbox from 'components/ui/Checkbox';
+import CustomSelect from 'components/ui/CustomSelect';
 interface IAppointments {
   name: string;
   phone_number: string;
@@ -438,25 +438,20 @@ const BookAppointment: React.FC<AppointmentProps> = ({
             )}
           </div>
           <div>
-            <label
-              htmlFor="how_user_find_us"
-              className="block text-sm sm:text-xl font-roboto font-medium"
-            >
-              How Did You Hear About Us?
-            </label>
-            <Select
+             <label
+          htmlFor="how_user_find_us"
+          className="block text-sm sm:text-xl font-roboto font-medium"
+        >
+          How Did You Hear About Us?
+        </label>
+        <CustomSelect
               instanceId="window-options-select"
-              isSearchable={false}
               options={referralOptions}
-              onChange={(option: any) =>
-                handleSelectChange('how_user_find_us', option?.value || null)
+              onChange={(option) =>
+                handleSelectChange('how_user_find_us', option?.value ?? null)
               }
-              value={
-                referralOptions.find(
-                  (option) => option.value === formData.how_user_find_us,
-                ) || null
-              }
-              className="mt-1 w-full text-sm sm:text-xl font-medium custom-select"
+              value={formData.how_user_find_us}
+              className="mt-1 w-full text-sm sm:text-base font-medium custom-select"
             />
           </div>
         </div>

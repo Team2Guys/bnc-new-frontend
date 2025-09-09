@@ -348,11 +348,7 @@ export interface UpdateBlog extends BlogInfo {
 }
 export interface BlogProps {
   className?: string;
-  title?: string | undefined;
-  id?: string;
   Blogdata: BlogInfo[];
-  isFirstItemLarge?: boolean;
-  buttonView?: boolean;
 }
 export interface CommentDataType {
   id: number;

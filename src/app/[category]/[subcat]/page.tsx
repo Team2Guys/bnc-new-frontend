@@ -72,11 +72,9 @@ const Page = async ({ params }: meta_props) => {
   const product = (await params).subcat;
   const category = (await params).category;
   const response =  await  getSignleProd(product, category)
-  const  filteredProduct = response.product
+  const  filteredProduct = response.product || []
 
-    console.log(response, "filteredProduct")
-
-  if (!filteredProduct) {
+  if (!response) {
     return notFound();
   }
   if (filteredProduct && filteredProduct.status !== "PUBLISHED") {

@@ -1,7 +1,6 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { Button } from 'components/ui/button';
 import { useRouter } from 'next/navigation';
 import Input from 'components/Common/regularInputs';
 import Container from 'components/Res-usable/Container/Container';
@@ -267,13 +266,12 @@ const EstimatorPage = ({ sortedProducts }: { sortedProducts: EstimatorProductTyp
                 </div>
               </div>
               <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-2 lg:gap-4'>
-                <Button
-                  variant={'default'}
+                <button
                   onClick={() => route.push('/request-appointment/')}
-                  className="w-full h-12 bg-secondary text-primary font-semibold font-roboto text-base md:text-sm lg:text-base hover:opacity-65"
+                  className="w-full h-12 bg-secondary text-primary font-semibold font-roboto text-base md:text-sm lg:text-base hover:opacity-65 rounded-lg"
                 >
                   Book A Free Visit
-                </Button>
+                </button>
                 <Link
                   href={`https://wa.me/${WhatsAppInfo.number.replaceAll(' ', '')}`}
                   target="_blank"
