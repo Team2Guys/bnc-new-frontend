@@ -20,7 +20,7 @@ module.exports = {
     sitemapSize: 5000,
     outDir: './public', // Will be generated after build
     exclude: excludePages, // optional
-      trailingSlash: true,
+    trailingSlash: true,
 
     robotsTxtOptions: {
         policies: [
@@ -34,7 +34,7 @@ module.exports = {
 
 
     additionalPaths: async () => {
-        const [products,subcategories, categories] = await Promise.all([
+        const [products, subcategories, categories] = await Promise.all([
             fetchProducts(),
             fetchSubCategories(),
             fetchCategories(),
@@ -47,13 +47,13 @@ module.exports = {
 
 
 
-        const productPaths = products.filter((val)=>val.status == 'PUBLISHED').map((product) => ({
+        const productPaths = products.filter((val) => val.status == 'PUBLISHED').map((product) => ({
             loc: `/${product.category?.productCustomUrl || generateSlug(product.category.name)}/${product.customUrl ?? generateSlug(product.title)}/`,
             lastmod: new Date().toISOString(),
         }));
 
 
-        const subcategoriesPaths = subcategories.filter((val)=>val.status == 'PUBLISHED').map((product) => ({
+        const subcategoriesPaths = subcategories.filter((val) => val.status == 'PUBLISHED').map((product) => ({
             loc: `/${product.category?.productCustomUrl || generateSlug(product.category.name)}/${product.customUrl ?? generateSlug(product.title)}/`,
             lastmod: new Date().toISOString(),
         }));
@@ -61,6 +61,13 @@ module.exports = {
 
         return [...categoryPaths, ...productPaths, ...subcategoriesPaths];
 
+    },
+
+    transform: async (config, path) => {
+        return {
+            loc: path,
+            lastmod: new Date().toISOString(),
+        };
     },
 };
 
