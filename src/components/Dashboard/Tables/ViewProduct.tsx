@@ -12,11 +12,11 @@ import Link from 'next/link';
 import useColorMode from 'hooks/useColorMode';
 import TableSkeleton from './TableSkelton';
 import Swal from 'sweetalert2';
-import { toast } from 'react-toastify';
 import Table from 'components/ui/Table';
 import ViewsTableHeader from '../TableHeader/ViewsTableHeader';
 import { DateFormatHandler, getPath } from 'utils/helperFunctions';
 import { IProduct } from 'types/types';
+import { showAlert } from 'utils/Alert';
 
 interface Product extends IProduct {
   id: number;
@@ -105,10 +105,17 @@ const ViewProduct: React.FC<CategoryProps> = ({
         },
       );
       revalidateTag('products');
-
-      toast.success('Product Deleted: The product has been successfully deleted.');
-    } catch (err) {
-      toast.error('Deletion Failed: There was an error deleting the product.');
+        showAlert({
+          title: "Product Deleted",
+          text: "The product has been successfully deleted.",
+          icon: "success",
+        });
+      } catch (err) {
+        showAlert({
+          title: "Deletion Failed",
+          text: "There was an error deleting the product.",
+          icon: "error",
+        });
     }
     finally {
       setLoading(false)

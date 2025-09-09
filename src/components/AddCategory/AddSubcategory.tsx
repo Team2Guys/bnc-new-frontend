@@ -5,7 +5,6 @@ import Image from 'next/image';
 import axios from 'axios';
 import { Formik, Form } from 'formik';
 import { ISUBCATEGORY } from 'types/types';
-import showToast from 'components/Toaster/Toaster';
 import Imageupload from 'components/ImageUpload/Imageupload';
 import {
   subcategoryValidationSchema,
@@ -22,6 +21,7 @@ import Input from 'components/ui/Input';
 import ImageTextInput from 'components/Common/regularInputs/ImageTextInput';
 import { editCategoryProps, editSubCategoryNameType } from 'types/category';
 import { useConfirmModal } from 'components/ui/useConfirmModal';
+import { showAlert } from 'utils/Alert';
 
 
 const FormLayout = ({
@@ -61,7 +61,10 @@ const FormLayout = ({
   const onSubmit = async (values: ISUBCATEGORY, { resetForm }: any) => {
     console.log(values, 'values');
     if (values.CategoryId === undefined) {
-      return showToast('warn', 'Select parent category😟');
+      return showAlert({
+        title: "Select parent category 😟",
+        icon: "warning",
+      });
     }
     try {
       setloading(true);
@@ -69,7 +72,10 @@ const FormLayout = ({
       let bannerImage = bannerImageUrl && bannerImageUrl[0];
       if (!posterImageUrl) {
         setloading(false);
-        return showToast('warn', 'Make sure Image is selected😴');
+        return showAlert({
+          title: "Make sure Image is selected😴",
+          icon: "warning",
+        });
       }
       console.log(bannerImage + 'bannerImage');
       let { CategoryId, ...newValue } = {
@@ -108,12 +114,12 @@ const FormLayout = ({
       console.log(response, 'response');
       revalidateTag('subCategories');
 
-      showToast(
-        'success',
-        updateFlag
-          ? 'Sub Category has been sucessufully Updated🎉'
-          : 'Sub Category has been sucessufully Created🎉',
-      );
+      showAlert({
+        title: updateFlag
+          ? "Sub Category has been successfully Updated 🎉"
+          : "Sub Category has been successfully Created 🎉",
+        icon: "success",
+      });
       setloading(false);
 
       setposterimageUrl(undefined);

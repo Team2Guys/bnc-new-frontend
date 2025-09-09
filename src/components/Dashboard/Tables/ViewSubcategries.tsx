@@ -10,12 +10,12 @@ import Cookies from 'js-cookie';
 import { FaRegEye } from 'react-icons/fa';
 import { CategoryProps, ICategory, SUBCATEOGRY } from 'types/types';
 import Swal from 'sweetalert2';
-import { toast } from 'react-toastify';
 import Table from 'components/ui/Table';
 import ViewsTableHeader from '../TableHeader/ViewsTableHeader';
 import { DateFormatHandler, getPath } from 'utils/helperFunctions';
 import revalidateTag from 'components/ServerActons/ServerAction';
 import Link from 'next/link';
+import { showAlert } from 'utils/Alert';
 
 const ViewSubcategries = ({
   setMenuType,
@@ -88,12 +88,19 @@ const ViewSubcategries = ({
       );
 
       revalidateTag('subCategories')
-      toast.success('Category Deleted: The category has been successfully deleted.'
-      );
+      showAlert({
+        title: "Category Deleted",
+        text: "The category has been successfully deleted.",
+        icon: "success",
+      });
 
       return ;
     } catch (err) {
-      toast.error('Deletion Failed: There was an error deleting the category.');
+      showAlert({
+          title: "Deletion Failed",
+          text: "There was an error deleting the category.",
+          icon: "error",
+        });
     }
   };
 

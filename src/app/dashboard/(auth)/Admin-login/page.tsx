@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Toaster from 'components/Toaster/Toaster';
 import { useAppDispatch } from 'components/Others/HelperRedux';
 import { loggedInAdminAction } from '../../../../redux/slices/AdminsSlice';
 const USRcomponent = dynamic(() => import('components/userComponent/userComponent'), {
@@ -13,6 +12,7 @@ import NoneAuth from 'hooks/None-AuthHook';
 import Cookies from 'js-cookie';
 import { Api_handler } from 'utils/helperFunctions';
 import dynamic from 'next/dynamic';
+import { showAlert } from 'utils/Alert';
 
 const DashboardLogin = () => {
   const router = useRouter();
@@ -54,7 +54,10 @@ const DashboardLogin = () => {
       setloading(false);
       dispatch(loggedInAdminAction(response.user));
       setFormData(intialvalue);
-      Toaster('success', 'You have sucessfully login');
+      showAlert({
+        title: "You have successfully login",
+        icon: "success",
+      });
       setTimeout(() => {
         router.push('/dashboard');
       }, 1000);

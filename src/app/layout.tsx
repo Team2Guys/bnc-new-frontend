@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import PathnameWrapper from 'components/Pathcomponent/PathnameWrapper';
 import 'app/globals.css';
 import { Providers } from './Providers';
-import { ToastContainer } from 'react-toastify';
 import WhatsIcon from 'components/Icons/Whatsapp';
 import { GoogleTagManager } from '@next/third-parties/google';
 import Script from 'next/script';
@@ -17,7 +16,6 @@ export const roboto = Roboto({
   weight: ["300", "400", "500", "700", "900"],
   variable: '--font-roboto',
   display: 'swap',
-  adjustFontFallback: false,
 });
 
 export const robotoSerif = Roboto_Serif({
@@ -25,7 +23,6 @@ export const robotoSerif = Roboto_Serif({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
   variable: '--font-roboto-serif',
   display: 'swap',
-  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {
@@ -171,8 +168,6 @@ export default function RootLayout({
             {children}
             <WhatsIcon />
             <Callbutton />
-            <ToastContainer autoClose={3000} />
-
           </PathnameWrapper>
         </body>
       </html>

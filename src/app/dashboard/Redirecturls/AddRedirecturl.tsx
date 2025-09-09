@@ -5,10 +5,10 @@ import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import revalidateTag from 'components/ServerActons/ServerAction';
-import showToast from 'components/Toaster/Toaster';
 import { createRedirectUrl, updateRedirectUrl } from 'config/fetch';
 import { useConfirmModal } from 'components/ui/useConfirmModal';
 import Breadcrumb from 'components/Dashboard/Breadcrumbs/Breadcrumb';
+import { showAlert } from 'utils/Alert';
 
 interface IVIEWREDIRECTURLS {
   setRedirectUrls: React.Dispatch<SetStateAction<RedirectUrls | undefined>>
@@ -49,7 +49,10 @@ function AddRedirecturl({ RedirectUrls, setRedirectUrls, setselecteMenu }: IVIEW
       revalidateTag("RedirectUrls")
     } catch (error: any) {
       const graphQLError = error?.graphQLErrors?.[0]?.message;
-      showToast('error', graphQLError || "Internal server error")
+      showAlert({
+        title: graphQLError || "Internal server error",
+        icon: "error",
+      });
     } finally {
       setloading(false)
     }

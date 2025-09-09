@@ -6,7 +6,6 @@ import { formatDateMonth } from 'config';
 import { LiaEdit } from 'react-icons/lia';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import axios from 'axios';
-import showToast from 'components/Toaster/Toaster';
 import Image from 'next/image';
 import { FaRegEye } from 'react-icons/fa';
 import { generateSlug } from 'data/data';
@@ -16,6 +15,7 @@ import Swal, { SweetAlertResult } from 'sweetalert2';
 import revalidateTag from 'components/ServerActons/ServerAction';
 import Table from 'components/ui/Table';
 import ViewsTableHeader from '../TableHeader/ViewsTableHeader';
+import { showAlert } from 'utils/Alert';
 
 interface BlogProps {
   setMenuType: React.Dispatch<SetStateAction<string>>;
@@ -83,13 +83,19 @@ const ShowBlog: React.FC<BlogProps> = ({ setMenuType, setEditBlog, blogs, menuTy
         },
       );
       setfilteredBlog(((prev) => prev.filter((blog: any) => blog.id !== id)))
-      showToast('success', 'The blog has been successfully deleted👍');
+      showAlert({
+        title: "The blog has been successfully deleted 👍",
+        icon: "success",
+      });
       //@ts-expect-error
       queryClient.invalidateQueries(['blogs']);
       revalidateTag('blogs');
 
     } catch (error) {
-      showToast('warn', 'There was an error deleting the blog😢');
+      showAlert({
+        title: "There was an error deleting the blog 😢",
+        icon: "warning",
+      });
     }
   };
 

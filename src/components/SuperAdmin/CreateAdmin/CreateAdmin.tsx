@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import axios from 'axios';
-import Toaster from 'components/Toaster/Toaster';
 import Loader from 'components/Loader/Loader';
 import Cookies from 'js-cookie';
 import { createAdmin, formDataTypes } from 'types/interfaces';
@@ -11,6 +10,7 @@ import { checkboxData, intitalValues } from 'data/data';
 import revalidateTag from 'components/ServerActons/ServerAction';
 import Checkbox from 'components/ui/Checkbox';
 import { CheckboxProps } from 'types/types';
+import { showAlert } from 'utils/Alert';
 
 const CreateAdmin = ({ setselecteMenu, edit_admins, setedit_admins }: createAdmin) => {
   const [formData, setFormData] = useState<formDataTypes>(edit_admins ? edit_admins : intitalValues);
@@ -55,7 +55,10 @@ const CreateAdmin = ({ setselecteMenu, edit_admins, setedit_admins }: createAdmi
       );
       revalidateTag('admins')
       console.log(response, 'response');
-      Toaster('success', `Admin has been sucessfully ${edit_admins ? "Edited" : "Created"}`);
+      showAlert({
+        title: `Admin has been successfully ${edit_admins ? "Edited" : "Created"}`,
+        icon: "success",
+      });
       setFormData(intitalValues);
     } catch (err: any) {
       if (err.response && err.response.data && err.response.data.message) {

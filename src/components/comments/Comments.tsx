@@ -12,8 +12,8 @@ import {
   PinterestShareButton,
   WhatsappShareButton
 } from "react-share";
-import { toast } from 'react-toastify';
 import CustomModal from 'components/ui/Modal';
+import { showAlert } from 'utils/Alert';
 type CommentType = 'parent' | 'nested';
 interface CommentsProps {
   data: any;
@@ -101,7 +101,10 @@ function Comments({ data }: CommentsProps) {
         queryClient.invalidateQueries({ queryKey: ['blogs'] });
 
       } catch (error: any) {
-        toast.error(error?.message || "Internal server errorr")
+        showAlert({
+          title: error?.message || "Internal server error",
+          icon: "error",
+        });
       } finally {
         setloading(false)
 

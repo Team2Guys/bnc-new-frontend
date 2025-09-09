@@ -7,7 +7,6 @@ import { ICategory } from 'types/types';
 import { fetchCategories } from 'config/fetch';
 import Imageupload from 'components/ImageUpload/Imageupload';
 import axios from 'axios';
-import showToast from 'components/Toaster/Toaster';
 import Loader from 'components/Loader/Loader';
 import { UpdateBlog as IUpdateBlog, UpdateBlog } from 'types/interfaces';
 import { RxCross2 } from 'react-icons/rx';
@@ -18,6 +17,7 @@ import Cookies from 'js-cookie';
 import revalidateTag from 'components/ServerActons/ServerAction';
 import Select from 'components/ui/Select';
 import { useConfirmModal } from 'components/ui/useConfirmModal';
+import { showAlert } from 'utils/Alert';
 
 interface IAddBlogs {
   setMenuType: React.Dispatch<SetStateAction<string>>;
@@ -71,7 +71,10 @@ const AddBlogs = ({
       let posterImage = posterimageUrl && posterimageUrl[0];
       if (!posterImage) {
         if (isPublish) {
-          showToast('error', 'Please select Thumbnail image😴');
+          showAlert({
+          title: "Please select Thumbnail image😴",
+          icon: "error",
+        });
           throw new Error('No poster image selected');
         } else {
           setposterimageUrl([]);
@@ -105,19 +108,25 @@ const AddBlogs = ({
         setMenuType('Blogs');
         revalidateTag('blogs');
 
-        showToast(
-          'success',
-          EditInitialValues
-            ? 'Blog updated successfully🎉'
-            : 'Blog added successfully🎉',
-        );
+        showAlert({
+          title: EditInitialValues
+            ? "Blog updated successfully 🎉"
+            : "Blog added successfully 🎉",
+          icon: "success",
+        });
         setEditBlog(null);
       } else {
-        showToast('warn', 'Blog saved as Draft🎉');
+        showAlert({
+          title: "Blog saved as Draft 🎉",
+          icon: "warning",
+        });
       }
     },
     onError: (error: any) => {
-      showToast('error', error.data.message + '☹');
+      showAlert({
+        title: error?.data?.message + " ☹",
+        icon: "error",
+      });
       console.error('Error adding blog:', error);
     },
   });
@@ -294,10 +303,10 @@ const AddBlogs = ({
                 values.category === '' ||
                 values.title === ''
               ) {
-                return showToast(
-                  'error',
-                  'Ensure all fields are filled out 😴',
-                );
+                return showAlert({
+                  title: "Ensure all fields are filled out 😴",
+                  icon: "error",
+                });
               }
             }
 

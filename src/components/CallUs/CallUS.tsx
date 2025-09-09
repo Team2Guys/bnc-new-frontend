@@ -5,8 +5,8 @@ import React, { useState } from 'react'
 import { FiPhoneCall } from "react-icons/fi";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import showToast from 'components/Toaster/Toaster';
 import Link from 'next/link';
+import { showAlert } from 'utils/Alert';
 
 const CallUS = () => {
    const [loading, setloading] = useState(false)
@@ -49,9 +49,15 @@ const CallUS = () => {
          await response.json();
 
          resetForm()
-         showToast("success", "Form has been Submitted !")
-      } catch (error) {
-         showToast("error", 'Error sending email');
+         showAlert({
+         title: "Form has been Submitted 🎉",
+         icon: "success",
+         });
+         } catch (error) {
+         showAlert({
+         title: "Error sending email ☹",
+         icon: "error",
+         });
       } finally {
          setloading(false)
       }

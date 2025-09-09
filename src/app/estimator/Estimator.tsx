@@ -6,7 +6,6 @@ import Input from 'components/Common/regularInputs';
 import Container from 'components/Res-usable/Container/Container';
 import UnitSelector from '../../components/estimator-product/UnitSelector';
 import { EstimatorProductTypes } from 'types/interfaces';
-import showToast from 'components/Toaster/Toaster';
 import Link from 'next/link';
 import { WhatsAppInfo } from 'data/data';
 import Testimonial from 'components/ProductDetailPage/testimonial';
@@ -14,6 +13,7 @@ import InfoTabs from 'components/NewHomecomponents/info';
 import Breadcrumb from 'components/Res-usable/breadcrumb';
 import { tabData } from 'data/Homedata/tabdata';
 import { FaChevronDown } from 'react-icons/fa';
+import { showAlert } from 'utils/Alert';
 
 const EstimatorPage = ({ sortedProducts }: { sortedProducts: EstimatorProductTypes[] }) => {
   const [selectedProduct, setSelectedProduct] = useState<EstimatorProductTypes | null>(null);
@@ -55,12 +55,10 @@ const EstimatorPage = ({ sortedProducts }: { sortedProducts: EstimatorProductTyp
       if (!toastTimeout.current) {
         toastTimeout.current = setTimeout(() => {
           setproductError("Please select a product");  // Set the error message
-          showToast('error', 'Please select a product');
-
-          // setTimeout(() => {
-          //   setproductError("");  // Clear the error message after 1 second
-          // }, 1000);
-
+          showAlert({
+          title: "Please select a product",
+          icon: "error",
+        });
           toastTimeout.current = null;
         }, 1000);
       }
