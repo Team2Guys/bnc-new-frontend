@@ -40,6 +40,7 @@ const Blog = async () => {
   return (
     <>
       <TopHero title="Blogs" image={bgBreadcrum.src} pagename="blog" />
+
       <div className="mt-5">
           <BlogMain blogs={filteredBlog} />
           <div className="mt-10">
