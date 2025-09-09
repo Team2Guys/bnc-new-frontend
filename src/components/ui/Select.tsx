@@ -59,7 +59,7 @@ const Select: React.FC<SelectProps> = ({
             setOpen((prev) => !prev);
           }
         }}
-        className="w-full border rounded-md px-3 h-12 flex justify-between items-center text-black dark:text-white bg-white dark:bg-transparent outline-none"
+        className="w-full border rounded-md px-3 h-12 flex justify-between items-center text-black bg-white dark:bg-transparent outline-none"
       >
         <span>{options.find((opt) => opt.value === selected)?.label}</span>
         <FiChevronDown

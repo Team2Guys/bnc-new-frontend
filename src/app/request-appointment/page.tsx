@@ -7,7 +7,6 @@ const Testimonial = dynamic(() => import('components/ProductDetailPage/testimoni
 const AppointmentMapWrapper = dynamic(() => import('components/AppointmentMap/AppointmentMapWrapper'));
 import bgBreadcrum from '../../../public/assets/images/Breadcrum/endering.png';
 
-
 export const metadata: Metadata = {
   title: 'Blind And Curtains Dubai | Book Appointment',
   description: 'Spruce up your space with stylish blinds and curtains in Dubai. Book an appointment today for expert advice, custom designs, and perfect fits.',

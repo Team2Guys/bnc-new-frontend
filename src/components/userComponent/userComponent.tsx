@@ -6,7 +6,6 @@ import { IoArrowBackSharp } from 'react-icons/io5';
 import { usePathname, useRouter } from 'next/navigation';
 import { USRPROPS } from 'types/interfaces';
 import Container from 'components/Res-usable/Container/Container';
-import { Button } from 'components/ui/button';
 import Input from 'components/Common/regularInputs';
 import Select from 'components/ui/Select';
 
@@ -113,9 +112,9 @@ export default function UserComponent({
                       )}
                     </p>
 
-                    <Button type="submit">
+                    <button className='dashboard_primary_button' type="submit">
                       {loading ? <Loader color="#fff" /> : buttonTitle}
-                    </Button>
+                    </button>
                     <div className="flex justify-end space-y-3 w-full">
                       <p className="text-[#9096B2] text-sm">
                         {InstructionText && InstructionText}{' '}

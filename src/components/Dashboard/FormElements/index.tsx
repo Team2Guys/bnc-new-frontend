@@ -17,13 +17,13 @@ import {
   AddproductsinitialValues,
 } from 'data/data';
 import { ICategory } from 'types/types';
-import showToast from 'components/Toaster/Toaster';
 import revalidateTag from 'components/ServerActons/ServerAction';
 import TopButton from '../Layouts/TopButton';
 import Checkbox from 'components/ui/Checkbox';
 import Input from 'components/ui/Input';
 import ImageTextInput from 'components/Common/regularInputs/ImageTextInput';
 import { useConfirmModal } from 'components/ui/useConfirmModal';
+import { showAlert } from 'utils/Alert';
 
 const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
   EditInitialValues,
@@ -177,7 +177,10 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
       let bannerImage = bannerImageUrl && bannerImageUrl[0];
       let privarcyImage = privarcyImagemageUrl && privarcyImagemageUrl[0];
       if (!posterImageUrl || !(imagesUrl) || !(imagesUrl?.length > 0)) {
-        return showToast('warn', 'Please select relevant Images');
+        return showAlert({
+        title: "Please select relevant Images",
+        icon: "warning",
+      });
       }
 
       let newValues = {
@@ -282,11 +285,10 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
         },
       );
       revalidateTag('products');
-
-      showToast(
-        'success',
-        `Product has been successfully ${updateFlag ? 'updated!' : 'Addded'}`,
-      );
+      showAlert({
+        title: `Product has been successfully ${updateFlag ? "updated!" : "added!"}`,
+        icon: "success",
+      });
       setProductInitialValue(AddproductsinitialValues);
       resetForm();
       setloading(false);

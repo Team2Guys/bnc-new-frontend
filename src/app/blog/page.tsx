@@ -1,11 +1,9 @@
 import bgBreadcrum from '../../../public/assets/images/Blog/blogbackground.png';
-import PageSkelton from 'components/Skeleton/PageSkelton';
 import { BlogInfo } from 'types/interfaces';
 import dynamic from 'next/dynamic';
 const PopularBlog = dynamic(() => import('components/Blogs/popular-blog'));
 const BlogMain = dynamic(() => import('components/Blogs/blog-main'));
 const TopHero = dynamic(() => import('components/ui/top-hero'));
-import { Suspense } from 'react';
 import { Metadata } from 'next';
 import { fetchBlogs } from 'config/fetch';
 
@@ -44,12 +42,10 @@ const Blog = async () => {
       <TopHero title="Blogs" image={bgBreadcrum.src} pagename="blog" />
 
       <div className="mt-5">
-        <Suspense fallback={<PageSkelton />}>
           <BlogMain blogs={filteredBlog} />
           <div className="mt-10">
-            {filteredBlog?.length >= 3 && <PopularBlog blogs={blogs || []} />}
+            {filteredBlog?.length >= 3 && <PopularBlog blogs={filteredBlog || []} />}
           </div>
-        </Suspense>
       </div>
       <div className="mt-0 sm:mt-16 lg:mt-20 max-sm:mb-10" />
     </>

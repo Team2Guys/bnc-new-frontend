@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import PathnameWrapper from 'components/Pathcomponent/PathnameWrapper';
 import 'app/globals.css';
 import { Providers } from './Providers';
-import { ToastContainer } from 'react-toastify';
 import WhatsIcon from 'components/Icons/Whatsapp';
 import { GoogleTagManager } from '@next/third-parties/google';
 import Script from 'next/script';
@@ -14,14 +13,14 @@ import Callbutton from 'components/callbutton/callbutton';
 
 export const roboto = Roboto({
   subsets: ['latin'],
-  weight: ['100', '300', '400', '500', '700', '900'],
+  weight: ["300", "400", "500", "700", "900"],
   variable: '--font-roboto',
   display: 'swap',
 });
 
 export const robotoSerif = Roboto_Serif({
   subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   variable: '--font-roboto-serif',
   display: 'swap',
 });
@@ -169,8 +168,6 @@ export default function RootLayout({
             {children}
             <WhatsIcon />
             <Callbutton />
-            <ToastContainer autoClose={3000} />
-
           </PathnameWrapper>
         </body>
       </html>

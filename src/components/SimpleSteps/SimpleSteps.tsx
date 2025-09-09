@@ -1,42 +1,11 @@
 "use client";
-
-import { useEffect, useRef } from "react";
 import Container from "components/Res-usable/Container/Container";
 import { workingProcessData } from "data/SellerSlider";
 import Image from "next/image";
 import Link from "next/link";
 export default function SimpleSteps() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (videoRef.current) {
-          if (entry.isIntersecting) {
-            videoRef.current.play();
-          } else {
-            videoRef.current.pause();
-          }
-        }
-      },
-      {
-        threshold: 0.5,
-      }
-    );
-
-    if (videoRef.current) {
-      observer.observe(videoRef.current);
-    }
-
-    return () => {
-      if (videoRef.current) {
-        observer.unobserve(videoRef.current);
-      }
-    };
-  }, []);
 
   return (
-    // <div className="bg-secondary-foreground sm:bg-transparent pb-5 sm:pb-0">
       <Container className="mt-5 md:mt-10">
         <div className="mx-auto px-1 md:px-4">
           <div className="sm:py-7 pt-5 pb-0 space-y-5">
@@ -106,6 +75,5 @@ export default function SimpleSteps() {
           </div>
         </div>
       </Container>
-    // </div>
   );
 }

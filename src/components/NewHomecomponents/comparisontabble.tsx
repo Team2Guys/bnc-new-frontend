@@ -13,9 +13,7 @@ export default function ComparisonTable() {
         <h2 className="font-robotoSerif font-semibold text-24 lg:font-bold text-primary xl:text-[48px] my-3 xl:mt-7 lg:text-[40px]">
           We Don’t Just Compete – We Lead
         </h2>
-          {/* <p className="font-roboto font-normal lg:font-semibold text-16 md:text-20 text-[#3E3F42] my-3 lg:mb-7">Top Picks for Your Home</p> */}
        <div className="grid grid-cols-3">
-       {/* Header Row */}
        <div className="h-[60px] lg:h-[70px]"></div>
        <div className="bg-[#3E3F421A] h-[60px] lg:h-[70px] flex justify-center items-center font-bold font-roboto text-16 xl:text-24 text-primary rounded-t-md md:rounded-t-2xl">
        Blinds and Curtains
@@ -23,8 +21,6 @@ export default function ComparisonTable() {
       <div className="bg-white h-[60px] lg:h-[70px] flex justify-center items-center font-bold font-roboto text-16 xl:text-24 text-primary">
       Others
       </div>
-
-      {/* Left Column - Features */}
       <FeaturesColumn features={features} featureMobile={mobilefeatures} popupData={popupData} />
      <div className="bg-[#3E3F421A] divide-y divide-gray-200 text-primary rounded-b-md md:rounded-b-2xl">
     {blindsData.map((item, index) => {

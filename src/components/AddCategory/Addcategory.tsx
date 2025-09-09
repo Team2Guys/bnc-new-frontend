@@ -4,8 +4,6 @@ import Imageupload from 'components/ImageUpload/Imageupload';
 import { RxCross2 } from 'react-icons/rx';
 import Image from 'next/image';
 import { ImageRemoveHandler } from 'utils/helperFunctions';
-
-import Toaster from 'components/Toaster/Toaster';
 import axios from 'axios';
 import { Formik, Form, FieldArray } from 'formik';
 
@@ -20,6 +18,7 @@ import Input from 'components/ui/Input';
 import ImageTextInput from 'components/Common/regularInputs/ImageTextInput';
 import { editCategoryNameType, editCategoryProps } from 'types/category';
 import { useConfirmModal } from 'components/ui/useConfirmModal';
+import { showAlert } from 'utils/Alert';
 
 const FormLayout = ({
   seteditCategory,
@@ -98,12 +97,12 @@ const FormLayout = ({
         });
       }
       setloading(false);
-      Toaster(
-        'success',
-        updateFlag
-          ? 'Category has been sucessufully updated !'
-          : 'Category has been sucessufully Created !',
-      );
+      showAlert({
+        title: updateFlag
+          ? "Category has been successfully updated 🎉"
+          : "Category has been successfully created 🎉",
+        icon: "success",
+      });
       updateFlag ? seteditCategory(null) : null;
       setposterimageUrl(undefined);
       setBannerImageUrl(undefined);

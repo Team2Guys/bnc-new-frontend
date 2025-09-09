@@ -15,9 +15,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const productName = (await params).category + "/";
 
-
   let Category = await fetchSingleCategory(productName)
-  console.log(Category, "Category")
 
   if (!Category) {
     notFound();

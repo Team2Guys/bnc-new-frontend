@@ -8,7 +8,6 @@ const CommentsData = dynamic(() => import('components/Dashboard/Blogs/comment-da
 const Comment = async() => {
   let blogs = await fetchBlogs()
 
-
   return (
     <DefaultLayout>
       <Breadcrumb pageName={"Blogs Comment"} />

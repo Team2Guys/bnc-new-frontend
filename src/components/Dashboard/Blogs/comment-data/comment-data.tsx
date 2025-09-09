@@ -1,10 +1,10 @@
 "use client";
 import axios from "axios";
 import { useAppSelector } from "components/Others/HelperRedux";
-import showToast from "components/Toaster/Toaster";
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import ProtectedRoute from "hooks/AuthHookAdmin";
+import { showAlert } from "utils/Alert";
 
 interface IComment {
   id: number;
@@ -60,10 +60,16 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
         { status: "APPROVED" },
         { headers }
       );
-      showToast("success", "Comment approved successfully 🎉");
+      showAlert({
+        title: "Comment approved successfully 🎉",
+        icon: "success",
+      });
     } catch (error) {
       console.error("Error approving the comment:", error);
-      showToast("error", "Failed to approve the comment 😢");
+      showAlert({
+        title: "Failed to approve the comment 😢",
+        icon: "error",
+      });
       updateCommentStatus(comment.id, item.id, "PENDING");
     } finally {
       setTimeout(() => {
@@ -82,10 +88,16 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
         { status: "REJECTED" },
         { headers }
       );
-      showToast("success", "Comment rejected successfully ❌");
+      showAlert({
+        title: "Comment rejected successfully ❌",
+        icon: "success",
+      });
     } catch (error) {
       console.error("Error rejecting the comment:", error);
-      showToast("error", "Failed to reject the comment 😢");
+       showAlert({
+          title: "Failed to reject the comment 😢",
+          icon: "error",
+        });
       updateCommentStatus(comment.id, item.id, "PENDING");
     } finally {
       setTimeout(() => {

@@ -12,8 +12,7 @@ import VideoReelsSlider from 'components/VideoSlider/VideoSlider';
 import OurClient from 'components/Our-Client/OurClient';
 import Review_banner from 'components/ReviewBanner/Review_banner';
 import { IProduct } from 'types/types';
-import dynamic from 'next/dynamic';
-const SellerSlider = dynamic(() => import('components/BestSellerSlider/SellerCard'));
+import SellerSlider from 'components/BestSellerSlider/SellerCard';
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://blindsandcurtains.ae/"),

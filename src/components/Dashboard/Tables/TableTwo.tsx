@@ -10,10 +10,10 @@ import useColorMode from 'hooks/useColorMode';
 import Cookies from 'js-cookie';
 import { CategoryProps, ICategory } from 'types/types';
 import Swal from 'sweetalert2';
-import { toast } from 'react-toastify';
 import Table from 'components/ui/Table';
 import ViewsTableHeader from '../TableHeader/ViewsTableHeader';
 import { DateFormatHandler } from 'utils/helperFunctions';
+import { showAlert } from 'utils/Alert';
 
 const TableTwo = ({
   setMenuType,
@@ -77,11 +77,18 @@ const TableTwo = ({
         },
       );
       setCategory((prev: any) => prev.filter((item: any) => item.id != key));
-      toast.success(
-        'Category Deleted: The category has been successfully deleted.');
-    } catch (err) {
-      toast.error('Deletion Failed: There was an error deleting the category.');
-    }
+       showAlert({
+        title: "Category Deleted",
+        text: "The category has been successfully deleted.",
+        icon: "success",
+      });
+      } catch (err) {
+        showAlert({
+          title: "Deletion Failed",
+          text: "There was an error deleting the category.",
+          icon: "error",
+        });
+      }
   };
 
   const handleEdit = (record: any) => {

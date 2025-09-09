@@ -1,9 +1,8 @@
 "use client";
 import axios, { AxiosResponse } from "axios";
-import showToast from "components/Toaster/Toaster";
-
 import React, { ChangeEvent, DragEvent, SetStateAction, useRef, useState } from "react";
 import { BsCloudDownload, BsCloudUpload } from "react-icons/bs";
+import { showAlert } from "utils/Alert";
 
  interface ImagesProps {
   imageUrl: string;
@@ -18,8 +17,6 @@ interface PROPS {
   multiple?: boolean
   s3Flag?:boolean
 }
-
-
 
 const UploadFile = ({ setImagesUrl, setposterimageUrl, sethoverImage, video, multiple,s3Flag }: PROPS) => {
   const [isDraggableArea, setIsDraggableArea] = useState<boolean>(false);
@@ -36,7 +33,10 @@ const UploadFile = ({ setImagesUrl, setposterimageUrl, sethoverImage, video, mul
         const isImage = file.type.startsWith('image/');
         const isVideo = file.type.startsWith('video/');
         if (!isImage && !isVideo) {
-          showToast("error", `Skipped unsupported file type: ${file.name}`);
+          showAlert({
+            title: `Skipped unsupported file type: ${file.name}`,
+            icon: "error",
+          });
           continue;
         }
 
@@ -45,7 +45,10 @@ const UploadFile = ({ setImagesUrl, setposterimageUrl, sethoverImage, video, mul
 
         if ((isImage && file.size > maxImageSize) || (isVideo && file.size > maxVideoSize)
         ) {
-          showToast("error", `Skipped large file: ${file.name} Please upload file in less size`);
+        showAlert({
+            title: `Skipped large file: ${file.name} Please upload file in less size`,
+            icon: "error",
+          });
           continue;
         }
 

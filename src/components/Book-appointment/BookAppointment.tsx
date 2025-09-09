@@ -1,12 +1,8 @@
 'use client';
 import React, { useState } from 'react';
-import Select from 'react-select';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import axios from 'axios';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import showToast from 'components/Toaster/Toaster';
 import { AppointmentProps, ContactMethods, ProductOptions } from 'types/types';
 import HorizontalDatePicker from './HorizontalDatePicker';
 import TimeSlotPicker from './TimeSlotPicker';
@@ -15,6 +11,8 @@ import Image from 'next/image';
 import Loader from 'components/Loader/Loader';
 import { useRouter } from 'next/navigation';
 import Checkbox from 'components/ui/Checkbox';
+import CustomSelect from 'components/ui/CustomSelect';
+import { showAlert } from 'utils/Alert';
 interface IAppointments {
   name: string;
   phone_number: string;
@@ -48,7 +46,11 @@ const BookAppointment: React.FC<AppointmentProps> = ({
       );
       return response.data;
     } catch (error: any) {
-      showToast('error', error.message || JSON.stringify(error));
+      showAlert({
+      title: "Error",
+      text: error.message || JSON.stringify(error),
+      icon: "error",
+    });
     }
   };
 
@@ -107,8 +109,6 @@ const BookAppointment: React.FC<AppointmentProps> = ({
     windows: '',
     area: '',
   });
-
-
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -209,7 +209,10 @@ const BookAppointment: React.FC<AppointmentProps> = ({
           product_type: productTypeArray,
           area: formData.area + ' ' + selectedCity
         });
-
+        showAlert({
+          title: "Appointment submitted successfully",
+          icon: "success",
+        });
         if (typeof window !== 'undefined') {
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
@@ -218,21 +221,20 @@ const BookAppointment: React.FC<AppointmentProps> = ({
             page_location: window.location.origin + '/thank-you/',
           });
         }
-
         router.push('/thank-you');
-
         setFormData({
           ...formInitialValues,
           how_user_find_us: '',
-
         });
-
         setTimeout(() => setFormData(formInitialValues), 0);
         setSelectedOptions(getInitialSelectedOptions());
         setContactMethods(initialContactMethods)
 
       } catch (error) {
-        toast.error('Failed to submit the appointment. Please try again.');
+        showAlert({
+          title: "Failed to submit the appointment. Please try again.",
+          icon: "error",
+        });
       } finally {
         setLoading(false);
       }
@@ -438,25 +440,20 @@ const BookAppointment: React.FC<AppointmentProps> = ({
             )}
           </div>
           <div>
-            <label
-              htmlFor="how_user_find_us"
-              className="block text-sm sm:text-xl font-roboto font-medium"
-            >
-              How Did You Hear About Us?
-            </label>
-            <Select
+             <label
+          htmlFor="how_user_find_us"
+          className="block text-sm sm:text-xl font-roboto font-medium"
+        >
+          How Did You Hear About Us?
+        </label>
+        <CustomSelect
               instanceId="window-options-select"
-              isSearchable={false}
               options={referralOptions}
-              onChange={(option: any) =>
-                handleSelectChange('how_user_find_us', option?.value || null)
+              onChange={(option) =>
+                handleSelectChange('how_user_find_us', option?.value ?? null)
               }
-              value={
-                referralOptions.find(
-                  (option) => option.value === formData.how_user_find_us,
-                ) || null
-              }
-              className="mt-1 w-full text-sm sm:text-xl font-medium custom-select"
+              value={formData.how_user_find_us}
+              className="mt-1 w-full text-sm sm:text-base font-medium custom-select"
             />
           </div>
         </div>

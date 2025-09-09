@@ -7,8 +7,6 @@ import Link from "next/link";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 
 export default function ReviewBanner() {
-
-
   return (
     <div className="pt-5 lg:pt-10 bg-secondary-foreground">
       <Container className="grid grid-cols-1 md:grid-cols-2">
@@ -53,7 +51,7 @@ export default function ReviewBanner() {
       </div>
       
        <div className="hidden sm:block">
-      <div className=" mt-5 md:mt-10 relative">
+        <div className=" mt-5 md:mt-10 relative">
         <ReviewBackgrounddashktop />
         <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-robotoSerif text-center sm:text-[19px] md:text-24 xl:text-32 font-bold xl:font-bold text-primary-foreground max-sm:px-6 w-full ">
           Dubai Homeowners Have Crowned Us With Their Trust!

@@ -11,7 +11,6 @@ import { RxCross2 } from 'react-icons/rx';
 
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import revalidateTag from 'components/ServerActons/ServerAction';
-import showToast from 'components/Toaster/Toaster';
 import { ProductImages } from 'types/types';
 import { createReview, updateReview } from 'config/fetch';
 import { initiValuesProps, IREVIEWS, } from 'types/general';
@@ -19,6 +18,7 @@ import ImageTextInput from 'components/Common/regularInputs/ImageTextInput';
 import Input from 'components/ui/Input';
 import Breadcrumb from 'components/Dashboard/Breadcrumbs/Breadcrumb';
 import { useConfirmModal } from 'components/ui/useConfirmModal';
+import { showAlert } from 'utils/Alert';
 
 
 
@@ -82,7 +82,10 @@ function AddReview({ editReview, setEditsetReview, setselecteMenu }: I_Add_Revie
     } //eslint-disable-next-line
     catch (error: any) {
       const graphQLError = error?.graphQLErrors?.[0]?.message;
-      showToast('error', graphQLError || "Internal server error")
+      showAlert({
+        title: graphQLError || "Internal server error",
+        icon: "error",
+      });
     } finally {
       setloading(false)
     }
