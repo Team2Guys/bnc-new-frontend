@@ -14,7 +14,7 @@ const excludePages = [
 ]
 
 module.exports = {
-    siteUrl: 'https://ppc.blindsandcurtains.ae/',
+    siteUrl: 'https://blindsandcurtains.ae/',
     generateRobotsTxt: true,
     generateIndexSitemap: false,
     sitemapSize: 5000,
@@ -29,7 +29,7 @@ module.exports = {
                 disallow: excludePages
             },
         ],
-        additionalSitemaps: ['https://ppc.blindsandcurtains.ae/sitemap.xml']
+        additionalSitemaps: ['https://blindsandcurtains.ae/sitemap.xml']
     },
 
 
