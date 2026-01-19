@@ -28,12 +28,6 @@ const fetchProducts = async () => {
     console.log(error)
   }
 
-
-
-
-
-
-
 };
 
 

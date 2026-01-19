@@ -145,82 +145,95 @@ const AppointmentsClient = ({ appointments }: { appointments: IAppointments[] })
             )
           }
           {isModalVisible && selectedAppointment && (
-            <CustomModal
-              title={
-                <div className="flex items-center space-x-3">
-                  <div className="bg-gradient-to-r from-blue-600 border to-indigo-600 text-white rounded-full w-9 h-9 flex items-center justify-center font-semibold shadow-md">
-                    {selectedAppointment.name[0]}
-                  </div>
-                  <span className="text-xl font-bold text-gray-900 dark:text-white">
-                    {selectedAppointment.name}
-                  </span>
-                </div>
-              }
-              open={isModalVisible}
-              onClose={handleCloseModal}
-            >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
-                {/* Preferred Contact Method */}
-                <div className="p-5 rounded-2xl bg-gradient-to-br from-indigo-50 to-white dark:from-gray-800 dark:to-gray-900 shadow-sm hover:shadow-md transition border border-gray-50 dark:border-gray-100">
-                  <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                    Preferred Contact Method
-                  </p>
-                  <p className="mt-2 text-base font-semibold text-gray-800 dark:text-gray-200">
-                    {selectedAppointment.prefered_contact_method}
-                  </p>
-                </div>
+           <CustomModal
+  title={
+    <div className="flex items-center space-x-3">
+      <div className="bg-gradient-to-r from-blue-600 border to-indigo-600 text-white rounded-full w-9 h-9 flex items-center justify-center font-semibold shadow-md">
+        {selectedAppointment.name[0]}
+      </div>
+      <span className="text-xl font-bol dark:text-white">
+        {selectedAppointment.name}
+      </span>
+    </div>
+  }
+  open={isModalVisible}
+  onClose={handleCloseModal}
+>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+    {/* Preferred Contact Method */}
+    {selectedAppointment.prefered_contact_method && (
+      <div className="p-5 rounded-2xl bg-gradient-to-br from-indigo-50 to-white dark:from-gray-800 dark:to-gray-900 shadow-sm hover:shadow-md transition border border-gray-50 dark:border-gray-100">
+        <p className="appointment_popup_heading">
+          Preferred Contact Method
+        </p>
+        <p className="mt-2 text-base font-semibold  dark:text-white">
+          {selectedAppointment.prefered_contact_method}
+        </p>
+      </div>
+    )}
 
-                {/* Windows */}
-                <div className="p-5 rounded-2xl bg-gradient-to-br from-blue-50 to-white dark:from-gray-800 dark:to-gray-900 shadow-sm hover:shadow-md transition border border-gray-50 dark:border-gray-100">
-                  <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                    Windows
-                  </p>
-                  <p className="mt-2 text-base font-semibold text-gray-800 dark:text-gray-200">
-                    {selectedAppointment.windows}
-                  </p>
-                </div>
+    {/* Windows */}
+    {selectedAppointment.windows && (
+      <div className="p-5 rounded-2xl bg-gradient-to-br from-blue-50 to-white dark:from-gray-800 dark:to-gray-900 shadow-sm hover:shadow-md transition border border-gray-50 dark:border-gray-100">
+        <p className="appointment_popup_heading">
+          Windows
+        </p>
+        <p className="mt-2 text-base font-semibold  dark:text-white">
+          {selectedAppointment.windows}
+        </p>
+      </div>
+    )}
 
-                {/* Product Type */}
-                <div className="p-5 rounded-2xl bg-gradient-to-br from-emerald-50 to-white dark:from-gray-800 dark:to-gray-900 shadow-sm hover:shadow-md transition border border-gray-50 dark:border-gray-100">
-                  <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                    Product Type
-                  </p>
-                  <p className="mt-2 text-base font-semibold text-gray-800 dark:text-gray-200">
-                    {selectedAppointment.product_type}
-                  </p>
-                </div>
+    {/* Product Type */}
+   {selectedAppointment.product_type && (
+  <div className="p-5 rounded-2xl bg-gradient-to-br from-emerald-50 to-white dark:from-gray-800 dark:to-gray-900 shadow-sm hover:shadow-md transition border border-gray-50 dark:border-gray-100">
+    <p className="appointment_popup_heading">
+      Product Type
+    </p>
+    <p className="mt-2 text-base font-semibold  dark:text-white">
+      {selectedAppointment.product_type}
+    </p>
+  </div>
+)}
 
-                {/* How User Found Us */}
-                <div className="p-5 rounded-2xl bg-gradient-to-br from-pink-50 to-white dark:from-gray-800 dark:to-gray-900 shadow-sm hover:shadow-md transition border border-gray-50 dark:border-gray-100">
-                  <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                    How User Found Us
-                  </p>
-                  <p className="mt-2 text-base font-semibold text-gray-800 dark:text-gray-200">
-                    {selectedAppointment.how_user_find_us}
-                  </p>
-                </div>
+    {/* How User Found Us */}
+    {selectedAppointment.how_user_find_us && (
+      <div className="p-5 rounded-2xl bg-gradient-to-br from-pink-50 to-white dark:from-gray-800 dark:to-gray-900 shadow-sm hover:shadow-md transition border border-gray-50 dark:border-gray-100">
+        <p className="appointment_popup_heading">
+          How User Found Us
+        </p>
+        <p className="mt-2 text-base font-semibold  dark:text-white">
+          {selectedAppointment.how_user_find_us}
+        </p>
+      </div>
+    )}
 
-                {/* User Query (full width) */}
-                <div className="md:col-span-2 p-5 rounded-2xl bg-gradient-to-br from-yellow-50 to-white dark:from-gray-800 dark:to-gray-900 shadow-sm hover:shadow-md transition border border-gray-50 dark:border-gray-100">
-                  <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                    User Query
-                  </p>
-                  <p className="mt-2 text-base font-medium text-gray-700 dark:text-gray-300">
-                    {selectedAppointment.user_query}
-                  </p>
-                </div>
+    {/* User Query (full width) */}
+    {selectedAppointment.user_query && (
+      <div className="md:col-span-2 p-5 rounded-2xl bg-gradient-to-br from-yellow-50 to-white dark:from-gray-800 dark:to-gray-900 shadow-sm hover:shadow-md transition border border-gray-50 dark:border-gray-100">
+        <p className="appointment_popup_heading">
+          User Query
+        </p>
+        <p className="mt-2 text-base font-medium  dark:text-white">
+          {selectedAppointment.user_query}
+        </p>
+      </div>
+    )}
 
-                {/* Preferred Date (full width) */}
-                <div className="md:col-span-2 p-5 rounded-2xl bg-gradient-to-br from-purple-50 to-white dark:from-gray-800 dark:to-gray-900 shadow-sm hover:shadow-md transition border border-gray-50 dark:border-gray-100">
-                  <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                    Preferred Date
-                  </p>
-                  <p className="mt-2 text-base font-semibold text-gray-800 dark:text-gray-200">
-                    {selectedAppointment.prefered_Date}
-                  </p>
-                </div>
-              </div>
-            </CustomModal>
+    {/* Preferred Date (full width) */}
+    {selectedAppointment.prefered_Date && (
+      <div className="md:col-span-2 p-5 rounded-2xl bg-gradient-to-br from-purple-50 to-white dark:from-gray-800 dark:to-gray-900 shadow-sm hover:shadow-md transition border border-gray-50 dark:border-gray-100">
+        <p className="appointment_popup_heading">
+          Preferred Date
+        </p>
+        <p className="mt-2 text-base font-semibold  dark:text-white">
+          {selectedAppointment.prefered_Date}
+        </p>
+      </div>
+    )}
+  </div>
+</CustomModal>
+
 
           )}
         </>

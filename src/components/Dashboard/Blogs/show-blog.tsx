@@ -2,7 +2,7 @@
 import React, { Fragment, SetStateAction, useEffect, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { BlogInfo, UpdateBlog } from 'types/interfaces';
-import { formatDateMonth } from 'config';
+import { formatDateDayMonthYear } from 'config';
 import { LiaEdit } from 'react-icons/lia';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import axios from 'axios';
@@ -125,7 +125,7 @@ const ShowBlog: React.FC<BlogProps> = ({ setMenuType, setEditBlog, blogs, menuTy
       title: 'Created At',
       key: 'createdAt',
       render: (record: BlogInfo) =>
-        formatDateMonth(record.createdAt),
+        formatDateDayMonthYear(record.createdAt),
     },
     {
       title: 'Category',

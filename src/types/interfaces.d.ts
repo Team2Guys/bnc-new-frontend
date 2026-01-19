@@ -226,10 +226,6 @@ export interface TFooterSection {
   links: FooterLink[];
 }
 
-export interface SupportItem {
-  title: string;
-  description: string;
-}
 
 export type BannerData = {
   imageUrl: string;
@@ -278,6 +274,11 @@ export interface TProductGuarantees {
   text: string;
   image: string;
   imageAlign: 'left' | 'right';
+  icons?: {
+    heading: string;
+    text: string;
+    icon: string;
+  }[]
 }
 
 export interface formDataTypes {

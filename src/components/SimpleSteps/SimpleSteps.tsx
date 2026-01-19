@@ -9,13 +9,13 @@ export default function SimpleSteps() {
       <Container className="mt-5 md:mt-10">
         <div className="mx-auto px-1 md:px-4">
           <div className="sm:py-7 pt-5 pb-0 space-y-5">
-            <h2 className="categoryHeading text-primary text-center block font-bold text-24 lg:text-[48px] font-robotoSerif">
+            <h2 className="categoryHeading text-primary text-center block font-bold text-24 lg:text-[48px] font-futura">
               {workingProcessData.heading}
             </h2>
             <p className="font-normal text-[20px] mb-2 text-center font-roboto text-primary max-w-5xl mx-auto sm:block hidden">
               {workingProcessData.subheading}
             </p>
-            <h3 className="sm:text-2xl text-xl sm:font-bold font-semibold text-primary mb-6 text-center font-robotoSerif block sm:hidden">
+            <h3 className="sm:text-2xl text-xl sm:font-bold font-semibold text-primary mb-6 text-center font-futura block sm:hidden">
               Just <span className="text-[#F1B42F]">4</span> Simple Steps
             </h3>
           </div>
@@ -23,18 +23,20 @@ export default function SimpleSteps() {
           <div className="flex md:flex-row flex-col justify-center gap-8 md:gap-3 lg:gap-8 items-center sm:bg-secondary-foreground">
             <div className="relative w-full h-full md:h-[600px] sm:w-3/5 sm:pt-5 lg:pt-0 xl:pb-10">
               <video
-                src={workingProcessData.videoUrl}
-                className="w-full h-full object-fill"
+                poster="/assets/images/video-home.avif"
+                preload="none"
                 autoPlay
-                loop
                 muted
+                loop
                 playsInline
-                aria-describedby="video-caption"
-              />
+                className="w-full h-full object-fill"
+              >
+                <source src={workingProcessData.videoUrl} type="video/mp4" />
+              </video>
             </div>
 
             <div className="w-full md:sm:w-2/5 flex flex-col justify-center items-center sm:pb-5">
-              <h3 className="text-[24px] font-bold text-primary mb-6 md:mb-3 xl:mt-6 font-robotoSerif sm:block hidden">
+              <h3 className="text-[24px] font-bold text-primary mb-6 md:mb-3 xl:mt-6 font-futura sm:block hidden">
                 Just <span className="text-[#F1B42F]">4</span> Simple Steps
               </h3>
               <div>
@@ -54,7 +56,7 @@ export default function SimpleSteps() {
                       />
                     </div>
                     <div className="flex flex-col justify-center pt-3">
-                      <h4 className="text-[18px] sm:text-[20px] md:text-[16px] lg:text-[18px] xl:text-[20px] font-bold text-primary font-robotoSerif capitalize">
+                      <h4 className="text-[18px] sm:text-[20px] md:text-[16px] lg:text-[18px] xl:text-[20px] font-bold text-primary font-futura capitalize">
                         {step.title}
                       </h4>
                       <p className="text-[16px] md:text-[14px] lg:text-[16px] xl:text-[20px] text-primary font-roboto">

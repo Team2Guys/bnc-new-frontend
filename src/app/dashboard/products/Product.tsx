@@ -66,13 +66,9 @@ const Products = ({ products, categories , subcategories }: PRODUCTS_PROPS) => {
         videos: editProduct && editProduct.videos,
         privacySectoin: editProduct && editProduct.privacySectoin || [],
         privarcyImage: editProduct && editProduct.privarcyImage ,
- 
-
-
+        recalledByCategories: editProduct?.recalledByCategories?.map((value: ICategory) => value.id) || [],
   };
 
-
-  console.log(editProduct?.privarcyImage, "privarcyImagemageUrl")
   let productFlag: boolean = selecteMenu === 'Categories' ? true : false;
   return (
     <>

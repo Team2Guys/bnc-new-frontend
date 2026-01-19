@@ -80,7 +80,7 @@ const CustomSelect = ({
                 </div>
               ))
             ) : (
-              <div className="p-3 text-gray-500 text-center">No options found</div>
+              <div className="p-3 text-primary text-center">No options found</div>
             )}
           </div>
         </div>

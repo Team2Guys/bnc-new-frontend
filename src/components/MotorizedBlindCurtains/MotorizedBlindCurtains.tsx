@@ -4,11 +4,10 @@ import { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { motorizeBlindData } from "data/SellerSlider";
 import { FaPlay } from "react-icons/fa";
 import videoPoster from '../../../public/videos/video-poster.webp'
+import "style/motorizedblindcurtains.css"
 
 export default function MotorizeBlindCurtain() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -41,17 +40,17 @@ export default function MotorizeBlindCurtain() {
   };
 
   return (
-    <div className="motorizedblindcurtains mt-5 md:mt-10">
+    <div className="motorizedblindcurtains mt-5 md:mt-10 max-w-screen-2xl 2xl:max-w-screen-xxl mx-auto">
 
-      <h2 className="text-center font-robotoSerif text-xl sm:text-4xl font-bold sm:mb-10 mb-5 text-primary px-4 md:px-0 hidden md:block">
+      <h2 className="text-center font-futura text-xl sm:text-4xl font-bold sm:mb-10 mb-5 text-primary px-4 md:px-0 hidden md:block">
         {motorizeBlindData.heading}
       </h2>
-      <h2 className="text-center font-robotoSerif text-2xl sm:text-4xl font-bold sm:mb-10 mb-5 text-primary px-4 md:px-0 block md:hidden">
+      <h2 className="text-center font-futura text-2xl sm:text-4xl font-bold sm:mb-10 mb-5 text-primary px-4 md:px-0 block md:hidden">
         New! Motorised Blinds And curtains
       </h2>
       {/* Video Section */}
       <div
-        className="relative w-full mx-auto overflow-hidden h-[272px] sm:h-[400px]  lg:h-[744px] group cursor-pointer"
+        className="relative w-full mx-auto overflow-hidden h-[272px] sm:h-[400px] lg:h-[744px] group cursor-pointer"
         onClick={togglePlayPause}
       >
         <video
@@ -92,7 +91,7 @@ export default function MotorizeBlindCurtain() {
             <Link
               key={i}
               href={link}
-              className="bg-secondary hover:bg-yellow-500 text-primary font-semibold font-roboto py-2 lg:py-4 px-5 rounded-md shadow-md sm:text-base text-12 transition hover:opacity-65 "
+              className="bg-secondary hover:bg-yellow-500 text-primary font-semibold font-roboto py-2 lg:py-4 px-5 rounded-md shadow-md sm:text-base text-xs transition hover:opacity-65 "
               aria-label="moterised-video"
             >
               {label}
@@ -106,7 +105,7 @@ export default function MotorizeBlindCurtain() {
         {motorizeBlindData.features.map(({ icon, label }, i) => (
           <div key={i} className="flex flex-col items-center gap-2 relative">
             <div className="w-20 h-20 relative">
-              <Image src={icon} alt={label} fill className="object-contain" loading="lazy" />
+              <Image src={icon} alt={label} fill className="object-contain" loading="lazy" sizes="80px" />
             </div>
             <p className="text-lg text-primary font-medium font-roboto">
               {label}
@@ -132,7 +131,7 @@ export default function MotorizeBlindCurtain() {
                   loading="lazy"
                 />
               </div>
-              <p className=" text-lg sm:text-10 text-gray-700 font-medium text-center mt-2">
+              <p className=" text-lg sm:text-[10px] text-gray-700 font-medium text-center mt-2">
                 {label}
               </p>
             </div>

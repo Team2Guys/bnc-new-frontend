@@ -1,26 +1,39 @@
 'use client';
 import { ApexOptions } from 'apexcharts';
+import { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { MONTHLYGRAPH } from 'types/general';
 
-const baseColorArray = ['#80CAEE', '#3C50E0'];
 
 const ChartOne = ({chartData}:{chartData : MONTHLYGRAPH}) => {
+  const [isDark, setIsDark] = useState(false);
+  useEffect(() => {
+    const checkDark = () => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    };
+    checkDark();
+    const observer = new MutationObserver(checkDark);
 
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
 
+    return () => observer.disconnect();
+  }, []);
+
+  const labelColor = isDark ? '#ffffff' : '#374151';
   const chartOptions: ApexOptions = {
     legend: {
       show: true,
       position: 'top',
       horizontalAlign: 'left',
     },
-    theme: { mode: 'dark' },
-    colors: baseColorArray,
     chart: {
       fontFamily: 'Satoshi, sans-serif',
       height: 335,
       type: 'area',
-
+      foreColor: labelColor,
       dropShadow: {
         enabled: true,
         color: '#000',
@@ -57,7 +70,6 @@ const ChartOne = ({chartData}:{chartData : MONTHLYGRAPH}) => {
     markers: {
       size: 4,
       colors: '#000',
-      strokeColors: baseColorArray,
       strokeWidth: 3,
       fillOpacity: 1,
       hover: { sizeOffset: 5 },
@@ -72,32 +84,26 @@ const ChartOne = ({chartData}:{chartData : MONTHLYGRAPH}) => {
       title: { style: { fontSize: '0px' } },
       min: 0,
     },
-
+  tooltip: {
+      theme: isDark ? 'dark' : 'light',
+    },
   };
 
-
-
   return (
-    <div className="col-span-12 rounded-sm border border-stroke  px-5 pb-5 pt-7 shadow-default sm:px-7 xl:col-span-8 bg-primary">
-    
-     
-          <div className="flex min-w-48 pb-5 text-white">
-            Monthly Statistics
-          </div>
-          {
-          (
-            chartData && (
-              <ReactApexChart
-                options={chartOptions}
-                series={chartData.series}
-                type="area"
-                height={350}
-                width="100%"
-              />
-            )
-          )}
-
-
+    <div className="col-span-12 rounded-xl border border-stroke p-7 shadow-default xl:col-span-8 bg-white dark:bg-transparent">
+      <div className="inline-flex appearance-none py-1 text-sm font-medium dark:text-white">
+        Monthly Statistics
+      </div>
+      {chartData && (
+        <ReactApexChart
+          options={chartOptions}
+          series={chartData.series}
+          type="area"
+          height={350}
+          width="100%"
+          className="bg-white dark:bg-transparent"
+        />
+      )}
     </div>
   );
 };

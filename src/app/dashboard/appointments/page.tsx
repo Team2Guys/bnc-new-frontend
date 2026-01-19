@@ -1,8 +1,8 @@
-import dynamic from 'next/dynamic';
 import { fetchAppointments } from 'config/fetch';
-const AppointmentsClient = dynamic(() => import("./AppointmentsClient"))
 import { cookies } from 'next/headers';
-
+import AppointmentsClient from './AppointmentsClient';
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 const AppointmentPage = async () => {
   let Cookies = await cookies()

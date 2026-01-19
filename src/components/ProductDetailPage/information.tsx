@@ -67,16 +67,16 @@ const Information = ({ privarcyImage, privacySectoin }: InformationProps) => {
             <div className="col-span-12 md:col-span-6 space-y-2 order-2 md:order-1">
               {/* First always-visible section */}
               <div>
-                <h2 className="font-robotoSerif font-bold text-2xl md:text-[30px] xl:text-[40px] leading-[120%]">
+                <h2 className="font-futura font-bold text-primary text-2xl md:text-[30px] xl:text-[40px] leading-[120%]">
                   {privacySectoin[0].specsHeading}
                 </h2>
-                <p>{privacySectoin[0].specsDetails}</p>
+                <p className='font-roboto text-[16px] text-primary'>{privacySectoin[0].specsDetails}</p>
               </div>
 
               {/* Extra sections */}
               {visibleSections.map((item, index) => (
                 <div key={index}>
-                  <h3 className="font-robotoSerif font-medium md:font-bold text-xl md:text-2xl leading-[120%]">
+                  <h3 className="font-futura font-medium md:font-bold text-xl md:text-2xl leading-[120%]">
                     {item.specsHeading}
                   </h3>
                   <p>{item.specsDetails}</p>
@@ -115,7 +115,7 @@ const Information = ({ privarcyImage, privacySectoin }: InformationProps) => {
                   src={privarcyImage.imageUrl}
                   fill
                   alt={privarcyImage.alt ||"Category Images"}
-                  sizes='40vw'
+                  sizes='100vw'
                 />
               </div>
             )}

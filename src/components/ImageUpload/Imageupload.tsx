@@ -40,8 +40,8 @@ const UploadFile = ({ setImagesUrl, setposterimageUrl, sethoverImage, video, mul
           continue;
         }
 
-        const maxImageSize = 1 * 1024 * 1024; // 1 MB
-        const maxVideoSize = 20 * 1024 * 1024; // 2 MB
+        const maxImageSize = 1 * 1024 * 1024;
+        const maxVideoSize = 20 * 1024 * 1024;
 
         if ((isImage && file.size > maxImageSize) || (isVideo && file.size > maxVideoSize)
         ) {
@@ -51,30 +51,22 @@ const UploadFile = ({ setImagesUrl, setposterimageUrl, sethoverImage, video, mul
           });
           continue;
         }
-
         const formData = new FormData();
         formData.append("file", file);
-     const response: AxiosResponse<any> = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/${urlsEndpoint}`,formData,{
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        },
-      );
-
-   
+        const response: AxiosResponse<any> = await axios.post(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/${urlsEndpoint}`,formData,{
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            },
+          );
         if (response.data) {
           Response_data.push(response.data)
         }
       }
-
       return Response_data;
-
     } 
   
-
-
-
   const handleDrop = async (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -89,6 +81,7 @@ const UploadFile = ({ setImagesUrl, setposterimageUrl, sethoverImage, video, mul
       setposterimageUrl?.(response);
       sethoverImage?.(response);
     } catch (error) {
+      console.log(error, "error")
       throw error;
     } finally {
       setIsDraggableArea(false);

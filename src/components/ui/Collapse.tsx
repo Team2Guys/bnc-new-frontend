@@ -35,7 +35,7 @@ const Collapse = ({ items, defaultActiveKey, className }: CollapseProps) => {
               className="w-full flex justify-between items-center py-2 focus:outline-none"
               onClick={() => toggle(item.key)}
             >
-              <span className="sm:font-semibold font-medium text-18 text-primary font-robotoSerif">
+              <span className="sm:font-semibold font-medium text-18 text-primary font-futura">
                 {item.label}
               </span>
               <IoIosArrowDown

@@ -5,8 +5,7 @@ import { IProduct } from 'types/types';
 import { getPath } from 'utils/helperFunctions';
 const Card = ({ card }: { card: IProduct }) => {
   return (
-    <div className="xs:px-2">
-      <div className=" pb-4 bg-secondary-foreground rounded-md xs:rounded-xl flex flex-col justify-between h-full">
+      <div className="pb-4 bg-secondary-foreground rounded-md xs:rounded-xl flex flex-col justify-between h-full xs:mx-2">
         <div className='space-y-2'>
           <Link href={getPath(card)} className="relative block w-full h-[150px] xxs:h-[170px] xs:h-[300px]">
           <Image
@@ -20,13 +19,14 @@ const Card = ({ card }: { card: IProduct }) => {
 
           <div className="flex flex-col h-full px-2 xs:px-4 pb-4 text-center space-y-1">
             <div className="min-h-[30px] xs:min-h-[60px]">
-              <h3 className="font-bold  font-robotoSerif text-14 xs:text-24 text-primary capitalize">
+
+              <h3 className="font-extrabold font-futura text-sm xs:text-2xl text-primary capitalize">
                 {card.title.replace(/\//g, ' ')}
               </h3>
             </div>
 
             <div className="min-h-[30px] xs:min-h-[60px]">
-              <p className="text-primary font-normal text-12 xs:text-16 font-roboto transition-al">
+              <p className="text-primary font-normal text-xs xs:text-base font-roboto transition-all">
                 {card?.short_description}
               </p>
             </div>
@@ -40,7 +40,6 @@ const Card = ({ card }: { card: IProduct }) => {
           Learn More
         </Link>
       </div>
-    </div>
   );
 };
 export default Card;

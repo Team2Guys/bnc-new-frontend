@@ -35,7 +35,7 @@ const FaqTabs = () => {
               transition duration-300 text-primary`}
             >
               <span
-                className={`transition-all duration-200 text-16 md:text-20 font-roboto text-primary capitalize ${
+                className={`transition-all duration-200 text-base md:text-xl font-roboto text-primary capitalize ${
                   activeTab === tab ? "font-bold" : "font-normal"
                 }`}
                 dangerouslySetInnerHTML={{ __html: tab }}
@@ -53,7 +53,7 @@ const FaqTabs = () => {
       </div>
 
       <h2
-        className="text-2xl font-bold lg:text-[38px] text-center my-5 sm:my-10 text-primary lg:leading-10 2xl:leading-normal font-robotoSerif "
+        className="text-2xl font-bold lg:text-4xl text-center my-5 sm:my-10 text-primary lg:leading-10 2xl:leading-normal font-futura "
         dangerouslySetInnerHTML={{ __html: activeTab }}
       />
 
@@ -65,7 +65,7 @@ const FaqTabs = () => {
           >
             <button
               onClick={() => toggleFaq(index)}
-              className={`w-full flex justify-between items-center px-4 py-3 text-left rounded-b-md transition-all duration-200 text-14 sm:text-20 font-roboto font-bold ${
+              className={`w-full flex justify-between items-center px-4 py-3 text-left rounded-b-md transition-all duration-200 text-sm sm:text-xl font-roboto font-bold ${
                 openIndex === index
                   ? "text-white bg-primary hover:bg-primary/90"
                   : "text-primary bg-secondary-foreground hover:bg-gray-50"
@@ -79,7 +79,7 @@ const FaqTabs = () => {
               )}
             </button>
             {openIndex === index && (
-              <div className="px-4 py-4 text-primary bg-white text-14 font-normal font-roboto sm:text-20">
+              <div className="px-4 py-4 text-primary bg-white text-sm font-normal font-roboto sm:text-xl">
                 <p dangerouslySetInnerHTML={{ __html: faq.answer }} />
               </div>
             )}

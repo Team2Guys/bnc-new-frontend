@@ -1,53 +1,53 @@
-import bgBreadcrum from '../../../public/assets/images/Blog/blogbackground.png';
+import React from 'react';
 import { BlogInfo } from 'types/interfaces';
-import dynamic from 'next/dynamic';
-const PopularBlog = dynamic(() => import('components/Blogs/popular-blog'));
-const BlogMain = dynamic(() => import('components/Blogs/blog-main'));
-const TopHero = dynamic(() => import('components/ui/top-hero'));
-import { Metadata } from 'next';
 import { fetchBlogs } from 'config/fetch';
-
-export const metadata: Metadata = {
-  title: 'Blinds And Curtains Dubai | Blog',
-  description:
-    'Read our blog for the latest updates on trends and new products. Get to know the best product for your home or business. For more information, give us a call.',
-  openGraph: {
-    title: 'Blinds And Curtains Dubai | Blog',
-    description:
-      'Read our blog for the latest updates on trends and new products. Get to know the best product for your home or business. For more information, give us a call.',
-
-    url: 'https://blindsandcurtains.ae/blog/',
-    images: [
-      {
-        url: bgBreadcrum.src,
-        alt: 'blindsandcurtains',
-      },
-    ],
-    type:"article"
-  },
-  alternates: {
-    canonical: 'https://blindsandcurtains.ae/blog/',
-  },
-};
-
+import { generateMetadata } from 'utils/seoMetadata';
+import { metaData } from 'data/meta-data';
+import Breadcrumb from 'components/Res-usable/breadcrumb';
+import Container from 'components/Res-usable/Container/Container';
+import BlogCard from 'components/Blogs/blog-card';
+import dynamic from 'next/dynamic';
+const  SlickSlider = dynamic(() => import('components/Blogs/slick-slider'));
+const  BlogLoad = dynamic(() => import('components/Blogs/blog-load'));
+export const metadata = generateMetadata(metaData.blog);
 
 const Blog = async () => {
-  const blogs = await fetchBlogs();
-  const filteredBlog: BlogInfo[] = blogs?.filter((blog: BlogInfo) => blog.isPublished)?.sort((a: BlogInfo, b: BlogInfo) =>
-    new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-  );
+ let blogs: BlogInfo[] = [];
 
+  try {
+    const data = await fetchBlogs();
+    blogs = Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.error('Failed to fetch blogs:', error);
+  }
+
+  const filteredBlog: BlogInfo[] = blogs
+    .filter((blog) => blog.isPublished)
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() -
+        new Date(a.createdAt).getTime()
+    );
+
+  const uniqueCategories = Array.from(
+    new Set(filteredBlog.map((blog) => blog.category))
+  );
   return (
     <>
-      <TopHero title="Blogs" image={bgBreadcrum.src} pagename="blog" />
+      <Breadcrumb title="Blog - Blinds and Curtains Dubai" bradcrumbtitle='Blog' image='/assets/images/Blog/blogbackground.png' /> 
+      <Container>
+      <BlogLoad filteredBlog={filteredBlog}/>
+      <SlickSlider title="Blog Category">
+        {uniqueCategories.map((category, index) => {
+          const blog = filteredBlog.find((b) => b.category === category);
+          return (
+            blog && <BlogCard key={blog.id ?? index} blog={blog} iscategory  />
+          );
+        })}
+      </SlickSlider>
 
-      <div className="mt-5">
-          <BlogMain blogs={filteredBlog} />
-          <div className="mt-10">
-            {filteredBlog?.length >= 3 && <PopularBlog blogs={filteredBlog || []} />}
-          </div>
-      </div>
-      <div className="mt-0 sm:mt-16 lg:mt-20 max-sm:mb-10" />
+      </Container> 
+
     </>
   );
 };

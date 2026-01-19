@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+/package-lock.json
 /yarn.lock
 /bun.lock
 /public/sitemap.xml

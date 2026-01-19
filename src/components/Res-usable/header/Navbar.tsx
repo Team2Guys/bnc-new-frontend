@@ -5,8 +5,6 @@ import Image from 'next/image';
 import Container from 'components/Res-usable/Container/Container';
 import Sheet from 'components/ui/Drawer';
 import SocialLink from '../social-link/social-link';
-
-
 import { usePathname } from 'next/navigation';
 import { links } from 'data/header_links';
 import { TfiEmail } from 'react-icons/tfi';
@@ -16,9 +14,7 @@ import { CgMenuRight } from 'react-icons/cg';
 
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
-  const [selectedLabel, setSelectedLabel] = useState<string | undefined>(
-    undefined,
-  );
+  const [selectedLabel, setSelectedLabel] = useState<string | undefined>(undefined,);
   const [language, setLanguage] = useState('en');
   const [translatorReady, setTranslatorReady] = useState(false);
   const lastLangRef = useRef<string>('en');
@@ -26,7 +22,6 @@ const Navbar = () => {
   const path = usePathname();
 
   useEffect(() => {
-    // Wait for Google Translate widget to be available
     const interval = setInterval(() => {
       const selectEl = document.querySelector('.goog-te-combo') as HTMLSelectElement;
       if (selectEl && selectEl.options.length > 1) {
@@ -45,29 +40,21 @@ const Navbar = () => {
     if (lang === 'en') {
       combo.value = 'en';
       combo.dispatchEvent(new Event('change'));
-
-      // Auto-select Arabic (simulate selection)
       combo.value = 'ar';
       combo.dispatchEvent(new Event('change'));
-
-      skipNextUpdateRef.current = true; // Skip next Arabic update
+      skipNextUpdateRef.current = true;
       lastLangRef.current = 'en';
       setLanguage('en')
-      return; // Do not update state
+      return;
     }
 
-
-    // Normal flow
     if (combo.value !== lang || lastLangRef.current !== lang) {
       combo.value = lang;
       combo.dispatchEvent(new Event('change'));
       lastLangRef.current = lang;
-      setLanguage(lang); // ✅ Only update state now
+      setLanguage(lang);
     }
   }
-
-
-
 
   const handleLinkClick = () => {
     setDrawerOpen(false);
@@ -77,8 +64,6 @@ const Navbar = () => {
     setDrawerOpen(false);
   };
 
-
-
   return (
     <>
       {
@@ -86,7 +71,7 @@ const Navbar = () => {
 
           <div className="w-full bg-primary hidden md:block">
             <Container className="flex flex-wrap md:flex-nowrap justify-between items-center min-h-12">
-              <div className="text-white py-2 text-10 md:text-14 font-normal font-roboto leading-relaxed 2xl:leading-loose flex gap-2 md:gap-10">
+              <div className="text-white py-2 text-[10px] md:text-sm font-normal font-roboto leading-relaxed 2xl:leading-loose flex gap-2 md:gap-10">
                 <Link href="tel:04 252 2025" target='_black' rel='no-referrer' className='flex gap-1 md:gap-2 items-center'>
                   <LiaPhoneSolid className='text-12 md:text-18 text-secondary' />
                   04 252 2025
@@ -104,12 +89,7 @@ const Navbar = () => {
           </div>
       }
 
-
-
       <nav className="sticky -top-1 z-50 py-2 sm:py-0 bg-white">
-
-        {/* mobile container */}
-
         <Container className="flex w-full justify-between h-12 sm:h-24 max-lg:px-2 items-center gap-1 md:gap-3 lg:gap-0 overflow-hidden ">
           <div className='flex gap-4 items-center'>
             <Link href='/' className="w-[79px] h-[35px] relative md:w-[120px] md:h-[48px]">
@@ -123,10 +103,6 @@ const Navbar = () => {
               />
             </Link>
             <div className='w-[140px] overflow-hidden hidden lg:block'>
-              {/* {!translatorReady ?
-                <div
-                  className={`bg-gray-300 h-8 w-full rounded-lg animate-pulse`} />
-                : */}
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => handleLanguageSwitch('en')}
@@ -152,20 +128,18 @@ const Navbar = () => {
                     العربية
                   </button>
                 </div>
-              {/* } */}
-
             </div>
           </div>
 
-          <div className=" hidden lg:flex gap-[48px] ">
-            <div className="hidden lg:flex justify-evenly items-start lg:text-10 font-roboto font-medium  gap-[24px] text-primary text-18 ">
+          <div className=" hidden lg:flex gap-[20px] 2xl:gap-[48px] ">
+            <div className="hidden lg:flex justify-evenly items-start lg:text-[10px] font-roboto font-medium gap-[18px] 2xl:gap-[24px] text-primary text-18 ">
               {links.map((link, index) => {
 
                 return (
                   <Link
                     key={index}
                     href={link.href + "/" || ''}
-                    className="px-1 lg:text-10 text-12 xl:text-18 h-full flex items-center justify-center transition-all duration-200"
+                    className="px-1 lg:text-[10px] text-12 xl:text-18 h-full flex items-center justify-center transition-all duration-200"
 
                   >
                     {link.label}
@@ -204,6 +178,7 @@ const Navbar = () => {
                     loading='lazy'
                     src='/assets/images/logomain1.png'
                     alt="Logo"
+                    sizes="120px"
                   />
                 </Link>
                 <CgMenuRight className='min-w-6 w-6 h-6 bg-[#F1B42F66]' onClick={() => setDrawerOpen(false)} />
@@ -217,7 +192,7 @@ const Navbar = () => {
                   return (
                     <Link
                       key={index}
-                      className={`text-16 border-b text-primary font-robotoSerif font-medium border-[#0000002a] pb-[6px] hover:text-black `}
+                      className={`text-16 border-b text-primary font-futura font-medium border-[#0000002a] pb-[6px] hover:text-black `}
                       onClick={handleCloseDrawer}
                       href={`${link.href}/`}
                     >
@@ -236,7 +211,7 @@ const Navbar = () => {
                     <button
                       onClick={() => handleLanguageSwitch('en')}
                       disabled={!translatorReady || language === 'en'}
-                      className='flex items-center justify-end gap-1 w-fit py-1 rounded-md font-medium font-robotoSerif transition-colors duration-200 text-primary'
+                      className='flex items-center justify-end gap-1 w-fit py-1 rounded-md font-medium font-futura transition-colors duration-200 text-primary'
                     >
                       <Image
                         src="/assets/uaeFlag.webp"
@@ -249,7 +224,7 @@ const Navbar = () => {
                     </button>
                     <div className='bg-primary w-[1px] h-6'></div>
                     <button
-                      className='w-fit py-1 mb-1 text-start rounded-md font-medium font-robotoSerif transition-colors duration-200 text-primary notranslate'
+                      className='w-fit py-1 mb-1 text-start rounded-md font-medium font-futura transition-colors duration-200 text-primary notranslate'
                       onClick={() => handleLanguageSwitch('ar')}
                       disabled={!translatorReady || language === 'ar'}
                     >
@@ -268,9 +243,6 @@ const Navbar = () => {
               </Link>
             </Sheet>
           </div>
-
-
-
         </Container>
       </nav>
     </>

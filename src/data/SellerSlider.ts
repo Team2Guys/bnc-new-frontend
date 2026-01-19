@@ -1,40 +1,49 @@
 import { MotorizeBlindData, Reel, WorkingProcessContent } from "types/types";
 
-
-
 export const reelsData: Reel[] = [
   {
     videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test1.mp4",
+    videoPoster:"/assets/images/videoposter/1-v.webp"
   },
   {
     videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test2.mp4",
+    videoPoster:"/assets/images/videoposter/2-v.webp"
   },
   {
     videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test3.mp4",
+    videoPoster:"/assets/images/videoposter/3-v.webp"
   },
   {
     videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test4.mp4",
+    videoPoster:"/assets/images/videoposter/4-v.webp"
   },
   {
     videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test5.mp4",
+    videoPoster:"/assets/images/videoposter/5-v.webp"
   },
   {
     videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test6.mp4",
+    videoPoster:"/assets/images/videoposter/6-v.webp"
   },
   {
     videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test7.mp4",
+    videoPoster:"/assets/images/videoposter/7-v.webp"
   },
   {
     videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test8.mp4",
+    videoPoster:"/assets/images/videoposter/8-v.webp"
   },
   {
     videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test9.mp4",
+    videoPoster:"/assets/images/videoposter/9-v.webp"
   },
   {
     videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test10.mp4",
+    videoPoster:"/assets/images/videoposter/10-v.webp"
   },
   {
     videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test11.mp4",
+    videoPoster:"/assets/images/videoposter/11-v.webp"
   },
 
 ];

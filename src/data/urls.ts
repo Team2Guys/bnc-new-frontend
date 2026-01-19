@@ -1,5 +1,3 @@
-import { generateSlug } from './data';
-
 export const urls = [
   {
     productName: 'Living Room Curtains',
@@ -166,22 +164,3 @@ export const urls = [
     errorUrl: '/shutters-range/regular-full-height-shutters',
   },
 ];
-
-
-
-export const ChangedProductUrl_handler = (title: string): string => {
-
-  let products = urls.find((url: { productName: string; Url: string }) => {
-    return url.productName === title;
-  });
-
-  return products ? products.Url : generateSlug(title);
-};
-
-export const blogCategoryUrl = [
-  { url: '/blog/blinds', name: 'Blinds' },
-  { url: '/blog/curtains', name: 'Curtains' },
-  { url: '/blog/shutters', name: 'Shutters' },
-];
-
-

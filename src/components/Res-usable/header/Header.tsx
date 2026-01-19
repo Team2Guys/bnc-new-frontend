@@ -8,6 +8,8 @@ import StarRatingBar from "components/Hero/StarRatingBar";
 import Link from "next/link";
 import { IREVIEWS } from "types/general";
 import { fetchReviews } from "config/fetch";
+import WhatsIcon from "components/Icons/Whatsapp";
+import Callbutton from "components/callbutton/callbutton";
 const CustomModal = dynamic(() => import("components/ui/Modal"));
 const TestimonialCard = dynamic(() => import("../Cards/TestimonialCard"));
 
@@ -44,7 +46,7 @@ const Header = () => {
             .map((_, index) => (
               <MdOutlineStarPurple500
                 key={index}
-                className="text-[#FFD800] text-lg md:text-27"
+                className="text-[#FFD800] text-lg md:text-2xl"
               />
             ))}
         </div>
@@ -55,7 +57,7 @@ const Header = () => {
 
       <CustomModal open={open} onClose={handleModalClose} title={
         <div className="flex justify-between items-center flex-col space-y-2">
-          <p className="font-bold font-robotoSerif text-xl">
+          <p className="font-bold font-futura text-xl">
             Let customers speak for us
           </p>
           <div className="flex justify-center items-center">
@@ -66,7 +68,7 @@ const Header = () => {
               />
             ))}
           </div>
-          <p className="font-roboto text-primary">Based on 773 reviews</p>
+          <p className="font-roboto text-primary">Based on 794 reviews</p>
         </div>
       }>
         <div className="space-y-3 mt-5">
@@ -91,7 +93,7 @@ const Header = () => {
           <hr />
         </div>
 
-        <div className="w-full max-h-[30vh] xsm:max-h-[40vh] xs:max-h-[350px] lg:max-h-[500px] overflow-y-scroll p-4 xsm:p-6 grid grid-cols-1 xs:grid-cols-2 gap-0 xs:gap-4">
+        <div className="w-full max-h-[30vh] xsm:max-h-[40vh] xs:max-h-[350px] lg:max-h-[440px] overflow-y-scroll p-4 xsm:p-6 grid grid-cols-1 xs:grid-cols-2 gap-0 xs:gap-4">
           {visibleReviews && visibleReviews.map((item, index) => (
             <TestimonialCard key={index} testimonial={item} />
           ))}
@@ -108,6 +110,8 @@ const Header = () => {
           </div>
         )}
       </CustomModal>
+      <WhatsIcon />
+      <Callbutton />
     </>
   );
 };

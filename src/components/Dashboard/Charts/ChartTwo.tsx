@@ -3,23 +3,48 @@
 import { ApexOptions } from 'apexcharts';
 import ReactApexChart from 'react-apexcharts';
 import { WEEKLYGRAPH } from 'types/general';
+import { useEffect, useState } from 'react';
 
-const baseColorArray = ['#80CAEE', '#3C50E0'];
+const ChartTwo = ({ chartData }: { chartData: WEEKLYGRAPH }) => {
+  const [isDark, setIsDark] = useState(false);
+  useEffect(() => {
+    const checkDark = () => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    };
+    checkDark();
+    const observer = new MutationObserver(checkDark);
 
-const ChartTwo= ({chartData}:{chartData:WEEKLYGRAPH}) => {
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const labelColor = isDark ? '#ffffff' : '#374151';
+
   const options: ApexOptions = {
-    colors: baseColorArray,
-    theme: { mode: "dark" },
     chart: {
       fontFamily: 'Satoshi, sans-serif',
       type: 'bar',
       height: 335,
       stacked: true,
-      toolbar: {
-        show: false,
+      toolbar: { show: false },
+      zoom: { enabled: false },
+      foreColor: labelColor,
+    },
+    xaxis: {
+      categories: chartData?.categories,
+      labels: {
+        style: {
+          colors: Array(chartData?.categories?.length || 0).fill(labelColor),
+        },
       },
-      zoom: {
-        enabled: false,
+    },
+    yaxis: {
+      labels: {
+        style: { colors: [labelColor] },
       },
     },
     responsive: [
@@ -27,10 +52,7 @@ const ChartTwo= ({chartData}:{chartData:WEEKLYGRAPH}) => {
         breakpoint: 1536,
         options: {
           plotOptions: {
-            bar: {
-              borderRadius: 0,
-              columnWidth: '25%',
-            },
+            bar: { borderRadius: 0, columnWidth: '25%' },
           },
         },
       },
@@ -44,45 +66,36 @@ const ChartTwo= ({chartData}:{chartData:WEEKLYGRAPH}) => {
         borderRadiusWhenStacked: 'last',
       },
     },
-    dataLabels: {
-      enabled: false,
-    },
-    xaxis: {
-      categories: chartData?.categories,
-    },
+    dataLabels: { enabled: false },
     legend: {
       position: 'top',
       horizontalAlign: 'left',
       fontFamily: 'Satoshi',
       fontWeight: 500,
       fontSize: '14px',
-      // markers: {
-      //   radius: 99,
-      // },
+      labels: { colors: [labelColor] },
     },
-    fill: {
-      opacity: 1,
+    tooltip: {
+      theme: isDark ? 'dark' : 'light',
     },
+    fill: { opacity: 1 },
   };
 
-
   return (
-    <div className="col-span-12 rounded-sm border border-stroke p-7 shadow-default xl:col-span-4 bg-primary">
-
-      <p className="inline-flex appearance-none py-1 pl-3 pr-8 text-sm font-medium bg-primary text-white">
+    <div className="col-span-12 rounded-xl border border-stroke p-7 shadow-default xl:col-span-4 dark:bg-transparent">
+      <p className="inline-flex appearance-none py-1 text-sm font-medium dark:text-white">
         Weekly Statistics
       </p>
-      <div id="chartTwo" className="-mb-9 -ml-5">
-        { 
-          chartData && (
-            <ReactApexChart
-              options={options}
-              series={chartData.series}
-              type="bar"
-              height={350}
-              width="100%"
-            />
-          
+      <div id="chartTwo">
+        {chartData && (
+          <ReactApexChart
+            options={options}
+            series={chartData.series}
+            type="bar"
+            height={350}
+            width="100%"
+            className="bg-white dark:bg-transparent"
+          />
         )}
       </div>
     </div>

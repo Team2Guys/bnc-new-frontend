@@ -1,46 +1,11 @@
 import { ReactNode } from 'react';
-import type { Metadata } from 'next';
 import PathnameWrapper from 'components/Pathcomponent/PathnameWrapper';
 import 'app/globals.css';
 import { Providers } from './Providers';
-import WhatsIcon from 'components/Icons/Whatsapp';
 import { GoogleTagManager } from '@next/third-parties/google';
 import Script from 'next/script';
 import Head from 'next/head';
-import { Roboto, Roboto_Serif } from 'next/font/google';
-import Callbutton from 'components/callbutton/callbutton';
-
-
-export const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ["300", "400", "500", "700", "900"],
-  variable: '--font-roboto',
-  display: 'swap',
-});
-
-export const robotoSerif = Roboto_Serif({
-  subsets: ['latin'],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-  variable: '--font-roboto-serif',
-  display: 'swap',
-});
-
-export const metadata: Metadata = {
-  robots: {
-    index: false,
-    follow: false,
-    nocache: true,
-    googleBot: {
-      index: false,
-      follow: false,
-      noimageindex: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-};
-
+import { futura, roboto} from 'font/font';
 
 export default function RootLayout({
   children,
@@ -52,10 +17,9 @@ export default function RootLayout({
       <html lang="en">
 
         <Head>
+          <link rel="preload" as="image" href="/assets/images/hero_image.avif" fetchPriority="high" type="image/avif" />
 
-          {/* Google Site Verification */}
-          <meta name="google-site-verification" content="kY94RrP8_rfkJPW-jgK6GaWAfX9BUykeQ5Q7WFxmGyY" />
-
+          <meta name="google-site-verification" content="BHdLyJ6iGcCDMwuouc5ShyVcSBwHyip3ZtBxeKTEoVg" />
           {/* Pinterest Domain Verification */}
           <meta name="p:domain_verify" content="58b7c4e018c53c00c2cd12f5f838b47a" />
         </Head>
@@ -64,25 +28,25 @@ export default function RootLayout({
           id="google-tag-manager"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-MNXTN5B');`,
+          __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-MNXTN5B');`,
           }}
         />
 
         {/* End Google Tag Manager */}
         <Script id="google-translate-init" strategy="afterInteractive">
-          {`
-      function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-          pageLanguage: 'en',
-          includedLanguages: 'en,ar',
-          autoDisplay: false
-        }, 'google_translate_element');
-      }
-    `}
+        {`
+          function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+              pageLanguage: 'en',
+              includedLanguages: 'en,ar',
+              autoDisplay: false
+            }, 'google_translate_element');
+          }
+        `}
         </Script>
 
         <Script
@@ -133,10 +97,8 @@ export default function RootLayout({
         />
 
         <Script id="google-analytics"
-          strategy="lazyOnload"
-
-        >
-          {`
+          strategy="lazyOnload">
+        {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
@@ -145,9 +107,7 @@ export default function RootLayout({
         `}
         </Script>
 
-
-
-        <body className={`${roboto.variable} ${robotoSerif.variable}`}>
+        <body className={`${roboto.variable} ${futura.variable}`}>
           <noscript>
             <iframe
               src="https://www.googletagmanager.com/ns.html?id=GTM-MNXTN5B"
@@ -164,10 +124,7 @@ export default function RootLayout({
 
 
           <PathnameWrapper>
-
             {children}
-            <WhatsIcon />
-            <Callbutton />
           </PathnameWrapper>
         </body>
       </html>

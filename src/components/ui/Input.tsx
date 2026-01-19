@@ -7,8 +7,8 @@ interface InputProps {
   label?: string;
   name: string;
   placeholder?: string;
-  type?: "text" | "password" | "number"; // only for input
-  textarea?: boolean; // if true → render textarea
+  type?: "text" | "password" | "number" | "email";
+  textarea?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -23,28 +23,16 @@ const Input: React.FC<InputProps> = ({
   return (
     <div className="w-full">
       {label && <label className="primary-label">{label}</label>}
-
       <div className="relative">
-        {/* If textarea */}
         {textarea ? (
-          <Field
-            as="textarea"
-            name={name}
-            placeholder={placeholder}
-            className="primary-input h-28 resize-none"
-          />
+          <Field as="textarea" name={name} placeholder={placeholder} className="primary-input h-40 resize-none py-2" />
         ) : (
           <>
-            <Field
-              type={type === "password" ? (showPassword ? "text" : "password") : type}
-              name={name}
-              placeholder={placeholder}
-              className="primary-input"
-            />
+            <Field type={type === "password" ? (showPassword ? "text" : "password") : type} name={name} placeholder={placeholder} className="primary-input"/>
             {type === "password" && (
               <button
                 type="button"
-                className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+                className="absolute inset-y-0 right-3 flex items-center text-primary"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -53,7 +41,7 @@ const Input: React.FC<InputProps> = ({
           </>
         )}
       </div>
-
+      
       <ErrorMessage
         name={name}
         component="div"

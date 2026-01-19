@@ -18,17 +18,10 @@ export const fetchProducts = async () => {
   } catch (error) {
     console.log(error)
   }
-
-
-
-
-
-
-
 };
 
 
-export const getSignleProd = async (Productname: string, category: string,   fields?: Record<string, boolean> ) => {
+export const getSignleProd = async (Productname: string, category: string, fields?: Record<string, boolean>) => {
   try {
 
     console.log(Productname, category)
@@ -39,7 +32,7 @@ export const getSignleProd = async (Productname: string, category: string,   fie
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({Productname, category, fields}),
+        body: JSON.stringify({ Productname, category, fields }),
         next: { tags: ["products"] },
       }
     );
@@ -102,20 +95,29 @@ export async function fetchSingleCategorymain(customUrl: string) {
 
 export const fetchBlogs = async () => {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/blogs`,
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/blogs`,
       {
-        next: { tags: ['blogs'] },
-      },
+        next: { tags: ["blogs"] },
+      }
     );
+    const text = await response.text();
+    if (!response.ok) {
+      console.error("API returned error:", text);
+      return [];
+    }
+    if (text.startsWith("<")) {
+      console.error("HTML returned instead of JSON:", text);
+      return [];
+    }
 
-    let blogs = response.json()
-
-    return blogs;
+    return JSON.parse(text);
   } catch (error) {
-    console.log(error)
+    console.log("fetchBlogs error:", error);
+    return [];
   }
-
 };
+
 
 
 export const fetchCategories = async () => {
@@ -371,12 +373,19 @@ export const deleteRedirectUrl = async (id: number) => {
     console.error(error);
   }
 };
-
 export const fetchRedirectUrlById = async (url: string) => {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/getRedirect/${url}`, {
-      next: { tags: ['redirects'] },
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/getRedirect`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        next: { tags: ["redirects"] },
+        body: JSON.stringify({ url }), 
+      }
+    );
 
     return await response.json();
   } catch (error) {

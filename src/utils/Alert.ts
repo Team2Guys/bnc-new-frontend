@@ -13,14 +13,14 @@ export const showAlert = ({
   text = "",
   icon = "success",
   timer = 2000,
-  showCloseButton = true, // ✅ default true
+  showCloseButton = true,
 }: AlertOptions) => {
   return Swal.fire({
     title,
     text,
     icon,
     showConfirmButton: false,
-    showCloseButton, // ✅ adds the close (X) button
+    showCloseButton,
     timer,
     timerProgressBar: true,
     toast: true,

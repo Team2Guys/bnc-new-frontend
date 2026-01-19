@@ -1,41 +1,58 @@
-import Image from 'next/image';
-import React from 'react';
-import { projectMainFont } from 'typo/font';
+"use client";
+import { projectsData } from "data/data";
+import Image from "next/image";
+import React, { useState } from "react";
 
-interface ProjectCardProps {
-  title: string;
-  description: string;
-  imageUrl: string;
-}
+const ProjectCard = () => {
+  const sortedProjects = projectsData.sort((a, b) =>a.title.localeCompare(b.title));
+  const [visibleCount, setVisibleCount] = useState(9);
 
-const ProjectCard: React.FC<ProjectCardProps> = ({
-  title,
-  description,
-  imageUrl,
-}) => {
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + 9);
+  };
+
   return (
-    <div className=" max-w-full sm:max-w-[45%] lg:max-w-[30%] rounded-xl bg-transparent overflow-hidden  transform  transition duration-300">
-      <div className=" h-[296px] overflow-hidden">
-        <Image
-          src={imageUrl}
-          alt={title}
-          height={500}
-          width={500}
-          loading='eager'
-          className="w-full h-full object-cover rounded-t-xl"
-        />
+    <>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 md:gap-6 pt-4">
+        {sortedProjects.slice(0, visibleCount).map((project, index) => (
+          <div
+            className="relative group w-full h-[280px] xss:h-[343px] md:h-[380px] overflow-hidden cursor-pointer"
+            key={index}
+          >
+            <Image
+              src={project.imageUrl}
+              alt={project.title}
+              fill
+              priority={index < 9}
+              className="transition-transform duration-500 group-hover:scale-110"
+            />
+
+            <div className="absolute inset-0 flex items-center justify-center bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <div className="text-center px-4">
+                <h3 className="text-white text-xl md:text-2xl font-medium mb-2 font-futura">
+                  {project.title}
+                </h3>
+                <p
+                  className="text-white font-roboto"
+                  dangerouslySetInnerHTML={{ __html: project.description }}
+                />
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
 
-      <div className="p-2 text-center bg-white rounded-md -mt-4 relative z-10 ">
-        <h3
-          className={`text-sm md:text-[16px]  font-bold text-gray-800 ${projectMainFont.className}`}
-        >
-          {title}
-        </h3>
-      </div>
-      <p className={`text-sm md:text-[16px] text-[#000000] mt-2 ${projectMainFont.className}`}
-      dangerouslySetInnerHTML={{ __html: description }}/>
-    </div>
+      {visibleCount < sortedProjects.length && (
+        <div className="flex justify-center mt-6">
+          <button
+            onClick={handleLoadMore}
+            className="px-6 py-3 border border-secondary rounded-md hover:bg-secondary transition font-semibold font-roboto"
+          >
+            Load More
+          </button>
+        </div>
+      )}
+    </>
   );
 };
 

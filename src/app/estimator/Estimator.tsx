@@ -11,7 +11,7 @@ import { WhatsAppInfo } from 'data/data';
 import Testimonial from 'components/ProductDetailPage/testimonial';
 import InfoTabs from 'components/NewHomecomponents/info';
 import Breadcrumb from 'components/Res-usable/breadcrumb';
-import { tabData } from 'data/Homedata/tabdata';
+import { EstimatortabData } from 'data/Homedata/tabdata';
 import { FaChevronDown } from 'react-icons/fa';
 import { showAlert } from 'utils/Alert';
 
@@ -146,27 +146,32 @@ const EstimatorPage = ({ sortedProducts }: { sortedProducts: EstimatorProductTyp
   };
   return (
     <>
-      <Breadcrumb title='Estimator' />
+      <Breadcrumb title='Estimator'/>
       <Container className="md:pt-10 pb-10 lg:pb-20">
         <div className="grid grid-cols-12 gap-4 lg:gap-10 xl:gap-14 md:px-2 xl:px-0">
           <div className="col-span-12 md:col-span-6 mt-2 sm:mt-0">
-            <div className='w-full h-[350px] xs:h-[600px] md:h-[450px] xl:h-[620px]'>
-              <Image
+            <div className='w-full h-[350px] xs:h-[600px] md:h-[450px] xl:h-[620px] relative'>
+             <Image
                 src={selectedProduct?.posterImage?.imageUrl || sortedProducts[0].posterImage.imageUrl}
+                alt={selectedProduct?.title || "Product Image"}
                 fill
-                alt={selectedProduct?.title || 'Product Image'}
-                className="!relative"
-                quality={100}
+                priority
+                fetchPriority="high"
+                sizes="100vw"
               />
             </div>
           </div>
 
           <div className="flex flex-col space-y-3 col-span-12 md:col-span-6 px-2 md:px-0">
             <div className='max-w-[520px] pb-2'>
-              <h1 className="text-[24px] sm:text-[30px] lg:text-[36px] xl:text-[40px] leading-normal font-robotoSerif font-bold capitalize text-primary">
+              <h1 className="text-[24px] sm:text-[30px] lg:text-[36px] xl:text-[40px] leading-normal font-futura font-bold capitalize text-primary">
                 Get Your Estimate in 3 Simple Steps
               </h1>
-
+                <ul className='list-disc pl-5 pt-3 text-sm sm:text-base'>
+                  <li>Price is an estimate; final cost depends on exact size and fabric.</li>
+                  <li>Final quote confirmed during your free visit, no hidden charges.</li>
+                  <li>Estimator prices for blinds, curtains, and shutters start at 1.5m².</li>
+                </ul>
             </div>
             <div className="space-y-3 border-t pt-6 max-w-[520px]">
               <div className="relative w-full">
@@ -175,42 +180,37 @@ const EstimatorPage = ({ sortedProducts }: { sortedProducts: EstimatorProductTyp
                   onClick={toggleDropdown}
                 >
                   <div className="flex items-center gap-2">
-                    <span className="size-5 flex justify-center items-center bg-secondary text-14 text-gray-600 rounded-full">
+                    <span className="size-5 flex justify-center items-center bg-secondary text-sm  rounded-full">
                       1
                     </span>
-                    <span className="text-gray-600 text-sm">
+                    <span className=" text-sm">
                       {activeProduct?.title || 'Select the Product'}
                     </span>
                   </div>
                   <FaChevronDown className="text-gray-400" />
                 </div>
 
-                {isOpen && (
-                  <ul className="w-full mt-2 bg-white border rounded-lg shadow z-10 p-3">
-                    {sortedProducts.map((product, index) => (
-                      <li
-                        key={index}
-                        onClick={() => handleSelect(product)}
-                        className={`text-sm text-gray-600 py-2 rounded cursor-pointer transition
-                ${activeProduct?.title === product.title
-                            ? 'bg-secondary px-3'
-                            : 'hover:bg-gray-100'
-                          }`}
-                      >
-                        {product.title}
-                      </li>
-                    ))}
-                  </ul>
-                )}
+            {isOpen && (
+              <ul className="w-full mt-2 bg-white border rounded-lg shadow z-10 p-3">
+                {sortedProducts.map((product, index) => (
+                  <li
+                    key={index}
+                    onClick={() => handleSelect(product)}
+                    className={`text-sm py-2 rounded cursor-pointer transition ${activeProduct?.title === product.title ? 'bg-secondary px-3' : 'hover:bg-gray-100' }`}>
+                    {product.title}
+                  </li>
+                ))}
+              </ul>
+            )}
               </div>
               <div
                 className="flex justify-between items-center border border-secondary rounded-md px-3 py-2 cursor-pointer bg-white font-roboto"
                onClick={handleFocusInput}>
                 <div className="flex items-center gap-2">
-                  <span className="size-5 flex justify-center items-center bg-secondary text-14 text-gray-600 rounded-full">
+                  <span className="size-5 flex justify-center items-center bg-secondary text-sm  rounded-full">
                     2
                   </span>
-                  <span className="text-gray-600 text-sm">
+                  <span className=" text-sm">
                     Enter Size
                   </span>
                 </div>
@@ -246,10 +246,10 @@ const EstimatorPage = ({ sortedProducts }: { sortedProducts: EstimatorProductTyp
                 className="flex justify-between items-center border border-secondary rounded-md px-3 py-2 bg-white font-roboto"
               >
                 <div className="flex items-center gap-2">
-                  <span className="size-5 flex justify-center items-center bg-secondary text-14 text-gray-600 rounded-full">
+                  <span className="size-5 flex justify-center items-center bg-secondary text-sm  rounded-full">
                     3
                   </span>
-                  <span className="text-gray-600 text-sm">
+                  <span className=" text-sm">
                     Your Estimate Below
                   </span>
                 </div>
@@ -276,18 +276,15 @@ const EstimatorPage = ({ sortedProducts }: { sortedProducts: EstimatorProductTyp
                   rel="noopener noreferrer"
                   aria-label="Chat on WhatsApp"
                   className="w-full h-12 bg-[#44C654] font-semibold text-base md:text-sm lg:text-base flex items-center gap-2 font-roboto justify-center text-white rounded-lg">
-                  <Image width={100} height={100} className='size-5' src='/assets/images/whatsapp.png' alt='whatsapp' />
+                  <Image width={100} height={100} className='size-5' src='/assets/images/whatsapp.webp' alt='whatsapp' />
                   Send on Whatsapp
                 </Link>
               </div>
-            </div>
-
-            {/* 
-        {productError ? <p className='mt-0 p-0 text-15' style={{marginTop: "0px", marginBottom: "0px"}}>{productError}</p> : null} */}
+            </div>          
           </div>
         </div>
       </Container>
-      <InfoTabs tabData={tabData} isHome />
+      <InfoTabs tabData={EstimatortabData} isHome />
       <Testimonial />
     </>
   );

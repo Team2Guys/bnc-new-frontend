@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, SetStateAction, useRef } from 'react';
-import { Formik, FieldArray, Form } from 'formik';
+import { Formik, FieldArray, Form, Field } from 'formik';
 
 import Imageupload from 'components/ImageUpload/Imageupload';
 import { RxCross2 } from 'react-icons/rx';
@@ -178,9 +178,9 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
       let privarcyImage = privarcyImagemageUrl && privarcyImagemageUrl[0];
       if (!posterImageUrl || !(imagesUrl) || !(imagesUrl?.length > 0)) {
         return showAlert({
-        title: "Please select relevant Images",
-        icon: "warning",
-      });
+          title: "Please select relevant Images",
+          icon: "warning",
+        });
       }
 
       let newValues = {
@@ -373,7 +373,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
       return false;
     })();
     // eslint-disable-next-line
-    const { videos: _v1, topImages: _t1, colorsImages: _c1, subCategoryImage: _s1, imageUrls: _i1, posterImage: _p1, privarcyImage: _pr1, bannerImage: _b1, subCategory: _sub1, category: _category , ...newInitialValues } = productInitialValue;
+    const { videos: _v1, topImages: _t1, colorsImages: _c1, subCategoryImage: _s1, imageUrls: _i1, posterImage: _p1, privarcyImage: _pr1, bannerImage: _b1, subCategory: _sub1, category: _category, ...newInitialValues } = productInitialValue;
     // eslint-disable-next-line
     const { videos: _v2, topImages: _t2, colorsImages: _c2, subCategoryImage: _s2, imageUrls: _i2, posterImage: _p2, privarcyImage: _pr2, bannerImage: _b2, subCategory: _sub2, category, ...current } = formikValuesRef.current as any;
 
@@ -386,7 +386,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     const normalizedCurrent = JSON.stringify(current);
 
     const isFormChanged = normalizedInitial !== normalizedCurrent;
-    console.log(values, current , 'isFormChanged')
+    console.log(values, current, 'isFormChanged')
 
     return (
       isPosterChanged ||
@@ -641,6 +641,53 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                           </div>
                         )}
                       </div>
+
+
+
+                    <label className="mb-3 block text-sm font-medium text-black dark:text-white">
+                    recalledByCategories
+                    </label>
+                    <FieldArray name="recalledByCategories">
+                      {({ push, remove }) => (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          {categoriesList?.map((cat: ICategory) => {
+                            const isChecked = formik.values.recalledByCategories?.includes(cat.id);
+
+                            return (
+                              <label
+                                key={cat.id}
+                                className="flex items-center space-x-2"
+                              >
+                                <Field
+                                  type="checkbox"
+                                  name="recalledByCategories"
+                                  value={cat.id}
+                                  checked={isChecked}
+                                  onChange={(
+                                    e: React.ChangeEvent<HTMLInputElement>
+                                  ) => {
+                                    if (e.target.checked) {
+                                      push(cat.id);
+                                    } else {
+                                      remove(
+                                        formik?.values?.recalledByCategories?.indexOf(
+                                          cat.id
+                                        )
+                                      );
+                                    }
+                                  }}
+                                  className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
+                                />
+                                <span className="text-black dark:text-white">
+                                  {cat.title}
+                                </span>
+                              </label>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </FieldArray>
+
                       <div className="mt-4">
                         <h2 className="text-lg font-medium dark:text-white">
                           Subcategories
@@ -694,110 +741,124 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                       />
 
                     </div>
+                    <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
+                      <div className="inputs_heading border-stroke dark:border-strokedark">
+                        <h3 className="label_main">
+                          FAQS
+                        </h3>
+                      </div>
+                      <div className="flex flex-col gap-4 p-4">
+                        <FieldArray name="faqs">
+                          {({ push, remove }) => (
+                            <div className="flex flex-col gap-2">
+                              {formik.values.faqs &&
+                                formik.values.faqs.map(
+                                  (spec: any, index: any) => (
+                                    <div
+                                      key={index}
+                                      className="flex gap-2 items-center"
+                                    >
+                                      <Input name={`faqs[${index}].specsHeading`} placeholder="FAQS Heading" />
+                                      <Input name={`faqs[${index}].specsDetails`} placeholder="FAQS Details" />
+
+                                      <button
+                                        type="button"
+                                        onClick={() => remove(index)}
+                                        className="crose_button"
+                                      >
+                                        <RxCross2
+                                          className="errorColor"
+                                          size={25}
+                                        />
+                                      </button>
+                                    </div>
+                                  ),
+                                )}
+                              <button
+                                type="button"
+                                onClick={() => push({ specsDetails: '' })}
+                                className="dashboard_primary_button"
+                              >
+                                Add FAQS
+                              </button>
+                            </div>
+                          )}
+                        </FieldArray>
+                      </div>
+                    </div>
+
+                    <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
+                      <div className="inputs_heading border-stroke dark:border-strokedark">
+                        <h3 className="label_main">
+                          Privacy Section
+                        </h3>
+                      </div>
+                      <div className="flex flex-col gap-4 p-4">
+                        <FieldArray name="privacySectoin">
+                          {({ push, remove }) => (
+                            <div className="flex flex-col gap-2">
+                              {formik.values.privacySectoin &&
+                                formik.values.privacySectoin.map(
+                                  (spec: any, index: any) => (
+                                    <div
+                                      key={index}
+                                      className="flex gap-2 items-center"
+                                    >
+                                      <Input name={`privacySectoin[${index}].specsHeading`} placeholder="privacySectoin Heading" />
+                                      <Input name={`privacySectoin[${index}].specsDetails`} placeholder="privacySectoin Details" />
+
+                                      <button
+                                        type="button"
+                                        onClick={() => remove(index)}
+                                        className="crose_button"
+                                      >
+                                        <RxCross2
+                                          className="errorColor"
+                                          size={25}
+                                        />
+                                      </button>
+                                    </div>
+                                  ),
+                                )}
+                              <button
+                                type="button"
+                                onClick={() => push({ specsDetails: '' })}
+                                className="dashboard_primary_button"
+                              >
+                                Add privacySectoin
+                              </button>
+                            </div>
+                          )}
+                        </FieldArray>
+                      </div>
+                    </div>
                   </div>
+
                 </div>
 
-                <div className="flex flex-col gap-5">
-                  <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                    <div className="inputs_heading border-stroke dark:border-strokedark">
-                      <h3 className="label_main">
-                        FAQS
-                      </h3>
-                    </div>
-                    <div className="flex flex-col gap-4 p-4">
-                      <FieldArray name="faqs">
-                        {({ push, remove }) => (
-                          <div className="flex flex-col gap-2">
-                            {formik.values.faqs &&
-                              formik.values.faqs.map(
-                                (spec: any, index: any) => (
-                                  <div
-                                    key={index}
-                                    className="flex gap-2 items-center"
-                                  >
-                                    <Input name={`faqs[${index}].specsHeading`} placeholder="FAQS Heading" />
-                                    <Input name={`faqs[${index}].specsDetails`} placeholder="FAQS Details" />
+                <div className="flex flex-col gap-5 border p-2">
 
-                                    <button
-                                      type="button"
-                                      onClick={() => remove(index)}
-                                      className="crose_button"
-                                    >
-                                      <RxCross2
-                                        className="errorColor"
-                                        size={25}
-                                      />
-                                    </button>
-                                  </div>
-                                ),
-                              )}
-                            <button
-                              type="button"
-                              onClick={() => push({ specsDetails: '' })}
-                              className="dashboard_primary_button"
-                            >
-                              Add FAQS
-                            </button>
-                          </div>
-                        )}
-                      </FieldArray>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <div className="inputs_heading border-stroke dark:border-strokedark">
+                        <h3 className="label_main">
+                          Sub Heading
+                        </h3>
+                      </div>
+                      <Input name="Sub_Heading" placeholder="Sub Heading" textarea />
+                    </div>
+                    <div>
+                      <div className="inputs_heading border-stroke dark:border-strokedark">
+                        <h3 className="label_main">
+                          Sub Heading Description
+                        </h3>
+                      </div>
+                      <Input name="Sub_Heading_description" placeholder="Sub Heading Description" textarea />
                     </div>
                   </div>
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                     <div className="inputs_heading border-stroke dark:border-strokedark">
-                      <h3 className="label_main">
-                        Privacy Section
-                      </h3>
-                    </div>
-                    <div className="flex flex-col gap-4 p-4">
-                      <FieldArray name="privacySectoin">
-                        {({ push, remove }) => (
-                          <div className="flex flex-col gap-2">
-                            {formik.values.privacySectoin &&
-                              formik.values.privacySectoin.map(
-                                (spec: any, index: any) => (
-                                  <div
-                                    key={index}
-                                    className="flex gap-2 items-center"
-                                  >
-                                    <Input name={`privacySectoin[${index}].specsHeading`} placeholder="privacySectoin Heading" />
-                                    <Input name={`privacySectoin[${index}].specsDetails`} placeholder="privacySectoin Details" />
-
-                                    <button
-                                      type="button"
-                                      onClick={() => remove(index)}
-                                      className="crose_button"
-                                    >
-                                      <RxCross2
-                                        className="errorColor"
-                                        size={25}
-                                      />
-                                    </button>
-                                  </div>
-                                ),
-                              )}
-                            <button
-                              type="button"
-                              onClick={() => push({ specsDetails: '' })}
-                              className="dashboard_primary_button"
-                            >
-                              Add privacySectoin
-                            </button>
-                          </div>
-                        )}
-                      </FieldArray>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2  gap-4">
-                    <Input name="Sub_Heading" placeholder="Sub Heading" textarea />
-                    <Input name="Sub_Heading_description" placeholder="Sub Heading Description" textarea />
-
-                  </div>
-
-                  <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
-                   <div className="inputs_heading border-stroke dark:border-strokedark">
                       <h3 className="label_main">
                         Descripton(On Subcategory Page)
                       </h3>
@@ -895,7 +956,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                   </div>
 
                   <div className="rounded-sm border border-stroke dark:border-strokedark ">
-                  <div className="inputs_heading border-stroke dark:border-strokedark">
+                    <div className="inputs_heading border-stroke dark:border-strokedark">
                       <h3 className="font-medium">Add Vidoes</h3>
                     </div>
                     {videos?.[0] && videos?.length > 0 ? (
@@ -1070,13 +1131,12 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                     </div>
                     {subCategoryImage && subCategoryImage?.length > 0 ? (
                       <div className="form_element_main">
-                        <div>
                           {subCategoryImage.map((item: any, index) => {
                             return (
-                              <>
+                              <div key={index}>
                                 <div
                                   className="relative group rounded-lg overflow-hidden shadow-md bg-white transform transition-transform duration-300 hover:scale-105"
-                                  key={index}
+                                  
                                 >
                                   <div className="absolute top-1 right-1 invisible group-hover:visible errorColor bg-white rounded-full">
                                     <RxCross2
@@ -1109,11 +1169,11 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                   }
                                 />
 
-                              </>
+                              </div>
                             );
                           })}
                         </div>
-                      </div>
+                 
                     ) : (
                       <Imageupload setposterimageUrl={setsubCategoryImage} />
                     )}

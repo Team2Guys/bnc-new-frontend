@@ -5,7 +5,6 @@ import { Metadata } from "next";
 import { links } from "data/header_links";
 import Script from "next/script";
 import { notFound } from "next/navigation";
-// import { getSubcategoriesByCategory } from "utils/helperFunctions";
 import Product from "components/Product";
 import { subcategoryMap } from "utils/helperFunctions";
 type Props = {
@@ -42,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   let description =
     Category?.Meta_description ||
     'Welcome to blindsandcurtains';
-  let url = `${fullUrl}${productName}`;
+  let url = Category?.Canonical_Tag || `${fullUrl}${productName}`;
   return {
     title: title,
     description: description,
@@ -62,26 +61,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const Products = async ({ params }: Props) => {
   const slug = (await params).category;
-
   const category = await fetchSingleCategorymain(slug)
   if (!category) {
     return notFound();
   }
   const matchingLink: any = links.find((link) => slug.includes(link.href.replace(/^\//, '')),);
 
+  const uniqueProducts = Array.from(
+    new Map([...category.products, ...category.recalledProducts].map(product => [product.id, product])).values()
+  );
 
-
-  const filteredProducts = category.products?.filter((product: IProduct) => product.status === "PUBLISHED")?.sort((a: IProduct, b: IProduct) => {
-    // Pick the correct order list based on category
+  const filteredProducts = uniqueProducts?.filter((product: IProduct) => product.status === "PUBLISHED")?.sort((a: IProduct, b: IProduct) => {
     const orderArray = subcategoryMap[category.title?.toLowerCase()];
-
     if (!orderArray) return 0;
-
     const indexA = orderArray.findIndex(item => item.toLowerCase().trim() === a.title?.toLowerCase().trim());
     const indexB = orderArray.findIndex(item => item.toLowerCase().trim() === b.title?.toLowerCase().trim());
     return (indexA === -1 ? orderArray.length : indexA) - (indexB === -1 ? orderArray.length : indexB);
   });
-
 
   return (
     <>

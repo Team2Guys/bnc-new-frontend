@@ -2,8 +2,6 @@
 import React from 'react';
 import Slider from 'react-slick';
 import Image from 'next/image';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 
 const ClientLogoGridSlider = ({ OurClientImage }: { OurClientImage: any[] }) => {
   const settings = {
@@ -45,6 +43,7 @@ const ClientLogoGridSlider = ({ OurClientImage }: { OurClientImage: any[] }) => 
                 alt={image.alt}
                 fill
                 priority
+                sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1280px) 25vw, 12vw"
               />
             </div>
           </div>

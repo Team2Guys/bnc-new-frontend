@@ -67,15 +67,15 @@ const CallUS = () => {
       <Container className='xs:py-5 lg:!pb-10 xl:mt-7 '>
          <div className='bg-primary grid grid-cols-1 sm:grid-cols-9 sm:px-0 px-3 rounded-md'>
             <div className='relative sm:col-span-5 md:col-span-4 sm:h-[320px] xsm:px-8 sm:px-0'>
-               <Image src='/assets/images/callus/callus.webp' fill loading="lazy" className='!relative hidden sm:block' alt='call us image' />
+               <Image src='/assets/images/callus/callus.webp' fill loading="lazy" className='!relative hidden sm:block' sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw" alt='call us image' />
                <div className='sm:absolute top-0 w-full h-full pt-8 sm:py-6 lg:py-8 sm:ps-8 sm:pe-14 2xl:pe-20 flex flex-col justify-center gap-4 items-center sm:items-start sm:justify-between'>
-                  <h2 className='text-center sm:text-start text-primary-foreground text-24 sm:text-28 xl:text-[40px] font-semibold font-robotoSerif leading-tight lg:max-w-md'>Ready to Decide? Let&apos;s Set It Up Instantly!</h2>
+                  <h2 className='text-center sm:text-start text-primary-foreground text-24 sm:text-28 xl:text-[40px] font-semibold font-futura leading-tight lg:max-w-md'>Ready to Decide? Let&apos;s Set It Up Instantly!</h2>
                   <Link href="tel:042522025" target='_blank'  className='flex gap-4 items-center'>
                      <span>
                         <FiPhoneCall className='size-12 xl:size-16 text-primary-foreground' />
                      </span>
                      <div className='flex flex-col text-primary-foreground'>
-                        <p className='text-md xl:text-xl font-medium font-robotoSerif'>Call Us Any Time</p>
+                        <p className='text-md xl:text-xl font-medium font-futura'>Call Us Any Time</p>
                         <p className='text-lg xl:text-2xl font-bold font-roboto'>04 252 2025</p>
                      </div>
                   </Link>
@@ -89,7 +89,7 @@ const CallUS = () => {
                         <Field
                            name="name"
                            placeholder="Name"
-                           className="w-full text-10 xsm:text-sm md:text-base rounded-full px-4 md:px-6 py-3 border-2 text-primary-foreground font-medium font-robotoSerif border-primary-foreground bg-transparent placeholder-primary-foreground outline-none"
+                           className="w-full text-[10px] xsm:text-sm md:text-base rounded-full px-4 md:px-6 py-3 border-2 text-primary-foreground font-medium font-futura border-primary-foreground bg-transparent placeholder-primary-foreground outline-none"
                         />
                         <ErrorMessage name="name" component="div" className="text-red-400 text-sm mt-1" />
                      </div>
@@ -100,7 +100,7 @@ const CallUS = () => {
                            name="email"
                            placeholder="Email"
                            type="email"
-                           className="w-full text-10 xsm:text-sm md:text-base rounded-full px-4 md:px-6 py-3 border-2 text-primary-foreground font-medium font-robotoSerif border-primary-foreground bg-transparent placeholder-primary-foreground outline-none"
+                           className="w-full text-[10px] xsm:text-sm md:text-base rounded-full px-4 md:px-6 py-3 border-2 text-primary-foreground font-medium font-futura border-primary-foreground bg-transparent placeholder-primary-foreground outline-none"
                         />
                         <ErrorMessage name="email" component="div" className="text-red-400 text-sm mt-1" />
                      </div>
@@ -110,7 +110,7 @@ const CallUS = () => {
                         <Field
                            name="phone"
                            placeholder="Phone Number"
-                           className="w-full text-10 xsm:text-sm md:text-base rounded-full px-4 md:px-6 py-3 border-2 text-primary-foreground font-medium font-robotoSerif border-primary-foreground bg-transparent placeholder-primary-foreground outline-none"
+                           className="w-full text-[10px] xsm:text-sm md:text-base rounded-full px-4 md:px-6 py-3 border-2 text-primary-foreground font-medium font-futura border-primary-foreground bg-transparent placeholder-primary-foreground outline-none"
                         />
                         <ErrorMessage name="phone" component="div" className="text-red-400 text-sm mt-1" />
                      </div>
@@ -120,7 +120,7 @@ const CallUS = () => {
                         <button
                            type="submit"
                            disabled={loading}
-                           className="w-full text-10 xsm:text-sm md:text-base rounded-full px-4 md:px-6 py-3 bg-primary-foreground text-primary font-semibold font-robotoSerif hover:bg-secondary duration-200 transition"
+                           className="w-full text-[10px] xsm:text-sm md:text-base rounded-full px-4 md:px-6 py-3 bg-primary-foreground text-primary font-semibold font-futura hover:bg-secondary duration-200 transition"
                         >
                            {loading ? "Submitting..." : "Submit Now"}
                         </button>

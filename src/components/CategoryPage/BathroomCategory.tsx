@@ -2,8 +2,6 @@ import React from 'react';
 import Image from 'next/image';
 import { IProduct } from 'types/types';
 import Link from 'next/link';
-import { Categories_wise_Images } from 'data/Images';
-import { usePathname } from 'next/navigation';
 import { getPath } from 'utils/helperFunctions';
 
 interface BathroomCategoryProps {
@@ -27,42 +25,14 @@ const BathroomCategory = ({
   categoryName,
   description,
 }: BathroomCategoryProps) => {
-  const pathname = usePathname();
-
-
-
-
-  
-
-  let prod_finder_handler = (arr: IProduct) => {
-    let product;
-    for (let category of Categories_wise_Images) {
-      if (!pathname.includes('commercial')) {
-        if (category.sub_Category === subCategory) {
-          product = category.Product.find((value) => value.product_name === arr.title.trim());
-          return product;
-        }
-      } else {
-        if (category.sub_Category === subCategory) {
-          product = category.Product.find((value) => value.product_name == arr.title.trim());
-          break;
-        }
-      }
-    }
-
-    return product;
-  };
-  const currentCategory = Categories_wise_Images.find((category) =>category.sub_Category === subCategory
-  );
-  const static_Title = currentCategory?.static_Title;
 
   return (
     <>
       <div className="flex flex-col justify-center items-center space-y-4 px-2">
         <h2 className="text-xl sm:text-30 font-bold border-b-[#A9B4A4] text-center">
-          {static_Title ? static_Title : categoryName}
+          {categoryName}
         </h2>
-        <p className="font-normal text-xs sm:text-16 leading-6 sm:leading-9 text-center text-[#666768]  border-b-[#A9B4A4] pb-2 " dangerouslySetInnerHTML={{ __html: description }}></p>
+        <p className="font-normal text-xs sm:text-base leading-6 sm:leading-9 text-center text-[#666768]  border-b-[#A9B4A4] pb-2 " dangerouslySetInnerHTML={{ __html: description }}></p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-10 2xl:gap-16 my-10 px-2">
         {isLoading
@@ -80,7 +50,7 @@ const BathroomCategory = ({
           ))
           : filteredProducts &&
           filteredProducts.map((arr: IProduct, index: number) => {
-            let product_Images = prod_finder_handler(arr);
+            let product_Images = arr?.imageUrls?.find((value)=>value?.name?.trim()?.toLowerCase()===subCategory?.trim()?.toLowerCase())
             let findModel = arr?.modelDetails?.find((value)=>value?.name?.trim()?.toLowerCase()===subCategory?.trim()?.toLowerCase())
   
             return (
@@ -91,10 +61,10 @@ const BathroomCategory = ({
                 <div>
                   <Image
                     className="w-full h-[280px] xs:h-[300px] sm:h-[350px] md:h-[450px] lg:h-[500px] rounded-md"
-                    src={product_Images?.Imagesurl || arr?.subCategoryImage?.imageUrl || arr.posterImage.imageUrl }
+                    src={product_Images?.imageUrl || arr?.subCategoryImage?.imageUrl || arr.posterImage.imageUrl }
                     height={774}
                     width={1032}
-                    alt={product_Images ? product_Images.altText : arr.title}
+                    alt={arr.title}
                     loading="lazy"
                   />
                   <h2 className="font-bold  sm:text-xl md:text-2xl text-center mt-2">
@@ -103,7 +73,7 @@ const BathroomCategory = ({
                     <p
                       className="leading-6 sm:leading-9 text-xs sm:text-base text-[#797D85] font-normal w-full"
                       dangerouslySetInnerHTML={{
-                        __html: findModel?.detail || product_Images?.desc || "",
+                        __html: findModel?.detail || arr.description || "",
                       }}
                     ></p>
                 

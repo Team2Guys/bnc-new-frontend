@@ -33,11 +33,11 @@ const ConfirmModal: FC<InternalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white rounded-lg shadow-lg w-full max-w-md mx-4 p-6">
         <h2 className="text-lg font-semibold mb-4">{title}</h2>
-        <p className="mb-6 text-gray-700">{content}</p>
+        <p className="mb-6">{content}</p>
         <div className="flex justify-end space-x-3">
           <button
             onClick={handleCancel}
-            className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded hover:bg-gray-300"
+            className="px-4 py-2 text-sm font-medium bg-gray-200 rounded hover:bg-gray-300"
           >
             {cancelText}
           </button>

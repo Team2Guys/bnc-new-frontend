@@ -8,11 +8,15 @@ import React from 'react';
 
 const QualitySection = () => {
   const path = usePathname();
-  const category = path.includes('blinds')
-    ? 'blinds'
-    : path.includes('curtains')
-    ? 'curtains'
-    : 'shutters';
+const category = path.includes('commercial')
+  ? 'commercial'
+  : path.includes('blinds')
+  ? 'blinds'
+  : path.includes('curtains')
+  ? 'curtains'
+  : path.includes('shutters')
+  ? 'shutters'
+  : 'commercial';
 
   const imageSrc = getImageSrc(category);
   const qualityFeatures = QualityData[category];
@@ -24,7 +28,7 @@ const QualitySection = () => {
           <p className="uppercase text-sm sm:text-base font-medium text-primary text-center sm:text-start">
             We Only Focus On
           </p>
-          <h2 className="text-2xl md:text-[40px] font-black text-primary font-robotoSerif text-center sm:text-start">
+          <h2 className="text-2xl md:text-[40px] font-black text-primary font-futura text-center sm:text-start">
             Customer Satisfaction
           </h2>
         </div>
@@ -50,6 +54,7 @@ const QualitySection = () => {
                   <p
                     className="text-base xl:text-xl text-primary font-medium font-roboto"
                     dangerouslySetInnerHTML={{ __html: feature.text }}
+                    suppressHydrationWarning
                   />
                 </div>
               ))}
@@ -75,6 +80,8 @@ function getImageSrc(category: string) {
     case "blinds":
       return "/assets/images/safisfaction/Blinds.webp";
     case "curtains":
+      return "/assets/images/safisfaction/Curtains.webp";
+      case "commercial":
       return "/assets/images/safisfaction/Curtains.webp";
     default:
       return "/assets/images/safisfaction/Shutters.webp";

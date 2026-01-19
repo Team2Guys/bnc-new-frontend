@@ -1,9 +1,7 @@
 'use client';
-
 import React, { useEffect, useState } from 'react';
 import {
   footerInfo,
-  generateSlug,
   footerData,
   EmailInfo,
   phoneNumberInfo,
@@ -12,14 +10,9 @@ import {
 import { IoLocationOutline } from 'react-icons/io5';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ICategory, IProduct } from 'types/types';
+import { IProduct } from 'types/types';
 import { useQuery } from '@tanstack/react-query';
-import {
-  fetchCategories,
-  fetchProducts,
-  fetchSubCategories,
-} from 'config/fetch';
-import { urls } from 'data/urls';
+import { fetchProducts, } from 'config/fetch';
 import { Skeleton } from 'components/ui/skeleton';
 import { TCategorySection } from 'types/footer';
 import Container from '../Container/Container';
@@ -32,39 +25,15 @@ import SocialLink from '../social-link/social-link';
 import { IoIosArrowDown } from 'react-icons/io';
 import Collapse from 'components/ui/Collapse';
 import { getPath } from 'utils/helperFunctions';
-
-
-
-const Footer: React.FC = () => {
+const Footer = () => {
   const fetchAllData = async () => {
-    const [products, categories, subcategories] = await Promise.all([
-      fetchProducts(),
-      fetchCategories(),
-      fetchSubCategories(),
-    ]);
-    return { products, categories, subcategories };
+    const [products] = await Promise.all([fetchProducts(),]); return { products };
   };
-
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ['allData'],
-    queryFn: fetchAllData,
-
-  });
+  const { data, isLoading, isError } = useQuery({ queryKey: ['allData'], queryFn: fetchAllData });
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname()
   const products: IProduct[] = data?.products || [];
-  const categories: ICategory[] = data?.categories || [];
-  const subcategories = data?.subcategories || [];
   const [isMobile, setIsMobile] = useState(false);
-
-
-  const ChangedProductUrl = (title: string): string => {
-    let products = urls.find((url: { productName: string; Url: string }) => {
-      return url.productName === title;
-    });
-
-    return products ? products.Url : generateSlug(title);
-  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -82,12 +51,13 @@ const Footer: React.FC = () => {
         <Container>
           <div className="grid grid-cols-1 xs:grid-cols-2  md:grid-cols-4 lg:grid-cols-5 gap-2 md:justify-items-center">
             <div className="mb-4 flex flex-col items-start">
-              <Link href='/' className="w-[79px] h-[50px] relative md:w-[120px] md:h-[50px]">
+              <Link href='/' className="h-[50px] relative w-[120px] md:h-[50px]">
                 <Image
                   fill
                   priority
                   src='/assets/images/logomain.webp'
                   alt="Logo"
+                  sizes="(max-width: 768px) 79px, 120px"
                 />
               </Link>
               <p className="text-base sm:text-sm text-start max-w-80 text-primary font-roboto mt-2 opacity-60">
@@ -159,184 +129,86 @@ const Footer: React.FC = () => {
               </ul>
 
             </div>
-            {isLoading || isError ? (
-              <>
-                {Array.from({ length: 3 }).map((_, index) => (
-                  <div className='flex flex-col gap-2 sm:gap-4 w-full xs:items-center' key={index}>
-                    {Array.from({ length: 6 }).map((_, index) => (
-                      <Skeleton
-                        key={index}
-                        className="w-2/3 h-6 bg-black/25"
-                      />
-                    ))}
-                  </div>
-                ))}
-              </>
-            ) :
-
-
-              (footerData.map((category: TCategorySection) => (
-                <div className="2xl:pl-2" key={category.key}>
-                  {
-                    isMobile ? (
-                      <Collapse
-                      className="bg-transparent border-0"
-                      items={[
-                        {
-                          key: category.key || category.title,
-                          label: category.title,
-                          children: (
-                            <ul className="space-y-2 font-roboto">
-                              {category?.items?.map((item: string, index: number) => {
-                                const matchingSubcategory = subcategories?.find(
-                                  (subcategory: ICategory) =>
-                                    subcategory.title === item &&
-                                    subcategory.CategoryId ===
-                                      categories.find(
-                                        (cat) => generateSlug(cat.title) === generateSlug(category.title)
-                                      )?.id
-                                );
-
-                                const matchingProduct = products?.find(
-                                  (product) =>
-                                    product.status === "PUBLISHED" &&
-                                    product.title.toLowerCase() === item.toLowerCase() &&
-                                    product.CategoryId ===
-                                      categories.find(
-                                        (cat) =>
-                                          cat.title.toLowerCase() === category.title.toLowerCase()
-                                      )?.id
-                                );
-
-                                return (
-                                  <li key={index}>
-                                    {matchingSubcategory && (
-                                      <Link
-                                        className="text-14 2xl:text-16 text-primary font-normal capitalize"
-                                        href={`/${category.title
-                                          .toLowerCase()
-                                          .replace("shutters", "shutters-range")}/${ChangedProductUrl(
-                                          matchingSubcategory.title
-                                        )}/`}
-                                      >
-                                        {matchingSubcategory.title}
-                                      </Link>
-                                    )}
-
-                                    {matchingProduct && (
-                                      <Link
-                                        className="text-14 2xl:text-16 text-primary font-normal capitalize"
-                                        href={getPath(matchingProduct)}
-                                      >
-                                        {matchingProduct.title}
-                                      </Link>
-                                    )}
-                                  </li>
-                                );
-                              })}
-                            </ul>
-                          ),
-                        },
-                      ]}
+            {isLoading || isError ?
+              Array.from({ length: 3 }).map((_, index) => (
+                <div className='flex flex-col gap-2 sm:gap-4 w-full xs:items-center' key={index}>
+                  {Array.from({ length: 6 }).map((_, index) => (
+                    <Skeleton
+                      key={index}
+                      className="w-2/3 h-6 bg-black/25"
                     />
-
-                    )
-                      : (
-                        <div>
-                          <h3 className="font-semibold text-20 mb-2 text-primary w-fit font-robotoSerif">
-                            {category.title}
-                          </h3>
-                          <ul className="space-y-2 mt-4 text-primary font-roboto capitalize">
-
-                            {
-                              //@ts-ignore
-                              category?.items?.map((item, index: number) => {
-                                const matchingSubcategory = subcategories?.find(
-                                  (subcategory: ICategory) =>
-                                    subcategory.title === item &&
-                                    subcategory.CategoryId ===
-                                    categories.find(
-                                      (cat) =>
-                                        generateSlug(cat.title) ===
-                                        generateSlug(category.title),
-                                    )?.id,
-                                );
-
-                                const matchingProduct = products?.find(
-                                  (product) =>
-                                    product.status === "PUBLISHED" &&
-                                    product.title.toLowerCase() === item.toLowerCase() &&
-                                    product.CategoryId ===
-                                    categories.find(
-                                      (cat) => cat.title.toLowerCase() === category.title.toLowerCase(),
-                                    )?.id,
-                                );
-                                return (
-                                  <React.Fragment key={index}>
-                                    {matchingSubcategory && (
-                                      <li>
-                                        <Link
-                                          className="text-12 sm:text-14 text-[#3E3F42] opacity-60"
-                                          href={`/${category.title.toLowerCase().replace('shutters', 'shutters-range')}/${ChangedProductUrl(matchingSubcategory.title)}/`}
-
-                                        >
-                                          {matchingSubcategory.title}
-                                        </Link>
-                                      </li>
-                                    )}
-
-                                    {matchingProduct && (
-                                      <li>
-                                        <Link
-                                          className="text-12 sm:text-14 text-[#3E3F42] opacity-60"
-                                          href={getPath(matchingProduct)}
-                                        >
-                                          {matchingProduct.title}
-                                        </Link>
-                                      </li>
-                                    )}
-                                  </React.Fragment>
-                                );
-                              })}
-                          </ul>
-                        </div>
-                      )}
+                  ))}
                 </div>
               ))
-              )}
-
+              :
+              footerData.map((array: TCategorySection, index) => (
+                <div className="2xl:pl-2" key={array.key || index}>
+                  {isMobile ? (
+                    <Collapse className="bg-transparent border-0"
+                      items={[{
+                        key: array.key || array.title,
+                        label: array.title,
+                        children: (
+                          <ul className="space-y-2 font-roboto">
+                            {array?.items?.map((item: string, index: number) => {
+                              const product = products.find((p) => p.status === "PUBLISHED" && p.title.toLowerCase().trim() === item.toLowerCase().trim());
+                              return (
+                                product && (
+                                  <li key={index} className="text-sm 2xl:text-16 text-primary font-normal capitalize" >
+                                    <Link href={getPath(product)}>
+                                      {item}
+                                    </Link>
+                                  </li>
+                                ));
+                            })}
+                          </ul>
+                        ),
+                      },]}
+                    />
+                  ) : (
+                    <div>
+                      <Link href={array.link} className="font-semibold text-xl mb-2 text-primary w-fit font-futura">
+                        {array.title}
+                      </Link>
+                      <ul className="space-y-2 mt-4 text-primary font-roboto capitalize">
+                        {array.items &&
+                          array.items.map((item, index) => {
+                            const product = products.find((p) => p.status === "PUBLISHED" && p.title.toLowerCase().trim() === item.toLowerCase().trim());
+                            return (
+                              product && (
+                                <li key={index} className="text-xs sm:text-sm text-[#3E3F42] opacity-60 hover:opacity-100 transition">
+                                  <Link href={getPath(product)}>
+                                    {item}
+                                  </Link>
+                                </li>
+                              ));
+                          })}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              ))}
             <div className="flex flex-col gap-4 lg:pl-2 mt-0 sm:mt-4 lg:mt-0 col-auto md:col-span-1 lg:col-auto">
               <div className={`${isMobile ? 'flex flex-col gap-4' : 'pl-0 lg:mx-auto flex flex-col  gap-4'}`}>
                 <div>
                   {isMobile ? (
-                    <button
-                      onClick={() => setIsOpen(!isOpen)}
-                      className="w-full flex items-center justify-between sm:font-semibold font-medium text-18 xs:text-20 text-primary font-robotoSerif focus:outline-none"
-                    >
+                    <button onClick={() => setIsOpen(!isOpen)} className="w-full flex items-center justify-between sm:font-semibold font-medium text-18 xs:text-20 text-primary font-futura focus:outline-none">
                       <span>Location We are In</span>
-                      {isOpen ? (
-
-                        <IoIosArrowDown size={24} className="pt-1 transform rotate-180 transition-transform duration-300 opacity-60" />
-
-                      ) : (
-                        <IoIosArrowDown size={24} className="pt-1 transition-transform duration-300 opacity-60" />
-
-                      )}
+                      <IoIosArrowDown size={24} className="pt-1 transform transition-transform duration-300 opacity-60" />
                     </button>
                   ) : (
-                    <h3 className="font-semibold text-18 xs:text-20 text-primary font-robotoSerif max-lg:whitespace-nowrap">
+                    <h3 className="font-semibold text-18 xs:text-20 text-primary font-futura max-lg:whitespace-nowrap">
                       Location We are In
                     </h3>
                   )}
                 </div>
-
                 {(isMobile ? isOpen : true) && (
                   <div>
                     <ul className="text-primary grid grid-cols-1 gap-1 xl:gap-2 ">
                       {locations.map((city) => (
                         <li key={city} className="flex gap-2 flex-nowrap sm:px-0 px-3 ">
                           <IoLocationOutline size={20} className="text-secondary me-1" />
-                          <p className="2xl:text-sm text-12 sm:text-14 text-[#3E3F42] opacity-60">{city}</p>
+                          <p className="2xl:text-sm text-12 sm:text-sm text-[#3E3F42] opacity-60">{city}</p>
                         </li>
                       ))}
                     </ul>
@@ -349,17 +221,20 @@ const Footer: React.FC = () => {
       </div>
 
       <div className="bg-primary">
-        <Container className='pb-4 md:pb-0'>
-          <div className="border-t border-primary-300 py-3 text-center flex md:flex-row flex-col sm:justify-between justify-center items-center max-md:space-y-1 sm:gap-y-0 gap-y-2">
-            <div className='flex items-center max-sm:justify-between gap-4 lg:gap-6 max-sm:w-full'>
-              <Link href="/about-us/" className="text-14 lg:text-16 text-primary-foreground font-medium font-roboto">About Us</Link>
-              <Link href="/blog/" className="text-14 lg:text-16 text-primary-foreground font-medium font-roboto">Blog</Link>
-              <Link href="/faqs/" className="text-14 lg:text-16 text-primary-foreground font-medium font-roboto">FAQs</Link>
-              <Link href="/estimator/" className="text-14 lg:text-16 text-primary-foreground font-medium font-roboto">Estimator</Link>
-            </div>
-            <p className="text-14 lg:text-16 text-primary-foreground font-medium font-roboto">{footerInfo}</p>
-            <div className='flex gap-2 items-center'>
-              <p className='text-14 lg:text-16 sm:font-bold font-semibold text-white font-roboto'>Follow Us</p>
+        <Container className='pb-4 md:pb-0 border-t border-primary-300 py-3 space-y-3 sm:space-y-0'>
+          <div className='flex flex-wrap sm:flex-nowrap justify-center items-center gap-y-2'>
+            <Link href="/product-guarantees/" className="text-sm lg:text-16 text-primary-foreground font-medium font-roboto border-r border-secondary px-2">Product Guarantees</Link>
+            <Link href="/blog/" className="text-sm lg:text-16 text-primary-foreground font-medium font-roboto border-r border-secondary px-2">Blog</Link>
+            <Link href="/projects/" className="text-sm lg:text-16 text-primary-foreground font-medium font-roboto border-r-0 xsm:border-r border-secondary px-2">Our Projects</Link>
+            <Link href="/contact-us/" className="text-sm lg:text-16 text-primary-foreground font-medium font-roboto border-r xsm:border-r-0 xs:border-r border-secondary px-2">Contact Us</Link>
+            <Link href="/gallery/" className="text-sm lg:text-16 text-primary-foreground font-medium font-roboto border-r border-secondary px-2">Gallery</Link>
+            <Link href="/why-choose-blinds-curtains/" className="text-sm lg:text-16 text-primary-foreground font-medium font-roboto px-2">Why Choose Us</Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 text-center sm:items-end gap-2">
+            <span className='hidden lg:block'></span>
+            <p className="text-sm lg:text-16 text-primary-foreground font-medium font-roboto">{footerInfo}</p>
+            <div className='flex gap-2 justify-center sm:justify-end items-center'>
+              <p className='text-sm lg:text-16 sm:font-bold font-semibold text-white font-roboto'>Follow Us</p>
               <div className="flex items-center space-x-5 ">
                 <SocialLink />
               </div>

@@ -50,7 +50,7 @@ const TestimonialCard = ({
                </p>}
 
                <div className='flex flex-col gap-1'>
-                  <h3 className="text-12 xs:text-14 2xl:text-lg font-bold">
+                  <h3 className="text-12 xs:text-sm 2xl:text-lg font-bold">
                      {testimonial.name}
                   </h3>
                   <p className='text-12 text-[#8a8a8a]'>

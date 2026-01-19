@@ -1,8 +1,9 @@
 
 import { fetchCategories, fetchSubCategories } from 'config/fetch';
-import dynamic from 'next/dynamic';
 import { ICategory } from 'types/types';
-const SubCategory = dynamic(()=>import('./SubCategory'))
+import SubCategory from './SubCategory';
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 const AddSubCategory = async () => {
   const [subCategories, categories] = await Promise.all([

@@ -127,8 +127,8 @@ function Comments({ data }: CommentsProps) {
   return (
     <div className='w-full'>
       <div className="flex justify-between items-center">
-        <h4 className="text-20 font-semibold">Comments</h4>
-        <div className="text-18 font-normal text-paralight flex items-center gap-2">
+        <h4 className="text-xl font-semibold">Comments</h4>
+        <div className="text-lg font-normal text-paralight flex items-center gap-2">
           Share:{' '}
           <span className="flex items-center gap-1">
             <FacebookShareButton url={shareURL}>
@@ -159,9 +159,9 @@ function Comments({ data }: CommentsProps) {
                     required
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="bg-transparent px-3 py-2 border border-bdrgrey rounded-lg w-full text-bdrgrey text-18"
+                    className="bg-transparent px-3 py-2 border border-bdrgrey rounded-lg w-full text-bdrgrey text-lg"
                   />
-                  {errors.name && <p className="text-red-500 text-14">{errors.name}</p>}
+                  {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
                 </div>
                 <div className='w-full'>
                   <input
@@ -171,9 +171,9 @@ function Comments({ data }: CommentsProps) {
                     required
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="bg-transparent px-3 py-2 border border-bdrgrey rounded-lg w-full text-bdrgrey text-18"
+                    className="bg-transparent px-3 py-2 border border-bdrgrey rounded-lg w-full text-bdrgrey text-lg"
                   />
-                  {errors.email && <p className="text-red-500 text-14">{errors.email}</p>}
+                  {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                 </div>
               </div>
             </div>
@@ -183,7 +183,7 @@ function Comments({ data }: CommentsProps) {
               required
               value={formData.description}
               onChange={handleInputChange}
-              className="bg-transparent px-3 py-2 border border-bdrgrey rounded-lg w-full text-bdrgrey text-18"
+              className="bg-transparent px-3 py-2 border border-bdrgrey rounded-lg w-full text-bdrgrey text-lg"
               rows={6}
             ></textarea>
           </div>
@@ -191,7 +191,7 @@ function Comments({ data }: CommentsProps) {
           <div className='flex justify-between items-center'>
             <div>
               {(currentComments && currentComments.length > 0) &&
-                <p className="text-18 font-normal text-darkgrey">
+                <p className="text-lg font-normal text-darkgrey">
                   {comments.length} Comments
                 </p>
               }
@@ -200,7 +200,7 @@ function Comments({ data }: CommentsProps) {
               <button
                 disabled={loading && !isModalOpen}
                 type="submit"
-                className="px-4 py-3 text-white bg-secondary hover:bg-primary rounded-3xl text-16 sm:text-18 font-semibold"
+                className="px-4 py-3 text-white bg-secondary hover:bg-primary rounded-3xl text-base sm:text-lg font-semibold"
               >
                 {(loading && !isModalOpen) ? <Loader color="#fff" /> : "Post Comment"}
               </button>
@@ -213,31 +213,31 @@ function Comments({ data }: CommentsProps) {
           {(currentComments && currentComments.length > 0) && currentComments.map((item: any) => (
             <div key={item.id} className="leading-8 border-b border-[#EAEAEA] my-4">
               <div className="flex justify-between items-center">
-                <h5 className="text-16 font-semibold">{item.name}</h5>
+                <h5 className="text-base font-semibold">{item.name}</h5>
                 <span className="text-darkgrey">
                   {item?.createdAt ? new Date(item.createdAt).toLocaleString('en-US', { month: 'long', day: '2-digit', year: 'numeric', }) : ''}
                 </span>
               </div>
-              <p className="leading-normal text-darkgrey text-18">{item.description}</p>
+              <p className="leading-normal text-darkgrey text-lg">{item.description}</p>
               <button className="flex items-center gap-1" onClick={() => handleReplyClick(item.id, 'parent')}>
                 <BsReply className="text-[#CDB7AA]" size={18} />
-                <span className="font-medium text-16">Reply</span>
+                <span className="font-medium text-base">Reply</span>
               </button>
               {item?.replies.map((nestedItem: any) =>
               (
                 <div key={nestedItem.id} className="mt-4 leading-8 ps-6">
                   <div className="flex justify-between items-center">
-                    <h5 className="text-16 font-semibold">
+                    <h5 className="text-base font-semibold">
                       {nestedItem.name}
                     </h5>
                     <span className="text-darkgrey">{nestedItem.createdAt && new Date(nestedItem.createdAt).toLocaleString()}</span>
                   </div>
-                  <p className="leading-normal text-darkgrey text-18">
+                  <p className="leading-normal text-darkgrey text-lg">
                     {nestedItem.description}
                   </p>
                   <button className="flex items-center gap-1" onClick={() => handleReplyClick(item.id, 'nested')}>
                     <BsReply className="text-[#CDB7AA]" size={18} />
-                    <span className="font-medium text-16">Reply</span>
+                    <span className="font-medium text-base">Reply</span>
                   </button>
                 </div>
               )
@@ -291,7 +291,7 @@ function Comments({ data }: CommentsProps) {
         open={isModalOpen}
         onClose={handleModalClose}
       >
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-4">
           <input
             type="text"
             name="name"
@@ -299,9 +299,9 @@ function Comments({ data }: CommentsProps) {
             required
             value={formData.name}
             onChange={handleInputChange}
-            className="bg-transparent px-3 py-2 border border-bdrgrey rounded-lg w-full text-bdrgrey text-18"
+            className="bg-transparent px-3 py-2 border border-bdrgrey rounded-lg w-full text-bdrgrey text-lg"
           />
-          {errors.name && <p className="text-red-500 text-14">{errors.name}</p>}
+          {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
           <input
             type="email"
             name="email"
@@ -309,16 +309,16 @@ function Comments({ data }: CommentsProps) {
             required
             value={formData.email}
             onChange={handleInputChange}
-            className="bg-transparent px-3 py-2 border border-bdrgrey rounded-lg w-full text-bdrgrey text-18"
+            className="bg-transparent px-3 py-2 border border-bdrgrey rounded-lg w-full text-bdrgrey text-lg"
           />
-          {errors.email && <p className="text-red-500 text-14">{errors.email}</p>}
+          {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
           <textarea
             name="description"
             placeholder="Reply Comment"
             required
             value={formData.description}
             onChange={handleInputChange}
-            className="bg-transparent px-3 py-2 border border-bdrgrey rounded-lg w-full text-bdrgrey text-18"
+            className="bg-transparent px-3 py-2 border border-bdrgrey rounded-lg w-full text-bdrgrey text-lg"
             rows={4}
           ></textarea>
           <div className="text-end">
@@ -326,7 +326,7 @@ function Comments({ data }: CommentsProps) {
               disabled={loading && isModalOpen}
 
               type="submit"
-              className="px-6 py-3 text-white bg-primary rounded-3xl text-16 sm:text-18 font-medium"
+              className="px-6 py-3 text-white bg-primary rounded-3xl text-base sm:text-lg font-medium"
             >
               {loading && isModalOpen ? <Loader color="#fff" /> : "Post Reply"}
 

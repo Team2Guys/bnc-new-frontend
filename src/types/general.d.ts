@@ -39,3 +39,12 @@ export interface initialRedirectUrls extends Omit<RedirectUrls, "id" > {
 export interface MONTHLYGRAPH {  series: { name: string, data: number[] }[]; categories: string[] } 
 export interface WEEKLYGRAPH{ series: { name: string, data: number[] }[]; categories: string[] }
 export interface STATUS { date: string, day: string, Appointments: number, Orders: number }
+
+export interface IContactForm {
+  fullName: string;
+  email: string;
+  phone: string;
+  whatsapp?: string | null;
+  address: string;
+  message?: string | null;
+}

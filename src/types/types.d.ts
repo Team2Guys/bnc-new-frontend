@@ -107,7 +107,8 @@ export interface IProduct {
   privarcyImage?:Image
   topImages?:Image
   status?:Status
-    customUrl  ?:       String?
+    customUrl  ?:       String
+  recalledByCategories?:[]
 }
 
 export interface ProductImages {
@@ -349,6 +350,7 @@ export interface ImageGalleryProps {
 
 export interface Reel {
   videoUrl: string;
+  videoPoster?: string;
 }
 export interface StepItem {
   step: string;
@@ -452,3 +454,10 @@ export interface SheetProps {
   className?: string;
 }
 export type Status = "DRAFT" | "PUBLISHED" | "ARCHIVED"
+
+export interface WhyChooseProps {
+  reverse?: boolean;
+  title: string;
+  description: string;
+  sliderImages: Array<{ src: string; alt: string }>;
+}
