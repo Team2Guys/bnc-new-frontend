@@ -4,14 +4,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import SidebarLinkGroup from './SidebarLinkGroup';
 import {
   MdKeyboardArrowLeft,
   MdOutlineDashboard,
   MdOutlineKeyboardArrowDown,
   MdProductionQuantityLimits,
 } from 'react-icons/md';
-import {  GrUserAdmin } from 'react-icons/gr';
+import { GrUserAdmin } from 'react-icons/gr';
 import { useAppSelector } from 'components/Others/HelperRedux';
 import { IoSettingsOutline } from 'react-icons/io5';
 import { TbGardenCartOff } from 'react-icons/tb';
@@ -19,7 +18,6 @@ import { BsArrowReturnRight } from 'react-icons/bs';
 import { ImBlog } from "react-icons/im";
 import { CgListTree } from 'react-icons/cg';
 import { FaChalkboardUser } from 'react-icons/fa6';
-
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -38,9 +36,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
   let storedSidebarExpanded = 'true';
 
-  const [sidebarExpanded, setSidebarExpanded] = useState(
+  const [sidebarExpanded] = useState(
     storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true',
   );
+
+  // Track which dropdown is currently open
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
       if (!sidebar.current || !trigger.current) return;
@@ -74,13 +76,31 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     }
   }, [sidebarExpanded]);
 
+  // Function to handle dropdown clicks
+  const handleDropdownClick = (dropdownName: string) => {
+    if (openDropdown === dropdownName) {
+      setOpenDropdown(null);
+    } else {
+      setOpenDropdown(dropdownName);
+    }
+  };
+
+  // Check if a dropdown should be open based on current path
+  const isDropdownOpen = (dropdownName: string, conditionPaths: string[]) => {
+    if (openDropdown === dropdownName) return true;
+    if (openDropdown === null) {
+      return conditionPaths.some(path => pathname.includes(path));
+    }
+    return false;
+  };
+
   return (
     <aside
       ref={sidebar}
       className={`absolute left-0 top-0 z-50 flex h-screen w-72 flex-col overflow-y-hidden bg-secondary dark:border-r dark:bg-dashboardDark duration-300 ease-linear lg:static lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
     >
-      <div className="back_main_button gap-2 px-6 py-5 lg:py-2">
+      <div className="flex items-center justify-between gap-2 px-6 py-5 lg:py-2">
         <Link href="/">
           <Image
             width={140}
@@ -108,379 +128,297 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             <ul className="mb-6 flex flex-col gap-4">
 
               {/* ================= Dashboard ================= */}
-              <SidebarLinkGroup activeCondition={pathname === '/dashboard'}>
-                {(handleClick, open) => {
-                  return (
-                    <>
-                      {/* Main Link */}
+              <li>
+                <div className={`main_dropdown group  ${pathname === '/dashboard' ? 'bg-white text-secondary' : 'text-white hover:bg-white/10'}`}
+                  onClick={() => handleDropdownClick('dashboard')}
+                >
+                  <MdOutlineDashboard size={20} className={`transition-transform duration-500 ${pathname === '/dashboard' ? 'text-secondary' : 'text-white'}`} />
+                  <span className="ml-2">Dashboard</span>
+                  <MdOutlineKeyboardArrowDown
+                    size={24}
+                    className={`ml-auto transition-transform duration-300 ${isDropdownOpen('dashboard', ['/dashboard']) ? 'rotate-180' : 'rotate-0'} ${pathname === '/dashboard' ? 'text-secondary' : 'text-white'}`}
+                  />
+                </div>
+
+                {/* Dropdown */}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${isDropdownOpen('dashboard', ['/dashboard']) ? 'max-h-60 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
+                    }`}
+                >
+                  <ul className="mt-1 pl-4">
+                    <li
+                      className={`transition-opacity duration-300 ${isDropdownOpen('dashboard', ['/dashboard']) ? 'opacity-100' : 'opacity-0'
+                        }`}
+                    >
                       <Link
                         href="/dashboard"
-                       className={`relative flex items-center gap-2 group dashboard_sidebar_links 
-    ${pathname === '/dashboard' ? 'dashboard_sidebar_Active_links' : ''}`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
-                        }}
-                      >
-                        <MdOutlineDashboard size={20} className="text-white transition-transform duration-500 " />
-                        <span className="ml-2">Dashboard</span>
-                        <MdOutlineKeyboardArrowDown
-                          size={24}
-                          className={`MdOutlineKeyboardArrowDown ${open ? 'rotate-180' : 'rotate-0'
-                            }`}
-                        />
-                      </Link>
-
-                      {/* Dropdown */}
-                      <div
-                        className={`db_dropdown ${open ? 'max-h-60 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
+                        className={`flex items-center gap-2 py-2 px-4 rounded-md transition-all duration-300 ${pathname === '/dashboard'
+                          ? 'bg-white text-secondary'
+                          : 'text-white hover:bg-white/10'
                           }`}
                       >
-                        <ul className="db_ui_link">
-                          <li
-                            className={`db_ul_li_link ${open ? 'opacity-100' : 'opacity-0'
-                              }`}
-                          >
-                            <BsArrowReturnRight
-                              size={25}
-                              className="db_main_link"
-                            />
-                            <Link
-                              href="/dashboard"
-                              className={`sidebar_inner_link text-white ${pathname === '/dashboard'
-                                  ? ' db_inner_sub_cat_link'
-                                  : 'db_inner_sub_cat_link_hover '
-                                }`}
-                            >
-                              eCommerce
-                            </Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </>
-                  );
-                }}
-              </SidebarLinkGroup>
+                        <BsArrowReturnRight size={18} />
+                        eCommerce
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </li>
 
               {/* ================= Category ================= */}
-              <SidebarLinkGroup activeCondition={pathname === '/dashboard/category'}>
-                {(handleClick, open) => {
-                  return (
-                    <>
+              <li>
+                <div
+                  className={`main_dropdown group  ${pathname.includes('/dashboard/category') || pathname.includes('/dashboard/subcategory') ? 'bg-white text-secondary' : 'text-white hover:bg-white/10'}`}
+                  onClick={() => handleDropdownClick('category')}
+                >
+                  <CgListTree size={20} className={`${pathname.includes('/dashboard/category') || pathname.includes('/dashboard/subcategory') ? 'text-secondary' : 'text-white'}`} />
+                  <span className="ml-2">Category</span>
+                  <MdOutlineKeyboardArrowDown
+                    size={24}
+                    className={`ml-auto transition-transform duration-300 ${isDropdownOpen('category', ['/dashboard/category', '/dashboard/subcategory']) ? 'rotate-180' : 'rotate-0'} ${pathname.includes('/dashboard/category') || pathname.includes('/dashboard/subcategory') ? 'text-secondary' : 'text-white'}`}
+                  />
+                </div>
+
+                {/* Dropdown */}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${isDropdownOpen('category', ['/dashboard/category', '/dashboard/subcategory']) ? 'max-h-60 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
+                    }`}
+                >
+                  <ul className="mt-1 pl-4">
+                    <li
+                      className={`transition-opacity duration-300 ${isDropdownOpen('category', ['/dashboard/category', '/dashboard/subcategory']) ? 'opacity-100' : 'opacity-0'
+                        }`}
+                    >
                       <Link
-                        href="#"
-                        className={`relative flex items-center gap-2 group dashboard_sidebar_links ${pathname === '/dashboard/category' && 'dashboard_sidebar_Active_links'
+                        href="/dashboard/category"
+                        className={`flex items-center gap-2 py-2 px-4 rounded-md transition-all duration-300 ${pathname === '/dashboard/category'
+                          ? 'bg-white text-secondary'
+                          : 'text-white hover:bg-white/10'
                           }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
-                        }}
                       >
-                        <CgListTree size={20} className="text-white" />
-                        <span className="ml-2">Category</span>
-                        <MdOutlineKeyboardArrowDown
-                          size={24}
-                          className={`MdOutlineKeyboardArrowDown ${open ? 'rotate-180' : 'rotate-0'
-                            }`}
-                        />
+                        <BsArrowReturnRight size={18} />
+                        View Categories
                       </Link>
+                    </li>
 
-                      {/* Dropdown */}
-                      <div
-                        className={`db_dropdown ${open ? 'max-h-60 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
+                    <li
+                      className={`transition-all duration-300 ${isDropdownOpen('category', ['/dashboard/category', '/dashboard/subcategory']) ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
+                        }`}
+                    >
+                      <Link
+                        href="/dashboard/subcategory"
+                        className={`flex items-center gap-2 py-2 px-4 rounded-md transition-all duration-300 ${pathname === '/dashboard/subcategory'
+                          ? 'bg-white text-secondary'
+                          : 'text-white hover:bg-white/10'
                           }`}
                       >
-                        <ul className="db_ui_link">
-                          <li
-                            className={`db_ul_li_link ${open ? 'opacity-100' : 'opacity-0'
-                              }`}
-                          >
-                            <BsArrowReturnRight size={25} className="db_main_link" />
-                            <Link
-                              href="/dashboard/category"
-                              className={`sidebar_inner_link ${pathname === '/dashboard/category'
-                                  ? 'db_inner_sub_cat_link'
-                                  : 'db_inner_sub_cat_link_hover'
-                                }`}
-                            >
-                              View Categories
-                            </Link>
-                          </li>
-
-                          <li
-                            className={`sub_cat_link ${open ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
-                              }`}
-                          >
-                            <BsArrowReturnRight size={25} className="db_main_link" />
-                            <Link
-                              href="/dashboard/subcategory"
-                              className={`sidebar_inner_link ${pathname === '/dashboard/subcategory'
-                                  ? 'db_inner_sub_cat_link'
-                                  : 'db_inner_sub_cat_link_hover'
-                                }`}
-                            >
-                              View Sub Categories
-                            </Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </>
-                  );
-                }}
-              </SidebarLinkGroup>
+                        <BsArrowReturnRight size={18} />
+                        View Sub Categories
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </li>
 
               {/* ================= Products ================= */}
-              <SidebarLinkGroup activeCondition={pathname === '/dashboard/products'}>
-                {(handleClick, open) => {
-                  return (
-                    <>
+              <li>
+                <div
+                  className={`main_dropdown group  ${pathname.includes('/dashboard/products') ? 'bg-white text-secondary' : 'text-white '}`}
+                  onClick={() => handleDropdownClick('products')}
+                >
+                  <MdProductionQuantityLimits size={20} className={`${pathname.includes('/dashboard/products') ? 'text-secondary' : 'text-white'}`} />
+                  <span className="ml-2">Products</span>
+                  <MdOutlineKeyboardArrowDown
+                    size={24}
+                    className={`ml-auto transition-transform duration-300 ${isDropdownOpen('products', ['/dashboard/products']) ? 'rotate-180' : 'rotate-0'} ${pathname.includes('/dashboard/products') ? 'text-secondary' : 'text-white'}`}
+                  />
+                </div>
+
+                {/* Dropdown */}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${isDropdownOpen('products', ['/dashboard/products']) ? 'max-h-60 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
+                    }`}
+                >
+                  <ul className="mt-1 pl-4">
+                    <li
+                      className={`transition-opacity duration-300 ${isDropdownOpen('products', ['/dashboard/products']) ? 'opacity-100' : 'opacity-0'
+                        }`}
+                    >
                       <Link
                         href="/dashboard/products"
-                        className={`relative flex items-center gap-2 group dashboard_sidebar_links ${pathname === '/dashboard/products' && 'dashboard_sidebar_Active_links'
+                        className={`flex items-center gap-2 py-2 px-4 rounded-md transition-all duration-300 ${pathname === '/dashboard/products'
+                          ? 'bg-white text-secondary'
+                          : 'text-white hover:bg-white/10'
                           }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
-                        }}
                       >
-                        <MdProductionQuantityLimits size={20} className="text-white" />
-                        <span className="ml-2">Products</span>
-                        <MdOutlineKeyboardArrowDown
-                          size={24}
-                          className={`MdOutlineKeyboardArrowDown ${open ? 'rotate-180' : 'rotate-0'
-                            }`}
-                        />
+                        <BsArrowReturnRight size={18} />
+                        View Products
                       </Link>
-
-                      {/* Dropdown */}
-                      <div
-                        className={`db_dropdown ${open ? 'max-h-60 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
-                          }`}
-                      >
-                        <ul className="db_ui_link">
-                          <li
-                            className={`db_ul_li_link ${open ? 'opacity-100' : 'opacity-0'
-                              }`}
-                          >
-                            <BsArrowReturnRight size={25} className="db_main_link" />
-                            <Link
-                              href="/dashboard/products"
-                              className={`sidebar_inner_link ${pathname === '/dashboard/products'
-                                  ? 'db_inner_sub_cat_link'
-                                  : 'db_inner_sub_cat_link_hover'
-                                }`}
-                            >
-                              View Products
-                            </Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </>
-                  );
-                }}
-              </SidebarLinkGroup>
+                    </li>
+                  </ul>
+                </div>
+              </li>
 
               {/* ================= Blog ================= */}
-              <SidebarLinkGroup activeCondition={pathname === '/dashboard/blog'}>
-                {(handleClick, open) => {
-                  return (
-                    <>
+              <li>
+                <div
+                  className={`main_dropdown group ${pathname.includes('/dashboard/blog') || pathname.includes('/dashboard/comment') ? 'bg-white text-secondary' : 'text-white hover:bg-white/10'}`}
+                  onClick={() => handleDropdownClick('blog')}
+                >
+                  <ImBlog size={20} className={`${pathname.includes('/dashboard/blog') || pathname.includes('/dashboard/comment') ? 'text-secondary' : 'text-white'}`} />
+                  <span className="ml-2">Blog</span>
+                  <MdOutlineKeyboardArrowDown
+                    size={24}
+                    className={`ml-auto transition-transform duration-300 ${isDropdownOpen('blog', ['/dashboard/blog', '/dashboard/comment']) ? 'rotate-180' : 'rotate-0'} ${pathname.includes('/dashboard/blog') || pathname.includes('/dashboard/comment') ? 'text-secondary' : 'text-white'}`}
+                  />
+                </div>
+
+                {/* Dropdown */}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${isDropdownOpen('blog', ['/dashboard/blog', '/dashboard/comment']) ? 'max-h-60 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
+                    }`}
+                >
+                  <ul className="mt-1 pl-4">
+                    <li
+                      className={`transition-opacity duration-300 ${isDropdownOpen('blog', ['/dashboard/blog', '/dashboard/comment']) ? 'opacity-100' : 'opacity-0'
+                        }`}
+                    >
                       <Link
                         href="/dashboard/blog"
-                        className={`relative flex items-center gap-2 group dashboard_sidebar_links ${pathname === '/dashboard/blog' && 'dashboard_sidebar_Active_links'
+                        className={`flex items-center gap-2 py-2 px-4 rounded-md transition-all duration-300 ${pathname === '/dashboard/blog'
+                          ? 'bg-white text-secondary'
+                          : 'text-white hover:bg-white/10'
                           }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
-                        }}
                       >
-                        <ImBlog size={20} className="text-white" />
-                        <span className="ml-2">Blog</span>
-                        <MdOutlineKeyboardArrowDown
-                          size={24}
-                          className={`MdOutlineKeyboardArrowDown ${open ? 'rotate-180' : 'rotate-0'
-                            }`}
-                        />
+                        <BsArrowReturnRight size={18} />
+                        View Blog
                       </Link>
+                    </li>
 
-                      {/* Dropdown */}
-                      <div
-                        className={`db_dropdown ${open ? 'max-h-60 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
+                    <li
+                      className={`transition-all duration-300 ${isDropdownOpen('blog', ['/dashboard/blog', '/dashboard/comment']) ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
+                        }`}
+                    >
+                      <Link
+                        href="/dashboard/comment"
+                        className={`flex items-center gap-2 py-2 px-4 rounded-md transition-all duration-300 ${pathname === '/dashboard/comment'
+                          ? 'bg-white text-secondary'
+                          : 'text-white hover:bg-white/10'
                           }`}
                       >
-                        <ul className="db_ui_link">
-                          <li
-                            className={`db_ul_li_link ${open ? 'opacity-100' : 'opacity-0'
-                              }`}
-                          >
-                            <BsArrowReturnRight size={25} className="db_main_link" />
-                            <Link
-                              href="/dashboard/blog"
-                              className={`sidebar_inner_link ${pathname === '/dashboard/blog'
-                                  ? 'db_inner_sub_cat_link'
-                                  : 'db_inner_sub_cat_link_hover'
-                                }`}
-                            >
-                              View Blog
-                            </Link>
-                          </li>
-
-                          <li
-                            className={`sub_cat_link ${open ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
-                              }`}
-                          >
-                            <BsArrowReturnRight size={25} className="db_main_link" />
-                            <Link
-                              href="/dashboard/comment"
-                              className={`sidebar_inner_link ${pathname === '/dashboard/comment'
-                                  ? 'db_inner_sub_cat_link'
-                                  : 'db_inner_sub_cat_link_hover'
-                                }`}
-                            >
-                              View Comment
-                            </Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </>
-                  );
-                }}
-              </SidebarLinkGroup>
-
-
+                        <BsArrowReturnRight size={18} />
+                        View Comment
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </li>
 
               {/* ================= Appointments ================= */}
-              <SidebarLinkGroup activeCondition={pathname === '/dashboard/appointments'}>
-                {(handleClick, open) => {
-                  return (
-                    <>
-                      {/* Main Link */}
+              <li>
+                <div
+                  className={`main_dropdown group ${pathname.includes('/dashboard/appointments') ? 'bg-white text-secondary' : 'text-white hover:bg-white/10'}`}
+                  onClick={() => handleDropdownClick('appointments')}
+                >
+                  <FaChalkboardUser size={20} className={`${pathname.includes('/dashboard/appointments') ? 'text-secondary' : 'text-white'}`} />
+                  <span className="ml-2">Appointments</span>
+                  <MdOutlineKeyboardArrowDown
+                    size={24}
+                    className={`ml-auto transition-transform duration-300 ${isDropdownOpen('appointments', ['/dashboard/appointments']) ? 'rotate-180' : 'rotate-0'} ${pathname.includes('/dashboard/appointments') ? 'text-secondary' : 'text-white'}`}
+                  />
+                </div>
+
+                {/* Dropdown */}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${isDropdownOpen('appointments', ['/dashboard/appointments']) ? 'max-h-40 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
+                    }`}
+                >
+                  <ul className="mt-1 pl-4">
+                    <li
+                      className={`transition-opacity duration-300 ${isDropdownOpen('appointments', ['/dashboard/appointments']) ? 'opacity-100' : 'opacity-0'
+                        }`}
+                    >
                       <Link
                         href="/dashboard/appointments"
-                        className={`relative flex items-center gap-2 group dashboard_sidebar_links ${pathname === '/dashboard/appointments' && 'dashboard_sidebar_Active_links'
+                        className={`flex items-center gap-2 py-2 px-4 rounded-md transition-all duration-300 ${pathname === '/dashboard/appointments'
+                          ? 'bg-white text-secondary'
+                          : 'text-white hover:bg-white/10'
                           }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
-                        }}
                       >
-                        <FaChalkboardUser size={20} className="text-white" />
-                        <span className="ml-2">Appointments</span>
-                        <MdOutlineKeyboardArrowDown
-                          size={24}
-                          className={`MdOutlineKeyboardArrowDown ${open ? 'rotate-180' : 'rotate-0'
-                            }`}
-                        />
+                        <BsArrowReturnRight size={18} />
+                        View Appointments
                       </Link>
-
-                      {/* Dropdown */}
-                      <div
-                        className={`db_dropdown ${open ? 'max-h-40 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
-                          }`}
-                      >
-                        <ul className="db_ui_link">
-                          <li
-                            className={`db_ul_li_link ${open ? 'opacity-100' : 'opacity-0'
-                              }`}
-                          >
-                            <BsArrowReturnRight size={22} className="text-white" />
-                            <Link
-                              href="/dashboard/appointments"
-                              className={`sidebar_inner_link ${pathname === '/dashboard/appointments'
-                                  ? 'db_inner_sub_cat_link'
-                                  : 'db_inner_sub_cat_link_hover'
-                                }`}
-                            >
-                              View Appointments
-                            </Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </>
-                  );
-                }}
-              </SidebarLinkGroup>
+                    </li>
+                  </ul>
+                </div>
+              </li>
 
               {/* ================= Generals ================= */}
-              <SidebarLinkGroup activeCondition={pathname === '/dashboard/general'}>
-                {(handleClick, open) => {
-                  return (
-                    <>
-                      {/* Main Link */}
+              <li>
+                <div
+                  className={`main_dropdown group ${pathname.includes('/dashboard/reviews') || pathname.includes('/dashboard/Redirecturls') ? 'bg-white text-secondary' : 'text-white hover:bg-white/10'}`}
+                  onClick={() => handleDropdownClick('general')}
+                >
+                  <TbGardenCartOff size={20} className={`${pathname.includes('/dashboard/reviews') || pathname.includes('/dashboard/Redirecturls') ? 'text-secondary' : 'text-white'}`} />
+                  <span className="ml-2">Generals</span>
+                  <MdOutlineKeyboardArrowDown
+                    size={24}
+                    className={`ml-auto transition-transform duration-300 ${isDropdownOpen('general', ['/dashboard/reviews', '/dashboard/Redirecturls']) ? 'rotate-180' : 'rotate-0'} ${pathname.includes('/dashboard/reviews') || pathname.includes('/dashboard/Redirecturls') ? 'text-secondary' : 'text-white'}`}
+                  />
+                </div>
+
+                {/* Dropdown */}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${isDropdownOpen('general', ['/dashboard/reviews', '/dashboard/Redirecturls']) ? 'max-h-60 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
+                    }`}
+                >
+                  <ul className="mt-1 pl-4">
+                    <li
+                      className={`transition-opacity duration-300 ${isDropdownOpen('general', ['/dashboard/reviews', '/dashboard/Redirecturls']) ? 'opacity-100' : 'opacity-0'
+                        }`}
+                    >
                       <Link
-                        href="/dashboard/general"
-                        className={`relative flex items-center gap-2 group dashboard_sidebar_links ${pathname === '/dashboard/general' && 'dashboard_sidebar_Active_links'
+                        href="/dashboard/reviews"
+                        className={`flex items-center gap-2 py-2 px-4 rounded-md transition-all duration-300 ${pathname === '/dashboard/reviews'
+                          ? 'bg-white text-secondary'
+                          : 'text-white hover:bg-white/10'
                           }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
-                        }}
                       >
-                        <TbGardenCartOff size={20} className="text-white" />
-                        <span className="ml-2">Generals</span>
-                        <MdOutlineKeyboardArrowDown
-                          size={24}
-                          className={`MdOutlineKeyboardArrowDown ${open ? 'rotate-180' : 'rotate-0'
-                            }`}
-                        />
+                        <BsArrowReturnRight size={18} />
+                        View Reviews
                       </Link>
+                    </li>
 
-                      {/* Dropdown */}
-                      <div
-                        className={`db_dropdown ${open ? 'max-h-60 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
+                    <li
+                      className={`transition-opacity duration-300 ${isDropdownOpen('general', ['/dashboard/reviews', '/dashboard/Redirecturls']) ? 'opacity-100' : 'opacity-0'
+                        }`}
+                    >
+                      <Link
+                        href="/dashboard/Redirecturls"
+                        className={`flex items-center gap-2 py-2 px-4 rounded-md transition-all duration-300 ${pathname === '/dashboard/Redirecturls'
+                          ? 'bg-white text-secondary'
+                          : 'text-white hover:bg-white/10'
                           }`}
                       >
-                        <ul className="db_ui_link">
-                          <li
-                            className={`db_ul_li_link ${open ? 'opacity-100' : 'opacity-0'
-                              }`}
-                          >
-                            <BsArrowReturnRight size={22} className="text-white" />
-                            <Link
-                              href="/dashboard/reviews"
-                              className={`sidebar_inner_link ${pathname === '/dashboard/reviews'
-                                  ? 'db_inner_sub_cat_link'
-                                  : 'db_inner_sub_cat_link_hover'
-                                }`}
-                            >
-                              View Reviews
-                            </Link>
-                          </li>
-
-                          <li
-                            className={`db_ul_li_link ${open ? 'opacity-100' : 'opacity-0'
-                              }`}
-                          >
-                            <BsArrowReturnRight size={22} className="text-white" />
-                            <Link
-                              href="/dashboard/Redirecturls"
-                              className={`sidebar_inner_link ${pathname === '/dashboard/Redirecturls'
-                                  ? 'db_inner_sub_cat_link'
-                                  : 'db_inner_sub_cat_link_hover'
-                                }`}
-                            >
-                              View Redirecturls
-                            </Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </>
-                  );
-                }}
-              </SidebarLinkGroup>
-
-
+                        <BsArrowReturnRight size={18} />
+                        View Redirecturls
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </li>
 
               {superAdmin ? (
                 <li>
                   <Link
                     href="/dashboard/super-admin"
-                    className={`group dashboard_sidebar_links ${pathname.includes('super-admin') &&
-                      'dashboard_sidebar_Active_links'
+                    className={`flex items-center gap-2 py-3 px-4 rounded-md transition-all duration-300 ${pathname.includes('super-admin')
+                      ? 'bg-white text-secondary'
+                      : 'text-white hover:bg-white/10'
                       }`}
                   >
                     <GrUserAdmin size={20} />
-                    Admin
+                    <span>Admin</span>
                   </Link>
                 </li>
               ) : null}
@@ -488,12 +426,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <li>
                 <Link
                   href="/dashboard/settings"
-                  className={`group dashboard_sidebar_links ${pathname.includes('settings') &&
-                    'dashboard_sidebar_Active_links'
+                  className={`main_dropdown group ${pathname.includes('settings')
+                    ? 'bg-white text-secondary'
+                    : 'text-white hover:bg-white/10'
                     }`}
                 >
                   <IoSettingsOutline size={20} />
-                  Settings
+                  <span>Settings</span>
                 </Link>
               </li>
             </ul>

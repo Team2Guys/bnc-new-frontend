@@ -1,9 +1,10 @@
 
 import DefaultLayout from 'components/Dashboard/Layouts/DefaultLayout';
 import { fetchCategories, fetchProducts, fetchSubCategories } from 'config/fetch';
-import dynamic from 'next/dynamic'
 import { IProduct } from 'types/types';
-const Product = dynamic(() => import('./Product'))
+import Product from './Product';
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 
 const Produc_page = async () => {

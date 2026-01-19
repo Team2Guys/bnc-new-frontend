@@ -225,7 +225,7 @@ const Settings = () => {
                   <p className="mt-3 text-sm text-gray-600">
                     <span className="font-medium text-primary">Click to upload</span> or drag and drop
                   </p>
-                  <p className="text-xs text-gray-500 ">SVG, PNG, JPG or GIF (max 800x800)</p>
+                  <p className="text-xs ">SVG, PNG, JPG or GIF (max 800x800)</p>
                 </div>
               </div>
             </div>
@@ -261,13 +261,13 @@ const Settings = () => {
                 {/* Email */}
                 <div>
                   <label
-                    className="mb-2 block text-sm font-medium text-gray-700 dark:text-white"
+                    className="mb-2 block text-sm font-medium dark:text-white"
                     htmlFor="emailAddress"
                   >
                     Email Address
                   </label>
                   <div className="relative">
-                    <span className="absolute left-4 top-3 text-gray-500 dark:text-white">
+                    <span className="absolute left-4 top-3 dark:text-white">
                       <CiMail size={20} />
                     </span>
                     <input
@@ -279,8 +279,6 @@ const Settings = () => {
                     />
                   </div>
                 </div>
-
-                {/* Save Button */}
                 <div className="flex justify-end">
                   <button
                     className="px-6 py-2 rounded-md bg-primary text-white hover:bg-primary/90 transition"

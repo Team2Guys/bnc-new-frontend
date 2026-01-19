@@ -10,7 +10,7 @@ import {
   subcategoryValidationSchema,
   subcategoryInitialValues,
 } from 'data/data';
-import { ImageRemoveHandler } from 'utils/helperFunctions';
+import { ImageRemoveHandler, updateAltText } from 'utils/helperFunctions';
 import Loader from 'components/Loader/Loader';
 import ProtectedRoute from 'hooks/AuthHookAdmin';
 import Cookies from 'js-cookie';
@@ -133,21 +133,6 @@ const FormLayout = ({
     }
   };
 
-
-  const handlealtTextposterimageUrl = (index: number, newaltText: string) => {
-    //@ts-expect-error
-    const updatedImagesUrl = posterimageUrl.map((item, i) =>
-      i === index ? { ...item, altText: newaltText } : item,
-    );
-    setposterimageUrl(updatedImagesUrl);
-  };
-  const handlealtTextbannerImageUrl = (index: number, newaltText: string) => {
-    //@ts-expect-error
-    const updatedImagesUrl = bannerImageUrl.map((item, i) =>
-      i === index ? { ...item, altText: newaltText } : item,
-    );
-    setBannerImageUrl(updatedImagesUrl);
-  };
 
   const hasUnsavedChanges = (): boolean => {
 
@@ -285,7 +270,7 @@ const FormLayout = ({
                                   name="altText"
                                   value={item.altText}
                                   placeholder="Alt text"
-                                  onChange={(val) => handlealtTextposterimageUrl(index, val)}
+                                  onChange={(val) =>setposterimageUrl((prev) => updateAltText(prev, index, val))}
                                   className='border rounded p-2 focus:outline-none mt-1'
                                 />
 
@@ -334,7 +319,7 @@ const FormLayout = ({
                                   name="altText"
                                   value={item.altText}
                                   placeholder="Alt text"
-                                  onChange={(val) => handlealtTextbannerImageUrl(index, val)}
+                                  onChange={(val) =>setBannerImageUrl((prev) => updateAltText(prev, index, val))}
                                   className='border rounded p-2 focus:outline-none mt-1'
                                 />
                               </div>

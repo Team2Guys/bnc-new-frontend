@@ -1,38 +1,15 @@
 import Projects from 'components/Projects/Projects';
-import ProjectsTags from 'components/ProjectTags/ProjectsTags';
-import { Metadata } from 'next';
-import React, { Fragment } from 'react';
-import ProjectTopHero from 'components/ui/project-top-hero';
-import logo from '../../../public/assets/images/logomain.webp';
-
-
-export const metadata: Metadata = {
-  title: 'Blinds And Curtains Dubai | Projects',
-  description: 'We offer premium quality made-to-measure blinds in Dubai, check out the projects that we did for our clients. Like something give us a call to learn more.',
-  openGraph: {
-    title: 'Blinds And Curtains Dubai | Projects',
-    description: 'We offer premium quality made-to-measure blinds in Dubai, check out the projects that we did for our clients. Like something give us a call to learn more.',
-    url: 'https://blindsandcurtains.ae/projects/',
-    images: [
-      {
-        url: logo.src,
-        alt: 'Blinds And Curtains Dubai | Projects',
-      },
-    ],
-         type:"website"
-  },
-  alternates: {
-    canonical: 'https://blindsandcurtains.ae/projects/',
-  },
-};
-
+import React from 'react';
+import { generateMetadata } from 'utils/seoMetadata';
+import { metaData } from 'data/meta-data';
+import Breadcrumb from 'components/Res-usable/breadcrumb';
+export const metadata = generateMetadata(metaData.projects);
 const ProjectPage = () => {
   return (
-    <Fragment>
-      <ProjectTopHero title="Our Projects" />
+    <>
+      <Breadcrumb image="/assets/images/Projects/projects-banner.webp" title="Our Projects - Blinds and Curtains Dubai" bradcrumbtitle='Our Projects'/>
       <Projects />
-      <ProjectsTags />
-    </Fragment>
+    </>
   );
 };
 

@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { DetailProps } from 'types/product'
-
+import "style/blog.css";
 
 const Detail = ({ data }: DetailProps) => {
 
@@ -26,7 +26,7 @@ const Detail = ({ data }: DetailProps) => {
   const featuresinfo = FeaturesData[category];
   return (
     <div className=' space-y-2 sm:space-y-4 max-w-[650px]'>
-      <h1 className='font-robotoSerif font-bold text-2xl xl:text-5xl text-primary px-2'>{data.title}</h1>
+      <h1 className='font-futura font-bold text-2xl xl:text-5xl text-primary px-2'>{data.title}</h1>
 
       <div className='flex flex-wrap items-center gap-2 lg:gap-4 px-2 !mb-4'>
         {Array.isArray(data?.topImages) && data.topImages.map((feature, index) => (
@@ -45,7 +45,7 @@ const Detail = ({ data }: DetailProps) => {
         </Link>
       </div>
 
-      <p className='px-2'>
+      <p className='px-2' suppressHydrationWarning>
         <span className='font-roboto blog-content'
           dangerouslySetInnerHTML={{ __html: data.description }} />
       </p>

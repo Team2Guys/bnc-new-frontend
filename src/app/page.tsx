@@ -1,69 +1,75 @@
-import type { Metadata } from 'next'
 import Script from 'next/script';
 import { schema } from 'data/schema';
-import logo from '../../public/assets/images/blind-curtains-dubai/blinds-curtains-dubai1.png';
 import MainHero from 'components/Hero/main-hero';
 import { fetchProducts } from 'config/fetch';
 import InfoTabs from 'components/NewHomecomponents/info';
 import ComparisonTable from 'components/NewHomecomponents/comparisontabble';
-import SimpleSteps from 'components/SimpleSteps/SimpleSteps';
-import MotorizeBlindCurtain from 'components/MotorizedBlindCurtains/MotorizedBlindCurtains';
-import VideoReelsSlider from 'components/VideoSlider/VideoSlider';
 import OurClient from 'components/Our-Client/OurClient';
 import Review_banner from 'components/ReviewBanner/Review_banner';
 import { IProduct } from 'types/types';
 import SellerSlider from 'components/BestSellerSlider/SellerCard';
+import MotorizeBlindCurtain from 'components/MotorizedBlindCurtains/MotorizedBlindCurtains';
+import VideoReelsWrapper from 'components/VideoSlider/VideoReelsWrapper';
+import StepWrapper from 'components/SimpleSteps/StepWrapper';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://blindsandcurtains.ae/"),
+  metadataBase: new URL('https://blindsandcurtains.ae'),
 
   title: 'Blinds and Curtains Dubai | Book a Free Appointment Today',
-  description: 'If you are looking for blinds in dubai, or maybe curtains in Dubai, look no further. Our ZERO pressure appointment guarantee will ensure you are.....',
+  description:
+    'If you are looking for blinds in dubai, or maybe curtains in Dubai, look no further. Our ZERO pressure appointment guarantee will ensure you are.....',
+
+  verification: {
+    google: 'BHdLyJ6iGcCDMwuouc5ShyVcSBwHyip3ZtBxeKTEoVg',
+  },
+
   openGraph: {
     title: 'Blinds and Curtains Dubai | Book a Free Appointment Today',
-    description: 'If you are looking for blinds in dubai, or maybe curtains in Dubai, look no further. Our ZERO pressure appointment guarantee will ensure you are.....',
+    description:
+      'If you are looking for blinds in dubai, or maybe curtains in Dubai, look no further. Our ZERO pressure appointment guarantee will ensure you are.....',
     url: 'https://blindsandcurtains.ae/',
+    type: 'website',
     images: [
       {
-        url: `${logo.src}`,
-        alt: 'blindsandcurtains',
+        url: '/assets/images/blind-curtains-dubai/blinds-curtains-dubai1.png',
+        width: 1200,
+        height: 630,
+        alt: 'Blinds and Curtains Dubai | Book a Free Appointment Today',
       },
     ],
-    type: "website"
   },
+
   alternates: {
     canonical: 'https://blindsandcurtains.ae/',
   },
-}
+};
 
 export default async function Home() {
-  const products = await fetchProducts();
-  const PublishedProduct = products.filter((product: IProduct) => product.status === "PUBLISHED");
+  let products: IProduct[] = [];
+  try {
+    products = await fetchProducts();
+  } catch (err) {
+    console.error('Failed to fetch products for Home page', err);
+  }
+  const PublishedProduct = products.filter((p) => p.status === 'PUBLISHED');
   return (
     <>
-      {schema.map((script: any, index: number) =>
+      {schema.map((script: any, index: number) => (
         <Script type="application/ld+json" id="home-json-ld" key={index}>
           {JSON.stringify(script)}
-
         </Script>
-      )}
-
+      ))}
       <MainHero />
       <Review_banner />
       <InfoTabs isHome />
-      <div className='grid grid-cols-12'>
-        <div className='col-span-12 order-2 md:order-1'>
-          <ComparisonTable />
-        </div>
-        {PublishedProduct && (
-          <div className='col-span-12 order-1 md:order-2'>
-            <SellerSlider products={PublishedProduct} />
-          </div>
-        )}
+      <div className="flex flex-col-reverse md:flex-col">
+        <ComparisonTable />
+        <SellerSlider products={PublishedProduct && PublishedProduct} />
       </div>
-      <SimpleSteps />
+      <StepWrapper />
       <MotorizeBlindCurtain />
-      <VideoReelsSlider />
+      <VideoReelsWrapper />
       <OurClient />
     </>
   );

@@ -1,20 +1,10 @@
 'use client'
-
 import Container from 'components/Res-usable/Container/Container'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MdOutlineStarPurple500 } from 'react-icons/md'
-import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
 import { fetchReviews } from 'config/fetch'
 import { IREVIEWS } from 'types/general'
-
-const getTruncatedText = (text: string, wordLimit: number) => {
-  const words = text.split(' ')
-  return words.length > wordLimit
-    ? words.slice(0, wordLimit).join(' ') + '...'
-    : text
-}
+import SlickSlider from 'components/Blogs/slick-slider'
 
 const settings = {
   dots: true,
@@ -23,62 +13,43 @@ const settings = {
   speed: 500,
   slidesToShow: 2,
   slidesToScroll: 1,
+  swipeToSlide: true,
   arrows: false,
   responsive: [
     {
       breakpoint: 640,
-      settings: {
-        slidesToShow: 1,
-      },
+      settings: { slidesToShow: 1 },
     },
   ],
 }
 
+const truncateText = (text: string, limit: number) => {
+  if (text.length <= limit) return text
+  return text.slice(0, limit) + '...'
+}
 const Testimonial = () => {
   const [reviews, setReviews] = useState<IREVIEWS[]>([])
-  const [expandedStates, setExpandedStates] = useState<{ [key: number]: boolean }>({})
-  const [isOverflowing, setIsOverflowing] = useState<{ [key: number]: boolean }>({})
-  const textRefs = useRef<(HTMLParagraphElement | null)[]>([])
-  const [wordLimit, setWordLimit] = useState(28)
-
+  const [expanded, setExpanded] = useState<{ [key: number]: boolean }>({})
+  const [charLimit, setCharLimit] = useState(140)
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const width = window.innerWidth
-      setWordLimit(width < 500 ? 26 : 28)
+      setCharLimit(width < 500 ? 100 : 150)
     }
   }, [])
-
-  useEffect(() => {
-    const result: { [key: number]: boolean } = {}
-    textRefs.current.forEach((ref, index) => {
-      if (ref) {
-        const lineHeight = parseFloat(getComputedStyle(ref).lineHeight)
-        const maxHeight = lineHeight * 3
-        result[index] = ref.scrollHeight > maxHeight
-      }
-    })
-    setIsOverflowing(result)
-  }, [reviews])
-
-  const toggleExpand = (index: number) => {
-    setExpandedStates(prev => ({
-      ...prev,
-      [index]: !prev[index],
-    }))
-  }
-
   useEffect(() => {
     fetchReviews().then(data => setReviews(data))
   }, [])
-
+  const toggleExpand = (index: number) => {
+    setExpanded(prev => ({ ...prev, [index]: !prev[index] }))
+  }
   return (
-    <div className="mt-10 space-y-5">
-      <h2 className="font-bold font-robotoSerif text-[40px] hidden md:block text-center">
+    <div className="my-10 space-y-5">
+      <h2 className="font-bold font-futura text-[40px] hidden md:block text-center text-primary">
         Testimonials
       </h2>
       <div className="bg-secondary-foreground py-10 w-full">
         <Container className="grid grid-cols-12 gap-6">
-          {/* Left Section */}
           <div className="col-span-12 md:col-span-4 flex flex-col items-center md:items-start space-y-4 text-center md:text-left">
             <div className="flex justify-center md:justify-start">
               {[...Array(5)].map((_, i) => (
@@ -86,59 +57,48 @@ const Testimonial = () => {
               ))}
             </div>
             <p className="font-roboto text-xl">
-              Rating <span className="font-medium">4.9 | 773</span> reviews <br />
+              Rating <span className="font-medium">4.9 | 794</span> reviews <br />
               Window treatment store
             </p>
           </div>
-
-          {/* Right Section - Slider */}
           <div className="col-span-12 md:col-span-8">
-            <div className="custom-test">
-              <Slider {...settings}>
-                {reviews.map((item, index) => {
-                  const isExpanded = expandedStates[index]
-                  const showTruncation = isOverflowing[index] && !isExpanded
-                  const content = showTruncation
-                    ? getTruncatedText(item.ReviewsDescription, wordLimit)
-                    : item.ReviewsDescription
+            <SlickSlider settings={settings}>
+              {reviews.map((item, index) => {
+                const isExpanded = expanded[index]
+                const content = isExpanded
+                  ? item.ReviewsDescription
+                  : truncateText(item.ReviewsDescription, charLimit)
 
-                  return (
-                    <div key={index} className="px-4 sm:mb-2">
-                      <div className="space-y-3 h-full">
-                        <p className="font-robotoSerif font-bold text-xl text-center sm:text-start">
-                          {item.name}
-                        </p>
-                        <div className="flex justify-center xs:justify-start">
-                          {[...Array(item.starRating)].map((_, i) => (
-                            <MdOutlineStarPurple500
-                              key={i}
-                              className="text-[#FFD800] text-xl"
-                            />
-                          ))}
-                        </div>
-                        <div className="relative">
-                          <p
-                            ref={el => {
-                              textRefs.current[index] = el
-                            }}
-                            className="font-roboto text-gray-700 text-sm md:text-base text-center sm:text-start transition-all duration-300"
-                          >
-                            &quot;{content}{isOverflowing[index] && (
-                              <button
-                                onClick={() => toggleExpand(index)}
-                                className="text-gray-700 text-sm underline"
-                              >
-                                {' '}{isExpanded ? 'Read less' : 'Read more'}
-                              </button>
-                            )}&quot;
-                          </p>
-                        </div>
+                return (
+                  <div key={index} className="px-4 sm:mb-2">
+                    <div className="space-y-3 h-full">
+                      <p className="font-futura font-bold text-xl text-center sm:text-start">
+                        {item.name}
+                      </p>
+                      <div className="flex justify-center xs:justify-start">
+                        {[...Array(item.starRating)].map((_, i) => (
+                          <MdOutlineStarPurple500
+                            key={i}
+                            className="text-[#FFD800] text-xl"
+                          />
+                        ))}
                       </div>
+                      <p className="font-roboto text-primary text-sm md:text-base text-center sm:text-start">
+                        &quot;{content}&quot;
+                        {item.ReviewsDescription.length > charLimit && (
+                          <button
+                            onClick={() => toggleExpand(index)}
+                            className="ml-1 text-primary text-sm underline"
+                          >
+                            {isExpanded ? 'Read less' : 'Read more'}
+                          </button>
+                        )}
+                      </p>
                     </div>
-                  )
-                })}
-              </Slider>
-            </div>
+                  </div>
+                )
+              })}
+            </SlickSlider>
           </div>
         </Container>
       </div>

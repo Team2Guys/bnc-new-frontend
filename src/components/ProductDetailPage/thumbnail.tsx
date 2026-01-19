@@ -1,8 +1,6 @@
 'use client';
 import React, { useRef, useState, useEffect, useMemo } from 'react';
 import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import Image from 'next/image';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import { SliderWithGoTo, ThumbnailProps } from 'types/interfaces';
@@ -93,7 +91,6 @@ const Thumbnail = ({
     focusOnSelect: displayImages.length > 4,
     draggable: displayImages.length > 4,
   };
-console.log(displayImages.length , 'displayImages')
   return (
     <div>
       {displayImages.length < 2 ? (
@@ -105,7 +102,7 @@ console.log(displayImages.length , 'displayImages')
               fill
               priority
               fetchPriority='high'
-              sizes='40vw'
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
             />
           </div>
         ))
@@ -134,7 +131,7 @@ console.log(displayImages.length , 'displayImages')
                   fill
                   priority
                   fetchPriority='high'
-                  sizes='40vw'
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                 />
               </div>
             ))}
@@ -160,6 +157,7 @@ console.log(displayImages.length , 'displayImages')
                   src={videoThumbnail}
                   alt="Video thumbnail"
                   fill
+                  sizes="(max-width: 640px) 80px,(max-width: 1024px) 112px, (max-width: 1280px) 128px, 160px"
                 />
               ) : (
                 <div className="w-full h-full bg-black flex items-center justify-center text-white">
@@ -188,7 +186,7 @@ console.log(displayImages.length , 'displayImages')
                   src={img.imageUrl}
                   alt={img.altText || ''}
                   fill
-                  sizes='10vw'
+                  sizes="(max-width: 640px) 80px, (max-width: 1024px) 112px, (max-width: 1280px) 128px, 160px"
                 />
               </div>
             );
@@ -212,6 +210,7 @@ console.log(displayImages.length , 'displayImages')
                   src={videoThumbnail}
                   alt="Video thumbnail"
                   fill
+                  sizes="(max-width: 640px) 80px,(max-width: 1024px) 112px, (max-width: 1280px) 128px, 160px"
                 />
               ) : (
                 <div className="w-full h-full bg-black flex items-center justify-center text-white">
@@ -241,6 +240,7 @@ console.log(displayImages.length , 'displayImages')
                   src={img.imageUrl}
                   alt={img.altText || ''}
                   fill
+                  sizes="(max-width: 640px) 80px,(max-width: 1024px) 112px, (max-width: 1280px) 128px, 160px"
                 />
               </div>
             );

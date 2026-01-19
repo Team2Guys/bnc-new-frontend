@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import Imageupload from 'components/ImageUpload/Imageupload';
 import { RxCross2 } from 'react-icons/rx';
 import Image from 'next/image';
-import { ImageRemoveHandler } from 'utils/helperFunctions';
+import { ImageRemoveHandler, updateAltText } from 'utils/helperFunctions';
 import axios from 'axios';
 import { Formik, Form, FieldArray } from 'formik';
 
@@ -116,22 +116,6 @@ const FormLayout = ({
   };
 
   console.log(setEditCategoryName, 'setEditCategoryName');
-
-  const handlealtTextposterimageUrl = (index: number, newaltText: string) => {
-    //@ts-expect-error
-    const updatedImagesUrl = posterimageUrl.map((item, i) =>
-      i === index ? { ...item, altText: newaltText } : item,
-    );
-    setposterimageUrl(updatedImagesUrl);
-  };
-  const handlealtTextbannerImageUrl = (index: number, newaltText: string) => {
-    //@ts-expect-error
-    const updatedImagesUrl = bannerImageUrl.map((item, i) =>
-      i === index ? { ...item, altText: newaltText } : item,
-    );
-    setBannerImageUrl(updatedImagesUrl);
-  };
-
   const hasUnsavedChanges = (): boolean => {
 
     let isPosterChanged: boolean;
@@ -230,7 +214,7 @@ const FormLayout = ({
               <div className="flex justify-center ">
                 <div className="flex flex-col gap-9 w-full dark:border-strokedark dark:bg-lightdark rounded-md">
                   <div className="rounded-md gap-3 flex justify-evenly dark:bg-lightdark mb-3 mt-3">
-                    <div className="upload_image dark:border-strokedark dark:bg-lightdark">
+                    <div className="upload_image dark:border-strokedark dark:bg-lightdark w-6/12">
                       <div className="inputs_heading border-stroke dark:border-strokedark ">
                         <h3 className="label_main">
                           Add Category Images
@@ -268,7 +252,7 @@ const FormLayout = ({
                                   value={item.altText}
                                   placeholder="altText"
                                   className="border rounded p-2 focus:outline-none mt-1"
-                                  onChange={(val) => handlealtTextposterimageUrl(index, val)}
+                                  onChange={(val) =>setposterimageUrl((prev) => updateAltText(prev, index, val))}
                                 />
 
                               </div>
@@ -316,7 +300,7 @@ const FormLayout = ({
                                     name="altText"
                                     value={item.altText}
                                     placeholder="Alt text"
-                                    onChange={(val) => handlealtTextbannerImageUrl(index, val)}
+                                    onChange={(val) =>setBannerImageUrl((prev) => updateAltText(prev, index, val))}
                                     className='border rounded p-2 focus:outline-none mt-1'
                                   />
 
@@ -373,8 +357,6 @@ const FormLayout = ({
                     </div>
                     </div>
                     
-
-
                     <div className="flex flex-col space-y-3 mt-2 p-2 w-1/2 border">
 
                       <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">

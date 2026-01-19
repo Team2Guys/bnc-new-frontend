@@ -10,7 +10,7 @@ const Callbutton = () => {
       target="_blank"
       rel="noopener noreferrer"
        aria-label="Call Phone Number"
-      className="fixed sm:bottom-2 bottom-4 left-1 z-50 "
+      className="fixed sm:bottom-2 bottom-4 left-1 z-40 "
     >
       <div className='relative size-14'>
         <Image priority fill className='rounded-full' src={phone} alt='phone' />

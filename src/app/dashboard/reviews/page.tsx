@@ -1,7 +1,8 @@
 import React from 'react'
 import { fetchReviews } from 'config/fetch'
-import dynamic from 'next/dynamic';
-const MainPage = dynamic(()=>import('./MainPage'))
+import MainPage from './MainPage';
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 async function  Page() {
   const  reviews=await fetchReviews()

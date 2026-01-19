@@ -16,7 +16,7 @@ const path = usePathname()
 
       <Container className="py-10 space-y-2 sm:space-y-4 lg:space-y-8 relative z-10">
         <div className="max-w-[520px] space-y-2 sm:space-y-4 lg:space-y-8 ">
-          <p className="text-3xl lg:text-[40px] text-secondary font-robotoSerif font-extrabold drop-shadow-2xl">
+          <p className="text-3xl lg:text-[40px] text-secondary font-futura font-extrabold drop-shadow-2xl">
             Customisation
           </p>
           <p className="text-base lg:text-2xl text-white font-roboto drop-shadow-2xl">
@@ -24,11 +24,11 @@ const path = usePathname()
           </p>
         </div>
        <div className='space-y-3'>
-         <p className="max-w-[660px] font-robotoSerif font-extrabold text-19 sm:text-3xl lg:text-[40px] text-white drop-shadow-2xl">
+         <p className="max-w-[660px] font-futura font-extrabold text-19 sm:text-3xl lg:text-[40px] text-white drop-shadow-2xl">
           Dubai&apos;s leading manufacturer{' '}
           <span className="block sm:hidden">of automated {title==="Motorised blinds" ? "blinds":"curtains"}</span>
         </p>
-        <p className="font-robotoSerif font-extrabold text-19 sm:text-3xl lg:text-[40px] text-white hidden sm:block">
+        <p className="font-futura font-extrabold text-19 sm:text-3xl lg:text-[40px] text-white hidden sm:block">
           of automated {title==="Motorised blinds" ? "blinds":"curtains"}
         </p>
        </div>

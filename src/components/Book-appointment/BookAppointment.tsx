@@ -258,7 +258,7 @@ const BookAppointment: React.FC<AppointmentProps> = ({
   return (
     <div
 
-      className={`bg-white  text-left text-black ${className} ${singlePage ? 'w-full rounded-lg sm:px-3 sm:py-4' : 'xl:w-6/12 2xl:w-5/12 py-4 bg-white drop-shadow-md rounded-xl  mt-5'}`}
+      className={`bg-white text-left text-black ${className} ${singlePage ? 'w-full rounded-lg sm:px-3 sm:py-4' : 'lg:w-7/12 py-4 bg-white drop-shadow-md rounded-xl  mt-5'}`}
     >
       {!singlePage && (
         <h3 className="font-bold text-lg text-center tracking-[5px] uppercase">
@@ -270,11 +270,11 @@ const BookAppointment: React.FC<AppointmentProps> = ({
         className={` bg-white rounded-md ${singlePage ? 'w-full  px-0 py-4 sm:p-4 ' : ' px-4 py-2'}`}
       >
        <div>
-      <label className="font-bold mb-2 block font-robotoSerif text-xl sm:text-2xl">
+      <label className="font-bold mb-2 block font-futura text-xl sm:text-2xl">
         City
       </label>
 
-      <div className="flex sm:gap-12 justify-between sm:justify-start">
+      <div className="flex flex-wrap sm:flex-nowrap sm:gap-12 justify-between sm:justify-start">
         {cities.map((city) => (
           <Checkbox
             key={city}
@@ -302,7 +302,7 @@ const BookAppointment: React.FC<AppointmentProps> = ({
           />
         </div>
         <div className='py-8'>
-          <h3 className='text-xl sm:text-2xl font-robotoSerif font-bold mb-4 text-primary'>Time Slot For The Visit</h3>
+          <h3 className='text-xl sm:text-2xl font-futura font-bold mb-4 text-primary'>Time Slot For The Visit</h3>
           <TimeSlotPicker
             value={formData.prefered_time}
             onChange={(val: string) => setFormData({ ...formData, prefered_time: val })}
@@ -392,10 +392,10 @@ const BookAppointment: React.FC<AppointmentProps> = ({
                 className={`size-4 sm:size-5 flex items-center justify-center rounded-full border 
             ${sameAsPhone ? 'bg-gray-800 text-white border-gray-800' : 'border-gray-400 text-gray-400'}`}
               >
-                {sameAsPhone && <IoMdCheckmark className='text-16 sm:text-18' />}
+                {sameAsPhone && <IoMdCheckmark className='text-base sm:text-lg' />}
               </div>
               <span className="text-sm sm:text-base font-medium">I have the same WhatsApp number</span>
-              <Image width={100} height={100} className='size-4 sm:size-5' src='/assets/images/whatsapp.png' alt='whatsapp' />
+              <Image width={100} height={100} className='size-4 sm:size-5' src='/assets/images/whatsapp.webp' alt='whatsapp' />
             </div>
           </div>
           {!sameAsPhone && (
@@ -467,16 +467,7 @@ const BookAppointment: React.FC<AppointmentProps> = ({
           >
             {loading ? <Loader color="#fff" /> : 'Submit Request'}
           </button>
-          {/* {successMessage && (
-            <p className=" text-lg mt-2">{successMessage}
-
-
-            </p>
-          )} */}
-
         </div>
-
-
 
       </form>
     </div>

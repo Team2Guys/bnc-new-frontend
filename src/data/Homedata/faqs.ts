@@ -69,7 +69,7 @@ export const FAQ_DATA: Record<string, { question: string; answer: string }[]> = 
     }
 
   ],
-  "Motorization": [
+  "Motorisation": [
     {
       question: "Which kind of motors do you offer?",
       answer: `We offer Somfy, Motion, Nice and Dooya. Functionalities are quite similar but there are differences in costs and performance. Our fully trained sales person can explain the differences.`

@@ -59,7 +59,7 @@ const allVideos = useMemo<VideoItem[]>(() => {
   return (
     <div className="bg-secondary-foreground py-6 sm:py-12 mt-10">
       <Container className="space-y-5 md:space-y-10">
-        <h2 className="font-robotoSerif font-extrabold text-24 sm:text-30 lg:text-5xl text-center text-primary">
+        <h2 className="font-futura font-extrabold text-24 sm:text-30 lg:text-5xl text-center text-primary">
           A Complete Guide To
         </h2>
 
@@ -122,6 +122,7 @@ const allVideos = useMemo<VideoItem[]>(() => {
                   className="w-full max-h-[75vh] rounded-lg"
                   controls
                   autoPlay
+                  muted
                 >
                   <source src={activeVideo.src} type="video/mp4" />
                   Your browser does not support the video tag.

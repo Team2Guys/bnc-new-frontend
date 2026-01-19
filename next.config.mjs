@@ -18,7 +18,29 @@ const nextConfig = {
   },
 
   compress: true,
-
+  
+async headers() {
+    return [
+      {
+        source: '/_next/image',
+        headers: [
+          {
+            key: 'Content-Disposition',
+            value: 'inline',
+          },
+        ],
+      },
+       {
+        source: '/:path*\\.(avif|webp|png|jpg|jpeg|svg|gif)',
+        headers: [
+          {
+            key: 'Content-Disposition',
+            value: 'inline',
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

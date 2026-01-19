@@ -12,7 +12,7 @@ const TableSkeleton = ({ rows, columns }: ITableSkeleton) => {
             {Array.from({ length: columns }).map((_, colIndex) => (
               <th
                 key={colIndex}
-                className="border px-4 py-3 text-left text-gray-500"
+                className="border px-4 py-3 text-left text-primary"
               >
                 <div className="h-4 w-32 rounded-md bg-gray-200 animate-pulse"></div>
               </th>

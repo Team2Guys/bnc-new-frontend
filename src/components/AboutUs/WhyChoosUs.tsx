@@ -8,9 +8,9 @@ const WhyChoose = () => {
     return (
       <>
         <section className="sm:py-16 mt-10 bg-white text-center">
-            <h2 className="sm:text-4xl text-[27px] font-bold mb-2 font-robotoSerif text-primary">Why Choose Two Guys?</h2>
-            <p className="text-[#3E3F42] text-base sm:mb-12 font-roboto font-normal">
-                You just found the industrys premier window treatment design team.
+            <h2 className="sm:text-4xl text-[27px] font-bold mb-2 font-futura text-primary">Why Choose Blinds and Curtains?</h2>
+            <p className="text-primary text-base sm:mb-12 font-roboto font-normal">
+                You just found the Industry&apos;s premier window treatment design team.
             </p>
 
             <div className="relative flex flex-col sm:gap-10 gap-43 lg:flex-row lg:justify-between lg:items-start lg:gap-0">

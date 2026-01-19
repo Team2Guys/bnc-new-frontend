@@ -10,7 +10,7 @@ import Cookies from 'js-cookie';
 import revalidateTag from 'components/ServerActons/ServerAction';
 import Link from 'next/link';
 import useColorMode from 'hooks/useColorMode';
-import TableSkeleton from './TableSkelton';
+// 🔴 TableSkeleton import remove kar diya
 import Swal from 'sweetalert2';
 import Table from 'components/ui/Table';
 import ViewsTableHeader from '../TableHeader/ViewsTableHeader';
@@ -25,7 +25,6 @@ interface Product extends IProduct {
   createdAt: string;
   CategoryId: number;
   last_editedBy?: string;
-  
 }
 
 interface CategoryProps {
@@ -97,7 +96,7 @@ const ViewProduct: React.FC<CategoryProps> = ({
 
   const handleDelete = async (key: number) => {
     try {
-      setLoading(true)
+      setLoading(true);
       await axios.delete(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/delete_product/${key}`,
         {
@@ -105,25 +104,21 @@ const ViewProduct: React.FC<CategoryProps> = ({
         },
       );
       revalidateTag('products');
-        showAlert({
-          title: "Product Deleted",
-          text: "The product has been successfully deleted.",
-          icon: "success",
-        });
-      } catch (err) {
-        showAlert({
-          title: "Deletion Failed",
-          text: "There was an error deleting the product.",
-          icon: "error",
-        });
-    }
-    finally {
-      setLoading(false)
-
+      showAlert({
+        title: 'Product Deleted',
+        text: 'The product has been successfully deleted.',
+        icon: 'success',
+      });
+    } catch (err) {
+      showAlert({
+        title: 'Deletion Failed',
+        text: 'There was an error deleting the product.',
+        icon: 'error',
+      });
+    } finally {
+      setLoading(false);
     }
   };
-
-
 
   const columns = [
     {
@@ -147,27 +142,22 @@ const ViewProduct: React.FC<CategoryProps> = ({
       title: 'Status',
       key: 'status',
     },
-
     {
-       title: 'Date',
+      title: 'Date',
       key: 'date',
       render: (record: Product) => {
-         const createdAt = DateFormatHandler(record?.createdAt)
- 
+        const createdAt = DateFormatHandler(record?.createdAt);
         return <span>{createdAt}</span>;
       },
     },
     {
-       title: 'UpdateAt',
+      title: 'UpdateAt',
       key: 'UpdateAt',
       render: (record: Product) => {
-         const createdAt = DateFormatHandler(record?.updatedAt)
- 
+        const createdAt = DateFormatHandler(record?.updatedAt);
         return <span>{createdAt}</span>;
       },
     },
-
-
     {
       title: 'Last Edited By',
       key: 'time',
@@ -180,7 +170,6 @@ const ViewProduct: React.FC<CategoryProps> = ({
       key: 'Preview',
       render: (record: Product) => {
         return (
-        
           <Link href={getPath(record)} target="_blank" rel="noreferrer">
             <FaRegEye className="cursor-pointer" />
           </Link>
@@ -192,7 +181,11 @@ const ViewProduct: React.FC<CategoryProps> = ({
       key: 'Edit',
       render: (record: Product) => (
         <LiaEdit
-          className={`${canEditproduct ? 'cursor-pointer' : 'cursor-not-allowed text-slate-200'}`}
+          className={`${
+            canEditproduct
+              ? 'cursor-pointer'
+              : 'cursor-not-allowed text-slate-200'
+          }`}
           size={20}
           onClick={() => {
             if (canEditproduct) {
@@ -209,7 +202,11 @@ const ViewProduct: React.FC<CategoryProps> = ({
       key: 'action',
       render: (record: Product) => (
         <RiDeleteBin6Line
-          className={`${canDeleteProduct ? 'text-red cursor-pointer' : 'cursor-not-allowed text-slate-200'}`}
+          className={`${
+            canDeleteProduct
+              ? 'text-red cursor-pointer'
+              : 'cursor-not-allowed text-slate-200'
+          }`}
           size={20}
           onClick={() => {
             if (canDeleteProduct) {
@@ -223,28 +220,23 @@ const ViewProduct: React.FC<CategoryProps> = ({
 
   return (
     <div className={colorMode === 'dark' ? 'dark' : ''}>
-      {loading ? (
-        <TableSkeleton rows={10} columns={1} />
+      <ViewsTableHeader
+        searchTerm={searchTerm}
+        onSearchChange={handleSearchChange}
+        canAdd={canAddProduct}
+        setEdit={setEditProduct}
+        setMenuType={setselecteMenu}
+        menuTypeText="Add Products"
+      />
+      {filteredProducts && filteredProducts.length > 0 ? (
+        <Table<Product>
+          data={filteredProducts}
+          columns={columns}
+          rowKey="id"
+          loading={loading} 
+        />
       ) : (
-        <>
-          <ViewsTableHeader
-            searchTerm={searchTerm}
-            onSearchChange={handleSearchChange}
-            canAdd={canAddProduct}
-            setEdit={setEditProduct}
-            setMenuType={setselecteMenu}
-            menuTypeText='Add Products'
-          />
-          {filteredProducts && filteredProducts.length > 0 ? (
-            <Table<Product>
-              data={filteredProducts}
-              columns={columns}
-              rowKey="id"
-            />
-          ) : (
-            <p className="text-primary dark:text-white">No products found</p>
-          )}
-        </>
+        <p className="text-primary dark:text-white">No products found</p>
       )}
     </div>
   );

@@ -47,6 +47,7 @@ function AddRedirecturl({ RedirectUrls, setRedirectUrls, setselecteMenu }: IVIEW
       setRedirectUrls(undefined);
       setselecteMenu('All RedirectUrls')
       revalidateTag("RedirectUrls")
+      revalidateTag("redirects")
     } catch (error: any) {
       const graphQLError = error?.graphQLErrors?.[0]?.message;
       showAlert({
@@ -158,27 +159,27 @@ function AddRedirecturl({ RedirectUrls, setRedirectUrls, setselecteMenu }: IVIEW
 
                   {/* URL Input */}
                   <div>
-                    <label htmlFor="url" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                    <label htmlFor="url" className="block text-sm font-medium  dark:text-white">
                       Url Endpoint
                     </label>
                     <Field
                       name="url"
                       type="text"
                       placeholder="/example-endpoint"
-                      className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 placeholder-gray-400 dark:placeholder-gray-500 px-4 py-3 text-gray-900 dark:text-white outline-none transition focus:border-secondary dark:focus:border-secondary focus:ring-2 focus:ring-secondary dark:focus:secondary" />
+                      className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 placeholder-gray-400 dark:placeholder-gray-500 px-4 py-3 dark:text-white outline-none transition focus:border-secondary dark:focus:border-secondary focus:ring-2 focus:ring-secondary dark:focus:secondary" />
                     <ErrorMessage name="url" component="div" className="text-red-500 text-sm mt-1" />
                   </div>
 
                   {/* Redirected URL Input */}
                   <div>
-                    <label htmlFor="redirectedUrl" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                    <label htmlFor="redirectedUrl" className="block text-sm font-medium  dark:text-white">
                       Redirect Pages
                     </label>
                     <Field
                       name="redirectedUrl"
                       type="text"
                       placeholder="https://example.com"
-                      className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 placeholder-gray-400 dark:placeholder-gray-500 px-4 py-3 text-gray-900 dark:text-white outline-none transition focus:border-secondary dark:focus:border-secondary focus:ring-2 focus:ring-secondary dark:focus:secondary"
+                      className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 placeholder-gray-400 dark:placeholder-gray-500 px-4 py-3 dark:text-white outline-none transition focus:border-secondary dark:focus:border-secondary focus:ring-2 focus:ring-secondary dark:focus:secondary"
                     />
                     <ErrorMessage name="redirectedUrl" component="div" className="text-red-500 text-sm mt-1" />
                   </div>

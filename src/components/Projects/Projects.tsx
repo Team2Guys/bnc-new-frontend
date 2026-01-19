@@ -1,28 +1,15 @@
-import { projectsData } from 'data/data';
 import React from 'react';
 import ProjectCard from './ProjectCard';
 import Container from 'components/Res-usable/Container/Container';
-import { MontserratFont } from 'typo/font';
 
-const Projects: React.FC = () => {
-  const sortedProjects = projectsData.sort((a, b) => a.title.localeCompare(b.title));
+const Projects = () => {
   return (
-    <Container className="px-6 pt-2 md:pt-12">
-      <p
-        className={` md:mx-20 line leading-10 md:leading-[54px] text-center text-xl md:text-[26px] mb-8 ${MontserratFont.className}`}
-      >
+    <Container className="px-4 my-10 space-y-2 sm:space-y-4">
+      <h2 className='text-2xl lg:text-5xl font-semibold font-futura text-primary text-center'>Latest Projects</h2>
+      <p className="text-base px-1 lg:px-8 text-primary text-center">
         No matter where you are in Dubai, our expertise is just a phone call away
       </p>
-      <div className="flex flex-wrap justify-center gap-6">
-        {sortedProjects.map((project, index) => (
-          <ProjectCard
-            key={index}
-            title={project.title}
-            description={project.description}
-            imageUrl={project.imageUrl}
-          />
-        ))}
-      </div>
+      <ProjectCard/>
     </Container>
   );
 };

@@ -1,19 +1,20 @@
 'use client';
-
+export const runtime = 'nodejs';
 import Breadcrumb from 'components/Dashboard/Breadcrumbs/Breadcrumb';
-
 import DefaultLayout from 'components/Dashboard/Layouts/DefaultLayout';
 import ProtectedRoute from 'hooks/AuthHookAdmin';
 import { useState } from 'react';
-const Addcategory = dynamic(()=>import("components/AddCategory/Addcategory"))
-const TableTwo = dynamic(()=>import("components/Dashboard/Tables/TableTwo"))
+const Addcategory = dynamic(() => import('components/AddCategory/Addcategory'));
+const TableTwo = dynamic(() => import('components/Dashboard/Tables/TableTwo'));
 import { CategoriesType } from 'types/interfaces';
 import { ICategory } from 'types/types';
 import dynamic from 'next/dynamic';
 
-const Category = ({cetagories}: {cetagories: ICategory[]}) => {
+const Category = ({ cetagories = [] }: { cetagories?: ICategory[] }) => {
   const [menuType, setMenuType] = useState<string>('Categories');
-  const [editCategory, seteditCategory] = useState<CategoriesType | undefined | null>();
+  const [editCategory, seteditCategory] = useState<
+    CategoriesType | undefined | null
+  >();
 
   return (
     <DefaultLayout>
@@ -39,4 +40,3 @@ const Category = ({cetagories}: {cetagories: ICategory[]}) => {
 };
 
 export default ProtectedRoute(Category);
-

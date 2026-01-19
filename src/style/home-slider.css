@@ -1,0 +1,34 @@
+.best_seller_slider .slick-prev,
+.slick-next {
+  width: 40px !important;
+  height: 40px !important;
+  z-index: 10;
+  background-color: #333 !important;
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  opacity: 1 !important;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.best_seller_slider .slick-prev::before,
+.best_seller_slider .slick-next::before {
+  color: white !important;
+  opacity: 1 !important;
+}
+
+.best_seller_slider .slick-prev {
+  left: 0px;
+  z-index: 20;
+}
+
+.best_seller_slider .slick-next {
+  right: 0px;
+  z-index: 20;
+}
+.best_seller_slider .slick-prev:hover,
+.best_seller_slider .slick-next:hover {
+  background-color: #333 !important;
+}

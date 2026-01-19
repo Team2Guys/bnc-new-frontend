@@ -2,8 +2,6 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import { IREVIEWS } from 'types/general';
 import { FcGoogle } from 'react-icons/fc';
 import { MdOutlineStarPurple500 } from 'react-icons/md';
@@ -123,7 +121,7 @@ const ReviewImages = ({ testimonial }: { testimonial: IREVIEWS }) => {
                     </p>
                   )}
                   <div className="flex flex-col gap-1">
-                    <h3 className="text-12 xs:text-14 2xl:text-lg font-bold">
+                    <h3 className="text-12 xs:text-sm 2xl:text-lg font-bold">
                       {testimonial.name}
                     </h3>
                     <p className="text-12 text-[#8a8a8a]">

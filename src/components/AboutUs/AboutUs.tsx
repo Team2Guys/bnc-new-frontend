@@ -15,10 +15,10 @@ const AboutUsCompo: FC<Props> = ({ blocks }) => {
 
         const TextContent = (
           <div className="space-y-4">
-            <p className={`${block.shortHeadingSize} font-medium`}>
+            <p className={`${block.shortHeadingSize} font-medium text-[24px] text-primary font-roboto`}>
               {block.shortHeading}
             </p>
-            <h2 className={`${block.mainHeadingSize} font-bold font-robotoSerif`}>
+            <h2 className={`${block.mainHeadingSize} font-bold font-futura text-[40px] text-primary`}>
               {block.mainHeading}
             </h2>
             <p className={`${block.contentSize} text-[#3E3F42] text-base font-roboto`}>
@@ -29,22 +29,19 @@ const AboutUsCompo: FC<Props> = ({ blocks }) => {
 
         const ImageContent = (
           <div
-            className="w-full h-[300px] md:h-[400px] bg-cover bg-no-repeat bg-center"
+            className="w-full h-[300px] md:h-[450px] bg-cover bg-no-repeat bg-center"
             style={{ backgroundImage: `url(${block.imageUrl})` }}
           />
         );
 
-        // For odd blocks: mobile = text then image (vertical), desktop = image then text (horizontal)
         if (isImageLeft) {
           return (
-            <div key={index} className="sm:mt-16">
-              {/* Mobile: stacked vertical text then image */}
+            <div key={index} className="sm:mt-base">
               <div className="block sm:hidden sm:text-start text-center space-y-4 px-4">
                 {TextContent}
                 {ImageContent}
               </div>
 
-              {/* Desktop: side by side image then text */}
               <div className="hidden sm:grid sm:grid-cols-2 sm:items-center sm:gap-8 sm:py-10 sm:px-0 sm:text-start text-center">
                 <div>{ImageContent}</div>
                 <div>{TextContent}</div>
@@ -53,7 +50,6 @@ const AboutUsCompo: FC<Props> = ({ blocks }) => {
           );
         }
 
-        // For even blocks: always text then image (desktop and mobile stacked)
         return (
           <div
             key={index}

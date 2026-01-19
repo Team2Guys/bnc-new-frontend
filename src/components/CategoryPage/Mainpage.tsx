@@ -29,9 +29,10 @@ const Mainpage = ({
           />
         </>
       ) : (
-        <ProductDetail
-          title={`${filteredProduct?.title}`}
-          filterProduct={filteredProduct} />
+          filteredProduct &&
+          <ProductDetail
+            title={`${filteredProduct?.title}`}
+            filterProduct={filteredProduct} />       
       )}
     </>
   );

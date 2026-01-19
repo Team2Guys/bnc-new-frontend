@@ -1,18 +1,13 @@
-import React from 'react'
+import React from 'react';
 
-import { fetchRedirectUrls} from 'config/fetch';
-import dynamic from 'next/dynamic';
-const MainPage = dynamic(()=>import('./MainPage'))
+import { fetchRedirectUrls } from 'config/fetch';
+import MainPage from './MainPage';
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
-async function  Page() {
-  const  Redirecturls=await fetchRedirectUrls()
-  return (
- <>
-   
-    <MainPage Redirecturls={Redirecturls} />
-    
-</>
-  )
+async function Page() {
+  const Redirecturls = await fetchRedirectUrls();
+  return <MainPage Redirecturls={Redirecturls} />;
 }
 
-export default Page
+export default Page;

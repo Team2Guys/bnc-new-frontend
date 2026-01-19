@@ -13,7 +13,7 @@ const Checkbox= ({
   return (
     <label
       htmlFor={id}
-      className={`flex items-center space-x-2 cursor-pointer select-none ${className}`}
+      className={`flex items-center space-x-2 cursor-pointer select-none whitespace-nowrap ${className}`}
     >
       <input
         type={radio ? "radio" : "checkbox"}
@@ -57,7 +57,7 @@ const Checkbox= ({
           {checked && <div className="w-3 h-3 rounded-full bg-secondary"></div>}
         </div>
       )}
-      <span className="text-black dark:text-white">{label}</span>
+      <span className="text-black">{label}</span>
     </label>
   );
 };

@@ -1,6 +1,5 @@
 "use client";
 import axios from "axios";
-import { useAppSelector } from "components/Others/HelperRedux";
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import ProtectedRoute from "hooks/AuthHookAdmin";
@@ -15,12 +14,6 @@ interface IComment {
 }
 
 const Comments = ({ currentComments }: { currentComments: any[] }) => {
-  const loggedInUser = useAppSelector(
-    (state: any) => state.usersSlice?.loggedInUser
-  );
-  const canEditBlog =
-    loggedInUser?.role === "Admin" ? loggedInUser?.canEditBlog : true;
-
   const token = Cookies.get("2guysAdminToken");
   const superAdminToken = Cookies.get("superAdminToken");
   const finalToken = token || superAdminToken;
@@ -28,9 +21,7 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
     authorization: `Bearer ${finalToken}`,
   };
 
-  const [disabledButtons, setDisabledButtons] = useState<{
-    [key: number]: boolean;
-  }>({});
+  const [disabledButtons, setDisabledButtons] = useState<{ [key: number]: boolean }>({});
   const [searchTerm, setSearchTerm] = useState("");
   const [comments, setComments] = useState(currentComments);
 
@@ -50,81 +41,40 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
     setSearchTerm(event.target.value.toLowerCase());
   };
 
-  const handleApprove = async (id: number, comment: any, item: any) => {
-    updateCommentStatus(comment.id, item.id, "APPROVED");
-    setDisabledButtons((prev) => ({ ...prev, [comment.id]: true }));
-
-    try {
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/blogs/comment/status/${comment.id}`,
-        { status: "APPROVED" },
-        { headers }
-      );
-      showAlert({
-        title: "Comment approved successfully 🎉",
-        icon: "success",
-      });
-    } catch (error) {
-      console.error("Error approving the comment:", error);
-      showAlert({
-        title: "Failed to approve the comment 😢",
-        icon: "error",
-      });
-      updateCommentStatus(comment.id, item.id, "PENDING");
-    } finally {
-      setTimeout(() => {
-        setDisabledButtons((prev) => ({ ...prev, [comment.id]: false }));
-      }, 2000);
-    }
-  };
-
-  const handleReject = async (id: number, comment: any, item: any) => {
-    updateCommentStatus(comment.id, item.id, "REJECTED");
-    setDisabledButtons((prev) => ({ ...prev, [comment.id]: true }));
-
-    try {
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/blogs/comment/status/${comment.id}`,
-        { status: "REJECTED" },
-        { headers }
-      );
-      showAlert({
-        title: "Comment rejected successfully ❌",
-        icon: "success",
-      });
-    } catch (error) {
-      console.error("Error rejecting the comment:", error);
-       showAlert({
-          title: "Failed to reject the comment 😢",
-          icon: "error",
-        });
-      updateCommentStatus(comment.id, item.id, "PENDING");
-    } finally {
-      setTimeout(() => {
-        setDisabledButtons((prev) => ({ ...prev, [comment.id]: false }));
-      }, 2000);
-    }
-  };
-
-  const updateCommentStatus = (
-    commentId: number,
-    itemId: number,
-    newStatus: string
-  ) => {
+  const updateCommentStatus = async (commentId: number, itemId: number, newStatus: string) => {
     setComments((prevComments) =>
       prevComments.map((item) =>
         item.id === itemId
           ? {
-            ...item,
-            comments: item.comments.map((comment: IComment) =>
-              comment.id === commentId
-                ? { ...comment, status: newStatus }
-                : comment
-            ),
-          }
+              ...item,
+              comments: item.comments.map((comment: IComment) =>
+                comment.id === commentId ? { ...comment, status: newStatus } : comment
+              ),
+            }
           : item
       )
     );
+
+    setDisabledButtons((prev) => ({ ...prev, [commentId]: true }));
+
+    try {
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/blogs/comment/status/${commentId}`,
+        { status: newStatus },
+        { headers }
+      );
+      showAlert({
+        title: newStatus === "APPROVED" ? "Comment approved 🎉" : "Comment rejected ❌",
+        icon: "success",
+      });
+    } catch (error) {
+      console.error("Error updating comment status:", error);
+      showAlert({ title: "Failed to update comment 😢", icon: "error" });
+    } finally {
+      setTimeout(() => {
+        setDisabledButtons((prev) => ({ ...prev, [commentId]: false }));
+      }, 2000);
+    }
   };
 
   const filterComments = (item: any) => {
@@ -137,10 +87,7 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
         comment.name.toLowerCase().includes(term) ||
         comment.description.toLowerCase().includes(term) ||
         (comment.createdAt &&
-          new Date(comment.createdAt)
-            .toLocaleString()
-            .toLowerCase()
-            .includes(term))
+          new Date(comment.createdAt).toLocaleString().toLowerCase().includes(term))
     );
 
     return titleMatch || commentMatches;
@@ -161,72 +108,52 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
     <div
       key={comment.id}
       className="p-6 rounded-2xl shadow-lg border border-gray-200 
-                 bg-gradient-to-br from-white via-gray-50 to-gray-100 
-                 dark:from-gray-800 dark:via-gray-900 dark:to-black
-                 hover:shadow-2xl transition-all duration-300 flex flex-col justify-between"
+               bg-gradient-to-br from-white via-gray-50 to-gray-100 
+               dark:from-gray-800 dark:via-gray-900 dark:to-black
+               hover:shadow-2xl transition-all duration-300 flex flex-col justify-between"
     >
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
-        <h5 className="font-semibold text-gray-800 dark:text-gray-200">
-          {comment.name}
-        </h5>
-        <span className="text-xs text-gray-500 dark:text-gray-400">
-          {comment.createdAt &&
-            new Date(comment.createdAt).toLocaleString()}
+        <h5 className="font-semibold dark:text-white">{comment.name}</h5>
+        <span className="text-xs dark:text-white">
+          {comment.createdAt && new Date(comment.createdAt).toLocaleString()}
         </span>
       </div>
 
       {/* Description */}
-      <p className="text-sm text-gray-700 dark:text-gray-300 flex-grow">
-        {comment.description}
-      </p>
+      <p className="text-sm dark:text-white flex-grow">{comment.description}</p>
 
       {/* Actions */}
       <div className="flex items-center gap-4 mt-6">
-        <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-          Status:
-        </h3>
+        <h3 className="text-sm font-semibold dark:text-white">Status:</h3>
         <div className="flex gap-3">
-          {/* Approve Button */}
           <button
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition 
-        ${disabledButtons[comment.id] ||
-                !canEditBlog ||
-                comment.status === "APPROVED"
-                ? "bg-gray-300 text-gray-600 cursor-not-allowed"
-                : "bg-gradient-to-r from-green-500 to-green-700 text-white hover:scale-105 shadow-md"
+              ${
+                disabledButtons[comment.id]
+                  ? "bg-gray-300 cursor-not-allowed"
+                  : "bg-gradient-to-r from-green-500 to-green-700 text-white hover:scale-105 shadow-md"
               }`}
-            onClick={() => handleApprove(comment.id, comment, item)}
-            disabled={
-              !canEditBlog ||
-              comment.status === "APPROVED" ||
-              disabledButtons[comment.id]
-            }
+            onClick={() => updateCommentStatus(comment.id, item.id, "APPROVED")}
+            disabled={disabledButtons[comment.id]}
           >
-            ✅ <span>Approve</span>
+            ✅ Approve
           </button>
 
-          {/* Reject Button */}
           <button
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition 
-        ${disabledButtons[comment.id] ||
-                !canEditBlog ||
-                comment.status === "REJECTED"
-                ? "bg-gray-300 text-gray-600 cursor-not-allowed"
-                : "bg-gradient-to-r from-red-500 to-red-700 text-white hover:scale-105 shadow-md"
+              ${
+                disabledButtons[comment.id]
+                  ? "bg-gray-300 cursor-not-allowed"
+                  : "bg-gradient-to-r from-red-500 to-red-700 text-white hover:scale-105 shadow-md"
               }`}
-            onClick={() => handleReject(comment.id, comment, item)}
-            disabled={
-              !canEditBlog ||
-              comment.status === "REJECTED" ||
-              disabledButtons[comment.id]
-            }
+            onClick={() => updateCommentStatus(comment.id, item.id, "REJECTED")}
+            disabled={disabledButtons[comment.id]}
           >
-            ❌ <span>Reject</span>
+            ❌ Reject
           </button>
         </div>
       </div>
-
 
       {/* Status Badge */}
       <div className="mt-4">
@@ -241,7 +168,7 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
     </div>
   );
 
-  const sections = ["APPROVED", "REJECTED"];
+  const sections = ["APPROVED", "REJECTED", "PENDING"];
 
   return (
     <div className="space-y-8">
@@ -254,19 +181,18 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
           onChange={handleSearchChange}
         />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {sections.map((status) => (
           <div
             key={status}
             className="p-4 rounded-xl border dark:border-gray-700 bg-gray-50 dark:bg-gray-900"
           >
-            <h2 className="text-lg font-bold mb-4 text-gray-700 dark:text-gray-200">
+            <h2 className="text-lg font-bold mb-4 dark:text-white">
               {status} Comments
             </h2>
             <div className="space-y-4">
               {comments.map((item: any) => {
                 if (!filterComments(item)) return null;
-
                 return item.comments
                   .filter((c: any) => c.status === status)
                   .map((comment: any) => renderCommentCard(comment, item));

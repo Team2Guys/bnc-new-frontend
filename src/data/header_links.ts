@@ -158,7 +158,25 @@ export const links = [
           }
         ]
       } },
-  { href: '/commercial', label: 'Commercial' },
+  { href: '/commercial', label: 'Commercial', id: 6, script: 
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://blindsandcurtains.ae/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Commercial",
+            "item": "https://blindsandcurtains.ae/commercial/"
+          }
+        ]
+      } },
   { href: '/estimator', label: 'Estimator' },
   // { href: '/blog', label: 'Blog' },
   { href: '/faqs', label: 'FAQs' },
@@ -171,4 +189,31 @@ export const blogLinks = [
   { href: 'blinds', label: 'Blinds', id: 2 },
   { href: 'curtains', label: 'Curtains', id: 5 },
   { href: 'shutters', label: 'Shutters', id: 9 },
+];
+
+export const footerLinks = [
+  {
+    href: "/product-guarantees/",
+    text: "Product Guarantees"
+  },
+  {
+    href: "/blog/",
+    text: "Blog"
+  },
+  {
+    href: "/projects/",
+    text: "Our Projects"
+  },
+  {
+    href: "/contact-us/",
+    text: "Contact Us"
+  },
+  {
+    href: "/gallery/",
+    text: "Gallery"
+  },
+  {
+    href: "/why-choose-blinds-curtains/",
+    text: "Why Choose Us"
+  }
 ];

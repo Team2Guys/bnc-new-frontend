@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 
 import Imageupload from 'components/ImageUpload/Imageupload';
 
-import { compareImageArray, compareImages, handleImageAltText, ImageRemoveHandler } from 'utils/helperFunctions';
+import { compareImageArray, compareImages, handleImageAltText, ImageRemoveHandler, updateAltText } from 'utils/helperFunctions';
 import Image from 'next/image';
 import { RxCross2 } from 'react-icons/rx';
 
@@ -113,13 +113,6 @@ function AddReview({ editReview, setEditsetReview, setselecteMenu }: I_Add_Revie
     setImagesUrl(imagesClone);
   }
 
-  const handlealtText = (index: number, newaltText: string) => {
-    const updatedImagesUrl = imagesUrl.map((item, i) =>
-      i === index ? { ...item, altText: newaltText } : item,
-    );
-    setImagesUrl(updatedImagesUrl);
-  };
-
   const hasUnsavedChanges = (): boolean => {
     if (!editReview) return false;
     const oldPoster = editReview.posterImageUrl;
@@ -212,7 +205,7 @@ function AddReview({ editReview, setEditsetReview, setselecteMenu }: I_Add_Revie
                     {/* Reviewer Image */}
                     <div className="rounded-xl border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
                       <div className="px-5 py-3 border-b border-gray-200 dark:border-gray-700">
-                        <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Reviewer Image</h3>
+                        <h3 className="text-lg font-semibold  dark:text-white">Reviewer Image</h3>
                       </div>
                       {posterimageUrl && posterimageUrl.length > 0 ? (
                         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 p-5">
@@ -259,7 +252,7 @@ function AddReview({ editReview, setEditsetReview, setselecteMenu }: I_Add_Revie
 
                     {/* Name */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label className="block text-sm font-medium  dark:text-white mb-2">
                         Reviewer Name
                       </label>
                       <Input name="name" placeholder="Enter reviewer name" />
@@ -267,7 +260,7 @@ function AddReview({ editReview, setEditsetReview, setselecteMenu }: I_Add_Revie
 
                     {/* Star Rating */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label className="block text-sm font-medium  dark:text-white mb-2">
                         Star Rating
                       </label>
                       <Field name="starRating" type="number" className="primary-input" />
@@ -283,7 +276,7 @@ function AddReview({ editReview, setEditsetReview, setselecteMenu }: I_Add_Revie
                   <div className="space-y-8">
                     {/* Description */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label className="block text-sm font-medium  dark:text-white mb-2">
                         Review Description
                       </label>
                       <Field
@@ -302,7 +295,7 @@ function AddReview({ editReview, setEditsetReview, setselecteMenu }: I_Add_Revie
 
                     {/* Review Date */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label className="block text-sm font-medium  dark:text-white mb-2">
                         Review Date
                       </label>
                       <Field
@@ -320,7 +313,7 @@ function AddReview({ editReview, setEditsetReview, setselecteMenu }: I_Add_Revie
                     {/* Review Images */}
                     <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm">
                       <div className="px-5 py-3 border-b border-gray-200 dark:border-gray-700">
-                        <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Add Review Images</h3>
+                        <h3 className="text-lg font-semibold  dark:text-white">Add Review Images</h3>
                       </div>
                       <div className="p-5">
                         <Imageupload setImagesUrl={setImagesUrl} multiple />
@@ -360,7 +353,7 @@ function AddReview({ editReview, setEditsetReview, setselecteMenu }: I_Add_Revie
                                 name="altText"
                                 value={item.altText || ""}
                                 placeholder="Alt text"
-                                onChange={(val) => handlealtText(index, val)}
+                                onChange={(val) =>setImagesUrl((prev) => updateAltText(prev, index, val))}
                               />
                             </div>
                           ))}

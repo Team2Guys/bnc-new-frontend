@@ -3,8 +3,8 @@ import React from 'react';
 import { MdOutlineStarPurple500 } from 'react-icons/md';
 
 interface StarRatingBarProps {
-  rating: number; // 1 to 5
-  percentage: number; // 0 to 100
+  rating: number;
+  percentage: number;
 }
 
 const StarRatingBar: React.FC<StarRatingBarProps> = ({ rating, percentage }) => {

@@ -16,7 +16,7 @@ const Accordion = ({ items }:AccordionProps) => {
         <div key={index} className="border-b rounded-md bg-white py-2 space-y-2">
           <button
             onClick={() => toggle(index)}
-            className="w-full flex justify-between text-left pt-2 font-semibold font-robotoSerif text-base md:text-xl text-primary"
+            className="w-full flex justify-between text-left pt-2 font-semibold font-roboto text-base md:text-xl text-primary"
           >
             {item.specsHeading}
             <span className="text-xl">{openIndex === index ? <MdOutlineKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown /> }</span>

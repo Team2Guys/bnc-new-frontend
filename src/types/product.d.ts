@@ -8,6 +8,8 @@ export interface BreadcrumbProps  {
     subcategory?: string;
     categorylink?: string;
     productLink?:string
+    image?:string
+    bradcrumbtitle?:string
   }
  export interface CategoryProps {
   Data?: ICategory;
@@ -42,10 +44,7 @@ export type TabDataItem = {
   title: string;
   heading: string;
   description: string;
-  href: string;
-  buttonText: string;
   image: string;
-  mobileImage?: string 
 };
 
 export interface InfoTabsProps {

@@ -91,16 +91,6 @@ export const Api_handler = async (
 
 
 
-
-export const UpdateShutterTitle = (title: string): string => {
-  let updatedTitle = title
-    .replace(/Wooden Shutters/i, '')
-    .replace(/plantation shutters/i, '')
-    .trim();
-  return updatedTitle;
-};
-
-
 export const getPath = (product: IProduct) => {
   const parent = (product?.category?.productCustomUrl || generateSlug(product?.category?.title)) as string;
 
@@ -122,11 +112,6 @@ export const subcategoryMap: Record<string, string[]> = {
   curtains: curtainsSubcategories,
 };
 
-export const getSubcategoriesByCategory = (categoryName: string): string[] => {
-  return subcategoryMap[categoryName?.toLowerCase()] || [];
-};
-
-
 
 export const handleImageAltText = (
   index: number,
@@ -146,7 +131,6 @@ export const handleImageAltText = (
 
 
 export const DateFormatHandler = (input?: Date | string) => {
-  console.log(input, "input from update at")
   if (!input) return "Not available";
 
   const parsedDate = typeof input === "string" ? new Date(input) : input;
@@ -195,4 +179,15 @@ export function compareImageArray(a?: any[], b?: any[]): boolean {
   }
 
   return false;
+}
+
+export function updateAltText<T extends { altText?: string }>(
+  images: T[] | undefined,
+  index: number,
+  newAltText: string
+): T[] {
+  if (!images) return [];
+  return images.map((item, i) =>
+    i === index ? { ...item, altText: newAltText } : item
+  );
 }

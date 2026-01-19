@@ -1,15 +1,14 @@
 'use client';
 import Container from 'components/Res-usable/Container/Container';
-import Support from 'components/Res-usable/support/support';
 import React, { useEffect, useState } from 'react';
 import { ICategory, IProduct } from 'types/types';
 import bgBreadcrum from '../../../public/assets/images/Breadcrum/modern.png';
-import TopHero from 'components/ui/top-hero';
 import { usePathname } from 'next/navigation';
 import { urls } from 'data/urls';
 import NotFound from 'app/not-found';
 import { generateSlug, subCategoryName , subCategoryUrls } from 'data/data';
 import BathroomCategory from './BathroomCategory';
+import Breadcrumb from 'components/Res-usable/breadcrumb';
 
 interface ICategoryPage {
   title: string;
@@ -35,9 +34,7 @@ const SubCategory = ({
   useEffect(() => {
     if (pathname) {
       const matchingUrl = urls.find((url) => url.errorUrl === pathname);
-      console.log(pathname, 'pathnamepathname');
       if (matchingUrl) {
-        console.log(matchingUrl, 'matchingUrl');
         setIsNotFound(true);
       } else {
         setIsNotFound(false);
@@ -91,12 +88,7 @@ const SubCategory = ({
 
   return (
     <>
-      <TopHero
-        title={title}
-        pageTitle={`Made to Measure ${title}`}
-        image={`${filteredSubCategory?.bannerImage?.imageUrl || bgBreadcrum.src}`}
-        pagename={pathname}
-      />
+      <Breadcrumb title={title}  image={`${filteredSubCategory?.bannerImage?.imageUrl || bgBreadcrum.src}`}/>
       <Container className="my-12">
         <BathroomCategory
           categoryName={categoryName ? categoryName : title}
@@ -107,10 +99,6 @@ const SubCategory = ({
           subCategory={title}
           updateSubCategoryName={updateSubCategoryName}
         />
-      </Container>
-
-      <Container>
-        <Support />
       </Container>
     </>
   );

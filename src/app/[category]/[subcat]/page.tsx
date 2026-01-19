@@ -16,17 +16,11 @@ import Mainpage from 'components/CategoryPage/Mainpage';
 export async function generateMetadata({params}: meta_props): Promise<Metadata> {
   const product = (await params).subcat;
   const category = (await params).category;
-
-  const response =  await  getSignleProd(product, category,{Meta_Title:true, Meta_description:true, customUrl:true, title:true, posterImage:true})
-
-
+  const response =  await  getSignleProd(product, category,{Meta_Title:true, Meta_description:true, customUrl:true, title:true, posterImage:true , Canonical_Tag:true})
   const  filteredProduct = response?.product
-
   if (!filteredProduct) {
     return notFound();
   }
-
-
   
   const headersList = await headers();
   const domain = headersList.get('x-forwarded-host') || headersList.get('host') || '';
@@ -49,8 +43,7 @@ export async function generateMetadata({params}: meta_props): Promise<Metadata> 
     'blindsandcurtains';
   let description = filteredProduct?.Meta_description ||
     'Welcome to blindsandcurtains';
-  let url = `${fullUrl}${category}/${product}/`;
-
+    let url = filteredProduct?.Canonical_Tag || `${fullUrl}${category}/${product}/` ;
   return {
     title: title,
     description: description,
@@ -62,24 +55,29 @@ export async function generateMetadata({params}: meta_props): Promise<Metadata> 
            type:"website"
     },
     alternates: {
-      canonical:
-         url,
-    },
+      canonical: url
+     },
   };
 }
 
 const Page = async ({ params }: meta_props) => {
   const product = (await params).subcat;
   const category = (await params).category;
-  const response =  await  getSignleProd(product, category)
-  const  filteredProduct = response.product || []
+
+  const response = await getSignleProd(product, category);
 
   if (!response) {
     return notFound();
   }
-  if (filteredProduct && filteredProduct.status !== "PUBLISHED") {
+  const filteredProduct = response.product || [];
+
+  if (filteredProduct?.status !== "PUBLISHED" || filteredProduct.title == "Blackout Roller Blinds" ||
+    filteredProduct.title == "Sunscreen Roller Blinds"  ||
+    filteredProduct.title == "Dimout Roller Blinds") {
     return notFound();
   }
+
+ 
 
   const productTitle = filteredProduct?.title;
   const matchedSchema = BlindSchemaMap[productTitle];
@@ -88,7 +86,6 @@ const Page = async ({ params }: meta_props) => {
       <Mainpage
         filteredProduct={filteredProduct}
         filteredSubCategory={response.type == "subcategory"  && filteredProduct}
-        product={product}
         matchedSchema={matchedSchema}
       />
   );

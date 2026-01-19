@@ -35,10 +35,10 @@ const CardDataStats: React.FC<CardDataStatsProps> = ({
         </div>
 
         {/* Stats */}
-        <h4 className="text-5xl font-extrabold text-gray-900 dark:text-white tracking-wide drop-shadow-md">
+        <h4 className="text-5xl font-extrabold dark:text-white tracking-wide drop-shadow-md">
           {total}
         </h4>
-        <p className="mt-3 text-lg font-medium text-gray-600 dark:text-gray-300">
+        <p className="mt-3 text-lg font-medium dark:text-white">
           {title}
         </p>
 

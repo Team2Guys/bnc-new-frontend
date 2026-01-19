@@ -331,7 +331,7 @@ const AddBlogs = ({
                     <div className="space-y-6">
                       {/* Thumbnail */}
                       <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 shadow-md">
-                        <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center">
+                        <h3 className="text-lg font-semibold dark:text-white mb-4 flex items-center">
                           <span className="w-2 h-5 bg-secondary rounded-full mr-2"></span>
                           Thumbnail Image
                         </h3>
@@ -369,7 +369,7 @@ const AddBlogs = ({
 
                       {/* Title */}
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        <label className="block text-sm font-medium dark:text-white mb-1">
                           Title
                         </label>
                         <input
@@ -377,7 +377,7 @@ const AddBlogs = ({
                           name="title"
                           placeholder="Enter blog title"
                           value={values.title}
-                          className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent placeholder:text-gray-400 px-4 py-3 text-black dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/40 transition"
+                          className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent  px-4 py-3 text-black dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/40 transition"
                           onChange={(e) => {
                             setFieldValue("title", e.target.value);
                             handleDebouncedMutation({ ...values, title: e.target.value });
@@ -387,7 +387,7 @@ const AddBlogs = ({
 
                       {/* Blog URL */}
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        <label className="block text-sm font-medium dark:text-white mb-1">
                           Blog Url
                         </label>
                         <input
@@ -395,7 +395,7 @@ const AddBlogs = ({
                           name="redirectionUrl"
                           placeholder="Enter blog url"
                           value={values.redirectionUrl}
-                          className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent placeholder:text-gray-400 px-4 py-3 text-black dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/40 transition"
+                          className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent  px-4 py-3 text-black dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/40 transition"
                           onChange={(e) => {
                             setFieldValue("redirectionUrl", e.target.value);
                             handleDebouncedMutation({ ...values, redirectionUrl: e.target.value });
@@ -405,7 +405,7 @@ const AddBlogs = ({
 
                       {/* Category */}
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        <label className="block text-sm font-medium dark:text-white mb-1">
                           Category
                         </label>
                         {categoryLoading ? (
@@ -459,7 +459,7 @@ const AddBlogs = ({
                     <div className="space-y-6">
                       {/* Meta Title */}
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        <label className="block text-sm font-medium dark:text-white mb-1">
                           Meta Title
                         </label>
                         <input
@@ -467,7 +467,7 @@ const AddBlogs = ({
                           name="Meta_Title"
                           placeholder="Enter Meta Title"
                           value={values.Meta_Title}
-                          className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent placeholder:text-gray-400 px-4 py-3 text-black dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/40 transition"
+                          className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent  px-4 py-3 text-black dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/40 transition"
                           onChange={(e) => {
                             setFieldValue("Meta_Title", e.target.value);
                             handleDebouncedMutation({ ...values, Meta_Title: e.target.value });
@@ -477,7 +477,7 @@ const AddBlogs = ({
 
                       {/* Canonical Tag */}
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        <label className="block text-sm font-medium dark:text-white mb-1">
                           Canonical Tag
                         </label>
                         <input
@@ -485,7 +485,7 @@ const AddBlogs = ({
                           name="Canonical_Tag"
                           placeholder="Enter Canonical Tag"
                           value={values.Canonical_Tag}
-                          className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent placeholder:text-gray-400 px-4 py-3 text-black dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/40 transition"
+                          className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent  px-4 py-3 text-black dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/40 transition"
                           onChange={(e) => {
                             setFieldValue("Canonical_Tag", e.target.value);
                             handleDebouncedMutation({ ...values, Canonical_Tag: e.target.value });
@@ -495,14 +495,14 @@ const AddBlogs = ({
 
                       {/* Meta Description */}
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        <label className="block text-sm font-medium dark:text-white mb-1">
                           Meta Description
                         </label>
                         <textarea
                           name="Meta_description"
                           placeholder="Enter Meta Description"
                           value={values.Meta_description}
-                          className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent placeholder:text-gray-400 px-4 py-3 text-black dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/40 transition min-h-[120px]"
+                          className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent  px-4 py-3 text-black dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/40 transition min-h-[120px]"
                           onChange={(e) => {
                             setFieldValue("Meta_description", e.target.value);
                             handleDebouncedMutation({ ...values, Meta_description: e.target.value });
@@ -512,7 +512,7 @@ const AddBlogs = ({
 
                       {/* ALT Text */}
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        <label className="block text-sm font-medium dark:text-white mb-1">
                           Image ALT text
                         </label>
                         <input
@@ -520,7 +520,7 @@ const AddBlogs = ({
                           name="Images_Alt_Text"
                           placeholder="Enter Image ALT text"
                           value={values.Images_Alt_Text}
-                          className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent placeholder:text-gray-400 px-4 py-3 text-black dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/40 transition"
+                          className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent  px-4 py-3 text-black dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/40 transition"
                           onChange={(e) => {
                             setFieldValue("Images_Alt_Text", e.target.value);
                             handleDebouncedMutation({ ...values, Images_Alt_Text: e.target.value });

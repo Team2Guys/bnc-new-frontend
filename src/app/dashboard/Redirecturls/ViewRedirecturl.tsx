@@ -58,7 +58,10 @@ export default function ViewRedirecturl({
         try {
             setloading(key)
             await deleteRedirectUrl(key)
-            revalidateTag('reviews');
+           
+              revalidateTag("RedirectUrls")
+                  revalidateTag("redirects")
+
 
         } catch (err) {
             console.log(err, "error")

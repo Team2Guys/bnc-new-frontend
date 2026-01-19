@@ -41,7 +41,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
       onClick={handleBackdropClick}
     >
       <div
-        className={`bg-secondary-foreground shadow-xl w-full relative z-50 rounded-lg m-2 dark:bg-primary ${getWidthClass()}`}
+        className={`bg-secondary-foreground shadow-xl w-full relative z-50 rounded-lg m-2 ${getWidthClass()}`}
         onClick={(e) => e.stopPropagation()}
       >
         {

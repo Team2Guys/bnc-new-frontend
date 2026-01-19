@@ -8,7 +8,7 @@ export default function MilestoneSteps() {
         <div className="sm:mt-20 mt-10">
             <div className="flex sm:flex-row flex-col items-center sm:gap-8">
                 <h2
-                    className="text-4xl sm:text-8xl text-center font-bold text-primary font-robotoSerif sm:hidden block sm:mb-0 mb-8"
+                    className="text-4xl sm:text-8xl text-center font-bold text-primary font-futura sm:hidden block sm:mb-0 mb-8"
                     dangerouslySetInnerHTML={{ __html: milestoneStepsData.heading }}
                 />
 
@@ -24,7 +24,7 @@ export default function MilestoneSteps() {
                 <div className="w-full sm:w-1/2">
                     <div className="sm:text-start text-center sm:mb-10">
                         <h2
-                            className="text-2xl sm:text-6xl xl:text-7xl font-bold text-primary font-robotoSerif sm:block hidden ">{milestoneStepsData.heading} </h2>
+                            className="text-2xl sm:text-5xl  font-bold text-primary font-futura sm:block hidden ">{milestoneStepsData.heading} </h2>
 
                         <p className="text-24 sm:text-xl mt-4 text-primary font-roboto  mx-auto font-semibold">
                             {milestoneStepsData.subheading}
@@ -48,7 +48,7 @@ export default function MilestoneSteps() {
                             </div>
                             {/* Description */}
                             <div className="flex flex-col justify-center pt-6">
-                                <p className="text-16 font-medium sm:text-lg text-primary font-robotoSerif">
+                                <p className="text-base font-medium sm:text-lg text-primary font-futura">
                                     {step.description}
                                 </p>
                             </div>

@@ -1,9 +1,7 @@
 
 import {
   Email,
-  ITopHeroLink,
   PhoneNumber,
-  SupportItem,
   Tproductdata,
   TProductGuarantees,
 } from 'types/interfaces';
@@ -20,8 +18,6 @@ export const generateSlug = (text?: string) => {
     .replace(/[^\w\-]+/g, '')
     .replace(/\-\-+/g, '-');
 };
-
-
 
 
 export const footerInfo = ' ©Blinds & Curtains 2025 All rights reserved';
@@ -48,25 +44,6 @@ export const OurClientImage = [
 ];
 
 
-export const supportItems: SupportItem[] = [
-  {
-    title: 'Added Convenience',
-    description:
-      'A luxurious addition to your home that lets you set timers, create scenes, and makes you wonder why you didn’t switch your blinds and curtains sooner.',
-  },
-  {
-    title: 'Compatible with all major smart homes systems',
-    description:
-      'Talk to our specialists today to find the best option for your blinds & curtains, whether it’s a remote, Alexa, Google Home, or Apple HomeKit.',
-  },
-  {
-    title: 'Energy Efficient',
-    description:
-      'Live comfortably and save energy with blinds and curtains automation that helps keep your room warm in winter and cool in summer.',
-  },
-];
-
-
 
 export const productData: Tproductdata = {
   title: 'PRODUCT GUARANTEES',
@@ -74,109 +51,72 @@ export const productData: Tproductdata = {
   sideImage1: '/assets/images/product-guarantees/guarantee2.png',
   heading: 'BLINDS, CURTAINS & SHUTTERS PRODUCT GUARANTEES',
   content:
-    'We at <a href="/"" style="text-decoration:underline">blindsandcurtains.ae</a> know our products will complement your home now and in the future. All our made-to-measure <a href="/made-to-measure-blinds/"" style="text-decoration:underline">blinds</a>, <a href="/made-to-measure-curtains/"" style="text-decoration:underline">curtains</a>, and <a href="/shutters-range/"" style="text-decoration:underline">shutters</a> come with a 10-year mechanical and labour warranty. We make sure all our products are of high quality, but if something goes wrong, our team will visit to assess the situation. With them, you can be sure your problem will be handled with care, whether with a quick fix or a replacement. We stand behind our work so that you can trust us.',
+    'We at blindsandcurtains.ae know our products will complement your home now and in the future. All our made-to-measure blinds, curtains, and shutters come with a 10-year mechanical and labour warranty. We make sure all our products are of high quality, but if something goes wrong, our team will visit to assess the situation. With them, you can be sure your problem will be handled with care, whether with a quick fix or a replacement. We stand behind our work so that you can trust us.',
 };
 
 
 export const PGuarantees: TProductGuarantees[] = [
   {
     heading: 'What Our Guarantee Cover?',
-    text: `When choosing blindsandcurtains.ae, you're buying beautiful window dressings and getting a customer service experience that is unmatched in Dubai. From <b class="text-black font-bold">free consultation and installation</b> to an after-sales care package, you can rest assured that you’ll be in good hands for the lifetime of your blinds, curtains or shutters. We understand how important fabric quality is to your blinds and curtains. That’s why we offer a <b class="text-black font-bold">3-year warranty</b> on all fabrics used in our products. From the track to the rod and every mechanism in between, every component of your blinds and curtains is durable. There's a <b class="text-black font-bold">10-year warranty on</b> all moving and static parts, so you're covered for the long term.If your custom window covering doesn’t perform as it should within <b class="text-black font-bold">10 years of installation</b>, we’ll fix it or give you a replacement of your choice. We do this so you'll always have a solution that works.`,
+    text: `When choosing blindsandcurtains.ae, you're buying beautiful window dressings and getting a customer service experience that is unmatched in Dubai. From free consultation and installation to an after-sales care package, you can rest assured that you’ll be in good hands for the lifetime of your blinds, curtains or shutters. We understand how important fabric quality is to your blinds and curtains. That’s why we offer a 3-year warranty on all fabrics used in our products. From the track to the rod and every mechanism in between, every component of your blinds and curtains is durable. There's a 10-year warranty on all moving and static parts, so you're covered for the long term.If your custom window covering doesn’t perform as it should within 10 years of installation, we’ll fix it or give you a replacement of your choice. We do this so you'll always have a solution that works.`,
     image: '/assets/images/product-guarantees/guarantee3.png',
     imageAlign: 'left',
   },
   {
-    heading: 'The Best Quality and Workmanship',
-    text: "Great care and pride is attached to everything we do. As soon as they are installed, you can count on our support. This is our commitment to you.For over a decade, we’ve been helping homes across Dubai achieve stunning, functional window solutions. From transparent pricing to honest advice, we’ve built a reputation for reliability. Our <b class='text-black font-bold'>750+ 5-star reviews</b> speak to the trust our customers place in us.Call or email our support team, and we’ll guide you through the next steps. To fix the problem, our technicians will come to you when it's convenient for you. The <b class='text-black font-bold'>warranty</b> covers all labour costs and parts replacements. Moreover, we provide free uninstall/reinstall services within two years, protecting your peace of mind during renovations.",
-    image: '/assets/images/product-guarantees/guarantee4.png',
+    heading: 'Why Choose Our Guarantees?',
+    text: "We've revolutionized product guarantees with cutting-edge technology and customer-first approach.",
+    icons: [
+      {
+        heading: 'Global Coverage',
+        text: 'Submit claims online and get approval within 24 hours with our automated system.',
+        icon: '/assets/images/product-guarantees/icon1.png',
+      },
+      {
+        heading: 'Instant Claims Processing',
+        text: 'Your products are protected worldwide with our international service network.',
+        icon: '/assets/images/product-guarantees/icon2.png',
+      },
+      {
+        heading: 'Transparent Terms',
+        text: 'No hidden clauses or fine print. Clear, straightforward guarantee terms you can understand.',
+        icon: '/assets/images/product-guarantees/icon3.png',
+      },
+    ],
+    image: '/assets/images/product-guarantees/guarantee4.webp',
     imageAlign: 'right',
   },
 ];
 
-// export const AboutUsPara = {
-//   id: 1,
-//   subheading: 'About Us',
-//   heading: ['Our Journey'],
-//   paragraph: [
-//     'Having spent 20 years in the UK retail industry, our Managing Partner, Shiraz, decided it was time for sunnier climes and moved to Dubai in 2014 with his family. The first office was a stunning waste of space on Sheikh Zayed Road, which gave Shiraz a fantastic view of Burj Khalifah, but chewed through his finances like water. School fees were duly paid and a move to a compact but cosy office in Port Saeed was home for the next 2 years.',
-//     'Like a lot of business people that move to Dubai, the first 2 years were painfully hard to adjust, but with the drive and ambition to succeed, and with a helping hand from God, things started to turn and the seeds that were laid in 2014 started bearing fruit.',
-//     'By 2017, we moved to our first actual showroom in Oud Metha. This is where things started to blow. Blinds and Curtains was now established as a firm favourite with hundreds of customers, most of whom would recommend us to their friends and families and also ended up being our return customers.',
-//   ],
-// };
-// export const UsHistoryPara = {
-//   id: 1,
-//   paragraph: [
-//     'This cycle ran successfully for many years but by 2021, with covid out the way, we figured it was time to push the barriers further. We had already introduced flooring, wallpaper and other items to our list of services offered, but the name felt restrictive. It was also around this time that lots of other companies turned up with copycat versions of our name (we guess blindsandcurtains.ae can’t really be expected to be exclusive) and it was quite confusing for our existing customers and quite a few were misled into buying from companies claiming to be us.',
-//     'With this in mind, we decided on a brand and image change. After weeks of deliberating, Shiraz’s brother Valy, (who had since followed his brother and made the move to Dubai), came up with Two Guys. It was instant love for both brothers and that is the name we trade as today. But with <a href="/"" style="text-decoration: underline">www.blindsandcurtains.ae</a> having so many loyal customers, it would have been suicidal to wrap up and bury, so the brand is still alive and kicking today, albeit under the Two Guys Home Furnishings brand.',
-//     'Today we employ over 60 staff, dedicated to giving our customers the level of satisfaction that the owners themselves would accept (Shiraz literally has OCD). Our staff are trained to give impartial advice, to NEVER be pushy in their sales pitch and to NEVER “up-sell” when not required. Once we have you as a customer, our goal is to keep you for life, so you will find that the service doesn’t end once the final payments have been made. Your journey is a part of our journey, and we believe we have a long way to go before reaching the end of the road.',
-//   ],
-// };
-
-
-// export const OurHistoryData: OurHistory[] = [
-//   {
-//     id: 1,
-//     year: '1999',
-//     heading: 'Our UK fashion business wins Scottish Retailer of The Year Award',
-//     discription:
-//       'We started strong by winning the Scottish Retailer of the Year, setting a high standard from the outset. This early recognition defined our dedication to quality in the fashion industry.',
-//   },
-//   {
-//     id: 2,
-//     year: '2014',
-//     heading:
-//       '<a href="/"" style="text-decoration: underline">www.blindsandcurtains.ae</a> is born',
-//     discription:
-//       'We entered the online world with blindsandcurtains.ae to expand our reach and redefine the way we interact with our customers.',
-//   },
-//   {
-//     id: 3,
-//     year: '2016',
-//     heading: 'Started manufacturing ourselves',
-//     discription:
-//       'Making our own products gave us greater control over quality and design, so we could better meet our customers needs.',
-//   },
-
-//   {
-//     id: 4,
-//     year: '2023 ',
-//     heading: 'Re-branded to Two Guys & moved to Al Quoz',
-//     discription:
-//       'We moved to Al Quoz as part of our company rebranding, taking advantage of new opportunities to better serve our customers.',
-//   },
-
-// ];
-
 export const aboutUsData: AboutUsBlock[] = [
   {
     shortHeading: 'A New Country – A New Chapter',
-    shortHeadingSize: 'sm:text-[20px] text-20 font-Roboto font-medium text-[#3E3F42]',
+    shortHeadingSize: 'sm:text-2xl text-20 font-Roboto font-medium text-primary',
     mainHeading: 'How It All Began — From the UK to Dubai',
-    mainHeadingSize: 'sm:text-2xl text-24 text-[#3E3F42]',
+    mainHeadingSize: 'sm:text-2xl text-24 font-bold xl:text-[40px] text-primary',
     content: `It all started with Shiraz, our managing partner, who has spent over 20 years working within the retail business in the UK. Multiple achievements were collected over the years, including Scottish retailer of the year (twice), Top Customer Service Accolades on 5 occasions and even a place in the top 100 most influential fashion icons. In 2014, Shiraz moved to Dubai with his family, ready for a new start and bigger dreams. That move led to something special — the beginning of Blinds & Curtains Furnitures Trading. A brand built on years of experience and strong family values. Over the years, it was felt that customer’s would join the Blinds & Curtains family at the end of their renovation journeys. 1000’s fell in love with the company and brand ethics, but by the time they were ready to cover their windows, they had already purchased their furnitures and flooring options. This led to real deep thinking process that lasted for several months before it was decided to re-brand. And that was the birth of Two Guys Home Furnishings.`,
     contentSize: 'text-base text-start',
     imageUrl: '/assets/images/about-us/aboutus.webp',
   },
   {
     shortHeading: 'Meet the People Behind the Promise',
-    shortHeadingSize: 'sm:text-2xl text-20 text-[#3E3F42] font-roboto font-semibold',
+    shortHeadingSize: 'sm:text-2xl text-20 text-primary font-roboto font-semibold',
     mainHeading: 'Real Experts. Real Advice. No Pushy Sales.',
-    mainHeadingSize: 'sm:text-5xl text-2xl text[#3E3F42]',
+    mainHeadingSize: 'sm:text-5xl text-2xl text-primary',
     content: `At Two Guys, we don’t just hire staff — we have built a team of over 60 people who care about your home like it’s their own. Our team is friendly, honest, and never pushy. Shiraz, our founder, notices every little detail — even a crooked curtain! That’s how much we care. When you choose us, you’re part of the Two Guys family.`,
     contentSize: 'text-base text-start',
     imageUrl: '/assets/images/about-us/only-sources.webp',
   },
   {
     shortHeading: 'Our First Big Step in Dubai',
-    shortHeadingSize: 'sm:text-2xl text-20 text-[#3E3F42] font-roboto font-semibold',
+    shortHeadingSize: 'sm:text-2xl text-20 text-primary font-roboto font-semibold',
     mainHeading: 'From a Tiny Office to the First Two Guys Showroom',
-    mainHeadingSize: 'sm:text-5xl text-2xl text[#3E3F42]',
+    mainHeadingSize: 'sm:text-5xl text-2xl text-primary',
     content: `We started in a small, cosy office in Port Saeed — no fancy setup, just hard work and learning the Dubai market.
 In 2017, we opened our first showroom in Oud Metha as Blinds and Curtains and quickly became a trusted name.
 With loyal customers and growing demand, we evolved into Two Guys Home Furnishings — built on service, trust, and homes that feel just right.`,
     contentSize: 'text-base text-start',
 
-    imageUrl: '/assets/images/about-us/IMG_7006.webp',
+    imageUrl: '/assets/images/about-us/aboutUsimage.webp',
   },
 ];
 
@@ -271,40 +211,12 @@ export const AddProductvalidationSchema = Yup.object().shape({
 
 });
 
-export const TopHeroLink: ITopHeroLink[] = [
-  {
-    matchingTitle: 'blinds',
-    title: 'made-to-measure-blinds',
-  },
-  {
-    matchingTitle: 'curtains',
-    title: 'made-to-measure-curtains',
-  },
-  {
-    matchingTitle: 'shutters',
-    title: 'shutters-range',
-  },
-  {
-    matchingTitle: 'shutters',
-    title: 'shutters range',
-  },
-  {
-    matchingTitle: 'blog',
-    title: 'blog',
-  },
-];
-
-export const BreakCrum_conent_pages = [
-  {
-    url: '/blinds/roller-blinds',
-    content: 'Made to Measure Roller Blinds',
-  },
-];
 
 export const footerData = [
   {
     key: "1",
     title: 'Blinds',
+    link:"/made-to-measure-blinds/",
     items: [
       'Motorised blinds',
       'Blackout Roller Blinds',
@@ -316,6 +228,7 @@ export const footerData = [
   {
     key: "2",
     title: 'Curtains',
+    link:"/made-to-measure-curtains/",
     items: [
       'Motorised Curtains',
       'Blackout Triple Pinch Pleat curtains',
@@ -327,6 +240,7 @@ export const footerData = [
   {
     key: "3",
     title: 'Shutters',
+    link:"/shutters-range/",
     items: [
       'Full Height Shutters',
       'Tracked Shutters',
@@ -336,30 +250,6 @@ export const footerData = [
     ],
   },
 
-];
-
-export const GuaranteeVisitData = [
-  {
-    heading: 'Book a free consultation',
-    description:
-      'Our experts will come over at your convenience and discuss colours, styles, and measurements.',
-    button: 'Book an appointment',
-    href: '/request-appointment/',
-  },
-  {
-    heading: 'Visit our showroom ',
-    description:
-      "Visit us in person next time you're in the area, and see for yourself what we've got to offer.",
-    button: 'Find Our Location Map',
-    href: 'https://www.google.com/maps?cid=2467468347994691262&hl=en',
-  },
-  {
-    heading: 'Talk To Our Specialist',
-    description:
-      'Do you want to talk with the Blinds & Curtains Team? Our team will get back to you ASAP.',
-    button: 'Talk To Specialist',
-    href: 'https://api.whatsapp.com/send/?phone=%2B971544945339&text&type=phone_number&app_absent=0',
-  },
 ];
 
 export const contentArray = [
@@ -434,57 +324,6 @@ export const projectsData = [
     imageUrl: '/assets/images/Projects/Palm Jumeirah.webp',
   },
 ];
-
-export const projectsTags = [
-  'Emirates Hills',
-  'The Lakes',
-  'Meadows',
-  'Damac Hills',
-  'Arjan',
-  'Al Quoz',
-  'Al Barari',
-  'Furjan',
-  'Mohammed Bin Rashid City',
-  'District 1',
-  'Meydan',
-  'Sobha Hartland',
-  'Villa Nova',
-  'Al Reem',
-  'Townsquare',
-  'Alvorada',
-  'Beachfront',
-  'Maple Villas',
-  'Sidra Villas',
-  'The Greens',
-  'Dubai Harbour',
-  'Dubai Creek Harbour',
-  'Barsha Heights',
-  'Academic City',
-  'Nad Al Sheba',
-  'Dubailand',
-  'DIFC',
-  'Al Khawaneej',
-  'Dubai Design District',
-  'Jumeirah Village Circle',
-  'Discovery Gardens',
-  'Umm Suqeim',
-  'Jumeirah Beach Residence',
-  'Jebel Ali Village',
-  'Dubai Marina',
-  'Business Bay Dubai',
-  'Nad Al Hamar',
-  'Festival City',
-  'Dubai Creek',
-  'Al Qusais',
-  'Media City',
-  'Bur Dubai',
-  'Al Sufouh',
-  'Silicon Oasis',
-  'Mirdif',
-  'Falcon City',
-  'Jumeirah',
-];
-
 
 
 export const checkboxData = [
