@@ -65,13 +65,16 @@ const Products = async ({ params }: Props) => {
   if (!category) {
     return notFound();
   }
+  
   const matchingLink: any = links.find((link) => slug.includes(link.href.replace(/^\//, '')),);
 
-  const uniqueProducts = Array.from(
-    new Map([...category.products, ...category.recalledProducts].map(product => [product.id, product])).values()
-  );
+  // const uniqueProducts = Array.from(
+  //   new Map([...category.products,
+  //     //  ...category.recalledProducts
+  //     ].map(product => [product.id, product])).values()
+  // );
 
-  const filteredProducts = uniqueProducts?.filter((product: IProduct) => product.status === "PUBLISHED")?.sort((a: IProduct, b: IProduct) => {
+  const filteredProducts = category.products?.filter((product: IProduct) => product.status === "PUBLISHED")?.sort((a: IProduct, b: IProduct) => {
     const orderArray = subcategoryMap[category.title?.toLowerCase()];
     if (!orderArray) return 0;
     const indexA = orderArray.findIndex(item => item.toLowerCase().trim() === a.title?.toLowerCase().trim());
