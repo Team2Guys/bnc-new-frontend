@@ -1,63 +1,131 @@
 'use client';
 
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { setIsNotFoundPage } from '../redux/slices/pageStateSlice';
+
+import Container from 'components/Res-usable/Container/Container';
+import ContactInfo from 'components/Contact/contact-info';
+import ContactForm from 'components/Contact/contact-form';
+import Card from 'components/ui/newCard';
+
+import { fetchProducts } from 'config/fetch';
+import { IProduct } from 'types/types';
+import { PRODUCT_TABS } from 'data/error';
+
+type TabKey = keyof typeof PRODUCT_TABS;
 
 export default function NotFound() {
-  const [isClient, setIsClient] = useState(false);
-  const dispatch = useDispatch();
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const [activeTab, setActiveTab] = useState<TabKey>('blinds');
+  const [loading, setLoading] = useState(true);
+
+  /* Fetch products */
   useEffect(() => {
-    dispatch(setIsNotFoundPage(true));
+    async function loadProducts() {
+      try {
+        const res = await fetchProducts();
+        setProducts(res.filter((p: IProduct) => p.status === 'PUBLISHED'));
+      } catch (error) {
+        console.error('Failed to fetch products', error);
+      } finally {
+        setLoading(false);
+      }
+    }
 
-    return () => {
-      dispatch(setIsNotFoundPage(false));
-    };
-  }, [dispatch]);
-
-    useEffect(() => {
-    setIsClient(true);
+    loadProducts();
   }, []);
-  if (!isClient) {
-    return null;
-  }
+
+  /* Filter products by tab */
+  const filteredProducts = useMemo(() => {
+    const allowedSlugs = PRODUCT_TABS[activeTab];
+
+    return products
+      .filter((product) => allowedSlugs.includes(String(product.customUrl)))
+      .slice(0, 10);
+  }, [activeTab, products]);
 
   return (
-    <div className="flex items-center justify-center sm:h-[90vh]">
-      <div className="flex flex-col items-center gap-4 relative">
-        <video
-          className="w-full h-full sm:w-96 sm:h-96 object-contain"
-          autoPlay
-          muted
-          loop
-          playsInline
-          >
-          <source src="/assets/404.mp4" type="video/mp4" />
-        
-          Your browser does not support the video tag.
-          </video>
-        <h2 className="text-2xl xsm:text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-black -mt-10">
+    <Container className="my-20 space-y-16">
+      <div className="space-y-4 text-center">
+        <h2 className="text-3xl sm:text-5xl lg:text-7xl font-bold text-black">
           There&apos;s <span className="uppercase">Nothing</span> here ...
         </h2>
-        <p className="text-center px-2 xsm:px-0 text-[10px] xsm:text-xs sm:text-base md:text-lg lg:text-xl">
-          ...maybe the page you are looking for is not found or never existed.
+        <p className="text-sm sm:text-lg text-gray-600">
+          ...maybe the page you are looking for does not exist.
         </p>
-        <div className="flex items-center gap-4 justify-center">
+
+        <div className="flex justify-center gap-4">
           <Link
-            className="w-35 sm:w-40 h-10 sm:h-12 text-sm max-md:px-4 sm:text-base flex justify-center items-center rounded-full bg-primary text-white hover:bg-white border border-primary hover:text-primary transition"
             href="/"
+            className="px-6 py-3 rounded-full bg-primary text-white border border-primary hover:bg-white hover:text-primary transition"
           >
             Back to Home
           </Link>
+
           <Link
-            className="w-35 sm:w-40 h-10 sm:h-12 text-sm max-md:px-4 flex justify-center items-center rounded-full bg-transparent text-primary hover:bg-primary border border-primary hover:border-primary hover:text-white transition"
             href="/contact-us"
+            className="px-6 py-3 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition"
           >
             Contact Us
           </Link>
         </div>
       </div>
-    </div>
+
+      {/* CONTACT SECTION */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <ContactInfo />
+        <ContactForm />
+      </div>
+
+      <div className="space-y-10">
+        <div className="flex flex-wrap justify-center gap-3">
+          {(Object.keys(PRODUCT_TABS) as TabKey[]).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-6 py-3 rounded-md font-medium transition
+                ${
+                  activeTab === tab
+                    ? 'bg-primary text-white'
+                    : 'bg-secondary text-black hover:bg-primary hover:text-white'
+                }`}
+            >
+              {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            </button>
+          ))}
+        </div>
+
+        {loading ? (
+          <p className="text-center">Loading products...</p>
+        ) : filteredProducts.length === 0 ? (
+          <p className="text-center text-gray-500">
+            No products found for this category.
+          </p>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+            {filteredProducts.map((product) => (
+              <Card key={product.id} card={product} />
+            ))}
+          </div>
+        )}
+
+        <div className="flex justify-center">
+          <Link
+            href={
+              activeTab === 'blinds'
+                ? '/made-to-measure-blinds/'
+                : activeTab === 'curtains'
+                  ? '/made-to-measure-curtains/'
+                  : activeTab === 'shutters'
+                    ? '/shutters-range/'
+                    : `/${activeTab}/`
+            }
+            className="text-primary bg-secondary font-semibold rounded-md py-3 px-6 hover:opacity-70 transition"
+          >
+            View More
+          </Link>
+        </div>
+      </div>
+    </Container>
   );
 }

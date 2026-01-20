@@ -36,14 +36,14 @@ const Detail = ({ data }: DetailProps) => {
           </div>
         ))}
       </div>
-      <div className="fixed bottom-0 left-0 w-full bg-[#F2F2F2] px-4 py-2 z-50 block sm:hidden">
+      {/* <div className="fixed bottom-0 left-0 w-full bg-[#F2F2F2] px-4 py-2 z-50 block sm:hidden">
         <Link
           href="/request-appointment/"
           className="bg-secondary text-primary mt-2 mb-2 py-4 px-4 md:py-3 md:px-6 font-semibold block rounded-md w-full font-roboto text-center hover:opacity-65"
         >
           Book A Free Visit
         </Link>
-      </div>
+      </div> */}
 
       <p className='px-2' suppressHydrationWarning>
         <span className='font-roboto blog-content'
