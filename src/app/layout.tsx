@@ -3,7 +3,7 @@ import PathnameWrapper from 'components/Pathcomponent/PathnameWrapper';
 import 'app/globals.css';
 import { Providers } from './Providers';
 // import { GoogleTagManager } from '@next/third-parties/google';
-// import Script from 'next/script';
+import Script from 'next/script';
 import Head from 'next/head';
 import { futura, roboto } from 'font/font';
 import { Metadata } from 'next';
@@ -65,7 +65,7 @@ export default function RootLayout({
         /> */}
 
         {/* End Google Tag Manager */}
-        {/* <Script id="google-translate-init" strategy="afterInteractive">
+        <Script id="google-translate-init" strategy="afterInteractive">
           {`
           function googleTranslateElementInit() {
             new google.translate.TranslateElement({
@@ -75,12 +75,12 @@ export default function RootLayout({
             }, 'google_translate_element');
           }
         `}
-        </Script> */}
+        </Script>
 
-        {/* <Script
+        <Script
           src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
           strategy="afterInteractive"
-        /> */}
+        />
 
         {/* Microsoft Clarity */}
         {/* <Script
