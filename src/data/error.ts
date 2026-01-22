@@ -45,3 +45,23 @@ export const PRODUCT_TABS = {
     'washable',
   ],
 } as const;
+
+
+export const featuresInfo = [
+  {
+    icon: '/assets/detailpage/fast1.png',
+    text: 'Fast 1-2 day installation. Zero Hassle.',
+  },
+  {
+    icon: '/assets/detailpage/fast2.png',
+    text: 'Free Home Consultation',
+  },
+  {
+    icon: '/assets/detailpage/fast3.png',
+    text: 'Dedicated After Sales Care, 7 days a week',
+  },
+  {
+    icon: '/assets/detailpage/fast5.png',
+    text: '5 years warranty',
+  },
+];

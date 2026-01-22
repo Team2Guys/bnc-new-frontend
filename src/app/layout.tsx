@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import PathnameWrapper from 'components/Pathcomponent/PathnameWrapper';
 import 'app/globals.css';
 import { Providers } from './Providers';
-// import { GoogleTagManager } from '@next/third-parties/google';
+import { GoogleTagManager } from '@next/third-parties/google';
 import Script from 'next/script';
 import Head from 'next/head';
 import { futura, roboto } from 'font/font';
@@ -52,7 +52,7 @@ export default function RootLayout({
           />
         </Head>
         {/* Google Tag Manager  */}
-        {/* <Script
+        <Script
           id="google-tag-manager"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
@@ -62,7 +62,7 @@ export default function RootLayout({
           'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
           })(window,document,'script','dataLayer','GTM-MNXTN5B');`,
           }}
-        /> */}
+        />
 
         {/* End Google Tag Manager */}
         <Script id="google-translate-init" strategy="afterInteractive">
@@ -83,7 +83,7 @@ export default function RootLayout({
         />
 
         {/* Microsoft Clarity */}
-        {/* <Script
+        <Script
           id="clarity-script"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
@@ -95,9 +95,9 @@ export default function RootLayout({
               })(window, document, "clarity", "script", "pwun6b0806");
             `,
           }}
-        /> */}
+        />
         {/* Meta Pixel */}
-        {/* <Script
+        <Script
           id="meta-pixel"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
@@ -114,14 +114,14 @@ export default function RootLayout({
               fbq('track', 'PageView');
             `,
           }}
-        /> */}
+        />
         {/* Google Analytics Script */}
-        {/* <Script
+        <Script
           strategy="lazyOnload"
           src="https://www.googletagmanager.com/gtag/js?id=G-2W1CWBHDRB"
-        /> */}
+        />
 
-        {/* <Script id="google-analytics" strategy="lazyOnload">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
@@ -129,10 +129,10 @@ export default function RootLayout({
 
           gtag('config', 'G-2W1CWBHDRB');
         `}
-        </Script> */}
+        </Script>
 
         <body className={`${roboto.variable} ${futura.variable}`}>
-          {/* <noscript>
+           <noscript>
             <iframe
               src="https://www.googletagmanager.com/ns.html?id=GTM-MNXTN5B"
               height="0"
@@ -153,7 +153,7 @@ export default function RootLayout({
               width="0"
               style={{ display: 'none', visibility: 'hidden' }}
             ></iframe>
-          </noscript> */}
+          </noscript>
 
           <PathnameWrapper>{children}</PathnameWrapper>
         </body>

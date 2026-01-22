@@ -11,7 +11,7 @@ import { showAlert } from "utils/Alert";
 import axios from "axios";
 import { IContactForm } from "types/general";
 
-const ContactForm = () => {
+const ContactForm = ({textareaClass}:{textareaClass?:string}) => {
   const [sameAsPhone, setSameAsPhone] = useState(false);
   const [loading, setloading] = useState(false)
 
@@ -105,7 +105,7 @@ const ContactusPost = async (values:IContactForm) => {
             <Input label="Address*" name="address" placeholder="Tap to write" />
           </div>
           <div className="sm:col-span-2">
-            <Input label="Message" name="message" textarea placeholder="Tap to write" />
+            <Input label="Message" name="message" textareaClass={textareaClass} textarea placeholder="Tap to write" />
           </div>
           <div className="sm:col-span-2 mx-auto">
             <button
