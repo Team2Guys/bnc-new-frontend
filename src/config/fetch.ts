@@ -98,20 +98,10 @@ export const fetchBlogs = async () => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/blogs`,
       {
-        next: { tags: ["blogs"] },
+        next: { tags: ["blogList"] },
       }
     );
-    const text = await response.text();
-    if (!response.ok) {
-      console.error("API returned error:", text);
-      return [];
-    }
-    if (text.startsWith("<")) {
-      console.error("HTML returned instead of JSON:", text);
-      return [];
-    }
-
-    return JSON.parse(text);
+    return response.json();
   } catch (error) {
     console.log("fetchBlogs error:", error);
     return [];

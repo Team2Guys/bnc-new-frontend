@@ -1,6 +1,6 @@
 export const PRODUCT_TABS = {
   blinds: [
-    'blackout-roller-blinds',
+    'roller-blinds/blackout-roller-blinds',
     'motorised-blinds',
     'zipline-blinds',
     'living-room-blinds',
@@ -26,10 +26,16 @@ export const PRODUCT_TABS = {
   ],
 
   shutters: [
-    'plantation-shutters',
-    'wooden-shutters',
-    'security-shutters',
-    'roller-shutters',
+    'dark-wood-shutters',
+    'full-height-shutters',
+    'bay-window-shutters',
+    'living-room-shutters',
+    'special-shape-shutters',
+    'tracked-window-shutters',
+    'bedroom-shutters',
+    'bathroom-shutters',
+    'dark-wood-shutters',
+    'bi-fold-shutters',
   ],
 
   commercial: [
@@ -38,4 +44,4 @@ export const PRODUCT_TABS = {
     'fire-retardant',
     'washable',
   ],
-};
+} as const;

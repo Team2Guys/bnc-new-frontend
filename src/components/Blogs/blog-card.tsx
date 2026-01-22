@@ -30,17 +30,15 @@ const BlogCard = ({ blog, iscategory }: { blog: BlogInfo; iscategory?: boolean }
           }
         }}
       >
-        <div className="relative h-72">
+        <div className="relative h-auto max-h-[350px] aspect-square w-full">
           <Image
             src={blog.posterImage?.imageUrl}
             fill
             priority
             fetchPriority="high"
-            className="rounded-lg object-cover"
+            className="rounded-lg"
             alt={blog.Images_Alt_Text || "blog image"}
-            sizes="(max-width: 640px) 100vw, 
-                  (max-width: 1024px) 50vw, 
-                  33vw"
+            sizes="100vw"
           />
         </div>
         <h3 className={`text-lg xl:text-2xl font-futura font-bold text-primary text-center px-2  ${iscategory ? "pb-2" : ""}`}>
