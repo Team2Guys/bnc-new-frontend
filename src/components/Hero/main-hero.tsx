@@ -14,7 +14,6 @@ const MainHero = () => {
           fill
           priority
           fetchPriority="high"
-          quality={100}
           className="aspect-video"
           sizes="100vw"
         />
