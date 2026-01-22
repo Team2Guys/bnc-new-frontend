@@ -2,20 +2,20 @@ import { ReactNode } from 'react';
 import PathnameWrapper from 'components/Pathcomponent/PathnameWrapper';
 import 'app/globals.css';
 import { Providers } from './Providers';
-import { GoogleTagManager } from '@next/third-parties/google';
-import Script from 'next/script';
+// import { GoogleTagManager } from '@next/third-parties/google';
+// import Script from 'next/script';
 import Head from 'next/head';
-import { futura, roboto} from 'font/font';
+import { futura, roboto } from 'font/font';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   robots: {
-    index: true,
-    follow: true,
+    index: false,
+    follow: false,
     nocache: true,
     googleBot: {
-      index: true,
-      follow: true,
+      index: false,
+      follow: false,
       noimageindex: true,
       'max-video-preview': -1,
       'max-image-preview': 'large',
@@ -32,30 +32,41 @@ export default function RootLayout({
   return (
     <Providers>
       <html lang="en">
-
         <Head>
-          <link rel="preload" as="image" href="/assets/images/hero_image.avif" fetchPriority="high" type="image/avif" />
+          <link
+            rel="preload"
+            as="image"
+            href="/assets/images/hero_image.avif"
+            fetchPriority="high"
+            type="image/avif"
+          />
 
-          <meta name="google-site-verification" content="BHdLyJ6iGcCDMwuouc5ShyVcSBwHyip3ZtBxeKTEoVg" />
+          <meta
+            name="google-site-verification"
+            content="BHdLyJ6iGcCDMwuouc5ShyVcSBwHyip3ZtBxeKTEoVg"
+          />
           {/* Pinterest Domain Verification */}
-          <meta name="p:domain_verify" content="58b7c4e018c53c00c2cd12f5f838b47a" />
+          <meta
+            name="p:domain_verify"
+            content="58b7c4e018c53c00c2cd12f5f838b47a"
+          />
         </Head>
         {/* Google Tag Manager  */}
-        <Script
+        {/* <Script
           id="google-tag-manager"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
-          __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
           j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
           })(window,document,'script','dataLayer','GTM-MNXTN5B');`,
           }}
-        />
+        /> */}
 
         {/* End Google Tag Manager */}
-        <Script id="google-translate-init" strategy="afterInteractive">
-        {`
+        {/* <Script id="google-translate-init" strategy="afterInteractive">
+          {`
           function googleTranslateElementInit() {
             new google.translate.TranslateElement({
               pageLanguage: 'en',
@@ -64,19 +75,17 @@ export default function RootLayout({
             }, 'google_translate_element');
           }
         `}
-        </Script>
+        </Script> */}
 
-        <Script
+        {/* <Script
           src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
           strategy="afterInteractive"
-        />
+        /> */}
 
         {/* Microsoft Clarity */}
-        <Script
-
+        {/* <Script
           id="clarity-script"
           strategy="afterInteractive"
-
           dangerouslySetInnerHTML={{
             __html: `
               (function(c,l,a,r,i,t,y){
@@ -86,9 +95,9 @@ export default function RootLayout({
               })(window, document, "clarity", "script", "pwun6b0806");
             `,
           }}
-        />
+        /> */}
         {/* Meta Pixel */}
-        <Script
+        {/* <Script
           id="meta-pixel"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
@@ -105,27 +114,25 @@ export default function RootLayout({
               fbq('track', 'PageView');
             `,
           }}
-        />
+        /> */}
         {/* Google Analytics Script */}
-        <Script
+        {/* <Script
           strategy="lazyOnload"
-
           src="https://www.googletagmanager.com/gtag/js?id=G-2W1CWBHDRB"
-        />
+        /> */}
 
-        <Script id="google-analytics"
-          strategy="lazyOnload">
-        {`
+        {/* <Script id="google-analytics" strategy="lazyOnload">
+          {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
 
           gtag('config', 'G-2W1CWBHDRB');
         `}
-        </Script>
+        </Script> */}
 
         <body className={`${roboto.variable} ${futura.variable}`}>
-          <noscript>
+          {/* <noscript>
             <iframe
               src="https://www.googletagmanager.com/ns.html?id=GTM-MNXTN5B"
               height="0"
@@ -133,16 +140,22 @@ export default function RootLayout({
               style={{ display: 'none', visibility: 'hidden' }}
             />
           </noscript>
-          <div id="google_translate_element" className="translate-widget hidden"></div>
+          <div
+            id="google_translate_element"
+            className="translate-widget hidden"
+          ></div>
 
           <GoogleTagManager gtmId="GTM-MNXTN5B" />
-          <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MNXTN5B"
-            height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe></noscript>
+          <noscript>
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-MNXTN5B"
+              height="0"
+              width="0"
+              style={{ display: 'none', visibility: 'hidden' }}
+            ></iframe>
+          </noscript> */}
 
-
-          <PathnameWrapper>
-            {children}
-          </PathnameWrapper>
+          <PathnameWrapper>{children}</PathnameWrapper>
         </body>
       </html>
     </Providers>
