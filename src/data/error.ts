@@ -56,6 +56,6 @@ export const featuresInfo = [
   },
   {
     icon: '/assets/detailpage/fast5.png',
-    text: '5 years warranty',
+    text: 'We provide a solid 5-year warranty',
   },
 ];

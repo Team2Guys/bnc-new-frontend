@@ -15,14 +15,10 @@ export default async function NotFound() {
       <div className="grid grid-cols-12 gap-6 items-center">
         <div className="space-y-4 text-center col-span-12 md:col-span-7">
           <h2 className="text-3xl sm:text-5xl lg:text-7xl font-bold">
-            Product Not Found
+            We Appreciate Your Choice!
           </h2>
           <p className="text-2xl">
-            Thank you for your patience. You are very special to us!
-          </p>
-          <p className="text-primary">
-            Your desired product either has been sold or is in the publishing
-            process.
+            Premium Blinds & Curtains, Expertly Measured, Crafted, and Installed at Your Doorstep. Book a free visit now.
           </p>
 
           <div className="flex justify-center gap-4">
