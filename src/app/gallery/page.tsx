@@ -11,8 +11,8 @@ const GalleryPage = async () => {
   const products = await fetchProducts();
   return (
     <>
-    <Breadcrumb title="Gallery" bradcrumbtitle='Gallery'/>
-    <Gallery products={products} />
+      <Breadcrumb title="Gallery" bradcrumbtitle="Gallery" />
+      <Gallery products={products} />
     </>
   );
 };

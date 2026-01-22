@@ -1,50 +1,59 @@
-"use client";
-import { useState, useCallback, useMemo } from "react";
-import Image from "next/image";
-import { IProduct } from "types/types";
-import Container from "components/Res-usable/Container/Container";
-import Link from "next/link";
-import { getPath } from "utils/helperFunctions";
-import { orderedTitles } from "data/new-data";
-import SlickSlider from "components/Blogs/slick-slider";
-import "style/home-slider.css"
+'use client';
+import { useState, useCallback, useMemo } from 'react';
+import Image from 'next/image';
+import { IProduct } from 'types/types';
+import Container from 'components/Res-usable/Container/Container';
+import Link from 'next/link';
+import { getPath } from 'utils/helperFunctions';
+import { orderedTitles } from 'data/new-data';
+import SlickSlider from 'components/Blogs/slick-slider';
+import 'style/home-slider.css';
 
 const SellerSlider = ({ products }: { products: IProduct[] }) => {
   const [isDragging, setIsDragging] = useState(false);
-  const filteredAndSortedProducts = useMemo(() =>
+  const filteredAndSortedProducts = useMemo(
+    () =>
       orderedTitles
         .map((title) =>
-          products.find((item) => item.title.toLowerCase() === title.toLowerCase())
+          products.find(
+            (item) => item.title.toLowerCase() === title.toLowerCase(),
+          ),
         )
         .filter(Boolean) as IProduct[],
-    [products]
+    [products],
   );
-  const sliderSettings = useMemo(() => ({
-    dots: false,
-    infinite: true,
-    slidesToShow: 4,
-    swipeToSlide: true,
-    arrows: true,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: { slidesToShow: 3 },
-      },
-      {
-        breakpoint: 800,
-        settings: { slidesToShow: 2 },
-      },
-      {
-        breakpoint: 640,
-        settings: { slidesToShow: 1.1, arrows: false },
-      },
-    ],
-  }), []);
-  const handleMouseUp = useCallback((item: IProduct) => {
-    if (!isDragging) {
-      window.location.href = getPath(item);
-    }
-  }, [isDragging]);
+  const sliderSettings = useMemo(
+    () => ({
+      dots: false,
+      infinite: true,
+      slidesToShow: 4,
+      swipeToSlide: true,
+      arrows: true,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: { slidesToShow: 3 },
+        },
+        {
+          breakpoint: 800,
+          settings: { slidesToShow: 2 },
+        },
+        {
+          breakpoint: 640,
+          settings: { slidesToShow: 1.1, arrows: false },
+        },
+      ],
+    }),
+    [],
+  );
+  const handleMouseUp = useCallback(
+    (item: IProduct) => {
+      if (!isDragging) {
+        window.location.href = getPath(item);
+      }
+    },
+    [isDragging],
+  );
 
   return (
     <div className="bg-secondary-foreground py-5">
@@ -70,29 +79,33 @@ const SellerSlider = ({ products }: { products: IProduct[] }) => {
               >
                 <div className="bg-white overflow-hidden rounded-xl md:p-3 cursor-pointer">
                   <div className="relative w-full h-[280px] md:h-[345px] rounded-xl">
-                <Image
-               src={item.posterImage.imageUrl.replace('/upload/', '/upload/w_296,f_auto,q_auto/')}
-              alt={item.title}
-              fill
-              className="rounded-xl"
-              />
-
-                </div>
+                    <Image
+                      src={item.posterImage.imageUrl.replace(
+                        '/upload/',
+                        '/upload/w_296,f_auto,q_auto/',
+                      )}
+                      alt={item.title}
+                      fill
+                      className="rounded-xl"
+                    />
+                  </div>
                   <div className="pt-4 text-center md:text-start sm:px-0 px-2">
                     <h3 className="font-medium mb-1 text-primary text-base md:text-xl font-futura min-h-14">
                       {item.title}
                     </h3>
                     <p className="text-secondary font-normal md:text-base text-base font-roboto sm:px-0 px-4">
-                      <span className="text-primary">Starting from</span>{" "}
-                      {item.posterImage.pricing} AED{" "}
-                      <span className="text-primary text-base">{item.posterImage.dimentions}</span>
+                      <span className="text-primary">Starting from</span>{' '}
+                      {item.posterImage.pricing} AED{' '}
+                      <span className="text-primary text-base">
+                        {item.posterImage.dimentions}
+                      </span>
                     </p>
                   </div>
                 </div>
               </div>
             </div>
           ))}
-      </SlickSlider>
+        </SlickSlider>
         <Link
           href="/request-appointment/"
           className="bg-secondary font-roboto text-primary font-medium text-lg sm:text-[14px] px-5 py-2 rounded-lg block w-fit text-center mx-auto mt-5 hover:opacity-65"

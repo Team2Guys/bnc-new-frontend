@@ -15,13 +15,19 @@ const AboutUsCompo: FC<Props> = ({ blocks }) => {
 
         const TextContent = (
           <div className="space-y-4">
-            <p className={`${block.shortHeadingSize} font-medium text-[24px] text-primary font-roboto`}>
+            <p
+              className={`${block.shortHeadingSize} font-medium text-[24px] text-primary font-roboto`}
+            >
               {block.shortHeading}
             </p>
-            <h2 className={`${block.mainHeadingSize} font-bold font-futura text-[40px] text-primary`}>
+            <h2
+              className={`${block.mainHeadingSize} font-bold font-futura text-[40px] text-primary`}
+            >
               {block.mainHeading}
             </h2>
-            <p className={`${block.contentSize} text-[#3E3F42] text-base font-roboto`}>
+            <p
+              className={`${block.contentSize} text-[#3E3F42] text-base font-roboto`}
+            >
               {block.content}
             </p>
           </div>

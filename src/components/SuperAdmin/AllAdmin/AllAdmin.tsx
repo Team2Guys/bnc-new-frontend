@@ -1,10 +1,10 @@
-"use client"
+'use client';
 
 import React, { useState } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import Loader from 'components/Loader/Loader';
 import { FaEdit } from 'react-icons/fa';
-import { admin_del_handler} from 'config/fetch';
+import { admin_del_handler } from 'config/fetch';
 import { ADMINS_PROPS } from 'types/interfaces';
 import revalidateTag from 'components/ServerActons/ServerAction';
 import Table from 'components/ui/Table';
@@ -15,9 +15,9 @@ function Admins({ setselecteMenu, setedit_admins, adminsData }: ADMINS_PROPS) {
   const handleDelete = async (id: string) => {
     try {
       setDelLoading(id);
-      console.log(id, "id")
-      await admin_del_handler(id)
-      revalidateTag('admins')
+      console.log(id, 'id');
+      await admin_del_handler(id);
+      revalidateTag('admins');
     } catch (error) {
       console.error('Error deleting admin:', error);
     } finally {
@@ -25,8 +25,7 @@ function Admins({ setselecteMenu, setedit_admins, adminsData }: ADMINS_PROPS) {
     }
   };
 
-
-  console.log(adminsData, "adminsData")
+  console.log(adminsData, 'adminsData');
 
   const columns = [
     {
@@ -150,9 +149,7 @@ function Admins({ setselecteMenu, setedit_admins, adminsData }: ADMINS_PROPS) {
       title: 'Add Blog',
       key: 'canAddBlog',
 
-      render: (record: any) => (
-        <span>{record.canAddBlog ? 'Yes' : 'No'}</span>
-      ),
+      render: (record: any) => <span>{record.canAddBlog ? 'Yes' : 'No'}</span>,
     },
     {
       title: 'Del Blog',
@@ -166,76 +163,65 @@ function Admins({ setselecteMenu, setedit_admins, adminsData }: ADMINS_PROPS) {
       title: 'Edit Blog',
       key: 'canEditBlog',
 
-      render: (record: any) => (
-        <span>{record.canEditBlog ? 'Yes' : 'No'}</span>
-      ),
+      render: (record: any) => <span>{record.canEditBlog ? 'Yes' : 'No'}</span>,
     },
 
     {
       title: 'Actions',
       key: 'actions',
 
-      render: (record: any) =>
-      (
+      render: (record: any) => (
         <>
-          <div className='flex gap-3'>
+          <div className="flex gap-3">
             <FaEdit
               className="cursor-pointer text-red-500"
               size={20}
               onClick={(e) => {
                 e.stopPropagation();
-                const { password, ...withoutPassowrd } = record
-                setedit_admins(withoutPassowrd); setselecteMenu(" ")
-                console.log(password, "password")
-                console.log(password, "password")
+                const { password, ...withoutPassowrd } = record;
+                setedit_admins(withoutPassowrd);
+                setselecteMenu(' ');
+                console.log(password, 'password');
+                console.log(password, 'password');
               }}
             />
 
-            {
-              delLoading === record._id ? <div><Loader color="#fff" /></div> : (
-                <RiDeleteBin6Line
-                  className="cursor-pointer text-red-500"
-                  size={20}
-                  onClick={() => handleDelete(record.id)}
-                />
-              )
-          
-            }
-
+            {delLoading === record._id ? (
+              <div>
+                <Loader color="#fff" />
+              </div>
+            ) : (
+              <RiDeleteBin6Line
+                className="cursor-pointer text-red-500"
+                size={20}
+                onClick={() => handleDelete(record.id)}
+              />
+            )}
           </div>
         </>
-      )
+      ),
     },
   ];
-
-
 
   return (
     <div>
       {
-        (
-          <>
-            <div className="flex justify-between mb-4 items-center text-black dark:text-white ">
-              <p></p>
-              <div>
-                <button
-                  onClick={() => setselecteMenu('Add Admin')}
-                  className=" bg-secondary text-white rounded-md   lg:p-2 md:p-2"
-                >
-                  Add new Admin
-                </button>
-              </div>
+        <>
+          <div className="flex justify-between mb-4 items-center text-black dark:text-white ">
+            <p></p>
+            <div>
+              <button
+                onClick={() => setselecteMenu('Add Admin')}
+                className=" bg-secondary text-white rounded-md   lg:p-2 md:p-2"
+              >
+                Add new Admin
+              </button>
             </div>
-    
-              <Table
-                data={adminsData}
-                columns={columns}
-                rowKey="id"
-              />
-          
-          </>
-        )}
+          </div>
 
+          <Table data={adminsData} columns={columns} rowKey="id" />
+        </>
+      }
     </div>
   );
 }

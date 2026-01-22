@@ -9,7 +9,7 @@ function Skeleton({
       className={`animate-pulse rounded-md bg-slate-400 dark:bg-slate-800 ${className}`}
       {...props}
     />
-  )
+  );
 }
 
-export { Skeleton }
+export { Skeleton };

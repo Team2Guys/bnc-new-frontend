@@ -12,17 +12,20 @@ interface IProductProps {
   filteredItems?: IProduct[];
 }
 
-const Product = ({
-  categories,
-  filteredItems,
-}: IProductProps) => {
+const Product = ({ categories, filteredItems }: IProductProps) => {
   return (
     <>
-      <Breadcrumb title={categories.breakcrum || categories.title} categorylink={categories.categoryCustomUrl}/>
-      <CategoryHero Data={categories}/>
-      <AllProduct title={categories.productpageHeading} Products={filteredItems || []} />
+      <Breadcrumb
+        title={categories.breakcrum || categories.title}
+        categorylink={categories.categoryCustomUrl}
+      />
+      <CategoryHero Data={categories} />
+      <AllProduct
+        title={categories.productpageHeading}
+        Products={filteredItems || []}
+      />
       <StepWrapper />
-      <Faqs Data={categories}/>
+      <Faqs Data={categories} />
     </>
   );
 };

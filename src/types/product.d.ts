@@ -1,17 +1,17 @@
-import React from "react";
-import { ICategory, IProduct } from "./types";
+import React from 'react';
+import { ICategory, IProduct } from './types';
 
-export interface BreadcrumbProps  {
-    title?: string;
-    image?: string;
-    slug?: string;
-    subcategory?: string;
-    categorylink?: string;
-    productLink?:string
-    image?:string
-    bradcrumbtitle?:string
-  }
- export interface CategoryProps {
+export interface BreadcrumbProps {
+  title?: string;
+  image?: string;
+  slug?: string;
+  subcategory?: string;
+  categorylink?: string;
+  productLink?: string;
+  image?: string;
+  bradcrumbtitle?: string;
+}
+export interface CategoryProps {
   Data?: ICategory;
   Products: IProduct[];
   title?: string;
@@ -26,11 +26,11 @@ export interface AccordionProps {
   items?: AccordionItem[];
 }
 export interface VideoItem {
-  imageUrl?: string
-  public_id?: string
-   src: string
-  title: string
-  poster?:string
+  imageUrl?: string;
+  public_id?: string;
+  src: string;
+  title: string;
+  poster?: string;
 }
 
 export interface DetailProps {
@@ -50,6 +50,6 @@ export type TabDataItem = {
 export interface InfoTabsProps {
   tabData?: TabDataItem[];
   isHome?: boolean;
-  isCurtainsCategory?: boolean
-  isMotorisedCategory?: boolean
+  isCurtainsCategory?: boolean;
+  isMotorisedCategory?: boolean;
 }

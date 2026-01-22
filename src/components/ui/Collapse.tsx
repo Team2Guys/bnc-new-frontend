@@ -1,6 +1,6 @@
-"use client";
-import React, { useState } from "react";
-import { IoIosArrowDown } from "react-icons/io";
+'use client';
+import React, { useState } from 'react';
+import { IoIosArrowDown } from 'react-icons/io';
 
 interface CollapseItem {
   key: string;
@@ -15,14 +15,16 @@ interface CollapseProps {
 }
 
 const Collapse = ({ items, defaultActiveKey, className }: CollapseProps) => {
-  const [activeKey, setActiveKey] = useState<string | null>(defaultActiveKey || null);
+  const [activeKey, setActiveKey] = useState<string | null>(
+    defaultActiveKey || null,
+  );
 
   const toggle = (key: string) => {
     setActiveKey(activeKey === key ? null : key);
   };
 
   return (
-    <div className={`flex flex-col gap-1 ${className || ""}`}>
+    <div className={`flex flex-col gap-1 ${className || ''}`}>
       {items.map((item) => {
         const isActive = activeKey === item.key;
 
@@ -41,14 +43,14 @@ const Collapse = ({ items, defaultActiveKey, className }: CollapseProps) => {
               <IoIosArrowDown
                 size={22}
                 className={`text-primary opacity-60 transform transition-transform duration-300 ${
-                  isActive ? "rotate-180" : "rotate-0"
+                  isActive ? 'rotate-180' : 'rotate-0'
                 }`}
               />
             </button>
 
             <div
               className={`overflow-hidden transition-all duration-300 px-4 ${
-                isActive ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+                isActive ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
               }`}
             >
               <div className="my-4">{item.children}</div>

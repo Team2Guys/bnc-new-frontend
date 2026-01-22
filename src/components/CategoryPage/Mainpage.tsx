@@ -1,6 +1,8 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
-const ProductDetail = dynamic(() => import('components/ProductDetailPage/product-detail'));
+const ProductDetail = dynamic(
+  () => import('components/ProductDetailPage/product-detail'),
+);
 import Script from 'next/script';
 import { PRODUCS_PROPS } from 'types/interfaces';
 const SubCategory = dynamic(() => import('./SubCategory'));
@@ -8,7 +10,7 @@ const SubCategory = dynamic(() => import('./SubCategory'));
 const Mainpage = ({
   filteredProduct,
   filteredSubCategory,
-  matchedSchema
+  matchedSchema,
 }: PRODUCS_PROPS) => {
   return (
     <>
@@ -29,10 +31,12 @@ const Mainpage = ({
           />
         </>
       ) : (
-          filteredProduct &&
+        filteredProduct && (
           <ProductDetail
             title={`${filteredProduct?.title}`}
-            filterProduct={filteredProduct} />       
+            filterProduct={filteredProduct}
+          />
+        )
       )}
     </>
   );

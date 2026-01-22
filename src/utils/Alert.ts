@@ -1,4 +1,4 @@
-import Swal, { SweetAlertIcon } from "sweetalert2";
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 
 interface AlertOptions {
   title: string;
@@ -10,8 +10,8 @@ interface AlertOptions {
 
 export const showAlert = ({
   title,
-  text = "",
-  icon = "success",
+  text = '',
+  icon = 'success',
   timer = 2000,
   showCloseButton = true,
 }: AlertOptions) => {
@@ -24,6 +24,6 @@ export const showAlert = ({
     timer,
     timerProgressBar: true,
     toast: true,
-    position: "top-end",
+    position: 'top-end',
   });
 };

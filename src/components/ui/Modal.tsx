@@ -19,7 +19,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
   title,
   showCloseButton = true,
   width = 'max-w-4xl',
-  isheader
+  isheader,
 }) => {
   if (!open) return null;
 
@@ -44,20 +44,18 @@ const CustomModal: React.FC<CustomModalProps> = ({
         className={`bg-secondary-foreground shadow-xl w-full relative z-50 rounded-lg m-2 ${getWidthClass()}`}
         onClick={(e) => e.stopPropagation()}
       >
-        {
-          isheader ? 
-
-           showCloseButton && (
-              <button
-                onClick={onClose}
-                className="bg-secondary rounded-full text-white absolute -top-2 md:-top-3 -right-1 md:-right-3"
-              >
-                <IoCloseSharp  className="w-7 h-7" />
-              </button>
-            )
-          :
-           <div className="px-6 py-6 border-b border-gray-200 relative shadow-md">
-            <div className="text-xl font-semibold">{title ?? " "}</div>
+        {isheader ? (
+          showCloseButton && (
+            <button
+              onClick={onClose}
+              className="bg-secondary rounded-full text-white absolute -top-2 md:-top-3 -right-1 md:-right-3"
+            >
+              <IoCloseSharp className="w-7 h-7" />
+            </button>
+          )
+        ) : (
+          <div className="px-6 py-6 border-b border-gray-200 relative shadow-md">
+            <div className="text-xl font-semibold">{title ?? ' '}</div>
             {showCloseButton && (
               <button
                 onClick={onClose}
@@ -67,8 +65,8 @@ const CustomModal: React.FC<CustomModalProps> = ({
               </button>
             )}
           </div>
-        }
-         
+        )}
+
         <div>{children}</div>
       </div>
     </div>

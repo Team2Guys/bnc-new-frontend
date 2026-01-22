@@ -11,9 +11,17 @@ export const metadata = generateMetadata(metaData.contact);
 const ContactUs = () => {
   return (
     <>
-      <Breadcrumb image="/assets/images/contact-us/contact-us.webp" title="Contact Blinds and Curtains Dubai" bradcrumbtitle="Contact Us" imageclassName="object-center"/>
+      <Breadcrumb
+        image="/assets/images/contact-us/contact-us.webp"
+        title="Contact Blinds and Curtains Dubai"
+        bradcrumbtitle="Contact Us"
+        imageclassName="object-center"
+      />
       <Container className="my-8 md:my-10 space-y-4 md:space-y-8">
-        <h2 className="text-2xl lg:text-5xl font-semibold font-futura text-primary text-center"> Tell Us More </h2>
+        <h2 className="text-2xl lg:text-5xl font-semibold font-futura text-primary text-center">
+          {' '}
+          Tell Us More{' '}
+        </h2>
         <p className="text-base px-1 lg:px-8 text-primary text-center">
           Get some rough window measurements and call us on{' '}
           <Link
@@ -29,7 +37,7 @@ const ContactUs = () => {
           using the contact form below.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-1">
-          <ContactInfo/>
+          <ContactInfo />
           <ContactForm />
         </div>
       </Container>

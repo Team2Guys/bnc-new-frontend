@@ -18,8 +18,7 @@ const Blogging = () => {
         const filtered =
           blog?.sort(
             (a: BlogInfo, b: BlogInfo) =>
-              new Date(b.createdAt).getTime() -
-              new Date(a.createdAt).getTime()
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
           ) || [];
 
         setBlogs(filtered);
@@ -33,7 +32,7 @@ const Blogging = () => {
     loadBlogs();
   }, []);
 
-  if (loading) return null; 
+  if (loading) return null;
 
   return <Blogs blogs={blogs} />;
 };

@@ -1,6 +1,6 @@
-import TableSkeleton from "components/Dashboard/Tables/TableSkelton";
-import React, { useState } from "react";
-import { TableProps } from "types/types";
+import TableSkeleton from 'components/Dashboard/Tables/TableSkelton';
+import React, { useState } from 'react';
+import { TableProps } from 'types/types';
 
 interface ExtendedTableProps<T> extends TableProps<T> {
   loading?: boolean; // 👈 extra prop
@@ -10,7 +10,7 @@ const Table = <T,>({
   data,
   columns,
   rowKey,
-  emptyMessage = "No data found",
+  emptyMessage = 'No data found',
   loading = false, // 👈 default false
 }: ExtendedTableProps<T>) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,7 +27,8 @@ const Table = <T,>({
   };
 
   const getPaginationNumbers = () => {
-    const windowWidth = typeof window !== "undefined" ? window.innerWidth : 1024;
+    const windowWidth =
+      typeof window !== 'undefined' ? window.innerWidth : 1024;
     const maxButtons = windowWidth < 640 ? 3 : 5;
     const pages: (number | string)[] = [];
 
@@ -44,9 +45,9 @@ const Table = <T,>({
         end = totalPages - 1;
       }
 
-      if (start > 2) pages.push("...");
+      if (start > 2) pages.push('...');
       for (let i = start; i <= end; i++) pages.push(i);
-      if (end < totalPages - 1) pages.push("...");
+      if (end < totalPages - 1) pages.push('...');
       pages.push(totalPages);
     }
 
@@ -117,7 +118,7 @@ const Table = <T,>({
           </button>
 
           {getPaginationNumbers().map((page, i) =>
-            page === "..." ? (
+            page === '...' ? (
               <span key={i} className="px-3 py-1 dark:text-white">
                 ...
               </span>
@@ -127,13 +128,13 @@ const Table = <T,>({
                 onClick={() => goToPage(Number(page))}
                 className={`px-3 py-1 border rounded ${
                   currentPage === page
-                    ? "bg-gray-200 dark:text-black"
-                    : "dark:text-white"
+                    ? 'bg-gray-200 dark:text-black'
+                    : 'dark:text-white'
                 }`}
               >
                 {page}
               </button>
-            )
+            ),
           )}
 
           <button

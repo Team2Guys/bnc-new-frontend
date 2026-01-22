@@ -1,5 +1,5 @@
-import Container from 'components/Res-usable/Container/Container'
-import React from 'react'
+import Container from 'components/Res-usable/Container/Container';
+import React from 'react';
 
 const SimpleStepsSkeleton = () => {
   return (
@@ -31,7 +31,7 @@ const SimpleStepsSkeleton = () => {
         </div>
       </div>
     </Container>
-  )
-}
+  );
+};
 
-export default SimpleStepsSkeleton
+export default SimpleStepsSkeleton;

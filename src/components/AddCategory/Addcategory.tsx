@@ -30,9 +30,14 @@ const FormLayout = ({
   const { confirm, modalNode } = useConfirmModal();
   let token = admin_token ? admin_token : super_admin_token;
 
-  let CategoryName = editCategory && editCategory.title ? { name: editCategory.title, description: editCategory.description } : null;
+  let CategoryName =
+    editCategory && editCategory.title
+      ? { name: editCategory.title, description: editCategory.description }
+      : null;
   let CategorImageUrl = editCategory && editCategory.posterImage;
-  const [posterimageUrl, setposterimageUrl] = useState<any[] | undefined>(CategorImageUrl ? [CategorImageUrl] : undefined);
+  const [posterimageUrl, setposterimageUrl] = useState<any[] | undefined>(
+    CategorImageUrl ? [CategorImageUrl] : undefined,
+  );
 
   const [bannerImageUrl, setBannerImageUrl] = useState<any[] | undefined>(
     editCategory && editCategory.bannerImage && [editCategory.bannerImage],
@@ -55,15 +60,15 @@ const FormLayout = ({
     Canonical_Tag: editCategory?.Canonical_Tag ?? '',
     Meta_Title: editCategory?.Meta_Title ?? '',
     Meta_description: editCategory?.Meta_description ?? '',
-    productCustomUrl: editCategory?.productCustomUrl ?? "",
-    categoryCustomUrl: editCategory?.categoryCustomUrl ?? "",
+    productCustomUrl: editCategory?.productCustomUrl ?? '',
+    categoryCustomUrl: editCategory?.categoryCustomUrl ?? '',
     status: editCategory?.status || 'PUBLISHED',
-
   });
-  const formikValuesRef = useRef<editCategoryNameType | Category>(editCategoryName ? editCategoryName : categoryInitialValues);
+  const formikValuesRef = useRef<editCategoryNameType | Category>(
+    editCategoryName ? editCategoryName : categoryInitialValues,
+  );
 
   const onSubmit = async (values: Category, { resetForm }: any) => {
-
     try {
       setloading(true);
       let posterImageUrl = posterimageUrl && posterimageUrl[0];
@@ -80,9 +85,10 @@ const FormLayout = ({
       let addProductUrl = updateFlag
         ? `/api/categories/updateCategory/${editCategory.id} `
         : null;
-      let url = `${process.env.NEXT_PUBLIC_BASE_URL}${updateFlag ? addProductUrl : '/api/categories/AddCategory'
-        }`;
-      console.log(newValue, 'newValue')
+      let url = `${process.env.NEXT_PUBLIC_BASE_URL}${
+        updateFlag ? addProductUrl : '/api/categories/AddCategory'
+      }`;
+      console.log(newValue, 'newValue');
       if (updateFlag) {
         await axios.put(url, newValue, {
           headers: {
@@ -99,14 +105,14 @@ const FormLayout = ({
       setloading(false);
       showAlert({
         title: updateFlag
-          ? "Category has been successfully updated 🎉"
-          : "Category has been successfully created 🎉",
-        icon: "success",
+          ? 'Category has been successfully updated 🎉'
+          : 'Category has been successfully created 🎉',
+        icon: 'success',
       });
       updateFlag ? seteditCategory(null) : null;
       setposterimageUrl(undefined);
       setBannerImageUrl(undefined);
-      revalidateTag("categories")
+      revalidateTag('categories');
       resetForm();
       setMenuType('Categories');
     } catch (err) {
@@ -117,7 +123,6 @@ const FormLayout = ({
 
   console.log(setEditCategoryName, 'setEditCategoryName');
   const hasUnsavedChanges = (): boolean => {
-
     let isPosterChanged: boolean;
     let isBannerChanged: boolean;
 
@@ -129,7 +134,7 @@ const FormLayout = ({
         !oldPoster || !newPoster
           ? oldPoster !== newPoster
           : oldPoster.public_id !== newPoster.public_id ||
-          (oldPoster.altText ?? '') !== (newPoster.altText ?? '');
+            (oldPoster.altText ?? '') !== (newPoster.altText ?? '');
 
       const oldBanner = editCategory?.bannerImage;
       const newBanner = bannerImageUrl?.[0];
@@ -138,15 +143,17 @@ const FormLayout = ({
         !oldBanner || !newBanner
           ? oldBanner !== newBanner
           : oldBanner.public_id !== newBanner.public_id ||
-          (oldBanner.altText ?? '') !== (newBanner.altText ?? '');
+            (oldBanner.altText ?? '') !== (newBanner.altText ?? '');
     } else {
       // Adding mode (initially no images)
       isPosterChanged = !!posterimageUrl && posterimageUrl.length > 0;
       isBannerChanged = !!bannerImageUrl && bannerImageUrl.length > 0;
     }
 
-    const isFormChanged = JSON.stringify(editCategoryName) !== JSON.stringify(formikValuesRef.current);
-    return (isPosterChanged || isBannerChanged || isFormChanged)
+    const isFormChanged =
+      JSON.stringify(editCategoryName) !==
+      JSON.stringify(formikValuesRef.current);
+    return isPosterChanged || isBannerChanged || isFormChanged;
   };
 
   useEffect(() => {
@@ -162,13 +169,15 @@ const FormLayout = ({
       if (hasUnsavedChanges()) {
         window.history.pushState(null, '', window.location.href);
         confirm({
-          title: "Unsaved Changes",
-          content: "You have unsaved changes. Do you want to discard them?",
-          okText: "Discard Changes",
-          cancelText: "Cancel",
-          onOk: () => setMenuType("Categories"),
+          title: 'Unsaved Changes',
+          content: 'You have unsaved changes. Do you want to discard them?',
+          okText: 'Discard Changes',
+          cancelText: 'Cancel',
+          onOk: () => setMenuType('Categories'),
         });
-      } else { setMenuType("All Categories"); }
+      } else {
+        setMenuType('All Categories');
+      }
     };
 
     window.addEventListener('beforeunload', handleBeforeUnload);
@@ -184,16 +193,16 @@ const FormLayout = ({
   const handleBack = () => {
     if (hasUnsavedChanges()) {
       confirm({
-        title: "Unsaved Changes",
-        content: "You have unsaved changes. Do you want to discard them?",
-        okText: "Discard Changes",
-        cancelText: "Cancel",
-        onOk: () => setMenuType("Categories"),
+        title: 'Unsaved Changes',
+        content: 'You have unsaved changes. Do you want to discard them?',
+        okText: 'Discard Changes',
+        cancelText: 'Cancel',
+        onOk: () => setMenuType('Categories'),
       });
       return;
     }
 
-    setMenuType("Categories");
+    setMenuType('Categories');
   };
   return (
     <>
@@ -216,9 +225,7 @@ const FormLayout = ({
                   <div className="rounded-md gap-3 flex justify-evenly dark:bg-lightdark mb-3 mt-3">
                     <div className="upload_image dark:border-strokedark dark:bg-lightdark w-6/12">
                       <div className="inputs_heading border-stroke dark:border-strokedark ">
-                        <h3 className="label_main">
-                          Add Category Images
-                        </h3>
+                        <h3 className="label_main">Add Category Images</h3>
                       </div>
                       {posterimageUrl && posterimageUrl.length > 0 ? (
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
@@ -252,9 +259,12 @@ const FormLayout = ({
                                   value={item.altText}
                                   placeholder="altText"
                                   className="border rounded p-2 focus:outline-none mt-1"
-                                  onChange={(val) =>setposterimageUrl((prev) => updateAltText(prev, index, val))}
+                                  onChange={(val) =>
+                                    setposterimageUrl((prev) =>
+                                      updateAltText(prev, index, val),
+                                    )
+                                  }
                                 />
-
                               </div>
                             );
                           })}
@@ -262,108 +272,110 @@ const FormLayout = ({
                       ) : (
                         <Imageupload setposterimageUrl={setposterimageUrl} />
                       )}
-                      <div className='border p-2'>
-                      <div className="rounded-sm border border-stroke dark:border-strokedark dark:bg-lightdark ">
-                        <div className="inputs_heading border-stroke dark:border-strokedark">
-                          <h3 className="label_main">
-                            Banner Images for Blogs
-                          </h3>
-                        </div>
-                        {bannerImageUrl && bannerImageUrl.length > 0 ? (
-                          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
-                            {bannerImageUrl.map((item: any, index) => {
-                              return (
-                                <div key={index}>
-                                  <div className="relative group rounded-lg overflow-hidden shadow-md bg-white  transform transition-transform duration-300 hover:scale-105">
-                                    <div className="absolute top-1 right-1 invisible group-hover:visible errorColor bg-white rounded-full">
-                                      <RxCross2
-                                        className="cursor-pointer text-red-500 hover:text-red-700"
-                                        size={17}
-                                        onClick={() => {
-                                          ImageRemoveHandler(
-                                            item.public_id,
-                                            setBannerImageUrl,
-                                          );
-                                        }}
+                      <div className="border p-2">
+                        <div className="rounded-sm border border-stroke dark:border-strokedark dark:bg-lightdark ">
+                          <div className="inputs_heading border-stroke dark:border-strokedark">
+                            <h3 className="label_main">
+                              Banner Images for Blogs
+                            </h3>
+                          </div>
+                          {bannerImageUrl && bannerImageUrl.length > 0 ? (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+                              {bannerImageUrl.map((item: any, index) => {
+                                return (
+                                  <div key={index}>
+                                    <div className="relative group rounded-lg overflow-hidden shadow-md bg-white  transform transition-transform duration-300 hover:scale-105">
+                                      <div className="absolute top-1 right-1 invisible group-hover:visible errorColor bg-white rounded-full">
+                                        <RxCross2
+                                          className="cursor-pointer text-red-500 hover:text-red-700"
+                                          size={17}
+                                          onClick={() => {
+                                            ImageRemoveHandler(
+                                              item.public_id,
+                                              setBannerImageUrl,
+                                            );
+                                          }}
+                                        />
+                                      </div>
+                                      <Image
+                                        key={index}
+                                        className="object-cover w-full h-full"
+                                        width={300}
+                                        height={200}
+                                        src={item.imageUrl}
+                                        alt={`productImage-${index}`}
                                       />
                                     </div>
-                                    <Image
-                                      key={index}
-                                      className="object-cover w-full h-full"
-                                      width={300}
-                                      height={200}
-                                      src={item.imageUrl}
-                                      alt={`productImage-${index}`}
+                                    <ImageTextInput
+                                      name="altText"
+                                      value={item.altText}
+                                      placeholder="Alt text"
+                                      onChange={(val) =>
+                                        setBannerImageUrl((prev) =>
+                                          updateAltText(prev, index, val),
+                                        )
+                                      }
+                                      className="border rounded p-2 focus:outline-none mt-1"
                                     />
                                   </div>
-                                  <ImageTextInput
-                                    name="altText"
-                                    value={item.altText}
-                                    placeholder="Alt text"
-                                    onChange={(val) =>setBannerImageUrl((prev) => updateAltText(prev, index, val))}
-                                    className='border rounded p-2 focus:outline-none mt-1'
-                                  />
+                                );
+                              })}
+                            </div>
+                          ) : (
+                            <Imageupload
+                              setposterimageUrl={setBannerImageUrl}
+                            />
+                          )}
+                        </div>
+                        <div className=" flex flex-wrap md:flex-nowrap gap-4 mt-3">
+                          <Input
+                            label="Category Title"
+                            name="name"
+                            placeholder="Title"
+                          />
+                          <Input
+                            label="Top Heading"
+                            name="topHeading"
+                            placeholder="Top Heading"
+                          />
+                        </div>
+                        <div className="mt-2">
+                          <Input
+                            label="Product Page Heading"
+                            name="productpageHeading"
+                            placeholder="Product Page Heading"
+                          />
+                        </div>
 
-                                </div>
-                              );
-                            })}
-                          </div>
-                        ) : (
-                          <Imageupload setposterimageUrl={setBannerImageUrl} />
-                        )}
-                      </div>
-                      <div className=' flex flex-wrap md:flex-nowrap gap-4 mt-3'>
+                        <div className="flex gap-4 mt-2 flex-wrap md:flex-nowrap">
+                          <Input
+                            label="breadCrumb"
+                            name="breakcrum"
+                            placeholder="breadCrumb"
+                          />
+                          <Input
+                            label="productCustomUrl"
+                            name="productCustomUrl"
+                            placeholder="productCustomUrl"
+                          />
+                          <Input
+                            label="categoryCustomUrl"
+                            name="categoryCustomUrl"
+                            placeholder="categoryCustomUrl"
+                          />
+                        </div>
                         <Input
-                          label="Category Title"
-                          name="name"
-                          placeholder="Title"
+                          label="Faq Heading"
+                          name="faqHeading"
+                          placeholder="Faq Heading"
                         />
-                        <Input
-                          label="Top Heading"
-                          name="topHeading"
-                          placeholder="Top Heading"
-                        />
                       </div>
-                      <div className='mt-2'>
-                        <Input
-                        label="Product Page Heading"
-                        name="productpageHeading"
-                        placeholder="Product Page Heading"
-                      />
-                      </div>
+                    </div>
 
-                      <div className='flex gap-4 mt-2 flex-wrap md:flex-nowrap'>
-                        <Input
-                          label="breadCrumb"
-                          name="breakcrum"
-                          placeholder="breadCrumb"
-                        />
-                        <Input
-                          label="productCustomUrl"
-                          name="productCustomUrl"
-                          placeholder="productCustomUrl"
-                        />
-                        <Input
-                          label="categoryCustomUrl"
-                          name="categoryCustomUrl"
-                          placeholder="categoryCustomUrl"
-                        />
-                      </div>
-                      <Input
-                        label="Faq Heading"
-                        name="faqHeading"
-                        placeholder="Faq Heading"
-                      />
-                    </div>
-                    </div>
-                    
                     <div className="flex flex-col space-y-3 mt-2 p-2 w-1/2 border">
-
                       <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                         <div className="inputs_heading border-stroke dark:border-strokedark">
-                          <h3 className="label_main">
-                            FAQS
-                          </h3>
+                          <h3 className="label_main">FAQS</h3>
                         </div>
                         <div className="flex flex-col gap-4 p-4">
                           <FieldArray name="faqs">
@@ -412,9 +424,7 @@ const FormLayout = ({
 
                       <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                         <div className="inputs_heading border-stroke dark:border-strokedark">
-                          <h3 className="label_main">
-                            heading checks
-                          </h3>
+                          <h3 className="label_main">heading checks</h3>
                         </div>
                         <div className="flex flex-col gap-4 p-4">
                           <FieldArray name="headingchecks">
@@ -493,12 +503,8 @@ const FormLayout = ({
                 </div>
               </div>
 
-
               <div className="flex justify-start">
-                <button
-                  type="submit"
-                  className="dashboard_primary_button "
-                >
+                <button type="submit" className="dashboard_primary_button ">
                   {loading ? <Loader color="#fff" /> : 'Submit'}
                 </button>
               </div>

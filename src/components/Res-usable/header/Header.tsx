@@ -1,17 +1,17 @@
-"use client";
-import { useEffect, useState, useCallback } from "react";
-import dynamic from "next/dynamic";
-import Navbar from "./Navbar";
-import { MdOutlineStarPurple500 } from "react-icons/md";
-import { ratings } from "data/new-data";
-import StarRatingBar from "components/Hero/StarRatingBar";
-import Link from "next/link";
-import { IREVIEWS } from "types/general";
-import { fetchReviews } from "config/fetch";
-import WhatsIcon from "components/Icons/Whatsapp";
-import Callbutton from "components/callbutton/callbutton";
-const CustomModal = dynamic(() => import("components/ui/Modal"));
-const TestimonialCard = dynamic(() => import("../Cards/TestimonialCard"));
+'use client';
+import { useEffect, useState, useCallback } from 'react';
+import dynamic from 'next/dynamic';
+import Navbar from './Navbar';
+import { MdOutlineStarPurple500 } from 'react-icons/md';
+import { ratings } from 'data/new-data';
+import StarRatingBar from 'components/Hero/StarRatingBar';
+import Link from 'next/link';
+import { IREVIEWS } from 'types/general';
+import { fetchReviews } from 'config/fetch';
+import WhatsIcon from 'components/Icons/Whatsapp';
+import Callbutton from 'components/callbutton/callbutton';
+const CustomModal = dynamic(() => import('components/ui/Modal'));
+const TestimonialCard = dynamic(() => import('../Cards/TestimonialCard'));
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -55,31 +55,36 @@ const Header = () => {
         </span>
       </div>
 
-      <CustomModal open={open} onClose={handleModalClose} title={
-        <div className="flex justify-between items-center flex-col space-y-2">
-          <p className="font-bold font-futura text-xl">
-            Let customers speak for us
-          </p>
-          <div className="flex justify-center items-center">
-            {Array.from({ length: 5 }, (_, index) => (
-              <MdOutlineStarPurple500
-                key={index}
-                className="text-[#FFD800] text-30"
-              />
-            ))}
+      <CustomModal
+        open={open}
+        onClose={handleModalClose}
+        title={
+          <div className="flex justify-between items-center flex-col space-y-2">
+            <p className="font-bold font-futura text-xl">
+              Let customers speak for us
+            </p>
+            <div className="flex justify-center items-center">
+              {Array.from({ length: 5 }, (_, index) => (
+                <MdOutlineStarPurple500
+                  key={index}
+                  className="text-[#FFD800] text-30"
+                />
+              ))}
+            </div>
+            <p className="font-roboto text-primary">Based on 794 reviews</p>
           </div>
-          <p className="font-roboto text-primary">Based on 794 reviews</p>
-        </div>
-      }>
+        }
+      >
         <div className="space-y-3 mt-5">
           <div className="mt-2 max-w-64 md:max-w-md mx-auto">
-            {ratings && ratings.map((r) => (
-              <StarRatingBar
-                key={r.rating}
-                rating={r.rating}
-                percentage={r.percent}
-              />
-            ))}
+            {ratings &&
+              ratings.map((r) => (
+                <StarRatingBar
+                  key={r.rating}
+                  rating={r.rating}
+                  percentage={r.percent}
+                />
+              ))}
           </div>
 
           <Link
@@ -94,9 +99,10 @@ const Header = () => {
         </div>
 
         <div className="w-full max-h-[30vh] xsm:max-h-[40vh] xs:max-h-[350px] lg:max-h-[440px] overflow-y-scroll p-4 xsm:p-6 grid grid-cols-1 xs:grid-cols-2 gap-0 xs:gap-4">
-          {visibleReviews && visibleReviews.map((item, index) => (
-            <TestimonialCard key={index} testimonial={item} />
-          ))}
+          {visibleReviews &&
+            visibleReviews.map((item, index) => (
+              <TestimonialCard key={index} testimonial={item} />
+            ))}
         </div>
 
         {reviews.length > 4 && (

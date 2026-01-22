@@ -34,7 +34,7 @@ const PathnameWrapper = ({ children }: { children: ReactNode }) => {
           pathname === '/faqs/' ||
           pathname === '/about-us/' ||
           isNotFoundPage ||
-          pathname === "/_not-found" || 
+          pathname === '/_not-found' ||
           splited_urls.includes('request-appointment') ||
           splited_urls.includes('estimator') ||
           splited_urls.includes('contact-us') ? null : (

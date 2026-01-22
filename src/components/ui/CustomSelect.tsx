@@ -8,13 +8,16 @@ const CustomSelect = ({
   value,
   onChange,
   instanceId,
-  className = ''
-}:CustomSelectProps) => {
+  className = '',
+}: CustomSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (selectRef.current && !selectRef.current.contains(event.target as Node)) {
+      if (
+        selectRef.current &&
+        !selectRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -25,7 +28,7 @@ const CustomSelect = ({
     };
   }, []);
 
-  const selectedOption = options.find(option => option.value === value);
+  const selectedOption = options.find((option) => option.value === value);
 
   const handleSelect = (option: Option) => {
     onChange(option);
@@ -39,14 +42,16 @@ const CustomSelect = ({
         onClick={() => setIsOpen(!isOpen)}
         tabIndex={0}
         onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
+          if (e.key === 'Enter' || e.key === ' ') {
             setIsOpen(!isOpen);
             e.preventDefault();
-        }
+          }
         }}
-        >
+      >
         <div className="flex justify-between items-center">
-          <span className={`text-lg ${selectedOption ? ' text-black' : 'text-gray-400'}`}>
+          <span
+            className={`text-lg ${selectedOption ? ' text-black' : 'text-gray-400'}`}
+          >
             {selectedOption ? selectedOption.label : 'Select...'}
           </span>
           <span
@@ -65,7 +70,9 @@ const CustomSelect = ({
                 <div
                   key={option.value}
                   className={`p-3 cursor-pointer hover:bg-secondary hover:text-white transition-colors ${
-                    option.value === value ? 'bg-secondary text-white font-medium' : ''
+                    option.value === value
+                      ? 'bg-secondary text-white font-medium'
+                      : ''
                   }`}
                   onClick={() => handleSelect(option)}
                   onKeyDown={(e) => {
@@ -80,7 +87,9 @@ const CustomSelect = ({
                 </div>
               ))
             ) : (
-              <div className="p-3 text-primary text-center">No options found</div>
+              <div className="p-3 text-primary text-center">
+                No options found
+              </div>
             )}
           </div>
         </div>

@@ -23,12 +23,11 @@ import { editCategoryProps, editSubCategoryNameType } from 'types/category';
 import { useConfirmModal } from 'components/ui/useConfirmModal';
 import { showAlert } from 'utils/Alert';
 
-
 const FormLayout = ({
   seteditCategory,
   editCategory,
   setMenuType,
-  categoriesList
+  categoriesList,
 }: editCategoryProps) => {
   const admin_token = Cookies.get('2guysAdminToken');
   const super_admin_token = Cookies.get('superAdminToken');
@@ -38,32 +37,39 @@ const FormLayout = ({
   let CategoryName =
     editCategory && editCategory.title
       ? {
-        title: editCategory.title,
-        description: editCategory.description,
-        short_description: editCategory.short_description,
-        CategoryId: editCategory.CategoryId || undefined,
-        Images_Alt_Text: editCategory?.Images_Alt_Text,
-        Canonical_Tag: editCategory?.Canonical_Tag,
-        Meta_Title: editCategory?.Meta_Title,
-        Meta_description: editCategory?.Meta_description,
-        status: editCategory?.status,
-        customUrl: editCategory?.customUrl,
-      }
+          title: editCategory.title,
+          description: editCategory.description,
+          short_description: editCategory.short_description,
+          CategoryId: editCategory.CategoryId || undefined,
+          Images_Alt_Text: editCategory?.Images_Alt_Text,
+          Canonical_Tag: editCategory?.Canonical_Tag,
+          Meta_Title: editCategory?.Meta_Title,
+          Meta_description: editCategory?.Meta_description,
+          status: editCategory?.status,
+          customUrl: editCategory?.customUrl,
+        }
       : null;
   let CategorImageUrl = editCategory && editCategory.posterImage;
-  const [posterimageUrl, setposterimageUrl] = useState<any[] | undefined>(CategorImageUrl ? [CategorImageUrl] : undefined);
-  const [bannerImageUrl, setBannerImageUrl] = useState<any[] | undefined>(editCategory && editCategory.bannerImage && [editCategory.bannerImage],
+  const [posterimageUrl, setposterimageUrl] = useState<any[] | undefined>(
+    CategorImageUrl ? [CategorImageUrl] : undefined,
+  );
+  const [bannerImageUrl, setBannerImageUrl] = useState<any[] | undefined>(
+    editCategory && editCategory.bannerImage && [editCategory.bannerImage],
   );
   const [loading, setloading] = useState<boolean>(false);
-  const [editCategoryName, setEditCategoryName] = useState<editSubCategoryNameType | ISUBCATEGORY | undefined>(CategoryName ? CategoryName : subcategoryInitialValues);
+  const [editCategoryName, setEditCategoryName] = useState<
+    editSubCategoryNameType | ISUBCATEGORY | undefined
+  >(CategoryName ? CategoryName : subcategoryInitialValues);
   const { confirm, modalNode } = useConfirmModal();
-  const formikValuesRef = useRef<editSubCategoryNameType | ISUBCATEGORY>(editCategoryName ? editCategoryName : subcategoryInitialValues);
+  const formikValuesRef = useRef<editSubCategoryNameType | ISUBCATEGORY>(
+    editCategoryName ? editCategoryName : subcategoryInitialValues,
+  );
   const onSubmit = async (values: ISUBCATEGORY, { resetForm }: any) => {
     console.log(values, 'values');
     if (values.CategoryId === undefined) {
       return showAlert({
-        title: "Select parent category 😟",
-        icon: "warning",
+        title: 'Select parent category 😟',
+        icon: 'warning',
       });
     }
     try {
@@ -73,8 +79,8 @@ const FormLayout = ({
       if (!posterImageUrl) {
         setloading(false);
         return showAlert({
-          title: "Make sure Image is selected😴",
-          icon: "warning",
+          title: 'Make sure Image is selected😴',
+          icon: 'warning',
         });
       }
       console.log(bannerImage + 'bannerImage');
@@ -91,8 +97,9 @@ const FormLayout = ({
       let addProductUrl = updateFlag
         ? `/api/categories/updatesubCategory/${editCategory.id}`
         : null;
-      let url = `${process.env.NEXT_PUBLIC_BASE_URL}${updateFlag ? addProductUrl : '/api/categories/Addsubcategory'
-        }`;
+      let url = `${process.env.NEXT_PUBLIC_BASE_URL}${
+        updateFlag ? addProductUrl : '/api/categories/Addsubcategory'
+      }`;
 
       let response;
       if (updateFlag) {
@@ -116,9 +123,9 @@ const FormLayout = ({
 
       showAlert({
         title: updateFlag
-          ? "Sub Category has been successfully Updated 🎉"
-          : "Sub Category has been successfully Created 🎉",
-        icon: "success",
+          ? 'Sub Category has been successfully Updated 🎉'
+          : 'Sub Category has been successfully Created 🎉',
+        icon: 'success',
       });
       setloading(false);
 
@@ -133,9 +140,7 @@ const FormLayout = ({
     }
   };
 
-
   const hasUnsavedChanges = (): boolean => {
-
     let isPosterChanged: boolean;
     let isBannerChanged: boolean;
 
@@ -147,25 +152,32 @@ const FormLayout = ({
         !oldPoster || !newPoster
           ? oldPoster !== newPoster
           : oldPoster.public_id !== newPoster.public_id ||
-          (oldPoster.altText ?? '') !== (newPoster.altText ?? '');
+            (oldPoster.altText ?? '') !== (newPoster.altText ?? '');
 
       const oldBanner = editCategory?.bannerImage;
       const newBanner = bannerImageUrl ? bannerImageUrl?.[0] : null;
-      console.log(newBanner)
+      console.log(newBanner);
       isBannerChanged =
         !oldBanner || !newBanner
           ? oldBanner !== newBanner
           : oldBanner.public_id !== newBanner.public_id ||
-          (oldBanner.altText ?? '') !== (newBanner.altText ?? '');
+            (oldBanner.altText ?? '') !== (newBanner.altText ?? '');
     } else {
       // Adding mode (initially no images)
       isPosterChanged = !!posterimageUrl && posterimageUrl.length > 0;
       isBannerChanged = !!bannerImageUrl && bannerImageUrl.length > 0;
     }
 
-    const isFormChanged = JSON.stringify(editCategoryName) !== JSON.stringify(formikValuesRef.current);
-    console.log(editCategory.bannerImage, 'formikValuesRef.current', bannerImageUrl, isBannerChanged)
-    return (isPosterChanged || isBannerChanged || isFormChanged)
+    const isFormChanged =
+      JSON.stringify(editCategoryName) !==
+      JSON.stringify(formikValuesRef.current);
+    console.log(
+      editCategory.bannerImage,
+      'formikValuesRef.current',
+      bannerImageUrl,
+      isBannerChanged,
+    );
+    return isPosterChanged || isBannerChanged || isFormChanged;
   };
 
   useEffect(() => {
@@ -181,13 +193,15 @@ const FormLayout = ({
       if (hasUnsavedChanges()) {
         window.history.pushState(null, '', window.location.href);
         confirm({
-          title: "Unsaved Changes",
-          content: "You have unsaved changes. Do you want to discard them?",
-          okText: "Discard Changes",
-          cancelText: "Cancel",
-          onOk: () => setMenuType("Categories"),
+          title: 'Unsaved Changes',
+          content: 'You have unsaved changes. Do you want to discard them?',
+          okText: 'Discard Changes',
+          cancelText: 'Cancel',
+          onOk: () => setMenuType('Categories'),
         });
-      } else { setMenuType("All Categories"); }
+      } else {
+        setMenuType('All Categories');
+      }
     };
 
     window.addEventListener('beforeunload', handleBeforeUnload);
@@ -203,16 +217,16 @@ const FormLayout = ({
   const handleBack = () => {
     if (hasUnsavedChanges()) {
       confirm({
-        title: "Unsaved Changes",
-        content: "You have unsaved changes. Do you want to discard them?",
-        okText: "Discard Changes",
-        cancelText: "Cancel",
-        onOk: () => setMenuType("Categories"),
+        title: 'Unsaved Changes',
+        content: 'You have unsaved changes. Do you want to discard them?',
+        okText: 'Discard Changes',
+        cancelText: 'Cancel',
+        onOk: () => setMenuType('Categories'),
       });
       return;
     }
 
-    setMenuType("Categories");
+    setMenuType('Categories');
   };
 
   return (
@@ -235,15 +249,13 @@ const FormLayout = ({
                   <div className="rounded-md flex gap-3 w-full bg-white  dark:bg-lightdark dark:bg-black dark:text-white mt-3">
                     <div className="upload_image dark:border-strokedark dark:bg-lightdark w-full">
                       <div className="inputs_heading border-stroke dark:border-strokedark ">
-                        <h3 className="label_main">
-                          Add Sub Category Images
-                        </h3>
+                        <h3 className="label_main">Add Sub Category Images</h3>
                       </div>
                       {posterimageUrl && posterimageUrl.length > 0 ? (
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4  dark:bg-black dark:text-white dark:bg-lightdark dark:border-white">
                           {posterimageUrl.map((item: any, index) => {
                             return (
-                              <div key={index} className='w-full'>
+                              <div key={index} className="w-full">
                                 <div className="relative group rounded-lg overflow-hidden shadow-md bg-white transform transition-transform duration-300 hover:scale-105">
                                   <div className="absolute top-1 right-1 invisible group-hover:visible text-red bg-white rounded-full ">
                                     <RxCross2
@@ -270,10 +282,13 @@ const FormLayout = ({
                                   name="altText"
                                   value={item.altText}
                                   placeholder="Alt text"
-                                  onChange={(val) =>setposterimageUrl((prev) => updateAltText(prev, index, val))}
-                                  className='border rounded p-2 focus:outline-none mt-1'
+                                  onChange={(val) =>
+                                    setposterimageUrl((prev) =>
+                                      updateAltText(prev, index, val),
+                                    )
+                                  }
+                                  className="border rounded p-2 focus:outline-none mt-1"
                                 />
-
                               </div>
                             );
                           })}
@@ -282,85 +297,85 @@ const FormLayout = ({
                         <Imageupload setposterimageUrl={setposterimageUrl} />
                       )}
 
-                       <div className="upload_image dark:border-strokedark dark:bg-lightdark w-full">
-                      <div className="inputs_heading border-stroke dark:border-strokedark ">
-                        <h3 className="label_main">
-                          Banner Image
-                        </h3>
-                      </div>
-                      {bannerImageUrl && bannerImageUrl.length > 0 ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4  dark:bg-black dark:text-white dark:bg-lightdark dark:border-white">
-                          {bannerImageUrl.map((item: any, index) => {
-                            return (
-                              <div key={index}>
-                                <div className="relative group rounded-lg overflow-hidden shadow-md bg-white transform transition-transform duration-300 hover:scale-105">
-                                  <div className="absolute top-1 right-1 invisible group-hover:visible text-red bg-white rounded-full ">
-                                    <RxCross2
-                                      className="cursor-pointer text-red-500 hover:text-red-700"
-                                      size={17}
-                                      onClick={() => {
-                                        ImageRemoveHandler(
-                                          item.public_id,
-                                          setBannerImageUrl,
-                                        );
-                                      }}
+                      <div className="upload_image dark:border-strokedark dark:bg-lightdark w-full">
+                        <div className="inputs_heading border-stroke dark:border-strokedark ">
+                          <h3 className="label_main">Banner Image</h3>
+                        </div>
+                        {bannerImageUrl && bannerImageUrl.length > 0 ? (
+                          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4  dark:bg-black dark:text-white dark:bg-lightdark dark:border-white">
+                            {bannerImageUrl.map((item: any, index) => {
+                              return (
+                                <div key={index}>
+                                  <div className="relative group rounded-lg overflow-hidden shadow-md bg-white transform transition-transform duration-300 hover:scale-105">
+                                    <div className="absolute top-1 right-1 invisible group-hover:visible text-red bg-white rounded-full ">
+                                      <RxCross2
+                                        className="cursor-pointer text-red-500 hover:text-red-700"
+                                        size={17}
+                                        onClick={() => {
+                                          ImageRemoveHandler(
+                                            item.public_id,
+                                            setBannerImageUrl,
+                                          );
+                                        }}
+                                      />
+                                    </div>
+                                    <Image
+                                      key={index}
+                                      className="object-cover w-full h-full"
+                                      width={300}
+                                      height={200}
+                                      src={item.imageUrl}
+                                      alt={`productImage-${index}`}
                                     />
                                   </div>
-                                  <Image
-                                    key={index}
-                                    className="object-cover w-full h-full"
-                                    width={300}
-                                    height={200}
-                                    src={item.imageUrl}
-                                    alt={`productImage-${index}`}
+                                  <ImageTextInput
+                                    name="altText"
+                                    value={item.altText}
+                                    placeholder="Alt text"
+                                    onChange={(val) =>
+                                      setBannerImageUrl((prev) =>
+                                        updateAltText(prev, index, val),
+                                      )
+                                    }
+                                    className="border rounded p-2 focus:outline-none mt-1"
                                   />
                                 </div>
-                                <ImageTextInput
-                                  name="altText"
-                                  value={item.altText}
-                                  placeholder="Alt text"
-                                  onChange={(val) =>setBannerImageUrl((prev) => updateAltText(prev, index, val))}
-                                  className='border rounded p-2 focus:outline-none mt-1'
-                                />
-                              </div>
-                            );
-                          })}
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <Imageupload setposterimageUrl={setBannerImageUrl} />
+                        )}
+                        <div className="p-2">
+                          <Input
+                            label="Sub Category Name"
+                            name="title"
+                            placeholder="Sub Category Name"
+                          />
+                          <Input
+                            label="Category Description"
+                            name="description"
+                            placeholder="Description"
+                          />
+                          <Input
+                            label="Custom Url"
+                            name="customUrl"
+                            placeholder="Custom Url"
+                          />
+                          <Input
+                            label="Category Short Description"
+                            name="short_description"
+                            placeholder="Short Description"
+                            textarea
+                          />
                         </div>
-                      ) : (
-                        <Imageupload setposterimageUrl={setBannerImageUrl} />
-                      )}
-                      <div className='p-2'>
-                           <Input
-                        label="Sub Category Name"
-                        name="title"
-                        placeholder="Sub Category Name"
-                      />
-                      <Input
-                        label="Category Description"
-                        name="description"
-                        placeholder="Description"
-                      />
-                      <Input
-                        label="Custom Url"
-                        name="customUrl"
-                        placeholder="Custom Url"
-                      />
-                      <Input
-                        label="Category Short Description"
-                        name="short_description"
-                        placeholder="Short Description"
-                        textarea
-                      />
                       </div>
                     </div>
-                    </div>
-                   
 
-                    <div className="flex flex-col gap-5 mt-2 border w-full p-2">                 
-
+                    <div className="flex flex-col gap-5 mt-2 border w-full p-2">
                       <div>
                         <div className="inputs_heading border-stroke dark:border-strokedark">
-                         <h3 className="label_main">
+                          <h3 className="label_main">
                             Select Parent Category (atleat one)
                           </h3>
                         </div>
@@ -374,8 +389,10 @@ const FormLayout = ({
                               label={category.title}
                               onChange={() =>
                                 formik.setFieldValue(
-                                  "CategoryId",
-                                  formik.values.CategoryId === category.id ? null : category.id
+                                  'CategoryId',
+                                  formik.values.CategoryId === category.id
+                                    ? null
+                                    : category.id,
                                 )
                               }
                             />
@@ -394,7 +411,6 @@ const FormLayout = ({
                           name="Canonical_Tag"
                           placeholder="Canonical Tag"
                         />
-
                       </div>
                       <Input
                         label="Meta Description"
@@ -408,7 +424,6 @@ const FormLayout = ({
                         name="Images_Alt_Text"
                         placeholder="Images Alt Text"
                       />
-
                     </div>
                   </div>
                 </div>

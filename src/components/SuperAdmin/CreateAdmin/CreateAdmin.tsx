@@ -12,9 +12,14 @@ import Checkbox from 'components/ui/Checkbox';
 import { CheckboxProps } from 'types/types';
 import { showAlert } from 'utils/Alert';
 
-const CreateAdmin = ({ setselecteMenu, edit_admins, setedit_admins }: createAdmin) => {
-  const [formData, setFormData] = useState<formDataTypes>(edit_admins ? edit_admins : intitalValues);
-
+const CreateAdmin = ({
+  setselecteMenu,
+  edit_admins,
+  setedit_admins,
+}: createAdmin) => {
+  const [formData, setFormData] = useState<formDataTypes>(
+    edit_admins ? edit_admins : intitalValues,
+  );
 
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>();
@@ -38,26 +43,31 @@ const CreateAdmin = ({ setselecteMenu, edit_admins, setedit_admins }: createAdmi
       let token = Cookies.get('superAdminToken');
       if (!token) return null;
 
-      let paswordFlag = edit_admins ? false : !formData.password
+      let paswordFlag = edit_admins ? false : !formData.password;
 
       if (!formData.fullname || !formData.email || paswordFlag)
         throw new Error('Fields are required');
 
       setLoading(true);
-      let url = edit_admins ? `/api/admins/editAdmin/${edit_admins.id}` : `/api/admins/add-admin`
-      let method_type: "post" | "put" = edit_admins ? "put" : "post"
+      let url = edit_admins
+        ? `/api/admins/editAdmin/${edit_admins.id}`
+        : `/api/admins/add-admin`;
+      let method_type: 'post' | 'put' = edit_admins ? 'put' : 'post';
 
-      let response: any = await axios[method_type](`${process.env.NEXT_PUBLIC_BASE_URL}${url}`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      let response: any = await axios[method_type](
+        `${process.env.NEXT_PUBLIC_BASE_URL}${url}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      },
       );
-      revalidateTag('admins')
+      revalidateTag('admins');
       console.log(response, 'response');
       showAlert({
-        title: `Admin has been successfully ${edit_admins ? "Edited" : "Created"}`,
-        icon: "success",
+        title: `Admin has been successfully ${edit_admins ? 'Edited' : 'Created'}`,
+        icon: 'success',
       });
       setFormData(intitalValues);
     } catch (err: any) {
@@ -94,10 +104,7 @@ const CreateAdmin = ({ setselecteMenu, edit_admins, setedit_admins }: createAdmi
       canDeleteBlog: true,
       canEditBlog: true,
     });
-
-
   };
-
 
   const handleClearAllPermissions = () => {
     setFormData({
@@ -187,7 +194,9 @@ const CreateAdmin = ({ setselecteMenu, edit_admins, setedit_admins }: createAdmi
             id={checkbox.name}
             name={checkbox.name}
             label={checkbox.label}
-            checked={formData[checkbox.name as keyof typeof formData] as boolean}
+            checked={
+              formData[checkbox.name as keyof typeof formData] as boolean
+            }
             onChange={handleCheckboxChange}
           />
         ))}
@@ -225,7 +234,13 @@ const CreateAdmin = ({ setselecteMenu, edit_admins, setedit_admins }: createAdmi
           className="bg-primary text-white w-full"
           onClick={handleSubmit}
         >
-          {loading ? <Loader color="#fff" /> : edit_admins ? 'Edit Admin' : 'Add Admin'}
+          {loading ? (
+            <Loader color="#fff" />
+          ) : edit_admins ? (
+            'Edit Admin'
+          ) : (
+            'Add Admin'
+          )}
         </button>
       </div>
     </div>

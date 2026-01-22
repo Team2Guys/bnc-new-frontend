@@ -28,7 +28,7 @@ export interface PrivacyPolicyItem {
 interface PosterImage {
   imageUrl: string;
   public_id: string;
-  altText? :string
+  altText?: string;
 }
 
 export interface ICategory {
@@ -48,33 +48,30 @@ export interface ICategory {
   last_editedBy?: string;
   breakcrum: string;
   topHeading?: string;
-  headingchecks: any[]
+  headingchecks: any[];
   breakcrum?: string;
   productpageHeading?: string;
   faqHeadingS?: string;
-  faqs: any[]
-  faqHeading?:string
-  status:Status
-  productCustomUrl?:string
-  categoryCustomUrl?:string
+  faqs: any[];
+  faqHeading?: string;
+  status: Status;
+  productCustomUrl?: string;
+  categoryCustomUrl?: string;
 }
 
-
-interface SUBCATEOGRY extends ICategory{
-    category?: ICategory;
-
+interface SUBCATEOGRY extends ICategory {
+  category?: ICategory;
 }
 
 export interface Image {
   imageUrl: string;
   public_id: string;
-  altText?:string;
-  name?:string;
-  pricing?:string
+  altText?: string;
+  name?: string;
+  pricing?: string;
 }
 
-
-export interface POSTER_iMAGE extends Image{}
+export interface POSTER_iMAGE extends Image {}
 
 export interface IProduct {
   id: number;
@@ -87,7 +84,7 @@ export interface IProduct {
   CategoryId: number;
   SubCategoryId: number | null;
   createdAt: string;
-  updatedAt?: string ;
+  updatedAt?: string;
   length?: any;
   href?: string;
   category?: ICategory;
@@ -95,28 +92,28 @@ export interface IProduct {
   subCategory?: [];
   short_description?: string;
   heading?: string;
-  colors?: Array<{name?: string;detail?: string;}> 
+  colors?: Array<{ name?: string; detail?: string }>;
   Sub_Heading?: string;
-  Sub_Heading_description?:string
+  Sub_Heading_description?: string;
   Meta_Title?: string;
   Canonical_Tag?: string;
   Meta_description?: string;
-  subCategoryImage?: Image
-  subcategory_description?:string
-  modelDetails?:{name:string, detail:string}[]
-  privarcyImage?:Image
-  topImages?:Image
-  status?:Status
-    customUrl  ?:       String
-  recalledByCategories?:[]
+  subCategoryImage?: Image;
+  subcategory_description?: string;
+  modelDetails?: { name: string; detail: string }[];
+  privarcyImage?: Image;
+  topImages?: Image;
+  status?: Status;
+  customUrl?: String;
+  recalledByCategories?: [];
 }
 
 export interface ProductImages {
-  altText?: string,
-  imageUrl: string,
-  public_id?: string,
-  pricing?:string
-  dimentions?:string
+  altText?: string;
+  imageUrl: string;
+  public_id?: string;
+  pricing?: string;
+  dimentions?: string;
 }
 
 export interface IRECORDS {
@@ -194,7 +191,6 @@ export interface MotorisedPageProps {
   chooseustitle1: string;
 }
 
-
 export interface CategoryProps {
   setMenuType: React.Dispatch<SetStateAction<string>>;
   seteditCategory?: React.Dispatch<
@@ -215,7 +211,6 @@ export interface ProductOptions {
   shutters?: boolean;
   others?: boolean;
 }
-
 
 export interface ContactMethods {
   email: boolean;
@@ -260,8 +255,8 @@ export interface FeaturesCarouselProps {
 }
 export interface Title {
   heading: string;
-  id?:string;
-  className?:string;
+  id?: string;
+  className?: string;
 }
 export interface Video {
   src: string;
@@ -294,7 +289,12 @@ export interface ExploreBlindsCurtainsProps {
     description: string;
     image: string;
     viewlink: string;
-    features: { icon: string; title: string; text: string,className?:string;}[];
+    features: {
+      icon: string;
+      title: string;
+      text: string;
+      className?: string;
+    }[];
     buttonLinks: { href: string; text: string }[];
     className?: string;
   };
@@ -321,8 +321,8 @@ interface BannerProps {
 export interface ExploreBlindsProps extends ExploreBlindsCurtainsProps {
   hideViewMore?: boolean;
   hidefeatures?: boolean;
-  className?:string;
-  buttonsClassName?:string,
+  className?: string;
+  buttonsClassName?: string;
 }
 
 export interface VideoPageProps {
@@ -331,7 +331,7 @@ export interface VideoPageProps {
   subtitle: string | any;
   description: string | any;
   width?: any;
-  height?:any;
+  height?: any;
 }
 export interface relativeProps {
   products: IProduct[];
@@ -341,7 +341,7 @@ export interface relativeProps {
   title?: string;
   description?: string;
   bgcolor?: boolean;
-  isPPc?:boolean
+  isPPc?: boolean;
 }
 export interface ImageGalleryProps {
   images: ImageData[];
@@ -355,13 +355,13 @@ export interface Reel {
 export interface StepItem {
   step: string;
   title: string;
-   iconimage:string;
+  iconimage: string;
   description: string;
 }
 
 export interface WorkingProcessContent {
   heading: string;
- sliderImages:string[];
+  sliderImages: string[];
   subheading: string;
   videoUrl: string;
   steps: StepItem[];
@@ -380,7 +380,7 @@ export interface MotorizeBlindData {
 
 export interface AboutUsBlock {
   shortHeading: string;
-  shortHeadingSize?: string; 
+  shortHeadingSize?: string;
   mainHeading: string;
   mainHeadingSize?: string;
   content: string;
@@ -388,22 +388,23 @@ export interface AboutUsBlock {
   imageUrl: string;
 }
 export interface MilestoneStepItem {
-  step: string;          
-  description: string;    
-  iconimage?: string;     
+  step: string;
+  description: string;
+  iconimage?: string;
 }
 
 export interface MilestoneStepsData {
-  heading: string;         
-  subheading: string;       
-  image: string;            
-  steps: MilestoneStepItem[];  
+  heading: string;
+  subheading: string;
+  image: string;
+  steps: MilestoneStepItem[];
 }
 export interface WhyChooseItem {
   icon: string;
   title: string;
   description: string;
-}export interface ReviewData {
+}
+export interface ReviewData {
   name: string;
   review: string;
   reviewLink: string;
@@ -422,8 +423,6 @@ interface Column<T> {
   key: string;
   render?: (_record: T) => React.ReactNode;
 }
-
-
 
 export interface TableProps<T> {
   data: T[];
@@ -444,7 +443,7 @@ export interface CheckboxProps {
 
 export interface SheetProps {
   children?: React.ReactNode;
-  drawerName: React.ReactNode; 
+  drawerName: React.ReactNode;
   title?: string;
   open: boolean;
   setOpen: (open: boolean) => void;
@@ -453,7 +452,7 @@ export interface SheetProps {
   mobileBgColor?: string;
   className?: string;
 }
-export type Status = "DRAFT" | "PUBLISHED" | "ARCHIVED"
+export type Status = 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
 
 export interface WhyChooseProps {
   reverse?: boolean;

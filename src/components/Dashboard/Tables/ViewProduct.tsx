@@ -233,7 +233,7 @@ const ViewProduct: React.FC<CategoryProps> = ({
           data={filteredProducts}
           columns={columns}
           rowKey="id"
-          loading={loading} 
+          loading={loading}
         />
       ) : (
         <p className="text-primary dark:text-white">No products found</p>

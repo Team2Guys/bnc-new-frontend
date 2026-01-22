@@ -7,7 +7,11 @@ export const metadata = generateMetadata(metaData.projects);
 const ProjectPage = () => {
   return (
     <>
-      <Breadcrumb image="/assets/images/Projects/projects-banner.webp" title="Our Projects - Blinds and Curtains Dubai" bradcrumbtitle='Our Projects'/>
+      <Breadcrumb
+        image="/assets/images/Projects/projects-banner.webp"
+        title="Our Projects - Blinds and Curtains Dubai"
+        bradcrumbtitle="Our Projects"
+      />
       <Projects />
     </>
   );

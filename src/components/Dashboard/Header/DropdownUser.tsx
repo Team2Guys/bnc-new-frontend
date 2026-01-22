@@ -33,7 +33,6 @@ const DropdownUser = () => {
     return () => document.removeEventListener('click', clickHandler);
   });
 
-
   useEffect(() => {
     const keyHandler = ({ keyCode }: KeyboardEvent) => {
       if (!dropdownOpen || keyCode !== 27) return;
@@ -52,9 +51,6 @@ const DropdownUser = () => {
       console.log(err);
     }
   };
-
-
-
 
   return (
     <div className="relative ">
@@ -76,7 +72,7 @@ const DropdownUser = () => {
         <div className=" hidden sm:flex items-center gap-3">
           <div className="h-12 w-12 rounded-full overflow-hidden">
             <Image
-              className='h-12 w-12 rounded-full object-cover'
+              className="h-12 w-12 rounded-full object-cover"
               src={
                 loggedInUser && loggedInUser.posterImageUrl
                   ? loggedInUser.posterImageUrl.imageUrl
@@ -96,8 +92,9 @@ const DropdownUser = () => {
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`absolute right-0 mt-2 flex w-60 flex-col rounded-sm border border-stroke bg-secondary dark:bg-dashboardDark  ${dropdownOpen === true ? 'block' : 'hidden'
-          }`}
+        className={`absolute right-0 mt-2 flex w-60 flex-col rounded-sm border border-stroke bg-secondary dark:bg-dashboardDark  ${
+          dropdownOpen === true ? 'block' : 'hidden'
+        }`}
       >
         <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-3 dark:border-strokedark">
           <li>

@@ -12,12 +12,20 @@ export const metadata = generateMetadata(metaData.product_guarantees);
 const ProductGuarantees = () => {
   return (
     <>
-      <Breadcrumb image="/assets/images/product-guarantees/large.webp" bradcrumbtitle='Product Guarantee' title="Product Guarantees" imageclassName='bg-center' />
+      <Breadcrumb
+        image="/assets/images/product-guarantees/large.webp"
+        bradcrumbtitle="Product Guarantee"
+        title="Product Guarantees"
+        imageclassName="bg-center"
+      />
       <Container className="space-y-4 p-3 mt-5 lg:mt-10 mx-auto">
-          <h2 className="text-2xl lg:text-3xl text-primary font-semibold font-futura w-fit mx-auto">
-            {productData.heading}
-          </h2>
-          <p className="text-base 2xl:text-lg leading-7 xl::leading-9 text-primary font-roboto" dangerouslySetInnerHTML={{ __html: productData.content }}></p>
+        <h2 className="text-2xl lg:text-3xl text-primary font-semibold font-futura w-fit mx-auto">
+          {productData.heading}
+        </h2>
+        <p
+          className="text-base 2xl:text-lg leading-7 xl::leading-9 text-primary font-roboto"
+          dangerouslySetInnerHTML={{ __html: productData.content }}
+        ></p>
       </Container>
       {PGuarantees.map((data: TProductGuarantees, index: number) => (
         <Container
@@ -30,19 +38,33 @@ const ProductGuarantees = () => {
             <h3 className="font-semibold text-2xl tracking-wider font-futura mt-5">
               {data.heading}
             </h3>
-            <p className="text-base 2xl:text-lg leading-7 xl::leading-9 mt-4 text-primary font-roboto" dangerouslySetInnerHTML={{ __html: data.text }}></p>
-            <div className={`flex flex-col gap-4 ${data.icons ? 'py-6' : 'pt-4 xs:py-6'}`}>
-              {data.icons && (
+            <p
+              className="text-base 2xl:text-lg leading-7 xl::leading-9 mt-4 text-primary font-roboto"
+              dangerouslySetInnerHTML={{ __html: data.text }}
+            ></p>
+            <div
+              className={`flex flex-col gap-4 ${data.icons ? 'py-6' : 'pt-4 xs:py-6'}`}
+            >
+              {data.icons &&
                 data.icons.map((item, index) => (
                   <div className="flex gap-4" key={index}>
-                    <Image src={item.icon} alt='icon' width={48} height={48} className='w-12 h-12' />
+                    <Image
+                      src={item.icon}
+                      alt="icon"
+                      width={48}
+                      height={48}
+                      className="w-12 h-12"
+                    />
                     <div>
-                      <h4 className='text-xl font-roboto font-semibold text-primary'>{item.heading}</h4>
-                      <p className='text-base 2xl:text-lg leading-7 xl:leading-9 text-primary'>{item.text}</p>
+                      <h4 className="text-xl font-roboto font-semibold text-primary">
+                        {item.heading}
+                      </h4>
+                      <p className="text-base 2xl:text-lg leading-7 xl:leading-9 text-primary">
+                        {item.text}
+                      </p>
                     </div>
                   </div>
-                ))
-              )}
+                ))}
             </div>
           </div>
           <div
@@ -59,10 +81,10 @@ const ProductGuarantees = () => {
         </Container>
       ))}
 
-      <Container className='py-6'>
-            <CallToActionSection />
+      <Container className="py-6">
+        <CallToActionSection />
       </Container>
-       <CallUS />
+      <CallUS />
     </>
   );
 };

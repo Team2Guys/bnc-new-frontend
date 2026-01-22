@@ -1,6 +1,6 @@
-"use client";
-import React, { useState, useEffect, useRef } from "react";
-import { FiChevronDown } from "react-icons/fi";
+'use client';
+import React, { useState, useEffect, useRef } from 'react';
+import { FiChevronDown } from 'react-icons/fi';
 
 interface Option {
   value: string;
@@ -24,7 +24,7 @@ const Select: React.FC<SelectProps> = ({
   className,
 }) => {
   const [selected, setSelected] = useState<string>(
-    defaultValue || options[0]?.value || ""
+    defaultValue || options[0]?.value || '',
   );
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -43,18 +43,18 @@ const Select: React.FC<SelectProps> = ({
         setOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   return (
-    <div ref={ref} className={`relative w-full ${className || ""}`}>
+    <div ref={ref} className={`relative w-full ${className || ''}`}>
       {/* Selected box */}
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
         onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
+          if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             setOpen((prev) => !prev);
           }
@@ -64,7 +64,7 @@ const Select: React.FC<SelectProps> = ({
         <span>{options.find((opt) => opt.value === selected)?.label}</span>
         <FiChevronDown
           className={`w-4 h-4 transform transition-transform ${
-            open ? "rotate-180" : "rotate-0"
+            open ? 'rotate-180' : 'rotate-0'
           }`}
         />
       </button>
@@ -77,10 +77,10 @@ const Select: React.FC<SelectProps> = ({
               onClick={() => handleSelect(opt.value, opt.disabled)}
               className={`px-3 py-2 text-sm cursor-pointer select-none ${
                 opt.disabled
-                  ? "text-gray-400 cursor-not-allowed"
+                  ? 'text-gray-400 cursor-not-allowed'
                   : selected === opt.value
-                  ? "bg-secondary text-white"
-                  : "hover:bg-gray-100 dark:hover:bg-secondary text-black dark:text-white"
+                    ? 'bg-secondary text-white'
+                    : 'hover:bg-gray-100 dark:hover:bg-secondary text-black dark:text-white'
               }`}
             >
               {opt.label}

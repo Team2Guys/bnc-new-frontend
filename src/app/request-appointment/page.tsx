@@ -1,8 +1,14 @@
 import dynamic from 'next/dynamic';
-const BookAppointment = dynamic(() => import('components/Book-appointment/BookAppointment'));
-const Container = dynamic(() => import('components/Res-usable/Container/Container'));
+const BookAppointment = dynamic(
+  () => import('components/Book-appointment/BookAppointment'),
+);
+const Container = dynamic(
+  () => import('components/Res-usable/Container/Container'),
+);
 const Breadcrumb = dynamic(() => import('components/Res-usable/breadcrumb'));
-const Testimonial = dynamic(() => import('components/ProductDetailPage/testimonial'));
+const Testimonial = dynamic(
+  () => import('components/ProductDetailPage/testimonial'),
+);
 import { generateMetadata } from 'utils/seoMetadata';
 import { metaData } from 'data/meta-data';
 import AppointmentMap from 'components/AppointmentMap/AppointmentMap';

@@ -77,18 +77,18 @@ const TableTwo = ({
         },
       );
       setCategory((prev: any) => prev.filter((item: any) => item.id != key));
-       showAlert({
-        title: "Category Deleted",
-        text: "The category has been successfully deleted.",
-        icon: "success",
+      showAlert({
+        title: 'Category Deleted',
+        text: 'The category has been successfully deleted.',
+        icon: 'success',
       });
-      } catch (err) {
-        showAlert({
-          title: "Deletion Failed",
-          text: "There was an error deleting the category.",
-          icon: "error",
-        });
-      }
+    } catch (err) {
+      showAlert({
+        title: 'Deletion Failed',
+        text: 'There was an error deleting the category.',
+        icon: 'error',
+      });
+    }
   };
 
   const handleEdit = (record: any) => {
@@ -123,8 +123,8 @@ const TableTwo = ({
       title: 'Date',
       key: 'date',
       render: (record: ICategory) => {
-               const createdAt = DateFormatHandler(record?.createdAt)
-      
+        const createdAt = DateFormatHandler(record?.createdAt);
+
         return <span>{createdAt}</span>;
       },
     },
@@ -132,8 +132,8 @@ const TableTwo = ({
       title: 'UpdatedAT',
       key: 'UpdatedAT',
       render: (record: ICategory) => {
-               const createdAt = DateFormatHandler(record?.updatedAt)
-      
+        const createdAt = DateFormatHandler(record?.updatedAt);
+
         return <span>{createdAt}</span>;
       },
     },
@@ -161,8 +161,9 @@ const TableTwo = ({
       key: 'action',
       render: (record: ICategory) => (
         <RiDeleteBin6Line
-          className={`cursor-pointer ${canDeleteCategory && 'errorColor'} ${!canDeleteCategory && 'cursor-not-allowed text-slate-300'
-            }`}
+          className={`cursor-pointer ${canDeleteCategory && 'errorColor'} ${
+            !canDeleteCategory && 'cursor-not-allowed text-slate-300'
+          }`}
           size={20}
           onClick={() => {
             if (canDeleteCategory) {
@@ -183,10 +184,14 @@ const TableTwo = ({
           canAdd={canAddCategory}
           setEdit={seteditCategory}
           setMenuType={setMenuType}
-          menuTypeText='Add Category'
+          menuTypeText="Add Category"
         />
         {filteredProducts.length > 0 ? (
-          <Table<ICategory> data={filteredProducts} columns={columns} rowKey="id" />
+          <Table<ICategory>
+            data={filteredProducts}
+            columns={columns}
+            rowKey="id"
+          />
         ) : (
           <p className="text-xl text-black dark:text-white">
             No Categories found

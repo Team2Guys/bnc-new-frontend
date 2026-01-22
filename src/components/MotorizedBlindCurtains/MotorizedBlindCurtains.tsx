@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useCallback, useRef, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import Slider from "react-slick";
-import { motorizeBlindData } from "data/SellerSlider";
-import { FaPlay } from "react-icons/fa";
-import videoPoster from '../../../public/videos/video-poster.webp'
-import "style/motorizedblindcurtains.css"
+import { useCallback, useRef, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import Slider from 'react-slick';
+import { motorizeBlindData } from 'data/SellerSlider';
+import { FaPlay } from 'react-icons/fa';
+import videoPoster from '../../../public/videos/video-poster.webp';
+import 'style/motorizedblindcurtains.css';
 
 export default function MotorizeBlindCurtain() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -19,16 +19,15 @@ export default function MotorizeBlindCurtain() {
     if (!video) return;
 
     if (video.paused) {
-      video.play().catch(() => { });
+      video.play().catch(() => {});
       setIsPlaying(true);
-      setHideBtn(true)
+      setHideBtn(true);
     } else {
       video.pause();
       setIsPlaying(false);
-      setHideBtn(false)
+      setHideBtn(false);
     }
   }, []);
-
 
   const sliderSettings = {
     dots: true,
@@ -41,7 +40,6 @@ export default function MotorizeBlindCurtain() {
 
   return (
     <div className="motorizedblindcurtains mt-5 md:mt-10 max-w-screen-2xl 2xl:max-w-screen-xxl mx-auto">
-
       <h2 className="text-center font-futura text-xl sm:text-4xl font-bold sm:mb-10 mb-5 text-primary px-4 md:px-0 hidden md:block">
         {motorizeBlindData.heading}
       </h2>
@@ -84,8 +82,9 @@ export default function MotorizeBlindCurtain() {
 
         {/* Buttons Over Video */}
         <div
-          className={`absolute inset-0 flex flex-col sm:flex-row justify-end sm:justify-center items-center sm:items-end sm:pb-6 pb-3 gap-3 sm:gap-4 sm:pr-6 transition-opacity duration-300 z-20 ${hideBtn ? "opacity-0" : "opacity-100"
-            }`}
+          className={`absolute inset-0 flex flex-col sm:flex-row justify-end sm:justify-center items-center sm:items-end sm:pb-6 pb-3 gap-3 sm:gap-4 sm:pr-6 transition-opacity duration-300 z-20 ${
+            hideBtn ? 'opacity-0' : 'opacity-100'
+          }`}
         >
           {motorizeBlindData.buttons.map(({ label, link }, i) => (
             <Link
@@ -105,7 +104,14 @@ export default function MotorizeBlindCurtain() {
         {motorizeBlindData.features.map(({ icon, label }, i) => (
           <div key={i} className="flex flex-col items-center gap-2 relative">
             <div className="w-20 h-20 relative">
-              <Image src={icon} alt={label} fill className="object-contain" loading="lazy" sizes="80px" />
+              <Image
+                src={icon}
+                alt={label}
+                fill
+                className="object-contain"
+                loading="lazy"
+                sizes="80px"
+              />
             </div>
             <p className="text-lg text-primary font-medium font-roboto">
               {label}

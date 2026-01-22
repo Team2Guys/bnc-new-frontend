@@ -1,5 +1,5 @@
-"use client";
-import React from "react";
+'use client';
+import React from 'react';
 
 interface CategoryHeaderProps {
   searchTerm: string;
@@ -7,7 +7,7 @@ interface CategoryHeaderProps {
   canAdd: boolean;
   setEdit?: (value: any) => void;
   setMenuType: (value: string) => void;
-  menuTypeText: string
+  menuTypeText: string;
 }
 
 const ViewsTableHeader: React.FC<CategoryHeaderProps> = ({
@@ -16,7 +16,7 @@ const ViewsTableHeader: React.FC<CategoryHeaderProps> = ({
   canAdd,
   setEdit,
   setMenuType,
-  menuTypeText
+  menuTypeText,
 }) => {
   return (
     <div className="flex justify-between mb-4 items-center text-dark dark:text-white">
@@ -32,7 +32,7 @@ const ViewsTableHeader: React.FC<CategoryHeaderProps> = ({
       {/* Add Category Button */}
       <div>
         <p
-          className={`${canAdd ? "cursor-pointer bg-secondary text-white rounded-md hover:text-white" : "cursor-not-allowed"} lg:p-2 md:p-2 flex justify-center`}
+          className={`${canAdd ? 'cursor-pointer bg-secondary text-white rounded-md hover:text-white' : 'cursor-not-allowed'} lg:p-2 md:p-2 flex justify-center`}
           onClick={() => {
             setEdit?.(null);
             if (canAdd) {

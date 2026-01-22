@@ -1,10 +1,10 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { useInView } from "react-intersection-observer";
-import dynamic from "next/dynamic";
-import SimpleStepsSkeleton from "./SimpleStepsSkeleton";
+'use client';
+import React, { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
+import dynamic from 'next/dynamic';
+import SimpleStepsSkeleton from './SimpleStepsSkeleton';
 
-const SimpleSteps = dynamic(() => import("./SimpleSteps"), {
+const SimpleSteps = dynamic(() => import('./SimpleSteps'), {
   loading: () => <SimpleStepsSkeleton />,
 });
 
@@ -21,9 +21,7 @@ const StepWrapper = () => {
   }, [inView]);
 
   return (
-    <div ref={ref}>
-      {show ? <SimpleSteps /> : <SimpleStepsSkeleton />}
-    </div>
+    <div ref={ref}>{show ? <SimpleSteps /> : <SimpleStepsSkeleton />}</div>
   );
 };
 

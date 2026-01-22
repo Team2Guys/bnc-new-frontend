@@ -76,8 +76,8 @@ export default function UserComponent({
                       defaultValue="Admin"
                       onChange={selecthandleChange}
                       options={[
-                        { value: "Admin", label: "Admin" },
-                        { value: "Super-Admin", label: "Super-Admin" },
+                        { value: 'Admin', label: 'Admin' },
+                        { value: 'Super-Admin', label: 'Super-Admin' },
                       ]}
                     />
                   </div>
@@ -112,7 +112,7 @@ export default function UserComponent({
                       )}
                     </p>
 
-                    <button className='dashboard_primary_button' type="submit">
+                    <button className="dashboard_primary_button" type="submit">
                       {loading ? <Loader color="#fff" /> : buttonTitle}
                     </button>
                     <div className="flex justify-end space-y-3 w-full">

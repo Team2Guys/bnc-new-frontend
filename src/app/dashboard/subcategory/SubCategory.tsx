@@ -8,11 +8,23 @@ import { useState } from 'react';
 import { CategoriesType } from 'types/interfaces';
 import { ICategory } from 'types/types';
 
-const AddSubcategory = dynamic(()=>import("components/AddCategory/AddSubcategory"))
-const ViewSubcategries = dynamic(()=>import("components/Dashboard/Tables/ViewSubcategries"))
-const Subcategory = ({subCategories , cetagories}: {subCategories: ICategory[] , cetagories: ICategory[]}) => {
+const AddSubcategory = dynamic(
+  () => import('components/AddCategory/AddSubcategory'),
+);
+const ViewSubcategries = dynamic(
+  () => import('components/Dashboard/Tables/ViewSubcategries'),
+);
+const Subcategory = ({
+  subCategories,
+  cetagories,
+}: {
+  subCategories: ICategory[];
+  cetagories: ICategory[];
+}) => {
   const [menuType, setMenuType] = useState<string>('Categories');
-  const [editCategory, seteditCategory] = useState<CategoriesType | undefined | null>();
+  const [editCategory, seteditCategory] = useState<
+    CategoriesType | undefined | null
+  >();
 
   return (
     <DefaultLayout>

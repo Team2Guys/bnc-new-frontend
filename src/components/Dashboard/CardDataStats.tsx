@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode } from 'react';
 
 interface CardDataStatsProps {
   title: string;
@@ -21,7 +21,6 @@ const CardDataStats: React.FC<CardDataStatsProps> = ({
 
       {/* Inner Card */}
       <div className="relative z-10 rounded-3xl bg-white/95 dark:bg-[#0f0f0f]/95 backdrop-blur-xl px-8 py-10 flex flex-col items-center text-center border border-white/20">
-        
         {/* Icon Area */}
         <div className="relative mb-6 flex items-center justify-center">
           {/* Outer Glow Ring */}
@@ -38,9 +37,7 @@ const CardDataStats: React.FC<CardDataStatsProps> = ({
         <h4 className="text-5xl font-extrabold dark:text-white tracking-wide drop-shadow-md">
           {total}
         </h4>
-        <p className="mt-3 text-lg font-medium dark:text-white">
-          {title}
-        </p>
+        <p className="mt-3 text-lg font-medium dark:text-white">{title}</p>
 
         {/* Bottom Neon Gradient Line */}
         <div className="mt-6 h-2 w-28 rounded-full bg-gradient-to-r from-primary via-secondary to-white shadow-[0_0_20px_rgba(0,0,0,0.25)]" />

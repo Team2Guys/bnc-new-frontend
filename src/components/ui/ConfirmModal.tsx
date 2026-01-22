@@ -1,6 +1,5 @@
-import { FC } from "react";
-import { ConfirmModalProps } from "types/interfaces";
-
+import { FC } from 'react';
+import { ConfirmModalProps } from 'types/interfaces';
 
 interface InternalProps extends ConfirmModalProps {
   isOpen: boolean;
@@ -12,8 +11,8 @@ const ConfirmModal: FC<InternalProps> = ({
   close,
   title,
   content,
-  okText = "OK",
-  cancelText = "Cancel",
+  okText = 'OK',
+  cancelText = 'Cancel',
   onOk,
   onCancel,
 }) => {

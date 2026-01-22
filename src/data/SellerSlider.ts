@@ -1,89 +1,89 @@
-import { MotorizeBlindData, Reel, WorkingProcessContent } from "types/types";
+import { MotorizeBlindData, Reel, WorkingProcessContent } from 'types/types';
 
 export const reelsData: Reel[] = [
   {
-    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test1.mp4",
-    videoPoster:"/assets/images/videoposter/1-v.webp"
+    videoUrl: 'https://bncvidoes.s3.eu-north-1.amazonaws.com/test1.mp4',
+    videoPoster: '/assets/images/videoposter/1-v.webp',
   },
   {
-    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test2.mp4",
-    videoPoster:"/assets/images/videoposter/2-v.webp"
+    videoUrl: 'https://bncvidoes.s3.eu-north-1.amazonaws.com/test2.mp4',
+    videoPoster: '/assets/images/videoposter/2-v.webp',
   },
   {
-    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test3.mp4",
-    videoPoster:"/assets/images/videoposter/3-v.webp"
+    videoUrl: 'https://bncvidoes.s3.eu-north-1.amazonaws.com/test3.mp4',
+    videoPoster: '/assets/images/videoposter/3-v.webp',
   },
   {
-    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test4.mp4",
-    videoPoster:"/assets/images/videoposter/4-v.webp"
+    videoUrl: 'https://bncvidoes.s3.eu-north-1.amazonaws.com/test4.mp4',
+    videoPoster: '/assets/images/videoposter/4-v.webp',
   },
   {
-    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test5.mp4",
-    videoPoster:"/assets/images/videoposter/5-v.webp"
+    videoUrl: 'https://bncvidoes.s3.eu-north-1.amazonaws.com/test5.mp4',
+    videoPoster: '/assets/images/videoposter/5-v.webp',
   },
   {
-    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test6.mp4",
-    videoPoster:"/assets/images/videoposter/6-v.webp"
+    videoUrl: 'https://bncvidoes.s3.eu-north-1.amazonaws.com/test6.mp4',
+    videoPoster: '/assets/images/videoposter/6-v.webp',
   },
   {
-    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test7.mp4",
-    videoPoster:"/assets/images/videoposter/7-v.webp"
+    videoUrl: 'https://bncvidoes.s3.eu-north-1.amazonaws.com/test7.mp4',
+    videoPoster: '/assets/images/videoposter/7-v.webp',
   },
   {
-    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test8.mp4",
-    videoPoster:"/assets/images/videoposter/8-v.webp"
+    videoUrl: 'https://bncvidoes.s3.eu-north-1.amazonaws.com/test8.mp4',
+    videoPoster: '/assets/images/videoposter/8-v.webp',
   },
   {
-    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test9.mp4",
-    videoPoster:"/assets/images/videoposter/9-v.webp"
+    videoUrl: 'https://bncvidoes.s3.eu-north-1.amazonaws.com/test9.mp4',
+    videoPoster: '/assets/images/videoposter/9-v.webp',
   },
   {
-    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test10.mp4",
-    videoPoster:"/assets/images/videoposter/10-v.webp"
+    videoUrl: 'https://bncvidoes.s3.eu-north-1.amazonaws.com/test10.mp4',
+    videoPoster: '/assets/images/videoposter/10-v.webp',
   },
   {
-    videoUrl:  "https://bncvidoes.s3.eu-north-1.amazonaws.com/test11.mp4",
-    videoPoster:"/assets/images/videoposter/11-v.webp"
+    videoUrl: 'https://bncvidoes.s3.eu-north-1.amazonaws.com/test11.mp4',
+    videoPoster: '/assets/images/videoposter/11-v.webp',
   },
-
 ];
-
 
 // data/SellerSlider.ts
 export const workingProcessData: WorkingProcessContent = {
-  heading: "Our Working Process",
+  heading: 'Our Working Process',
   subheading:
-    "Hassle-free process from selection to installation. We make choosing and installing blinds and curtains effortless with our super-fast step-by-step process. ",
+    'Hassle-free process from selection to installation. We make choosing and installing blinds and curtains effortless with our super-fast step-by-step process. ',
   sliderImages: [
-    "/assets/images/Blinds/landing/Automatedblinds.webp",
-    "/assets/images/Blinds/landing/Automatedblinds.webp",
-    "/assets/images/Blinds/landing/Automatedblinds.webp",
+    '/assets/images/Blinds/landing/Automatedblinds.webp',
+    '/assets/images/Blinds/landing/Automatedblinds.webp',
+    '/assets/images/Blinds/landing/Automatedblinds.webp',
   ],
-  videoUrl: "https://bncmain.s3.eu-north-1.amazonaws.com/New+Latest+Bnc+Step+By+Step+Process+With+Text(1).mp4",
+  videoUrl:
+    'https://bncmain.s3.eu-north-1.amazonaws.com/New+Latest+Bnc+Step+By+Step+Process+With+Text(1).mp4',
   steps: [
     {
-      step: "Step 1",
-      iconimage: "/assets/images/Line-380.svg",
-      title: "Book a Free Appointment",
-      description: "You can easily book online or call us.",
+      step: 'Step 1',
+      iconimage: '/assets/images/Line-380.svg',
+      title: 'Book a Free Appointment',
+      description: 'You can easily book online or call us.',
     },
     {
-      step: "Step 2",
-      iconimage: "/assets/images/Line-380.svg",
-      title: "Measurements & Selection",
-      description: "Our experts will visit with samples and take precise measurements.",
+      step: 'Step 2',
+      iconimage: '/assets/images/Line-380.svg',
+      title: 'Measurements & Selection',
+      description:
+        'Our experts will visit with samples and take precise measurements.',
     },
     {
-      step: "Step 3",
-      iconimage: "/assets/images/Line-380.svg",
-      title: "In-house production",
-      description: "Every stitch is made by our own hands, not outsourced.",
+      step: 'Step 3',
+      iconimage: '/assets/images/Line-380.svg',
+      title: 'In-house production',
+      description: 'Every stitch is made by our own hands, not outsourced.',
     },
     {
-      step: "Step 4",
-      iconimage: "/assets/images/Line-380.svg",
-      title: "Delivery & Installation",
-      description: "Professional installation by our own dedicated staff.",
+      step: 'Step 4',
+      iconimage: '/assets/images/Line-380.svg',
+      title: 'Delivery & Installation',
+      description: 'Professional installation by our own dedicated staff.',
     },
   ],
 };
@@ -91,32 +91,33 @@ export const workingProcessData: WorkingProcessContent = {
 // data.ts
 
 export const motorizeBlindData: MotorizeBlindData = {
-  heading: "Motorised Blinds and Curtains for a Smart Home!",
-  videoUrl: "https://bncmain.s3.eu-north-1.amazonaws.com/Motion+Blinds+%26+Curtains+No+Voiceover.mp4", 
+  heading: 'Motorised Blinds and Curtains for a Smart Home!',
+  videoUrl:
+    'https://bncmain.s3.eu-north-1.amazonaws.com/Motion+Blinds+%26+Curtains+No+Voiceover.mp4',
   buttons: [
-    { label: "View Motorised Blinds", link: "/blinds/motorised-blinds/" },
-    { label: "View Motorised Curtains", link: "/curtains/motorised-curtains/" },
+    { label: 'View Motorised Blinds', link: '/blinds/motorised-blinds/' },
+    { label: 'View Motorised Curtains', link: '/curtains/motorised-curtains/' },
   ],
   features: [
     {
-      icon: "/assets/images/feature/smarcontrol.png",
-      label: "Smart Control",
+      icon: '/assets/images/feature/smarcontrol.png',
+      label: 'Smart Control',
     },
     {
-      icon: "/assets/images/feature/smartphone.png",
-      label: "Smartphone",
+      icon: '/assets/images/feature/smartphone.png',
+      label: 'Smartphone',
     },
     {
-    icon: "/assets/images/feature/voiceassistant.png",
-      label: "Voice Assistant",
+      icon: '/assets/images/feature/voiceassistant.png',
+      label: 'Voice Assistant',
     },
     {
-    icon: "/assets/images/feature/remotecontrol.png",
-      label: "Remote Control",
+      icon: '/assets/images/feature/remotecontrol.png',
+      label: 'Remote Control',
     },
     {
-      icon: "/assets/images/feature/automated.png",
-      label: "Automated Scheduling",
+      icon: '/assets/images/feature/automated.png',
+      label: 'Automated Scheduling',
     },
   ],
 };

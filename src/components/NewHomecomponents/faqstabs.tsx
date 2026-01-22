@@ -1,12 +1,12 @@
-"use client"
-import React, { useState } from "react";
-import { HiMinusSmall } from "react-icons/hi2";
-import { FiPlus } from "react-icons/fi";
-import { TABS } from "data/Homedata/tabdata";
-import { FAQ_DATA } from "data/Homedata/faqs";
+'use client';
+import React, { useState } from 'react';
+import { HiMinusSmall } from 'react-icons/hi2';
+import { FiPlus } from 'react-icons/fi';
+import { TABS } from 'data/Homedata/tabdata';
+import { FAQ_DATA } from 'data/Homedata/faqs';
 
 const FaqTabs = () => {
-  const [activeTab, setActiveTab] = useState("All");
+  const [activeTab, setActiveTab] = useState('All');
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleFaq = (index: number) => {
@@ -15,7 +15,7 @@ const FaqTabs = () => {
 
   // Combine all FAQs when activeTab is "All"
   const faqsToDisplay =
-    activeTab === "All"
+    activeTab === 'All'
       ? Object.values(FAQ_DATA).flat()
       : FAQ_DATA[activeTab] || [];
 
@@ -36,15 +36,15 @@ const FaqTabs = () => {
             >
               <span
                 className={`transition-all duration-200 text-base md:text-xl font-roboto text-primary capitalize ${
-                  activeTab === tab ? "font-bold" : "font-normal"
+                  activeTab === tab ? 'font-bold' : 'font-normal'
                 }`}
                 dangerouslySetInnerHTML={{ __html: tab }}
               />
               <span
                 className={`absolute bottom-[-4px] left-0 w-full h-[4px] z-10 transition-all duration-300 ${
                   activeTab === tab
-                    ? "bg-secondary"
-                    : "bg-transparent group-hover:bg-secondary"
+                    ? 'bg-secondary'
+                    : 'bg-transparent group-hover:bg-secondary'
                 }`}
               />
             </button>
@@ -67,8 +67,8 @@ const FaqTabs = () => {
               onClick={() => toggleFaq(index)}
               className={`w-full flex justify-between items-center px-4 py-3 text-left rounded-b-md transition-all duration-200 text-sm sm:text-xl font-roboto font-bold ${
                 openIndex === index
-                  ? "text-white bg-primary hover:bg-primary/90"
-                  : "text-primary bg-secondary-foreground hover:bg-gray-50"
+                  ? 'text-white bg-primary hover:bg-primary/90'
+                  : 'text-primary bg-secondary-foreground hover:bg-gray-50'
               }`}
             >
               <p className="w-[90%] sm:w-full">{faq.question}</p>

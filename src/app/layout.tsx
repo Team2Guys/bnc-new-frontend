@@ -140,20 +140,13 @@ export default function RootLayout({
               style={{ display: 'none', visibility: 'hidden' }}
             />
           </noscript>
+          
+          <GoogleTagManager gtmId="GTM-MNXTN5B" />
+          */}
           <div
             id="google_translate_element"
             className="translate-widget hidden"
           ></div>
-
-          <GoogleTagManager gtmId="GTM-MNXTN5B" />
-          <noscript>
-            <iframe
-              src="https://www.googletagmanager.com/ns.html?id=GTM-MNXTN5B"
-              height="0"
-              width="0"
-              style={{ display: 'none', visibility: 'hidden' }}
-            ></iframe>
-          </noscript> */}
 
           <PathnameWrapper>{children}</PathnameWrapper>
         </body>
