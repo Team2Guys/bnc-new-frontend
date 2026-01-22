@@ -1,7 +1,7 @@
-"use client";
-import React, { useState } from "react";
-import BlogCard from "./blog-card";
-import { BlogInfo } from "types/interfaces";
+'use client';
+import React, { useState } from 'react';
+import BlogCard from './blog-card';
+import { BlogInfo } from 'types/interfaces';
 
 const BlogLoad = ({
   filteredBlog,
@@ -22,7 +22,10 @@ const BlogLoad = ({
     <>
       <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-6 my-5">
         {filteredBlog.map((blog, index) => (
-          <div key={blog.id ?? index}className={index < visibleCount ? "block" : "hidden"} >
+          <div
+            key={blog.id ?? index}
+            className={index < visibleCount ? 'block' : 'hidden'}
+          >
             <BlogCard blog={blog} iscategory={iscategory} />
           </div>
         ))}
@@ -38,7 +41,6 @@ const BlogLoad = ({
           </button>
         </div>
       )}
-
     </>
   );
 };

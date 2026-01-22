@@ -5,14 +5,13 @@ import Image from 'next/image';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import { SliderWithGoTo, ThumbnailProps } from 'types/interfaces';
 
-
 const Thumbnail = ({
   images = [],
   selectedColor,
   setColorImage,
   videos,
   videoThumbnail,
-  isMotorisedCategory
+  isMotorisedCategory,
 }: ThumbnailProps) => {
   const [nav1, setNav1] = useState<SliderWithGoTo | undefined>(undefined);
   const [nav2, setNav2] = useState<SliderWithGoTo | undefined>(undefined);
@@ -21,13 +20,9 @@ const Thumbnail = ({
   const slider1 = useRef<SliderWithGoTo | null>(null);
   const slider2 = useRef<SliderWithGoTo | null>(null);
 
-
   const displayImages = useMemo(() => {
-    return isMotorisedCategory && videos.length > 0
-      ? images.slice(1)
-      : images;
+    return isMotorisedCategory && videos.length > 0 ? images.slice(1) : images;
   }, [isMotorisedCategory, videos, images]);
-
 
   useEffect(() => {
     setNav1(slider1.current ?? undefined);
@@ -39,7 +34,7 @@ const Thumbnail = ({
       const matchIndex = images.findIndex(
         (img) =>
           img.colorCode &&
-          `#${img.colorCode.toUpperCase()}` === selectedColor.toUpperCase()
+          `#${img.colorCode.toUpperCase()}` === selectedColor.toUpperCase(),
       );
       if (matchIndex !== -1 && matchIndex !== activeIndex) {
         const index = isMotorisedCategory ? matchIndex + 1 : matchIndex;
@@ -95,49 +90,56 @@ const Thumbnail = ({
     <div>
       {displayImages.length < 2 ? (
         displayImages.map((img, index) => (
-          <div key={index} className='relative w-full h-[340px] xsm:h-[400px] lg:h-[450px] xl:h-[563px] mb-2'>
+          <div
+            key={index}
+            className="relative w-full h-[340px] xsm:h-[400px] lg:h-[450px] xl:h-[563px] mb-2"
+          >
             <Image
               src={img.imageUrl}
               alt={img.altText || `Thumbnail${index}`}
               fill
               priority
-              fetchPriority='high'
+              fetchPriority="high"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
             />
           </div>
         ))
-      )
-        :
-        (
-          <Slider {...mainSettings} ref={slider1} className="overflow-hidden outline-0">
-            {isMotorisedCategory && videos.length > 0 && (
-              <div className="relative w-full h-[340px] xsm:h-[400px] lg:h-[450px] xl:h-[563px] bg-black flex items-center justify-center">
-                <video
-                  className="w-full h-full object-cover"
-                  autoPlay
-                  controls
-                  loop
-                  muted
-                  playsInline
-                  src={videos[0]?.imageUrl}
-                />
-              </div>
-            )}
-            {displayImages.map((img, index) => (
-              <div key={index} className='relative w-full h-[340px] xsm:h-[400px] lg:h-[450px] xl:h-[563px]'>
-                <Image
-                  src={img.imageUrl}
-                  alt={img.altText || `Thumbnail${index}`}
-                  fill
-                  priority
-                  fetchPriority='high'
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-                />
-              </div>
-            ))}
-          </Slider>
-        )
-      }
+      ) : (
+        <Slider
+          {...mainSettings}
+          ref={slider1}
+          className="overflow-hidden outline-0"
+        >
+          {isMotorisedCategory && videos.length > 0 && (
+            <div className="relative w-full h-[340px] xsm:h-[400px] lg:h-[450px] xl:h-[563px] bg-black flex items-center justify-center">
+              <video
+                className="w-full h-full object-cover"
+                autoPlay
+                controls
+                loop
+                muted
+                playsInline
+                src={videos[0]?.imageUrl}
+              />
+            </div>
+          )}
+          {displayImages.map((img, index) => (
+            <div
+              key={index}
+              className="relative w-full h-[340px] xsm:h-[400px] lg:h-[450px] xl:h-[563px]"
+            >
+              <Image
+                src={img.imageUrl}
+                alt={img.altText || `Thumbnail${index}`}
+                fill
+                priority
+                fetchPriority="high"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+              />
+            </div>
+          ))}
+        </Slider>
+      )}
 
       {displayImages.length > 0 && displayImages.length > 4 ? (
         <Slider {...thumbSettings} ref={slider2}>
@@ -177,9 +179,10 @@ const Thumbnail = ({
                 }}
                 className={`cursor-pointer border-2 relative
                   aspect-square w-20 sm:w-28 lg:w-32 xl:w-40
-                  ${adjustedIndex === activeIndex
-                    ? 'border-secondary'
-                    : 'border-transparent'
+                  ${
+                    adjustedIndex === activeIndex
+                      ? 'border-secondary'
+                      : 'border-transparent'
                   }`}
               >
                 <Image
@@ -231,9 +234,10 @@ const Thumbnail = ({
                 className={`cursor-pointer border-2 relative
                   aspect-square
                   w-20 sm:w-28 lg:w-32 xl:w-40
-                  ${adjustedIndex === activeIndex
-                    ? 'border-secondary'
-                    : 'border-transparent'
+                  ${
+                    adjustedIndex === activeIndex
+                      ? 'border-secondary'
+                      : 'border-transparent'
                   }`}
               >
                 <Image

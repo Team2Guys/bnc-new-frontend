@@ -21,10 +21,15 @@ interface BlogProps {
   setMenuType: React.Dispatch<SetStateAction<string>>;
   setEditBlog: React.Dispatch<SetStateAction<UpdateBlog | null>>;
   blogs: BlogInfo[];
-  menuType: string
+  menuType: string;
 }
 
-const ShowBlog: React.FC<BlogProps> = ({ setMenuType, setEditBlog, blogs, menuType }) => {
+const ShowBlog: React.FC<BlogProps> = ({
+  setMenuType,
+  setEditBlog,
+  blogs,
+  menuType,
+}) => {
   const queryClient = useQueryClient();
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [filteredBlog, setfilteredBlog] = useState<BlogInfo[]>(blogs);
@@ -71,7 +76,6 @@ const ShowBlog: React.FC<BlogProps> = ({ setMenuType, setEditBlog, blogs, menuTy
     });
   };
 
-
   const handleDelete = async (id: string) => {
     try {
       await axios.delete(
@@ -82,19 +86,18 @@ const ShowBlog: React.FC<BlogProps> = ({ setMenuType, setEditBlog, blogs, menuTy
           },
         },
       );
-      setfilteredBlog(((prev) => prev.filter((blog: any) => blog.id !== id)))
+      setfilteredBlog((prev) => prev.filter((blog: any) => blog.id !== id));
       showAlert({
-        title: "The blog has been successfully deleted 👍",
-        icon: "success",
+        title: 'The blog has been successfully deleted 👍',
+        icon: 'success',
       });
       //@ts-expect-error
       queryClient.invalidateQueries(['blogs']);
       revalidateTag('blogs');
-
     } catch (error) {
       showAlert({
-        title: "There was an error deleting the blog 😢",
-        icon: "warning",
+        title: 'There was an error deleting the blog 😢',
+        icon: 'warning',
       });
     }
   };
@@ -104,17 +107,17 @@ const ShowBlog: React.FC<BlogProps> = ({ setMenuType, setEditBlog, blogs, menuTy
       title: 'Image',
       key: 'posterImageUrl',
       render: (record: BlogInfo) => {
-        return (
-          record.posterImage?.imageUrl ?
-
-            <Image
-              src={record.posterImage?.imageUrl}
-              alt={`Image of ${record.title}`}
-              className="rounded-md h-[50px]"
-              width={50}
-              height={50}
-            /> : "Image not available"
-        )
+        return record.posterImage?.imageUrl ? (
+          <Image
+            src={record.posterImage?.imageUrl}
+            alt={`Image of ${record.title}`}
+            className="rounded-md h-[50px]"
+            width={50}
+            height={50}
+          />
+        ) : (
+          'Image not available'
+        );
       },
     },
     {
@@ -124,8 +127,7 @@ const ShowBlog: React.FC<BlogProps> = ({ setMenuType, setEditBlog, blogs, menuTy
     {
       title: 'Created At',
       key: 'createdAt',
-      render: (record: BlogInfo) =>
-        formatDateDayMonthYear(record.createdAt),
+      render: (record: BlogInfo) => formatDateDayMonthYear(record.createdAt),
     },
     {
       title: 'Category',
@@ -204,9 +206,8 @@ const ShowBlog: React.FC<BlogProps> = ({ setMenuType, setEditBlog, blogs, menuTy
   ];
 
   useEffect(() => {
-    setfilteredBlog(blogs)
-  }, [blogs, menuType])
-
+    setfilteredBlog(blogs);
+  }, [blogs, menuType]);
 
   return (
     <div className="mt-10">
@@ -216,16 +217,11 @@ const ShowBlog: React.FC<BlogProps> = ({ setMenuType, setEditBlog, blogs, menuTy
         canAdd={canAddBlog}
         setEdit={setEditBlog}
         setMenuType={setMenuType}
-        menuTypeText='Add Blog'
+        menuTypeText="Add Blog"
       />
 
-
       {filteredBlog && filteredBlog.length > 0 ? (
-        <Table<BlogInfo>
-          data={filteredBlog}
-          columns={columns}
-          rowKey="id"
-        />
+        <Table<BlogInfo> data={filteredBlog} columns={columns} rowKey="id" />
       ) : (
         <p className="dark:text-white">No Blogs found</p>
       )}

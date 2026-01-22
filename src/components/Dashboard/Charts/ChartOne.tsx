@@ -4,8 +4,7 @@ import { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { MONTHLYGRAPH } from 'types/general';
 
-
-const ChartOne = ({chartData}:{chartData : MONTHLYGRAPH}) => {
+const ChartOne = ({ chartData }: { chartData: MONTHLYGRAPH }) => {
   const [isDark, setIsDark] = useState(false);
   useEffect(() => {
     const checkDark = () => {
@@ -57,7 +56,8 @@ const ChartOne = ({chartData}:{chartData : MONTHLYGRAPH}) => {
       yaxis: { lines: { show: true } },
     },
     dataLabels: {
-      enabled: false, style: {
+      enabled: false,
+      style: {
         fontSize: '12px',
         colors: ['#000'],
       },
@@ -65,7 +65,7 @@ const ChartOne = ({chartData}:{chartData : MONTHLYGRAPH}) => {
       background: {
         enabled: true,
         borderRadius: 2,
-      }
+      },
     },
     markers: {
       size: 4,
@@ -84,7 +84,7 @@ const ChartOne = ({chartData}:{chartData : MONTHLYGRAPH}) => {
       title: { style: { fontSize: '0px' } },
       min: 0,
     },
-  tooltip: {
+    tooltip: {
       theme: isDark ? 'dark' : 'light',
     },
   };

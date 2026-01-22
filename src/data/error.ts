@@ -38,14 +38,8 @@ export const PRODUCT_TABS = {
     'bi-fold-shutters',
   ],
 
-  commercial: [
-    'water-repellent',
-    'outdoor',
-    'fire-retardant',
-    'washable',
-  ],
+  commercial: ['water-repellent', 'outdoor', 'fire-retardant', 'washable'],
 } as const;
-
 
 export const featuresInfo = [
   {

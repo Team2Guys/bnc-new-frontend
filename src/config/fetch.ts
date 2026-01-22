@@ -3,8 +3,6 @@ import { IAppointments, IRECORDS } from 'types/types';
 import { token } from 'components/ServerActons/ServerAction';
 import { initialRedirectUrls, RedirectUrls } from 'types/general';
 
-
-
 export const fetchProducts = async () => {
   try {
     const response = await fetch(
@@ -16,52 +14,53 @@ export const fetchProducts = async () => {
     const products = await response.json();
     return products;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 };
 
-
-export const getSignleProd = async (Productname: string, category: string, fields?: Record<string, boolean>) => {
+export const getSignleProd = async (
+  Productname: string,
+  category: string,
+  fields?: Record<string, boolean>,
+) => {
   try {
-
-    console.log(Productname, category)
+    console.log(Productname, category);
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/getSignleProd`,
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ Productname, category, fields }),
-        next: { tags: ["products"] },
-      }
+        next: { tags: ['products'] },
+      },
     );
     if (!response.ok) {
-      return null
+      return null;
     }
 
     const product = await response.json();
     return product;
   } catch (error) {
-    console.error("Error fetching product:", error);
+    console.error('Error fetching product:', error);
     throw error;
   }
 };
 
-
-
-
 export async function fetchSingleCategory(customUrl: string) {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/categories/findsingleCategory/${customUrl.split("/").join("")}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories/findsingleCategory/${customUrl.split('/').join('')}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        next: { tags: ['categories'] },
       },
-      credentials: 'include',
-      next: { tags: ['categories'] },
-    });
-
+    );
 
     const data = await res.json();
     return data;
@@ -73,14 +72,17 @@ export async function fetchSingleCategory(customUrl: string) {
 
 export async function fetchSingleCategorymain(customUrl: string) {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/categories/findsingleCategorymain/${customUrl}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories/findsingleCategorymain/${customUrl}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        next: { tags: ['categories'] },
       },
-      credentials: 'include',
-      next: { tags: ['categories'] },
-    });
+    );
     const data = await res.json();
     if (!res.ok) {
       console.error('API error:', data.message);
@@ -98,17 +100,15 @@ export const fetchBlogs = async () => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/blogs`,
       {
-        next: { tags: ["blogList"] },
-      }
+        next: { tags: ['blogList'] },
+      },
     );
     return response.json();
   } catch (error) {
-    console.log("fetchBlogs error:", error);
+    console.log('fetchBlogs error:', error);
     return [];
   }
 };
-
-
 
 export const fetchCategories = async () => {
   try {
@@ -121,21 +121,22 @@ export const fetchCategories = async () => {
     let result = await response.json();
     return result;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 };
 
 export const fetchSubCategories = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories/get-all-subCategories`, {
-      next: { tags: ['subCategories'] },
-    }
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories/get-all-subCategories`,
+      {
+        next: { tags: ['subCategories'] },
+      },
     );
     let result = await response.json();
     return result;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 };
 
@@ -159,16 +160,16 @@ export const adminRecords = async (
   }
 };
 
-export const fetchAppointments = async (token: string | undefined): Promise<IAppointments[]> => {
+export const fetchAppointments = async (
+  token: string | undefined,
+): Promise<IAppointments[]> => {
   try {
-
     const response = await axios.get(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/appointments/getAllappointments`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
-
-        }
+        },
       },
     );
     return response.data;
@@ -177,8 +178,6 @@ export const fetchAppointments = async (token: string | undefined): Promise<IApp
     throw error;
   }
 };
-
-
 
 export const getAllAdmins = async (token: any) => {
   try {
@@ -189,7 +188,6 @@ export const getAllAdmins = async (token: any) => {
           Authorization: `Bearer ${token}`,
         },
         next: { tags: ['admins'] },
-
       },
     );
     const admins = await response.json();
@@ -199,12 +197,9 @@ export const getAllAdmins = async (token: any) => {
   }
 };
 
-
-
-
 export const admin_del_handler = async (id: any) => {
   try {
-    let finalToken = await token()
+    let finalToken = await token();
     await axios.delete(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/admins/delete/${id}`,
       {
@@ -213,13 +208,10 @@ export const admin_del_handler = async (id: any) => {
         },
       },
     );
-
   } catch (error: any) {
-    throw new Error(error.message || 'Error occured')
+    throw new Error(error.message || 'Error occured');
   }
-}
-
-
+};
 
 // reviews
 
@@ -234,13 +226,9 @@ export const fetchReviews = async () => {
     const reviews = await response.json();
     return reviews;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-
-
-
-}
-
+};
 
 export async function createReview(payload: any) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews`, {
@@ -258,17 +246,19 @@ export async function createReview(payload: any) {
   return await res.json();
 }
 
-
 export async function updateReview(payload: any) {
   try {
-    console.log(payload, "payload")
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/updated_reviews`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
+    console.log(payload, 'payload');
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/updated_reviews`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
       },
-      body: JSON.stringify(payload),
-    });
+    );
 
     if (!res.ok) {
       throw new Error('Failed to update review');
@@ -276,20 +266,20 @@ export async function updateReview(payload: any) {
 
     return await res.json();
   } catch (error) {
-    console.log(error, "error")
+    console.log(error, 'error');
   }
-
 }
 
-
 export async function deleteReview(id: string | number) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/${id}`
-    , {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/${id}`,
+    {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
-    });
+    },
+  );
 
   if (!res.ok) {
     throw new Error('Failed to update review');
@@ -298,52 +288,55 @@ export async function deleteReview(id: string | number) {
   return await res.json();
 }
 
-
-
-
-// Redirecturls 
+// Redirecturls
 
 export const fetchRedirectUrls = async () => {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/get-all_redirects`, {
-      next: { tags: ['redirects'] },
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/get-all_redirects`,
+      {
+        next: { tags: ['redirects'] },
+      },
+    );
 
     return await response.json();
   } catch (error) {
-    console.error(error, "urlssadf");
+    console.error(error, 'urlssadf');
   }
 };
-
 
 export const createRedirectUrl = async (data: initialRedirectUrls) => {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/add_redirect`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/add_redirect`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        next: { tags: ['redirects'] },
       },
-      body: JSON.stringify(data),
-      next: { tags: ['redirects'] },
-    });
+    );
 
     return await response.json();
   } catch (error) {
     console.error(error);
   }
 };
-
-
 
 export const updateRedirectUrl = async (data: RedirectUrls) => {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/update_Redirect`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/update_Redirect`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
       },
-      body: JSON.stringify(data),
-    });
+    );
 
     return await response.json();
   } catch (error) {
@@ -351,12 +344,14 @@ export const updateRedirectUrl = async (data: RedirectUrls) => {
   }
 };
 
-
 export const deleteRedirectUrl = async (id: number) => {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/delet/${id}`, {
-      method: 'DELETE',
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/delet/${id}`,
+      {
+        method: 'DELETE',
+      },
+    );
 
     return await response.json();
   } catch (error) {
@@ -368,13 +363,13 @@ export const fetchRedirectUrlById = async (url: string) => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/getRedirect`,
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        next: { tags: ["redirects"] },
-        body: JSON.stringify({ url }), 
-      }
+        next: { tags: ['redirects'] },
+        body: JSON.stringify({ url }),
+      },
     );
 
     return await response.json();
@@ -383,12 +378,7 @@ export const fetchRedirectUrlById = async (url: string) => {
   }
 };
 
-
-
-
-export const getMonthlyAppointments = async (
-  token?: string | undefined,
-) => {
+export const getMonthlyAppointments = async (token?: string | undefined) => {
   try {
     // if (!token) throw new Error('token not found');
     const response = await fetch(
@@ -401,16 +391,14 @@ export const getMonthlyAppointments = async (
       },
     );
 
-    let data = await response.json()
+    let data = await response.json();
     return data;
   } catch (error) {
     console.error('Error fetching admin records:', error);
     throw error;
   }
 };
-export const getLast7DaysStats = async (
-  token?: string | undefined,
-) => {
+export const getLast7DaysStats = async (token?: string | undefined) => {
   try {
     // if (!token) throw new Error('token not found');
     const response = await fetch(
@@ -422,7 +410,7 @@ export const getLast7DaysStats = async (
         next: { tags: ['ecomerece'] },
       },
     );
-    return await response.json()
+    return await response.json();
   } catch (error) {
     console.error('Error fetching admin records:', error);
     throw error;

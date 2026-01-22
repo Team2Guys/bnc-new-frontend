@@ -1,6 +1,6 @@
 // components/TextInput.tsx
-"use client";
-import React from "react";
+'use client';
+import React from 'react';
 
 interface TextInputProps {
   name: string;
@@ -14,9 +14,9 @@ interface TextInputProps {
 const ImageTextInput: React.FC<TextInputProps> = ({
   name,
   value,
-  placeholder = "",
-  className = "primary-input",
-  type = "text",
+  placeholder = '',
+  className = 'primary-input',
+  type = 'text',
   onChange,
 }) => {
   return (

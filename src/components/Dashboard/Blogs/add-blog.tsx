@@ -1,6 +1,12 @@
 'use client';
 import { Form, Formik } from 'formik';
-import React, { useState, SetStateAction, Fragment, useRef, useEffect } from 'react';
+import React, {
+  useState,
+  SetStateAction,
+  Fragment,
+  useRef,
+  useEffect,
+} from 'react';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { ICategory } from 'types/types';
@@ -72,9 +78,9 @@ const AddBlogs = ({
       if (!posterImage) {
         if (isPublish) {
           showAlert({
-          title: "Please select Thumbnail image😴",
-          icon: "error",
-        });
+            title: 'Please select Thumbnail image😴',
+            icon: 'error',
+          });
           throw new Error('No poster image selected');
         } else {
           setposterimageUrl([]);
@@ -110,22 +116,22 @@ const AddBlogs = ({
 
         showAlert({
           title: EditInitialValues
-            ? "Blog updated successfully 🎉"
-            : "Blog added successfully 🎉",
-          icon: "success",
+            ? 'Blog updated successfully 🎉'
+            : 'Blog added successfully 🎉',
+          icon: 'success',
         });
         setEditBlog(null);
       } else {
         showAlert({
-          title: "Blog saved as Draft 🎉",
-          icon: "warning",
+          title: 'Blog saved as Draft 🎉',
+          icon: 'warning',
         });
       }
     },
     onError: (error: any) => {
       showAlert({
-        title: error?.data?.message + " ☹",
-        icon: "error",
+        title: error?.data?.message + ' ☹',
+        icon: 'error',
       });
       console.error('Error adding blog:', error);
     },
@@ -142,7 +148,6 @@ const AddBlogs = ({
   };
 
   const hasUnsavedChanges = (): boolean => {
-
     let isPosterChanged: boolean;
 
     if (EditInitialValues) {
@@ -153,15 +158,16 @@ const AddBlogs = ({
         !oldPoster || !newPoster
           ? oldPoster !== newPoster
           : oldPoster.public_id !== newPoster.public_id ||
-          (oldPoster.altText ?? '') !== (newPoster.altText ?? '');
-
+            (oldPoster.altText ?? '') !== (newPoster.altText ?? '');
     } else {
       // Adding mode (initially no images)
       isPosterChanged = !!posterimageUrl && posterimageUrl.length > 0;
     }
 
-    const isFormChanged = JSON.stringify(blogInitialValues) !== JSON.stringify(formikValuesRef.current);
-    return (isPosterChanged || isFormChanged)
+    const isFormChanged =
+      JSON.stringify(blogInitialValues) !==
+      JSON.stringify(formikValuesRef.current);
+    return isPosterChanged || isFormChanged;
   };
 
   useEffect(() => {
@@ -177,13 +183,18 @@ const AddBlogs = ({
       if (hasUnsavedChanges()) {
         window.history.pushState(null, '', window.location.href);
         confirm({
-          title: "Unsaved Changes",
-          content: "You have unsaved changes. Do you want to discard them?",
-          okText: "Discard Changes",
-          cancelText: "Cancel",
-          onOk: () => { setMenuType("Blogs"), setEditBlog(null) },
+          title: 'Unsaved Changes',
+          content: 'You have unsaved changes. Do you want to discard them?',
+          okText: 'Discard Changes',
+          cancelText: 'Cancel',
+          onOk: () => {
+            (setMenuType('Blogs'), setEditBlog(null));
+          },
         });
-      } else { setMenuType("All Blogs"); setEditBlog(null) }
+      } else {
+        setMenuType('All Blogs');
+        setEditBlog(null);
+      }
     };
 
     window.addEventListener('beforeunload', handleBeforeUnload);
@@ -199,11 +210,13 @@ const AddBlogs = ({
   const handleBack = () => {
     if (hasUnsavedChanges()) {
       confirm({
-        title: "Unsaved Changes",
-        content: "You have unsaved changes. Do you want to discard them?",
-        okText: "Discard Changes",
-        cancelText: "Cancel",
-        onOk: () => { setMenuType("Blogs"), setEditBlog(null) },
+        title: 'Unsaved Changes',
+        content: 'You have unsaved changes. Do you want to discard them?',
+        okText: 'Discard Changes',
+        cancelText: 'Cancel',
+        onOk: () => {
+          (setMenuType('Blogs'), setEditBlog(null));
+        },
       });
       return;
     }
@@ -222,8 +235,7 @@ const AddBlogs = ({
 
     setMenuType('Blogs');
     setEditBlog(null);
-  }
-
+  };
 
   return (
     <>
@@ -231,10 +243,7 @@ const AddBlogs = ({
       {/* Fixed Top Action Bar */}
       <div className="sticky top-0 z-10 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 shadow-sm py-4 px-6 mb-6">
         <div className="back_main_button">
-          <p
-            className="dashboard_primary_button"
-            onClick={handleBack}
-          >
+          <p className="dashboard_primary_button" onClick={handleBack}>
             <IoMdArrowRoundBack /> Back
           </p>
 
@@ -258,8 +267,19 @@ const AddBlogs = ({
               {addBlogMutation.isPending && !isPublish ? (
                 <Loader color="#fff" />
               ) : (
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                <svg
+                  className="w-5 h-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                  ></path>
                 </svg>
               )}
               Save Draft
@@ -275,8 +295,19 @@ const AddBlogs = ({
               {addBlogMutation.isPending && isPublish ? (
                 <Loader color="#fff" />
               ) : (
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                <svg
+                  className="w-5 h-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  ></path>
                 </svg>
               )}
               Publish
@@ -304,8 +335,8 @@ const AddBlogs = ({
                 values.title === ''
               ) {
                 return showAlert({
-                  title: "Ensure all fields are filled out 😴",
-                  icon: "error",
+                  title: 'Ensure all fields are filled out 😴',
+                  icon: 'error',
                 });
               }
             }
@@ -348,7 +379,10 @@ const AddBlogs = ({
                                     className="cursor-pointer hover:text-red-700"
                                     size={16}
                                     onClick={() =>
-                                      ImageRemoveHandler(item.public_id, setposterimageUrl)
+                                      ImageRemoveHandler(
+                                        item.public_id,
+                                        setposterimageUrl,
+                                      )
                                     }
                                   />
                                 </div>
@@ -379,8 +413,11 @@ const AddBlogs = ({
                           value={values.title}
                           className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent  px-4 py-3 text-black dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/40 transition"
                           onChange={(e) => {
-                            setFieldValue("title", e.target.value);
-                            handleDebouncedMutation({ ...values, title: e.target.value });
+                            setFieldValue('title', e.target.value);
+                            handleDebouncedMutation({
+                              ...values,
+                              title: e.target.value,
+                            });
                           }}
                         />
                       </div>
@@ -397,8 +434,11 @@ const AddBlogs = ({
                           value={values.redirectionUrl}
                           className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent  px-4 py-3 text-black dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/40 transition"
                           onChange={(e) => {
-                            setFieldValue("redirectionUrl", e.target.value);
-                            handleDebouncedMutation({ ...values, redirectionUrl: e.target.value });
+                            setFieldValue('redirectionUrl', e.target.value);
+                            handleDebouncedMutation({
+                              ...values,
+                              redirectionUrl: e.target.value,
+                            });
                           }}
                         />
                       </div>
@@ -414,35 +454,47 @@ const AddBlogs = ({
                           <Select
                             name="category"
                             className="w-full border rounded-md"
-                            defaultValue={values.category || ""}
+                            defaultValue={values.category || ''}
                             onChange={(value) => {
-                              setFieldValue("category", value);
-                              handleDebouncedMutation({ ...values, category: value });
+                              setFieldValue('category', value);
+                              handleDebouncedMutation({
+                                ...values,
+                                category: value,
+                              });
                             }}
                             options={[
                               ...(categories?.length
                                 ? [
-                                  { value: "", label: "Select Category", disabled: true },
-                                  ...categories
-                                    .filter((category) => category.title !== "Commercial")
-                                    .map((category) => ({
-                                      value: category.title,
-                                      label: category.title,
-                                    })),
-                                ]
+                                    {
+                                      value: '',
+                                      label: 'Select Category',
+                                      disabled: true,
+                                    },
+                                    ...categories
+                                      .filter(
+                                        (category) =>
+                                          category.title !== 'Commercial',
+                                      )
+                                      .map((category) => ({
+                                        value: category.title,
+                                        label: category.title,
+                                      })),
+                                  ]
                                 : [
-                                  {
-                                    value: "",
-                                    label: categoryError
-                                      ? "Error loading categories"
-                                      : "No categories found",
-                                  },
-                                ]),
+                                    {
+                                      value: '',
+                                      label: categoryError
+                                        ? 'Error loading categories'
+                                        : 'No categories found',
+                                    },
+                                  ]),
                             ]}
                           />
                         )}
                         {categoryError && (
-                          <div className="text-red-500 text-sm mt-1">{categoryError.message}</div>
+                          <div className="text-red-500 text-sm mt-1">
+                            {categoryError.message}
+                          </div>
                         )}
                       </div>
 
@@ -469,8 +521,11 @@ const AddBlogs = ({
                           value={values.Meta_Title}
                           className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent  px-4 py-3 text-black dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/40 transition"
                           onChange={(e) => {
-                            setFieldValue("Meta_Title", e.target.value);
-                            handleDebouncedMutation({ ...values, Meta_Title: e.target.value });
+                            setFieldValue('Meta_Title', e.target.value);
+                            handleDebouncedMutation({
+                              ...values,
+                              Meta_Title: e.target.value,
+                            });
                           }}
                         />
                       </div>
@@ -487,8 +542,11 @@ const AddBlogs = ({
                           value={values.Canonical_Tag}
                           className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent  px-4 py-3 text-black dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/40 transition"
                           onChange={(e) => {
-                            setFieldValue("Canonical_Tag", e.target.value);
-                            handleDebouncedMutation({ ...values, Canonical_Tag: e.target.value });
+                            setFieldValue('Canonical_Tag', e.target.value);
+                            handleDebouncedMutation({
+                              ...values,
+                              Canonical_Tag: e.target.value,
+                            });
                           }}
                         />
                       </div>
@@ -504,8 +562,11 @@ const AddBlogs = ({
                           value={values.Meta_description}
                           className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent  px-4 py-3 text-black dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/40 transition min-h-[120px]"
                           onChange={(e) => {
-                            setFieldValue("Meta_description", e.target.value);
-                            handleDebouncedMutation({ ...values, Meta_description: e.target.value });
+                            setFieldValue('Meta_description', e.target.value);
+                            handleDebouncedMutation({
+                              ...values,
+                              Meta_description: e.target.value,
+                            });
                           }}
                         />
                       </div>
@@ -522,8 +583,11 @@ const AddBlogs = ({
                           value={values.Images_Alt_Text}
                           className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent  px-4 py-3 text-black dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/40 transition"
                           onChange={(e) => {
-                            setFieldValue("Images_Alt_Text", e.target.value);
-                            handleDebouncedMutation({ ...values, Images_Alt_Text: e.target.value });
+                            setFieldValue('Images_Alt_Text', e.target.value);
+                            handleDebouncedMutation({
+                              ...values,
+                              Images_Alt_Text: e.target.value,
+                            });
                           }}
                         />
                       </div>
@@ -537,7 +601,11 @@ const AddBlogs = ({
                       type="submit"
                       className="text-white bg-yellow-500 px-6 py-2 font-semibold rounded-lg shadow-md hover:bg-yellow-600 transition"
                     >
-                      {addBlogMutation.isPending && !isPublish ? <Loader color="#fff" /> : "Draft"}
+                      {addBlogMutation.isPending && !isPublish ? (
+                        <Loader color="#fff" />
+                      ) : (
+                        'Draft'
+                      )}
                     </button>
                     <button
                       disabled={addBlogMutation.isPending ? true : false}
@@ -545,15 +613,18 @@ const AddBlogs = ({
                       className="bg-black hover:bg-secondary text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center"
                       onClick={() => setIsPublish(true)}
                     >
-                      {addBlogMutation.isPending && isPublish ? <Loader color="#fff" /> : "Publish"}
+                      {addBlogMutation.isPending && isPublish ? (
+                        <Loader color="#fff" />
+                      ) : (
+                        'Publish'
+                      )}
                     </button>
                   </div>
                 </div>
-
               </Form>
-            )
+            );
           }}
-        </Formik >
+        </Formik>
       )}
     </>
   );

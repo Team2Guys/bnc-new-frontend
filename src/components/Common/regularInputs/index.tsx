@@ -11,7 +11,7 @@ interface InputProps {
   value?: any;
   checked?: any;
   className?: string;
-  ref?: Ref<HTMLInputElement>
+  ref?: Ref<HTMLInputElement>;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -24,8 +24,8 @@ const Input: React.FC<InputProps> = ({
   id,
   checked,
   className,
-  ref
-})=> {
+  ref,
+}) => {
   const [inputType, setInputType] = useState(type);
 
   const togglePasswordVisibility = () => {

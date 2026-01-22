@@ -1,6 +1,6 @@
-"use client"
-import React, { SetStateAction, useEffect, useRef, useState } from 'react'
-import { initialRedirectUrls, RedirectUrls } from 'types/general'
+'use client';
+import React, { SetStateAction, useEffect, useRef, useState } from 'react';
+import { initialRedirectUrls, RedirectUrls } from 'types/general';
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { IoMdArrowRoundBack } from 'react-icons/io';
@@ -11,21 +11,24 @@ import Breadcrumb from 'components/Dashboard/Breadcrumbs/Breadcrumb';
 import { showAlert } from 'utils/Alert';
 
 interface IVIEWREDIRECTURLS {
-  setRedirectUrls: React.Dispatch<SetStateAction<RedirectUrls | undefined>>
-  setselecteMenu: React.Dispatch<SetStateAction<string>>,
-  RedirectUrls: RedirectUrls | undefined
+  setRedirectUrls: React.Dispatch<SetStateAction<RedirectUrls | undefined>>;
+  setselecteMenu: React.Dispatch<SetStateAction<string>>;
+  RedirectUrls: RedirectUrls | undefined;
 }
 
-function AddRedirecturl({ RedirectUrls, setRedirectUrls, setselecteMenu }: IVIEWREDIRECTURLS) {
-  const [loading, setloading] = useState(false)
+function AddRedirecturl({
+  RedirectUrls,
+  setRedirectUrls,
+  setselecteMenu,
+}: IVIEWREDIRECTURLS) {
+  const [loading, setloading] = useState(false);
 
   const [formDate] = useState<initialRedirectUrls>({
-    redirectedUrl: RedirectUrls?.redirectedUrl || "",
-    url: RedirectUrls?.url || "",
-  })
+    redirectedUrl: RedirectUrls?.redirectedUrl || '',
+    url: RedirectUrls?.url || '',
+  });
   const formikValuesRef = useRef<initialRedirectUrls>(formDate);
   const { confirm, modalNode } = useConfirmModal();
-
 
   const validationSchema = Yup.object({
     url: Yup.string().required('Url is required'),
@@ -34,43 +37,43 @@ function AddRedirecturl({ RedirectUrls, setRedirectUrls, setselecteMenu }: IVIEW
 
   const apiHandler = async (values: initialRedirectUrls) => {
     try {
-      setloading(true)
+      setloading(true);
       if (RedirectUrls?.redirectedUrl) {
         // UPDATE existing review
-        await updateRedirectUrl({ id: RedirectUrls.id, ...values })
-
-          ;
+        await updateRedirectUrl({ id: RedirectUrls.id, ...values });
       } else {
         await createRedirectUrl(values);
       }
 
       setRedirectUrls(undefined);
-      setselecteMenu('All RedirectUrls')
-      revalidateTag("RedirectUrls")
-      revalidateTag("redirects")
+      setselecteMenu('All RedirectUrls');
+      revalidateTag('RedirectUrls');
+      revalidateTag('redirects');
     } catch (error: any) {
       const graphQLError = error?.graphQLErrors?.[0]?.message;
       showAlert({
-        title: graphQLError || "Internal server error",
-        icon: "error",
+        title: graphQLError || 'Internal server error',
+        icon: 'error',
       });
     } finally {
-      setloading(false)
+      setloading(false);
     }
   };
 
-  const handleSubmit = async (values: initialRedirectUrls, { resetForm }: FormikHelpers<initialRedirectUrls>) => {
-    await apiHandler(values)
-    resetForm()
+  const handleSubmit = async (
+    values: initialRedirectUrls,
+    { resetForm }: FormikHelpers<initialRedirectUrls>,
+  ) => {
+    await apiHandler(values);
+    resetForm();
   };
 
-
   const hasUnsavedChanges = (): boolean => {
-    const isFormChanged = JSON.stringify(formDate) !== JSON.stringify(formikValuesRef.current);
+    const isFormChanged =
+      JSON.stringify(formDate) !== JSON.stringify(formikValuesRef.current);
 
     return isFormChanged;
   };
-
 
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
@@ -90,10 +93,12 @@ function AddRedirecturl({ RedirectUrls, setRedirectUrls, setselecteMenu }: IVIEW
           okText: 'Discard Changes',
           cancelText: 'Cancel',
           onOk: () => {
-            setselecteMenu("All RedirectUrls");
+            setselecteMenu('All RedirectUrls');
           },
         });
-      } else { setselecteMenu("All RedirectUrls"); }
+      } else {
+        setselecteMenu('All RedirectUrls');
+      }
     };
 
     window.addEventListener('beforeunload', handleBeforeUnload);
@@ -114,13 +119,13 @@ function AddRedirecturl({ RedirectUrls, setRedirectUrls, setselecteMenu }: IVIEW
         okText: 'Discard Changes',
         cancelText: 'Cancel',
         onOk: () => {
-          setselecteMenu("All RedirectUrls");
+          setselecteMenu('All RedirectUrls');
         },
       });
       return;
     }
 
-    setselecteMenu("All RedirectUrls");
+    setselecteMenu('All RedirectUrls');
   };
 
   return (
@@ -129,50 +134,58 @@ function AddRedirecturl({ RedirectUrls, setRedirectUrls, setselecteMenu }: IVIEW
       <div className="p-6">
         {/* Breadcrumb */}
 
-        <Breadcrumb pageName={"Add Redirect URL"} />
-    <div className="back_main_button pb-4 border-b border-gray-200 dark:border-gray-700">
-                     <p
-                               className="dashboard_primary_button"
-                               onClick={handleBack}
-                             >
-                               <IoMdArrowRoundBack /> Back
-                             </p>
-                    <button
-                      type="submit"
-                      className="px-6 py-2 bg-primary text-white rounded-lg shadow hover:bg-primary/90 transition"
-                    >
-                      {loading ? "Loading..." : "Submit"}
-                    </button>
-                  </div>
+        <Breadcrumb pageName={'Add Redirect URL'} />
+        <div className="back_main_button pb-4 border-b border-gray-200 dark:border-gray-700">
+          <p className="dashboard_primary_button" onClick={handleBack}>
+            <IoMdArrowRoundBack /> Back
+          </p>
+          <button
+            type="submit"
+            className="px-6 py-2 bg-primary text-white rounded-lg shadow hover:bg-primary/90 transition"
+          >
+            {loading ? 'Loading...' : 'Submit'}
+          </button>
+        </div>
         <div className="bg-white dark:bg-gray-900 shadow-xl rounded-lg p-6 border border-gray-200 dark:border-gray-700 mt-4">
-          <Formik enableReinitialize initialValues={formDate}
+          <Formik
+            enableReinitialize
+            initialValues={formDate}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
             {({ values }) => {
               formikValuesRef.current = values;
               return (
-                
                 <Form className="space-y-6">
                   {/* Top Header */}
-              
 
                   {/* URL Input */}
                   <div>
-                    <label htmlFor="url" className="block text-sm font-medium  dark:text-white">
+                    <label
+                      htmlFor="url"
+                      className="block text-sm font-medium  dark:text-white"
+                    >
                       Url Endpoint
                     </label>
                     <Field
                       name="url"
                       type="text"
                       placeholder="/example-endpoint"
-                      className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 placeholder-gray-400 dark:placeholder-gray-500 px-4 py-3 dark:text-white outline-none transition focus:border-secondary dark:focus:border-secondary focus:ring-2 focus:ring-secondary dark:focus:secondary" />
-                    <ErrorMessage name="url" component="div" className="text-red-500 text-sm mt-1" />
+                      className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 placeholder-gray-400 dark:placeholder-gray-500 px-4 py-3 dark:text-white outline-none transition focus:border-secondary dark:focus:border-secondary focus:ring-2 focus:ring-secondary dark:focus:secondary"
+                    />
+                    <ErrorMessage
+                      name="url"
+                      component="div"
+                      className="text-red-500 text-sm mt-1"
+                    />
                   </div>
 
                   {/* Redirected URL Input */}
                   <div>
-                    <label htmlFor="redirectedUrl" className="block text-sm font-medium  dark:text-white">
+                    <label
+                      htmlFor="redirectedUrl"
+                      className="block text-sm font-medium  dark:text-white"
+                    >
                       Redirect Pages
                     </label>
                     <Field
@@ -181,7 +194,11 @@ function AddRedirecturl({ RedirectUrls, setRedirectUrls, setselecteMenu }: IVIEW
                       placeholder="https://example.com"
                       className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 placeholder-gray-400 dark:placeholder-gray-500 px-4 py-3 dark:text-white outline-none transition focus:border-secondary dark:focus:border-secondary focus:ring-2 focus:ring-secondary dark:focus:secondary"
                     />
-                    <ErrorMessage name="redirectedUrl" component="div" className="text-red-500 text-sm mt-1" />
+                    <ErrorMessage
+                      name="redirectedUrl"
+                      component="div"
+                      className="text-red-500 text-sm mt-1"
+                    />
                   </div>
 
                   {/* Bottom Button */}
@@ -191,17 +208,17 @@ function AddRedirecturl({ RedirectUrls, setRedirectUrls, setselecteMenu }: IVIEW
                       disabled={loading}
                       className="px-6 py-2 bg-primary text-white rounded-lg shadow hover:bg-primary/90 transition disabled:opacity-50"
                     >
-                      {loading ? "Submitting..." : "Submit"}
+                      {loading ? 'Submitting...' : 'Submit'}
                     </button>
                   </div>
                 </Form>
-              )
+              );
             }}
           </Formik>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default AddRedirecturl
+export default AddRedirecturl;

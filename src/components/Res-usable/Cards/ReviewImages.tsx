@@ -83,7 +83,10 @@ const ReviewImages = ({ testimonial }: { testimonial: IREVIEWS }) => {
             <div className="w-full md:w-2/3 xl:w-3/4 h-full bg-black relative">
               <Slider {...sliderSettings}>
                 {testimonial.ReviewsImages.map((item, index) => (
-                  <div key={index} className="relative w-full h-full flex justify-center items-center">
+                  <div
+                    key={index}
+                    className="relative w-full h-full flex justify-center items-center"
+                  >
                     <Image
                       src={item.imageUrl}
                       alt={`Slide ${index + 1}`}
@@ -127,7 +130,7 @@ const ReviewImages = ({ testimonial }: { testimonial: IREVIEWS }) => {
                     <p className="text-12 text-[#8a8a8a]">
                       {(testimonial.reviewDate || testimonial.createdAt) &&
                         new Date(
-                          testimonial.reviewDate || testimonial.createdAt
+                          testimonial.reviewDate || testimonial.createdAt,
                         ).toLocaleDateString('en-GB', {
                           day: 'numeric',
                           month: 'long',

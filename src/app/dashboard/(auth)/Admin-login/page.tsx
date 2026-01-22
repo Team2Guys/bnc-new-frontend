@@ -4,9 +4,12 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAppDispatch } from 'components/Others/HelperRedux';
 import { loggedInAdminAction } from '../../../../redux/slices/AdminsSlice';
-const USRcomponent = dynamic(() => import('components/userComponent/userComponent'), {
-  ssr: false, 
-});
+const USRcomponent = dynamic(
+  () => import('components/userComponent/userComponent'),
+  {
+    ssr: false,
+  },
+);
 import { IoIosLock, IoMdMail } from 'react-icons/io';
 import NoneAuth from 'hooks/None-AuthHook';
 import Cookies from 'js-cookie';
@@ -32,7 +35,6 @@ const DashboardLogin = () => {
 
   const [formData, setFormData] = useState(intialvalue);
 
-
   const [error, setError] = useState<string | undefined>();
   const [loading, setloading] = useState<boolean | null | undefined>(false);
   const [adminType, setadminType] = useState<string | undefined>('Admin');
@@ -45,18 +47,25 @@ const DashboardLogin = () => {
     }
     try {
       setloading(true);
-      let url = adminType === 'Admin' ? 'admins/admin-login': 'admins/super_admin_login-login';
-      console.log(url, 'url')
-      const response = await Api_handler(url,formData,"post",)
-      console.log(response, "response")
+      let url =
+        adminType === 'Admin'
+          ? 'admins/admin-login'
+          : 'admins/super_admin_login-login';
+      console.log(url, 'url');
+      const response = await Api_handler(url, formData, 'post');
+      console.log(response, 'response');
 
-      Cookies.set(adminType == "Admin" ? '2guysAdminToken' : "superAdminToken", response.token, { expires: 1 }) 
+      Cookies.set(
+        adminType == 'Admin' ? '2guysAdminToken' : 'superAdminToken',
+        response.token,
+        { expires: 1 },
+      );
       setloading(false);
       dispatch(loggedInAdminAction(response.user));
       setFormData(intialvalue);
       showAlert({
-        title: "You have successfully login",
-        icon: "success",
+        title: 'You have successfully login',
+        icon: 'success',
       });
       setTimeout(() => {
         router.push('/dashboard');

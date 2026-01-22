@@ -1,11 +1,11 @@
 .motorizedblindcurtains .slick-dots li.slick-active button:before {
-  opacity: .75;
-  color: #F1B42F !important;
+  opacity: 0.75;
+  color: #f1b42f !important;
   opacity: 1;
 }
 
 .motorizedblindcurtains .slick-dots li button:before {
-  color:#36454F1F !important;
+  color: #36454f1f !important;
   font-size: 8px !important;
   opacity: 1;
 }

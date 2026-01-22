@@ -6,11 +6,11 @@
 @layer base {
   :root {
     --foreground: 222.2 84% 4.9%;
-    --primary: #3E3F42;
-    --primary-foreground: #FFFFF0;
-    --secondary: #F1B42F;
+    --primary: #3e3f42;
+    --primary-foreground: #fffff0;
+    --secondary: #f1b42f;
     --light: #ffffff;
-    --secondary-foreground: #F5F5F5;
+    --secondary-foreground: #f5f5f5;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --radius: 0.5rem;
@@ -35,9 +35,9 @@
   .primary-input {
     @apply h-14 px-4 border-2 border-[#3E3F423D] placeholder:text-[#3E3F4266] w-full font-medium rounded-lg text-sm sm:text-base dark:bg-primary  dark:text-white dark:focus:border-secondary dark:border;
   }
-.search_input {
-  @apply primary-input w-fit
-}
+  .search_input {
+    @apply primary-input w-fit;
+  }
 }
 
 @layer components {
@@ -52,15 +52,14 @@
   }
 }
 
-
 @layer components {
-.dashboard_primary_button {
-    @apply bg-primary hover:bg-secondary text-white px-4 py-2 rounded w-fit flex items-center gap-2 cursor-pointer ;
+  .dashboard_primary_button {
+    @apply bg-primary hover:bg-secondary text-white px-4 py-2 rounded w-fit flex items-center gap-2 cursor-pointer;
   }
 }
 
 @layer components {
-.dashboard_sidebar_links {
+  .dashboard_sidebar_links {
     @apply relative flex items-center gap-2 rounded-sm px-4 py-2 font-medium duration-300 shadow-md border-b hover:bg-secondary dark:hover:bg-lightdark text-white dark:text-white;
   }
 }
@@ -72,61 +71,60 @@
 }
 
 @layer components {
-.errorColor {
-    @apply text-red-500 ;
+  .errorColor {
+    @apply text-red-500;
   }
 }
 @layer components {
-  .sidebar_inner_link{
-    @apply flex-1 rounded-lg px-3 py-2 text-sm transition-all duration-300 shadow-lg text-white dark:border-b
+  .sidebar_inner_link {
+    @apply flex-1 rounded-lg px-3 py-2 text-sm transition-all duration-300 shadow-lg text-white dark:border-b;
   }
   .db_dropdown {
     @apply transition-all duration-500 ease-in-out overflow-hidden;
   }
-  .db_main_link{
+  .db_main_link {
     @apply text-white group-hover:text-primary transition-transform duration-300 group-hover:translate-x-1;
   }
   .db_ui_link {
-   @apply mb-3 mt-3 flex flex-col gap-2 pl-6
+    @apply mb-3 mt-3 flex flex-col gap-2 pl-6;
   }
   .db_ul_li_link {
     @apply flex items-center gap-2 transition-all duration-500;
   }
   .db_inner_sub_cat_link {
-    @apply text-white border-l-4 border-white shadow-md
+    @apply text-white border-l-4 border-white shadow-md;
   }
   .db_inner_sub_cat_link_hover {
-    @apply text-white hover:bg-white/5 hover:text-white
+    @apply text-white hover:bg-white/5 hover:text-white;
   }
   .sub_cat_link {
-    @apply flex items-center gap-2 transform transition-all duration-500 delay-200 
+    @apply flex items-center gap-2 transform transition-all duration-500 delay-200;
   }
-  .MdOutlineKeyboardArrowDown{
-    @apply absolute right-4 top-1/2 -translate-y-1/2 text-white transition-transform duration-500
+  .MdOutlineKeyboardArrowDown {
+    @apply absolute right-4 top-1/2 -translate-y-1/2 text-white transition-transform duration-500;
   }
-  .inputs_heading{
+  .inputs_heading {
     @apply border-b py-4 px-4 bg-secondary text-lg;
   }
   .crose_button {
-    @apply ml-2 errorColor bg-secondary rounded-full p-1 w-fit
+    @apply ml-2 errorColor bg-secondary rounded-full p-1 w-fit;
   }
-  .back_main_button{
+  .back_main_button {
     @apply flex items-center justify-between;
   }
-  .label_main{
-    @apply font-medium text-black dark:text-white
+  .label_main {
+    @apply font-medium text-black dark:text-white;
   }
-  .form_element_main{
+  .form_element_main {
     @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4;
   }
-  .upload_image{
-    @apply rounded-sm border bg-white ;
+  .upload_image {
+    @apply rounded-sm border bg-white;
   }
   .main_dropdown {
-    @apply relative flex items-center gap-2 py-3 px-4 rounded-md cursor-pointer text-white font-semibold transition-all duration-300 border shadow-md
+    @apply relative flex items-center gap-2 py-3 px-4 rounded-md cursor-pointer text-white font-semibold transition-all duration-300 border shadow-md;
   }
-  .appointment_popup_heading
-  {
+  .appointment_popup_heading {
     @apply text-base uppercase tracking-wide text-gray-500 font-semibold dark:text-gray-400;
   }
 }
@@ -163,7 +161,6 @@ input {
   * {
     @apply border-border;
   }
-
 }
 
 .VIpgJd-ZVi9od-ORHb-OEVmcd.skiptranslate {
@@ -202,7 +199,7 @@ li button:before {
   animation: fadeUp 0.8s ease-out forwards;
 }
 
-.PhoneInputInput{
-  border-left: 1px solid #3E3F423D !important;
+.PhoneInputInput {
+  border-left: 1px solid #3e3f423d !important;
   padding-left: 5px !important;
 }

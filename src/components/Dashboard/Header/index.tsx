@@ -28,7 +28,7 @@ const Header = (props: {
               height={100}
               src={'/assets/images/whitelogo.png'}
               alt="Logo"
-              className='w-auto h-auto'
+              className="w-auto h-auto"
             />
           </Link>
         </div>

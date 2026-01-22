@@ -1,9 +1,9 @@
-"use client";
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import Cookies from "js-cookie";
-import ProtectedRoute from "hooks/AuthHookAdmin";
-import { showAlert } from "utils/Alert";
+'use client';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
+import ProtectedRoute from 'hooks/AuthHookAdmin';
+import { showAlert } from 'utils/Alert';
 
 interface IComment {
   id: number;
@@ -14,15 +14,17 @@ interface IComment {
 }
 
 const Comments = ({ currentComments }: { currentComments: any[] }) => {
-  const token = Cookies.get("2guysAdminToken");
-  const superAdminToken = Cookies.get("superAdminToken");
+  const token = Cookies.get('2guysAdminToken');
+  const superAdminToken = Cookies.get('superAdminToken');
   const finalToken = token || superAdminToken;
   const headers = {
     authorization: `Bearer ${finalToken}`,
   };
 
-  const [disabledButtons, setDisabledButtons] = useState<{ [key: number]: boolean }>({});
-  const [searchTerm, setSearchTerm] = useState("");
+  const [disabledButtons, setDisabledButtons] = useState<{
+    [key: number]: boolean;
+  }>({});
+  const [searchTerm, setSearchTerm] = useState('');
   const [comments, setComments] = useState(currentComments);
 
   useEffect(() => {
@@ -31,9 +33,9 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
         ...item,
         comments: item.comments.map((comment: IComment) => ({
           ...comment,
-          status: comment.status || "PENDING",
+          status: comment.status || 'PENDING',
         })),
-      }))
+      })),
     );
   }, [currentComments]);
 
@@ -41,18 +43,24 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
     setSearchTerm(event.target.value.toLowerCase());
   };
 
-  const updateCommentStatus = async (commentId: number, itemId: number, newStatus: string) => {
+  const updateCommentStatus = async (
+    commentId: number,
+    itemId: number,
+    newStatus: string,
+  ) => {
     setComments((prevComments) =>
       prevComments.map((item) =>
         item.id === itemId
           ? {
               ...item,
               comments: item.comments.map((comment: IComment) =>
-                comment.id === commentId ? { ...comment, status: newStatus } : comment
+                comment.id === commentId
+                  ? { ...comment, status: newStatus }
+                  : comment,
               ),
             }
-          : item
-      )
+          : item,
+      ),
     );
 
     setDisabledButtons((prev) => ({ ...prev, [commentId]: true }));
@@ -61,15 +69,18 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
       await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/blogs/comment/status/${commentId}`,
         { status: newStatus },
-        { headers }
+        { headers },
       );
       showAlert({
-        title: newStatus === "APPROVED" ? "Comment approved 🎉" : "Comment rejected ❌",
-        icon: "success",
+        title:
+          newStatus === 'APPROVED'
+            ? 'Comment approved 🎉'
+            : 'Comment rejected ❌',
+        icon: 'success',
       });
     } catch (error) {
-      console.error("Error updating comment status:", error);
-      showAlert({ title: "Failed to update comment 😢", icon: "error" });
+      console.error('Error updating comment status:', error);
+      showAlert({ title: 'Failed to update comment 😢', icon: 'error' });
     } finally {
       setTimeout(() => {
         setDisabledButtons((prev) => ({ ...prev, [commentId]: false }));
@@ -87,7 +98,10 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
         comment.name.toLowerCase().includes(term) ||
         comment.description.toLowerCase().includes(term) ||
         (comment.createdAt &&
-          new Date(comment.createdAt).toLocaleString().toLowerCase().includes(term))
+          new Date(comment.createdAt)
+            .toLocaleString()
+            .toLowerCase()
+            .includes(term)),
     );
 
     return titleMatch || commentMatches;
@@ -95,12 +109,12 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
 
   const getStatusBadge = (status: string) => {
     switch (status) {
-      case "APPROVED":
-        return "bg-gradient-to-r from-green-400 to-green-600 text-white shadow-md";
-      case "REJECTED":
-        return "bg-gradient-to-r from-red-400 to-red-600 text-white shadow-md";
+      case 'APPROVED':
+        return 'bg-gradient-to-r from-green-400 to-green-600 text-white shadow-md';
+      case 'REJECTED':
+        return 'bg-gradient-to-r from-red-400 to-red-600 text-white shadow-md';
       default:
-        return "bg-gradient-to-r from-yellow-400 to-yellow-600 text-black shadow-md";
+        return 'bg-gradient-to-r from-yellow-400 to-yellow-600 text-black shadow-md';
     }
   };
 
@@ -131,10 +145,10 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition 
               ${
                 disabledButtons[comment.id]
-                  ? "bg-gray-300 cursor-not-allowed"
-                  : "bg-gradient-to-r from-green-500 to-green-700 text-white hover:scale-105 shadow-md"
+                  ? 'bg-gray-300 cursor-not-allowed'
+                  : 'bg-gradient-to-r from-green-500 to-green-700 text-white hover:scale-105 shadow-md'
               }`}
-            onClick={() => updateCommentStatus(comment.id, item.id, "APPROVED")}
+            onClick={() => updateCommentStatus(comment.id, item.id, 'APPROVED')}
             disabled={disabledButtons[comment.id]}
           >
             ✅ Approve
@@ -144,10 +158,10 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition 
               ${
                 disabledButtons[comment.id]
-                  ? "bg-gray-300 cursor-not-allowed"
-                  : "bg-gradient-to-r from-red-500 to-red-700 text-white hover:scale-105 shadow-md"
+                  ? 'bg-gray-300 cursor-not-allowed'
+                  : 'bg-gradient-to-r from-red-500 to-red-700 text-white hover:scale-105 shadow-md'
               }`}
-            onClick={() => updateCommentStatus(comment.id, item.id, "REJECTED")}
+            onClick={() => updateCommentStatus(comment.id, item.id, 'REJECTED')}
             disabled={disabledButtons[comment.id]}
           >
             ❌ Reject
@@ -159,7 +173,7 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
       <div className="mt-4">
         <span
           className={`px-4 py-1 rounded-full text-xs font-bold tracking-wide ${getStatusBadge(
-            comment.status
+            comment.status,
           )}`}
         >
           {comment.status}
@@ -168,7 +182,7 @@ const Comments = ({ currentComments }: { currentComments: any[] }) => {
     </div>
   );
 
-  const sections = ["APPROVED", "REJECTED", "PENDING"];
+  const sections = ['APPROVED', 'REJECTED', 'PENDING'];
 
   return (
     <div className="space-y-8">

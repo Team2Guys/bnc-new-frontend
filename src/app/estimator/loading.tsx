@@ -1,11 +1,9 @@
-'use client'
-import EstimatorSkeleton from 'components/Skeleton/estimator-skeleton'
-import React from 'react'
+'use client';
+import EstimatorSkeleton from 'components/Skeleton/estimator-skeleton';
+import React from 'react';
 
 const Loading = () => {
-  return (
-    <EstimatorSkeleton />
-  )
-}
+  return <EstimatorSkeleton />;
+};
 
-export default Loading
+export default Loading;

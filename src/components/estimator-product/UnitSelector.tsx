@@ -1,15 +1,18 @@
-"use client";
-import Checkbox from "components/ui/Checkbox";
-import React from "react";
+'use client';
+import Checkbox from 'components/ui/Checkbox';
+import React from 'react';
 
-const units = ["mm", "cm", "inches"];
+const units = ['mm', 'cm', 'inches'];
 
 interface UnitSelectorProps {
   selectedUnit: string;
   setSelectedUnit: (unit: string) => void;
 }
 
-const UnitSelector: React.FC<UnitSelectorProps> = ({ selectedUnit, setSelectedUnit }) => {
+const UnitSelector: React.FC<UnitSelectorProps> = ({
+  selectedUnit,
+  setSelectedUnit,
+}) => {
   const handleUnitChange = (unit: string) => {
     setSelectedUnit(unit);
   };

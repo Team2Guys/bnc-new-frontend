@@ -47,10 +47,10 @@ const BookAppointment: React.FC<AppointmentProps> = ({
       return response.data;
     } catch (error: any) {
       showAlert({
-      title: "Error",
-      text: error.message || JSON.stringify(error),
-      icon: "error",
-    });
+        title: 'Error',
+        text: error.message || JSON.stringify(error),
+        icon: 'error',
+      });
     }
   };
 
@@ -82,7 +82,9 @@ const BookAppointment: React.FC<AppointmentProps> = ({
     telephone: false,
     whatsapp: false,
   };
-  const [contactMethods, setContactMethods] = useState<ContactMethods>(initialContactMethods);
+  const [contactMethods, setContactMethods] = useState<ContactMethods>(
+    initialContactMethods,
+  );
   // const [successMessage, setSuccessMessage] = useState<string>('');
 
   const formInitialValues = {
@@ -116,9 +118,9 @@ const BookAppointment: React.FC<AppointmentProps> = ({
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
- const handleRadioChange = (city: string) => {
-  setSelectedCity(city);
-};
+  const handleRadioChange = (city: string) => {
+    setSelectedCity(city);
+  };
 
   const handleSelectChange = (name: string, value: string) => {
     setFormData({ ...formData, [name]: value });
@@ -207,11 +209,11 @@ const BookAppointment: React.FC<AppointmentProps> = ({
           prefered_time,
           prefered_contact_method: prefered_contact_method_list,
           product_type: productTypeArray,
-          area: formData.area + ' ' + selectedCity
+          area: formData.area + ' ' + selectedCity,
         });
         showAlert({
-          title: "Appointment submitted successfully",
-          icon: "success",
+          title: 'Appointment submitted successfully',
+          icon: 'success',
         });
         if (typeof window !== 'undefined') {
           window.dataLayer = window.dataLayer || [];
@@ -228,12 +230,11 @@ const BookAppointment: React.FC<AppointmentProps> = ({
         });
         setTimeout(() => setFormData(formInitialValues), 0);
         setSelectedOptions(getInitialSelectedOptions());
-        setContactMethods(initialContactMethods)
-
+        setContactMethods(initialContactMethods);
       } catch (error) {
         showAlert({
-          title: "Failed to submit the appointment. Please try again.",
-          icon: "error",
+          title: 'Failed to submit the appointment. Please try again.',
+          icon: 'error',
         });
       } finally {
         setLoading(false);
@@ -254,10 +255,8 @@ const BookAppointment: React.FC<AppointmentProps> = ({
 
   const cities = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman'];
 
-
   return (
     <div
-
       className={`bg-white text-left text-black ${className} ${singlePage ? 'w-full rounded-lg sm:px-3 sm:py-4' : 'lg:w-7/12 py-4 bg-white drop-shadow-md rounded-xl  mt-5'}`}
     >
       {!singlePage && (
@@ -269,48 +268,55 @@ const BookAppointment: React.FC<AppointmentProps> = ({
         onSubmit={handleSubmit}
         className={` bg-white rounded-md ${singlePage ? 'w-full  px-0 py-4 sm:p-4 ' : ' px-4 py-2'}`}
       >
-       <div>
-      <label className="font-bold mb-2 block font-futura text-xl sm:text-2xl">
-        City
-      </label>
+        <div>
+          <label className="font-bold mb-2 block font-futura text-xl sm:text-2xl">
+            City
+          </label>
 
-      <div className="flex flex-wrap sm:flex-nowrap sm:gap-12 justify-between sm:justify-start">
-        {cities.map((city) => (
-          <Checkbox
-            key={city}
-            id={city}
-            name="city"
-            label={city}
-            checked={selectedCity === city}
-            onChange={() => handleRadioChange(city)}
-            radio
-        />
-        ))}
-      </div>
+          <div className="flex flex-wrap sm:flex-nowrap sm:gap-12 justify-between sm:justify-start">
+            {cities.map((city) => (
+              <Checkbox
+                key={city}
+                id={city}
+                name="city"
+                label={city}
+                checked={selectedCity === city}
+                onChange={() => handleRadioChange(city)}
+                radio
+              />
+            ))}
+          </div>
 
-      {selectedCity !== "Dubai" && (
-        <p className="text-red-500 font-medium font-roboto text-sm sm:text-xl py-4 sm:px-8">
-          Services available with a minimum order of 8 windows.
-        </p>
-      )}
-    </div>
-        <div className='pt-4 sm:pt-8'>
+          {selectedCity !== 'Dubai' && (
+            <p className="text-red-500 font-medium font-roboto text-sm sm:text-xl py-4 sm:px-8">
+              Services available with a minimum order of 8 windows.
+            </p>
+          )}
+        </div>
+        <div className="pt-4 sm:pt-8">
           <HorizontalDatePicker
             onChange={(date: Date) =>
               setFormData({ ...formData, prefered_Date: date })
             }
           />
         </div>
-        <div className='py-8'>
-          <h3 className='text-xl sm:text-2xl font-futura font-bold mb-4 text-primary'>Time Slot For The Visit</h3>
+        <div className="py-8">
+          <h3 className="text-xl sm:text-2xl font-futura font-bold mb-4 text-primary">
+            Time Slot For The Visit
+          </h3>
           <TimeSlotPicker
             value={formData.prefered_time}
-            onChange={(val: string) => setFormData({ ...formData, prefered_time: val })}
+            onChange={(val: string) =>
+              setFormData({ ...formData, prefered_time: val })
+            }
           />
         </div>
-        <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
-            <label htmlFor="name" className="block text-sm sm:text-xl font-roboto font-medium">
+            <label
+              htmlFor="name"
+              className="block text-sm sm:text-xl font-roboto font-medium"
+            >
               Name *
             </label>
             <input
@@ -327,7 +333,10 @@ const BookAppointment: React.FC<AppointmentProps> = ({
             )}
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm sm:text-xl font-roboto font-medium">
+            <label
+              htmlFor="email"
+              className="block text-sm sm:text-xl font-roboto font-medium"
+            >
               E-Mail *
             </label>
             <input
@@ -344,7 +353,10 @@ const BookAppointment: React.FC<AppointmentProps> = ({
             )}
           </div>
           <div>
-            <label htmlFor="Address " className="block text-sm sm:text-xl font-roboto font-medium">
+            <label
+              htmlFor="Address "
+              className="block text-sm sm:text-xl font-roboto font-medium"
+            >
               Address *
             </label>
             <input
@@ -392,10 +404,20 @@ const BookAppointment: React.FC<AppointmentProps> = ({
                 className={`size-4 sm:size-5 flex items-center justify-center rounded-full border 
             ${sameAsPhone ? 'bg-gray-800 text-white border-gray-800' : 'border-gray-400 text-gray-400'}`}
               >
-                {sameAsPhone && <IoMdCheckmark className='text-base sm:text-lg' />}
+                {sameAsPhone && (
+                  <IoMdCheckmark className="text-base sm:text-lg" />
+                )}
               </div>
-              <span className="text-sm sm:text-base font-medium">I have the same WhatsApp number</span>
-              <Image width={100} height={100} className='size-4 sm:size-5' src='/assets/images/whatsapp.webp' alt='whatsapp' />
+              <span className="text-sm sm:text-base font-medium">
+                I have the same WhatsApp number
+              </span>
+              <Image
+                width={100}
+                height={100}
+                className="size-4 sm:size-5"
+                src="/assets/images/whatsapp.webp"
+                alt="whatsapp"
+              />
             </div>
           </div>
           {!sameAsPhone && (
@@ -409,7 +431,6 @@ const BookAppointment: React.FC<AppointmentProps> = ({
               <PhoneInput
                 className="mt-1 h-14 px-4 border-2 border-gray-300 w-full font-medium rounded-xl text-sm sm:text-base"
                 international
-
                 defaultCountry="AE"
                 limitMaxLength
                 countryCallingCodeEditable={false}
@@ -421,7 +442,10 @@ const BookAppointment: React.FC<AppointmentProps> = ({
             </div>
           )}
           <div>
-            <label htmlFor="windows " className="block text-sm sm:text-xl font-roboto font-medium">
+            <label
+              htmlFor="windows "
+              className="block text-sm sm:text-xl font-roboto font-medium"
+            >
               How Many Windows *
             </label>
             <input
@@ -440,13 +464,13 @@ const BookAppointment: React.FC<AppointmentProps> = ({
             )}
           </div>
           <div>
-             <label
-          htmlFor="how_user_find_us"
-          className="block text-sm sm:text-xl font-roboto font-medium"
-        >
-          How Did You Hear About Us?
-        </label>
-        <CustomSelect
+            <label
+              htmlFor="how_user_find_us"
+              className="block text-sm sm:text-xl font-roboto font-medium"
+            >
+              How Did You Hear About Us?
+            </label>
+            <CustomSelect
               instanceId="window-options-select"
               options={referralOptions}
               onChange={(option) =>
@@ -461,14 +485,13 @@ const BookAppointment: React.FC<AppointmentProps> = ({
         <div className="text-center sm:text-start mt-8">
           <button
             type="submit"
-            id='appointment'
+            id="appointment"
             className="w-fit bg-secondary py-3 px-5 sm:px-8 rounded-lg font-semibold"
             disabled={loading}
           >
             {loading ? <Loader color="#fff" /> : 'Submit Request'}
           </button>
         </div>
-
       </form>
     </div>
   );

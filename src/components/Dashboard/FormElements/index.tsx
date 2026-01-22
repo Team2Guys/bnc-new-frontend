@@ -6,7 +6,12 @@ import { Formik, FieldArray, Form, Field } from 'formik';
 import Imageupload from 'components/ImageUpload/Imageupload';
 import { RxCross2 } from 'react-icons/rx';
 import Image from 'next/image';
-import { compareImageArray, compareImages, handleImageAltText, ImageRemoveHandler } from 'utils/helperFunctions';
+import {
+  compareImageArray,
+  compareImages,
+  handleImageAltText,
+  ImageRemoveHandler,
+} from 'utils/helperFunctions';
 import { ADDPRODUCTFORMPROPS, Product } from 'types/interfaces';
 import axios from 'axios';
 import Loader from 'components/Loader/Loader';
@@ -30,58 +35,78 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
   setselecteMenu,
   setEditProduct,
   categoriesList,
-  subCategoriesList
+  subCategoriesList,
 }) => {
   const [imagesUrl, setImagesUrl] = useState<any[]>([]);
   const [videos, setvideos] = useState<any[]>(
     (EditInitialValues &&
       EditInitialValues.videos &&
       EditInitialValues.videos) ||
-    [],
+      [],
   );
   const [posterimageUrl, setposterimageUrl] = useState<any[] | undefined>(
     EditInitialValues &&
-    EditInitialValues.posterImage && [EditInitialValues.posterImage],
+      EditInitialValues.posterImage && [EditInitialValues.posterImage],
   );
   const [bannerImageUrl, setBannerImageUrl] = useState<any[] | undefined>(
     EditInitialValues &&
-    EditInitialValues.bannerImage && [EditInitialValues.bannerImage],
+      EditInitialValues.bannerImage && [EditInitialValues.bannerImage],
   );
   const [privarcyImagemageUrl, setprivarcyImage] = useState<any[] | undefined>(
-    EditInitialValues &&
-    EditInitialValues?.privarcyImage && [EditInitialValues.privarcyImage] || [],
+    (EditInitialValues &&
+      EditInitialValues?.privarcyImage && [EditInitialValues.privarcyImage]) ||
+      [],
   );
 
-  const [subCategoryImage, setsubCategoryImage] = useState<any[] | undefined>((EditInitialValues &&
-    EditInitialValues.subCategoryImage) ? EditInitialValues.subCategoryImage : []
+  const [subCategoryImage, setsubCategoryImage] = useState<any[] | undefined>(
+    EditInitialValues && EditInitialValues.subCategoryImage
+      ? EditInitialValues.subCategoryImage
+      : [],
   );
 
-  console.log(subCategoryImage, 'subCategoryImage', EditInitialValues.subCategoryImage)
+  console.log(
+    subCategoryImage,
+    'subCategoryImage',
+    EditInitialValues.subCategoryImage,
+  );
 
-
-  const [topImages, settopImages] = useState<any[]>(EditInitialValues && EditInitialValues.topImages && EditInitialValues.topImages || []);
+  const [topImages, settopImages] = useState<any[]>(
+    (EditInitialValues &&
+      EditInitialValues.topImages &&
+      EditInitialValues.topImages) ||
+      [],
+  );
   const [colorsImages, setcolorsImages] = useState<any[]>(
-    EditInitialValues &&
-    EditInitialValues.colorsImages &&
-    EditInitialValues.colorsImages || []
+    (EditInitialValues &&
+      EditInitialValues.colorsImages &&
+      EditInitialValues.colorsImages) ||
+      [],
   );
   const [productUpdateFlat, setProductUpdateFlat] = useState(false);
   const [loading, setloading] = useState<boolean>(false);
-  const [productInitialValue, setProductInitialValue] = useState<any | null | undefined>(EditInitialValues ? EditInitialValues : AddproductsinitialValues);
+  const [productInitialValue, setProductInitialValue] = useState<
+    any | null | undefined
+  >(EditInitialValues ? EditInitialValues : AddproductsinitialValues);
 
   const [imgError, setError] = useState<string | null | undefined>();
 
   const [selectedCategoryIds, setSelectedCategoryIds] = useState<number[]>([]);
-  const [selectedSubcategoryIds, setSelectedSubcategoryIds] = useState<number[]>([]);
+  const [selectedSubcategoryIds, setSelectedSubcategoryIds] = useState<
+    number[]
+  >([]);
 
-  const [previousSelectedCategories, setpreviousSelectedCategories] = useState<number[]>([]);
+  const [previousSelectedCategories, setpreviousSelectedCategories] = useState<
+    number[]
+  >([]);
   const dragImage = useRef<number | null>(null);
   const draggedOverImage = useRef<number | null>(null);
   const token = Cookies.get('2guysAdminToken');
   const superAdminToken = Cookies.get('superAdminToken');
   let finalToken = token ? token : superAdminToken;
   const { confirm, modalNode } = useConfirmModal();
-  const formikValuesRef = useRef<Product>(EditInitialValues ? EditInitialValues : AddproductsinitialValues);
+  const formikValuesRef = useRef<Product>(
+    EditInitialValues ? EditInitialValues : AddproductsinitialValues,
+  );
 
   useEffect(() => {
     const CategoryHandler = async () => {
@@ -133,23 +158,23 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
         });
         setBannerImageUrl(
           EditInitialValues &&
-          EditInitialValues.bannerImage && [EditInitialValues.bannerImage],
+            EditInitialValues.bannerImage && [EditInitialValues.bannerImage],
         );
         setprivarcyImage(
           EditInitialValues &&
-          EditInitialValues.privarcyImage && [
-            EditInitialValues.privarcyImage,
-          ],
+            EditInitialValues.privarcyImage && [
+              EditInitialValues.privarcyImage,
+            ],
         );
         setposterimageUrl(
           EditInitialValues &&
-          EditInitialValues.posterImage && [EditInitialValues.posterImage],
+            EditInitialValues.posterImage && [EditInitialValues.posterImage],
         );
         setsubCategoryImage(
           EditInitialValues &&
-          EditInitialValues.subCategoryImage &&
-          EditInitialValues.subCategoryImage);
-
+            EditInitialValues.subCategoryImage &&
+            EditInitialValues.subCategoryImage,
+        );
       } catch (err) {
         console.log(err, 'err');
       }
@@ -176,10 +201,10 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
       let posterImageUrl = posterimageUrl && posterimageUrl[0];
       let bannerImage = bannerImageUrl && bannerImageUrl[0];
       let privarcyImage = privarcyImagemageUrl && privarcyImagemageUrl[0];
-      if (!posterImageUrl || !(imagesUrl) || !(imagesUrl?.length > 0)) {
+      if (!posterImageUrl || !imagesUrl || !(imagesUrl?.length > 0)) {
         return showAlert({
-          title: "Please select relevant Images",
-          icon: "warning",
+          title: 'Please select relevant Images',
+          icon: 'warning',
         });
       }
 
@@ -195,10 +220,10 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
         topImages: topImages,
         imageUrls: imagesUrl,
         Meta_description: values.Meta_Description,
-        price: 2
+        price: 2,
       };
 
-      console.log(values, "values")
+      console.log(values, 'values');
 
       setloading(true);
       let updateFlag = productUpdateFlat;
@@ -259,11 +284,11 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
           ...updatedvalue,
           subCategory: updateFlag
             ? {
-              set: selectedSubcategoryIds.map((id) => ({ id })),
-            }
+                set: selectedSubcategoryIds.map((id) => ({ id })),
+              }
             : {
-              connect: selectedSubcategoryIds.map((id) => ({ id })),
-            },
+                connect: selectedSubcategoryIds.map((id) => ({ id })),
+              },
         };
       } else if (updateFlag) {
         updatedvalue = {
@@ -286,8 +311,8 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
       );
       revalidateTag('products');
       showAlert({
-        title: `Product has been successfully ${updateFlag ? "updated!" : "added!"}`,
-        icon: "success",
+        title: `Product has been successfully ${updateFlag ? 'updated!' : 'added!'}`,
+        icon: 'success',
       });
       setProductInitialValue(AddproductsinitialValues);
       resetForm();
@@ -329,7 +354,9 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     setImageUrl(updatedImagesUrl);
   };
 
-  const [filteredSubcategories, setFilteredSubcategories] = useState<ICategory[]>([]);
+  const [filteredSubcategories, setFilteredSubcategories] = useState<
+    ICategory[]
+  >([]);
 
   useEffect(() => {
     const filteredSubcategories = subCategoriesList.filter((subcategory) =>
@@ -337,7 +364,6 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     );
     setFilteredSubcategories(filteredSubcategories);
   }, [selectedCategoryIds, categoriesList]);
-
 
   const hasUnsavedChanges = (): boolean => {
     if (!EditInitialValues) return false;
@@ -354,14 +380,33 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     const newPrivacy = privarcyImagemageUrl?.[0];
     const isPrivacyChanged = compareImages(oldPrivacy, newPrivacy);
 
-    const isVideosChanged = compareImageArray(EditInitialValues.videos ?? [], videos);
-    const isTopImagesChanged = compareImageArray(EditInitialValues.topImages ?? [], topImages);
-    const isColorsImagesChanged = compareImageArray(EditInitialValues.colorsImages ?? [], colorsImages);
-    const isSubCategoryImagesChanged = compareImageArray(EditInitialValues.subCategoryImage ?? [], subCategoryImage);
-    const isImagesUrlChanged = compareImageArray(EditInitialValues.imageUrls ?? [], imagesUrl);
-    const isCategoryChanged = (EditInitialValues.category ? EditInitialValues.category : undefined) !== selectedCategoryIds[0];
+    const isVideosChanged = compareImageArray(
+      EditInitialValues.videos ?? [],
+      videos,
+    );
+    const isTopImagesChanged = compareImageArray(
+      EditInitialValues.topImages ?? [],
+      topImages,
+    );
+    const isColorsImagesChanged = compareImageArray(
+      EditInitialValues.colorsImages ?? [],
+      colorsImages,
+    );
+    const isSubCategoryImagesChanged = compareImageArray(
+      EditInitialValues.subCategoryImage ?? [],
+      subCategoryImage,
+    );
+    const isImagesUrlChanged = compareImageArray(
+      EditInitialValues.imageUrls ?? [],
+      imagesUrl,
+    );
+    const isCategoryChanged =
+      (EditInitialValues.category ? EditInitialValues.category : undefined) !==
+      selectedCategoryIds[0];
     const isSubCategoryChanged = (() => {
-      const a = (EditInitialValues.subCategory?.map((sc: any) => sc.id) ?? []).sort();
+      const a = (
+        EditInitialValues.subCategory?.map((sc: any) => sc.id) ?? []
+      ).sort();
       const b = selectedSubcategoryIds.slice().sort();
 
       if (a.length !== b.length) return true;
@@ -373,9 +418,13 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
       return false;
     })();
     // eslint-disable-next-line
-    const { videos: _v1, topImages: _t1, colorsImages: _c1, subCategoryImage: _s1, imageUrls: _i1, posterImage: _p1, privarcyImage: _pr1, bannerImage: _b1, subCategory: _sub1, category: _category, ...newInitialValues } = productInitialValue;
+    const {videos: _v1,topImages: _t1,colorsImages: _c1,subCategoryImage: _s1,imageUrls: _i1,posterImage: _p1,privarcyImage: _pr1,bannerImage: _b1,subCategory: _sub1,category: _category,
+      ...newInitialValues
+    } = productInitialValue;
     // eslint-disable-next-line
-    const { videos: _v2, topImages: _t2, colorsImages: _c2, subCategoryImage: _s2, imageUrls: _i2, posterImage: _p2, privarcyImage: _pr2, bannerImage: _b2, subCategory: _sub2, category, ...current } = formikValuesRef.current as any;
+    const {videos: _v2,topImages: _t2,colorsImages: _c2,subCategoryImage: _s2,imageUrls: _i2,posterImage: _p2,privarcyImage: _pr2,bannerImage: _b2,subCategory: _sub2,category,
+      ...current
+    } = formikValuesRef.current as any;
 
     const values = {
       ...newInitialValues,
@@ -386,7 +435,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     const normalizedCurrent = JSON.stringify(current);
 
     const isFormChanged = normalizedInitial !== normalizedCurrent;
-    console.log(values, current, 'isFormChanged')
+    console.log(values, current, 'isFormChanged');
 
     return (
       isPosterChanged ||
@@ -403,9 +452,6 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
     );
   };
 
-
-
-
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
       if (hasUnsavedChanges()) {
@@ -419,13 +465,15 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
       if (hasUnsavedChanges()) {
         window.history.pushState(null, '', window.location.href);
         confirm({
-          title: "Unsaved Changes",
-          content: "You have unsaved changes. Do you want to discard them?",
-          okText: "Discard Changes",
-          cancelText: "Cancel",
-          onOk: () => setselecteMenu("Categories"),
+          title: 'Unsaved Changes',
+          content: 'You have unsaved changes. Do you want to discard them?',
+          okText: 'Discard Changes',
+          cancelText: 'Cancel',
+          onOk: () => setselecteMenu('Categories'),
         });
-      } else { setselecteMenu("All Categories"); }
+      } else {
+        setselecteMenu('All Categories');
+      }
     };
 
     window.addEventListener('beforeunload', handleBeforeUnload);
@@ -441,16 +489,16 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
   const handleBack = () => {
     if (hasUnsavedChanges()) {
       confirm({
-        title: "Unsaved Changes",
-        content: "You have unsaved changes. Do you want to discard them?",
-        okText: "Discard Changes",
-        cancelText: "Cancel",
-        onOk: () => setselecteMenu("Categories"),
+        title: 'Unsaved Changes',
+        content: 'You have unsaved changes. Do you want to discard them?',
+        okText: 'Discard Changes',
+        cancelText: 'Cancel',
+        onOk: () => setselecteMenu('Categories'),
       });
       return;
     }
 
-    setselecteMenu("Categories");
+    setselecteMenu('Categories');
   };
 
   return (
@@ -475,9 +523,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark p-2 ">
                     <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                       <div className="inputs_heading border-stroke dark:border-strokedark">
-                        <h3 className="label_main">
-                          Poster Image
-                        </h3>
+                        <h3 className="label_main">Poster Image</h3>
                       </div>
                       {posterimageUrl && posterimageUrl?.length > 0 ? (
                         <div className="form_element_main">
@@ -514,7 +560,12 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                   value={item.altText}
                                   placeholder="altText"
                                   onChange={(val) =>
-                                    handleImageAltText(index, val, setposterimageUrl, "altText")
+                                    handleImageAltText(
+                                      index,
+                                      val,
+                                      setposterimageUrl,
+                                      'altText',
+                                    )
                                   }
                                 />
 
@@ -523,7 +574,12 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                   value={item.pricing}
                                   placeholder="pricing"
                                   onChange={(val) =>
-                                    handleImageAltText(index, val, setposterimageUrl, "pricing")
+                                    handleImageAltText(
+                                      index,
+                                      val,
+                                      setposterimageUrl,
+                                      'pricing',
+                                    )
                                   }
                                 />
 
@@ -532,11 +588,14 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                   value={item.dimentions}
                                   placeholder="dimentions"
                                   onChange={(val) =>
-                                    handleImageAltText(index, val, setposterimageUrl, "dimentions")
+                                    handleImageAltText(
+                                      index,
+                                      val,
+                                      setposterimageUrl,
+                                      'dimentions',
+                                    )
                                   }
                                 />
-
-
                               </>
                             );
                           })}
@@ -566,7 +625,6 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                           placeholder="Short Description"
                           textarea
                         />
-
                       </div>
                       <Input
                         label="Heading"
@@ -599,7 +657,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                           label="Sale Price"
                           name="salePrice"
                           placeholder="Sale Price"
-                          type='number'
+                          type="number"
                         />
                         <Input
                           label="Discount Price"
@@ -623,7 +681,9 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                 key={category.id}
                                 id={`category-${category.id}`}
                                 name="CategoryId"
-                                checked={selectedCategoryIds.includes(category.id)}
+                                checked={selectedCategoryIds.includes(
+                                  category.id,
+                                )}
                                 label={category.title}
                                 onChange={(e) => {
                                   const checked = e.target.checked;
@@ -642,51 +702,52 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                         )}
                       </div>
 
+                      <label className="mb-3 block text-sm font-medium text-black dark:text-white">
+                        recalledByCategories
+                      </label>
+                      <FieldArray name="recalledByCategories">
+                        {({ push, remove }) => (
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {categoriesList?.map((cat: ICategory) => {
+                              const isChecked =
+                                formik.values.recalledByCategories?.includes(
+                                  cat.id,
+                                );
 
-
-                    <label className="mb-3 block text-sm font-medium text-black dark:text-white">
-                    recalledByCategories
-                    </label>
-                    <FieldArray name="recalledByCategories">
-                      {({ push, remove }) => (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          {categoriesList?.map((cat: ICategory) => {
-                            const isChecked = formik.values.recalledByCategories?.includes(cat.id);
-
-                            return (
-                              <label
-                                key={cat.id}
-                                className="flex items-center space-x-2"
-                              >
-                                <Field
-                                  type="checkbox"
-                                  name="recalledByCategories"
-                                  value={cat.id}
-                                  checked={isChecked}
-                                  onChange={(
-                                    e: React.ChangeEvent<HTMLInputElement>
-                                  ) => {
-                                    if (e.target.checked) {
-                                      push(cat.id);
-                                    } else {
-                                      remove(
-                                        formik?.values?.recalledByCategories?.indexOf(
-                                          cat.id
-                                        )
-                                      );
-                                    }
-                                  }}
-                                  className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
-                                />
-                                <span className="text-black dark:text-white">
-                                  {cat.title}
-                                </span>
-                              </label>
-                            );
-                          })}
-                        </div>
-                      )}
-                    </FieldArray>
+                              return (
+                                <label
+                                  key={cat.id}
+                                  className="flex items-center space-x-2"
+                                >
+                                  <Field
+                                    type="checkbox"
+                                    name="recalledByCategories"
+                                    value={cat.id}
+                                    checked={isChecked}
+                                    onChange={(
+                                      e: React.ChangeEvent<HTMLInputElement>,
+                                    ) => {
+                                      if (e.target.checked) {
+                                        push(cat.id);
+                                      } else {
+                                        remove(
+                                          formik?.values?.recalledByCategories?.indexOf(
+                                            cat.id,
+                                          ),
+                                        );
+                                      }
+                                    }}
+                                    className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
+                                  />
+                                  <span className="text-black dark:text-white">
+                                    {cat.title}
+                                  </span>
+                                </label>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </FieldArray>
 
                       <div className="mt-4">
                         <h2 className="text-lg font-medium dark:text-white">
@@ -698,7 +759,9 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                               key={subcategory.id}
                               id={`subcategory-${subcategory.id}`}
                               name="SubcategoryId"
-                              checked={selectedSubcategoryIds.includes(subcategory.id)}
+                              checked={selectedSubcategoryIds.includes(
+                                subcategory.id,
+                              )}
                               label={subcategory.title}
                               onChange={(e) => {
                                 const checked = e.target.checked;
@@ -706,7 +769,9 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                   if (checked) {
                                     return [...prev, subcategory.id];
                                   } else {
-                                    return prev.filter((id) => id !== subcategory.id);
+                                    return prev.filter(
+                                      (id) => id !== subcategory.id,
+                                    );
                                   }
                                 });
                               }}
@@ -726,7 +791,6 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                           name="Canonical_Tag"
                           placeholder="Canonical Tag"
                         />
-
                       </div>
                       <Input
                         label="Meta Description"
@@ -739,13 +803,10 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                         name="Images_Alt_Text"
                         placeholder="Images Alt Text"
                       />
-
                     </div>
                     <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                       <div className="inputs_heading border-stroke dark:border-strokedark">
-                        <h3 className="label_main">
-                          FAQS
-                        </h3>
+                        <h3 className="label_main">FAQS</h3>
                       </div>
                       <div className="flex flex-col gap-4 p-4">
                         <FieldArray name="faqs">
@@ -758,8 +819,14 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                       key={index}
                                       className="flex gap-2 items-center"
                                     >
-                                      <Input name={`faqs[${index}].specsHeading`} placeholder="FAQS Heading" />
-                                      <Input name={`faqs[${index}].specsDetails`} placeholder="FAQS Details" />
+                                      <Input
+                                        name={`faqs[${index}].specsHeading`}
+                                        placeholder="FAQS Heading"
+                                      />
+                                      <Input
+                                        name={`faqs[${index}].specsDetails`}
+                                        placeholder="FAQS Details"
+                                      />
 
                                       <button
                                         type="button"
@@ -789,9 +856,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
 
                     <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                       <div className="inputs_heading border-stroke dark:border-strokedark">
-                        <h3 className="label_main">
-                          Privacy Section
-                        </h3>
+                        <h3 className="label_main">Privacy Section</h3>
                       </div>
                       <div className="flex flex-col gap-4 p-4">
                         <FieldArray name="privacySectoin">
@@ -804,8 +869,14 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                       key={index}
                                       className="flex gap-2 items-center"
                                     >
-                                      <Input name={`privacySectoin[${index}].specsHeading`} placeholder="privacySectoin Heading" />
-                                      <Input name={`privacySectoin[${index}].specsDetails`} placeholder="privacySectoin Details" />
+                                      <Input
+                                        name={`privacySectoin[${index}].specsHeading`}
+                                        placeholder="privacySectoin Heading"
+                                      />
+                                      <Input
+                                        name={`privacySectoin[${index}].specsDetails`}
+                                        placeholder="privacySectoin Details"
+                                      />
 
                                       <button
                                         type="button"
@@ -833,27 +904,29 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                       </div>
                     </div>
                   </div>
-
                 </div>
 
                 <div className="flex flex-col gap-5 border p-2">
-
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <div className="inputs_heading border-stroke dark:border-strokedark">
-                        <h3 className="label_main">
-                          Sub Heading
-                        </h3>
+                        <h3 className="label_main">Sub Heading</h3>
                       </div>
-                      <Input name="Sub_Heading" placeholder="Sub Heading" textarea />
+                      <Input
+                        name="Sub_Heading"
+                        placeholder="Sub Heading"
+                        textarea
+                      />
                     </div>
                     <div>
                       <div className="inputs_heading border-stroke dark:border-strokedark">
-                        <h3 className="label_main">
-                          Sub Heading Description
-                        </h3>
+                        <h3 className="label_main">Sub Heading Description</h3>
                       </div>
-                      <Input name="Sub_Heading_description" placeholder="Sub Heading Description" textarea />
+                      <Input
+                        name="Sub_Heading_description"
+                        placeholder="Sub Heading Description"
+                        textarea
+                      />
                     </div>
                   </div>
 
@@ -867,7 +940,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                       <FieldArray name="modelDetails">
                         {({ push, remove }) => (
                           <div className="flex flex-col gap-2 ">
-                            <div className='shadow-md p-2 rounded relative'>
+                            <div className="shadow-md p-2 rounded relative">
                               {formik.values?.modelDetails?.map(
                                 (model: any, index: any) => (
                                   <>
@@ -875,13 +948,18 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                       key={index}
                                       className="flex flex-col gap-3 pt-3 "
                                     >
-                                      <Input name={`modelDetails[${index}].name`} placeholder="Sub Category Name" />
-                                      <Input name={`modelDetails[${index}].detail`} placeholder="Description on Sub Category" textarea />
-
-
+                                      <Input
+                                        name={`modelDetails[${index}].name`}
+                                        placeholder="Sub Category Name"
+                                      />
+                                      <Input
+                                        name={`modelDetails[${index}].detail`}
+                                        placeholder="Description on Sub Category"
+                                        textarea
+                                      />
                                     </div>
 
-                                    <div className='relative'>
+                                    <div className="relative">
                                       <button
                                         type="button"
                                         onClick={() => remove(index)}
@@ -926,8 +1004,14 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                     key={index}
                                     className="flex items-center gap-2"
                                   >
-                                    <Input name={`colors[${index}].name`} placeholder="Heading name" />
-                                    <Input name={`colors[${index}].detail`} placeholder="details text" />
+                                    <Input
+                                      name={`colors[${index}].name`}
+                                      placeholder="Heading name"
+                                    />
+                                    <Input
+                                      name={`colors[${index}].detail`}
+                                      placeholder="details text"
+                                    />
 
                                     <button
                                       type="button"
@@ -1002,9 +1086,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                   </div>
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                     <div className="inputs_heading border-stroke dark:border-strokedark">
-                      <h3 className="label_main">
-                        Colors Images
-                      </h3>
+                      <h3 className="label_main">Colors Images</h3>
                     </div>
                     <Imageupload setImagesUrl={setcolorsImages} multiple />
                     {colorsImages && colorsImages?.length > 0 && (
@@ -1052,7 +1134,6 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                     )
                                   }
                                 />
-
                               </div>
                             </>
                           );
@@ -1063,14 +1144,11 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                     <div className="inputs_heading border-stroke dark:border-strokedark">
-                      <h3 className="label_main">
-                        Top Images
-                      </h3>
+                      <h3 className="label_main">Top Images</h3>
                     </div>
                     <Imageupload setImagesUrl={settopImages} />
                     {topImages && topImages?.length > 0 && (
                       <div className="grid grid-cols-2 sm:grid-cols-4  gap-4 p-4">
-
                         {topImages.map((item: any, index) => {
                           return (
                             <>
@@ -1103,7 +1181,12 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                   value={item.altText}
                                   placeholder="altText"
                                   onChange={(val) =>
-                                    handleImageAltText(index, val, settopImages, "altText")
+                                    handleImageAltText(
+                                      index,
+                                      val,
+                                      settopImages,
+                                      'altText',
+                                    )
                                   }
                                 />
                                 <ImageTextInput
@@ -1111,10 +1194,14 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                   value={item.name}
                                   placeholder="Icon Name"
                                   onChange={(val) =>
-                                    handleImageAltText(index, val, settopImages, "name")
+                                    handleImageAltText(
+                                      index,
+                                      val,
+                                      settopImages,
+                                      'name',
+                                    )
                                   }
                                 />
-
                               </div>
                             </>
                           );
@@ -1125,55 +1212,53 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                     <div className="inputs_heading border-stroke dark:border-strokedark">
-                      <h3 className="label_main">
-                        subCategoryImage
-                      </h3>
+                      <h3 className="label_main">subCategoryImage</h3>
                     </div>
                     {subCategoryImage && subCategoryImage?.length > 0 ? (
                       <div className="form_element_main">
-                          {subCategoryImage.map((item: any, index) => {
-                            return (
-                              <div key={index}>
-                                <div
-                                  className="relative group rounded-lg overflow-hidden shadow-md bg-white transform transition-transform duration-300 hover:scale-105"
-                                  
-                                >
-                                  <div className="absolute top-1 right-1 invisible group-hover:visible errorColor bg-white rounded-full">
-                                    <RxCross2
-                                      className="cursor-pointer errorColor hover:errorColor-700"
-                                      size={17}
-                                      onClick={() => {
-                                        ImageRemoveHandler(
-                                          item.public_id,
-                                          setsubCategoryImage,
-                                        );
-                                      }}
-                                    />
-                                  </div>
-                                  <Image
-                                    key={index}
-                                    className="object-cover w-full h-full"
-                                    width={300}
-                                    height={400}
-                                    src={item?.imageUrl}
-                                    alt={`productImage-${index}`}
+                        {subCategoryImage.map((item: any, index) => {
+                          return (
+                            <div key={index}>
+                              <div className="relative group rounded-lg overflow-hidden shadow-md bg-white transform transition-transform duration-300 hover:scale-105">
+                                <div className="absolute top-1 right-1 invisible group-hover:visible errorColor bg-white rounded-full">
+                                  <RxCross2
+                                    className="cursor-pointer errorColor hover:errorColor-700"
+                                    size={17}
+                                    onClick={() => {
+                                      ImageRemoveHandler(
+                                        item.public_id,
+                                        setsubCategoryImage,
+                                      );
+                                    }}
                                   />
                                 </div>
-
-                                <ImageTextInput
-                                  name="altText"
-                                  value={item.altText}
-                                  placeholder="altText"
-                                  onChange={(val) =>
-                                    handleImageAltText(index, val, setsubCategoryImage, "altText")
-                                  }
+                                <Image
+                                  key={index}
+                                  className="object-cover w-full h-full"
+                                  width={300}
+                                  height={400}
+                                  src={item?.imageUrl}
+                                  alt={`productImage-${index}`}
                                 />
-
                               </div>
-                            );
-                          })}
-                        </div>
-                 
+
+                              <ImageTextInput
+                                name="altText"
+                                value={item.altText}
+                                placeholder="altText"
+                                onChange={(val) =>
+                                  handleImageAltText(
+                                    index,
+                                    val,
+                                    setsubCategoryImage,
+                                    'altText',
+                                  )
+                                }
+                              />
+                            </div>
+                          );
+                        })}
+                      </div>
                     ) : (
                       <Imageupload setposterimageUrl={setsubCategoryImage} />
                     )}
@@ -1181,9 +1266,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                     <div className="inputs_heading border-stroke dark:border-strokedark">
-                      <h3 className="label_main">
-                        Banner Image
-                      </h3>
+                      <h3 className="label_main">Banner Image</h3>
                     </div>
                     {bannerImageUrl && bannerImageUrl?.length > 0 ? (
                       <div className="form_element_main">
@@ -1221,7 +1304,12 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                   value={item.altText}
                                   placeholder="altText"
                                   onChange={(val) =>
-                                    handleImageAltText(index, val, setBannerImageUrl, "altText")
+                                    handleImageAltText(
+                                      index,
+                                      val,
+                                      setBannerImageUrl,
+                                      'altText',
+                                    )
                                   }
                                 />
                               </>
@@ -1236,12 +1324,10 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                     <div className="inputs_heading border-stroke dark:border-strokedark">
-                      <h3 className="label_main">
-                        privarcy Image
-                      </h3>
+                      <h3 className="label_main">privarcy Image</h3>
                     </div>
                     {privarcyImagemageUrl &&
-                      privarcyImagemageUrl?.length > 0 ? (
+                    privarcyImagemageUrl?.length > 0 ? (
                       <div className="form_element_main">
                         <div>
                           {privarcyImagemageUrl.map((item: any, index) => {
@@ -1278,7 +1364,12 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                   value={item.altText}
                                   placeholder="altText"
                                   onChange={(val) =>
-                                    handleImageAltText(index, val, setprivarcyImage, "altText")
+                                    handleImageAltText(
+                                      index,
+                                      val,
+                                      setprivarcyImage,
+                                      'altText',
+                                    )
                                   }
                                 />
                               </>
@@ -1293,9 +1384,7 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
 
                   <div className="rounded-sm border border-stroke bg-white dark:border-strokedark dark:bg-lightdark">
                     <div className="inputs_heading border-stroke dark:border-strokedark">
-                      <h3 className="label_main">
-                        Product Images
-                      </h3>
+                      <h3 className="label_main">Product Images</h3>
                     </div>
                     <Imageupload setImagesUrl={setImagesUrl} />
                     {imagesUrl && imagesUrl.length > 0 ? (
@@ -1338,8 +1427,6 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                       alt={`productImage-${index}`}
                                     />
                                   </div>
-
-
                                 </div>
                               </div>
                               <ImageTextInput
@@ -1347,7 +1434,12 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                 value={item.altText}
                                 placeholder="altText"
                                 onChange={(val) =>
-                                  handleImageAltText(index, val, setImagesUrl, "altText")
+                                  handleImageAltText(
+                                    index,
+                                    val,
+                                    setImagesUrl,
+                                    'altText',
+                                  )
                                 }
                               />
                               <ImageTextInput
@@ -1355,7 +1447,12 @@ const FormElements: React.FC<ADDPRODUCTFORMPROPS> = ({
                                 value={item.colorCode}
                                 placeholder="colorCode"
                                 onChange={(val) =>
-                                  handleImageAltText(index, val, setImagesUrl, "colorCode")
+                                  handleImageAltText(
+                                    index,
+                                    val,
+                                    setImagesUrl,
+                                    'colorCode',
+                                  )
                                 }
                               />
                             </div>

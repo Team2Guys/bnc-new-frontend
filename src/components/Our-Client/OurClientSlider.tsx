@@ -3,7 +3,11 @@ import React from 'react';
 import Slider from 'react-slick';
 import Image from 'next/image';
 
-const ClientLogoGridSlider = ({ OurClientImage }: { OurClientImage: any[] }) => {
+const ClientLogoGridSlider = ({
+  OurClientImage,
+}: {
+  OurClientImage: any[];
+}) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -51,7 +55,7 @@ const ClientLogoGridSlider = ({ OurClientImage }: { OurClientImage: any[] }) => 
       </Slider>
       <style jsx global>{`
         .slick-dots li.slick-active div {
-          background-color: #F1B42F !important;
+          background-color: #f1b42f !important;
         }
       `}</style>
     </div>

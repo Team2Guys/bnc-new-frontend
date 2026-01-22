@@ -1,4 +1,3 @@
-
 import {
   Email,
   PhoneNumber,
@@ -7,7 +6,14 @@ import {
 } from 'types/interfaces';
 import * as Yup from 'yup';
 import { Category, FormValues } from 'types/interfaces';
-import { AboutUsBlock, ISUBCATEGORY, MilestoneStepsData, ReviewData, ThankYouCardProps, WhyChooseItem } from 'types/types';
+import {
+  AboutUsBlock,
+  ISUBCATEGORY,
+  MilestoneStepsData,
+  ReviewData,
+  ThankYouCardProps,
+  WhyChooseItem,
+} from 'types/types';
 /* eslint-disable no-useless-escape */
 export const generateSlug = (text?: string) => {
   if (!text) return ' ';
@@ -18,7 +24,6 @@ export const generateSlug = (text?: string) => {
     .replace(/[^\w\-]+/g, '')
     .replace(/\-\-+/g, '-');
 };
-
 
 export const footerInfo = ' ©Blinds & Curtains 2025 All rights reserved';
 
@@ -39,11 +44,12 @@ export const OurClientImage = [
   { src: '/assets/images/ourclient/new/Khansaheb.webp', alt: 'HUQQBAZ-Logo' },
   { src: '/assets/images/ourclient/new/maison.webp', alt: 'Khansaheb-Logo' },
   { src: '/assets/images/ourclient/new/mercedes.webp', alt: 'Khansaheb-Logo' },
-  { src: '/assets/images/ourclient/new/roundedlogo.webp', alt: 'Khansaheb-Logo' },
+  {
+    src: '/assets/images/ourclient/new/roundedlogo.webp',
+    alt: 'Khansaheb-Logo',
+  },
   { src: '/assets/images/ourclient/new/waner.webp', alt: 'Khansaheb-Logo' },
 ];
-
-
 
 export const productData: Tproductdata = {
   title: 'PRODUCT GUARANTEES',
@@ -53,7 +59,6 @@ export const productData: Tproductdata = {
   content:
     'We at blindsandcurtains.ae know our products will complement your home now and in the future. All our made-to-measure blinds, curtains, and shutters come with a 10-year mechanical and labour warranty. We make sure all our products are of high quality, but if something goes wrong, our team will visit to assess the situation. With them, you can be sure your problem will be handled with care, whether with a quick fix or a replacement. We stand behind our work so that you can trust us.',
 };
-
 
 export const PGuarantees: TProductGuarantees[] = [
   {
@@ -90,16 +95,19 @@ export const PGuarantees: TProductGuarantees[] = [
 export const aboutUsData: AboutUsBlock[] = [
   {
     shortHeading: 'A New Country – A New Chapter',
-    shortHeadingSize: 'sm:text-2xl text-20 font-Roboto font-medium text-primary',
+    shortHeadingSize:
+      'sm:text-2xl text-20 font-Roboto font-medium text-primary',
     mainHeading: 'How It All Began — From the UK to Dubai',
-    mainHeadingSize: 'sm:text-2xl text-24 font-bold xl:text-[40px] text-primary',
+    mainHeadingSize:
+      'sm:text-2xl text-24 font-bold xl:text-[40px] text-primary',
     content: `It all started with Shiraz, our managing partner, who has spent over 20 years working within the retail business in the UK. Multiple achievements were collected over the years, including Scottish retailer of the year (twice), Top Customer Service Accolades on 5 occasions and even a place in the top 100 most influential fashion icons. In 2014, Shiraz moved to Dubai with his family, ready for a new start and bigger dreams. That move led to something special — the beginning of Blinds & Curtains Furnitures Trading. A brand built on years of experience and strong family values. Over the years, it was felt that customer’s would join the Blinds & Curtains family at the end of their renovation journeys. 1000’s fell in love with the company and brand ethics, but by the time they were ready to cover their windows, they had already purchased their furnitures and flooring options. This led to real deep thinking process that lasted for several months before it was decided to re-brand. And that was the birth of Two Guys Home Furnishings.`,
     contentSize: 'text-base text-start',
     imageUrl: '/assets/images/about-us/aboutus.webp',
   },
   {
     shortHeading: 'Meet the People Behind the Promise',
-    shortHeadingSize: 'sm:text-2xl text-20 text-primary font-roboto font-semibold',
+    shortHeadingSize:
+      'sm:text-2xl text-20 text-primary font-roboto font-semibold',
     mainHeading: 'Real Experts. Real Advice. No Pushy Sales.',
     mainHeadingSize: 'sm:text-5xl text-2xl text-primary',
     content: `At Two Guys, we don’t just hire staff — we have built a team of over 60 people who care about your home like it’s their own. Our team is friendly, honest, and never pushy. Shiraz, our founder, notices every little detail — even a crooked curtain! That’s how much we care. When you choose us, you’re part of the Two Guys family.`,
@@ -108,7 +116,8 @@ export const aboutUsData: AboutUsBlock[] = [
   },
   {
     shortHeading: 'Our First Big Step in Dubai',
-    shortHeadingSize: 'sm:text-2xl text-20 text-primary font-roboto font-semibold',
+    shortHeadingSize:
+      'sm:text-2xl text-20 text-primary font-roboto font-semibold',
     mainHeading: 'From a Tiny Office to the First Two Guys Showroom',
     mainHeadingSize: 'sm:text-5xl text-2xl text-primary',
     content: `We started in a small, cosy office in Port Saeed — no fancy setup, just hard work and learning the Dubai market.
@@ -129,7 +138,6 @@ export const subcategoryValidationSchema = Yup.object({
   CategoryId: Yup.number().required('required'),
 });
 
-
 export const categoryInitialValues: Category = {
   name: '',
   description: '',
@@ -139,10 +147,9 @@ export const categoryInitialValues: Category = {
   Meta_description: '',
   headingchecks: [],
   faqs: [],
-  productCustomUrl: "",
-  categoryCustomUrl: ""
+  productCustomUrl: '',
+  categoryCustomUrl: '',
 };
-
 
 export const AddproductsinitialValues: FormValues = {
   name: '',
@@ -170,8 +177,6 @@ export const AddproductsinitialValues: FormValues = {
   Canonical_Tag: '',
   Images_Alt_Text: '',
 };
-
-
 
 export const subcategoryInitialValues: ISUBCATEGORY = {
   title: '',
@@ -206,17 +211,13 @@ export const intitalValues = {
   canEditBlog: false,
 };
 
-
-export const AddProductvalidationSchema = Yup.object().shape({
-
-});
-
+export const AddProductvalidationSchema = Yup.object().shape({});
 
 export const footerData = [
   {
-    key: "1",
+    key: '1',
     title: 'Blinds',
-    link:"/made-to-measure-blinds/",
+    link: '/made-to-measure-blinds/',
     items: [
       'Motorised blinds',
       'Blackout Roller Blinds',
@@ -226,9 +227,9 @@ export const footerData = [
     ],
   },
   {
-    key: "2",
+    key: '2',
     title: 'Curtains',
-    link:"/made-to-measure-curtains/",
+    link: '/made-to-measure-curtains/',
     items: [
       'Motorised Curtains',
       'Blackout Triple Pinch Pleat curtains',
@@ -238,9 +239,9 @@ export const footerData = [
     ],
   },
   {
-    key: "3",
+    key: '3',
     title: 'Shutters',
-    link:"/shutters-range/",
+    link: '/shutters-range/',
     items: [
       'Full Height Shutters',
       'Tracked Shutters',
@@ -249,7 +250,6 @@ export const footerData = [
       'Tier On Tier Shutters',
     ],
   },
-
 ];
 
 export const contentArray = [
@@ -325,7 +325,6 @@ export const projectsData = [
   },
 ];
 
-
 export const checkboxData = [
   { name: 'canAddProduct', label: 'Can Add Product' },
   { name: 'canEditProduct', label: 'Can Edit Product' },
@@ -346,58 +345,62 @@ export const checkboxData = [
   { name: 'canEditBlog', label: 'Can Edit Blog' },
 ];
 
-
 export const milestoneStepsData: MilestoneStepsData = {
-  heading: "What Got Us Here",
-  subheading: "A timeline of dreams",
-  image: "/assets/images/about-us/Our-Milestones.webp",
+  heading: 'What Got Us Here',
+  subheading: 'A timeline of dreams',
+  image: '/assets/images/about-us/Our-Milestones.webp',
   steps: [
     {
-      step: "1999",
-      description: "Scottish Retailer of the Year — our journey began with quality.",
-      iconimage: "/assets/images/Line-380.svg",
+      step: '1999',
+      description:
+        'Scottish Retailer of the Year — our journey began with quality.',
+      iconimage: '/assets/images/Line-380.svg',
     },
     {
-      step: "2014",
-      description: "Launched blindsandcurtains.ae to serve Dubai homes better.",
-      iconimage: "/assets/images/Line-380.svg",
+      step: '2014',
+      description: 'Launched blindsandcurtains.ae to serve Dubai homes better.',
+      iconimage: '/assets/images/Line-380.svg',
     },
     {
-      step: "2016",
-      description: "Started in-house Production to ensure better quality and control",
-      iconimage: "/assets/images/Line-380.svg",
+      step: '2016',
+      description:
+        'Started in-house Production to ensure better quality and control',
+      iconimage: '/assets/images/Line-380.svg',
     },
     {
-      step: "2023",
-      description: "From Blinds & Curtains to Two Guys — Al Quoz is our new home.",
+      step: '2023',
+      description:
+        'From Blinds & Curtains to Two Guys — Al Quoz is our new home.',
     },
   ],
 };
 
-
 export const whyChooseData: WhyChooseItem[] = [
   {
-    icon: "/assets/images/about-us/why1.svg",
-    title: "Built on 20+ Years <br /> of Expertise",
-    description: " We bring decades of hands-on experience to every home we furnish.",
+    icon: '/assets/images/about-us/why1.svg',
+    title: 'Built on 20+ Years <br /> of Expertise',
+    description:
+      ' We bring decades of hands-on experience to every home we furnish.',
   },
   {
-    icon: "/assets/images/about-us/why2.svg",
-    title: "In-house Production, <br /> No Outsourcing",
-    description: " Everything’s made by us —since 2016, so you get full quality, no compromises.",
+    icon: '/assets/images/about-us/why2.svg',
+    title: 'In-house Production, <br /> No Outsourcing',
+    description:
+      ' Everything’s made by us —since 2016, so you get full quality, no compromises.',
   },
   {
-    icon: "/assets/images/about-us/why3.svg",
-    title: "No Pushy Sales.<br />  Just Happy Customers",
-    description: "We guide, not pressure — because your comfort always comes first.",
+    icon: '/assets/images/about-us/why3.svg',
+    title: 'No Pushy Sales.<br />  Just Happy Customers',
+    description:
+      'We guide, not pressure — because your comfort always comes first.',
   },
   {
-    icon: "/assets/images/about-us/why4.svg",
-    title: "Crafted with Care. <br />  Installed with Confidence.",
-    description: 'From stitching to setup, we handle every detail with precision and pride.',
+    icon: '/assets/images/about-us/why4.svg',
+    title: 'Crafted with Care. <br />  Installed with Confidence.',
+    description:
+      'From stitching to setup, we handle every detail with precision and pride.',
   },
 ];
-
 
 export const subCategoryUrls = [
   { url: 'blackout-blinds', name: 'Blackout/Private Blinds' },
@@ -410,96 +413,93 @@ export const subCategoryName = [
   },
 ];
 
-
 export const shuttersSubcategories = [
-  "Regular Full Height Shutters",
-  "Bi-fold Shutters",
-  "Special Shape Shutters",
-  "Bypass Shutters",
-  "Solid Panel Shutters",
-  "Tier On Tier Shutters",
-  "Dark Wood Shutters",
-  "Bold Colours Shutters",
-  "Light Wood Shutters",
-  "Cafe Style Shutters",
-  "Outdoor Shutters",
-  "Living Room Shutters",
-  "Dining Room Shutters",
-  "Kitchen Room Shutters",
-  "Bedroom Shutters",
-  "Staircase Shutters",
-  "White Shutters",
-  "Off White Shutters"
+  'Regular Full Height Shutters',
+  'Bi-fold Shutters',
+  'Special Shape Shutters',
+  'Bypass Shutters',
+  'Solid Panel Shutters',
+  'Tier On Tier Shutters',
+  'Dark Wood Shutters',
+  'Bold Colours Shutters',
+  'Light Wood Shutters',
+  'Cafe Style Shutters',
+  'Outdoor Shutters',
+  'Living Room Shutters',
+  'Dining Room Shutters',
+  'Kitchen Room Shutters',
+  'Bedroom Shutters',
+  'Staircase Shutters',
+  'White Shutters',
+  'Off White Shutters',
 ];
-
 
 export const blindsSubcategories = [
-  "Blackout Roller Blinds",
-  "Sunscreen Roller Blinds",
-  "Day/night Blinds",
-  "Wood Venetian Blinds",
-  "Blackout Roman Blinds",
-  "Vertical Blinds",
-  "Motorised Blinds",
-  "Sheer Roman blinds",
-  "Roller Blinds",
-  "Roman Blinds",
-  "Zipline Outdoor Blinds",
-  "Skylight Blinds",
-  "Blackout Blinds",
-  "Zebra Blinds",
-  "Sheer Horizon Blinds",
-  "Honeycomb Blinds",
-  "Printed Blinds",
-  "Wooden Blinds",
-  "Staircase Blinds",
-  "Translucent Blinds",
-  "Patricia Blinds",
-  "Panel Blinds",
-  "Aluminium Blinds",
-  "Living Room Blinds",
-  "Kitchen Blinds",
-  "Dining Room Blinds",
-  "Bathroom Blinds",
-  "Kids Room Blinds",
-  "Bedroom Blinds",
-  "Balcony Blinds Dubai",
+  'Blackout Roller Blinds',
+  'Sunscreen Roller Blinds',
+  'Day/night Blinds',
+  'Wood Venetian Blinds',
+  'Blackout Roman Blinds',
+  'Vertical Blinds',
+  'Motorised Blinds',
+  'Sheer Roman blinds',
+  'Roller Blinds',
+  'Roman Blinds',
+  'Zipline Outdoor Blinds',
+  'Skylight Blinds',
+  'Blackout Blinds',
+  'Zebra Blinds',
+  'Sheer Horizon Blinds',
+  'Honeycomb Blinds',
+  'Printed Blinds',
+  'Wooden Blinds',
+  'Staircase Blinds',
+  'Translucent Blinds',
+  'Patricia Blinds',
+  'Panel Blinds',
+  'Aluminium Blinds',
+  'Living Room Blinds',
+  'Kitchen Blinds',
+  'Dining Room Blinds',
+  'Bathroom Blinds',
+  'Kids Room Blinds',
+  'Bedroom Blinds',
+  'Balcony Blinds Dubai',
 ];
 
-
 export const curtainsSubcategories = [
-  "Blackout Triple Pinch Pleat Curtains",
-  "Sheer Triple Pinch Pleat Curtains",
-  "Sheer Ripple Fold Curtains",
-  "Eyelet Curtains",
-  "Double Pinch Pleat Curtains",
-  "Blackout Curtains",
-  "Motorised Curtains",
-  "Wave Sheer & Blackout Curtains",
-  "Office Curtains",
-  "Home Curtains",
-  "Plain Curtains",
-  "Patterned Curtains",
-  "Natural Fabric Curtains",
-  "Kids Prints Curtains",
-  "Textured Curtains",
-  "Geometric Curtains",
-  "Goblet Pleat Curtains",
-  "Velvet Curtains",
-  "Stripes Curtains",
-  "Tab Top Curtains",
-  "Pencil Pleat Curtains",
-  "Dining Room Curtains",
-  "Bedroom Curtains",
-  "Hotel Curtains",
-  "Kids Room Curtains",
-  "Living room Curtains",
-  "Pelmet Curtains",
-  "Linen Curtains",
-  "Chiffon Curtains",
-  "Pinch Pleat Curtains",
-  "Staircase Curains",
-  "Conservatory Curtains",
+  'Blackout Triple Pinch Pleat Curtains',
+  'Sheer Triple Pinch Pleat Curtains',
+  'Sheer Ripple Fold Curtains',
+  'Eyelet Curtains',
+  'Double Pinch Pleat Curtains',
+  'Blackout Curtains',
+  'Motorised Curtains',
+  'Wave Sheer & Blackout Curtains',
+  'Office Curtains',
+  'Home Curtains',
+  'Plain Curtains',
+  'Patterned Curtains',
+  'Natural Fabric Curtains',
+  'Kids Prints Curtains',
+  'Textured Curtains',
+  'Geometric Curtains',
+  'Goblet Pleat Curtains',
+  'Velvet Curtains',
+  'Stripes Curtains',
+  'Tab Top Curtains',
+  'Pencil Pleat Curtains',
+  'Dining Room Curtains',
+  'Bedroom Curtains',
+  'Hotel Curtains',
+  'Kids Room Curtains',
+  'Living room Curtains',
+  'Pelmet Curtains',
+  'Linen Curtains',
+  'Chiffon Curtains',
+  'Pinch Pleat Curtains',
+  'Staircase Curains',
+  'Conservatory Curtains',
 ];
 
 export const customerReview: ReviewData = {
@@ -509,8 +509,6 @@ export const customerReview: ReviewData = {
   reviewLink:
     'https://www.google.com/maps/place/Blinds+And+Curtains+Dubai/@25.1177148,55.2356858,984m/data=!3m1!1e3!4m8!3m7!1s0x3e5f698d0b075de1:0x223e3563a8be56be!8m2!3d25.1177148!4d55.2356858!9m1!1b1!16s%2Fg%2F11bbt9c0yz?entry=ttu&g_ep=EgoyMDI1MDUxMy4xIKXMDSoASAFQAw%3D%3D',
 };
-
-
 
 export const thankYouCards: ThankYouCardProps[] = [
   {

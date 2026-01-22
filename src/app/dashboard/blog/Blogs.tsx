@@ -11,9 +11,8 @@ const AddBlogs = dynamic(() => import('components/Dashboard/Blogs/add-blog'), {
   ssr: false,
 });
 
-
 interface blogs {
-  blogs: any
+  blogs: any;
 }
 
 const Blogging = ({ blogs }: blogs) => {
@@ -23,14 +22,19 @@ const Blogging = ({ blogs }: blogs) => {
     <DefaultLayout>
       <Breadcrumb pageName={menuType} />
       {menuType === 'Blogs' ? (
-        <ShowBlog setMenuType={setMenuType} setEditBlog={setEditBlog} blogs={blogs} menuType={menuType} />
+        <ShowBlog
+          setMenuType={setMenuType}
+          setEditBlog={setEditBlog}
+          blogs={blogs}
+          menuType={menuType}
+        />
       ) : (
         <AddBlogs
           setMenuType={setMenuType}
           setEditBlog={setEditBlog}
           EditInitialValues={
             editBlog &&
-              (editBlog.title !== undefined || editBlog.category !== undefined)
+            (editBlog.title !== undefined || editBlog.category !== undefined)
               ? editBlog
               : undefined
           }

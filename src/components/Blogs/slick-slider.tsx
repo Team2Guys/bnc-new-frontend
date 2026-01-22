@@ -1,14 +1,14 @@
-"use client";
-import React, { Children,  useState } from "react";
-import Slider from "react-slick";
-import { GrFormNext, GrFormPrevious } from "react-icons/gr";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+'use client';
+import React, { Children, useState } from 'react';
+import Slider from 'react-slick';
+import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const NextArrow = (props: any) => {
   const { onClick } = props;
   return (
-     <div
+    <div
       className="absolute top-1/2 -right-2 transform -translate-y-1/2 z-10 cursor-pointer"
       onClick={onClick}
     >
@@ -35,7 +35,7 @@ interface BlogSliderProps {
   settings?: any;
   title?: string;
   padding?: string;
-  margin?: string
+  margin?: string;
 }
 
 const SlickSlider: React.FC<BlogSliderProps> = ({
@@ -44,7 +44,7 @@ const SlickSlider: React.FC<BlogSliderProps> = ({
   settings,
   title,
   padding,
-  margin
+  margin,
 }) => {
   const [dragging, setDragging] = useState(false);
 
@@ -93,7 +93,9 @@ const SlickSlider: React.FC<BlogSliderProps> = ({
           {title}
         </h3>
       )}
-      <div className={`relative ${margin ? margin : 'mt-10'} ${className || ""}`}>
+      <div
+        className={`relative ${margin ? margin : 'mt-10'} ${className || ''}`}
+      >
         <Slider {...defaultSettings}>{wrappedChildren}</Slider>
       </div>
     </div>

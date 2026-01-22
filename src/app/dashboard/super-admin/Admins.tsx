@@ -7,8 +7,10 @@ import ProtectedRoute from 'hooks/AuthHookAdmin';
 import React, { useState } from 'react';
 import { formDataTypes } from 'types/interfaces';
 
-const SuperAdmin = ({adminsData}:{adminsData:any[]}) => {
-  const [selecteMenu, setselecteMenu] = useState<string | null | undefined>('AllAdmin',);
+const SuperAdmin = ({ adminsData }: { adminsData: any[] }) => {
+  const [selecteMenu, setselecteMenu] = useState<string | null | undefined>(
+    'AllAdmin',
+  );
   const [edit_admins, setedit_admins] = useState<formDataTypes | undefined>();
 
   return (
@@ -17,9 +19,17 @@ const SuperAdmin = ({adminsData}:{adminsData:any[]}) => {
         <Breadcrumb pageName="Super Admin" />
         <div className="mt-10">
           {selecteMenu == 'AllAdmin' ? (
-            <AllAdmin setselecteMenu={setselecteMenu} setedit_admins={setedit_admins} adminsData={adminsData} />
+            <AllAdmin
+              setselecteMenu={setselecteMenu}
+              setedit_admins={setedit_admins}
+              adminsData={adminsData}
+            />
           ) : (
-            <CreateAdmin setselecteMenu={setselecteMenu} edit_admins={edit_admins} setedit_admins={setedit_admins}/>
+            <CreateAdmin
+              setselecteMenu={setselecteMenu}
+              edit_admins={edit_admins}
+              setedit_admins={setedit_admins}
+            />
           )}
         </div>
       </DefaultLayout>

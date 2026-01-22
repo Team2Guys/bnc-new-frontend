@@ -1,7 +1,7 @@
-"use client";
-import { IoIosCloseCircle } from "react-icons/io";
-import { useEffect, useRef, useState } from "react";
-import { BsExclamationCircle } from "react-icons/bs";
+'use client';
+import { IoIosCloseCircle } from 'react-icons/io';
+import { useEffect, useRef, useState } from 'react';
+import { BsExclamationCircle } from 'react-icons/bs';
 
 interface FeatureItem {
   key: string;
@@ -24,13 +24,13 @@ export default function FeaturesColumn({
   const popupRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
     const handleResize = () => setIsMobile(mediaQuery.matches);
 
     handleResize();
-    mediaQuery.addEventListener("change", handleResize);
+    mediaQuery.addEventListener('change', handleResize);
 
-    return () => mediaQuery.removeEventListener("change", handleResize);
+    return () => mediaQuery.removeEventListener('change', handleResize);
   }, []);
 
   // Detect click outside popup
@@ -44,8 +44,8 @@ export default function FeaturesColumn({
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const currentFeatures = isMobile ? featureMobile : features;
@@ -65,7 +65,7 @@ export default function FeaturesColumn({
               onClick={(e) => {
                 e.stopPropagation();
                 setActivePopupKey((prev) =>
-                  prev === feature.key ? null : feature.key
+                  prev === feature.key ? null : feature.key,
                 );
               }}
             />
@@ -92,4 +92,3 @@ export default function FeaturesColumn({
     </div>
   );
 }
-

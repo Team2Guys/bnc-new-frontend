@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import Container from 'components/Res-usable/Container/Container';
 import { QualityData } from 'data/Homedata/tabdata';
 import Image from 'next/image';
@@ -8,15 +8,15 @@ import React from 'react';
 
 const QualitySection = () => {
   const path = usePathname();
-const category = path.includes('commercial')
-  ? 'commercial'
-  : path.includes('blinds')
-  ? 'blinds'
-  : path.includes('curtains')
-  ? 'curtains'
-  : path.includes('shutters')
-  ? 'shutters'
-  : 'commercial';
+  const category = path.includes('commercial')
+    ? 'commercial'
+    : path.includes('blinds')
+      ? 'blinds'
+      : path.includes('curtains')
+        ? 'curtains'
+        : path.includes('shutters')
+          ? 'shutters'
+          : 'commercial';
 
   const imageSrc = getImageSrc(category);
   const qualityFeatures = QualityData[category];
@@ -36,7 +36,13 @@ const category = path.includes('commercial')
         <div className="grid grid-cols-12 gap-4 lg:gap-4 items-center">
           <div className="col-span-12 md:col-span-5">
             <div className="w-full h-[250px] xsm:h-[300px] xs:h-[350px] sm:h-[430px] md:h-[300px] xl:h-[325px] 2xl:h-[400px]">
-              <Image src={imageSrc} alt={category} fill className="!relative rounded" sizes='40vw' />
+              <Image
+                src={imageSrc}
+                alt={category}
+                fill
+                className="!relative rounded"
+                sizes="40vw"
+              />
             </div>
           </div>
 
@@ -77,14 +83,14 @@ const category = path.includes('commercial')
 
 function getImageSrc(category: string) {
   switch (category.toLowerCase()) {
-    case "blinds":
-      return "/assets/images/safisfaction/Blinds.webp";
-    case "curtains":
-      return "/assets/images/safisfaction/Curtains.webp";
-      case "commercial":
-      return "/assets/images/safisfaction/Curtains.webp";
+    case 'blinds':
+      return '/assets/images/safisfaction/Blinds.webp';
+    case 'curtains':
+      return '/assets/images/safisfaction/Curtains.webp';
+    case 'commercial':
+      return '/assets/images/safisfaction/Curtains.webp';
     default:
-      return "/assets/images/safisfaction/Shutters.webp";
+      return '/assets/images/safisfaction/Shutters.webp';
   }
 }
 

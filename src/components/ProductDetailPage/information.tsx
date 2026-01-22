@@ -1,62 +1,62 @@
-'use client'
-import React, { useState, useMemo, useEffect } from 'react'
-import Container from 'components/Res-usable/Container/Container'
-import Image from 'next/image'
+'use client';
+import React, { useState, useMemo, useEffect } from 'react';
+import Container from 'components/Res-usable/Container/Container';
+import Image from 'next/image';
 
 interface PrivacyImage {
-  imageUrl: string
-  alt?:string
+  imageUrl: string;
+  alt?: string;
 }
 
 interface InformationProps {
-  privarcyImage: PrivacyImage
+  privarcyImage: PrivacyImage;
   privacySectoin: Array<{
-    specsHeading: string
-    specsDetails: string
-  }>
+    specsHeading: string;
+    specsDetails: string;
+  }>;
 }
 
 const Information = ({ privarcyImage, privacySectoin }: InformationProps) => {
-  const [visibleCount, setVisibleCount] = useState(0)
-  const [isDesktop, setIsDesktop] = useState(false)
+  const [visibleCount, setVisibleCount] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   // Detect screen size
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsDesktop(window.innerWidth >= 768)
-    }
-    checkScreenSize()
-    window.addEventListener('resize', checkScreenSize)
-    return () => window.removeEventListener('resize', checkScreenSize)
-  }, [])
+      setIsDesktop(window.innerWidth >= 768);
+    };
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   // Show all on desktop
   useEffect(() => {
     if (isDesktop) {
-      setVisibleCount(privacySectoin.length - 1)
+      setVisibleCount(privacySectoin.length - 1);
     } else {
-      setVisibleCount(0)
+      setVisibleCount(0);
     }
-  }, [isDesktop, privacySectoin.length])
+  }, [isDesktop, privacySectoin.length]);
 
   const handleReadMore = () => {
-    const total = privacySectoin.length - 1
-    setVisibleCount(prev => Math.min(prev + 2, total))
-  }
+    const total = privacySectoin.length - 1;
+    setVisibleCount((prev) => Math.min(prev + 2, total));
+  };
 
-  const handleReadLess = () => setVisibleCount(0)
+  const handleReadLess = () => setVisibleCount(0);
 
   const { visibleSections, hasMore, hasVisible } = useMemo(() => {
-    const extraSections = privacySectoin.slice(1)
-    const visible = extraSections.slice(0, visibleCount)
-    const total = extraSections.length
+    const extraSections = privacySectoin.slice(1);
+    const visible = extraSections.slice(0, visibleCount);
+    const total = extraSections.length;
     return {
       visibleSections: visible,
       hasMore: visibleCount < total,
       hasVisible: visibleCount > 0,
-      isFullyVisible: visibleCount >= total
-    }
-  }, [privacySectoin, visibleCount])
+      isFullyVisible: visibleCount >= total,
+    };
+  }, [privacySectoin, visibleCount]);
 
   return (
     <>
@@ -70,7 +70,9 @@ const Information = ({ privarcyImage, privacySectoin }: InformationProps) => {
                 <h2 className="font-futura font-bold text-primary text-2xl md:text-[30px] xl:text-[40px] leading-[120%]">
                   {privacySectoin[0].specsHeading}
                 </h2>
-                <p className='font-roboto text-[16px] text-primary'>{privacySectoin[0].specsDetails}</p>
+                <p className="font-roboto text-[16px] text-primary">
+                  {privacySectoin[0].specsDetails}
+                </p>
               </div>
 
               {/* Extra sections */}
@@ -114,8 +116,8 @@ const Information = ({ privarcyImage, privacySectoin }: InformationProps) => {
                   className="object-cover !relative"
                   src={privarcyImage.imageUrl}
                   fill
-                  alt={privarcyImage.alt ||"Category Images"}
-                  sizes='100vw'
+                  alt={privarcyImage.alt || 'Category Images'}
+                  sizes="100vw"
                 />
               </div>
             )}
@@ -123,7 +125,7 @@ const Information = ({ privarcyImage, privacySectoin }: InformationProps) => {
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Information
+export default Information;

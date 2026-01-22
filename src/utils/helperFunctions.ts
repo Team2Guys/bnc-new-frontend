@@ -1,6 +1,10 @@
-
 import axios, { AxiosResponse } from 'axios';
-import { blindsSubcategories, curtainsSubcategories, generateSlug, shuttersSubcategories } from 'data/data';
+import {
+  blindsSubcategories,
+  curtainsSubcategories,
+  generateSlug,
+  shuttersSubcategories,
+} from 'data/data';
 
 import Cookies from 'js-cookie';
 import React from 'react';
@@ -9,12 +13,14 @@ const token = Cookies.get('2guysAdminToken');
 const superAdmintoken = Cookies.get('superAdminToken');
 const finalToken = token ? token : superAdmintoken;
 
-
-export const uploadPhotosToBackend = async (files: File[], s3Flag?: boolean): Promise<any[]> => {
+export const uploadPhotosToBackend = async (
+  files: File[],
+  s3Flag?: boolean,
+): Promise<any[]> => {
   const formData = new FormData();
 
   if (files.length === 0) throw new Error('No files found');
-  let urlsEndpoint = s3Flag ? "file-upload/upload-s3" : "file-upload"
+  let urlsEndpoint = s3Flag ? 'file-upload/upload-s3' : 'file-upload';
   try {
     for (const file of files) {
       console.log('hello from files');
@@ -22,11 +28,13 @@ export const uploadPhotosToBackend = async (files: File[], s3Flag?: boolean): Pr
     }
 
     const response: AxiosResponse<any> = await axios.post(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/${urlsEndpoint}`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/${urlsEndpoint}`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       },
-    },
     );
 
     return response.data;
@@ -40,10 +48,9 @@ export const ImageRemoveHandler = async (
   imagePublicId: string,
   setterFunction: any,
 ) => {
-
   console.log(imagePublicId);
   try {
-    let awsS3Flag = imagePublicId.includes("s3") ? "DelImages3" : "DelImage"
+    let awsS3Flag = imagePublicId.includes('s3') ? 'DelImages3' : 'DelImage';
     const response = await axios.delete(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/file-upload/${awsS3Flag}/${imagePublicId}`,
     );
@@ -55,7 +62,6 @@ export const ImageRemoveHandler = async (
     console.error('Failed to remove image:', error);
   }
 };
-
 
 export const Api_handler = async (
   Endpoint: string,
@@ -89,22 +95,24 @@ export const Api_handler = async (
   }
 };
 
-
-
 export const getPath = (product: IProduct) => {
-  const parent = (product?.category?.productCustomUrl || generateSlug(product?.category?.title)) as string;
+  const parent = (product?.category?.productCustomUrl ||
+    generateSlug(product?.category?.title)) as string;
 
-  const slug = (product.customUrl || generateSlug(product.title)) as string
+  const slug = (product.customUrl || generateSlug(product.title)) as string;
 
-  const path = 
-    `/${parent}${['dimout-roller-blinds', 'sunscreen-roller-blinds', 'blackout-roller-blinds'].includes(slug) ? '/roller-blinds'
+  const path = `/${parent}${
+    [
+      'dimout-roller-blinds',
+      'sunscreen-roller-blinds',
+      'blackout-roller-blinds',
+    ].includes(slug)
+      ? '/roller-blinds'
       : ''
-    }/${slug}`;
+  }/${slug}`;
 
-
-  return path + "/";
+  return path + '/';
 };
-
 
 export const subcategoryMap: Record<string, string[]> = {
   blinds: blindsSubcategories,
@@ -112,31 +120,29 @@ export const subcategoryMap: Record<string, string[]> = {
   curtains: curtainsSubcategories,
 };
 
-
 export const handleImageAltText = (
   index: number,
   newImageIndex: string,
   setImagesUrlhandler: React.Dispatch<React.SetStateAction<any[] | any>>,
-  variantType: string
+  variantType: string,
 ) => {
   setImagesUrlhandler((prev: any[] | undefined) => {
     if (!prev) return [];
 
     const updatedImagesUrl = prev?.map((item: any, i: number) =>
-      i === index ? { ...item, [variantType]: newImageIndex } : item
+      i === index ? { ...item, [variantType]: newImageIndex } : item,
     );
     return updatedImagesUrl;
   });
 };
 
-
 export const DateFormatHandler = (input?: Date | string) => {
-  if (!input) return "Not available";
+  if (!input) return 'Not available';
 
-  const parsedDate = typeof input === "string" ? new Date(input) : input;
+  const parsedDate = typeof input === 'string' ? new Date(input) : input;
 
   if (isNaN(parsedDate.getTime())) {
-    return "Not available";
+    return 'Not available';
   }
 
   return new Intl.DateTimeFormat('en-GB', {
@@ -145,26 +151,21 @@ export const DateFormatHandler = (input?: Date | string) => {
     day: '2-digit',
     hour: '2-digit',
     minute: '2-digit',
-    hour12: true
-  }).format(parsedDate).toUpperCase();
+    hour12: true,
+  })
+    .format(parsedDate)
+    .toUpperCase();
 };
-
-
 
 export const getRandomColor = () => {
   return `hsl(${Math.floor(Math.random() * 360)}, 70%, 60%)`;
-
-}
-
+};
 
 export function compareImages(a?: any, b?: any): boolean {
   if (!a && !b) return false;
   if (!a || !b) return true;
 
-  return (
-    a.public_id !== b.public_id ||
-    (a.altText ?? "") !== (b.altText ?? "")
-  );
+  return a.public_id !== b.public_id || (a.altText ?? '') !== (b.altText ?? '');
 }
 
 export function compareImageArray(a?: any[], b?: any[]): boolean {
@@ -184,10 +185,10 @@ export function compareImageArray(a?: any[], b?: any[]): boolean {
 export function updateAltText<T extends { altText?: string }>(
   images: T[] | undefined,
   index: number,
-  newAltText: string
+  newAltText: string,
 ): T[] {
   if (!images) return [];
   return images.map((item, i) =>
-    i === index ? { ...item, altText: newAltText } : item
+    i === index ? { ...item, altText: newAltText } : item,
   );
 }

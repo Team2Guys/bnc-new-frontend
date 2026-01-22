@@ -13,21 +13,27 @@ function ProtectedRoute(WrappedComponent: any) {
     const [loading, setLoading] = useState<boolean>(true);
     const dispatch = useAppDispatch();
 
-    const AddminProfileTriggerHandler = async (token: string, adminFlag: boolean) => {
+    const AddminProfileTriggerHandler = async (
+      token: string,
+      adminFlag: boolean,
+    ) => {
       try {
-        let apiEndpoint = adminFlag ? 'getSuperAdminHandler' : 'get-admin-handler';
-        let user: any = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admins/${apiEndpoint}`, {
-          headers: {
-            Authorization: `Bearer ${token}`
+        let apiEndpoint = adminFlag
+          ? 'getSuperAdminHandler'
+          : 'get-admin-handler';
+        let user: any = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/admins/${apiEndpoint}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           },
-        },
         );
-        console.log(user, "user")
+        console.log(user, 'user');
         dispatch(loggedInAdminAction(user.data));
       } catch (err: any) {
-
-        if(err.response?.data?.statusCode == 401){
-          Cookies.remove(adminFlag ?"superAdminToken": "2guysAdminToken" )
+        if (err.response?.data?.statusCode == 401) {
+          Cookies.remove(adminFlag ? 'superAdminToken' : '2guysAdminToken');
           router.push('/dashboard/Admin-login');
           return;
         }
@@ -40,7 +46,7 @@ function ProtectedRoute(WrappedComponent: any) {
       const superAdmintoken = Cookies.get('superAdminToken');
       let Finaltoken = superAdmintoken ? superAdmintoken : token;
       if (!Finaltoken) {
-        console.log('functoin called')
+        console.log('functoin called');
         router.push('/dashboard/Admin-login');
       } else {
         AddminProfileTriggerHandler(Finaltoken, superAdmintoken ? true : false);

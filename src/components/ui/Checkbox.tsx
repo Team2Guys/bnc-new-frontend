@@ -1,22 +1,22 @@
-"use client";
-import React from "react";
-import { CheckboxProps } from "types/types";
-const Checkbox= ({
+'use client';
+import React from 'react';
+import { CheckboxProps } from 'types/types';
+const Checkbox = ({
   id,
   name,
   checked,
   label,
   radio = false,
   onChange,
-  className = "",
-}:CheckboxProps) => {
+  className = '',
+}: CheckboxProps) => {
   return (
     <label
       htmlFor={id}
       className={`flex items-center space-x-2 cursor-pointer select-none whitespace-nowrap ${className}`}
     >
       <input
-        type={radio ? "radio" : "checkbox"}
+        type={radio ? 'radio' : 'checkbox'}
         id={id}
         name={name}
         checked={checked}
@@ -29,8 +29,8 @@ const Checkbox= ({
           className={`w-5 h-5 flex items-center justify-center border-2 rounded-md transition-colors duration-200
             ${
               checked
-                ? "bg-secondary border-secondary"
-                : "border-gray-400 dark:border-neutral-600"
+                ? 'bg-secondary border-secondary'
+                : 'border-gray-400 dark:border-neutral-600'
             }`}
         >
           {checked && (
@@ -50,8 +50,8 @@ const Checkbox= ({
           className={`w-5 h-5 flex items-center justify-center border-2 rounded-full transition-colors duration-200
             ${
               checked
-                ? "border-secondary"
-                : "border-gray-400 dark:border-neutral-600"
+                ? 'border-secondary'
+                : 'border-gray-400 dark:border-neutral-600'
             }`}
         >
           {checked && <div className="w-3 h-3 rounded-full bg-secondary"></div>}

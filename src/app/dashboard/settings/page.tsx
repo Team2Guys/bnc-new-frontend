@@ -5,7 +5,10 @@ import Image from 'next/image';
 import DefaultLayout from 'components/Dashboard/Layouts/DefaultLayout';
 import ProtectedRoute from 'hooks/AuthHookAdmin';
 import { useAppSelector } from 'components/Others/HelperRedux';
-import { uploadPhotosToBackend, ImageRemoveHandler } from 'utils/helperFunctions';
+import {
+  uploadPhotosToBackend,
+  ImageRemoveHandler,
+} from 'utils/helperFunctions';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useAppDispatch } from 'components/Others/HelperRedux';
@@ -32,7 +35,9 @@ const Settings = () => {
   const [formData, setFormData] = useState(initialFormData);
   const [profilePhoto, setProfilePhoto] = useState<IMAGE_INTERFACE[]>([]);
 
-  const handlePhotoChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePhotoChange = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const file = event.target.files?.[0];
     if (file) {
       let imageUrl: any = await uploadPhotosToBackend([file]);
@@ -40,12 +45,12 @@ const Settings = () => {
     }
   };
 
-   const adminUpdateHandler = async () => {
+  const adminUpdateHandler = async () => {
     try {
       let initialFormData = {
         email: loggedInUser.email,
         fullname: formData.fullname,
-        posterImageUrl: loggedInUser.posterImageUrl
+        posterImageUrl: loggedInUser.posterImageUrl,
       };
 
       if (loggedInUser) {
@@ -69,7 +74,7 @@ const Settings = () => {
           combinedData,
           {
             headers: {
-              Authorization: `Bearer ${token}`
+              Authorization: `Bearer ${token}`,
             },
           },
         );
@@ -79,10 +84,6 @@ const Settings = () => {
           console.error('Failed to update admin');
         }
       }
-
-
-
-
     } catch (error) {
       console.error('Error updating admin:', error);
     }
@@ -113,7 +114,7 @@ const Settings = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       dispatch(loggedInAdminAction(user.data));
     } catch (err: any) {
@@ -146,7 +147,9 @@ const Settings = () => {
           {/* Profile Photo Section */}
           <div className="rounded-lg bg-white shadow-md dark:bg-lightdark">
             <div className="border-b border-gray-200 px-6 py-4 dark:border-strokedark">
-              <h3 className="text-lg font-semibold text-black dark:text-white">Profile Photo</h3>
+              <h3 className="text-lg font-semibold text-black dark:text-white">
+                Profile Photo
+              </h3>
             </div>
             <div className="p-6">
               <div className="flex items-center gap-4 mb-6">
@@ -171,7 +174,7 @@ const Settings = () => {
                             onClick={() =>
                               ImageRemoveHandler(
                                 photo?.public_id ? photo?.public_id : '',
-                                setProfilePhoto
+                                setProfilePhoto,
                               )
                             }
                           >
@@ -215,7 +218,12 @@ const Settings = () => {
                 />
                 <div className="text-center">
                   <span className="inline-block p-3 rounded-full border border-primary bg-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                    >
                       <path
                         fill="#c72031"
                         d="M10 16v-5h4v5h5l-7 7-7-7h5zm-4-16v2h12v-2h-12zm-4 4h20v2h-20v-2z"
@@ -223,7 +231,10 @@ const Settings = () => {
                     </svg>
                   </span>
                   <p className="mt-3 text-sm text-gray-600">
-                    <span className="font-medium text-primary">Click to upload</span> or drag and drop
+                    <span className="font-medium text-primary">
+                      Click to upload
+                    </span>{' '}
+                    or drag and drop
                   </p>
                   <p className="text-xs ">SVG, PNG, JPG or GIF (max 800x800)</p>
                 </div>
@@ -234,7 +245,9 @@ const Settings = () => {
           {/* Personal Info Section */}
           <div className="lg:col-span-2 rounded-lg bg-white shadow-md dark:bg-lightdark">
             <div className="border-b border-gray-200 px-6 py-4 dark:border-strokedark">
-              <h3 className="text-lg font-semibold text-black dark:text-white">Personal Information</h3>
+              <h3 className="text-lg font-semibold text-black dark:text-white">
+                Personal Information
+              </h3>
             </div>
             <div className="p-6">
               <form onSubmit={handleSubmit} className="space-y-6">

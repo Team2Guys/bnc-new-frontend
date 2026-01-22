@@ -54,18 +54,18 @@ export interface Category {
   Images_Alt_Text?: string;
   topHeading?: string;
 
-  headingchecks: { specsDetails: string }[]
+  headingchecks: { specsDetails: string }[];
   breakcrum?: string;
 
   productpageHeading?: string;
   faqHeadingS?: string;
 
-  faqs: { specsHeading: string ,specsDetails: string }[]
-  faqHeading?: string
-    
-  productCustomUrl?: string
-  categoryCustomUrl?: string
-  title?: string
+  faqs: { specsHeading: string; specsDetails: string }[];
+  faqHeading?: string;
+
+  productCustomUrl?: string;
+  categoryCustomUrl?: string;
+  title?: string;
 }
 
 export interface CategoriesType extends Category {
@@ -96,7 +96,7 @@ interface Images {
   imageUrl: CloudinaryImage[];
 }
 
-export interface ProductWithImages extends Product, Images { }
+export interface ProductWithImages extends Product, Images {}
 
 export interface FormValues {
   name: string;
@@ -125,7 +125,7 @@ export interface FormValues {
   Canonical_Tag?: string;
   Meta_description?: string;
   Images_Alt_Text?: string;
-  subcategory_description?: string
+  subcategory_description?: string;
 }
 
 interface Color {
@@ -143,7 +143,7 @@ interface sizes {
   sizesDetails?: string;
 }
 
-export default interface PRODUCTS_TYPES extends Product { }
+export default interface PRODUCTS_TYPES extends Product {}
 
 export interface ADDPRODUCTFORMPROPS {
   setselecteMenu: any;
@@ -184,10 +184,9 @@ export interface Allproduct {
   CategoryId: number;
   SubCategoryId: number | null;
   createdAt: string;
-  updatedAt: string ;
+  updatedAt: string;
   name?: any;
-    status:Status
-  
+  status: Status;
 }
 
 export interface CardTypes {
@@ -225,7 +224,6 @@ export interface TFooterSection {
   title: string;
   links: FooterLink[];
 }
-
 
 export type BannerData = {
   imageUrl: string;
@@ -278,7 +276,7 @@ export interface TProductGuarantees {
     heading: string;
     text: string;
     icon: string;
-  }[]
+  }[];
 }
 
 export interface formDataTypes {
@@ -308,13 +306,13 @@ export interface formDataTypes {
 export interface ADMINS_PROPS {
   setselecteMenu: React.Dispatch<SetStateAction<string | null | undefined>>;
   setedit_admins: React.Dispatch<SetStateAction<formDataTypes | undefined>>;
-  adminsData: any[]
+  adminsData: any[];
 }
 
 export interface createAdmin extends ADMINS_PROPS {
   setedit_admins?: React.Dispatch<SetStateAction<formDataTypes | undefined>>;
   edit_admins: formDataTypes | undefined;
-  adminsData?: any[]
+  adminsData?: any[];
 }
 
 export interface BlogInfo {
@@ -404,9 +402,9 @@ export interface PRODUCS_PROPS {
   filteredProduct: IProduct | undefined | null;
   filteredSubCategory?: ICategory | undefined | null;
   allprod?: Allproduct[];
-  categories?: ICategory[]
-  subCategories?: ICategory[]
-  colorPage?: IColorData
+  categories?: ICategory[];
+  subCategories?: ICategory[];
+  colorPage?: IColorData;
   matchedSchema?: any;
 }
 
@@ -446,8 +444,6 @@ export interface EstimatorProps {
   setActiveProduct: React.DispatchM<SetStateAction<EsProduct | null>>;
   activeProduct: EsProduct | null;
 }
-
-
 
 interface PosterImage {
   imageUrl: string;
@@ -490,7 +486,7 @@ export interface ThumbnailProps {
   setColorImage?: React.Dispatch<React.SetStateAction<string>>;
   videos: VideoItem[];
   videoThumbnail?: string;
-  isMotorisedCategory: boolean
+  isMotorisedCategory: boolean;
 }
 
 export interface SliderWithGoTo extends Slider {

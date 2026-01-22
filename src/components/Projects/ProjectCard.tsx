@@ -1,10 +1,12 @@
-"use client";
-import { projectsData } from "data/data";
-import Image from "next/image";
-import React, { useState } from "react";
+'use client';
+import { projectsData } from 'data/data';
+import Image from 'next/image';
+import React, { useState } from 'react';
 
 const ProjectCard = () => {
-  const sortedProjects = projectsData.sort((a, b) =>a.title.localeCompare(b.title));
+  const sortedProjects = projectsData.sort((a, b) =>
+    a.title.localeCompare(b.title),
+  );
   const [visibleCount, setVisibleCount] = useState(9);
 
   const handleLoadMore = () => {

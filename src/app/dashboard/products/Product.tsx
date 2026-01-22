@@ -1,8 +1,10 @@
 'use client';
 
 import Breadcrumb from 'components/Dashboard/Breadcrumbs/Breadcrumb';
-const FormElements = dynamic(()=>import("components/Dashboard/FormElements"))
-const ViewProduct = dynamic(()=>import("components/Dashboard/Tables/ViewProduct"))
+const FormElements = dynamic(() => import('components/Dashboard/FormElements'));
+const ViewProduct = dynamic(
+  () => import('components/Dashboard/Tables/ViewProduct'),
+);
 import ProtectedRoute from 'hooks/AuthHookAdmin';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
@@ -18,10 +20,10 @@ interface Product extends IProduct {
 interface PRODUCTS_PROPS {
   products: Product[];
   subcategories: ICategory[];
-  categories: ICategory[]
+  categories: ICategory[];
 }
 
-const Products = ({ products, categories , subcategories }: PRODUCTS_PROPS) => {
+const Products = ({ products, categories, subcategories }: PRODUCTS_PROPS) => {
   const [editProduct, setEditProduct] = useState<any | undefined>();
   const [selecteMenu, setselecteMenu] = useState<string>('Categories');
 
@@ -37,7 +39,7 @@ const Products = ({ products, categories , subcategories }: PRODUCTS_PROPS) => {
     Canonical_Tag: editProduct && editProduct?.Canonical_Tag,
     Meta_Description: editProduct && editProduct?.Meta_description,
     Images_Alt_Text: editProduct && editProduct?.Images_Alt_Text,
-    modelDetails: editProduct && editProduct?.modelDetails || [],
+    modelDetails: (editProduct && editProduct?.modelDetails) || [],
     colors: editProduct?.colors,
     spacification: editProduct?.spacification,
     sizes: editProduct && editProduct?.sizes,
@@ -51,22 +53,24 @@ const Products = ({ products, categories , subcategories }: PRODUCTS_PROPS) => {
     Sub_Heading: editProduct && editProduct.Sub_Heading,
     Sub_Heading_description: editProduct && editProduct.Sub_Heading_description,
     bannerImage: editProduct && editProduct.bannerImage,
-    subCategoryImage:   editProduct && editProduct.subCategoryImage,
-    subcategory_description : editProduct && editProduct.subcategory_description,
+    subCategoryImage: editProduct && editProduct.subCategoryImage,
+    subcategory_description: editProduct && editProduct.subcategory_description,
     topImages: editProduct && editProduct.topImages,
     topHeading: editProduct && editProduct.topHeading,
     mainHeading: editProduct && editProduct.mainHeading,
     breadcurum: editProduct && editProduct.breadcurum,
     customUrl: editProduct && editProduct.customUrl,
-    colorsImages : editProduct && editProduct.colorsImages,
-    status : editProduct && editProduct.status,
+    colorsImages: editProduct && editProduct.colorsImages,
+    status: editProduct && editProduct.status,
     // updatedAt : editProduct && editProduct?.updatedAt,
 
-        faqs: editProduct && editProduct.faqs || [],
-        videos: editProduct && editProduct.videos,
-        privacySectoin: editProduct && editProduct.privacySectoin || [],
-        privarcyImage: editProduct && editProduct.privarcyImage ,
-        recalledByCategories: editProduct?.recalledByCategories?.map((value: ICategory) => value.id) || [],
+    faqs: (editProduct && editProduct.faqs) || [],
+    videos: editProduct && editProduct.videos,
+    privacySectoin: (editProduct && editProduct.privacySectoin) || [],
+    privarcyImage: editProduct && editProduct.privarcyImage,
+    recalledByCategories:
+      editProduct?.recalledByCategories?.map((value: ICategory) => value.id) ||
+      [],
   };
 
   let productFlag: boolean = selecteMenu === 'Categories' ? true : false;
@@ -86,15 +90,15 @@ const Products = ({ products, categories , subcategories }: PRODUCTS_PROPS) => {
           setEditProduct={setEditProduct}
           EditProductValue={
             EditInitialValues &&
-              (EditInitialValues.name !== undefined ||
-                EditInitialValues.category !== undefined)
+            (EditInitialValues.name !== undefined ||
+              EditInitialValues.category !== undefined)
               ? EditInitialValues
               : undefined
           }
           EditInitialValues={
             EditInitialValues &&
-              (EditInitialValues.name !== undefined ||
-                EditInitialValues.category !== undefined)
+            (EditInitialValues.name !== undefined ||
+              EditInitialValues.category !== undefined)
               ? EditInitialValues
               : undefined
           }

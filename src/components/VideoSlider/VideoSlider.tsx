@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import {
   useState,
   useRef,
@@ -7,18 +7,21 @@ import {
   useMemo,
   TouchEvent,
   SyntheticEvent,
-} from "react";
-import Container from "components/Res-usable/Container/Container";
-import Image from "next/image";
-import VideoIcon from "../../../public/assets/images/videoicon.webp";
-import { reelsData } from "data/SellerSlider";
-import NeedHelp from "components/NeedHelp/NeedHelp";
+} from 'react';
+import Container from 'components/Res-usable/Container/Container';
+import Image from 'next/image';
+import VideoIcon from '../../../public/assets/images/videoicon.webp';
+import { reelsData } from 'data/SellerSlider';
+import NeedHelp from 'components/NeedHelp/NeedHelp';
 
 export default function VideoReelsSlider() {
   const [activeIndex, setActiveIndex] = useState(2);
   const [isMobile, setIsMobile] = useState(false);
   const [popupVideoIndex, setPopupVideoIndex] = useState<number | null>(null);
-  const [videoSize, setVideoSize] = useState<{ width: number; height: number } | null>(null);
+  const [videoSize, setVideoSize] = useState<{
+    width: number;
+    height: number;
+  } | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   const totalVideos = reelsData.length;
@@ -30,12 +33,12 @@ export default function VideoReelsSlider() {
 
   const goToPrevious = useCallback(
     () => setActiveIndex((prev) => (prev === 0 ? totalVideos - 1 : prev - 1)),
-    [totalVideos]
+    [totalVideos],
   );
 
   const goToNext = useCallback(
     () => setActiveIndex((prev) => (prev === totalVideos - 1 ? 0 : prev + 1)),
-    [totalVideos]
+    [totalVideos],
   );
 
   useEffect(() => {
@@ -43,7 +46,7 @@ export default function VideoReelsSlider() {
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
     if (sliderRef.current) observer.observe(sliderRef.current);
     return () => {
@@ -54,8 +57,8 @@ export default function VideoReelsSlider() {
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 640);
     checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   useEffect(() => {
@@ -64,16 +67,16 @@ export default function VideoReelsSlider() {
     return () => clearInterval(interval);
   }, [goToNext, popupVideoIndex, isVisible]);
 
-useEffect(() => {
-  if (!isVisible || popupVideoIndex !== null) return;
-  const activeVideo = videoRefs.current[activeIndex];
-  if (activeVideo) {
-    activeVideo.play().catch(() => {});
-  }
-}, [isVisible, activeIndex, popupVideoIndex]);
+  useEffect(() => {
+    if (!isVisible || popupVideoIndex !== null) return;
+    const activeVideo = videoRefs.current[activeIndex];
+    if (activeVideo) {
+      activeVideo.play().catch(() => {});
+    }
+  }, [isVisible, activeIndex, popupVideoIndex]);
 
   useEffect(() => {
-    document.body.style.overflow = popupVideoIndex !== null ? "hidden" : "";
+    document.body.style.overflow = popupVideoIndex !== null ? 'hidden' : '';
     if (popupVideoIndex === null) setVideoSize(null);
   }, [popupVideoIndex]);
 
@@ -98,37 +101,44 @@ useEffect(() => {
       const right1 = (activeIndex + 1) % totalVideos;
       const right2 = (activeIndex + 2) % totalVideos;
 
-      if (index === activeIndex) return "z-30 scale-100 opacity-100";
-      if (index === left1) return "z-20 scale-[0.85] opacity-1 -translate-x-[60%]";
-      if (index === left2) return "z-10 scale-[0.75] opacity-1 -translate-x-[110%]";
-      if (index === right1) return "z-20 scale-[0.85] opacity-1 translate-x-[60%]";
-      if (index === right2) return "z-10 scale-[0.75] opacity-1 translate-x-[110%]";
-      return "hidden";
+      if (index === activeIndex) return 'z-30 scale-100 opacity-100';
+      if (index === left1)
+        return 'z-20 scale-[0.85] opacity-1 -translate-x-[60%]';
+      if (index === left2)
+        return 'z-10 scale-[0.75] opacity-1 -translate-x-[110%]';
+      if (index === right1)
+        return 'z-20 scale-[0.85] opacity-1 translate-x-[60%]';
+      if (index === right2)
+        return 'z-10 scale-[0.75] opacity-1 translate-x-[110%]';
+      return 'hidden';
     },
-    [activeIndex, totalVideos]
+    [activeIndex, totalVideos],
   );
 
-  const handleLoadedMetadata = useCallback((e: SyntheticEvent<HTMLVideoElement>) => {
-    const video = e.currentTarget;
-    const maxWidth = window.innerWidth * 0.9;
-    const maxHeight = window.innerHeight * 0.9;
+  const handleLoadedMetadata = useCallback(
+    (e: SyntheticEvent<HTMLVideoElement>) => {
+      const video = e.currentTarget;
+      const maxWidth = window.innerWidth * 0.9;
+      const maxHeight = window.innerHeight * 0.9;
 
-    let width = video.videoWidth;
-    let height = video.videoHeight;
+      let width = video.videoWidth;
+      let height = video.videoHeight;
 
-    if (width > maxWidth) {
-      const ratio = maxWidth / width;
-      width = maxWidth;
-      height *= ratio;
-    }
-    if (height > maxHeight) {
-      const ratio = maxHeight / height;
-      height = maxHeight;
-      width *= ratio;
-    }
+      if (width > maxWidth) {
+        const ratio = maxWidth / width;
+        width = maxWidth;
+        height *= ratio;
+      }
+      if (height > maxHeight) {
+        const ratio = maxHeight / height;
+        height = maxHeight;
+        width *= ratio;
+      }
 
-    setVideoSize({ width, height });
-  }, []);
+      setVideoSize({ width, height });
+    },
+    [],
+  );
 
   const videoElements = useMemo(
     () =>
@@ -140,7 +150,7 @@ useEffect(() => {
             setTimeout(() => setPopupVideoIndex(index), 100);
           }}
           className={`absolute transition-all duration-500 ease-in-out cursor-pointer ${getPositionClass(
-            index
+            index,
           )}`}
         >
           <div className="relative sm:w-[500px] sm:h-[670px] w-[150px] h-[280px] rounded-2xl overflow-hidden shadow-lg">
@@ -153,22 +163,24 @@ useEffect(() => {
               />
             </div>
             <video
-                ref={(el) => {
-                  if (el) videoRefs.current[index] = el;
-                }}
-                src={item.videoUrl}
-                className="w-full h-full object-cover"
-                loop
-                muted
-                playsInline
-                preload={index === activeIndex ? "auto" : "none"}
-                poster={item.videoPoster}
-                autoPlay={isVisible && index === activeIndex && popupVideoIndex === null}
-              />
+              ref={(el) => {
+                if (el) videoRefs.current[index] = el;
+              }}
+              src={item.videoUrl}
+              className="w-full h-full object-cover"
+              loop
+              muted
+              playsInline
+              preload={index === activeIndex ? 'auto' : 'none'}
+              poster={item.videoPoster}
+              autoPlay={
+                isVisible && index === activeIndex && popupVideoIndex === null
+              }
+            />
           </div>
         </div>
       )),
-    [reelsData, getPositionClass, activeIndex, totalVideos]
+    [reelsData, getPositionClass, activeIndex, totalVideos],
   );
 
   return (
@@ -201,10 +213,10 @@ useEffect(() => {
           <div
             className="relative bg-black rounded-lg shadow-lg"
             style={{
-              width: videoSize?.width ?? "auto",
-              height: videoSize?.height ?? "auto",
-              maxWidth: "90vw",
-              maxHeight: "90vh",
+              width: videoSize?.width ?? 'auto',
+              height: videoSize?.height ?? 'auto',
+              maxWidth: '90vw',
+              maxHeight: '90vh',
             }}
             onClick={(e) => e.stopPropagation()}
           >

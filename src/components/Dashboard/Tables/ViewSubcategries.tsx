@@ -51,15 +51,14 @@ const ViewSubcategries = ({
     setSearchTerm(e.target.value);
   };
 
-  const filteredProducts=
-   useMemo(() => {
-    if(!searchTerm) return subCategories
-    return  subCategories?.filter((product: any) =>
-      product.title.toLowerCase().includes(searchTerm.toLowerCase()),
-    ) || []
+  const filteredProducts = useMemo(() => {
+    if (!searchTerm) return subCategories;
+    return (
+      subCategories?.filter((product: any) =>
+        product.title.toLowerCase().includes(searchTerm.toLowerCase()),
+      ) || []
+    );
   }, [searchTerm, subCategories]);
-
-
 
   const confirmDelete = (key: any) => {
     Swal.fire({
@@ -87,20 +86,20 @@ const ViewSubcategries = ({
         },
       );
 
-      revalidateTag('subCategories')
+      revalidateTag('subCategories');
       showAlert({
-        title: "Category Deleted",
-        text: "The category has been successfully deleted.",
-        icon: "success",
+        title: 'Category Deleted',
+        text: 'The category has been successfully deleted.',
+        icon: 'success',
       });
 
-      return ;
+      return;
     } catch (err) {
       showAlert({
-          title: "Deletion Failed",
-          text: "There was an error deleting the category.",
-          icon: "error",
-        });
+        title: 'Deletion Failed',
+        text: 'There was an error deleting the category.',
+        icon: 'error',
+      });
     }
   };
 
@@ -140,7 +139,7 @@ const ViewSubcategries = ({
       title: 'Date',
       key: 'date',
       render: (record: SUBCATEOGRY) => {
-        const createdAt = DateFormatHandler(record.createdAt)
+        const createdAt = DateFormatHandler(record.createdAt);
 
         return <span>{createdAt}</span>;
       },
@@ -149,7 +148,7 @@ const ViewSubcategries = ({
       title: 'Update At',
       key: 'date',
       render: (record: SUBCATEOGRY) => {
-        const createdAt = DateFormatHandler(record?.updatedAt)
+        const createdAt = DateFormatHandler(record?.updatedAt);
 
         return <span>{createdAt}</span>;
       },
@@ -190,9 +189,10 @@ const ViewSubcategries = ({
       key: 'action',
       render: (record: any) => (
         <RiDeleteBin6Line
-          className={`cursor-pointer ${canDeleteCategory && 'text-red'} ${!canDeleteCategory &&
+          className={`cursor-pointer ${canDeleteCategory && 'text-red'} ${
+            !canDeleteCategory &&
             'cursor-not-allowed text-black dark:text-slate-300'
-            }`}
+          }`}
           size={20}
           onClick={() => {
             if (canDeleteCategory) {
@@ -213,7 +213,7 @@ const ViewSubcategries = ({
           canAdd={canAddCategory}
           setEdit={seteditCategory}
           setMenuType={setMenuType}
-          menuTypeText='Add Sub Category'
+          menuTypeText="Add Sub Category"
         />
 
         {filteredProducts && filteredProducts.length > 0 ? (
