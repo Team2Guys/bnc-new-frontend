@@ -72,8 +72,8 @@ const Navbar = () => {
       {path === '/ppc/motorised-blinds/' ||
       path === '/ppc/motorised-curtains/' ||
       path === '/ppc/roller-blinds/' ||
-      path === '/ppc/made-to-measure-blinds/' ||
-      path === '/ppc/made-to-measure-curtains/' ? (
+      path === '/ppc/blinds/' ||
+      path === '/ppc/curtains/' ? (
         ''
       ) : (
         <div className="w-full bg-primary hidden md:block">

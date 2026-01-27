@@ -1,6 +1,6 @@
-import { ICategory } from 'types/types';
+import { ICategory, IProduct } from 'types/types';
 import { headers } from 'next/headers';
-import { fetchBlogs, fetchCategories } from 'config/fetch';
+import { fetchBlogs, fetchCategories, fetchProducts } from 'config/fetch';
 import { blogLinks } from 'data/header_links';
 import { Metadata } from 'next';
 import { BlogInfo } from 'types/interfaces';
@@ -17,6 +17,7 @@ import dynamic from 'next/dynamic';
 import 'style/blog.css';
 const SlickSlider = dynamic(() => import('components/Blogs/slick-slider'));
 import BlogCard from 'components/Blogs/blog-card';
+import ProductSlider from 'components/Blogs/product-slider';
 const CategoryTitle = ['blinds', 'curtains', 'shutters', 'commercial'];
 
 export async function generateMetadata({
@@ -115,6 +116,7 @@ const BlogDetail = async ({
         blog.isPublished &&
         blog.category?.toLowerCase() === categorymatched.toLowerCase(),
     );
+
     return (
       <>
         {matchedSchema && (
@@ -154,6 +156,11 @@ const BlogDetail = async ({
       b.id !== blog?.id,
   );
   if (!blog) return notFound();
+  const productList = await fetchProducts();
+  const publishedProduct = productList.filter(
+    (p: IProduct) => p.status === 'PUBLISHED',
+  );
+
 
   return (
     <Container className="mt-10 space-y-4 lg:space-y-8 mb-10 md:mb-10">
@@ -184,6 +191,9 @@ const BlogDetail = async ({
           </div>
         </div>
       </div>
+  
+      <ProductSlider products={publishedProduct} />
+  
       <SlickSlider title="Related Blogs">
         {relatedBlogs.map((relatedBlog: BlogInfo, index: number) => (
           <BlogCard key={relatedBlog.id ?? index} blog={relatedBlog} />

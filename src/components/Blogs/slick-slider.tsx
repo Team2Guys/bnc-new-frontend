@@ -9,7 +9,7 @@ const NextArrow = (props: any) => {
   const { onClick } = props;
   return (
     <div
-      className="absolute top-1/2 -right-2 transform -translate-y-1/2 z-10 cursor-pointer"
+      className="absolute top-1/2 -right-2 transform -translate-y-1/2 z-10 cursor-pointer justify-around"
       onClick={onClick}
     >
       <GrFormNext className="text-3xl xl:text-4xl text-white transition border-2 border-white rounded-full bg-transparent backdrop-blur-sm" />

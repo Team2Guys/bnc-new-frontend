@@ -1,6 +1,6 @@
 export const links = [
   {
-    href: '/made-to-measure-blinds',
+    href: '/blinds',
     label: 'Blinds',
     id: 2,
 
@@ -20,7 +20,7 @@ export const links = [
               '@type': 'ListItem',
               position: 2,
               name: 'Blinds',
-              item: 'https://blindsandcurtains.ae/made-to-measure-blinds/',
+              item: 'https://blindsandcurtains.ae/blinds/',
             },
           ],
         },
@@ -30,7 +30,7 @@ export const links = [
           name: 'Blinds and Curtains Dubai',
           image:
             'https://blindsandcurtains.ae/_next/image?url=%2Fassets%2Fimages%2FBlinds%2Flanding%2Flanding.webp&w=1080&q=75',
-          url: 'https://blindsandcurtains.ae/made-to-measure-blinds/',
+          url: 'https://blindsandcurtains.ae/blinds/',
           telephone: '+971544945339',
           priceRange: 'AED 250',
           address: {
@@ -75,7 +75,7 @@ export const links = [
   },
 
   {
-    href: '/made-to-measure-curtains',
+    href: '/curtains',
     label: 'Curtains',
     id: 5,
     script: {
@@ -94,7 +94,7 @@ export const links = [
               '@type': 'ListItem',
               position: 2,
               name: 'Curtains',
-              item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+              item: 'https://blindsandcurtains.ae/curtains/',
             },
           ],
         },
@@ -104,7 +104,7 @@ export const links = [
           name: 'Blinds and Curtains Dubai',
           image:
             'https://blindsandcurtains.ae/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fblind.f0dfda22.png&w=640&q=75',
-          url: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          url: 'https://blindsandcurtains.ae/curtains/',
           telephone: '+971544945339',
           priceRange: 'AED 250',
           address: {

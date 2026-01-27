@@ -47,7 +47,7 @@ export let schema: any = [
         '@type': 'ListItem',
         position: 2,
         name: 'Blinds',
-        item: 'https://blindsandcurtains.ae/made-to-measure-blinds/',
+        item: 'https://blindsandcurtains.ae/blinds/',
       },
     ],
   },

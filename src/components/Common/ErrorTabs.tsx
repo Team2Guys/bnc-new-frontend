@@ -59,9 +59,9 @@ const ErrorTabs = ({ products }: { products: IProduct[] }) => {
         <Link
           href={
             activeTab === 'blinds'
-              ? '/made-to-measure-blinds/'
+              ? '/blinds/'
               : activeTab === 'curtains'
-                ? '/made-to-measure-curtains/'
+                ? '/curtains/'
                 : activeTab === 'shutters'
                   ? '/shutters-range/'
                   : '/commercial/'

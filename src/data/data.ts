@@ -217,7 +217,7 @@ export const footerData = [
   {
     key: '1',
     title: 'Blinds',
-    link: '/made-to-measure-blinds/',
+    link: '/blinds/',
     items: [
       'Motorised blinds',
       'Blackout Roller Blinds',
@@ -229,7 +229,7 @@ export const footerData = [
   {
     key: '2',
     title: 'Curtains',
-    link: '/made-to-measure-curtains/',
+    link: '/curtains/',
     items: [
       'Motorised Curtains',
       'Blackout Triple Pinch Pleat curtains',
@@ -267,8 +267,8 @@ export const contentArray = [
 ];
 
 export const links = {
-  blinds: '/made-to-measure-blinds',
-  curtains: '/made-to-measure-curtains',
+  blinds: '/blinds',
+  curtains: '/curtains',
   shutters: '/shutters-range',
 };
 
@@ -310,7 +310,7 @@ export const projectsData = [
   },
   {
     title: 'Jumeirah Bay Island',
-    description: `A luxury home needs custom care. We made <a href="/made-to-measure-blinds/"" style="text-decoration:underline">custom blinds</a>, curtains and shutters for Jumeirah Bay Island's exclusive clients.`,
+    description: `A luxury home needs custom care. We made <a href="/blinds/"" style="text-decoration:underline">custom blinds</a>, curtains and shutters for Jumeirah Bay Island's exclusive clients.`,
     imageUrl: '/assets/images/Projects/jumeriah bay island.webp',
   },
   {
@@ -320,7 +320,7 @@ export const projectsData = [
   },
   {
     title: 'Palm Jumeirah',
-    description: `We've made sure the blinds and <a href="/made-to-measure-curtains/"" style="text-decoration:underline">curtains</a> match the scale and elegance of Palm Jumeirah.`,
+    description: `We've made sure the blinds and <a href="/curtains/"" style="text-decoration:underline">curtains</a> match the scale and elegance of Palm Jumeirah.`,
     imageUrl: '/assets/images/Projects/Palm Jumeirah.webp',
   },
 ];
@@ -414,21 +414,24 @@ export const subCategoryName = [
 ];
 
 export const shuttersSubcategories = [
+  'Dark Wood Shutters',
   'Regular Full Height Shutters',
-  'Bi-fold Shutters',
+  'Bay Window Shutters',
+  'Living Room Shutters',
   'Special Shape Shutters',
+  'Tracked Shutters',
+  'Bedroom Shutters',
+  'Bathroom Shutters',
+  'Bi-fold Shutters',
   'Bypass Shutters',
   'Solid Panel Shutters',
   'Tier On Tier Shutters',
-  'Dark Wood Shutters',
   'Bold Colours Shutters',
   'Light Wood Shutters',
   'Cafe Style Shutters',
   'Outdoor Shutters',
-  'Living Room Shutters',
   'Dining Room Shutters',
   'Kitchen Room Shutters',
-  'Bedroom Shutters',
   'Staircase Shutters',
   'White Shutters',
   'Off White Shutters',
@@ -436,17 +439,18 @@ export const shuttersSubcategories = [
 
 export const blindsSubcategories = [
   'Blackout Roller Blinds',
-  'Sunscreen Roller Blinds',
-  'Day/night Blinds',
-  'Wood Venetian Blinds',
-  'Blackout Roman Blinds',
-  'Vertical Blinds',
   'Motorised Blinds',
-  'Sheer Roman blinds',
+  'Zipline Outdoor Blinds',
+  'Living Room Blinds',
   'Roller Blinds',
   'Roman Blinds',
-  'Zipline Outdoor Blinds',
+  'Sheer Roman blinds',
   'Skylight Blinds',
+  'Vertical Blinds',
+  'Day/night Blinds',
+  'Sunscreen Roller Blinds',
+  'Wood Venetian Blinds',
+  'Blackout Roman Blinds',
   'Blackout Blinds',
   'Zebra Blinds',
   'Sheer Horizon Blinds',
@@ -458,7 +462,6 @@ export const blindsSubcategories = [
   'Patricia Blinds',
   'Panel Blinds',
   'Aluminium Blinds',
-  'Living Room Blinds',
   'Kitchen Blinds',
   'Dining Room Blinds',
   'Bathroom Blinds',
@@ -469,13 +472,15 @@ export const blindsSubcategories = [
 
 export const curtainsSubcategories = [
   'Blackout Triple Pinch Pleat Curtains',
-  'Sheer Triple Pinch Pleat Curtains',
-  'Sheer Ripple Fold Curtains',
-  'Eyelet Curtains',
-  'Double Pinch Pleat Curtains',
   'Blackout Curtains',
-  'Motorised Curtains',
+  'Sheer Ripple Fold Curtains',
+  'Sheer Triple Pinch Pleat Curtains',
   'Wave Sheer & Blackout Curtains',
+  'Double Pinch Pleat Curtains',
+  'Eyelet Curtains',
+  'Bedroom Curtains',
+  'Motorised Curtains',
+  'Linen Curtains',
   'Office Curtains',
   'Home Curtains',
   'Plain Curtains',
@@ -490,12 +495,10 @@ export const curtainsSubcategories = [
   'Tab Top Curtains',
   'Pencil Pleat Curtains',
   'Dining Room Curtains',
-  'Bedroom Curtains',
   'Hotel Curtains',
   'Kids Room Curtains',
   'Living room Curtains',
   'Pelmet Curtains',
-  'Linen Curtains',
   'Chiffon Curtains',
   'Pinch Pleat Curtains',
   'Staircase Curains',
