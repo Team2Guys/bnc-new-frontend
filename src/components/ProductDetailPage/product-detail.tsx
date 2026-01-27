@@ -15,6 +15,7 @@ const InfoTabs = dynamic(() => import('components/NewHomecomponents/info'));
 const Customisation = dynamic(() => import('./Customisation'));
 import { TabDataItem } from 'types/product';
 import { useInView } from 'react-intersection-observer';
+import ComparisonTable from 'components/NewHomecomponents/comparisontabble';
 const VideoGuide = dynamic(() => import('./video-guilde'), {
   loading: () => (
     <div className="grid grid-cols-3 gap-4 justify-items-center mx-auto max-w-5xl py-6 sm:py-12">
@@ -96,6 +97,8 @@ const ProductDetail = ({ title, filterProduct }: IProductDetail) => {
           <Detail data={filterProduct} />
         </div>
       </Container>
+      <Testimonial />
+
       {isMotorisedCategory && (
         <InfoTabs
           tabData={processedTabDataDetail}
@@ -103,15 +106,26 @@ const ProductDetail = ({ title, filterProduct }: IProductDetail) => {
           isMotorisedCategory={isMotorisedCategory}
         />
       )}
-
-      <div className="grid grid-cols-12 w-full">
+      <div className="grid grid-cols-12 w-full gap-y-8">
+        {/* Quality Section */}
         <div
-          className={`col-span-12 ${isMotorisedCategory ? 'order-2' : 'order-1'}`}
+          className={`col-span-12 order-1 md:order-1 ${
+            isMotorisedCategory ? 'md:order-2' : ''
+          }`}
         >
           <QualitySection />
         </div>
+
+        {/* Comparison Table (CENTER) */}
+        <div className="col-span-12 flex justify-center order-2 md:order-2">
+          <ComparisonTable />
+        </div>
+
+        {/* Video + Customisation */}
         <div
-          className={`col-span-12 ${isMotorisedCategory ? 'order-1' : 'order-2'}`}
+          className={`col-span-12 order-3 md:order-3 ${
+            isMotorisedCategory ? 'md:order-1' : ''
+          }`}
         >
           <div ref={ref}>
             {show ? (
@@ -123,9 +137,11 @@ const ProductDetail = ({ title, filterProduct }: IProductDetail) => {
               <p className="py-20 text-center">Scroll to load videos...</p>
             )}
           </div>
+
           {isMotorisedCategory && <Customisation title={title} />}
         </div>
       </div>
+
       <Testimonial />
       <Faqs Data={filterProduct} />
       <Information

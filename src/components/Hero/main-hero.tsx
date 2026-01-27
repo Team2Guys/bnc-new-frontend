@@ -10,7 +10,6 @@ const MainHero = () => {
         <Image
           src="/assets/images/hero_image.webp"
           alt="Modern Blinds and Curtains"
-          typeof="image/webp"
           fill
           priority
           fetchPriority="high"

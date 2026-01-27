@@ -14,7 +14,7 @@ export const BlackoutCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -89,7 +89,7 @@ export const Motorisedcurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -164,7 +164,7 @@ export const BedroomCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -239,7 +239,7 @@ export const EyeletCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -314,7 +314,7 @@ export const LivingRoomCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -389,7 +389,7 @@ export const PinchPleatCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -464,7 +464,7 @@ export const SheerCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -539,7 +539,7 @@ export const GobletPleatCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -614,7 +614,7 @@ export const LinenCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -689,7 +689,7 @@ export const TriplePinchPleatCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -764,7 +764,7 @@ export const StageandTheatreCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -839,7 +839,7 @@ export const ChiffonCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -914,7 +914,7 @@ export const WaveCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -989,7 +989,7 @@ export const DoublePleatCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -1064,7 +1064,7 @@ export const KidsRoomCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -1139,7 +1139,7 @@ export const PelmetCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -1214,7 +1214,7 @@ export const HomeCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -1289,7 +1289,7 @@ export const HotelCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -1364,7 +1364,7 @@ export const VelvetCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -1439,7 +1439,7 @@ export const RoomCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -1514,7 +1514,7 @@ export const GymCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -1589,7 +1589,7 @@ export const ModernCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -1664,7 +1664,7 @@ export const OfficeWindowCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -1739,7 +1739,7 @@ export const DoorCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -1814,7 +1814,7 @@ export const HospitalCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -1889,7 +1889,7 @@ export const TabTopCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -1964,7 +1964,7 @@ export const PencilPleatCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -2039,7 +2039,7 @@ export const DiningRoomCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -2114,7 +2114,7 @@ export const StaircaseCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -2189,7 +2189,7 @@ export const ConservatoryCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -2264,7 +2264,7 @@ export const PlainCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -2339,7 +2339,7 @@ export const PatternedCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -2414,7 +2414,7 @@ export const NaturalFabricCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -2489,7 +2489,7 @@ export const GeometricCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -2564,7 +2564,7 @@ export const StripesCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -2639,7 +2639,7 @@ export const CurtainsPrintforKids = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',
@@ -2714,7 +2714,7 @@ export const TexturedCurtains = {
           '@type': 'ListItem',
           position: 2,
           name: 'Curtains',
-          item: 'https://blindsandcurtains.ae/made-to-measure-curtains/',
+          item: 'https://blindsandcurtains.ae/curtains/',
         },
         {
           '@type': 'ListItem',

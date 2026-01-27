@@ -75,9 +75,15 @@ export default function InfoTabs({
         <div className="hidden md:block">
           <div className="grid md:grid-cols-2 gap-6 lg:gap-16 2xl:gap-24 items-center md:py-8 p-2">
             <div className="flex flex-col justify-center items-start space-y-5 lg:space-y-12">
-              <h2 className="font-futura font-bold text-lg lg:text-4xl text-primary sm:pr-10">
-                {desktopContent.heading}
-              </h2>
+              { isHome &&activeTab === 0 ? (
+                <h1 className="font-futura font-bold text-lg lg:text-4xl text-primary sm:pr-10">
+                  {desktopContent.heading}
+                </h1>
+              ) : (
+                <h2 className="font-futura font-bold text-lg lg:text-4xl text-primary sm:pr-10">
+                  {desktopContent.heading}
+                </h2>
+              )}
               <p
                 className="text-base font-medium font-roboto lg:text-[20px] text-primary text-justify"
                 dangerouslySetInnerHTML={{ __html: desktopContent.description }}
@@ -95,7 +101,7 @@ export default function InfoTabs({
             >
               <Image
                 src={desktopContent.image}
-                alt={desktopContent.heading}
+                alt={desktopContent.heading || ''}
                 fill
                 loading="lazy"
                 className={`${isMotorisedCategory && 'object-contain'}`}
@@ -119,7 +125,7 @@ export default function InfoTabs({
           >
             <Image
               src={mobileContent.image}
-              alt={mobileContent.heading}
+              alt={mobileContent.heading || ''}
               fill
               className={`${isMotorisedCategory && 'object-contain'}`}
             />

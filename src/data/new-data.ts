@@ -19,6 +19,24 @@ export const orderedTitles = [
   'Sheer Ripple Fold Curtains',
 ];
 
+export const orderedBlogs = [
+  'Sunscreen Roller Blinds',
+  'Blackout Roller Blinds',
+  'Motorised Blinds',
+  'Sheer Roman blinds',
+  'Blackout Triple Pinch Pleat Curtains',
+  'Blackout Curtains',
+  'Sheer Ripple Fold Curtains',
+  'Sheer Triple Pinch Pleat Curtains',
+  'Motorised Curtains',
+  'Dark Wood Shutters',
+  'Regular Full Height Shutters',
+  'Bay Window Shutters',
+  'Living Room Shutters',
+  'Special Shape Shutters',
+  'Tracked Shutters',
+];
+
 export const ContactSchema = Yup.object().shape({
   fullName: Yup.string().required('First name is required'),
   email: Yup.string().email('Invalid email').required('Email is required'),

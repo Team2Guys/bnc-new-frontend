@@ -47,9 +47,10 @@ const Testimonial = () => {
     <>
       {reviews && (
         <div className="my-10 space-y-5">
-          <h2 className="font-bold font-futura text-[40px] hidden md:block text-center text-primary">
-            Testimonials
-          </h2>
+          {/*           
+            <h2 className="font-bold font-futura text-[40px] block md:hidden text-center text-primary">
+              Testimonials
+            </h2> */}
           <div className="bg-secondary-foreground py-10 w-full">
             <Container className="grid grid-cols-12 gap-6">
               <div className="col-span-12 md:col-span-4 flex flex-col items-center md:items-start space-y-4 text-center md:text-left">
