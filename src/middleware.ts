@@ -61,10 +61,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  /*
-   * Match all request paths except for:
-   * 1. /api (API routes)
-   * 2. /favicon.ico, /sitemap.xml, /robots.txt (metadata files)
-   */
-  matcher: ['/((?!api|favicon.ico|sitemap.xml|robots.txt).*)'],
+matcher: ['/((?!api|_next|.*\\.).+)'],
 };
