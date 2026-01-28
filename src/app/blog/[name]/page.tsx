@@ -8,8 +8,8 @@ import { generateSlug } from 'data/data';
 import { notFound } from 'next/navigation';
 import Container from 'components/Res-usable/Container/Container';
 import BlogLoad from 'components/Blogs/blog-load';
-import { matchedSchema } from 'data/schema';
-import Script from 'next/script';
+// import { matchedSchema } from 'data/schema';
+// import Script from 'next/script';
 import Breadcrumb from 'components/Res-usable/breadcrumb';
 import Image from 'next/image';
 import HTMLReactParser from 'html-react-parser/lib/index';
@@ -119,11 +119,11 @@ const BlogDetail = async ({
 
     return (
       <>
-        {matchedSchema && (
+        {/* {matchedSchema && (
           <Script type="application/ld+json" id="blinds-json-ld">
             {JSON.stringify(matchedSchema)}
           </Script>
-        )}
+        )} */}
 
         <Breadcrumb
           slug="blog"
