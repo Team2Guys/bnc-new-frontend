@@ -8,9 +8,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { MdOutlineStarPurple500 } from 'react-icons/md';
 
-export default function ReviewBanner() {
+export default function ReviewBanner({ isHide }: { isHide?: boolean }) {
   return (
-    <div className="pt-5 lg:pt-10 bg-secondary-foreground">
+    <div className="pt-5 lg:pt-10 bg-secondary-foreground pb-2">
       <Container className="grid grid-cols-1 md:grid-cols-2">
         <div className="md:max-w-screen-xs flex flex-col md:flex-row gap-6 items-center md:items-start relative mt-2">
           <Image
@@ -60,23 +60,29 @@ export default function ReviewBanner() {
           </Link>
         </div>
       </Container>
-      <div className="block sm:hidden">
-        <div className=" mt-5 md:mt-10 relative flex justify-between items-center">
-          <ReviewBackground />
-          <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-futura text-center xxs:text-[16px] text-[20px] font-bold xl:font-bold text-primary-foreground max-sm:px-6 w-full ">
-            Dubai Homeowners Have Crowned Us With Their Trust!
-          </p>
-        </div>
-      </div>
+      {isHide ? (
+        ''
+      ) : (
+        <>
+          <div className="block sm:hidden">
+            <div className=" mt-5 md:mt-10 relative flex justify-between items-center">
+              <ReviewBackground />
+              <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-futura text-center xxs:text-[16px] text-[20px] font-bold xl:font-bold text-primary-foreground max-sm:px-6 w-full ">
+                Dubai Homeowners Have Crowned Us With Their Trust!
+              </p>
+            </div>
+          </div>
 
-      <div className="hidden sm:block">
-        <div className=" mt-5 md:mt-10 relative">
-          <ReviewBackgrounddashktop />
-          <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-futura text-center sm:text-[19px] md:text-24 xl:text-[32px] font-bold xl:font-bold text-primary-foreground max-sm:px-6 w-full ">
-            Dubai Homeowners Have Crowned Us With Their Trust!
-          </p>
-        </div>
-      </div>
+          <div className="hidden sm:block">
+            <div className=" mt-5 md:mt-10 relative">
+              <ReviewBackgrounddashktop />
+              <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-futura text-center sm:text-[19px] md:text-24 xl:text-[32px] font-bold xl:font-bold text-primary-foreground max-sm:px-6 w-full ">
+                Dubai Homeowners Have Crowned Us With Their Trust!
+              </p>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

@@ -42,7 +42,7 @@ export interface DetailProps {
 export type TabDataItem = {
   icon: string;
   title: string;
-  heading?: string;
+  heading: string;
   description: string;
   image: string;
 };

@@ -75,7 +75,7 @@ export default function InfoTabs({
         <div className="hidden md:block">
           <div className="grid md:grid-cols-2 gap-6 lg:gap-16 2xl:gap-24 items-center md:py-8 p-2">
             <div className="flex flex-col justify-center items-start space-y-5 lg:space-y-12">
-              { isHome &&activeTab === 0 ? (
+              {isHome && activeTab === 0 ? (
                 <h1 className="font-futura font-bold text-lg lg:text-4xl text-primary sm:pr-10">
                   {desktopContent.heading}
                 </h1>

@@ -31,13 +31,13 @@ const SocialData: SocialDataType[] = [
     alt: 'Threads',
     plateform: 'Threads',
   },
-   {
+  {
     href: 'https://www.youtube.com/@blindsandcurtainsdubai',
     icon: <FaYoutube className="size-6 ps-[1px]" />,
     alt: 'Youtube',
     plateform: 'Youtube',
   },
-   {
+  {
     href: 'https://www.tiktok.com/@blindsandcurtainsdubai1',
     icon: <FaTiktok className="size-6 ps-[1px]" />,
     alt: 'Tiktok',

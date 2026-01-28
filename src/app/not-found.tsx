@@ -18,7 +18,8 @@ export default async function NotFound() {
             We Appreciate Your Choice!
           </h2>
           <p className="text-2xl">
-            Premium Blinds & Curtains, Expertly Measured, Crafted, and Installed at Your Doorstep. Book a free visit now.
+            Premium Blinds & Curtains, Expertly Measured, Crafted, and Installed
+            at Your Doorstep. Book a free visit now.
           </p>
 
           <div className="flex justify-center gap-4">
