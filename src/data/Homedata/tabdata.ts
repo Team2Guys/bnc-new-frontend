@@ -48,7 +48,7 @@ export const tabData = [
     title: 'Expert Guidance at Your Doorstep',
     icon: '/assets/images/Home/tab/Black.svg',
     image: '/assets/images/Home/tab/trusted.webp',
-
+    heading: 'Free In-Home Consultation',
     description:
       'No need to guess or visit. Our expert brings 20–30 fabric books of blinds and curtains to your home and provides an instant quote on the spot. You pick that fit — we handle the rest. From measuring to installation, your window coverings are our full-time job. Comfort, ease, and style — at your doorstep.',
   },
