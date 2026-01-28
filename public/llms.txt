@@ -1,48 +1,49 @@
+# Blinds and Curtains Dubai
+
+> A premier window treatment provider in Dubai specializing in custom blinds, curtains, and shutters for residential and commercial spaces.
+
 ## Business Overview
-Name: Blinds and Curtains Dubai
-Industry: Window coverings, blinds & curtains
-Founded: (approx) 2010s
-URL: https://blindsandcurtains.ae/
-Description: A trusted window treatment store in Dubai offering premium blinds, curtains, shutters, and installation services with free consultations and custom solutions. Trusted by thousands of customers with excellent reviews. :contentReference[oaicite:1]{index=1}
+- **Industry:** Window coverings, blinds & curtains
+- **Founded:** Approx. 2010s
+- **Website:** https://blindsandcurtains.ae/
+- **Description:** A trusted window treatment store in Dubai offering premium blinds, curtains, shutters, and installation services with free consultations and custom solutions.
 
 ## Key Pages
-- Home: https://blindsandcurtains.ae/  
-- Products: https://blindsandcurtains.ae/blinds  
-- Curtains: https://blindsandcurtains.ae/curtains  
-- Shutters: https://blindsandcurtains.ae/shutters  
-- Commercial: https://blindsandcurtains.ae/commercial  
-- Estimator: https://blindsandcurtains.ae/estimator  
-- FAQs: https://blindsandcurtains.ae/faqs  
-- About Us: https://blindsandcurtains.ae/about-us  
-- Contact Us: https://blindsandcurtains.ae/contact-us  
-- Projects: https://blindsandcurtains.ae/projects  
+- [Home](https://blindsandcurtains.ae/)
+- [Products](https://blindsandcurtains.ae/blinds)
+- [Curtains](https://blindsandcurtains.ae/curtains)
+- [Shutters](https://blindsandcurtains.ae/shutters)
+- [Commercial Services](https://blindsandcurtains.ae/commercial)
+- [Price Estimator](https://blindsandcurtains.ae/estimator)
+- [FAQs](https://blindsandcurtains.ae/faqs)
+- [About Us](https://blindsandcurtains.ae/about-us)
+- [Contact Us](https://blindsandcurtains.ae/contact-us)
+- [Projects](https://blindsandcurtains.ae/projects)
+- [Sitemap](https://blindsandcurtains.ae/sitemap.xml)
 
 ## Core Products & Services
-- Motorised blinds: Custom motorised window blinds with smart control options. :contentReference[oaicite:2]{index=2}
-- Blackout blinds: Window blinds designed to block out sunlight. :contentReference[oaicite:3]{index=3}
-- Roman blinds & roller blinds: Stylish and functional fabric blinds. :contentReference[oaicite:4]{index=4}
-- Vertical blinds: Classic vertical window blinds. :contentReference[oaicite:5]{index=5}
-- Curtains: Custom curtains including sheer, blackout, and designer styles. :contentReference[oaicite:6]{index=6}
-- Shutters: Window shutter solutions (if listed). :contentReference[oaicite:7]{index=7}
-- Free in-home consultation: Experts bring samples to your home for guidance and measurements. :contentReference[oaicite:8]{index=8}
-- Installation & after-sales care: End-to-end installation and support. :contentReference[oaicite:9]{index=9}
+- **Motorised Blinds:** Custom smart control options for modern homes.
+- **Blackout Blinds:** High-density fabrics designed for maximum light blockage.
+- **Roman & Roller Blinds:** Stylish, functional fabric solutions.
+- **Vertical Blinds:** Classic solutions for large windows and offices.
+- **Custom Curtains:** Includes sheer, blackout, and designer styles.
+- **Shutters:** Premium window shutter installations.
+- **Free In-Home Consultation:** Expert measurements and samples brought to the customer.
+- **Installation:** Professional end-to-end fitting and after-sales care.
 
 ## Key Differentiators
-- Over 20 years of industry experience and expertise in window coverings. :contentReference[oaicite:10]{index=10}
-- Free consultation and measurement service. :contentReference[oaicite:11]{index=11}
-- In-house production and quality control. :contentReference[oaicite:12]{index=12}
-- Strong customer reviews and reputation with 4.9+ star ratings. :contentReference[oaicite:13]{index=13}
+- Over 20 years of industry experience.
+- In-house production ensuring strict quality control.
+- Free consultation and measurement service across Dubai.
+- 4.9+ star reputation on Google (794+ reviews).
 
 ## Contact Information
-Phone: +971 4 252 2025 :contentReference[oaicite:14]{index=14}  
-Email: sales@blindsandcurtains.ae :contentReference[oaicite:15]{index=15}  
-Address: Unit 43 22nd St, Al Quoz Industrial Area 4, Dubai, UAE :contentReference[oaicite:16]{index=16}  
-
-## Social / Reviews
-Google Reviews: 4.9★ (794+ reviews) :contentReference[oaicite:17]{index=17}
+- **Phone:** +971 4 252 2025
+- **Email:** sales@blindsandcurtains.ae
+- **Address:** Unit 43 22nd St, Al Quoz Industrial Area 4, Dubai, UAE
 
 ## Project Highlights
-- Al Barsha window coverings project :contentReference[oaicite:18]{index=18}
-- Arabian Ranches blinds and curtains :contentReference[oaicite:19]{index=19}
-- Business Bay installations :contentReference[oaicite:20]{index=20}
-- Palm Jumeirah custom blinds & curtains :contentReference[oaicite:21]{index=21}
+- **Al Barsha:** Residential window coverings.
+- **Arabian Ranches:** Specialized blinds and curtains projects.
+- **Business Bay:** Commercial and residential installations.
+- **Palm Jumeirah:** High-end custom luxury solutions.
