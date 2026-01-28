@@ -29,14 +29,14 @@ export default async function RootLayout({
   params,
 }: Readonly<{
   children: ReactNode;
-  params: Promise<{ locale?: string }>; 
+  params: Promise<{ locale?: string }>;
 }>) {
   const resolvedParams = await params;
- const locale = resolvedParams?.locale || 'en'; 
+  const locale = resolvedParams?.locale || 'en';
   const isArabic = locale === 'ar';
 
   return (
-    <html lang={locale} dir={isArabic ? 'rtl' : 'ltr'} suppressHydrationWarning >
+    <html lang={locale} dir={isArabic ? 'rtl' : 'ltr'} suppressHydrationWarning>
       <Head>
         <link
           rel="preload"

@@ -48,7 +48,7 @@ export const tabData = [
     title: 'Expert Guidance at Your Doorstep',
     icon: '/assets/images/Home/tab/Black.svg',
     image: '/assets/images/Home/tab/trusted.webp',
-      
+
     description:
       'No need to guess or visit. Our expert brings 20–30 fabric books of blinds and curtains to your home and provides an instant quote on the spot. You pick that fit — we handle the rest. From measuring to installation, your window coverings are our full-time job. Comfort, ease, and style — at your doorstep.',
   },
@@ -196,10 +196,10 @@ export const FeaturesData = {
       icon: '/assets/detailpage/fast3.png',
       text: 'Dedicated After Sales Care, 7 days a week',
     },
-     {
-    icon: '/assets/detailpage/fast5.png',
-    text: 'We provide a solid 5-year warranty',
-  },
+    {
+      icon: '/assets/detailpage/fast5.png',
+      text: 'We provide a solid 5-year warranty',
+    },
   ],
   curtains: [
     {
@@ -214,10 +214,10 @@ export const FeaturesData = {
       icon: '/assets/detailpage/fast3.png',
       text: 'Dedicated After Sales Care, 7 days a week',
     },
-     {
-    icon: '/assets/detailpage/fast5.png',
-    text: 'We provide a solid 5-year warranty',
-  },
+    {
+      icon: '/assets/detailpage/fast5.png',
+      text: 'We provide a solid 5-year warranty',
+    },
   ],
   shutters: [
     {
@@ -232,10 +232,10 @@ export const FeaturesData = {
       icon: '/assets/detailpage/fast3.png',
       text: 'Dedicated After Sales Care, 7 days a week',
     },
-     {
-    icon: '/assets/detailpage/fast5.png',
-    text: 'We provide a solid 5-year warranty',
-  },
+    {
+      icon: '/assets/detailpage/fast5.png',
+      text: 'We provide a solid 5-year warranty',
+    },
   ],
 };
 

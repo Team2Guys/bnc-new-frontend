@@ -161,7 +161,6 @@ const BlogDetail = async ({
     (p: IProduct) => p.status === 'PUBLISHED',
   );
 
-
   return (
     <Container className="mt-10 space-y-4 lg:space-y-8 mb-10 md:mb-10">
       <Breadcrumb
@@ -191,9 +190,9 @@ const BlogDetail = async ({
           </div>
         </div>
       </div>
-  
+
       <ProductSlider products={publishedProduct} />
-  
+
       <SlickSlider title="Related Blogs">
         {relatedBlogs.map((relatedBlog: BlogInfo, index: number) => (
           <BlogCard key={relatedBlog.id ?? index} blog={relatedBlog} />

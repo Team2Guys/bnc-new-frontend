@@ -13,6 +13,7 @@ import Information from './information';
 import { tabDataDetail } from 'data/Homedata/tabdata';
 const InfoTabs = dynamic(() => import('components/NewHomecomponents/info'));
 const Customisation = dynamic(() => import('./Customisation'));
+import Review_banner from 'components/ReviewBanner/Review_banner';
 import { TabDataItem } from 'types/product';
 import { useInView } from 'react-intersection-observer';
 import ComparisonTable from 'components/NewHomecomponents/comparisontabble';
@@ -97,7 +98,10 @@ const ProductDetail = ({ title, filterProduct }: IProductDetail) => {
           <Detail data={filterProduct} />
         </div>
       </Container>
-      <Testimonial />
+
+      <div className="mt-10">
+        <Review_banner isHide />
+      </div>
 
       {isMotorisedCategory && (
         <InfoTabs
