@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 const GARBAGE_PATTERNS = [
+  '/_next',
   '/wp-content',
   '/wp-json',
   '/xmlrpc.php',
